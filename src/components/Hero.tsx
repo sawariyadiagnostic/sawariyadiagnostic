@@ -1,63 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Volume2, VolumeX, Menu, X } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
+import { Menu, X, Search, FileDown, Phone, Clock, Shield } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
 export function Hero() {
-  const [isMuted, setIsMuted] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50); // Show background after 50px scroll
+      setIsScrolled(scrollTop > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Ensure video is muted immediately on load to prevent any audio
-  useEffect(() => {
-    if (videoRef.current) {
-      console.log('Video element found, setting up...');
-      videoRef.current.volume = 0;
-      videoRef.current.muted = true;
-      videoRef.current.defaultMuted = true;
-
-      // Add event listeners for debugging
-      videoRef.current.addEventListener('loadstart', () => console.log('Video: loadstart'));
-      videoRef.current.addEventListener('loadedmetadata', () => console.log('Video: loadedmetadata'));
-      videoRef.current.addEventListener('canplay', () => console.log('Video: canplay'));
-      videoRef.current.addEventListener('playing', () => console.log('Video: playing'));
-      videoRef.current.addEventListener('error', e => console.error('Video error:', e));
-
-      // Force mute on play
-      videoRef.current.addEventListener('play', () => {
-        if (videoRef.current) {
-          console.log('Video play event fired');
-          videoRef.current.muted = isMuted;
-          videoRef.current.volume = isMuted ? 0 : 0.7;
-        }
-      });
-
-      // Try to play the video
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => console.log('Video autoplay successful')).catch(error => console.error('Video autoplay failed:', error));
-      }
-    }
-  }, []);
-
-  // Update video mute state when isMuted changes
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = isMuted;
-      videoRef.current.volume = isMuted ? 0 : 0.7;
-    }
-  }, [isMuted]);
 
   // Handle body scroll lock when mobile menu is open
   useEffect(() => {
@@ -66,110 +28,109 @@ export function Hero() {
     } else {
       document.body.style.overflow = 'unset';
     }
-
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [isMobileMenuOpen]);
 
-  // Close mobile menu on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    if (isMobileMenuOpen) {
-      window.addEventListener('scroll', handleScroll);
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      const testsSection = document.getElementById('tests');
+      testsSection?.scrollIntoView({ behavior: 'smooth' });
     }
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isMobileMenuOpen]);
-  return <div className="relative h-screen w-full overflow-hidden bg-black">
-      {/* MASSIVE VIDEO - Takes up 95% of space */}
-      <video ref={videoRef} className="absolute inset-0 w-full h-full object-cover scale-110" autoPlay muted loop playsInline>
-        <source src="https://mojli.s3.us-east-2.amazonaws.com/Mojli+Website+upscaled+(12mb).webm" type="video/webm" />
-        Your browser does not support the video tag.
-      </video>
+  };
 
-      {/* Full-Width Navbar */}
-      <motion.nav initial={{
-      opacity: 0,
-      y: -30
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.8,
-      delay: 0.3
-    }} className="fixed top-0 left-0 right-0 w-full z-[110]">
-        <div className={`w-full px-6 sm:px-8 lg:px-12 py-4 transition-all duration-300 ease-out ${isScrolled ? 'bg-black/80 backdrop-blur-xl border-b border-white/10' : 'bg-transparent'}`}>
-          <div className="flex items-center justify-between">
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    section?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileMenuOpen(false);
+  };
+
+  const navLinks = [
+    { label: 'Tests', href: 'tests' },
+    { label: 'About', href: 'about' },
+    { label: 'Services', href: 'services' },
+    { label: 'Our Team', href: 'team' },
+    { label: 'Contact', href: 'contact' },
+  ];
+
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[hsl(174,75%,95%)] via-white to-[hsl(199,89%,95%)]">
+      
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-72 h-72 bg-accent-teal/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-emerald/5 rounded-full blur-3xl" />
+      </div>
+
+      {/* Navbar */}
+      <motion.nav
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 left-0 right-0 w-full z-[110]"
+      >
+        <div className={`w-full px-6 sm:px-8 lg:px-12 py-4 transition-all duration-300 ${
+          isScrolled ? 'glass-navbar shadow-sm' : 'bg-transparent'
+        }`}>
+          <div className="max-w-7xl mx-auto flex items-center justify-between">
             {/* Logo */}
-            <motion.div whileHover={{
-            scale: 1.05
-          }} className="flex items-center cursor-pointer" onClick={() => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
-          }}>
-              <span className="text-white tracking-wider font-mono text-4xl font-medium">Sawariya Diagnositcs</span>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="flex items-center cursor-pointer"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 bg-accent-teal rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">S</span>
+                </div>
+                <span className="text-foreground font-bold text-xl hidden sm:block">
+                  Sawariya Diagnostics
+                </span>
+              </div>
             </motion.div>
 
-            {/* Navigation Menu */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#portfolio" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
-                Work
-              </a>
-              <a href="#about" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
-                Process
-              </a>
-              <a href="#services" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
-                Capabilities
-              </a>
-              <a href="#team" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
-                Team
-              </a>
-              <a href="#contact" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
-                Contact
-              </a>
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <button
+                  key={link.href}
+                  onClick={() => scrollToSection(link.href)}
+                  className="text-foreground/80 hover:text-accent-teal font-medium gentle-animation"
+                >
+                  {link.label}
+                </button>
+              ))}
             </div>
 
-            {/* Right Side - Video Controls + CTA + Mobile Menu */}
-            <div className="flex items-center space-x-3 relative">
-              {/* Video Controls with Sound On indicator */}
-              <div className="relative">
-                <button onClick={() => setIsMuted(!isMuted)} className="glass-effect p-3 rounded-full text-white hover:bg-white/20 gentle-animation cursor-pointer">
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
-                
-                {/* Sound On indicator - only show when muted */}
-                {isMuted && <div className="absolute -bottom-10 right-0 flex items-center text-white/80">
-                    <span className="whitespace-nowrap font-medium text-sm mr-2">Sound On</span>
-                    <span className="text-lg">↗</span>
-                  </div>}
-              </div>
-              
-              {/* CTA Button - Hidden on mobile */}
-              <motion.button whileHover={{
-              scale: 1.05
-            }} whileTap={{
-              scale: 0.95
-            }} onClick={() => {
-              const contactSection = document.getElementById('contact');
-              contactSection?.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }} className="hidden sm:block bg-red-600 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-md hover:bg-red-700 gentle-animation ml-4 cursor-pointer">
-                Book a Call
-              </motion.button>
+            {/* Right Side Actions */}
+            <div className="flex items-center gap-3">
+              {/* Download Report Button - Desktop */}
+              <Button
+                variant="outline"
+                className="hidden md:flex items-center gap-2 btn-outline"
+                onClick={() => window.open('#', '_blank')}
+              >
+                <FileDown className="w-4 h-4" />
+                Download Report
+              </Button>
 
-              {/* Mobile Hamburger Menu Button */}
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden glass-effect p-3 rounded-full text-white hover:bg-white/20 active:bg-white/30 gentle-animation cursor-pointer z-[120] relative">
-                {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {/* Book Now CTA */}
+              <Button
+                className="hidden sm:flex btn-primary px-6"
+                onClick={() => scrollToSection('contact')}
+              >
+                Book Test
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 rounded-xl hover:bg-secondary gentle-animation"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
           </div>
@@ -177,95 +138,196 @@ export function Hero() {
       </motion.nav>
 
       {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && <motion.div initial={{
-      opacity: 0
-    }} animate={{
-      opacity: 1
-    }} exit={{
-      opacity: 0
-    }} transition={{
-      duration: 0.3
-    }} className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-md z-[80] cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />}
+      {isMobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="lg:hidden fixed inset-0 bg-black/50 z-[80]"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
 
       {/* Mobile Menu Panel */}
-      <motion.div initial={{
-      x: '100%'
-    }} animate={{
-      x: isMobileMenuOpen ? '0%' : '100%'
-    }} transition={{
-      type: 'spring',
-      damping: 25,
-      stiffness: 200
-    }} className="md:hidden fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-black/90 backdrop-blur-xl border-l border-white/10 z-[90] mobile-menu-panel pointer-events-auto" onClick={e => e.stopPropagation()}>
-        <div className="flex flex-col h-full">
-          {/* Close Button at the top */}
-          <div className="flex justify-end p-4">
-            <button onClick={() => setIsMobileMenuOpen(false)} className="glass-effect p-3 rounded-full text-white hover:bg-white/20 active:bg-white/30 gentle-animation cursor-pointer">
-              <X className="w-5 h-5" />
-            </button>
+      <motion.div
+        initial={{ x: '100%' }}
+        animate={{ x: isMobileMenuOpen ? '0%' : '100%' }}
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background border-l border-border z-[90] shadow-xl"
+      >
+        <div className="flex flex-col h-full p-6 pt-20">
+          <div className="flex flex-col space-y-2">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className="text-left px-4 py-3 text-foreground hover:bg-secondary rounded-xl font-medium gentle-animation"
+              >
+                {link.label}
+              </button>
+            ))}
           </div>
-          
-          <div className="flex flex-col px-6 pb-6 h-full">
-            {/* Mobile Navigation Links */}
-            <div className="flex flex-col space-y-4 text-white">
-              <a href="#portfolio" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20" onClick={() => setIsMobileMenuOpen(false)}>
-                Work
-              </a>
-              <a href="#about" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20" onClick={() => setIsMobileMenuOpen(false)}>
-                Process
-              </a>
-              <a href="#services" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20" onClick={() => setIsMobileMenuOpen(false)}>
-                Capabilities
-              </a>
-              <a href="#team" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20" onClick={() => setIsMobileMenuOpen(false)}>
-                Team
-              </a>
-              <a href="#contact" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20" onClick={() => setIsMobileMenuOpen(false)}>
-                Contact
-              </a>
-            </div>
 
-            {/* Mobile CTA Button */}
-            <motion.button whileHover={{
-            scale: 1.05
-          }} whileTap={{
-            scale: 0.95
-          }} onClick={() => {
-            const contactSection = document.getElementById('contact');
-            contactSection?.scrollIntoView({
-              behavior: 'smooth'
-            });
-            setIsMobileMenuOpen(false);
-          }} className="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 active:bg-red-800 gentle-animation mt-8 cursor-pointer">
-              Book a Call
-            </motion.button>
+          <div className="mt-6 space-y-3">
+            <Button
+              variant="outline"
+              className="w-full btn-outline"
+              onClick={() => window.open('#', '_blank')}
+            >
+              <FileDown className="w-4 h-4 mr-2" />
+              Download Report
+            </Button>
+            <Button
+              className="w-full btn-primary"
+              onClick={() => scrollToSection('contact')}
+            >
+              Book Test
+            </Button>
           </div>
         </div>
       </motion.div>
 
+      {/* Hero Content */}
+      <div className="relative z-10 pt-32 pb-20 px-6 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+            
+            {/* Left Column - Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-8"
+            >
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-accent-teal/10 px-4 py-2 rounded-full">
+                <Shield className="w-4 h-4 text-accent-teal" />
+                <span className="text-sm font-medium text-accent-teal">NABL Accredited Lab</span>
+              </div>
 
+              {/* Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
+                Your Health,
+                <br />
+                <span className="text-accent-teal">Our Priority</span>
+              </h1>
 
-      {/* Big Studio Title - Lower Left */}
-      <motion.div initial={{
-      opacity: 0,
-      x: -50
-    }} animate={{
-      opacity: 1,
-      x: 0
-    }} transition={{
-      duration: 1,
-      delay: 1.5
-    }} className="absolute bottom-12 left-6 sm:left-8 lg:left-12 z-40">
-        <div className="max-w-2xl">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-white">
-            <span className="block text-9xl font-medium font-mono">A Medical Lab</span>
-            <span className="block">
-          </span>
-            <span className="block text-6xl font-mono font-light text-justify">WITHOUT LIMITS</span>
-          </h1>
+              {/* Subheadline */}
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
+                Accurate diagnostics with state-of-the-art technology. 
+                Get lab-quality tests from the comfort of your home.
+              </p>
+
+              {/* Search Bar */}
+              <form onSubmit={handleSearch} className="relative max-w-md">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Search for Vitamin D, CBC, Thyroid..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-12 pr-4 h-14 rounded-full border-2 border-border focus:border-accent-teal bg-white text-base"
+                />
+              </form>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  size="lg"
+                  className="btn-primary h-14 px-8 text-base"
+                  onClick={() => scrollToSection('home-collection')}
+                >
+                  Book Home Collection
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="btn-outline h-14 px-8 text-base"
+                  onClick={() => scrollToSection('tests')}
+                >
+                  View Health Packages
+                </Button>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap gap-6 pt-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-accent-emerald/10 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-accent-emerald" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">Same Day</p>
+                    <p className="text-xs text-muted-foreground">Reports</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-accent-blue/10 flex items-center justify-center">
+                    <Shield className="w-5 h-5 text-accent-blue" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">100% Accurate</p>
+                    <p className="text-xs text-muted-foreground">Results</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-accent-purple/10 flex items-center justify-center">
+                    <Phone className="w-5 h-5 text-accent-purple" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">24/7 Support</p>
+                    <p className="text-xs text-muted-foreground">Available</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Column - Visual */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="hidden lg:flex items-center justify-center"
+            >
+              <div className="relative">
+                {/* Main Visual Card */}
+                <div className="w-[400px] h-[500px] bg-gradient-to-br from-accent-teal/20 to-accent-blue/20 rounded-3xl flex items-center justify-center relative overflow-hidden">
+                  
+                  {/* Decorative Elements */}
+                  <div className="absolute top-8 left-8 w-20 h-20 bg-white/80 rounded-2xl shadow-lg flex items-center justify-center">
+                    <div className="w-12 h-12 bg-accent-teal/20 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">🧪</span>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/80 rounded-2xl shadow-lg flex items-center justify-center">
+                    <div className="w-14 h-14 bg-accent-emerald/20 rounded-full flex items-center justify-center">
+                      <span className="text-3xl">💉</span>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white rounded-full shadow-xl flex items-center justify-center">
+                    <div className="text-center">
+                      <span className="text-5xl">🏥</span>
+                      <p className="text-sm font-semibold text-foreground mt-2">Trusted Care</p>
+                    </div>
+                  </div>
+
+                  {/* Floating Stats */}
+                  <div className="absolute -left-4 top-1/3 bg-white rounded-xl shadow-lg px-4 py-3 float-gentle">
+                    <p className="text-2xl font-bold text-accent-teal">50K+</p>
+                    <p className="text-xs text-muted-foreground">Tests Done</p>
+                  </div>
+                  
+                  <div className="absolute -right-4 bottom-1/3 bg-white rounded-xl shadow-lg px-4 py-3 float-gentle" style={{ animationDelay: '1s' }}>
+                    <p className="text-2xl font-bold text-accent-emerald">10+</p>
+                    <p className="text-xs text-muted-foreground">Years Experience</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </motion.div>
-
-
-    </div>;
+      </div>
+    </div>
+  );
 }
