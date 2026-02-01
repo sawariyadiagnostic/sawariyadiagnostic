@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
+import { useEffect } from 'react';
+import { Calendar, FileCheck, Home, Clock } from 'lucide-react';
 
 export function Contact() {
-
   useEffect(() => {
     // Load Cal.com embed script
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
     script.innerHTML = `
       (function (C, A, L) { 
         let p = function (a, ar) { a.q.push(ar); }; 
@@ -36,66 +36,83 @@ export function Contact() {
         }; 
       })(window, "https://app.cal.com/embed/embed.js", "init");
       
-      Cal("init", "mojju-discovery-call", {origin:"https://app.cal.com"});
+      Cal("init", "sawariya-booking", {origin:"https://app.cal.com"});
       
-      Cal.ns["mojju-discovery-call"]("inline", {
-        elementOrSelector:"#my-cal-inline-mojju-discovery-call",
+      Cal.ns["sawariya-booking"]("inline", {
+        elementOrSelector:"#sawariya-booking-embed",
         config: {"layout":"month_view"},
         calLink: "zeroqode/30min",
       });
       
-      Cal.ns["mojju-discovery-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-    `
+      Cal.ns["sawariya-booking"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    `;
     
-    document.body.appendChild(script)
+    document.body.appendChild(script);
     
     return () => {
-      // Cleanup script on unmount
       if (document.body.contains(script)) {
-        document.body.removeChild(script)
+        document.body.removeChild(script);
       }
-    }
-  }, [])
+    };
+  }, []);
+
+  const infoCards = [
+    {
+      icon: FileCheck,
+      title: 'Choose Your Tests',
+      description: 'Select from our comprehensive test menu or health packages',
+      color: 'accent-teal',
+    },
+    {
+      icon: Home,
+      title: 'Home or Lab Visit',
+      description: 'Get sample collected at home or visit our nearest center',
+      color: 'accent-blue',
+    },
+    {
+      icon: Clock,
+      title: 'Quick Reports',
+      description: 'Receive accurate reports within 6-24 hours on WhatsApp',
+      color: 'accent-emerald',
+    },
+  ];
 
   return (
-    <section id="contact" className="relative py-32 bg-card/30">
+    <section id="contact" className="relative py-20 bg-secondary/30">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
+        
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-accent-emerald rounded-full animate-pulse" />
-            <span className="text-sm font-semibold text-muted-foreground">
-              Let's Create Together
-            </span>
-            <div className="w-3 h-3 bg-accent-blue rounded-full animate-pulse" />
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-accent-teal/10 px-4 py-2 rounded-full mb-6">
+            <Calendar className="w-4 h-4 text-accent-teal" />
+            <span className="text-sm font-medium text-accent-teal">Book Appointment</span>
           </div>
           
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-8">
-            <span className="block mb-2">Ready to Light Up the Screen?</span>
-            
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Schedule Your Test Today
           </h2>
           
-          <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Book a discovery call to discuss your project and see how we can bring your vision to cinematic reality
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Book a convenient time slot and we'll handle the rest
           </p>
         </div>
 
-        {/* Cal.com Booking Widget */}
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-background clean-border rounded-3xl overflow-hidden elevated-shadow">
+        {/* Booking Widget */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <div className="bg-background rounded-3xl overflow-hidden shadow-lg border border-border">
             {/* Widget Header */}
-            <div className="bg-card/50 px-8 py-6 border-b border-border">
+            <div className="bg-gradient-to-r from-accent-teal/10 to-accent-blue/10 px-8 py-6 border-b border-border">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl font-black text-foreground mb-1">
-                    MOJJU Discovery Call
+                  <h3 className="text-xl font-bold text-foreground mb-1">
+                    Sawariya Diagnostics - Book Appointment
                   </h3>
                   <p className="text-muted-foreground">
-                    30 minutes • Video call • Free consultation
+                    30 minutes • Video or Phone Call • Free consultation
                   </p>
                 </div>
-                <div className="hidden sm:flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-accent-emerald rounded-full" />
+                <div className="hidden sm:flex items-center gap-2">
+                  <div className="w-3 h-3 bg-accent-emerald rounded-full animate-pulse" />
                   <span className="text-sm text-muted-foreground font-medium">Available now</span>
                 </div>
               </div>
@@ -109,47 +126,28 @@ export function Contact() {
                   height: '600px',
                   overflow: 'scroll'
                 }} 
-                id="my-cal-inline-mojju-discovery-call"
+                id="sawariya-booking-embed"
               />
             </div>
           </div>
         </div>
 
-        {/* Bottom Info */}
-        <div className="text-center mt-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-blue rounded-full" />
+        {/* Info Cards */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {infoCards.map((card) => (
+            <div 
+              key={card.title}
+              className="bg-background rounded-2xl p-6 border border-border shadow-sm text-center"
+            >
+              <div className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-${card.color}/10 flex items-center justify-center`}>
+                <card.icon className={`w-7 h-7 text-${card.color}`} />
               </div>
-              <h4 className="font-black text-foreground mb-2">Project Discussion</h4>
-              <p className="text-muted-foreground text-sm">
-                Share your vision and requirements with our team
-              </p>
+              <h4 className="font-bold text-foreground mb-2">{card.title}</h4>
+              <p className="text-sm text-muted-foreground">{card.description}</p>
             </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-emerald/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-emerald rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Custom Strategy</h4>
-              <p className="text-muted-foreground text-sm">
-                Get a tailored approach for your unique project
-              </p>
-            </div>
-            
-            <div className="bg-background clean-border rounded-2xl p-6 subtle-shadow">
-              <div className="w-12 h-12 bg-accent-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-accent-purple rounded-full" />
-              </div>
-              <h4 className="font-black text-foreground mb-2">Next Steps</h4>
-              <p className="text-muted-foreground text-sm">
-                Clear timeline and roadmap to bring your idea to life
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
