@@ -258,9 +258,10 @@ export function Hero() {
     }} className="absolute bottom-12 left-6 sm:left-8 lg:left-12 z-40">
         <div className="max-w-2xl">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-white">
-            <span className="block">AI FILM</span>
-            <span className="block">PRODUCTION</span>
-            <span className="block">WITHOUT LIMITS</span>
+            <span className="block text-9xl font-serif font-medium">A Medical Lab</span>
+            <span className="block">
+          </span>
+            <span className="block text-6xl font-mono font-light text-justify">WITHOUT LIMITS</span>
           </h1>
         </div>
       </motion.div>
