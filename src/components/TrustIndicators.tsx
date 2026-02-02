@@ -25,7 +25,7 @@ export function TrustIndicators() {
     },
     {
       icon: Award,
-      value: '10+',
+      value: '5+',
       label: 'Years Experience',
       color: 'accent-purple',
     },
