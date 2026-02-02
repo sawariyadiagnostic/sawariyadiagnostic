@@ -319,7 +319,7 @@ export function Hero() {
                   </div>
                   
                   <div className="absolute -right-4 bottom-1/3 bg-white rounded-xl shadow-lg px-4 py-3 float-gentle" style={{ animationDelay: '1s' }}>
-                    <p className="text-2xl font-bold text-accent-emerald">10+</p>
+                    <p className="text-2xl font-bold text-accent-emerald">5+</p>
                     <p className="text-xs text-muted-foreground">Years Experience</p>
                   </div>
                 </div>
