@@ -117,10 +117,10 @@ export function HomeCollection() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 1.0 }}
             viewport={{ once: true }}
           >
-            <div className="bg-white rounded-3xl p-8 shadow-2xl">
+            <div className="bg-blue-500/1 backdrop-blur-sm  rounded-3xl p-8 shadow-2xl">
               <h3 className="text-2xl font-bold text-foreground mb-2">
                 Request a Callback
               </h3>
