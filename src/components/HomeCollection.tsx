@@ -57,7 +57,7 @@ export function HomeCollection() {
   ];
 
   return (
-    <section id="home-collection" className="relative py-20 bg-gradient-to-br from-accent-teal to-[hsl(174,75%,25%)] text-white overflow-hidden">
+    <section id="home-collection" className="relative py-20 bg-gradient-to-br from-accent-teal to-[hsl(173,84%,15%)] text-white overflow-hidden">
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -71,7 +71,7 @@ export function HomeCollection() {
           {/* Left - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 0.9, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
@@ -120,7 +120,7 @@ export function HomeCollection() {
             transition={{ duration: 1.0 }}
             viewport={{ once: true }}
           >
-            <div className="bg-blue-500/1 backdrop-blur-sm  rounded-3xl p-8 shadow-2xl">
+            <div className="bg-blue-500/3 backdrop-blur-sm  rounded-3xl p-8 shadow-2xl">
               <h3 className="text-2xl font-bold text-foreground mb-2">
                 Request a Callback
               </h3>
@@ -184,7 +184,7 @@ export function HomeCollection() {
                   
                   <p className="text-xs text-center text-muted-foreground">
                     By submitting, you agree to our{' '}
-                    <a href="#" className="text-accent-teal hover:underline">Terms & Conditions</a>
+                    <a href="#" className="text-accent-emerald hover:underline">Terms & Conditions</a>
                   </p>
                 </form>
               )}
