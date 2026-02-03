@@ -61,7 +61,7 @@ export function HomeCollection() {
       
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
       </div>
       
@@ -71,11 +71,11 @@ export function HomeCollection() {
           {/* Left - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 0.9, x: 0 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Home className="w-4 h-4" />
               <span className="text-sm font-medium">Home Sample Collection</span>
             </div>
