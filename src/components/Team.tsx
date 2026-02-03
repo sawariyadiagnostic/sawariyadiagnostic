@@ -6,31 +6,45 @@ import { Users } from 'lucide-react';
 export function Team() {
   const teamMembers = [
     {
-      name: 'Dr. Rajesh Kumar',
+      name: 'Dr. Radhika Vashisth',
       role: 'Chief Pathologist',
       qualification: 'MBBS, MD (Pathology)',
       bio: 'Over 20 years of experience in clinical pathology and laboratory medicine.',
       image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop&auto=format',
     },
-    {
-      name: 'Dr. Priya Sharma',
-      role: 'Senior Biochemist',
-      qualification: 'MSc, PhD (Biochemistry)',
-      bio: 'Specialist in hormone analysis and metabolic disorders testing.',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&auto=format',
-    },
-    {
-      name: 'Dr. Amit Patel',
+     {
+      name: 'Dr. Ankit Sangwan',
       role: 'Microbiologist',
-      qualification: 'MBBS, MD (Microbiology)',
+      qualification: 'MSc, PhD (Microbiology)',
       bio: 'Expert in infectious disease diagnostics and antimicrobial testing.',
       image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&h=300&fit=crop&auto=format',
     },
     {
-      name: 'Ms. Sneha Gupta',
-      role: 'Lab Manager',
-      qualification: 'MSc (MLT)',
-      bio: 'Ensures quality control and smooth operations across all departments.',
+      name: 'Ms. Manisha Saini',
+      role: 'Senior Medical Biochemist',
+      qualification: 'MSc(Medical Biotechnology)',
+      bio: 'Specialist in hormone analysis and metabolic disorders testing.',
+      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&auto=format',
+    },
+    {
+      name: 'Mr. Amit',
+      role: 'Lab & Marketing Manager',
+      qualification: 'MSc (Pharmaceuticals &Medical Microbiology)',
+      bio: 'Ensures quality control and smooth operations across all departments along with marketing.',
+      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
+    },
+    {
+      name: 'Mr. Sahil',
+      role: 'Logistics Incharge',
+      qualification: 'MSc (Medical Biotech & MKT)',
+      bio: 'Ensures smooth and timely delivery of reports to all departments.',
+      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
+    },
+    {
+      name: 'Mr. Rupesh',
+      role: 'Tech Incharge',
+      qualification: 'MSc (Medical Lab Tech & Biotechnology)',
+      bio: 'Ensures quality control and smooth operations of all instruments and reports.',
       image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
     },
   ];
@@ -56,7 +70,7 @@ export function Team() {
         </div>
 
         {/* Team Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member.name}
