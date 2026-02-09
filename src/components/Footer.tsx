@@ -30,7 +30,7 @@ export function Footer() {
               <div className="w-10 h-10 bg-accent-teal rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-xl">S</span>
               </div>
-              <span className="font-bold text-xl">Sawariya Diagnostics</span>
+              <span className="font-bold text-xl">Sawariya Diagnostic</span>
             </div>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
               Your trusted partner for accurate diagnostics. NABL accredited lab with 
@@ -83,26 +83,30 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-background">+91 98765 43210</p>
+                  <p className="text-sm text-background">
+                    <a href="tel:+917015290782" className="hover:text-accent-teal transition-colors">
+                      +91 7015290782
+                    </a>
+                  </p>
                   <p className="text-xs text-background/60">24/7 Support</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-background">info@sawariya.com</p>
+                <p className="text-sm text-background">sawariyadiagnosticckd11@gmail.com</p>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-background/70">
-                  123 Medical Plaza, Main Road,<br />
-                  City - 123456
+                  Opposite to R.S. Sangwan Hospital, Loharu Road, <br />
+                  Charkhi Dadri, Haryana - 127306
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm text-background">Mon - Sat: 7AM - 9PM</p>
-                  <p className="text-sm text-background/70">Sun: 8AM - 2PM</p>
+                  <p className="text-sm text-background">Mon - Sat: 8AM - 6PM</p>
+                  <p className="text-sm text-background/70">Sun: 9AM - 2PM</p>
                 </div>
               </div>
             </div>
@@ -113,7 +117,7 @@ export function Footer() {
         <div className="border-t border-background/20 pt-8 mt-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-background/70">
-              © 2025 Sawariya Diagnostics. All rights reserved.
+              © 2025 Sawariya Diagnostic. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <a href="#" className="text-sm text-background/70 hover:text-background gentle-animation">

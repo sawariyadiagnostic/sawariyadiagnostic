@@ -105,7 +105,7 @@ export function Contact() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-1">
-                    Sawariya Diagnostics - Book Appointment
+                    Sawariya Diagnostic - Book Appointment
                   </h3>
                   <p className="text-muted-foreground">
                     30 minutes • Video or Phone Call • Free consultation

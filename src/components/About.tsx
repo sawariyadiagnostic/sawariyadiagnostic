@@ -113,7 +113,7 @@ export function About() {
                 Committed to Excellence in Diagnostics
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                At Sawariya Diagnostics, we combine cutting-edge technology with 
+                At Sawariya Diagnostic, we combine cutting-edge technology with 
                 compassionate care to deliver accurate results you can trust. 
                 Our team of experienced professionals ensures every test is 
                 performed with precision and care.

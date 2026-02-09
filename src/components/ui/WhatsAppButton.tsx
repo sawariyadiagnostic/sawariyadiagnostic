@@ -6,8 +6,8 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({ 
-  phoneNumber = '919876543210', // Replace with actual number
-  message = 'Hi, I want to book a test at Sawariya Diagnostics.'
+  phoneNumber = '917015290782',
+  message = 'Hi, I want to book a test at Sawariya Diagnostic.'
 }: WhatsAppButtonProps) {
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);

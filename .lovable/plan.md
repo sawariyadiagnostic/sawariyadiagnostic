@@ -3,7 +3,7 @@
 # Medical Lab Website Transformation Plan
 
 ## Overview
-Transform the current video production portfolio ("MOJJU") into a professional medical diagnostics website for **Sawariya Diagnostics**. The site will showcase your blood tests, pathology, and specialized diagnostic services with a clean, trustworthy design appropriate for healthcare.
+Transform the current video production portfolio ("MOJJU") into a professional medical diagnostics website for **Sawariya Diagnostic**. The site will showcase your blood tests, pathology, and specialized diagnostic services with a clean, trustworthy design appropriate for healthcare.
 
 ---
 
@@ -13,7 +13,7 @@ Transform the current video production portfolio ("MOJJU") into a professional m
 **Current:** Cinematic video background with "A Medical Lab WITHOUT LIMITS" tagline  
 **Changes:**
 - Replace video background with a professional medical lab image or gradient background
-- Update branding to "Sawariya Diagnostics" with a proper tagline like "Your Health, Our Priority"
+- Update branding to "Sawariya Diagnostic" with a proper tagline like "Your Health, Our Priority"
 - Change navigation links: Work → Tests | Process → About | Capabilities → Services | Team → Our Team | Contact → Book Appointment
 - Update CTA button from "Book a Call" to "Book a Test" or "Schedule Appointment"
 - Remove video/sound controls (no longer needed)
@@ -111,7 +111,7 @@ Tab 2: Individual Tests (A searchable/filterable table or list).
 **Current:** Cal.com booking for "MOJJU Discovery Call"  
 **Changes:**
 - Update header text to appointment booking context
-- Change "MOJJU Discovery Call" to "Sawariya Diagnostics - Book Appointment"
+- Change "MOJJU Discovery Call" to "Sawariya Diagnostic - Book Appointment"
 - Update info cards:
   - Test Selection → Choose your tests
   - Sample Collection → Home or at lab
@@ -121,7 +121,7 @@ Tab 2: Individual Tests (A searchable/filterable table or list).
 ### 9. Footer (`Footer.tsx`)
 **Current:** MOJJU branding with AI tools list  
 **Changes:**
-- Update logo/name to "Sawariya Diagnostics"
+- Update logo/name to "Sawariya Diagnostic"
 - Replace "Tools We Use" with:
   - Quick Links (About, Tests, Contact)
   - Working Hours

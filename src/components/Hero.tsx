@@ -87,7 +87,7 @@ export function Hero() {
                   <span className="text-white font-bold text-xl">S</span>
                 </div>
                 <span className="text-foreground font-bold text-xl hidden sm:block">
-                  Sawariya Diagnostics
+                  Sawariya Diagnostic
                 </span>
               </div>
             </motion.div>
