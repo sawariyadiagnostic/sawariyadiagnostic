@@ -26,27 +26,6 @@ export function Team() {
       bio: 'Specialist in hormone analysis and metabolic disorders testing.',
       image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&auto=format',
     },
-    {
-      name: 'Mr. Amit',
-      role: 'Lab & Marketing Manager',
-      qualification: 'MSc (Pharmaceuticals &Medical Microbiology)',
-      bio: 'Ensures quality control and smooth operations across all departments along with marketing.',
-      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
-    },
-    {
-      name: 'Mr. Sahil',
-      role: 'Logistics Incharge',
-      qualification: 'MSc (Medical Biotech & MKT)',
-      bio: 'Ensures smooth and timely delivery of reports to all departments.',
-      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
-    },
-    {
-      name: 'Mr. Rupesh',
-      role: 'Tech Incharge',
-      qualification: 'MSc (Medical Lab Tech & Biotechnology)',
-      bio: 'Ensures quality control and smooth operations of all instruments and reports.',
-      image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&h=300&fit=crop&auto=format',
-    },
   ];
 
   return (
