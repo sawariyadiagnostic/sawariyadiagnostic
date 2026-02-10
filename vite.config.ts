@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/remix-of-ai-video-studio-landing-page/",
+  base: "/Sawariya-Diagnostic/",
   server: {
     host: "::",
     port: 8080,
