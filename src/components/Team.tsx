@@ -61,9 +61,10 @@ export function Team() {
             >
               {/* Photo */}
               <div className="relative mb-4 mx-auto">
-                <div className="w-36 h-36 mx-auto rounded-full overflow-hidden ring-4 ring-secondary group-hover:ring-accent-teal gentle-animation">
+                <div className="w-36 h-36 mx-auto rounded-full overflow-hidden ring-4 ring-secondary group-hover:ring-accent-teal gentle-animation bg-secondary/20 flex items-center justify-center">
+                  {/* Using UI Avatars for generic placeholder with initials */}
                   <img
-                    src={member.image}
+                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&color=fff&size=200`}
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
