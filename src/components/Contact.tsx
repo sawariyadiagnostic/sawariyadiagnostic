@@ -41,7 +41,7 @@ export function Contact() {
       Cal.ns["sawariya-booking"]("inline", {
         elementOrSelector:"#sawariya-booking-embed",
         config: {"layout":"month_view"},
-        calLink: "zeroqode/30min",
+        calLink: "sawariya-lab/30min",
       });
       
       Cal.ns["sawariya-booking"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});

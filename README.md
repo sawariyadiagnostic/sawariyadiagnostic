@@ -14,7 +14,7 @@ We provide accurate, reliable, and timely diagnostic services.
 - **Email**: sawariyadiagnosticckd11@gmail.com
 - **Services**: Blood Tests, Full Body Checkups, Home Sample Collection.
 
-## 🚀 Features
+## 🚀 Features1
 - **Home Collection Booking**: Easy scheduling for home visits.
 - **Test Catalog**: Browse available tests and packages.
 - **WhatsApp Integration**: Direct chat support for booking and reports.
@@ -29,28 +29,6 @@ This project is built using:
 - **[Tailwind CSS](https://tailwindcss.com/)**: Utility-first CSS framework for styling.
 - **[Shadcn UI](https://ui.shadcn.com/)**: Reusable components built with Radix UI and Tailwind CSS.
 
-## 💻 How to Run Locally
-
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/Sawariya-Diagnostic/Sawariya-Diagnostic.git
-    cd Sawariya-Diagnostic
-    ```
-
-2.  **Install Dependencies**
-    ```bash
-    npm install
-    ```
-
-3.  **Start Development Server**
-    ```bash
-    npm run dev
-    ```
-
-4.  **Build for Production**
-    ```bash
-    npm run build
-    ```
 
 ## 🤖 AI & SEO Ready
 This website includes specific files to help AI agents and Search Engines understand our business:
