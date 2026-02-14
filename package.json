@@ -2,6 +2,7 @@
   "name": "sawariya-diagnostic-website",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://sawariyadiagnostic.github.io/sawariyadiagnostic/",
   "type": "module",
   "scripts": {
     "dev": "vite",
