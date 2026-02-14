@@ -5,7 +5,7 @@
 ![Sawariya Diagnostic Banner](https://images.unsplash.com/photo-1579684385136-137af18db23d?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3)
 
 ## 🌐 Live Website
-**[https://Sawariya-Diagnostic.github.io/Sawariya-Diagnostic/](https://Sawariya-Diagnostic.github.io/Sawariya-Diagnostic/)**
+**[https://sawariyadiagnostic.github.io/sawariyadiagnostic/](https://sawariyadiagnostic.github.io/sawariyadiagnostic/)**
 
 ## 🏥 About Us
 We provide accurate, reliable, and timely diagnostic services.
