@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Menu, X, FileDown } from 'lucide-react';
 import { Button } from '../ui/button';
 import { navigation } from '@/data/website-content';
@@ -19,20 +18,16 @@ export function Navbar({
   scrollToSection 
 }: NavbarProps) {
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 w-full z-[110]"
+    <nav
+      className={`fixed top-0 left-0 right-0 w-full z-[110] transition-all duration-600 animate-slide-up`}
     >
       <div className={`w-full px-6 sm:px-8 lg:px-12 py-4 transition-all duration-300 ${
         isScrolled ? 'glass-navbar shadow-sm' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center cursor-pointer"
+          <div
+            className="flex items-center cursor-pointer hover:scale-102 transition-transform duration-200"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <div className="flex items-center gap-2">
@@ -43,7 +38,7 @@ export function Navbar({
                 Sawariya Diagnostic
               </span>
             </div>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
@@ -88,6 +83,6 @@ export function Navbar({
           </div>
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

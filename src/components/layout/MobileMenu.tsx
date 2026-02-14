@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { FileDown } from 'lucide-react';
 import { Button } from '../ui/button';
 import { navigation } from '@/data/website-content';
@@ -12,25 +11,19 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps) {
+  if (!isOpen) return null;
+
   return (
     <>
       {/* Mobile Menu Overlay */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="lg:hidden fixed inset-0 bg-black/50 z-[80]"
-          onClick={onClose}
-        />
-      )}
+      <div 
+        className="lg:hidden fixed inset-0 bg-black/50 z-[80] animate-fade-in"
+        onClick={onClose}
+      />
 
       {/* Mobile Menu Panel */}
-      <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: isOpen ? '0%' : '100%' }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background border-l border-border z-[90] shadow-xl"
+      <div 
+        className="lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background border-l border-border z-[90] shadow-xl animate-slide-in-right"
       >
         <div className="flex flex-col h-full p-6 pt-20">
           <div className="flex flex-col space-y-2">
@@ -62,7 +55,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
             </Button>
           </div>
         </div>
-      </motion.div>
+      </div>
     </>
   );
 }

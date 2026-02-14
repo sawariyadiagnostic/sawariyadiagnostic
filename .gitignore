@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Analysis artifacts
+har_files/
+stats.html
+analyze_har.cjs

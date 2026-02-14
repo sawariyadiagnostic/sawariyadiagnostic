@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Search, Shield } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
@@ -81,11 +80,8 @@ export function Hero() {
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
             
             {/* Left Column - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
+            <div
+              className="space-y-8 animate-slide-in-left"
             >
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-accent-teal/10 px-4 py-2 rounded-full">
@@ -151,14 +147,12 @@ export function Hero() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Right Column - Visual */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden lg:flex items-center justify-center"
+            <div
+              className="hidden lg:flex items-center justify-center animate-slide-in-right"
+              style={{ animationDelay: '0.4s' }}
             >
               <div className="relative">
                 {/* Main Visual Card */}
@@ -196,7 +190,7 @@ export function Hero() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

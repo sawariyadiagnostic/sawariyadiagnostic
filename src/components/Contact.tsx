@@ -1,59 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar, FileCheck, Home, Clock } from 'lucide-react';
+import { Button } from './ui/button';
+import Cal, { getCalApi } from "@calcom/embed-react";
+
 
 export function Contact() {
+  const [showCalendar, setShowCalendar] = useState(false);
+
   useEffect(() => {
-    // Load Cal.com embed script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.innerHTML = `
-      (function (C, A, L) { 
-        let p = function (a, ar) { a.q.push(ar); }; 
-        let d = C.document; 
-        C.Cal = C.Cal || function () { 
-          let cal = C.Cal; 
-          let ar = arguments; 
-          if (!cal.loaded) { 
-            cal.ns = {}; 
-            cal.q = cal.q || []; 
-            d.head.appendChild(d.createElement("script")).src = A; 
-            cal.loaded = true; 
-          } 
-          if (ar[0] === L) { 
-            const api = function () { p(api, arguments); }; 
-            const namespace = ar[1]; 
-            api.q = api.q || []; 
-            if(typeof namespace === "string"){
-              cal.ns[namespace] = cal.ns[namespace] || api;
-              p(cal.ns[namespace], ar);
-              p(cal, ["initNamespace", namespace]);
-            } else p(cal, ar); 
-            return;
-          } 
-          p(cal, ar); 
-        }; 
-      })(window, "https://app.cal.com/embed/embed.js", "init");
-      
-      Cal("init", "sawariya-booking", {origin:"https://app.cal.com"});
-      
-      Cal.ns["sawariya-booking"]("inline", {
-        elementOrSelector:"#sawariya-booking-embed",
-        config: {"layout":"month_view"},
-        calLink: "sawariya-lab/30min",
-      });
-      
-      Cal.ns["sawariya-booking"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-    `;
-    
-    document.body.appendChild(script);
-    
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
+    (async function () {
+      const cal = await getCalApi({"namespace":"sawariya-booking"});
+      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+    })();
   }, []);
 
   const infoCards = [
@@ -99,7 +59,7 @@ export function Contact() {
 
         {/* Booking Widget */}
         <div className="max-w-5xl mx-auto mb-12">
-          <div className="bg-background rounded-3xl overflow-hidden shadow-lg border border-border">
+          <div className="bg-background rounded-3xl overflow-hidden shadow-lg border border-border min-h-[400px]">
             {/* Widget Header */}
             <div className="bg-gradient-to-r from-accent-teal/10 to-accent-blue/10 px-8 py-6 border-b border-border">
               <div className="flex items-center justify-between">
@@ -118,16 +78,43 @@ export function Contact() {
               </div>
             </div>
             
-            {/* Cal.com Embed Container */}
-            <div className="p-0 bg-white">
-              <div 
-                style={{
-                  width: '100%',
-                  height: '600px',
-                  overflow: 'scroll'
-                }} 
-                id="sawariya-booking-embed"
-              />
+            {/* Cal.com Embed Container or Facade */}
+            <div className="p-0 bg-white min-h-[500px] flex items-center justify-center">
+              {!showCalendar ? (
+                <div className="text-center p-8 space-y-6">
+                   <div className="w-20 h-20 bg-accent-teal/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                     <Calendar className="w-10 h-10 text-accent-teal" />
+                   </div>
+                   <h4 className="text-2xl font-bold text-foreground">Ready to Schedule?</h4>
+                   <p className="text-muted-foreground max-w-md mx-auto">
+                     Click below to load the interactive booking calendar. 
+                     Check available slots for Home Collection or Lab Visit.
+                   </p>
+                   <Button 
+                     size="lg" 
+                     className="bg-gradient-to-r from-accent-teal to-accent-emerald hover:from-accent-teal/90 hover:to-accent-emerald/90 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 px-8 py-6 text-lg rounded-full"
+                     onClick={() => setShowCalendar(true)}
+                   >
+                     View Available Slots
+                   </Button>
+                </div>
+              ) : (
+                <div 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    minHeight: '600px',
+                    overflow: 'scroll'
+                  }} 
+                >
+                  <Cal 
+                    namespace="sawariya-booking"
+                    calLink="sawariya-lab/30min"
+                    style={{width:"100%",height:"100%",overflow:"scroll"}}
+                    config={{layout: 'month_view'}}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
