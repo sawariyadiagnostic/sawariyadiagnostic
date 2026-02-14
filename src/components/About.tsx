@@ -1,44 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { CalendarCheck, Home, Microscope, FileCheck, ArrowRight } from 'lucide-react';
+import { ArrowRight, Microscope } from 'lucide-react';
+import { about } from '@/data/website-content';
 
 export function About() {
-  const journeySteps = [
-    {
-      icon: CalendarCheck,
-      title: 'Book Online',
-      description: 'Schedule your test online or call us anytime',
-      color: 'accent-teal',
-    },
-    {
-      icon: Home,
-      title: 'Sample Collection',
-      description: 'Our trained phlebotomist visits your home',
-      color: 'accent-blue',
-    },
-    {
-      icon: Microscope,
-      title: 'Lab Analysis',
-      description: 'Samples processed in our NABL certified lab',
-      color: 'accent-emerald',
-    },
-    {
-      icon: FileCheck,
-      title: 'Get Reports',
-      description: 'Receive results on WhatsApp & Email',
-      color: 'accent-purple',
-    },
-  ];
-
-  const features = [
-    'State-of-the-art equipment',
-    'Experienced pathologists',
-    'Quick turnaround time',
-    'Affordable pricing',
-    'Home sample collection',
-    'Digital reports',
-  ];
+  const { journeySteps, features } = about;
 
   return (
     <section id="about" className="relative py-20 bg-background">

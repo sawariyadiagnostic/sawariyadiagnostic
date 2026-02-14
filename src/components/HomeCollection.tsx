@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Home, Shield, Clock, CheckCircle, Phone, User } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
+import { homeCollection } from '@/data/website-content';
 
 export function HomeCollection() {
   const [formData, setFormData] = useState({
@@ -49,12 +50,7 @@ export function HomeCollection() {
     },
   ];
 
-  const serviceAreas = [
-    'All major localities covered',
-    'Same day collection available',
-    'Flexible timing slots',
-    'No extra charges',
-  ];
+  const serviceAreas = homeCollection.features;
 
   return (
     <section id="home-collection" className="relative py-20 bg-gradient-to-br from-accent-teal to-[hsl(173,84%,15%)] text-white overflow-hidden">

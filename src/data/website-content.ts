@@ -152,3 +152,43 @@ export const footer = {
     mapsLink: "https://maps.google.com/?q=Sawariya+Diagnostic+Charkhi+Dadri"
   }
 };
+
+export const services = {
+  list: [
+    {
+      title: 'Pathology',
+      description: 'Comprehensive blood & body fluid analysis',
+      icon: Microscope,
+      color: 'accent-teal'
+    },
+    {
+      title: 'Microbiology',
+      description: 'Advanced testing for infectious diseases',
+      icon: Microscope,
+      color: 'accent-blue'
+    },
+    {
+      title: 'Biochemistry',
+      description: 'Liver, Kidney & specialized metabolic tests',
+      icon: FileCheck,
+      color: 'accent-emerald'
+    },
+    {
+      title: 'Hematology',
+      description: 'Complete blood count and blood disorders',
+      icon: FileCheck,
+      color: 'accent-purple'
+    }
+  ]
+};
+
+export const homeCollection = {
+  title: "Home Collection Service",
+  subtitle: "Get tested from the comfort of your home. Our trained phlebotomists ensure safe and hygienic sample collection.",
+  features: [
+    "Flexible Timing",
+    "Hygienic Collection",
+    "On-time Arrival",
+    "Digital Reports"
+  ]
+};
