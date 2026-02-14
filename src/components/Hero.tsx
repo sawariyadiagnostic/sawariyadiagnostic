@@ -1,10 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Menu, X, Search, FileDown, Phone, Clock, Shield } from 'lucide-react';
+import { Search, Shield } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+import { Navbar } from './layout/Navbar';
+import { MobileMenu } from './layout/MobileMenu';
+import { hero } from '@/data/website-content';
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,14 +50,6 @@ export function Hero() {
     setIsMobileMenuOpen(false);
   };
 
-  const navLinks = [
-    { label: 'Tests', href: 'tests' },
-    { label: 'About', href: 'about' },
-    { label: 'Services', href: 'services' },
-    { label: 'Our Team', href: 'team' },
-    { label: 'Contact', href: 'contact' },
-  ];
-
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[hsl(174,75%,95%)] via-white to-[hsl(199,89%,95%)]">
       
@@ -65,127 +60,20 @@ export function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-emerald/5 rounded-full blur-3xl" />
       </div>
 
-      {/* Navbar */}
-      <motion.nav
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 right-0 w-full z-[110]"
-      >
-        <div className={`w-full px-6 sm:px-8 lg:px-12 py-4 transition-all duration-300 ${
-          isScrolled ? 'glass-navbar shadow-sm' : 'bg-transparent'
-        }`}>
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center cursor-pointer"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 bg-accent-teal rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">S</span>
-                </div>
-                <span className="text-foreground font-bold text-xl hidden sm:block">
-                  Sawariya Diagnostic
-                </span>
-              </div>
-            </motion.div>
+      {/* Modular Navbar */}
+      <Navbar 
+        isScrolled={isScrolled}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+        scrollToSection={scrollToSection}
+      />
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-foreground/80 hover:text-accent-teal font-medium gentle-animation"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Right Side Actions */}
-            <div className="flex items-center gap-3">
-              {/* Download Report Button - Desktop */}
-              <Button
-                variant="outline"
-                className="hidden md:flex items-center gap-2 btn-outline"
-                onClick={() => window.open('#', '_blank')}
-              >
-                <FileDown className="w-4 h-4" />
-                Download Report
-              </Button>
-
-              {/* Book Now CTA */}
-              <Button
-                className="hidden sm:flex btn-primary px-6"
-                onClick={() => scrollToSection('contact')}
-              >
-                Book Test
-              </Button>
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 rounded-xl hover:bg-secondary gentle-animation"
-              >
-                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="lg:hidden fixed inset-0 bg-black/50 z-[80]"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Mobile Menu Panel */}
-      <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: isMobileMenuOpen ? '0%' : '100%' }}
-        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="lg:hidden fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background border-l border-border z-[90] shadow-xl"
-      >
-        <div className="flex flex-col h-full p-6 pt-20">
-          <div className="flex flex-col space-y-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="text-left px-4 py-3 text-foreground hover:bg-secondary rounded-xl font-medium gentle-animation"
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-6 space-y-3">
-            <Button
-              variant="outline"
-              className="w-full btn-outline"
-              onClick={() => window.open('#', '_blank')}
-            >
-              <FileDown className="w-4 h-4 mr-2" />
-              Download Report
-            </Button>
-            <Button
-              className="w-full btn-primary"
-              onClick={() => scrollToSection('contact')}
-            >
-              Book Test
-            </Button>
-          </div>
-        </div>
-      </motion.div>
+      {/* Modular Mobile Menu */}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        scrollToSection={scrollToSection}
+      />
 
       {/* Hero Content */}
       <div className="relative z-10 pt-32 pb-20 px-6 sm:px-8 lg:px-12">
@@ -249,35 +137,19 @@ export function Hero() {
                 </Button>
               </div>
 
-              {/* Trust Indicators */}
+              {/* Trust Indicators - Now Data Driven */}
               <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-accent-emerald/10 flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-accent-emerald" />
+                {hero.trustIndicators.map((indicator) => (
+                  <div key={indicator.title} className="flex items-center gap-2">
+                    <div className={`w-10 h-10 rounded-full bg-${indicator.color}/10 flex items-center justify-center`}>
+                      <indicator.icon className={`w-5 h-5 text-${indicator.color}`} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground text-sm">{indicator.title}</p>
+                      <p className="text-xs text-muted-foreground">{indicator.subtitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">Same Day</p>
-                    <p className="text-xs text-muted-foreground">Reports</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-accent-blue/10 flex items-center justify-center">
-                    <Shield className="w-5 h-5 text-accent-blue" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">100% Accurate</p>
-                    <p className="text-xs text-muted-foreground">Results</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-accent-purple/10 flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-accent-purple" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground text-sm">24/7 Support</p>
-                    <p className="text-xs text-muted-foreground">Available</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
