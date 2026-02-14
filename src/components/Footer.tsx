@@ -1,23 +1,10 @@
 'use client';
 
 import { Phone, Mail, MapPin, Clock, FileDown } from 'lucide-react';
+import { footer } from '@/data/website-content';
 
 export function Footer() {
-  const quickLinks = [
-    { label: 'Home', href: '#' },
-    { label: 'Tests & Packages', href: '#tests' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Our Team', href: '#team' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const services = [
-    'Blood Tests',
-    'Health Packages',
-    'Home Collection',
-    'Corporate Wellness',
-    'Specialized Tests',
-  ];
+  const { quickLinks, services, contact, description } = footer;
 
   return (
     <footer className="relative py-16 bg-foreground text-background">
@@ -33,8 +20,7 @@ export function Footer() {
               <span className="font-bold text-xl">Sawariya Diagnostic</span>
             </div>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
-              Your trusted partner for accurate diagnostics. NABL accredited lab with 
-              state-of-the-art technology and compassionate care.
+              {description}
             </p>
             
             {/* Download Report Button */}
@@ -69,8 +55,8 @@ export function Footer() {
             <h4 className="font-bold text-lg mb-4">Our Services</h4>
             <ul className="space-y-2">
               {services.map((service) => (
-                <li key={service} className="text-background/70 text-sm">
-                  {service}
+                <li key={service.label} className="text-background/70 text-sm">
+                  {service.label}
                 </li>
               ))}
             </ul>
@@ -84,8 +70,8 @@ export function Footer() {
                 <Phone className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-sm text-background">
-                    <a href="tel:+917015290782" className="hover:text-accent-teal transition-colors">
-                      +91 7015290782
+                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="hover:text-accent-teal transition-colors">
+                      {contact.phone}
                     </a>
                   </p>
                   <p className="text-xs text-background/60">24/7 Support</p>
@@ -93,13 +79,14 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-background">sawariyadiagnosticckd11@gmail.com</p>
+                <p className="text-sm text-background">{contact.email}</p>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-background/70">
-                  Opposite to R.S. Sangwan Hospital, Loharu Road, <br />
-                  Charkhi Dadri, Haryana - 127306
+                  <a href={contact.mapsLink} target="_blank" rel="noopener noreferrer" className="hover:text-accent-teal transition-colors">
+                   {contact.address}
+                  </a>
                 </p>
               </div>
               <div className="flex items-start gap-3">

@@ -127,3 +127,28 @@ export const hero = {
     }
   ]
 };
+
+export const footer = {
+  description: "Sawariya Diagnostic is a premier pathology lab in Charkhi Dadri, committed to providing accurate and timely diagnostic services.",
+  quickLinks: [
+    { label: 'Home', href: 'hero' },
+    { label: 'About Us', href: 'about' },
+    { label: 'Services', href: 'services' },
+    { label: 'Test Menu', href: 'tests' },
+    { label: 'Contact', href: 'contact' },
+  ],
+  services: [
+    { label: 'Blood Testing', href: 'tests' },
+    { label: 'Thyroid Profile', href: 'tests' },
+    { label: 'Lipid Profile', href: 'tests' },
+    { label: 'Diabetes Screening', href: 'tests' },
+    { label: 'Home Collection', href: 'home-collection' },
+  ],
+  contact: {
+    address: "Opposite R.S. Sangwan Hospital, Loharu Road, Charkhi Dadri, Haryana 127306",
+    phone: "+91 7015290782",
+    whatsapp: "+91 7015290782",
+    email: "contact@sawariyadiagnostic.com",
+    mapsLink: "https://maps.google.com/?q=Sawariya+Diagnostic+Charkhi+Dadri"
+  }
+};

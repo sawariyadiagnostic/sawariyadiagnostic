@@ -2,31 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
+import { team } from '@/data/website-content';
 
 export function Team() {
-  const teamMembers = [
-    {
-      name: 'Dr. Radhika Vashisth',
-      role: 'Chief Pathologist',
-      qualification: 'MBBS, MD (Pathology)',
-      bio: 'Over 20 years of experience in clinical pathology and laboratory medicine.',
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop&auto=format',
-    },
-     {
-      name: 'Dr. Ankit Sangwan',
-      role: 'Microbiologist',
-      qualification: 'MSc, PhD (Microbiology)',
-      bio: 'Expert in infectious disease diagnostics and antimicrobial testing.',
-      image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&h=300&fit=crop&auto=format',
-    },
-    {
-      name: 'Ms. Manisha Saini',
-      role: 'Senior Medical Biochemist',
-      qualification: 'MSc(Medical Biotechnology)',
-      bio: 'Specialist in hormone analysis and metabolic disorders testing.',
-      image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&auto=format',
-    },
-  ];
+  const teamMembers = team.members;
 
   return (
     <section id="team" className="relative py-20 bg-background">
