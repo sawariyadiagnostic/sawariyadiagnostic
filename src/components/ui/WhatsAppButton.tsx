@@ -6,7 +6,7 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({ 
-  phoneNumber = '917015290782',
+  phoneNumber = '919991941207',
   message = 'Hi, I want to book a test at Sawariya Diagnostic.'
 }: WhatsAppButtonProps) {
   const handleClick = () => {
@@ -18,7 +18,7 @@ export function WhatsAppButton({
   return (
     <button
       onClick={handleClick}
-      className="whatsapp-float"
+      className="whatsapp-float hidden sm:flex"
       aria-label="Chat on WhatsApp"
     >
       <MessageCircle className="w-7 h-7 text-white" fill="white" />

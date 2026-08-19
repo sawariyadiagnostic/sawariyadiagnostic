@@ -1,0 +1,6 @@
+{
+  "name": "Sawariya Diagnostic",
+  "description": "NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection with test catalog and online booking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

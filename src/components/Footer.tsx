@@ -1,122 +1,181 @@
 'use client';
 
-import { Phone, Mail, MapPin, Clock, FileDown } from 'lucide-react';
+import { useState } from 'react';
+import { Phone, Mail, MapPin, Clock, FileDown, ShieldCheck, ExternalLink, PhoneCall } from 'lucide-react';
 import { footer } from '@/data/website-content';
+import { LegalModal, PolicyType } from './ui/LegalModal';
+import { Logo } from './ui/Logo';
+import { ReportDownloadModal } from './ui/ReportDownloadModal';
 
 export function Footer() {
   const { quickLinks, services, contact, description } = footer;
+  const [activeModal, setActiveModal] = useState<PolicyType>(null);
 
   return (
-    <footer className="relative py-16 bg-foreground text-background">
-      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          
-          {/* Brand & Contact */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-accent-teal rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">S</span>
-              </div>
-              <span className="font-bold text-xl">Sawariya Diagnostic</span>
-            </div>
-            <p className="text-background/70 text-sm leading-relaxed mb-6">
-              {description}
-            </p>
+    <>
+      <footer className="relative py-[clamp(2.5rem,1.5rem+3vw,4.5rem)] bg-[#071A2E] text-slate-300 border-t border-white/10 overflow-hidden">
+        {/* Liquid Mesh Glow */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="absolute top-0 right-[20%] w-[40vw] h-[40vw] bg-[#00A896]/15 rounded-full blur-[100px] animate-liquid mix-blend-screen" />
+          <div className="absolute bottom-[-10%] left-[10%] w-[50vw] h-[50vw] bg-[#0A3663]/40 rounded-full blur-[100px] animate-liquid mix-blend-screen" style={{ animationDelay: '-5s' }} />
+        </div>
+
+        <div className="fluid-container relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10">
             
-            {/* Download Report Button */}
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 bg-accent-teal hover:bg-accent-teal/90 text-white px-4 py-2 rounded-full text-sm font-medium gentle-animation"
-            >
-              <FileDown className="w-4 h-4" />
-              Download Report
-            </a>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a 
-                    href={link.href} 
-                    className="text-background/70 hover:text-background text-sm gentle-animation"
+            {/* Brand & Mission (4 cols) */}
+            <div className="lg:col-span-4 space-y-4">
+              <Logo variant="horizontal" inverted size="md" />
+              
+              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm font-normal">
+                {description}
+              </p>
+              
+              <div className="pt-2 flex flex-wrap gap-2.5">
+                <ReportDownloadModal trigger={
+                  <button
+                    className="inline-flex items-center gap-2 bg-[#0A6E5C] hover:bg-[#085a4b] text-white px-4 py-2.5 rounded-[16px] text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
                   >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+                    <FileDown className="w-4 h-4 text-emerald-200" />
+                    <span>Online Booking & Reports</span>
+                  </button>
+                } />
+                <a
+                  href={contact.mapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/10 text-slate-200 px-3.5 py-2.5 rounded-[16px] text-xs font-semibold transition-all hover:text-white"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-teal-300" />
+                  <span>Google Maps</span>
+                  <ExternalLink className="w-3 h-3 ml-0.5 text-slate-400" />
+                </a>
+              </div>
 
-          {/* Services */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">Our Services</h4>
-            <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service.label} className="text-background/70 text-sm">
-                  {service.label}
-                </li>
-              ))}
-            </ul>
-          </div>
+              <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <span>NABL Accredited & ICMR Registered Lab</span>
+              </div>
+            </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-bold text-lg mb-4">Contact Us</h4>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-background">
-                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="hover:text-accent-teal transition-colors">
+            {/* Quick Links (2 cols) */}
+            <div className="lg:col-span-2 space-y-2.5">
+              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">Quick Links</h4>
+              <ul className="space-y-1.5">
+                {quickLinks.map((link) => (
+                  <li key={link.label}>
+                    <a 
+                      href={`#${link.href}`} 
+                      className="text-slate-400 hover:text-white text-xs transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services (3 cols) */}
+            <div className="lg:col-span-3 space-y-2.5">
+              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">Lab Specialities</h4>
+              <ul className="space-y-1.5">
+                {services.map((service) => (
+                  <li key={service.label} className="text-slate-400 text-xs flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#00A896]" />
+                    {service.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info (3 cols) */}
+            <div className="lg:col-span-3 space-y-2.5">
+              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">24*7 Calling Desk & Center</h4>
+              <div className="space-y-2.5 text-xs">
+                <div className="flex items-start gap-2.5">
+                  <Phone className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-slate-100 hover:text-teal-300 font-bold transition-colors">
                       {contact.phone}
                     </a>
-                  </p>
-                  <p className="text-xs text-background/60">24/7 Support</p>
+                    <p className="text-[11px] text-emerald-400 font-medium">24*7 Helpline & Home Collection</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-background">{contact.email}</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-background/70">
-                  <a href={contact.mapsLink} target="_blank" rel="noopener noreferrer" className="hover:text-accent-teal transition-colors">
-                   {contact.address}
-                  </a>
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-accent-teal flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-background">Mon - Sat: 8AM - 6PM</p>
-                  <p className="text-sm text-background/70">Sun: 9AM - 2PM</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-background/20 pt-8 mt-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-background/70">
-              © 2025 Sawariya Diagnostic. All rights reserved.
+                <div className="flex items-start gap-2.5">
+                  <PhoneCall className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <a href={`tel:${contact.emergencyPhone.replace(/\s/g, '')}`} className="text-amber-200 hover:text-amber-300 font-semibold transition-colors">
+                      {contact.emergencyPhone}
+                    </a>
+                    <p className="text-[11px] text-slate-400">Lab Director / Escalation line</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Mail className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />
+                  <a href={`mailto:${contact.email}`} className="text-slate-300 hover:text-teal-300 transition-colors break-all">
+                    {contact.email}
+                  </a>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />
+                  <a 
+                    href={contact.mapsLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-slate-300 hover:text-teal-300 transition-colors leading-relaxed"
+                  >
+                    {contact.address}
+                  </a>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Clock className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <div className="text-slate-300 space-y-0.5">
+                    <p className="text-emerald-400 font-bold">Open 24*7 Always</p>
+                    <p className="text-[11px] text-slate-400">Emergency & walk-in samples anytime</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 pt-6 sm:pt-8 mt-10 flex flex-col sm:flex-row justify-between items-center gap-3.5 text-xs text-slate-400">
+            <p className="text-center sm:text-left">
+              © {new Date().getFullYear()} Sawariya Diagnostic Lab. All diagnostic reports are confidential.
             </p>
-            <div className="flex items-center gap-6">
-              <a href="#" className="text-sm text-background/70 hover:text-background gentle-animation">
+            <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
+              <button 
+                onClick={() => setActiveModal('privacy')}
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="text-sm text-background/70 hover:text-background gentle-animation">
-                Terms of Service
-              </a>
+              </button>
+              <button 
+                onClick={() => setActiveModal('terms')}
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+              >
+                Terms & Patient Rights
+              </button>
+              <button 
+                onClick={() => setActiveModal('charter')}
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+              >
+                Quality Charter & Charity Camps
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+
+      {/* Interactive Modal */}
+      <LegalModal 
+        type={activeModal} 
+        onClose={() => setActiveModal(null)} 
+      />
+    </>
   );
 }

@@ -6,6 +6,7 @@ import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
 import { WhatsAppButton } from './components/ui/WhatsAppButton'
+import { MobileBottomDock } from './components/layout/MobileBottomDock'
 
 // Lazy load HEAVY / Interactive components only
 // - TestCatalog: Has lots of list data (~9KB gzipped)
@@ -19,47 +20,27 @@ const Footer = lazy(() => import('./components/Footer').then(module => ({ defaul
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="relative" role="main">
+    <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
+      <main className="relative w-full max-w-full" role="main">
         {/* Critical Path: Load Hero Instantly */}
-        <section id="hero" aria-label="Hero section">
-          <Hero />
-        </section>
+        <Hero />
 
         {/* Lightweight Content: Load with main bundle (Better for 3G) */}
-        <section id="trust" aria-label="Trust indicators">
-          <TrustIndicators />
-        </section>
-
-        <section id="about" aria-label="About section">
-          <About />
-        </section>
-        
-        <section id="services" aria-label="Services section">
-          <Services />
-        </section>
-        
-        <section id="home-collection" aria-label="Home collection section">
-          <HomeCollection />
-        </section>
+        <TrustIndicators />
+        <About />
+        <Services />
+        <HomeCollection />
 
         {/* Heavy Interactive Sections: Lazy Load */}
         <Suspense fallback={<LoadingSpinner />}>
-          <section id="tests" aria-label="Tests catalog section">
-            <TestCatalog />
-          </section>
-          
-          <section id="team" aria-label="Team section">
-            <Team />
-          </section>
-          
-          <section id="contact" aria-label="Contact section">
-            <Contact />
-          </section>
+          <TestCatalog />
+          <Team />
+          <Contact />
           <Footer />
         </Suspense>
       </main>
       <WhatsAppButton />
+      <MobileBottomDock />
     </div>
   )
 }

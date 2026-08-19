@@ -8,61 +8,82 @@
 :root {
   --font-size: 16px;
 
-  /* Medical Light Theme - Clinical & Trustworthy */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 210 40% 98%;
-  --card-foreground: 222.2 84% 4.9%;
+  /* Apple Design System & Human Interface Guidelines Tokens */
+  --apple-bg: #FBFBFD;
+  --apple-subtle: #F5F5F7;
+  --apple-card: #FFFFFF;
+  --apple-text-primary: #1D1D1F;
+  --apple-text-secondary: #86868B;
+  --apple-blue: #0071E3;
+  --apple-blue-hover: #0077ED;
+  --apple-emerald: #34C759;
+  --apple-amber: #FF9500;
+  --apple-coral: #FF3B30;
+  --apple-teal: #30B0C7;
+  --apple-indigo: #5856D6;
+
+  /* Healthcare & Natural Peacock Feather Design System Tokens */
+  --background: 210 33% 99%;
+  --foreground: 218 45% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 45% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 174 75% 32%;
+  --popover-foreground: 218 45% 12%;
+  
+  /* Peacock Feather Natural Harmonic Palette */
+  --primary: 195 85% 23%;             /* Deep Peacock Cerulean (#0A4D68) */
   --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
+  
+  /* Secondary: Soft Natural Slate */
+  --secondary: 210 25% 95%;
+  --secondary-foreground: 218 45% 12%;
+  
+  /* Muted */
+  --muted: 210 20% 95%;
+  --muted-foreground: 215 16% 45%;
+  
+  /* Accent */
+  --accent: 190 60% 94%;
+  --accent-foreground: 195 85% 23%;
+  
+  --destructive: 0 84.2% 55%;
   --destructive-foreground: 0 0% 100%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
   --input-background: 0 0% 100%;
-  --switch-background: 214.3 31.8% 91.4%;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: 174 75% 32%;
+  --switch-background: 214 20% 90%;
+  --ring: 195 85% 23%;
 
-  /* Medical Accent Colors */
-  --accent-blue: 199 89% 48%;
-  --accent-emerald: 160 84% 39%;
-  --accent-purple: 262 83% 58%;
-  --accent-teal: 174 75% 32%;
-  --accent-orange: 24 95% 53%;
+  /* Peacock Feather Iridescent Accents */
+  --accent-teal: 184 90% 25%;        /* Rich Peacock Teal (#066163) */
+  --accent-emerald: 168 85% 28%;     /* Malachite Feather Green (#0A6E5C) */
+  --accent-blue: 216 75% 20%;        /* Midnight Sapphire (#0C223F) */
+  --accent-orange: 38 65% 50%;       /* Gilded Feather Gold (#C5A880 / #D4AF37) */
+  --accent-purple: 220 50% 30%;      /* Royal Indigo */
 
-  --radius: 0.75rem;
+  --radius: 1rem;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 8%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 174 75% 42%;
-  --primary-foreground: 222.2 84% 4.9%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  --background: 218 55% 6%;
+  --foreground: 210 33% 98%;
+  --card: 218 50% 9%;
+  --card-foreground: 210 33% 98%;
+  --popover: 218 50% 9%;
+  --popover-foreground: 210 33% 98%;
+  --primary: 188 85% 42%;
+  --primary-foreground: 218 55% 6%;
+  --secondary: 217 30% 15%;
+  --secondary-foreground: 210 33% 98%;
+  --muted: 217 30% 15%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 188 40% 16%;
+  --accent-foreground: 210 33% 98%;
   --destructive: 0 62.8% 50.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 174 75% 42%;
+  --destructive-foreground: 210 33% 98%;
+  --border: 217 28% 18%;
+  --input: 217 28% 18%;
+  --ring: 188 85% 42%;
 }
 
 @theme inline {
@@ -95,21 +116,33 @@
   --color-accent-teal: hsl(var(--accent-teal));
   --color-accent-orange: hsl(var(--accent-orange));
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 6px);
 }
 
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
     font-family:
-      "Inter",
+      "Plus Jakarta Sans",
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -117,7 +150,51 @@
       sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* iOS iPhone Pro Safe Area Padding Utilities */
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left, 0px);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  /* iOS Native Momentum Scrolling for Carousels */
+  .ios-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .ios-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .ios-scroll-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
   }
 
   h1,
@@ -127,16 +204,12 @@
   h5,
   h6 {
     font-family:
-      "Plus Jakarta Sans",
+      "Outfit",
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
       Roboto,
       sans-serif;
-  }
-
-  * {
-    box-sizing: border-box;
   }
 
   /* Ensure no elements can cause horizontal overflow */
@@ -145,106 +218,373 @@
     overflow-x: hidden;
   }
 
-  /* Simplified utility classes */
+  /* =========================================================================
+     TOP-OF-THE-CLASS FLUID RESIZING & MATHEMATICAL SCALING ENGINE
+     Continuous Linear Viewport Interpolation (clamp) + Container Queries (@container)
+     Target Viewport Range: 360px (Mobile) to 1440px (Desktop Ultra-Wide)
+     ========================================================================= */
+
+  :root {
+    /* Fluid Typography Mathematical Scale (clamp(min, preferred, max)) */
+    --fluid-font-display: clamp(2rem, 1.25rem + 3.75vw, 4.25rem);      /* 32px -> 68px */
+    --fluid-font-h1: clamp(1.75rem, 1.15rem + 3vw, 3.5rem);           /* 28px -> 56px */
+    --fluid-font-h2: clamp(1.45rem, 1.05rem + 2vw, 2.65rem);          /* 23.2px -> 42.4px */
+    --fluid-font-h3: clamp(1.2rem, 0.95rem + 1.25vw, 1.75rem);        /* 19.2px -> 28px */
+    --fluid-font-h4: clamp(1.05rem, 0.92rem + 0.65vw, 1.35rem);       /* 16.8px -> 21.6px */
+    --fluid-font-lead: clamp(0.95rem, 0.85rem + 0.5vw, 1.2rem);       /* 15.2px -> 19.2px */
+    --fluid-font-body: clamp(0.875rem, 0.82rem + 0.28vw, 1.025rem);   /* 14px -> 16.4px */
+    --fluid-font-caption: clamp(0.725rem, 0.68rem + 0.22vw, 0.875rem);/* 11.6px -> 14px */
+
+    /* Fluid Spatial Rhythm & Container Padding Scale */
+    --fluid-section-py: clamp(2.5rem, 1.5rem + 5vw, 6.5rem);          
+    --fluid-container-px: clamp(0.75rem, 0.4rem + 3vw, 3.25rem);       
+    --fluid-gap-xs: clamp(0.375rem, 0.25rem + 0.5vw, 0.625rem);       
+    --fluid-gap-sm: clamp(0.5rem, 0.35rem + 0.75vw, 1rem);            
+    --fluid-gap-md: clamp(0.875rem, 0.65rem + 1.1vw, 1.75rem);        
+    --fluid-gap-lg: clamp(1.25rem, 0.95rem + 1.5vw, 2.5rem);          
+    --fluid-card-p: clamp(0.875rem, 0.75rem + 1.25vw, 1.85rem);
+    --fluid-radius: clamp(0.875rem, 0.65rem + 1vw, 1.5rem);           /* 14px -> 24px */
+  }
+
+  /* Fluid Typography Utility Classes */
+  .fluid-display {
+    font-size: var(--fluid-font-display);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+  .fluid-h1 {
+    font-size: var(--fluid-font-h1);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+  .fluid-h2 {
+    font-size: var(--fluid-font-h2);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+  .fluid-h3 {
+    font-size: var(--fluid-font-h3);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .fluid-h4 {
+    font-size: var(--fluid-font-h4);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+  .fluid-lead {
+    font-size: var(--fluid-font-lead);
+    line-height: 1.6;
+  }
+  .fluid-body {
+    font-size: var(--fluid-font-body);
+    line-height: 1.55;
+  }
+  .fluid-caption {
+    font-size: var(--fluid-font-caption);
+    line-height: 1.45;
+  }
+
+  /* Fluid Section & Container Wrappers */
+  .fluid-section {
+    padding-top: var(--fluid-section-py);
+    padding-bottom: var(--fluid-section-py);
+  }
+  .fluid-container {
+    width: 100%;
+    max-width: 80rem; /* 1280px */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--fluid-container-px);
+    padding-right: var(--fluid-container-px);
+  }
+  .fluid-card-pad {
+    padding: var(--fluid-card-p);
+  }
+  .fluid-rounded {
+    border-radius: var(--fluid-radius);
+  }
+
+  /* Top-of-the-class Intrinsic Dynamic Auto-Fit Grid Engines */
+  .fluid-grid-cards-sm {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: var(--fluid-gap-md);
+  }
+  .fluid-grid-cards-md {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: var(--fluid-gap-md);
+  }
+  .fluid-grid-cards-lg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: var(--fluid-gap-lg);
+  }
+
+  /* Container Query Contexts (Allows Cards to self-adapt based on container width) */
+  .cq-wrapper {
+    container-type: inline-size;
+  }
+
+  /* Performance & Rendering Containment */
+  .contain-paint {
+    contain: paint;
+  }
+  .contain-layout {
+    contain: layout;
+  }
+
+  /* Apple-inspired subtle depth & surface shadows */
   .clean-border {
     border: 1px solid hsl(var(--border));
   }
 
   .subtle-shadow {
     box-shadow:
-      0 1px 3px 0 rgba(0, 0, 0, 0.1),
-      0 1px 2px -1px rgba(0, 0, 0, 0.1);
+      0 1px 2px 0 rgba(15, 23, 42, 0.04),
+      0 1px 3px 0 rgba(15, 23, 42, 0.02);
   }
 
   .elevated-shadow {
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+      0 4px 12px -2px rgba(15, 23, 42, 0.06),
+      0 2px 6px -1px rgba(15, 23, 42, 0.04);
   }
 
   .medical-shadow {
-    box-shadow: 0 10px 30px -10px hsl(var(--accent-teal) / 0.15);
+    box-shadow: 
+      0 12px 30px -10px hsl(var(--accent-teal) / 0.16),
+      0 4px 12px -4px rgba(15, 23, 42, 0.04);
   }
 
-  .gentle-animation {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Power & Exclusivity Card Surfaces */
+  .apple-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(203, 213, 225, 0.8);
+    box-shadow: 0 4px 24px -4px rgba(10, 25, 47, 0.07);
+    border-radius: 1.25rem;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Glassmorphism for medical cards */
+  .apple-card:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(15, 39, 68, 0.4);
+    box-shadow: 
+      0 20px 40px -12px rgba(10, 25, 47, 0.16),
+      0 4px 12px -2px rgba(180, 83, 9, 0.08);
+    transform: translateY(-3px);
+  }
+
   .glass-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(203, 213, 225, 0.85);
+    box-shadow: 0 6px 28px -4px rgba(10, 25, 47, 0.08);
+    border-radius: 1.25rem;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.98);
+    border-color: rgba(15, 39, 68, 0.35);
+    box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.14);
+    transform: translateY(-3px);
   }
 
-  /* Glass Effect for dark backgrounds */
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .glass-effect:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  /* Glass navbar */
   .glass-navbar {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid hsl(var(--border));
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    border-bottom: 1px solid rgba(203, 213, 225, 0.8);
+    box-shadow: 0 2px 16px rgba(10, 25, 47, 0.05);
   }
 
-  /* Primary button style - Orange CTA */
+  /* =========================================================================
+     PEACOCK PLUMAGE CONTRAST BUTTON & ACTION SYSTEM
+     ========================================================================= */
+
+  /* High-Contrast Primary CTA: Vibrant Sunset Coral & Tangerine (Exact Optical Opposite to Peacock Sapphire & Teal) */
+  /* High-Contrast Primary CTA: Peacock Amber-Gold & Fire Coral (Optical Complementary Contrast to Peacock Sapphire & Teal) */
   .btn-primary {
-    background: hsl(var(--accent-orange));
-    color: white;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #C2410C 0%, #EA580C 42%, #D97706 78%, #F59E0B 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
     border-radius: 9999px;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(254, 215, 170, 0.45);
+    box-shadow: 0 4px 18px rgba(217, 119, 6, 0.42), 0 2px 6px rgba(194, 65, 12, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }
 
   .btn-primary:hover {
-    background: hsl(24 95% 45%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px hsl(var(--accent-orange) / 0.3);
+    background: linear-gradient(135deg, #9A3412 0%, #C2410C 42%, #EA580C 78%, #F59E0B 100%);
+    border-color: rgba(254, 240, 138, 0.65);
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 26px rgba(234, 88, 12, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
-  /* Secondary button style - Teal */
+  .btn-primary:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 2px 8px rgba(194, 65, 12, 0.35);
+  }
+
+  /* Deep Peacock Sapphire Secondary Button */
+  .btn-peacock,
   .btn-secondary {
-    background: hsl(var(--accent-teal));
-    color: white;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #051A2E 0%, #0A324D 50%, #084942 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
     border-radius: 9999px;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 168, 150, 0.35);
+    box-shadow: 0 4px 14px rgba(5, 26, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
   }
 
-  .btn-secondary:hover {
-    background: hsl(174 75% 28%);
-    transform: translateY(-1px);
+  .btn-secondary:hover,
+  .btn-peacock:hover {
+    background: linear-gradient(135deg, #082845 0%, #0D4968 50%, #0A6359 100%);
+    border-color: rgba(5, 191, 219, 0.6);
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 22px rgba(8, 40, 69, 0.5);
   }
 
-  /* Outline button */
+  .btn-secondary:active,
+  .btn-peacock:active {
+    transform: scale(0.97) translateY(0);
+  }
+
+  /* Lush Emerald Malachite CTA (WhatsApp & Rapid Action) */
+  .btn-emerald {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #065F46 0%, #0A6E5C 50%, #10B981 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(10, 110, 92, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+
+  .btn-emerald:hover {
+    background: linear-gradient(135deg, #047857 0%, #059669 50%, #34D399 100%);
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .btn-emerald:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 2px 8px rgba(10, 110, 92, 0.25);
+  }
+
+  /* Gilded Sun Gold CTA (Emergency & 24*7 Action) */
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #92400E 0%, #D97706 50%, #F59E0B 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #B45309 0%, #F59E0B 50%, #FBBF24 100%);
+    transform: translateY(-1.5px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+  }
+
+  .btn-gold:active {
+    transform: scale(0.97) translateY(0);
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+  }
+
+  /* Refined Natural Outline Button with Sunset Coral / Peacock Hover */
   .btn-outline {
-    background: transparent;
-    border: 2px solid hsl(var(--accent-teal));
-    color: hsl(var(--accent-teal));
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1.5px solid #CBD5E1;
+    color: #0A2540;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
     border-radius: 9999px;
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(10, 25, 47, 0.04);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
   }
 
   .btn-outline:hover {
-    background: hsl(var(--accent-teal));
-    color: white;
+    background: #072448;
+    color: #FFFFFF !important;
+    border-color: #072448;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 18px rgba(7, 36, 72, 0.25);
+  }
+
+  .btn-outline:active {
+    transform: scale(0.97) translateY(0);
+  }
+
+  /* Coral Outline for Secondary Booking */
+  .btn-outline-coral {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF7ED;
+    border: 1.5px solid #FDBA74;
+    color: #C2410C;
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(234, 88, 12, 0.06);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+
+  .btn-outline-coral:hover {
+    background: linear-gradient(135deg, #FF6B35 0%, #F97316 100%);
+    color: #FFFFFF !important;
+    border-color: transparent;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+  }
+
+  .btn-outline-coral:active {
+    transform: scale(0.97) translateY(0);
   }
 
   /* Animations */
@@ -256,6 +596,80 @@
     50% {
       transform: translateY(-8px);
     }
+  }
+
+  @keyframes liquid-mesh {
+    0% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+    33% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+      transform: translate(4%, 3%) rotate(8deg) scale(1.05);
+    }
+    66% {
+      border-radius: 50% 50% 40% 60% / 40% 40% 60% 50%;
+      transform: translate(-3%, 4%) rotate(-4deg) scale(0.95);
+    }
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+  }
+
+  .animate-liquid {
+    animation: liquid-mesh 18s ease-in-out infinite alternate;
+  }
+
+  .glass-panel {
+    @apply bg-white/40 backdrop-blur-[40px] border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.08)];
+    position: relative;
+  }
+  
+  .glass-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: -1;
+  }
+  
+  .glass-panel-dark {
+    @apply bg-black/40 backdrop-blur-[40px] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)];
+    position: relative;
+  }
+
+  .glass-panel-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-[24px] border border-white/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:bg-white/80 transition-all duration-300;
+    position: relative;
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+    z-index: -1;
   }
 
   @keyframes pulse-glow {
@@ -441,18 +855,21 @@ html {
   z-index: 1000;
   width: 60px;
   height: 60px;
-  background: #25d366;
+  background: rgba(37, 211, 102, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+  transform: scale(1.05) translateY(-4px);
+  background: rgba(37, 211, 102, 0.95);
+  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -462,4 +879,14 @@ html {
     width: 56px;
     height: 56px;
   }
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 0;
 }

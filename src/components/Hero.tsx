@@ -1,12 +1,12 @@
 'use client';
 
-import { Search, Shield } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Search, Shield, Sparkles, CheckCircle2, Clock, ArrowRight, FileCheck, Stethoscope, Activity, Heart, ShieldCheck } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Navbar } from './layout/Navbar';
 import { MobileMenu } from './layout/MobileMenu';
-import { hero } from '@/data/website-content';
+import { Logo } from './ui/Logo';
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -17,7 +17,7 @@ export function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
+      setIsScrolled(scrollTop > 30);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -37,10 +37,14 @@ export function Hero() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      const testsSection = document.getElementById('tests');
-      testsSection?.scrollIntoView({ behavior: 'smooth' });
-    }
+    const testsSection = document.getElementById('tests');
+    testsSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleQuickTagClick = (tag: string) => {
+    setSearchQuery(tag);
+    const testsSection = document.getElementById('tests');
+    testsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -49,14 +53,21 @@ export function Hero() {
     setIsMobileMenuOpen(false);
   };
 
+  const quickSearchTags = [
+    { label: 'CBC Blood Count', color: 'bg-blue-50 text-blue-900 border-blue-200/80 hover:bg-blue-100' },
+    { label: 'Thyroid (T3 T4 TSH)', color: 'bg-purple-50 text-purple-900 border-purple-200/80 hover:bg-purple-100' },
+    { label: 'Vitamin D3 & B12', color: 'bg-amber-50 text-amber-900 border-amber-200/80 hover:bg-amber-100' },
+    { label: 'Lipid (Cholesterol)', color: 'bg-emerald-50 text-emerald-900 border-emerald-200/80 hover:bg-emerald-100' },
+    { label: 'HbA1c Diabetes', color: 'bg-cyan-50 text-cyan-900 border-cyan-200/80 hover:bg-cyan-100' },
+  ];
+
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-[hsl(174,75%,95%)] via-white to-[hsl(199,89%,95%)]">
-      
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-accent-teal/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-accent-blue/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-emerald/5 rounded-full blur-3xl" />
+    <div className="relative min-h-screen w-full overflow-hidden bg-[#FBFBFD]">
+      {/* Liquid Organic Mesh Gradient Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-multiply">
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-teal-300/30 blur-[100px] animate-liquid mix-blend-multiply" />
+        <div className="absolute top-[20%] right-[-10%] w-[50vw] h-[50vw] bg-emerald-200/20 blur-[100px] animate-liquid mix-blend-multiply" style={{ animationDelay: '-6s' }} />
+        <div className="absolute bottom-[-20%] left-[20%] w-[70vw] h-[70vw] bg-cyan-200/20 blur-[120px] animate-liquid mix-blend-multiply" style={{ animationDelay: '-12s' }} />
       </div>
 
       {/* Modular Navbar */}
@@ -67,130 +78,247 @@ export function Hero() {
         scrollToSection={scrollToSection}
       />
 
-      {/* Modular Mobile Menu */}
+      {/* Modular Mobile Menu Drawer */}
       <MobileMenu 
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         scrollToSection={scrollToSection}
       />
 
-      {/* Hero Content */}
-      <div className="relative z-10 pt-32 pb-20 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+      {/* Hero Content Area */}
+      <div className="relative z-10 pt-[clamp(6rem,4rem+6vw,9rem)] pb-[clamp(3rem,2rem+4vw,6rem)] fluid-container">
+        <div className="w-full glass-card p-[clamp(1rem,4vw,3rem)] rounded-[clamp(1.25rem,1rem+2vw,3rem)] border border-white/60 relative overflow-hidden">
+          
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
             
-            {/* Left Column - Content */}
-            <div
-              className="space-y-8 animate-slide-in-left"
-            >
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-accent-teal/10 px-4 py-2 rounded-full">
-                <Shield className="w-4 h-4 text-accent-teal" />
-                <span className="text-sm font-medium text-accent-teal">NABL Accredited Lab</span>
+            {/* Left Column - Main Value Proposition (7 cols) */}
+            <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-slide-in-left">
+              
+              {/* Apple Pill Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md border border-white/40 px-3.5 py-1.5 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)] max-w-full">
+                <span className="flex h-2 w-2 relative flex-shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00A896] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0A6E5C]"></span>
+                </span>
+                <span className="text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 truncate">
+                  NABL Certified Quality <span className="text-slate-400">•</span> <span className="text-[#0A6E5C]">24*7 Active Lab</span>
+                  <span className="hidden sm:inline text-slate-400"> • </span><span className="hidden sm:inline">Charkhi Dadri</span>
+                </span>
               </div>
 
-              {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1]">
-                Your Health,
-                <br />
-                <span className="text-accent-teal">Our Priority</span>
-              </h1>
+              {/* Display Headline */}
+              <div className="space-y-2 sm:space-y-3">
+                <h1 className="text-[clamp(2.1rem,1.4rem+3.8vw,3.75rem)] font-black text-[#1D1D1F] tracking-tight leading-[1.08]">
+                  Precision Pathology.
+                  <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#072448] via-[#0A6E5C] to-[#00A896]">
+                    Peace of Mind at Home.
+                  </span>
+                </h1>
+                <p className="text-sm sm:text-base md:text-lg text-slate-700 max-w-xl font-medium leading-relaxed">
+                  Doctor-verified pathology reports with 99.9% clinical accuracy. Free doorstep sample collection across Charkhi Dadri and same-day WhatsApp report delivery.
+                </p>
+              </div>
 
-              {/* Subheadline */}
-              <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Accurate diagnostics with state-of-the-art technology. 
-                Get lab-quality tests from the comfort of your home.
-              </p>
+              {/* Clean Apple-Optimized Search Bar inside Glass */}
+              <div className="space-y-2.5 max-w-xl">
+                <form onSubmit={handleSearch} className="relative">
+                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#0A6E5C]/40 focus-within:bg-white focus-within:border-[#0A6E5C] focus-within:ring-2 focus-within:ring-[#0A6E5C]/15 transition-all p-1.5 duration-300">
+                    <Search className="w-4 h-4 text-slate-500 ml-3 flex-shrink-0" />
+                    <Input
+                      type="text"
+                      placeholder="Search tests..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-sm placeholder:text-slate-500 bg-transparent px-2.5 h-11 sm:h-12 w-full min-w-0"
+                    />
+                    <Button 
+                      type="submit" 
+                      className="bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 rounded-[18px] px-4 sm:px-6 h-11 sm:h-12 text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
+                    >
+                      <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
+                      <span>Find Test</span>
+                    </Button>
+                  </div>
+                </form>
 
-              {/* Search Bar */}
-              <form onSubmit={handleSearch} className="relative max-w-md">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Search for Vitamin D, CBC, Thyroid..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-4 h-14 rounded-full border-2 border-border focus:border-accent-teal bg-white text-base"
-                />
-              </form>
+                {/* Quick search suggestion pills: touch-friendly horizontal scroll */}
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 w-full max-w-full scrollbar-none text-xs">
+                  <span className="font-bold text-slate-500 mr-1 text-[11px] uppercase tracking-wider whitespace-nowrap flex-shrink-0">Popular:</span>
+                  {quickSearchTags.map((tag) => (
+                    <button
+                      key={tag.label}
+                      type="button"
+                      onClick={() => handleQuickTagClick(tag.label)}
+                      className={`h-8 px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#0A6E5C] hover:border-[#0A6E5C]/30 transition-all duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                    >
+                      {tag.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
+              {/* Action Buttons: Primary & Secondary */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1">
                 <Button
-                  size="lg"
-                  className="btn-primary h-14 px-8 text-base"
+                  size="xl"
+                  className="btn-primary w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97]"
                   onClick={() => scrollToSection('home-collection')}
                 >
-                  Book Home Collection
+                  <span>Book Doorstep Sample</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
+
                 <Button
-                  size="lg"
+                  size="xl"
                   variant="outline"
-                  className="btn-outline h-14 px-8 text-base"
+                  className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97]"
                   onClick={() => scrollToSection('tests')}
                 >
-                  View Health Packages
+                  <span>Explore Health Packages</span>
                 </Button>
               </div>
 
-              {/* Trust Indicators - Now Data Driven */}
-              <div className="flex flex-wrap gap-6 pt-4">
-                {hero.trustIndicators.map((indicator) => (
-                  <div key={indicator.title} className="flex items-center gap-2">
-                    <div className={`w-10 h-10 rounded-full bg-${indicator.color}/10 flex items-center justify-center`}>
-                      <indicator.icon className={`w-5 h-5 text-${indicator.color}`} />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">{indicator.title}</p>
-                      <p className="text-xs text-muted-foreground">{indicator.subtitle}</p>
-                    </div>
+              {/* Apple Health Trust Micro-Metrics */}
+              <div className="flex flex-wrap sm:grid sm:grid-cols-3 gap-3 sm:gap-4 pt-4 border-t border-black/[0.06] max-w-xl justify-between">
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-blue-50 flex items-center justify-center border border-blue-200/80 flex-shrink-0">
+                    <Clock className="w-4 h-4 text-blue-700" />
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">Same Day</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">6h Digital Report</p>
+                  </div>
+                </div>
 
-            {/* Right Column - Visual */}
-            <div
-              className="hidden lg:flex items-center justify-center animate-slide-in-right"
-              style={{ animationDelay: '0.4s' }}
-            >
-              <div className="relative">
-                {/* Main Visual Card */}
-                <div className="w-[400px] h-[500px] bg-gradient-to-br from-accent-teal/20 to-accent-blue/20 rounded-3xl flex items-center justify-center relative overflow-hidden">
-                  
-                  {/* Decorative Elements */}
-                  <div className="absolute top-8 left-8 w-20 h-20 bg-white/80 rounded-2xl shadow-lg flex items-center justify-center">
-                    <div className="w-12 h-12 bg-accent-teal/20 rounded-full flex items-center justify-center">
-                      <span className="text-2xl">🧪</span>
-                    </div>
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-emerald-50 flex items-center justify-center border border-emerald-200/80 flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   </div>
-                  
-                  <div className="absolute bottom-8 right-8 w-24 h-24 bg-white/80 rounded-2xl shadow-lg flex items-center justify-center">
-                    <div className="w-14 h-14 bg-accent-emerald/20 rounded-full flex items-center justify-center">
-                      <span className="text-3xl">💉</span>
-                    </div>
+                  <div>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">99.9%</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">Clinical Accuracy</p>
                   </div>
-                  
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-white rounded-full shadow-xl flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="text-5xl">🏥</span>
-                      <p className="text-sm font-semibold text-foreground mt-2">Trusted Care</p>
-                    </div>
-                  </div>
+                </div>
 
-                  {/* Floating Stats */}
-                  <div className="absolute -left-4 top-1/3 bg-white rounded-xl shadow-lg px-4 py-3 float-gentle">
-                    <p className="text-2xl font-bold text-accent-teal">50K+</p>
-                    <p className="text-xs text-muted-foreground">Tests Done</p>
+                <div className="flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-amber-50 flex items-center justify-center border border-amber-200/80 flex-shrink-0">
+                    <ShieldCheck className="w-4 h-4 text-amber-700" />
                   </div>
-                  
-                  <div className="absolute -right-4 bottom-1/3 bg-white rounded-xl shadow-lg px-4 py-3 float-gentle animation-delay-1000">
-                    <p className="text-2xl font-bold text-accent-emerald">5+</p>
-                    <p className="text-xs text-muted-foreground">Years Experience</p>
+                  <div>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">50,000+</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">Patients Diagnosed</p>
                   </div>
                 </div>
               </div>
+
             </div>
+
+            {/* Right Column - Apple Health Specimen Card Preview (5 cols) */}
+            <div className="lg:col-span-5 relative flex items-center justify-center mt-2 lg:mt-0 w-full overflow-hidden sm:overflow-visible">
+              <div className="relative w-full max-w-[340px] sm:max-w-[430px] mx-auto">
+                
+                {/* Background Ambient Aura */}
+                <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#0D5C75]/20 via-[#00A896]/15 to-[#EA580C]/15 rounded-[34px] blur-2xl opacity-70 pointer-events-none" />
+
+                {/* Primary Apple Glass Card */}
+                <div className="relative bg-white/95 backdrop-blur-2xl rounded-[28px] border border-black/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-5 sm:p-7 space-y-4 sm:space-y-5">
+                  
+                  {/* Card Header with Official Wordmark & Verified Pill */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between pb-3.5 border-b border-slate-100">
+                    <div className="min-w-0">
+                      <Logo variant="horizontal" size="xs" showTagline={false} />
+                      <p className="text-[10px] text-slate-400 mt-0.5 font-medium truncate">Sample #SD-2026-9082 • MD Pathologist Sign-off</p>
+                    </div>
+                    <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10.5px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 self-start sm:self-auto shrink-0">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verified
+                    </span>
+                  </div>
+
+                  {/* Patient Sample Details */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 bg-slate-50/90 p-3 rounded-[16px] border border-slate-100 text-xs">
+                    <div className="min-w-0">
+                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Test Specimen</span>
+                      <span className="font-bold text-slate-800 text-xs sm:text-sm truncate block">Complete Blood Count</span>
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Collection Mode</span>
+                      <span className="font-bold text-[#0A6E5C] text-xs sm:text-sm flex items-center gap-1 truncate">
+                        <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse shrink-0" /> Free Home Visit (₹0)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Diagnostic Metric Bars */}
+                  <div className="space-y-3">
+                    {/* Hemoglobin */}
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Hemoglobin (Hb)</span>
+                        <span className="text-teal-900 font-bold text-xs">14.2 g/dL <span className="text-slate-400 font-normal">(Optimal)</span></span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#00A896] to-[#0D5C75] h-full rounded-full w-[78%]" />
+                      </div>
+                    </div>
+
+                    {/* Thyroid */}
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Thyroid (TSH)</span>
+                        <span className="text-purple-900 font-bold text-xs">2.4 mIU/L <span className="text-slate-400 font-normal">(Normal)</span></span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#581C87] to-[#A855F7] h-full rounded-full w-[60%]" />
+                      </div>
+                    </div>
+
+                    {/* Fasting Glucose */}
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Fasting Glucose</span>
+                        <span className="text-emerald-900 font-bold text-xs">92 mg/dL <span className="text-slate-400 font-normal">(Healthy)</span></span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#065F46] to-[#10B981] h-full rounded-full w-[52%]" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verification Footer */}
+                  <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-[#0A3663]/10 flex items-center justify-center text-[#0A3663] shrink-0">
+                        <Stethoscope className="w-4 h-4" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-bold text-slate-800 truncate">Dr. Radhika Vashisth</p>
+                        <p className="text-[10px] text-slate-500 truncate">Chief Pathologist (MD)</p>
+                      </div>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <span className="text-[9.5px] text-slate-400 block font-medium">Digital Verification</span>
+                      <span className="text-[10.5px] font-mono font-bold text-[#0A6E5C] flex items-center gap-1 justify-start sm:justify-end">
+                        <FileCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" /> QR-Secured
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Micro Badge */}
+                <div className="hidden sm:flex absolute -left-4 -bottom-4 bg-white/95 backdrop-blur-md rounded-[18px] p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-black/[0.06] items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-[12px] bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0 border border-emerald-200/80">
+                    <Sparkles className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-900">Direct WhatsApp Delivery</p>
+                    <p className="text-[10px] text-slate-500">Doctor-signed PDF in 6 Hours</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
