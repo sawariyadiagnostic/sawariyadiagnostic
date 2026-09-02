@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build": "vite build && tsx scripts/generate-ssg.ts && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "start": "node dist/server.cjs",
@@ -50,6 +50,7 @@
     "date-fns": "^3.6.0",
     "express": "^5.2.1",
     "framer-motion": "^12.23.19",
+    "fuse.js": "^7.5.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.462.0",
     "next-themes": "^0.3.0",

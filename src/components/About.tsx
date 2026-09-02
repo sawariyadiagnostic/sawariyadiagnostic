@@ -159,11 +159,11 @@ export function About() {
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-emerald-400">99.9%</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300">Repeat Accuracy</p>
+                    <p className="text-xl sm:text-2xl font-black text-emerald-400">10,000+</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300">Samples Processed</p>
                   </div>
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-amber-300">100+</p>
+                    <p className="text-xl sm:text-2xl font-black text-amber-300">180+</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-300">Validated Profiles</p>
                   </div>
                 </div>

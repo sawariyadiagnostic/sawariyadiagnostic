@@ -1,63 +1,82 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { Search, Package, TestTube, Check, ArrowRight, Sparkles, ShieldCheck } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { 
+  Search, 
+  Package, 
+  TestTube, 
+  Check, 
+  ArrowRight, 
+  Sparkles, 
+  ShieldCheck, 
+  Settings2, 
+  SlidersHorizontal,
+  Flame,
+  Zap,
+  Info
+} from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { TestCard } from './ui/TestCard';
-import { medicalTests, healthPackages, categories } from '@/data/mockTests';
+import { categories, type MedicalTest, type HealthPackage } from '@/data/mockTests';
+import { CMSClient } from '@/lib/cms-client';
+import { buildSearchIndex, createSearchEngine, type SearchableItem } from '@/lib/search-fuse';
+import { StaffCMSModal } from './cms/StaffCMSModal';
+import { TestBookingModal } from './booking/TestBookingModal';
+import { TestDetailModal } from './catalog/TestDetailModal';
 
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [activeTab, setActiveTab] = useState<'packages' | 'tests'>('packages');
+
+  // Load from Headless CMS state
+  const [tests, setTests] = useState<MedicalTest[]>(() => CMSClient.getTests());
+  const [packages, setPackages] = useState<HealthPackage[]>(() => CMSClient.getPackages());
+
+  // Package booking & detail modal states
+  const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
+  const [selectedItemForDetail, setSelectedItemForDetail] = useState<MedicalTest | HealthPackage | null>(null);
+
+  const refreshCatalog = () => {
+    setTests(CMSClient.getTests());
+    setPackages(CMSClient.getPackages());
+  };
+
+  // Build Fuse.js Search Engine
+  const searchEngine = useMemo(() => {
+    const items = buildSearchIndex(tests, packages);
+    return createSearchEngine(items);
+  }, [tests, packages]);
+
+  // Execute Fuse.js Search
+  const filteredItems = useMemo(() => {
+    return searchEngine.search(searchQuery, selectedCategory);
+  }, [searchEngine, searchQuery, selectedCategory]);
 
   const filteredTests = useMemo(() => {
-    return medicalTests.filter((test) => {
-      const matchesSearch = 
-        test.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        test.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        test.parameters?.some(p => p.toLowerCase().includes(searchQuery.toLowerCase()));
-      const matchesCategory = selectedCategory === 'all' || test.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchQuery, selectedCategory]);
+    return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
+  }, [filteredItems]);
 
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    contactSection?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const categoryStyles: Record<string, { active: string; inactive: string }> = {
-    all: {
-      active: 'bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-white shadow-sm',
-      inactive: 'bg-white text-slate-700 hover:bg-slate-50 border-slate-200/90'
-    },
-    routine: {
-      active: 'bg-[#0A3663] text-white shadow-sm',
-      inactive: 'bg-blue-50/70 text-blue-900 hover:bg-blue-100/70 border-blue-200/70'
-    },
-    diabetes: {
-      active: 'bg-[#065F46] text-white shadow-sm',
-      inactive: 'bg-emerald-50/70 text-emerald-900 hover:bg-emerald-100/70 border-emerald-200/70'
-    },
-    thyroid: {
-      active: 'bg-[#581C87] text-white shadow-sm',
-      inactive: 'bg-purple-50/70 text-purple-900 hover:bg-purple-100/70 border-purple-200/70'
-    },
-    lipid: {
-      active: 'bg-[#B45309] text-white shadow-sm',
-      inactive: 'bg-amber-50/70 text-amber-900 hover:bg-amber-100/70 border-amber-200/70'
-    },
-    vitamins: {
-      active: 'bg-[#0E7490] text-white shadow-sm',
-      inactive: 'bg-cyan-50/70 text-cyan-900 hover:bg-cyan-100/70 border-cyan-200/70'
-    },
-    women: {
-      active: 'bg-[#831843] text-white shadow-sm',
-      inactive: 'bg-rose-50/70 text-rose-900 hover:bg-rose-100/70 border-rose-200/70'
+  const filteredPackages = useMemo(() => {
+    if (searchQuery.trim().length > 0) {
+      return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
     }
-  };
+    return packages;
+  }, [filteredItems, searchQuery, packages]);
+
+  const quickSymptoms = [
+    { label: 'All Tests', query: '', cat: 'all' },
+    { label: 'Sugar & Diabetes', query: 'sugar', cat: 'all' },
+    { label: 'Thyroid', query: 'thyroid', cat: 'all' },
+    { label: 'Full Body Checkup', query: 'full body', cat: 'all' },
+    { label: 'Fatigue & Weakness', query: 'fatigue', cat: 'all' },
+    { label: 'Cholesterol & Heart', query: 'lipid', cat: 'all' },
+    { label: 'Vitamins D & B12', query: 'vitamin', cat: 'all' },
+    { label: 'Fever & Infection', query: 'fever', cat: 'all' },
+    { label: 'Kidney & Urine', query: 'kidney', cat: 'all' }
+  ];
 
   return (
     <section id="tests" className="relative fluid-section bg-[#F5F5F7] overflow-hidden">
@@ -70,10 +89,12 @@ export function TestCatalog() {
       <div className="fluid-container relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-          <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-2xs">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2.5">
+          <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 px-4 py-1 rounded-full shadow-2xs">
             <TestTube className="w-3.5 h-3.5 text-[#0A6E5C]" />
-            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Test Catalog & Packages</span>
+            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">
+              Diagnostic Test Catalog & Packages
+            </span>
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#1D1D1F] tracking-tight leading-tight">
@@ -81,52 +102,142 @@ export function TestCatalog() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Choose from comprehensive preventive packages or over 100+ individual certified blood tests
+            Choose from comprehensive preventive packages or over 180+ individual certified blood tests with instant search & online booking
           </p>
+
+          {/* Staff CMS Trigger Pill */}
+          <div className="pt-1 flex justify-center">
+            <StaffCMSModal
+              onCatalogUpdated={refreshCatalog}
+              trigger={
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full border border-slate-200 shadow-2xs transition-all active:scale-95 cursor-pointer"
+                >
+                  <Settings2 className="w-3.5 h-3.5 text-[#0A6E5C]" />
+                  <span>Staff Headless CMS Editor</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </button>
+              }
+            />
+          </div>
         </div>
 
         {/* Apple Segmented Tabs */}
-        <Tabs defaultValue="packages" className="w-full">
-          <div className="flex justify-center mb-6 sm:mb-10 px-1">
-            <TabsList className="bg-white/50 backdrop-blur-xl p-1 rounded-full border border-white/80 h-12 grid grid-cols-2 w-full max-w-md shadow-inner">
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'packages' | 'tests')} className="w-full">
+          <div className="flex justify-center mb-6 px-1">
+            <TabsList className="bg-white/60 backdrop-blur-xl p-1 rounded-full border border-white/80 h-12 grid grid-cols-2 w-full max-w-md shadow-inner">
               <TabsTrigger 
                 value="packages" 
                 className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#1D1D1F] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <Package className="w-4 h-4 text-[#0A6E5C]" />
-                <span>Health Packages</span>
+                <span>Health Packages ({packages.length})</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="tests" 
                 className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#1D1D1F] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <TestTube className="w-4 h-4 text-[#0D5C75]" />
-                <span>Individual Tests ({medicalTests.length}+)</span>
+                <span>Individual Tests ({tests.length}+)</span>
               </TabsTrigger>
             </TabsList>
+          </div>
+
+          {/* Quick Fuse.js Search & Symptom Shortcut Bar */}
+          <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
+            <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
+              {/* Search Field with Fuse.js Instant Fuzzy Match */}
+              <div className="relative flex-1">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#0A6E5C]" />
+                <Input
+                  type="text"
+                  placeholder="Search 180+ tests by name, symptom (e.g. fatigue, sugar, cbc, thyroid)..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value && activeTab === 'packages') {
+                      setActiveTab('tests');
+                    }
+                  }}
+                  className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-medium focus:border-[#0A6E5C] shadow-2xs text-slate-900"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+
+              {/* Category Filter Pills */}
+              <div className="flex gap-1.5 overflow-x-auto pb-1 pt-0.5 scrollbar-none items-center">
+                {categories.map((cat) => {
+                  const isSelected = selectedCategory === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setSelectedCategory(cat.id)}
+                      className={`h-9 px-3.5 rounded-full text-xs font-bold transition-all whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
+                        isSelected 
+                          ? 'bg-[#072448] text-white' 
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      {cat.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Symptom shortcuts */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 px-1 scrollbar-none">
+              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1 flex-shrink-0">
+                <Zap className="w-3 h-3 text-amber-500" /> Popular Searches:
+              </span>
+              {quickSymptoms.map((sym) => (
+                <button
+                  key={sym.label}
+                  onClick={() => {
+                    setSearchQuery(sym.query);
+                    setSelectedCategory(sym.cat);
+                    if (sym.query) setActiveTab('tests');
+                  }}
+                  className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all whitespace-nowrap cursor-pointer ${
+                    searchQuery === sym.query && sym.query !== ''
+                      ? 'bg-[#0A6E5C] text-white border-[#0A6E5C]'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'
+                  }`}
+                >
+                  {sym.label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Health Packages Tab */}
           <TabsContent value="packages" className="mt-0">
             <div className="fluid-grid-cards-sm">
-              {healthPackages.map((pkg, idx) => {
+              {filteredPackages.map((pkg, idx) => {
                 const discountPercent = Math.round((1 - pkg.price / pkg.originalPrice) * 100);
-                
                 const packageThemes = [
-                  { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900', priceBg: 'bg-blue-50/70 border-blue-200/60' },
-                  { accent: 'border-emerald-300 hover:border-emerald-500', badge: 'bg-emerald-50 text-emerald-900', priceBg: 'bg-emerald-50/70 border-emerald-200/60' },
-                  { accent: 'border-purple-200 hover:border-purple-400', badge: 'bg-purple-50 text-purple-900', priceBg: 'bg-purple-50/70 border-purple-200/60' },
-                  { accent: 'border-amber-200 hover:border-amber-400', badge: 'bg-amber-50 text-amber-900', priceBg: 'bg-amber-50/70 border-amber-200/60' },
+                  { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
+                  { accent: 'border-emerald-300 hover:border-emerald-500', badge: 'bg-emerald-50 text-emerald-900' },
+                  { accent: 'border-purple-200 hover:border-purple-400', badge: 'bg-purple-50 text-purple-900' },
+                  { accent: 'border-amber-200 hover:border-amber-400', badge: 'bg-amber-50 text-amber-900' },
                 ];
                 const theme = packageThemes[idx % packageThemes.length];
 
                 return (
                   <div 
                     key={pkg.id} 
-                    className={`glass-card p-5 sm:p-6 flex flex-col justify-between relative rounded-[26px] ${
+                    className={`glass-card p-5 sm:p-6 flex flex-col justify-between relative rounded-[26px] bg-white/80 border border-white/80 shadow-sm hover:shadow-md transition-all ${
                       pkg.recommended 
                         ? 'border-2 border-[#0A6E5C] ring-2 ring-[#00A896]/20 bg-white' 
-                        : ``
+                        : ''
                     }`}
                   >
                     {pkg.recommended && (
@@ -181,14 +292,25 @@ export function TestCatalog() {
                       </div>
                     </div>
                     
-                    {/* Action Button */}
-                    <Button 
-                      onClick={scrollToContact}
-                      className="w-full h-12 text-xs sm:text-sm font-bold rounded-[18px] btn-primary active:scale-[0.98] transition-all shadow-xs hover:shadow-md"
-                    >
-                      <span>Book Package Now</span>
-                      <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-                    </Button>
+                    {/* Action Buttons */}
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
+                      <Button
+                        variant="outline"
+                        onClick={() => setSelectedItemForDetail(pkg)}
+                        className="h-11 text-xs font-bold rounded-[16px] border-slate-200"
+                      >
+                        <Info className="w-3.5 h-3.5 mr-1 text-slate-600" />
+                        <span>Overview</span>
+                      </Button>
+
+                      <Button 
+                        onClick={() => setSelectedPackageForBooking(pkg)}
+                        className="btn-primary h-11 text-xs font-bold rounded-[16px] shadow-xs hover:shadow-md"
+                      >
+                        <span>Book Package</span>
+                        <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                      </Button>
+                    </div>
                   </div>
                 );
               })}
@@ -197,45 +319,21 @@ export function TestCatalog() {
 
           {/* Individual Tests Tab */}
           <TabsContent value="tests" className="mt-0">
-            {/* Search & Category Filter Strip */}
-            <div className="flex flex-col sm:flex-row gap-2.5 mb-6 items-stretch sm:items-center justify-between bg-white p-3.5 sm:p-4 rounded-[22px] border border-black/[0.06] shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
-              {/* Search Field */}
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                <Input
-                  type="text"
-                  placeholder="Filter 100+ tests by name (e.g. CBC, Vitamin, Thyroid)..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-base sm:text-sm focus:border-[#0A6E5C] shadow-2xs font-medium"
-                />
+            {/* Search Result Count */}
+            {searchQuery && (
+              <div className="text-xs text-slate-600 mb-4 px-1 font-medium">
+                Found <strong>{filteredTests.length}</strong> tests matching "{searchQuery}"
               </div>
-              
-              {/* Category Filter Pills */}
-              <div className="flex gap-1.5 overflow-x-auto pb-1 pt-0.5 w-full max-w-full scrollbar-none items-center">
-                {categories.map((cat) => {
-                  const isSelected = selectedCategory === cat.id;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setSelectedCategory(cat.id)}
-                      className={`h-8 sm:h-9 px-3.5 rounded-full text-[11px] sm:text-xs font-bold transition-all whitespace-nowrap active:scale-95 border cursor-pointer inline-flex items-center shadow-2xs ${
-                        isSelected 
-                          ? 'bg-[#072448] text-white border-transparent shadow-xs' 
-                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border-transparent'
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            )}
 
             {/* Tests Grid */}
             <div className="fluid-grid-cards-sm">
               {filteredTests.map((test) => (
-                <TestCard key={test.id} test={test} />
+                <TestCard 
+                  key={test.id} 
+                  test={test} 
+                  onViewDetails={(t) => setSelectedItemForDetail(t)}
+                />
               ))}
             </div>
 
@@ -243,20 +341,43 @@ export function TestCatalog() {
               <div className="text-center py-12 bg-white rounded-[24px] border border-black/[0.06] p-6 max-w-md mx-auto">
                 <TestTube className="w-8 h-8 text-slate-300 mx-auto mb-2" />
                 <h4 className="font-bold text-slate-800 text-sm mb-1">No Tests Found</h4>
-                <p className="text-xs text-slate-500 mb-3">We couldn't find any test matching "{searchQuery}". Call our 24*7 desk for custom panels.</p>
+                <p className="text-xs text-slate-500 mb-3">
+                  We couldn't find any test matching "{searchQuery}". Call our 24*7 desk for custom pathology panels.
+                </p>
                 <Button 
                   size="sm"
                   onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
                   variant="outline"
                   className="rounded-full text-xs"
                 >
-                  Clear Filters
+                  Clear Search Filters
                 </Button>
               </div>
             )}
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Package Booking Modal */}
+      {selectedPackageForBooking && (
+        <TestBookingModal
+          testName={selectedPackageForBooking.name}
+          price={selectedPackageForBooking.price}
+          originalPrice={selectedPackageForBooking.originalPrice}
+          isPackage={true}
+          isOpen={!!selectedPackageForBooking}
+          onOpenChange={(open) => !open && setSelectedPackageForBooking(null)}
+        />
+      )}
+
+      {/* Item Details Modal */}
+      {selectedItemForDetail && (
+        <TestDetailModal
+          item={selectedItemForDetail}
+          isOpen={!!selectedItemForDetail}
+          onClose={() => setSelectedItemForDetail(null)}
+        />
+      )}
     </section>
   );
 }

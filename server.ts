@@ -30,16 +30,36 @@ async function startServer() {
   });
 
   // ==========================================
-  // LIS (Laboratory Information System) API
+  // FLABS LIS INTEGRATION API
   // ==========================================
+  
+  // Helper to generate FLabs Auth Token
+  async function getFlabsAuthToken() {
+    const clientId = process.env.FLABS_CLIENT_ID;
+    const clientSecret = process.env.FLABS_CLIENT_SECRET;
+    const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
+
+    if (!clientId || !clientSecret) {
+      throw new Error("FLabs credentials missing in environment variables (.env)");
+    }
+
+    const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret })
+    });
+
+    if (!response.ok) throw new Error("Failed to authenticate with FLabs");
+    const data = await response.json();
+    return data.access_token;
+  }
+
   app.post("/api/lis/download-report", async (req, res) => {
-    // Highly scalable architecture:
-    // This endpoint safely connects to your on-premise or cloud LIS software.
-    // It keeps API keys, database credentials, and HL7 connections secure on the server.
+    // This endpoint connects to FLabs securely on the server.
     
     const { patientId, reportId, otp } = req.body;
     
-    console.log(`[LIS Engine] Requesting report for Patient: ${patientId}`);
+    console.log(`[FLabs Engine] Requesting report for Patient: ${patientId}`);
 
     // Standard Validation
     if (!patientId || !reportId) {
@@ -47,10 +67,26 @@ async function startServer() {
     }
 
     try {
-      // Mock Integration to LIS Server:
-      // const lisResponse = await fetch(`https://internal-lis.sawariyadiagnostic.com/api/v1/reports/${reportId}`, {
-      //   headers: { "Authorization": `Bearer ${process.env.LIS_SECRET_API_KEY}` }
-      // });
+      if (process.env.FLABS_CLIENT_ID) {
+        const token = await getFlabsAuthToken();
+        const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
+        
+        // Fetch the report from FLabs
+        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if (!reportResponse.ok) {
+          throw new Error("Report not found in FLabs LIS");
+        }
+        
+        const reportData = await reportResponse.json();
+        return res.json({
+          success: true,
+          downloadUrl: reportData.pdf_url || reportData.download_url,
+          reportMetadata: reportData.metadata
+        });
+      }
       
       // Returning Mock Data Structure
       res.json({

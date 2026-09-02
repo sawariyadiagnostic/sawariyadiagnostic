@@ -7,8 +7,8 @@ export function TrustIndicators() {
   const stats = [
     {
       icon: Users,
-      value: '50,000+',
-      label: 'Patients Diagnosed',
+      value: '7,000+',
+      label: 'Patients in 2026',
       subtext: 'Across Haryana & NCR',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
@@ -18,7 +18,7 @@ export function TrustIndicators() {
     },
     {
       icon: Microscope,
-      value: '100+',
+      value: '180+',
       label: 'Automated Tests',
       subtext: 'High-precision analyzers',
       theme: {

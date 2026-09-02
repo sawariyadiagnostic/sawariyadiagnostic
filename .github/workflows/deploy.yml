@@ -1,9 +1,12 @@
-name: Deploy to GitHub Pages
+name: SSG Build & Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
+  repository_dispatch:
+    types: [cms_content_update, sanity_webhook, contentful_webhook]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -12,16 +15,24 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install and Build
-        run: |
-          npm ci
-          npm run build
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
-      - name: Deploy
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run SSG Multi-Page Generator & Build
+        run: npm run build
+
+      - name: Deploy Static Pages to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
           branch: gh-pages
+          clean: true

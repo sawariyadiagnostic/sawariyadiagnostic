@@ -206,8 +206,8 @@ export function Hero() {
                     <ShieldCheck className="w-4 h-4 text-amber-700" />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">50,000+</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">Patients Diagnosed</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">7,000+</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500">Patients in 2026</p>
                   </div>
                 </div>
               </div>

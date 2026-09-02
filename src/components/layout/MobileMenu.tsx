@@ -4,7 +4,7 @@ import { FileDown, Phone, ShieldCheck, X, Home, Calendar, MessageCircle, Chevron
 import { Button } from '../ui/button';
 import { Logo } from '../ui/Logo';
 import { navigation } from '@/data/website-content';
-import { ReportDownloadModal } from '../ui/ReportDownloadModal';
+import { PatientReportPortal } from '../portal/PatientReportPortal';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -29,12 +29,12 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
         onClick={onClose}
       />
 
-      {/* Apple iOS Native Sheet Drawer */}
+      {/* Sheet Drawer */}
       <div 
         className="lg:hidden fixed top-0 right-0 h-full w-[340px] max-w-[88vw] bg-white/70 backdrop-blur-[40px] border-l border-white/60 z-[130] shadow-[-20px_0_50px_rgba(0,0,0,0.1)] flex flex-col justify-between overflow-y-auto pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)] transition-transform duration-300"
       >
         <div className="p-5">
-          {/* Header with Logo & iOS-styled Close Button */}
+          {/* Header with Logo */}
           <div className="flex items-center justify-between pb-4 border-b border-black/[0.06]">
             <Logo variant="horizontal" size="xs" showTagline={false} />
             <button
@@ -46,7 +46,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
             </button>
           </div>
 
-          {/* Navigation Links with large 48px iOS list style touch targets */}
+          {/* Navigation Links */}
           <div className="flex flex-col space-y-1.5 pt-4">
             {navigation.links.map((link) => (
               <button
@@ -55,7 +55,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
                   scrollToSection(link.href);
                   onClose();
                 }}
-                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#0A6E5C] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-all duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs"
+                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#0A6E5C] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-all duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
               >
                 <span>{link.label}</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -76,13 +76,13 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
               Book Home Sample Visit
             </Button>
 
-            <ReportDownloadModal trigger={
+            <PatientReportPortal trigger={
               <button
-                className="w-full h-12 bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs"
+                className="w-full h-12 bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
                 onClick={onClose}
               >
                 <FileDown className="w-4 h-4 text-[#0A6E5C]" />
-                <span>Download Lab Reports</span>
+                <span>Patient Reports Portal</span>
               </button>
             } />
 
