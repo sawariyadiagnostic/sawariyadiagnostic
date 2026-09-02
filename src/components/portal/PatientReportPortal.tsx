@@ -159,10 +159,22 @@ export function PatientReportPortal({
             <Button
               onClick={() => handleSearch()}
               disabled={isLoading}
-              className="h-11 px-5 btn-primary rounded-[14px] text-xs font-bold"
+              className="h-11 px-5 btn-primary rounded-[14px] text-xs font-bold cursor-pointer"
             >
               {isLoading ? 'Querying LIS...' : 'Search Records'}
             </Button>
+          </div>
+
+          {/* UHID Receipt Helper & Trust Badge */}
+          <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-teal-100/90 relative z-10">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              Tip: Your UHID / Bill No. is printed on the top-right of your laboratory receipt or SMS.
+            </span>
+            <span className="inline-flex items-center gap-1 text-teal-300 font-semibold">
+              <Lock className="w-3 h-3 text-teal-300" />
+              256-Bit Encrypted & HIPAA Compliant
+            </span>
           </div>
 
           {/* Navigation Tabs */}

@@ -39,6 +39,20 @@ export function TestCatalog() {
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<MedicalTest | HealthPackage | null>(null);
 
+  useEffect(() => {
+    const handleExternalSearch = (e: Event) => {
+      const customEvent = e as CustomEvent<{ query: string; tab?: 'packages' | 'tests' }>;
+      if (customEvent.detail?.query !== undefined) {
+        setSearchQuery(customEvent.detail.query);
+        if (customEvent.detail.tab) {
+          setActiveTab(customEvent.detail.tab);
+        }
+      }
+    };
+    window.addEventListener('sawariya:search', handleExternalSearch);
+    return () => window.removeEventListener('sawariya:search', handleExternalSearch);
+  }, []);
+
   const refreshCatalog = () => {
     setTests(CMSClient.getTests());
     setPackages(CMSClient.getPackages());
@@ -234,7 +248,7 @@ export function TestCatalog() {
                 return (
                   <div 
                     key={pkg.id} 
-                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/80 border border-white/80 shadow-sm hover:shadow-md transition-all overflow-hidden ${
+                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/95 border border-slate-200/90 shadow-sm hover:shadow-md transition-all overflow-hidden ${
                       pkg.recommended 
                         ? 'border-2 border-[#0A6E5C] ring-2 ring-[#00A896]/20 bg-white' 
                         : ''
@@ -345,20 +359,45 @@ export function TestCatalog() {
             </div>
 
             {filteredTests.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-[24px] border border-black/[0.06] p-6 max-w-md mx-auto">
-                <TestTube className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                <h4 className="font-bold text-slate-800 text-sm mb-1">No Tests Found</h4>
-                <p className="text-xs text-slate-500 mb-3">
-                  We couldn't find any test matching "{searchQuery}". Call our 24*7 desk for custom pathology panels.
+              <div className="text-center py-10 bg-white/95 backdrop-blur-md rounded-[24px] border border-slate-200/90 shadow-sm p-6 max-w-lg mx-auto">
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-500">
+                  <TestTube className="w-6 h-6 text-[#0A6E5C]" />
+                </div>
+                <h4 className="font-bold text-slate-800 text-base mb-1">No Tests Matching "{searchQuery}"</h4>
+                <p className="text-xs text-slate-600 mb-4 max-w-sm mx-auto leading-relaxed">
+                  Try searching with generic terms like <em>blood</em>, <em>sugar</em>, or click one of the popular test tags below:
                 </p>
-                <Button 
-                  size="sm"
-                  onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
-                  variant="outline"
-                  className="rounded-full text-xs"
-                >
-                  Clear Search Filters
-                </Button>
+
+                <div className="flex flex-wrap gap-1.5 justify-center mb-5">
+                  {['CBC', 'Thyroid', 'HbA1c', 'Lipid', 'Vitamin D3', 'Liver LFT', 'Kidney KFT'].map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => { setSearchQuery(tag); setSelectedCategory('all'); }}
+                      className="text-xs bg-slate-100 hover:bg-teal-50 hover:text-[#0A6E5C] text-slate-700 font-semibold px-3 py-1 rounded-full border border-slate-200 transition-all cursor-pointer"
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-center gap-2">
+                  <Button 
+                    size="sm"
+                    onClick={() => { setSearchQuery(''); setSelectedCategory('all'); }}
+                    variant="outline"
+                    className="rounded-full text-xs font-bold border-slate-300 hover:bg-slate-50"
+                  >
+                    Clear Search Filters
+                  </Button>
+                  <a
+                    href="https://wa.me/919991941207?text=Hi%2C%20I%20am%20looking%20for%20a%20pathology%20test%20not%20listed%20in%20catalog"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#0A6E5C] text-white px-3.5 py-2 rounded-full hover:bg-[#072448] transition-all"
+                  >
+                    <span>Ask Lab on WhatsApp</span>
+                  </a>
+                </div>
               </div>
             )}
           </TabsContent>

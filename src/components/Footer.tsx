@@ -13,7 +13,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative py-[clamp(2.5rem,1.5rem+3vw,4.5rem)] bg-[#071A2E] text-slate-300 border-t border-white/10 overflow-hidden">
+      <footer className="relative pt-[clamp(2.5rem,1.5rem+3vw,4.5rem)] pb-[calc(env(safe-area-inset-bottom,16px)+6.5rem)] sm:pb-[clamp(2.5rem,1.5rem+3vw,4.5rem)] bg-[#071A2E] text-slate-300 border-t border-white/10 overflow-hidden">
         {/* Liquid Mesh Glow */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
           <div className="absolute top-0 right-[20%] w-[40vw] h-[40vw] bg-[#00A896]/15 rounded-full blur-[100px] animate-liquid mix-blend-screen" />

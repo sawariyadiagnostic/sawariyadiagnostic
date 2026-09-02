@@ -60,8 +60,13 @@ export function TestBookingModal({
 
   const handleProceedToReview = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!patientName.trim() || !phone.trim()) {
-      toast.error('Please enter patient name and mobile number');
+    const cleanPhone = phone.replace(/\D/g, '');
+    if (!patientName.trim()) {
+      toast.error('Please enter patient name');
+      return;
+    }
+    if (!cleanPhone || cleanPhone.length < 10) {
+      toast.error('Please enter a valid 10-digit mobile number');
       return;
     }
     if (visitType === 'HOME' && !address.trim()) {
@@ -69,6 +74,12 @@ export function TestBookingModal({
       return;
     }
     setStep('REVIEW');
+  };
+
+  const handleQuickWhatsAppBook = () => {
+    const text = `Hi Sawariya Diagnostic, I would like to book the test "${testName}" (₹${price}) with doorstep collection in Charkhi Dadri.`;
+    window.open(`https://wa.me/919991941207?text=${encodeURIComponent(text)}`, '_blank');
+    setOpen(false);
   };
 
   const handleFinalBooking = async () => {
@@ -146,6 +157,23 @@ export function TestBookingModal({
         {/* STEP 1: PATIENT & VISIT DETAILS */}
         {step === 'DETAILS' && (
           <form onSubmit={handleProceedToReview} className="p-4 sm:p-6 space-y-4">
+            {/* 10-Second WhatsApp Fast Track Option */}
+            <div className="bg-emerald-50/80 border border-emerald-200/80 rounded-[18px] p-3 flex items-center justify-between gap-2.5">
+              <div className="min-w-0">
+                <span className="text-[11px] font-bold text-emerald-900 flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Fast Booking Option
+                </span>
+                <p className="text-[10.5px] text-emerald-800 truncate">Book directly with our coordinator in 10 seconds</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleQuickWhatsAppBook}
+                className="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-xs active:scale-95 transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
+              >
+                <span>WhatsApp</span>
+              </button>
+            </div>
+
             {/* Visit Type Toggle */}
             <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-[18px]">
               <button
@@ -184,20 +212,24 @@ export function TestBookingModal({
                   value={patientName}
                   onChange={(e) => setPatientName(e.target.value)}
                   required
-                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium"
+                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
                 />
               </div>
 
               <div>
-                <Label htmlFor="b-phone" className="text-xs font-bold text-slate-700">Mobile Number (for SMS & Reports)</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="b-phone" className="text-xs font-bold text-slate-700">Mobile Number (10 Digits)</Label>
+                  <span className="text-[10px] text-slate-400">For SMS & Reports</span>
+                </div>
                 <Input
                   id="b-phone"
                   type="tel"
-                  placeholder="e.g. 99919 41207"
+                  maxLength={10}
+                  placeholder="e.g. 9991941207"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                   required
-                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium"
+                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900 font-mono"
                 />
               </div>
 
@@ -210,7 +242,7 @@ export function TestBookingModal({
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
-                    className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium"
+                    className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
                   />
                 </div>
               )}
@@ -221,7 +253,7 @@ export function TestBookingModal({
                   id="b-slot"
                   value={selectedSlot}
                   onChange={(e) => setSelectedSlot(e.target.value)}
-                  className="w-full h-11 bg-slate-50 border border-slate-200 focus:border-[#0A6E5C] rounded-[14px] px-3 mt-1 text-xs font-medium text-slate-800"
+                  className="w-full h-11 bg-slate-50 border border-slate-200 focus:border-[#0A6E5C] rounded-[14px] px-3 mt-1 text-xs font-medium text-slate-900"
                 >
                   {slots.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -232,7 +264,7 @@ export function TestBookingModal({
 
             <Button
               type="submit"
-              className="w-full h-12 btn-primary rounded-[16px] font-bold text-sm shadow-md mt-2"
+              className="w-full h-12 btn-primary rounded-[16px] font-bold text-sm shadow-md mt-2 cursor-pointer"
             >
               <span>Continue to Confirmation (Pay on Collection)</span>
             </Button>

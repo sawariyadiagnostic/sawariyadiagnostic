@@ -37,12 +37,18 @@ export function Hero() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('sawariya:search', { detail: { query: searchQuery, tab: 'tests' } }));
+    }
     const testsSection = document.getElementById('tests');
     testsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleQuickTagClick = (tag: string) => {
     setSearchQuery(tag);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('sawariya:search', { detail: { query: tag, tab: 'tests' } }));
+    }
     const testsSection = document.getElementById('tests');
     testsSection?.scrollIntoView({ behavior: 'smooth' });
   };

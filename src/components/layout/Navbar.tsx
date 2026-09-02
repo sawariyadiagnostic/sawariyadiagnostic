@@ -76,34 +76,24 @@ export function Navbar({
           {/* Right Side Action CTAs */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
             
-            {/* Mobile Call 24*7 Quick Action Button */}
-            <a
-              href="tel:+919991941207"
-              className="sm:hidden flex items-center gap-1.5 bg-white/70 backdrop-blur-md hover:bg-white text-[#0A192F] font-bold text-[11px] h-9 px-3 rounded-full border border-white/80 shadow-2xs active:scale-95 transition-all"
-              aria-label="Call 24*7 Helpline"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#0A6E5C]" />
-              <span>Call 24*7</span>
-            </a>
-
-            {/* Patient Portal / Download Report Button */}
-            <div className="hidden md:block">
+            {/* Patient Portal / Download Report Button (Desktop & Tablet) */}
+            <div className="hidden sm:block">
               <PatientReportPortal trigger={
                 <Button
                   variant="outline"
                   size="sm"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold h-10 px-4 rounded-full bg-white/70 backdrop-blur-md border border-white/80 text-slate-800 hover:border-[#0A6E5C] hover:bg-white hover:text-[#0A6E5C] transition-all shadow-[0_2px_12px_rgba(0,0,0,0.04)] active:scale-[0.97] cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold h-9 sm:h-10 px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#0A6E5C] hover:bg-white hover:text-[#0A6E5C] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
                 >
                   <FileDown className="w-3.5 h-3.5 text-[#0A6E5C]" />
-                  <span>Patient Reports & Portal</span>
+                  <span>Patient Portal</span>
                 </Button>
               } />
             </div>
 
-            {/* Book Now CTA */}
+            {/* Book Now CTA (Tablet & Desktop) */}
             <Button
               size="sm"
-              className="hidden sm:inline-flex bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 h-10 px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
+              className="hidden md:inline-flex bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 h-10 px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
               onClick={() => scrollToSection('home-collection')}
             >
               <span>Book Home Visit</span>
@@ -112,10 +102,10 @@ export function Navbar({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-[14px] text-slate-700 bg-white/70 backdrop-blur-md hover:bg-white transition-all border border-white/80 shadow-2xs active:scale-95 cursor-pointer"
-              aria-label="Toggle Menu"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-[14px] text-slate-700 bg-white/80 backdrop-blur-md hover:bg-white transition-all border border-slate-200/90 shadow-2xs active:scale-95 cursor-pointer"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}
             </button>
           </div>
 

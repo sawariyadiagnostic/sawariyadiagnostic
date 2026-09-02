@@ -22,8 +22,13 @@ export function HomeCollection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) {
-      toast.error('Please enter your name and phone number');
+    const cleanPhone = formData.phone.replace(/\D/g, '');
+    if (!formData.name.trim()) {
+      toast.error('Please enter your full name');
+      return;
+    }
+    if (!cleanPhone || cleanPhone.length < 10) {
+      toast.error('Please enter a valid 10-digit mobile number');
       return;
     }
 
@@ -219,16 +224,17 @@ export function HomeCollection() {
                   
                   <div>
                     <label className="text-xs font-bold text-slate-700 mb-1 block">
-                      Mobile Number (for WhatsApp Report)
+                      Mobile Number (10 Digits for WhatsApp Report)
                     </label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <Input
                         type="tel"
-                        placeholder="e.g. 99919 41207"
+                        maxLength={10}
+                        placeholder="e.g. 9991941207"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-medium focus:border-[#0A6E5C] text-slate-900"
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
+                        className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-mono font-medium focus:border-[#0A6E5C] text-slate-900"
                         required
                       />
                     </div>
