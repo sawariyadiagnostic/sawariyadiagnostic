@@ -82,7 +82,7 @@ export function Team() {
                     <div className={`w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ${theme.ring} transition-all flex items-center justify-center shadow-md`}>
                       <img
                         src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${theme.avatarBg}&color=${theme.avatarText}&size=200&bold=true`}
-                        alt={member.name}
+                        alt={`Portrait of ${member.name}, ${member.role} at Sawariya Diagnostic Lab`}
                         className="w-full h-full object-cover"
                         referrerPolicy="no-referrer"
                       />

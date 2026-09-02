@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { medicalTests, healthPackages } from '../src/data/mockTests';
+import { generateOgImage } from './generate-og-image';
 
 const BASE_URL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic';
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
@@ -81,6 +82,9 @@ export function buildSSG() {
   }
 
   const baseIndexHtml = fs.readFileSync(baseIndexHtmlPath, 'utf-8');
+
+  // Rasterize high resolution OG images
+  generateOgImage();
 
   const routes: RouteConfig[] = [];
 

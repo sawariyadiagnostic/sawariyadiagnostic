@@ -60,7 +60,7 @@ export function Footer() {
 
             {/* Quick Links (2 cols) */}
             <div className="lg:col-span-2 space-y-2.5">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">Quick Links</h4>
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">Quick Links</h3>
               <ul className="space-y-1.5">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
@@ -77,7 +77,7 @@ export function Footer() {
 
             {/* Services (3 cols) */}
             <div className="lg:col-span-3 space-y-2.5">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">Lab Specialities</h4>
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">Lab Specialities</h3>
               <ul className="space-y-1.5">
                 {services.map((service) => (
                   <li key={service.label} className="text-slate-400 text-xs flex items-center gap-1.5">
@@ -90,7 +90,7 @@ export function Footer() {
 
             {/* Contact Info (3 cols) */}
             <div className="lg:col-span-3 space-y-2.5">
-              <h4 className="font-bold text-xs uppercase tracking-wider text-slate-200">24*7 Calling Desk & Center</h4>
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">24*7 Calling Desk & Center</h3>
               <div className="space-y-2.5 text-xs">
                 <div className="flex items-start gap-2.5">
                   <Phone className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />

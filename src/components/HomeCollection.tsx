@@ -138,7 +138,7 @@ export function HomeCollection() {
                   <div className={`w-9 h-9 rounded-[12px] flex items-center justify-center border ${benefit.iconStyle}`}>
                     <benefit.icon className="w-4 h-4" />
                   </div>
-                  <h4 className="font-bold text-xs sm:text-sm text-white leading-tight">{benefit.title}</h4>
+                  <h3 className="font-bold text-xs sm:text-sm text-white leading-tight">{benefit.title}</h3>
                   <p className="text-[11px] text-slate-300 leading-normal font-normal">{benefit.description}</p>
                 </div>
               ))}

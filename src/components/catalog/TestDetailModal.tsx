@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import type { MedicalTest, HealthPackage } from '@/data/mockTests';
 import { SEOManager } from '@/lib/seo-ssg';
+import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { toast } from 'sonner';
 
@@ -49,6 +50,14 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
   return (
     <>
+      {isOpen && (
+        <SEOHead
+          title={`${item.name} - Price ₹${item.price} | Sawariya Diagnostic`}
+          description={item.description || `Book ${item.name} test at Sawariya Diagnostic Lab with free home sample collection.`}
+          canonicalUrl={`https://sawariyadiagnostic.github.io/sawariyadiagnostic/${isPackage ? 'package' : 'test'}/${item.id}.html`}
+          jsonLd={schemaJson}
+        />
+      )}
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
         <DialogContent className="sm:max-w-[620px] max-h-[90vh] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px] flex flex-col">
           {/* Header */}

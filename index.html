@@ -8,53 +8,74 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Sawariya Lab" />
     <meta name="format-detection" content="telephone=no" />
-    <title>Sawariya Diagnostic - Your Health, Our Priority</title>
+
+    <title>Sawariya Diagnostic - NABL Accredited Diagnostic Lab</title>
     <meta
       name="description"
-      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection. Accurate results, quick turnaround, and affordable pricing."
+      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection with test catalog and online booking."
     />
     <meta name="author" content="Sawariya Diagnostic" />
+
+    <!-- Canonical URL (Strictly lowercase) -->
+    <link rel="canonical" href="https://sawariyadiagnostic.github.io/sawariyadiagnostic/" />
+
+    <!-- Performance: Preconnect & Preload Critical Web Fonts (Core Web Vitals) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      as="style"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
+    <!-- Open Graph (OG) Meta Tags for Social Media Sharing -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sawariyadiagnostic.github.io/sawariyadiagnostic/" />
+    <meta property="og:site_name" content="Sawariya Diagnostic Lab" />
     <meta
       property="og:title"
-      content="Sawariya Diagnostic - Your Health, Our Priority"
+      content="Sawariya Diagnostic - NABL Accredited Diagnostic Lab"
     />
     <meta
       property="og:description"
-      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection."
+      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection with test catalog and online booking."
     />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sawariya Diagnostic Lab - Precision Pathology and Health Packages" />
 
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Sawariya Diagnostic - Your Health, Our Priority"
+      content="Sawariya Diagnostic - NABL Accredited Diagnostic Lab"
     />
     <meta
       name="twitter:description"
-      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection."
+      content="NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection with test catalog and online booking."
     />
-    <meta name="twitter:image" content="" />
+    <meta name="twitter:image" content="https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Sawariya Diagnostic Lab - Precision Pathology and Health Packages" />
 
-    <!-- TODO: Add custom favicon -->
+    <!-- Custom Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
 
-    <!-- JSON-LD DiagnosticLab Schema -->
+    <!-- JSON-LD DiagnosticLab Schema with strictly unified lowercase URL -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "DiagnosticLab",
         "name": "Sawariya Diagnostic",
-        "image": "https://lovable.dev/opengraph-image-p98pqg.png",
+        "image": "https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.jpg",
         "telephone": "+917015290782",
-        "url": "https://Sawariya-Diagnostic.github.io/Sawariya-Diagnostic/",
+        "url": "https://sawariyadiagnostic.github.io/sawariyadiagnostic/",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Opposite R.S. Sangwan Hospital, Loharu Road",
@@ -85,8 +106,10 @@
         "priceRange": "₹₹",
         "availableService": [
           { "@type": "MedicalTest", "name": "Complete Blood Count (CBC)" },
-          { "@type": "MedicalTest", "name": "Thyroid Profile" },
-          { "@type": "MedicalTest", "name": "Full Body Checkup" }
+          { "@type": "MedicalTest", "name": "Thyroid Profile (T3 T4 TSH)" },
+          { "@type": "MedicalTest", "name": "Lipid Profile (Cholesterol)" },
+          { "@type": "MedicalTest", "name": "HbA1c Glycated Hemoglobin" },
+          { "@type": "MedicalTest", "name": "Full Body Health Checkup Package" }
         ]
       }
     </script>

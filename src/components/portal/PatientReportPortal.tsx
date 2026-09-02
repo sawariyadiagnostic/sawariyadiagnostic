@@ -21,6 +21,7 @@ import {
   Stethoscope
 } from 'lucide-react';
 import { ServerlessDB, type PatientReport, type BiomarkerTrend } from '@/lib/serverless-db';
+import { SEOHead } from '../seo/SEOHead';
 import { toast } from 'sonner';
 
 interface PatientReportPortalProps {
@@ -102,7 +103,15 @@ export function PatientReportPortal({
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <>
+      {open && (
+        <SEOHead
+          title="Patient Lab Reports & Digital Sample Tracking Portal | Sawariya Diagnostic"
+          description="Download doctor-signed certified pathology reports, verify QR codes, and track your lab sample live."
+          canonicalUrl="https://sawariyadiagnostic.github.io/sawariyadiagnostic/portal/reports.html"
+        />
+      )}
+      <Dialog open={open} onOpenChange={setOpen}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
       <DialogContent className="sm:max-w-[840px] max-h-[92vh] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px] flex flex-col">
@@ -451,5 +460,6 @@ export function PatientReportPortal({
         </div>
       </DialogContent>
     </Dialog>
+    </>
   );
 }

@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://Sawariya-Diagnostic.github.io/Sawariya-Diagnostic/sitemap.xml
+Sitemap: https://sawariyadiagnostic.github.io/sawariyadiagnostic/sitemap.xml
