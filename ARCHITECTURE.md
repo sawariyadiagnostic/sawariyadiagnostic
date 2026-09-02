@@ -88,5 +88,32 @@ To transform this digital storefront into a fully-fledged, scalable platform, co
 
 ---
 
+## 4. Architecting for GitHub Pages (The Jamstack Approach)
+
+Since this project is currently deployed on **GitHub Pages**, which strictly hosts static files (HTML, CSS, JS) and cannot run a Node.js/Express backend, the architecture must rely on the **Jamstack** (JavaScript, APIs, and Markup). If staying on GitHub Pages is a requirement, here is how to extend the site:
+
+### A. Static Site Generation (SSG) for SEO
+Currently, as a Vite SPA, the site loads an empty HTML file and renders via JavaScript. This limits SEO.
+- **Solution**: Migrate the build process to **Astro** or **Next.js (Static Export)**.
+- **Impact**: At build time, it generates physical HTML files for every route (e.g., `/test/blood-sugar.html`). This provides perfect SEO and instant loads while remaining 100% compatible with static GitHub Pages hosting.
+
+### B. Headless CMS + GitHub Actions
+To allow staff to add tests without editing code or running a backend server:
+- **Solution**: Connect a headless CMS like **Sanity.io** or **Contentful**.
+- **The Flow**: When content is updated in the CMS, a webhook triggers a **GitHub Actions** workflow (`.github/workflows/deploy.yml`). The action rebuilds the static site with the new data and automatically deploys the updated files to GitHub Pages.
+
+### C. Serverless Databases & Authentication
+You don't need a custom backend to add user accounts or save reports.
+- **Solution**: Integrate **Supabase** or **Firebase** directly into the frontend.
+- **Impact**: Using Row Level Security (RLS), the React app can securely query the database or upload patient PDF reports directly from the client-side, bypassing the need for an Express server.
+
+### D. Third-Party APIs for Dynamic Features
+Replace backend functionalities with managed services:
+- **Payments**: Use Stripe Payment Links or Razorpay Standard Checkout for home collection fees.
+- **Forms**: Use Formspree or Web3Forms to capture patient inquiries without writing a backend email service.
+- **Search**: For instant catalog searching without a database server, integrate Algolia or a client-side search library like Fuse.js.
+
+---
+
 ## Conclusion
 The current Vite + React SPA architecture is excellent for a fast, responsive v1.0 storefront. To scale further, handle dynamic data, and maximize SEO, the next logical step is migrating to an SSR framework (like Next.js), attaching a headless CMS, and integrating a robust database for stateful user and booking management.
