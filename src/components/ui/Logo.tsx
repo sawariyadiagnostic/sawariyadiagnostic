@@ -23,41 +23,41 @@ export function Logo({
   showTagline = true,
 }: LogoProps) {
   // Brand colors
-  const brandColor = inverted ? 'text-white' : 'text-[#7E2222]';
-  const diagColor = inverted ? 'text-blue-200' : 'text-[#17365D]';
+  const brandColor = inverted ? 'text-[#FEFEFE]' : 'text-[#7E2222]';
+  const diagColor = inverted ? 'text-[#62A2F2]' : 'text-[#17365D]';
   const taglineColor = inverted ? 'text-teal-100/90' : 'text-slate-500';
   const accentColor = inverted ? 'text-teal-400' : 'text-[#00A896]';
 
   const sizeConfigs = {
     xs: {
-      brand: 'text-sm xs:text-base font-black tracking-tight leading-none',
-      diag: 'text-[10px] xs:text-xs font-bold tracking-widest leading-none',
+      brand: 'text-base sm:text-lg font-black tracking-tight leading-none',
+      diag: 'text-xs sm:text-sm font-bold tracking-widest leading-none',
       tagline: 'text-[8px] xs:text-[9px]',
-      icon: 'w-6 h-6 -rotate-45',
+      icon: 'w-6 h-6 sm:w-7 sm:h-7 -rotate-45',
     },
     sm: {
-      brand: 'text-base xs:text-lg sm:text-xl font-black tracking-tight leading-none',
-      diag: 'text-[11px] xs:text-xs sm:text-sm font-bold tracking-widest leading-none',
+      brand: 'text-lg sm:text-xl md:text-2xl font-black tracking-tight leading-none',
+      diag: 'text-xs sm:text-sm md:text-base font-bold tracking-widest leading-none',
       tagline: 'text-[8.5px] xs:text-[9.5px] sm:text-[10.5px]',
-      icon: 'w-8 h-8 -rotate-45',
+      icon: 'w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 -rotate-45',
     },
     md: {
-      brand: 'text-xl sm:text-2xl font-black tracking-tight leading-none',
-      diag: 'text-sm sm:text-base font-bold tracking-widest leading-none',
-      tagline: 'text-[10.5px] sm:text-xs',
-      icon: 'w-10 h-10 -rotate-45',
+      brand: 'text-xl sm:text-2xl md:text-[26px] font-black tracking-tight leading-none',
+      diag: 'text-sm sm:text-base md:text-[17px] font-bold tracking-widest leading-tight',
+      tagline: 'text-[10px] sm:text-xs',
+      icon: 'w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 -rotate-45',
     },
     lg: {
       brand: 'text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-none',
       diag: 'text-base sm:text-xl lg:text-2xl font-bold tracking-widest leading-none',
       tagline: 'text-xs sm:text-sm',
-      icon: 'w-14 h-14 -rotate-45',
+      icon: 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 -rotate-45',
     },
     xl: {
       brand: 'text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none',
       diag: 'text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest leading-none',
       tagline: 'text-sm sm:text-base',
-      icon: 'w-16 h-16 -rotate-45',
+      icon: 'w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 -rotate-45',
     },
   };
 

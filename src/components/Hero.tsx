@@ -92,7 +92,7 @@ export function Hero() {
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
             
             {/* Left Column - Main Value Proposition (7 cols) */}
-            <div className="lg:col-span-7 space-y-5 sm:space-y-6 animate-slide-in-left">
+            <div className="lg:col-span-7 w-full min-w-0 space-y-5 sm:space-y-6 animate-slide-in-left">
               
               {/* Apple Pill Badge */}
               <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md border border-white/40 px-3.5 py-1.5 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)] max-w-full">
@@ -108,7 +108,7 @@ export function Hero() {
 
               {/* Display Headline */}
               <div className="space-y-2 sm:space-y-3">
-                <h1 className="text-[clamp(2.1rem,1.4rem+3.8vw,3.75rem)] font-black text-[#1D1D1F] tracking-tight leading-[1.08]">
+                <h1 className="text-[clamp(2rem,1.3rem+3.5vw,3.75rem)] font-black text-[#1D1D1F] tracking-tight leading-[1.08] break-words">
                   Precision Pathology.
                   <br />
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#072448] via-[#0A6E5C] to-[#00A896]">
@@ -121,20 +121,20 @@ export function Hero() {
               </div>
 
               {/* Clean Apple-Optimized Search Bar inside Glass */}
-              <div className="space-y-2.5 max-w-xl">
+              <div className="space-y-2.5 w-full max-w-xl">
                 <form onSubmit={handleSearch} className="relative">
-                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#0A6E5C]/40 focus-within:bg-white focus-within:border-[#0A6E5C] focus-within:ring-2 focus-within:ring-[#0A6E5C]/15 transition-all p-1.5 duration-300">
-                    <Search className="w-4 h-4 text-slate-500 ml-3 flex-shrink-0" />
+                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[20px] sm:rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#0A6E5C]/40 focus-within:bg-white focus-within:border-[#0A6E5C] focus-within:ring-2 focus-within:ring-[#0A6E5C]/15 transition-all p-1 sm:p-1.5 duration-300">
+                    <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
                       placeholder="Search tests..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-sm placeholder:text-slate-500 bg-transparent px-2.5 h-11 sm:h-12 w-full min-w-0"
+                      className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-xs sm:text-sm placeholder:text-slate-500 bg-transparent px-2 sm:px-2.5 h-10 sm:h-12 w-full min-w-0"
                     />
                     <Button 
                       type="submit" 
-                      className="bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 rounded-[18px] px-4 sm:px-6 h-11 sm:h-12 text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
+                      className="bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 h-10 sm:h-12 text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
                       <span>Find Test</span>
@@ -150,7 +150,7 @@ export function Hero() {
                       key={tag.label}
                       type="button"
                       onClick={() => handleQuickTagClick(tag.label)}
-                      className={`h-8 px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#0A6E5C] hover:border-[#0A6E5C]/30 transition-all duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                      className={`h-7 sm:h-8 px-2.5 sm:px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#0A6E5C] hover:border-[#0A6E5C]/30 transition-all duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}
                     </button>
@@ -159,55 +159,55 @@ export function Hero() {
               </div>
 
               {/* Action Buttons: Primary & Secondary */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 w-full max-w-xl">
                 <Button
                   size="xl"
-                  className="btn-primary w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97]"
+                  className="btn-primary w-full sm:w-auto h-12 sm:h-14 px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
-                  <span>Book Doorstep Sample</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <span className="truncate">Book Doorstep Sample</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
                 </Button>
 
                 <Button
                   size="xl"
                   variant="outline"
-                  className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-sm sm:text-base font-bold rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97]"
+                  className="w-full sm:w-auto h-12 sm:h-14 px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
-                  <span>Explore Health Packages</span>
+                  <span className="truncate">Explore Health Packages</span>
                 </Button>
               </div>
 
               {/* Apple Health Trust Micro-Metrics */}
-              <div className="flex flex-wrap sm:grid sm:grid-cols-3 gap-3 sm:gap-4 pt-4 border-t border-black/[0.06] max-w-xl justify-between">
-                <div className="flex items-center gap-2 sm:gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 pt-4 border-t border-black/[0.06] w-full max-w-xl">
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-blue-50 flex items-center justify-center border border-blue-200/80 flex-shrink-0">
                     <Clock className="w-4 h-4 text-blue-700" />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">Same Day</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">6h Digital Report</p>
+                  <div className="min-w-0">
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Same Day</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">6h Digital Report</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-emerald-50 flex items-center justify-center border border-emerald-200/80 flex-shrink-0">
                     <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">99.9%</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">Clinical Accuracy</p>
+                  <div className="min-w-0">
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">99.9%</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Clinical Accuracy</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-2.5">
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-amber-50 flex items-center justify-center border border-amber-200/80 flex-shrink-0">
                     <ShieldCheck className="w-4 h-4 text-amber-700" />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight">7,000+</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500">Patients in 2026</p>
+                  <div className="min-w-0">
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">7,000+</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Patients in 2026</p>
                   </div>
                 </div>
               </div>
@@ -215,28 +215,28 @@ export function Hero() {
             </div>
 
             {/* Right Column - Apple Health Specimen Card Preview (5 cols) */}
-            <div className="lg:col-span-5 relative flex items-center justify-center mt-2 lg:mt-0 w-full overflow-hidden sm:overflow-visible">
-              <div className="relative w-full max-w-[340px] sm:max-w-[430px] mx-auto">
+            <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0 w-full min-w-0">
+              <div className="relative w-full max-w-full sm:max-w-[430px] mx-auto min-w-0">
                 
                 {/* Background Ambient Aura */}
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#0D5C75]/20 via-[#00A896]/15 to-[#EA580C]/15 rounded-[34px] blur-2xl opacity-70 pointer-events-none" />
 
                 {/* Primary Apple Glass Card */}
-                <div className="relative bg-white/95 backdrop-blur-2xl rounded-[28px] border border-black/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-5 sm:p-7 space-y-4 sm:space-y-5">
+                <div className="relative bg-white/95 backdrop-blur-2xl rounded-[22px] sm:rounded-[27px] border-0 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-hidden">
                   
                   {/* Card Header with Official Wordmark & Verified Pill */}
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-between pb-3.5 border-b border-slate-100">
-                    <div className="min-w-0">
+                  <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
+                    <div className="min-w-0 flex-1">
                       <Logo variant="horizontal" size="xs" showTagline={false} />
-                      <p className="text-[10px] text-slate-400 mt-0.5 font-medium truncate">Sample #SD-2026-9082 • MD Pathologist Sign-off</p>
+                      <p className="text-[10px] text-slate-400 mt-0.5 font-medium truncate">Sample #SD-2026-9082 • MD Sign-off</p>
                     </div>
-                    <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10.5px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 self-start sm:self-auto shrink-0">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verified
+                    <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10px] sm:text-[10.5px] font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-emerald-200 shrink-0">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600 shrink-0" /> Verified
                     </span>
                   </div>
 
                   {/* Patient Sample Details */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 bg-slate-50/90 p-3 rounded-[16px] border border-slate-100 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 bg-slate-50/90 p-3 rounded-[16px] border border-slate-100 text-xs">
                     <div className="min-w-0">
                       <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Test Specimen</span>
                       <span className="font-bold text-slate-800 text-xs sm:text-sm truncate block">Complete Blood Count</span>
@@ -250,7 +250,7 @@ export function Hero() {
                   </div>
 
                   {/* Diagnostic Metric Bars */}
-                  <div className="space-y-3">
+                  <div className="space-y-2.5 sm:space-y-3">
                     {/* Hemoglobin */}
                     <div>
                       <div className="flex justify-between text-xs font-semibold mb-1">
@@ -286,33 +286,22 @@ export function Hero() {
                   </div>
 
                   {/* Verification Footer */}
-                  <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-[#0A3663]/10 flex items-center justify-center text-[#0A3663] shrink-0">
-                        <Stethoscope className="w-4 h-4" />
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0A3663]/10 flex items-center justify-center text-[#0A3663] shrink-0">
+                        <Stethoscope className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </div>
                       <div className="min-w-0">
                         <p className="text-xs font-bold text-slate-800 truncate">Dr. Radhika Vashisth</p>
                         <p className="text-[10px] text-slate-500 truncate">Chief Pathologist (MD)</p>
                       </div>
                     </div>
-                    <div className="text-left sm:text-right">
-                      <span className="text-[9.5px] text-slate-400 block font-medium">Digital Verification</span>
-                      <span className="text-[10.5px] font-mono font-bold text-[#0A6E5C] flex items-center gap-1 justify-start sm:justify-end">
+                    <div className="text-right shrink-0">
+                      <span className="text-[9px] text-slate-400 block font-medium">Verification</span>
+                      <span className="text-[10px] sm:text-[10.5px] font-mono font-bold text-[#0A6E5C] flex items-center gap-1 justify-end">
                         <FileCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" /> QR-Secured
                       </span>
                     </div>
-                  </div>
-                </div>
-
-                {/* Floating Micro Badge */}
-                <div className="hidden sm:flex absolute -left-4 -bottom-4 bg-white/95 backdrop-blur-md rounded-[18px] p-3 shadow-[0_8px_24px_rgba(0,0,0,0.08)] border border-black/[0.06] items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-[12px] bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0 border border-emerald-200/80">
-                    <Sparkles className="w-4 h-4 text-emerald-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-slate-900">Direct WhatsApp Delivery</p>
-                    <p className="text-[10px] text-slate-500">Doctor-signed PDF in 6 Hours</p>
                   </div>
                 </div>
 

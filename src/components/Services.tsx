@@ -55,7 +55,7 @@ export function Services() {
 
               <div>
                 {/* Icon Container */}
-                <div className={`w-12 h-12 rounded-[16px] border flex items-center justify-center mb-4 transition-all duration-200 ${service.theme.iconBg}`}>
+                <div className={`w-[52px] h-[48px] rounded-[16px] border flex items-center justify-center mb-4 transition-all duration-200 ${service.theme.iconBg}`}>
                   <service.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 

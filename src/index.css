@@ -853,8 +853,8 @@ html {
   bottom: 24px;
   right: 24px;
   z-index: 1000;
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   background: rgba(37, 211, 102, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -872,12 +872,9 @@ html {
   box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 639px) {
   .whatsapp-float {
-    bottom: 16px;
-    right: 16px;
-    width: 56px;
-    height: 56px;
+    display: none !important;
   }
 }
 

@@ -4,19 +4,17 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { 
-  CreditCard, 
   Home, 
   Calendar, 
   Clock, 
   CheckCircle2, 
   Sparkles, 
   ShieldCheck, 
-  QrCode, 
-  Send,
   IndianRupee,
-  Building2
+  Building2,
+  QrCode,
+  Banknote
 } from 'lucide-react';
-import { PaymentsClient } from '@/lib/payments';
 import { ServerlessDB } from '@/lib/serverless-db';
 import { FormsService } from '@/lib/forms';
 import { toast } from 'sonner';
@@ -44,13 +42,12 @@ export function TestBookingModal({
   const open = externalOpen !== undefined ? externalOpen : internalOpen;
   const setOpen = externalOnOpenChange || setInternalOpen;
 
-  const [step, setStep] = useState<'DETAILS' | 'PAYMENT' | 'CONFIRMED'>('DETAILS');
+  const [step, setStep] = useState<'DETAILS' | 'REVIEW' | 'CONFIRMED'>('DETAILS');
   const [patientName, setPatientName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [visitType, setVisitType] = useState<'HOME' | 'LAB'>('HOME');
   const [selectedSlot, setSelectedSlot] = useState('Morning (07:00 AM - 09:30 AM)');
-  const [paymentMethod, setPaymentMethod] = useState<'RAZORPAY' | 'STRIPE' | 'CASH'>('RAZORPAY');
   const [isProcessing, setIsProcessing] = useState(false);
   const [confirmedBookingId, setConfirmedBookingId] = useState('');
 
@@ -61,75 +58,51 @@ export function TestBookingModal({
     'Evening (05:00 PM - 08:00 PM)'
   ];
 
-  const handleProceedToPayment = (e: React.FormEvent) => {
+  const handleProceedToReview = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!patientName || !phone) {
+    if (!patientName.trim() || !phone.trim()) {
       toast.error('Please enter patient name and mobile number');
       return;
     }
-    setStep('PAYMENT');
+    if (visitType === 'HOME' && !address.trim()) {
+      toast.error('Please enter your home address in Charkhi Dadri');
+      return;
+    }
+    setStep('REVIEW');
   };
 
   const handleFinalBooking = async () => {
     setIsProcessing(true);
 
-    const onPaymentComplete = async (txnId: string) => {
-      try {
-        const booking = await ServerlessDB.createBooking({
-          patientName,
-          phone,
-          address: visitType === 'HOME' ? address || 'Charkhi Dadri' : 'Lab Walk-in (Opp. R.S. Sangwan Hospital)',
-          testNames: [testName],
-          totalAmount: price,
-          paymentMethod: paymentMethod === 'RAZORPAY' ? 'ONLINE_RAZORPAY' : paymentMethod === 'STRIPE' ? 'ONLINE_STRIPE' : 'CASH_ON_COLLECTION',
-          paymentStatus: paymentMethod === 'CASH' ? 'PENDING' : 'PAID',
-          slotTime: selectedSlot
-        });
-
-        // Trigger notification
-        FormsService.dispatchToWhatsApp({
-          name: patientName,
-          phone,
-          address: visitType === 'HOME' ? address : 'Lab Walk-in',
-          serviceType: `${testName} (₹${price}) - ${paymentMethod}`,
-          date: selectedSlot
-        });
-
-        setConfirmedBookingId(booking.id);
-        setStep('CONFIRMED');
-      } catch (err) {
-        console.error('Booking failed', err);
-        toast.error('Could not complete booking record');
-      } finally {
-        setIsProcessing(false);
-      }
-    };
-
-    if (paymentMethod === 'RAZORPAY') {
-      PaymentsClient.openRazorpay({
-        amount: price,
-        testName,
-        patientName,
-        patientPhone: phone,
-        onSuccess: (txnId) => onPaymentComplete(txnId),
-        onFailure: (err) => {
-          setIsProcessing(false);
-          toast.error(err || 'Payment was cancelled');
-        }
+    try {
+      const booking = await ServerlessDB.createBooking({
+        patientName: patientName.trim(),
+        phone: phone.trim(),
+        address: visitType === 'HOME' ? address.trim() || 'Charkhi Dadri' : 'Lab Walk-in (Opp. R.S. Sangwan Hospital)',
+        testNames: [testName],
+        totalAmount: price,
+        paymentMethod: 'CASH_ON_COLLECTION',
+        paymentStatus: 'PENDING',
+        slotTime: selectedSlot
       });
-    } else if (paymentMethod === 'STRIPE') {
-      PaymentsClient.redirectToStripe({
-        amount: price,
-        testName,
-        patientName,
-        patientPhone: phone,
-        onSuccess: (txnId) => onPaymentComplete(txnId)
+
+      // Trigger notification
+      FormsService.dispatchToWhatsApp({
+        name: patientName,
+        phone,
+        address: visitType === 'HOME' ? address : 'Lab Walk-in',
+        serviceType: `${testName} (₹${price}) - Pay on Sample Collection`,
+        date: selectedSlot
       });
-    } else {
-      // Pay on collection
-      setTimeout(() => {
-        onPaymentComplete('CASH_COLLECTION');
-      }, 600);
+
+      setConfirmedBookingId(booking.id);
+      setStep('CONFIRMED');
+      toast.success('Appointment booked successfully!');
+    } catch (err) {
+      console.error('Booking failed', err);
+      toast.error('Could not complete booking record. Please try again.');
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -146,15 +119,15 @@ export function TestBookingModal({
     <Dialog open={open} onOpenChange={(val) => { if (!val) resetModal(); else setOpen(val); }}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
-      <DialogContent className="sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px]">
+      <DialogContent className="w-[calc(100vw-32px)] sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[28px] sm:rounded-[32px] mx-auto">
         {/* Header Strip */}
-        <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] p-5 text-white relative overflow-hidden">
-          <div className="flex items-center justify-between relative z-10">
-            <div>
+        <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] p-4 sm:p-5 text-white relative overflow-hidden">
+          <div className="flex items-center justify-between relative z-10 gap-3">
+            <div className="min-w-0">
               <span className="text-[10px] font-bold uppercase tracking-wider text-teal-200 bg-white/10 px-2 py-0.5 rounded-full inline-block mb-1">
                 {isPackage ? 'Health Package Booking' : 'Diagnostic Test Booking'}
               </span>
-              <DialogTitle className="text-lg sm:text-xl font-bold text-white tracking-tight leading-snug">
+              <DialogTitle className="text-base sm:text-xl font-bold text-white tracking-tight leading-snug truncate">
                 {testName}
               </DialogTitle>
             </div>
@@ -166,38 +139,38 @@ export function TestBookingModal({
             </div>
           </div>
           <DialogDescription className="text-xs text-teal-100/80 mt-1 relative z-10">
-            NABL accredited lab • Free home collection • Express WhatsApp report
+            NABL accredited lab • Free doorstep collection • Express digital report
           </DialogDescription>
         </div>
 
         {/* STEP 1: PATIENT & VISIT DETAILS */}
         {step === 'DETAILS' && (
-          <form onSubmit={handleProceedToPayment} className="p-5 sm:p-6 space-y-4">
+          <form onSubmit={handleProceedToReview} className="p-4 sm:p-6 space-y-4">
             {/* Visit Type Toggle */}
             <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-[18px]">
               <button
                 type="button"
                 onClick={() => setVisitType('HOME')}
-                className={`py-2 px-3 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-2.5 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   visitType === 'HOME'
                     ? 'bg-white text-[#0A6E5C] shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                <Home className="w-3.5 h-3.5" />
-                <span>Home Collection (Free)</span>
+                <Home className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="truncate">Home Collection (Free)</span>
               </button>
               <button
                 type="button"
                 onClick={() => setVisitType('LAB')}
-                className={`py-2 px-3 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-2 px-2.5 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   visitType === 'LAB'
                     ? 'bg-white text-[#0A6E5C] shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                <Building2 className="w-3.5 h-3.5" />
-                <span>Lab Walk-in (24*7)</span>
+                <Building2 className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="truncate">Lab Walk-in (24*7)</span>
               </button>
             </div>
 
@@ -261,14 +234,14 @@ export function TestBookingModal({
               type="submit"
               className="w-full h-12 btn-primary rounded-[16px] font-bold text-sm shadow-md mt-2"
             >
-              <span>Continue to Payment & Confirmation</span>
+              <span>Continue to Confirmation (Pay on Collection)</span>
             </Button>
           </form>
         )}
 
-        {/* STEP 2: PAYMENT METHOD SELECTION */}
-        {step === 'PAYMENT' && (
-          <div className="p-5 sm:p-6 space-y-4">
+        {/* STEP 2: REVIEW & PAY ON SAMPLE COLLECTION */}
+        {step === 'REVIEW' && (
+          <div className="p-4 sm:p-6 space-y-4">
             <div className="bg-slate-50 border border-slate-200 rounded-[18px] p-3.5 space-y-1.5 text-xs text-slate-700">
               <div className="flex justify-between font-bold text-slate-900 text-sm">
                 <span>Total Amount Payable:</span>
@@ -278,73 +251,38 @@ export function TestBookingModal({
                 <span>Patient: {patientName}</span>
                 <span>Slot: {selectedSlot.split(' ')[0]}</span>
               </div>
+              <div className="flex justify-between text-slate-500">
+                <span>Mode: {visitType === 'HOME' ? 'Home Doorstep Sample' : 'Lab Walk-in'}</span>
+                <span>Advance: ₹0 (No Prepayment)</span>
+              </div>
             </div>
 
+            {/* Exclusive Payment Method Card: Pay on Sample Collection */}
             <div className="space-y-2">
-              <Label className="text-xs font-bold text-slate-800">Select Payment Method</Label>
+              <Label className="text-xs font-bold text-slate-800">Payment Mode</Label>
               
-              {/* Razorpay Card */}
-              <label 
-                onClick={() => setPaymentMethod('RAZORPAY')}
-                className={`flex items-center justify-between p-3.5 rounded-[16px] border cursor-pointer transition-all ${
-                  paymentMethod === 'RAZORPAY' 
-                    ? 'border-[#0A6E5C] bg-teal-50/50 ring-1 ring-[#0A6E5C]' 
-                    : 'border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs">
-                    UPI
+              <div className="p-4 rounded-[18px] border-2 border-[#0A6E5C] bg-teal-50/60 ring-2 ring-[#00A896]/20 transition-all">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#0A6E5C] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                    <Banknote className="w-5 h-5" />
                   </div>
-                  <div>
-                    <div className="font-bold text-xs text-slate-900">Razorpay (UPI / Cards / NetBanking)</div>
-                    <div className="text-[11px] text-slate-500">Instant confirmation via GPay, PhonePe, Paytm</div>
-                  </div>
-                </div>
-                <input type="radio" checked={paymentMethod === 'RAZORPAY'} readOnly className="text-[#0A6E5C]" />
-              </label>
-
-              {/* Stripe Card */}
-              <label 
-                onClick={() => setPaymentMethod('STRIPE')}
-                className={`flex items-center justify-between p-3.5 rounded-[16px] border cursor-pointer transition-all ${
-                  paymentMethod === 'STRIPE' 
-                    ? 'border-[#0A6E5C] bg-teal-50/50 ring-1 ring-[#0A6E5C]' 
-                    : 'border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-700">
-                    <CreditCard className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-xs text-slate-900">Stripe Payment Link</div>
-                    <div className="text-[11px] text-slate-500">Global debit/credit card support</div>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-xs sm:text-sm text-slate-900">Pay on Sample Collection</span>
+                      <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-300">
+                        Default
+                      </span>
+                    </div>
+                    <p className="text-[11.5px] text-slate-600 leading-relaxed font-normal">
+                      Pay <strong className="text-slate-900 font-bold">₹{price}</strong> via <strong className="text-slate-800">Cash</strong> or <strong className="text-slate-800">UPI QR Code</strong> (GPay, PhonePe, Paytm) directly to the certified phlebotomist when your sample is collected.
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#0A6E5C] font-semibold pt-1">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <span>Zero advance fee • 100% Secure & Verified</span>
+                    </div>
                   </div>
                 </div>
-                <input type="radio" checked={paymentMethod === 'STRIPE'} readOnly className="text-[#0A6E5C]" />
-              </label>
-
-              {/* Cash On Collection */}
-              <label 
-                onClick={() => setPaymentMethod('CASH')}
-                className={`flex items-center justify-between p-3.5 rounded-[16px] border cursor-pointer transition-all ${
-                  paymentMethod === 'CASH' 
-                    ? 'border-[#0A6E5C] bg-teal-50/50 ring-1 ring-[#0A6E5C]' 
-                    : 'border-slate-200 hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-800">
-                    <IndianRupee className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-xs text-slate-900">Pay on Sample Collection</div>
-                    <div className="text-[11px] text-slate-500">Pay via Cash / QR code to phlebotomist at doorstep</div>
-                  </div>
-                </div>
-                <input type="radio" checked={paymentMethod === 'CASH'} readOnly className="text-[#0A6E5C]" />
-              </label>
+              </div>
             </div>
 
             <div className="flex gap-2 pt-2">
@@ -352,7 +290,7 @@ export function TestBookingModal({
                 type="button"
                 variant="outline"
                 onClick={() => setStep('DETAILS')}
-                className="h-12 rounded-[16px] text-xs font-bold"
+                className="h-12 rounded-[16px] text-xs font-bold px-4"
               >
                 Back
               </Button>
@@ -364,12 +302,10 @@ export function TestBookingModal({
               >
                 {isProcessing ? (
                   <span className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin text-[#FDE047]" /> Authorizing...
+                    <Sparkles className="w-4 h-4 animate-spin text-[#FDE047]" /> Confirming...
                   </span>
                 ) : (
-                  <span>
-                    {paymentMethod === 'CASH' ? `Confirm Booking (₹${price})` : `Pay ₹${price} Now`}
-                  </span>
+                  <span>Confirm Booking (Pay ₹{price} on Collection)</span>
                 )}
               </Button>
             </div>
@@ -378,41 +314,41 @@ export function TestBookingModal({
 
         {/* STEP 3: BOOKING CONFIRMED */}
         {step === 'CONFIRMED' && (
-          <div className="p-6 text-center space-y-4">
-            <div className="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-md">
-              <CheckCircle2 className="w-8 h-8" />
+          <div className="p-5 sm:p-6 text-center space-y-4">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-md">
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
 
             <div className="space-y-1">
-              <h3 className="text-xl font-bold text-slate-900">Booking Successfully Placed!</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900">Booking Confirmed!</h3>
               <p className="text-xs text-slate-500">
                 Booking ID: <span className="font-mono font-bold text-[#0A6E5C]">{confirmedBookingId}</span>
               </p>
             </div>
 
-            <div className="bg-slate-50 border border-slate-200 rounded-[20px] p-4 text-left space-y-2 text-xs text-slate-700">
+            <div className="bg-slate-50 border border-slate-200 rounded-[20px] p-3.5 sm:p-4 text-left space-y-2 text-xs text-slate-700">
               <div className="flex justify-between">
                 <span className="text-slate-500">Patient Name:</span>
                 <span className="font-bold text-slate-900">{patientName}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Test / Package:</span>
-                <span className="font-bold text-slate-900">{testName}</span>
+                <span className="font-bold text-slate-900 truncate max-w-[200px]">{testName}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Time Slot:</span>
                 <span className="font-semibold text-slate-900">{selectedSlot}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Payment Status:</span>
+                <span className="text-slate-500">Payment:</span>
                 <span className="font-bold text-emerald-700">
-                  {paymentMethod === 'CASH' ? 'Pay on Collection (₹' + price + ')' : 'PAID ONLINE (₹' + price + ')'}
+                  Pay ₹{price} on Sample Collection
                 </span>
               </div>
             </div>
 
             <p className="text-[11px] text-slate-500 leading-relaxed">
-              Our Phlebotomy desk has received your order. We have sent the confirmation summary to your WhatsApp & Mobile SMS.
+              Our Phlebotomy desk has scheduled your visit. A confirmation summary has been dispatched to your WhatsApp number.
             </p>
 
             <Button

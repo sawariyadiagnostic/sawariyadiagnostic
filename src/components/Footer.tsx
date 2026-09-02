@@ -90,22 +90,22 @@ export function Footer() {
 
             {/* Contact Info (3 cols) */}
             <div className="lg:col-span-3 space-y-2.5">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">24*7 Calling Desk & Center</h3>
+              <h3 className="font-bold text-[12px] uppercase tracking-wider text-slate-200">24*7 Calling Desk & Center</h3>
               <div className="space-y-2.5 text-xs">
                 <div className="flex items-start gap-2.5">
                   <Phone className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />
                   <div>
-                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-slate-100 hover:text-teal-300 font-bold transition-colors">
+                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="text-[#A1CDFB] hover:text-teal-300 font-bold transition-colors">
                       {contact.phone}
                     </a>
-                    <p className="text-[11px] text-emerald-400 font-medium">24*7 Helpline & Home Collection</p>
+                    <p className="text-[11px] text-[#F6F6F6] font-medium">24*7 Helpline & Home Collection</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2.5">
                   <PhoneCall className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <a href={`tel:${contact.emergencyPhone.replace(/\s/g, '')}`} className="text-amber-200 hover:text-amber-300 font-semibold transition-colors">
+                    <a href={`tel:${contact.emergencyPhone.replace(/\s/g, '')}`} className="text-[#FDF2C6] hover:text-amber-300 font-semibold transition-colors">
                       {contact.emergencyPhone}
                     </a>
                     <p className="text-[11px] text-slate-400">Lab Director / Escalation line</p>
@@ -114,7 +114,7 @@ export function Footer() {
 
                 <div className="flex items-start gap-2.5">
                   <Mail className="w-4 h-4 text-teal-300 flex-shrink-0 mt-0.5" />
-                  <a href={`mailto:${contact.email}`} className="text-slate-300 hover:text-teal-300 transition-colors break-all">
+                  <a href={`mailto:${contact.email}`} className="text-[#B2D3FC] hover:text-teal-300 transition-colors break-all">
                     {contact.email}
                   </a>
                 </div>
@@ -125,7 +125,7 @@ export function Footer() {
                     href={contact.mapsLink} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="text-slate-300 hover:text-teal-300 transition-colors leading-relaxed"
+                    className="text-[#CDF1D4] hover:text-teal-300 transition-colors leading-relaxed"
                   >
                     {contact.address}
                   </a>
@@ -134,8 +134,8 @@ export function Footer() {
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <div className="text-slate-300 space-y-0.5">
-                    <p className="text-emerald-400 font-bold">Open 24*7 Always</p>
-                    <p className="text-[11px] text-slate-400">Emergency & walk-in samples anytime</p>
+                    <p className="text-[#B5F3DC] font-bold text-[12px]">Open 24*7 Always</p>
+                    <p className="text-[12px] text-slate-400">Emergency & walk-in samples anytime</p>
                   </div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-6 sm:pt-8 mt-10 flex flex-col sm:flex-row justify-between items-center gap-3.5 text-xs text-slate-400">
-            <p className="text-center sm:text-left">
+            <p className="text-center sm:text-left text-[13px]">
               © {new Date().getFullYear()} Sawariya Diagnostic Lab. All diagnostic reports are confidential.
             </p>
             <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">

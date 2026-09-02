@@ -23,7 +23,7 @@ export function Navbar({
     <header className="fixed top-0 left-0 right-0 w-full z-[110] transition-all duration-300 pt-[env(safe-area-inset-top,0px)]">
       {/* Top Announcement Bar */}
       <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-slate-200 text-xs py-1.5 px-4 hidden sm:block border-b border-teal-500/25">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <span className="inline-flex items-center gap-1.5 text-[#FDE047] font-bold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#00A896] animate-pulse" />
@@ -45,12 +45,12 @@ export function Navbar({
       </div>
 
       {/* Main Frosted Glass Navbar */}
-      <div className={`w-full px-3.5 sm:px-8 lg:px-12 py-2.5 sm:py-3 transition-all duration-300 ${
+      <div className={`w-full min-h-[68px] sm:min-h-[76px] py-2 flex items-center px-3.5 sm:px-6 lg:px-8 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/40 backdrop-blur-[40px] border-b border-white/60 shadow-[0_4px_32px_rgba(0,0,0,0.06)]' 
-          : 'bg-white/60 backdrop-blur-2xl border-b border-white/40 shadow-2xs'
+          ? 'bg-white/70 backdrop-blur-[30px] border-b border-white/60 shadow-[0_4px_32px_rgba(0,0,0,0.06)]' 
+          : 'bg-white/80 backdrop-blur-2xl border-b border-white/40 shadow-2xs'
       }`}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Official Typography Logo */}
           <div

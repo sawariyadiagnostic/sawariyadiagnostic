@@ -75,19 +75,19 @@ export function Contact() {
         <div className="max-w-4xl mx-auto mb-10 sm:mb-14 relative z-10">
           <div className="glass-panel bg-white/70 rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
             {/* Widget Header */}
-            <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-white px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between border-b border-teal-500/30">
-              <div className="space-y-0.5">
-                <h3 className="text-sm sm:text-lg font-bold text-white flex items-center gap-2">
-                  <span>Online Appointment & Doctor Desk</span>
-                  <span className="bg-white/20 text-[#FDE047] text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-teal-300/30">
+            <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-teal-500/30">
+              <div className="space-y-0.5 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-sm sm:text-lg font-bold text-white">Online Appointment & Doctor Desk</h3>
+                  <span className="bg-white/20 text-[#FDE047] text-xs font-bold px-2.5 py-0.5 rounded-full border border-teal-300/30 inline-flex items-center">
                     24*7 Active
                   </span>
-                </h3>
-                <p className="text-[11px] sm:text-xs text-teal-100 font-normal">
+                </div>
+                <p className="text-[11px] sm:text-xs text-teal-100 font-normal truncate">
                   Instant confirmation • Helpline: +91 99919 41207
                 </p>
               </div>
-              <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white">
+              <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white shrink-0">
                 <span className="w-2 h-2 bg-[#FDE047] rounded-full animate-pulse" />
                 <span className="font-semibold">Always Open (24*7)</span>
               </div>
@@ -155,7 +155,7 @@ export function Contact() {
             <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-center">
               
               {/* Location Details (5 cols) */}
-              <div className="lg:col-span-5 space-y-4 sm:space-y-6">
+              <div className="lg:col-span-5 space-y-4 sm:space-y-6 min-w-0">
                 <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
                   <MapPin className="w-3.5 h-3.5 text-[#0A6E5C]" />
                   <span className="text-xs font-bold text-[#1D1D1F]">Lab Center Location</span>
@@ -171,45 +171,45 @@ export function Contact() {
                 </div>
 
                 <div className="space-y-3 text-xs sm:text-sm text-slate-700 border-y border-slate-100 py-3.5">
-                  <div className="flex items-start gap-2.5">
+                  <div className="flex items-start gap-2.5 min-w-0">
                     <MapPin className="w-4 h-4 text-[#0A3663] flex-shrink-0 mt-0.5" />
-                    <div>
+                    <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Address:</span>
-                      <span className="text-slate-500 leading-relaxed">{footer.contact.address}</span>
+                      <span className="text-[#032B65] leading-relaxed break-words">{footer.contact.address}</span>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2.5">
-                    <Clock className="w-4 h-4 text-[#00A896] flex-shrink-0 mt-0.5" />
-                    <div>
+                  <div className="flex items-start gap-2.5 min-w-0">
+                    <Clock className="w-4 h-4 text-[#068174] flex-shrink-0 mt-0.5" />
+                    <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Operating Hours:</span>
-                      <span className="text-emerald-700 font-bold">24*7 Active (Always Open)</span>
+                      <span className="text-[#075640] font-bold">24*7 Active (Always Open)</span>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2.5">
+                  <div className="flex items-start gap-2.5 min-w-0">
                     <PhoneCall className="w-4 h-4 text-[#0A6E5C] flex-shrink-0 mt-0.5" />
-                    <div>
+                    <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">24*7 Lab Helpline:</span>
-                      <a href="tel:+919991941207" className="text-[#0A6E5C] font-bold hover:underline">
+                      <a href="tel:+919991941207" className="text-[#035B4B] font-bold hover:underline">
                         +91 99919 41207
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2.5">
-                    <Phone className="w-4 h-4 text-[#D97706] flex-shrink-0 mt-0.5" />
-                    <div>
+                  <div className="flex items-start gap-2.5 min-w-0">
+                    <Phone className="w-4 h-4 text-[#AF6106] flex-shrink-0 mt-0.5" />
+                    <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Emergency & Lab Director:</span>
-                      <a href="tel:+917015290782" className="text-amber-800 font-semibold hover:underline">
+                      <a href="tel:+917015290782" className="text-[#7F3304] font-semibold hover:underline">
                         +91 70152 90782 (Director/Manager)
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-2.5">
+                  <div className="flex items-start gap-2.5 min-w-0">
                     <Mail className="w-4 h-4 text-[#0A3663] flex-shrink-0 mt-0.5" />
-                    <div>
+                    <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Official Lab Email:</span>
                       <a href="mailto:sawariyadiagnosticckd11@gmail.com" className="text-[#0A3663] font-medium hover:underline break-all">
                         sawariyadiagnosticckd11@gmail.com
@@ -218,15 +218,15 @@ export function Contact() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2.5">
+                <div className="w-full pt-1">
                   <Button
                     asChild
-                    className="btn-primary h-11 sm:h-12 px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98]"
+                    className="btn-primary h-11 sm:h-12 px-4 sm:px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98] w-full sm:w-auto max-w-full"
                   >
-                    <a href={footer.contact.mapsLink} target="_blank" rel="noopener noreferrer">
-                      <Navigation className="w-4 h-4 mr-2" />
-                      <span>Get Live Google Maps Directions</span>
-                      <ExternalLink className="w-3.5 h-3.5 ml-2" />
+                    <a href={footer.contact.mapsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 max-w-full">
+                      <Navigation className="w-4 h-4 shrink-0" />
+                      <span className="truncate">Open Google Maps Directions</span>
+                      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                     </a>
                   </Button>
                 </div>

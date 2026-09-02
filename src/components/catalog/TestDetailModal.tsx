@@ -180,7 +180,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               onClick={() => setShowBooking(true)}
               className="flex-1 h-11 btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
             >
-              <span>Book & Pay Online (₹{item.price})</span>
+              <span>Book Appointment (₹{item.price})</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>
