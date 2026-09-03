@@ -353,7 +353,7 @@ export function TestCatalog() {
                 <TestCard 
                   key={test.id} 
                   test={test} 
-                  onViewDetails={(t) => setSelectedItemForDetail(t)}
+                  onViewDetails={setSelectedItemForDetail as (t: MedicalTest) => void}
                 />
               ))}
             </div>
