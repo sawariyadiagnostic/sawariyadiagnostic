@@ -150,6 +150,7 @@ export function PatientReportPortal({
               <Input
                 type="text"
                 placeholder="Enter Patient UHID or Report ID (e.g. SD-2026-9082)..."
+                aria-label="Enter Patient UHID or Report ID"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -249,7 +250,9 @@ export function PatientReportPortal({
 
                 {reports.length === 0 && (
                   <div className="text-center py-8 bg-white rounded-[20px] border border-slate-200 p-4">
-                    <p className="text-xs text-slate-500">No reports found for this UHID.</p>
+                    <Search className="w-8 h-8 text-slate-300 mx-auto mb-3" />
+                    <p className="text-xs text-slate-500 mb-3">No reports found for this UHID.</p>
+                    <button onClick={() => { setSearchQuery('SD-2026-9082'); handleSearch('SD-2026-9082'); }} className="text-xs text-[#0A6E5C] font-bold hover:underline cursor-pointer">Try Demo ID: SD-2026-9082</button>
                   </div>
                 )}
               </div>
@@ -392,6 +395,7 @@ export function PatientReportPortal({
                   </div>
                 ) : (
                   <div className="text-center py-12 bg-white rounded-[24px] border border-slate-200 p-6">
+                    <FileText className="w-8 h-8 text-slate-300 mx-auto mb-3" />
                     <p className="text-xs text-slate-500">Select a report from the list to view results.</p>
                   </div>
                 )}
