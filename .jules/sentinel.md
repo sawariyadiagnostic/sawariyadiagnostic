@@ -1,0 +1,4 @@
+## 2025-05-18 - SSRF/Path Traversal via Unsanitized Proxy Path Variables
+**Vulnerability:** The `/api/lis/download-report` endpoint directly concatenated user input (`patientId` and `reportId`) into the proxy request URL `fetch(${baseUrl}/api/v1/patients/${patientId}/reports/${reportId})`. This could allow an attacker to use paths like `../` to manipulate the API endpoint and potentially access unintended resources on the external `FLABS_API_BASE_URL` (SSRF/Path Traversal).
+**Learning:** During external API proxying, inputs mapped to path parameters are often overlooked as injection points. Assuming the client-side sends safe IDs without validation in the backend leads to path traversal.
+**Prevention:** Always validate parameter types and strictly sanitize inputs used as path components using `encodeURIComponent()` to ensure they are encoded and treated as single path segments rather than path instructions.

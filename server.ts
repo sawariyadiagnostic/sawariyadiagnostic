@@ -62,9 +62,13 @@ async function startServer() {
     console.log(`[FLabs Engine] Requesting report for Patient: ${patientId}`);
 
     // Standard Validation
-    if (!patientId || !reportId) {
-      return res.status(400).json({ error: "Missing required parameters for LIS" });
+    if (!patientId || !reportId || typeof patientId !== 'string' || typeof reportId !== 'string') {
+      return res.status(400).json({ error: "Missing or invalid required parameters for LIS" });
     }
+
+    // Sanitize inputs to prevent Path Traversal / SSRF
+    const sanitizedPatientId = encodeURIComponent(patientId);
+    const sanitizedReportId = encodeURIComponent(reportId);
 
     try {
       if (process.env.FLABS_CLIENT_ID) {
@@ -72,7 +76,7 @@ async function startServer() {
         const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
         
         // Fetch the report from FLabs
-        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
+        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${sanitizedPatientId}/reports/${sanitizedReportId}`, {
           headers: { "Authorization": `Bearer ${token}` }
         });
 
