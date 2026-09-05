@@ -1,0 +1,3 @@
+## 2025-03-09 - Accessible Close Buttons in Custom Modals
+**Learning:** While standard Radix UI components (like `Dialog`) automatically manage focus and accessibility labels for close buttons, custom modal implementations (like `LegalModal` in this app) often miss these critical `aria-label` attributes on icon-only buttons. This renders the button contextless for screen reader users.
+**Action:** When auditing an app that uses a mix of standard accessible components (e.g., Radix) and custom components, prioritize checking the custom implementations for missing accessibility primitives (like `aria-label` on icon buttons, keyboard focus traps, etc.).
