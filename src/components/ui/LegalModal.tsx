@@ -37,6 +37,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
           <button 
             onClick={onClose}
             className="p-2 rounded-full hover:bg-white/20 text-slate-300 hover:text-white transition-colors relative z-10"
+            aria-label="Close modal"
           >
             <X className="w-5 h-5" />
           </button>
