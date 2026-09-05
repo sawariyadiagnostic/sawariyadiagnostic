@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useDeferredValue } from 'react';
 import { 
   Search, 
   Package, 
@@ -28,6 +28,7 @@ import { TestDetailModal } from './catalog/TestDetailModal';
 
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeTab, setActiveTab] = useState<'packages' | 'tests'>('packages');
 
@@ -65,20 +66,21 @@ export function TestCatalog() {
   }, [tests, packages]);
 
   // Execute Fuse.js Search
+  // ⚡ Bolt: Defer search query to keep input responsive during heavy fuzzy searches
   const filteredItems = useMemo(() => {
-    return searchEngine.search(searchQuery, selectedCategory);
-  }, [searchEngine, searchQuery, selectedCategory]);
+    return searchEngine.search(deferredSearchQuery, selectedCategory);
+  }, [searchEngine, deferredSearchQuery, selectedCategory]);
 
   const filteredTests = useMemo(() => {
     return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
   }, [filteredItems]);
 
   const filteredPackages = useMemo(() => {
-    if (searchQuery.trim().length > 0) {
+    if (deferredSearchQuery.trim().length > 0) {
       return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
     }
     return packages;
-  }, [filteredItems, searchQuery, packages]);
+  }, [filteredItems, deferredSearchQuery, packages]);
 
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
