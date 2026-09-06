@@ -206,12 +206,13 @@ export function HomeCollection() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <div>
-                    <label className="text-xs font-bold text-slate-700 mb-1 block">
+                    <label htmlFor="hc-name" className="text-xs font-bold text-slate-700 mb-1 block">
                       Patient Full Name
                     </label>
                     <div className="relative">
                       <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <Input
+                        id="hc-name"
                         type="text"
                         placeholder="e.g. Ramesh Kumar"
                         value={formData.name}
@@ -223,12 +224,13 @@ export function HomeCollection() {
                   </div>
                   
                   <div>
-                    <label className="text-xs font-bold text-slate-700 mb-1 block">
+                    <label htmlFor="hc-phone" className="text-xs font-bold text-slate-700 mb-1 block">
                       Mobile Number (10 Digits for WhatsApp Report)
                     </label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <Input
+                        id="hc-phone"
                         type="tel"
                         maxLength={10}
                         placeholder="e.g. 9991941207"
@@ -241,10 +243,11 @@ export function HomeCollection() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-slate-700 mb-1 block">
+                    <label htmlFor="hc-test" className="text-xs font-bold text-slate-700 mb-1 block">
                       Required Test / Health Package
                     </label>
                     <Input
+                      id="hc-test"
                       type="text"
                       placeholder="e.g. CBC, Lipid Profile, Thyroid, or Full Body"
                       value={formData.testRequired}
@@ -254,12 +257,13 @@ export function HomeCollection() {
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-slate-700 mb-1 block">
+                    <label htmlFor="hc-address" className="text-xs font-bold text-slate-700 mb-1 block">
                       Pickup Address in Charkhi Dadri
                     </label>
                     <div className="relative">
                       <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                       <Input
+                        id="hc-address"
                         type="text"
                         placeholder="e.g. Loharu Road / Model Town / Sector 8"
                         value={formData.address}
