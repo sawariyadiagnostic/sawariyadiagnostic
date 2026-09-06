@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useDeferredValue } from 'react';
 import { 
   Search, 
   Package, 
@@ -28,6 +28,7 @@ import { TestDetailModal } from './catalog/TestDetailModal';
 
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeTab, setActiveTab] = useState<'packages' | 'tests'>('packages');
 
@@ -66,19 +67,19 @@ export function TestCatalog() {
 
   // Execute Fuse.js Search
   const filteredItems = useMemo(() => {
-    return searchEngine.search(searchQuery, selectedCategory);
-  }, [searchEngine, searchQuery, selectedCategory]);
+    return searchEngine.search(deferredSearchQuery, selectedCategory);
+  }, [searchEngine, deferredSearchQuery, selectedCategory]);
 
   const filteredTests = useMemo(() => {
     return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
   }, [filteredItems]);
 
   const filteredPackages = useMemo(() => {
-    if (searchQuery.trim().length > 0) {
+    if (deferredSearchQuery.trim().length > 0) {
       return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
     }
     return packages;
-  }, [filteredItems, searchQuery, packages]);
+  }, [filteredItems, deferredSearchQuery, packages]);
 
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
@@ -341,9 +342,9 @@ export function TestCatalog() {
           {/* Individual Tests Tab */}
           <TabsContent value="tests" className="mt-0">
             {/* Search Result Count */}
-            {searchQuery && (
+            {deferredSearchQuery && (
               <div className="text-xs text-slate-600 mb-4 px-1 font-medium">
-                Found <strong>{filteredTests.length}</strong> tests matching "{searchQuery}"
+                Found <strong>{filteredTests.length}</strong> tests matching "{deferredSearchQuery}"
               </div>
             )}
 
@@ -363,7 +364,7 @@ export function TestCatalog() {
                 <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-500">
                   <TestTube className="w-6 h-6 text-[#0A6E5C]" />
                 </div>
-                <h4 className="font-bold text-slate-800 text-base mb-1">No Tests Matching "{searchQuery}"</h4>
+                <h4 className="font-bold text-slate-800 text-base mb-1">No Tests Matching "{deferredSearchQuery}"</h4>
                 <p className="text-xs text-slate-600 mb-4 max-w-sm mx-auto leading-relaxed">
                   Try searching with generic terms like <em>blood</em>, <em>sugar</em>, or click one of the popular test tags below:
                 </p>
