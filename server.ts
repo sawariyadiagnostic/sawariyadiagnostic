@@ -66,13 +66,21 @@ async function startServer() {
       return res.status(400).json({ error: "Missing required parameters for LIS" });
     }
 
+    // Security: Validate that patientId and reportId are strings and encode them to prevent Path Traversal
+    if (typeof patientId !== 'string' || typeof reportId !== 'string') {
+      return res.status(400).json({ error: "Invalid parameters type" });
+    }
+
+    const safePatientId = encodeURIComponent(patientId);
+    const safeReportId = encodeURIComponent(reportId);
+
     try {
       if (process.env.FLABS_CLIENT_ID) {
         const token = await getFlabsAuthToken();
         const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
         
-        // Fetch the report from FLabs
-        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
+        // Fetch the report from FLabs securely
+        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${safePatientId}/reports/${safeReportId}`, {
           headers: { "Authorization": `Bearer ${token}` }
         });
 
