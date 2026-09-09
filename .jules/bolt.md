@@ -1,0 +1,3 @@
+## 2025-02-17 - React TestCard Memoization Optimization
+**Learning:** In the `TestCatalog.tsx` component, the individual test lists trigger a re-render mapping over a list of `filteredTests` and creating `TestCard` components. Since the properties passed into the cards are stable (and we updated the inline anonymous callback `(t) => setSelectedItemForDetail(t)` to simply `setSelectedItemForDetail` to keep the prop stable), we can memoize the card to prevent expensive layout re-renders during text search fuzzy matching.
+**Action:** Always check mapping functions inside list views (like grid cards) for stable props and use `React.memo` to optimize expensive renders of list elements that frequently filter or update.
