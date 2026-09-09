@@ -349,11 +349,12 @@ export function TestCatalog() {
 
             {/* Tests Grid */}
             <div className="fluid-grid-cards-sm">
+              {/* ⚡ Bolt: Pass stable state setter directly instead of inline function to maintain reference equality for React.memo */}
               {filteredTests.map((test) => (
                 <TestCard 
                   key={test.id} 
                   test={test} 
-                  onViewDetails={(t) => setSelectedItemForDetail(t)}
+                  onViewDetails={setSelectedItemForDetail}
                 />
               ))}
             </div>

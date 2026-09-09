@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Clock, Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/mockTests';
@@ -11,7 +11,9 @@ interface TestCardProps {
   onViewDetails?: (test: MedicalTest) => void;
 }
 
-export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
+// ⚡ Bolt: Wrapped in React.memo to prevent unnecessary re-renders of the entire
+// test catalog list when unrelated parent state changes.
+export const TestCard = memo(function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
   const [showBooking, setShowBooking] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
 
@@ -173,4 +175,4 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
       />
     </>
   );
-}
+});
