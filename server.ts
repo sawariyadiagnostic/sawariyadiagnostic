@@ -66,6 +66,12 @@ async function startServer() {
       return res.status(400).json({ error: "Missing required parameters for LIS" });
     }
 
+    // Security: Validate inputs to prevent SSRF and Path Traversal
+    const idRegex = /^[a-zA-Z0-9_-]+$/;
+    if (!idRegex.test(patientId) || !idRegex.test(reportId)) {
+      return res.status(400).json({ error: "Invalid patient or report ID format" });
+    }
+
     try {
       if (process.env.FLABS_CLIENT_ID) {
         const token = await getFlabsAuthToken();
