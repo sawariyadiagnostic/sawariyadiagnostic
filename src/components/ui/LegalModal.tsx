@@ -12,7 +12,12 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
   if (!type) return null;
 
   return (
-    <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-sm animate-fade-in">
+    <div
+      className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-sm animate-fade-in"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="legal-modal-title"
+    >
       <div className="relative w-full max-w-2xl bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_32px_80px_rgba(0,0,0,0.2)] border border-white/60 overflow-hidden max-h-[85vh] flex flex-col">
         {/* Modal Header */}
         <div className="p-6 bg-[#072448] text-white flex items-center justify-between relative overflow-hidden">
@@ -26,7 +31,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
             {type === 'terms' && <FileText className="w-6 h-6 text-teal-400" />}
             {type === 'charter' && <HeartHandshake className="w-6 h-6 text-teal-400" />}
             <div>
-              <h3 className="text-lg font-bold text-white">
+              <h3 id="legal-modal-title" className="text-lg font-bold text-white">
                 {type === 'privacy' && 'Privacy & Medical Data Policy'}
                 {type === 'terms' && 'Terms of Service & Patient Rights'}
                 {type === 'charter' && 'Patient Quality & Charity Charter'}
@@ -36,7 +41,8 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
           </div>
           <button 
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-white/20 text-slate-300 hover:text-white transition-colors relative z-10"
+            className="p-2 rounded-full hover:bg-white/20 text-slate-300 hover:text-white transition-colors relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#072448]"
+            aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
           </button>
@@ -131,7 +137,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
         <div className="p-4 sm:p-5 bg-white/70 backdrop-blur-md border-t border-white/80 flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2 rounded-full bg-[#072448] text-white text-xs font-semibold hover:bg-[#0A6E5C] transition-colors shadow-md shadow-[#072448]/20"
+            className="px-6 py-2 rounded-full bg-[#072448] text-white text-xs font-semibold hover:bg-[#0A6E5C] transition-colors shadow-md shadow-[#072448]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2"
           >
             I Understand
           </button>
