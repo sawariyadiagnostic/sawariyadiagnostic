@@ -21,7 +21,7 @@ export function About() {
       description: 'A trained, vaccinated phlebotomist collects your sample securely.',
       theme: {
         bg: 'bg-white',
-        iconBg: 'bg-cyan-50 text-cyan-800 border-cyan-200/80',
+        iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
         accentBar: 'bg-[#C62828]',
       }
     },

@@ -38,14 +38,14 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
       case 'blood':
         return 'bg-blue-50 text-blue-900 border-blue-200/80';
       case 'diabetes':
-        return 'bg-green-50 text-green-900 border-green-200/80';
+        return 'bg-green-50 text-[#102A43] border-green-200/80';
       case 'thyroid':
       case 'hormone':
         return 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8]';
       case 'lipid':
         return 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]';
       case 'specialized':
-        return 'bg-cyan-50 text-cyan-900 border-cyan-200/80';
+        return 'bg-blue-50 text-[#102A43] border-blue-200/80';
       default:
         return 'bg-blue-50 text-blue-900 border-blue-200/80';
     }
@@ -62,7 +62,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
         className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-all duration-300 relative overflow-hidden cursor-pointer"
       >
         {/* Subtle hover gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-teal-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-teal-500/5 group-hover:to-emerald-500/5 transition-colors duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-blue-500/5 group-hover:to-[#FFF9F3]0/5 transition-colors duration-500 pointer-events-none" />
         
         <div className="flex-1 flex flex-col justify-between">
           <div>

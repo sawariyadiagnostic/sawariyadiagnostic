@@ -231,7 +231,7 @@ export function TestCatalog() {
                 const mostBooked = pkg.bookingsLast6Months === Math.max(...packages.map((p) => p.bookingsLast6Months ?? 0));
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
-                  { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-green-900' },
+                  { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-[#102A43]' },
                   { accent: 'border-[#D7C7B8] hover:border-[#7A4B2A]', badge: 'bg-[#F4EEEA] text-[#7A4B2A]' },
                   { accent: 'border-[#D7C7B8] hover:border-[#7A4B2A]', badge: 'bg-[#FFF9F3] text-[#7A4B2A]' },
                 ];

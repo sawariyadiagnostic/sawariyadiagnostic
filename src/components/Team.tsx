@@ -50,7 +50,7 @@ export function Team() {
                 roleColor: 'text-[#155E9A]',
                 avatarBg: '0A6E5C',
                 avatarText: 'A7F3D0',
-                qualTag: 'bg-green-50 text-green-900 border-green-200/80',
+                qualTag: 'bg-green-50 text-[#102A43] border-green-200/80',
                 accentBar: 'bg-[#155E9A]',
               },
               {

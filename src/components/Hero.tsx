@@ -62,9 +62,9 @@ export function Hero() {
   const quickSearchTags = [
     { label: 'CBC Blood Count', color: 'bg-blue-50 text-blue-900 border-blue-200/80 hover:bg-blue-100' },
     { label: 'Thyroid (T3 T4 TSH)', color: 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8] hover:bg-[#F4EEEA]' },
-    { label: 'Vitamin D3 & B12', color: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8] hover:bg-amber-100' },
-    { label: 'Lipid (Cholesterol)', color: 'bg-green-50 text-green-900 border-green-200/80 hover:bg-green-100' },
-    { label: 'HbA1c Diabetes', color: 'bg-cyan-50 text-cyan-900 border-cyan-200/80 hover:bg-cyan-100' },
+    { label: 'Vitamin D3 & B12', color: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8] hover:bg-[#F4EEEA]' },
+    { label: 'Lipid (Cholesterol)', color: 'bg-green-50 text-[#102A43] border-green-200/80 hover:bg-green-100' },
+    { label: 'HbA1c Diabetes', color: 'bg-blue-50 text-[#102A43] border-blue-200/80 hover:bg-blue-100' },
   ];
 
   return (
@@ -275,7 +275,7 @@ export function Hero() {
                         <span className="text-[#7A4B2A] font-bold text-xs">2.4 mIU/L <span className="text-slate-400 font-normal">(Normal)</span></span>
                       </div>
                       <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#581C87] to-[#A855F7] h-full rounded-full w-[60%]" />
+                        <div className="bg-gradient-to-r from-[#102A43] to-[#155E9A] h-full rounded-full w-[60%]" />
                       </div>
                     </div>
 
@@ -283,10 +283,10 @@ export function Hero() {
                     <div>
                       <div className="flex justify-between text-xs font-semibold mb-1">
                         <span className="text-slate-700 text-xs font-bold">Fasting Glucose</span>
-                        <span className="text-green-900 font-bold text-xs">92 mg/dL <span className="text-slate-400 font-normal">(Healthy)</span></span>
+                        <span className="text-[#102A43] font-bold text-xs">92 mg/dL <span className="text-slate-400 font-normal">(Healthy)</span></span>
                       </div>
                       <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#065F46] to-[#10B981] h-full rounded-full w-[52%]" />
+                        <div className="bg-gradient-to-r from-[#102A43] to-[#155E9A] h-full rounded-full w-[52%]" />
                       </div>
                     </div>
                   </div>

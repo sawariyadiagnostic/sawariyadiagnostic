@@ -74,7 +74,7 @@ export function HomeCollection() {
       icon: CheckCircle2,
       title: 'Certified Phlebotomists',
       description: 'Painless, hygienic sample collection',
-      iconStyle: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40',
+      iconStyle: 'bg-blue-500/20 text-cyan-400 border-cyan-500/40',
     },
     {
       icon: Clock,

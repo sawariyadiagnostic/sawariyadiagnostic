@@ -200,7 +200,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
               <span>Export JSON</span>
             </Button>
           </div>
-          <DialogDescription className="text-xs text-teal-100/90 mt-1">
+          <DialogDescription className="text-xs text-blue-100/90 mt-1">
             Dynamic content editing without a backend server. Changes can be published via GitHub Actions webhooks.
           </DialogDescription>
 
@@ -474,7 +474,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
           {activeTab === 'WEBHOOK' && (
             <div className="bg-white rounded-[22px] border border-slate-200 p-6 space-y-4 max-w-xl mx-auto">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-2 py-0.5 rounded-full">
                   Automated CI/CD Integration
                 </span>
                 <h3 className="text-base font-bold text-slate-900 mt-1">GitHub Actions Rebuild Webhook</h3>
@@ -519,7 +519,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
           {/* TAB 4: SCHEMA DEFINITION */}
           {activeTab === 'SCHEMA' && (
             <div className="bg-slate-900 text-slate-100 rounded-[22px] p-4 text-xs font-mono overflow-x-auto space-y-2 max-h-[380px]">
-              <div className="text-[11px] text-teal-300 font-sans font-bold">
+              <div className="text-[11px] text-blue-200 font-sans font-bold">
                 Sanity Studio Schema Code (Ready to deploy to Sanity.io or Contentful):
               </div>
               <pre className="text-[11px] leading-relaxed text-slate-300">

@@ -24,10 +24,10 @@ export function Logo({
   showTagline = true,
 }: LogoProps) {
   // Brand colors
-  const brandColor = inverted ? 'text-white' : 'text-[#C62828]';
+  const brandColor = inverted ? 'text-[#E54848]' : 'text-[#A61E1E]';
   const diagColor = inverted ? 'text-[#B9D9FF]' : 'text-[#155E9A]';
-  const taglineColor = inverted ? 'text-[#F1D4BE]' : 'text-[#7A4B2A]';
-  const accentColor = inverted ? 'text-[#F2B38B]' : 'text-[#7A4B2A]';
+  const taglineColor = inverted ? 'text-[#E8C8AE]' : 'text-[#7A4B2A]';
+  const accentColor = inverted ? 'text-[#E8C8AE]' : 'text-[#7A4B2A]';
 
   const sizeConfigs = {
     xs: {
@@ -68,7 +68,7 @@ export function Logo({
     <svg width="0" height="0" className="absolute pointer-events-none">
       <defs>
         <linearGradient id="sawariya-dna-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#C62828" />
+          <stop offset="0%" stopColor="#A61E1E" />
           <stop offset="50%" stopColor="#7A4B2A" />
           <stop offset="100%" stopColor="#155E9A" />
         </linearGradient>

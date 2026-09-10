@@ -23,7 +23,7 @@ export function TrustIndicators() {
       subtext: 'High-precision analyzers',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
-        iconBg: 'bg-cyan-50 text-cyan-800 border-cyan-200/80',
+        iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
         accentBar: 'bg-[#C62828]',
       }
     },
@@ -52,9 +52,9 @@ export function TrustIndicators() {
   ];
 
   const certifications = [
-    { name: 'Quality process documented', tag: 'bg-green-50 text-green-900 border-green-200/90', iconColor: 'text-green-700' },
+    { name: 'Quality process documented', tag: 'bg-green-50 text-[#102A43] border-green-200/90', iconColor: 'text-green-700' },
     { name: 'ISO 9001:2015 Certified', tag: 'bg-blue-50 text-blue-900 border-blue-200/90', iconColor: 'text-blue-600' },
-    { name: 'Patient records handled carefully', tag: 'bg-cyan-50 text-cyan-900 border-cyan-200/90', iconColor: 'text-cyan-600' },
+    { name: 'Patient records handled carefully', tag: 'bg-blue-50 text-[#102A43] border-cyan-200/90', iconColor: 'text-cyan-600' },
     { name: 'Support availability confirmed at booking', tag: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]', iconColor: 'text-[#7A4B2A]' },
   ];
 
