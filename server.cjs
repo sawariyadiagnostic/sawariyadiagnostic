@@ -34,21 +34,48 @@ async function startServer() {
     console.log(`[Analytics Engine] Received event: ${event}`, payload);
     res.json({ success: true, timestamp });
   });
+  async function getFlabsAuthToken() {
+    const clientId = process.env.FLABS_CLIENT_ID;
+    const clientSecret = process.env.FLABS_CLIENT_SECRET;
+    const baseUrl = process.env.FLABS_API_BASE_URL || "https://api.flabslis.com";
+    if (!clientId || !clientSecret) {
+      throw new Error("FLabs credentials missing in environment variables (.env)");
+    }
+    const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret })
+    });
+    if (!response.ok) throw new Error("Failed to authenticate with FLabs");
+    const data = await response.json();
+    return data.access_token;
+  }
   app.post("/api/lis/download-report", async (req, res) => {
     const { patientId, reportId, otp } = req.body;
-    console.log(`[LIS Engine] Requesting report for Patient: ${patientId}`);
+    console.log(`[FLabs Engine] Requesting report for Patient: ${patientId}`);
     if (!patientId || !reportId) {
       return res.status(400).json({ error: "Missing required parameters for LIS" });
     }
     try {
-      res.json({
-        success: true,
-        downloadUrl: "https://example.com/mock-report.pdf",
-        reportMetadata: {
-          status: "VERIFIED",
-          signedBy: "Dr. Consultant",
-          generatedAt: (/* @__PURE__ */ new Date()).toISOString()
+      if (process.env.FLABS_CLIENT_ID) {
+        const token = await getFlabsAuthToken();
+        const baseUrl = process.env.FLABS_API_BASE_URL || "https://api.flabslis.com";
+        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!reportResponse.ok) {
+          throw new Error("Report not found in FLabs LIS");
         }
+        const reportData = await reportResponse.json();
+        return res.json({
+          success: true,
+          downloadUrl: reportData.pdf_url || reportData.download_url,
+          reportMetadata: reportData.metadata
+        });
+      }
+      return res.status(503).json({
+        error: "LIS integration is not configured. No report was downloaded.",
+        code: "LIS_NOT_CONFIGURED"
       });
     } catch (error) {
       console.error("[LIS Engine Error]", error);
