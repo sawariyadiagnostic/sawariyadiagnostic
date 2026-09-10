@@ -94,7 +94,7 @@ export function Navbar({
             {/* Book Now CTA (Tablet & Desktop) */}
             <Button
               size="sm"
-              className="hidden md:inline-flex bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 h-10 px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
+              className="hidden md:inline-flex bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 action-button min-h-10 h-auto px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
               onClick={() => scrollToSection('home-collection')}
             >
               <span>Book Home Visit</span>

@@ -161,7 +161,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             <Button
               variant="outline"
               onClick={handleShare}
-              className="h-11 px-3.5 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200"
+              className="action-button h-auto min-h-11 px-3.5 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200"
               title="Copy canonical share link"
             >
               <Share2 className="w-3.5 h-3.5" />
@@ -170,7 +170,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
             <Button
               onClick={() => setShowBooking(true)}
-              className="flex-1 h-11 btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
+              className="action-button flex-1 min-h-11 h-auto btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
             >
               <span>Book Appointment (₹{item.price})</span>
               <ArrowRight className="w-4 h-4" />

@@ -304,12 +304,12 @@ export function TestCatalog() {
                     </div>
                     
                     {/* Action Buttons: Firmly baseline aligned with robust padding and truncate */}
-                    <div className="grid grid-cols-2 gap-2 pt-4 mt-auto border-t border-slate-100">
+                    <div className="action-row grid grid-cols-2 gap-2 pt-4 mt-auto border-t border-slate-100">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setSelectedItemForDetail(pkg)}
-                        className="h-10 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
+                        className="action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
                       >
                         <Info className="w-3.5 h-3.5 text-slate-500 shrink-0" />
                         <span className="truncate">Overview</span>
@@ -318,7 +318,7 @@ export function TestCatalog() {
                       <Button 
                         size="sm"
                         onClick={() => setSelectedPackageForBooking(pkg)}
-                        className="btn-primary h-10 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] shadow-xs hover:shadow-md w-full min-w-0"
+                        className="btn-primary action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] shadow-xs hover:shadow-md w-full min-w-0"
                       >
                         <span className="truncate">Book Package</span>
                         <ArrowRight className="w-3.5 h-3.5 shrink-0" />

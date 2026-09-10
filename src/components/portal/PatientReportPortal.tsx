@@ -160,7 +160,7 @@ export function PatientReportPortal({
             <Button
               onClick={() => handleSearch()}
               disabled={isLoading}
-              className="h-11 px-5 btn-primary rounded-[14px] text-xs font-bold cursor-pointer"
+              className="action-button min-h-11 h-auto px-5 btn-primary rounded-[14px] text-xs font-bold cursor-pointer"
             >
               {isLoading ? 'Querying LIS...' : 'Search Records'}
             </Button>

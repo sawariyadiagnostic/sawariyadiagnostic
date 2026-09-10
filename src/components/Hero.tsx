@@ -168,7 +168,7 @@ export function Hero() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 w-full max-w-xl">
                 <Button
                   size="xl"
-                  className="btn-primary w-full sm:w-auto h-12 sm:h-14 px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
+                  className="btn-primary w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
                   <span className="truncate">Book Doorstep Sample</span>
@@ -178,7 +178,7 @@ export function Hero() {
                 <Button
                   size="xl"
                   variant="outline"
-                  className="w-full sm:w-auto h-12 sm:h-14 px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
+                  className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
                   <span className="truncate">Explore Health Packages</span>

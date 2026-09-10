@@ -111,7 +111,7 @@ export function Contact() {
 
                     <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
                       <Button 
-                        className="btn-primary h-12 px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98]"
+                        className="btn-primary action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98]"
                         onClick={() => setShowCalendar(true)}
                       >
                         <span>Launch Interactive Calendar</span>
