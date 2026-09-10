@@ -23,7 +23,6 @@ import { TestCard } from './ui/TestCard';
 import { categories, type MedicalTest, type HealthPackage } from '@/data/mockTests';
 import { CMSClient } from '@/lib/cms-client';
 import { buildSearchIndex, createSearchEngine, type SearchableItem } from '@/lib/search-fuse';
-import { StaffCMSModal } from './cms/StaffCMSModal';
 import { TestBookingModal } from './booking/TestBookingModal';
 import { TestDetailModal } from './catalog/TestDetailModal';
 
@@ -120,22 +119,6 @@ export function TestCatalog() {
             Choose from comprehensive preventive packages or individual tests listed in the current catalog with instant search & online booking
           </p>
 
-          {/* Staff CMS Trigger Pill */}
-          <div className="pt-1 flex justify-center">
-            <StaffCMSModal
-              onCatalogUpdated={refreshCatalog}
-              trigger={
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full border border-slate-200 shadow-2xs transition-all active:scale-95 cursor-pointer"
-                >
-                  <Settings2 className="w-3.5 h-3.5 text-[#155E9A]" />
-                  <span>Staff Headless CMS Editor</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                </button>
-              }
-            />
-          </div>
         </div>
 
         {/* Apple Segmented Tabs */}
