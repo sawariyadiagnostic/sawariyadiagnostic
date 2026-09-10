@@ -1,4 +1,5 @@
 import { MessageCircle } from 'lucide-react';
+import { whatsappHref } from '@/config/site';
 
 interface WhatsAppButtonProps {
   phoneNumber?: string;
@@ -6,13 +7,13 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({ 
-  phoneNumber = '919991941207',
+  phoneNumber = '',
   message = 'Hi, I want to book a test at Sawariya Diagnostic.'
 }: WhatsAppButtonProps) {
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    const whatsappUrl = whatsappHref(message) || (phoneNumber ? `https://wa.me/${phoneNumber}?text=${encodedMessage}` : undefined);
+    if (whatsappUrl) window.open(whatsappUrl, '_blank');
   };
 
   return (

@@ -17,7 +17,7 @@ export function Services() {
       
       {/* Liquid Mesh Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[10%] right-[-10%] w-[40vw] h-[40vw] bg-emerald-500/5 blur-[80px] animate-liquid mix-blend-multiply" />
+        <div className="absolute top-[10%] right-[-10%] w-[40vw] h-[40vw] bg-green-600/5 blur-[80px]  mix-blend-multiply" />
       </div>
 
       <div className="fluid-container relative z-10">
@@ -25,7 +25,7 @@ export function Services() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-2xs">
-            <Activity className="w-3.5 h-3.5 text-[#0A6E5C]" />
+            <Activity className="w-3.5 h-3.5 text-[#155E9A]" />
             <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Clinical Specialities</span>
           </div>
           
@@ -60,7 +60,7 @@ export function Services() {
                 </div>
                 
                 {/* Content */}
-                <h3 className="font-bold text-base sm:text-lg text-[#1D1D1F] mb-1.5 group-hover:text-[#0A6E5C] transition-colors leading-snug">
+                <h3 className="font-bold text-base sm:text-lg text-[#1D1D1F] mb-1.5 group-hover:text-[#155E9A] transition-colors leading-snug">
                   {service.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
@@ -71,9 +71,9 @@ export function Services() {
               {/* Bottom Action Hint */}
               <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-700">
                 <span className={`flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full border ${service.theme.badge}`}>
-                  <ShieldCheck className="w-3 h-3 text-emerald-600" /> NABL Calibrated
+                  <ShieldCheck className="w-3 h-3 text-green-700" /> Quality process
                 </span>
-                <span className="flex items-center gap-1 group-hover:translate-x-0.5 text-[#0A6E5C] font-bold transition-transform text-[11px] sm:text-xs">
+                <span className="flex items-center gap-1 group-hover:translate-x-0.5 text-[#155E9A] font-bold transition-transform text-[11px] sm:text-xs">
                   Book <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                 </span>
               </div>

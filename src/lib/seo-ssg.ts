@@ -15,6 +15,7 @@ export interface SEOMetadata {
 }
 
 const BASE_URL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic';
+const LAB_PHONE = '+919991941207';
 
 export const SEOManager = {
   /**
@@ -105,7 +106,7 @@ export const SEOManager = {
       '@type': 'MedicalTest',
       name: test.name,
       description: test.description,
-      url: `${BASE_URL}/#/test/${test.id}`,
+      url: `${BASE_URL}/test/${test.id}.html`,
       code: {
         '@type': 'MedicalCode',
         code: test.id.toUpperCase(),
@@ -116,7 +117,6 @@ export const SEOManager = {
         price: test.price,
         priceCurrency: 'INR',
         availability: 'https://schema.org/InStock',
-        validFrom: '2025-01-01',
         seller: {
           '@type': 'DiagnosticLab',
           name: 'Sawariya Diagnostic',
@@ -143,7 +143,7 @@ export const SEOManager = {
       '@type': 'Product',
       name: pkg.name,
       description: pkg.description,
-      url: `${BASE_URL}/#/package/${pkg.id}`,
+      url: `${BASE_URL}/package/${pkg.id}.html`,
       offers: {
         '@type': 'Offer',
         price: pkg.price,
@@ -155,11 +155,6 @@ export const SEOManager = {
           name: 'Sawariya Diagnostic'
         }
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '342'
-      }
     };
   },
 

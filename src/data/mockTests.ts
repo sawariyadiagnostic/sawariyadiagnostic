@@ -19,6 +19,8 @@ export interface HealthPackage {
   originalPrice: number;
   testsIncluded: string[];
   recommended: boolean;
+  bookingsLast6Months?: number;
+  listedValue?: number;
 }
 
 export const medicalTests: MedicalTest[] = [
@@ -388,7 +390,52 @@ export const medicalTests: MedicalTest[] = [
     category: 'specialized',
     parameters: ['Count', 'Motility', 'Morphology'],
     homeCollection: false,
-  }
+  },
+  { id: 'register-liver-function-test-lft-tbil-dbil-ibil-ot-pt-alp-t', name: "LIVER FUNCTION TEST (LFT) { tbil, dbil,ibil, ot, pt, alp, tprotein, alb, glob}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIVER FUNCTION TEST (LFT) { tbil, dbil,ibil, ot, pt, alp, tprotein, alb, glob}"], homeCollection: true, bookingsLast6Months: 1638 },
+  { id: 'register-thyroid-profile', name: "THYROID PROFILE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID PROFILE"], homeCollection: true, bookingsLast6Months: 1593 },
+  { id: 'register-lipid-profile-chol-tg-hdl-ldl-vldl-ratios', name: "LIPID PROFILE { chol, tg, hdl, ldl, vldl, ratios}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIPID PROFILE { chol, tg, hdl, ldl, vldl, ratios}"], homeCollection: true, bookingsLast6Months: 1484 },
+  { id: 'register-hba1c', name: "HBA1C", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 450, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HBA1C"], homeCollection: true, bookingsLast6Months: 1095 },
+  { id: 'register-kidney-function-test-e-kfte-kft-with-electrolytes', name: "KIDNEY FUNCTION TEST e (KFTe) {kft with electrolytes}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["KIDNEY FUNCTION TEST e (KFTe) {kft with electrolytes}"], homeCollection: true, bookingsLast6Months: 1052 },
+  { id: 'register-blood-glucose-fasting', name: "BLOOD GLUCOSE FASTING", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 50, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GLUCOSE FASTING"], homeCollection: true, bookingsLast6Months: 1046 },
+  { id: 'register-haemogram-cbc-esr', name: "HAEMOGRAM (CBC+ESR)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 300, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HAEMOGRAM (CBC+ESR)"], homeCollection: true, bookingsLast6Months: 916 },
+  { id: 'register-vitamin-d3', name: "Vitamin D3", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 800, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Vitamin D3"], homeCollection: true, bookingsLast6Months: 782 },
+  { id: 'register-urine-examination-routine', name: "URINE EXAMINATION ROUTINE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["URINE EXAMINATION ROUTINE"], homeCollection: true, bookingsLast6Months: 782 },
+  { id: 'register-blood-glucose-random', name: "BLOOD GLUCOSE RANDOM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 50, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GLUCOSE RANDOM"], homeCollection: true, bookingsLast6Months: 715 },
+  { id: 'register-calcium', name: "CALCIUM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["CALCIUM"], homeCollection: true, bookingsLast6Months: 464 },
+  { id: 'register-erythrocyte-sedimentation-rate-esr', name: "ERYTHROCYTE SEDIMENTATION RATE (ESR)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ERYTHROCYTE SEDIMENTATION RATE (ESR)"], homeCollection: true, bookingsLast6Months: 415 },
+  { id: 'register-blood-group-abo-rh-typing', name: "BLOOD GROUP (ABO & Rh TYPING)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GROUP (ABO & Rh TYPING)"], homeCollection: true, bookingsLast6Months: 360 },
+  { id: 'register-widal-slide-agglutination', name: "WIDAL (SLIDE AGGLUTINATION)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["WIDAL (SLIDE AGGLUTINATION)"], homeCollection: true, bookingsLast6Months: 356 },
+  { id: 'register-rheumatoid-factor-ra-factor-quantitative', name: "RHEUMATOID FACTOR (RA FACTOR) - QUANTITATIVE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 450, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["RHEUMATOID FACTOR (RA FACTOR) - QUANTITATIVE"], homeCollection: true, bookingsLast6Months: 303 },
+  { id: 'register-renal-function-test-kft-without-calcium-urea-uric-', name: "Renal Function Test { kft without calcium} { urea, uric acid , phosphorus, bun}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Renal Function Test { kft without calcium} { urea, uric acid , phosphorus, bun}"], homeCollection: true, bookingsLast6Months: 290 },
+  { id: 'register-creatinine', name: "CREATININE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["CREATININE"], homeCollection: true, bookingsLast6Months: 249 },
+  { id: 'register-uric-acid-serum', name: "URIC ACID -  SERUM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["URIC ACID -  SERUM"], homeCollection: true, bookingsLast6Months: 242 },
+  { id: 'register-thyroid-stimulating-hormone-tsh', name: "THYROID STIMULATING HORMONE (TSH)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 300, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID STIMULATING HORMONE (TSH)"], homeCollection: true, bookingsLast6Months: 215 },
+  { id: 'register-total-testosterone-male', name: "Total Testosterone - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 600, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Total Testosterone - Male"], homeCollection: true, bookingsLast6Months: 214 },
+  { id: 'register-free-testosterone-male', name: "Free Testosterone - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 900, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Free Testosterone - Male"], homeCollection: true, bookingsLast6Months: 195 },
+  { id: 'register-hemoglobin-hb', name: "HEMOGLOBIN (HB)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HEMOGLOBIN (HB)"], homeCollection: true, bookingsLast6Months: 189 },
+  { id: 'register-electrolyte-plus-profile-na-k-cl-ica', name: "ELECTROLYTE PLUS PROFILE{ na , k , cl , ica}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 350, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ELECTROLYTE PLUS PROFILE{ na , k , cl , ica}"], homeCollection: true, bookingsLast6Months: 184 },
+  { id: 'register-estradiol-e2-male', name: "Estradiol (E2) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 650, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Estradiol (E2) - Male"], homeCollection: true, bookingsLast6Months: 182 },
+  { id: 'register-follicle-stimulating-hormone-fsh-male', name: "Follicle Stimulating Hormone (FSH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Follicle Stimulating Hormone (FSH) - Male"], homeCollection: true, bookingsLast6Months: 181 },
+  { id: 'register-luteinizing-hormone-lh-male', name: "Luteinizing Hormone (LH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Luteinizing Hormone (LH) - Male"], homeCollection: true, bookingsLast6Months: 181 },
+  { id: 'register-prolactin-prl-male', name: "Prolactin (PRL) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 550, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Prolactin (PRL) - Male"], homeCollection: true, bookingsLast6Months: 181 },
+  { id: 'register-growth-hormone-gh-male', name: "Growth Hormone (GH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 900, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Growth Hormone (GH) - Male"], homeCollection: true, bookingsLast6Months: 180 },
+  { id: 'register-thyroid-profile-free', name: "THYROID PROFILE FREE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID PROFILE FREE"], homeCollection: true, bookingsLast6Months: 178 },
+  { id: 'register-hiv-1-2-antibody-rapid-screening', name: "HIV 1 & 2 ANTIBODY - Rapid Screening", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HIV 1 & 2 ANTIBODY - Rapid Screening"], homeCollection: true, bookingsLast6Months: 175 },
+  { id: 'register-vdrl', name: "VDRL", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 200, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["VDRL"], homeCollection: true, bookingsLast6Months: 173 },
+  { id: 'register-hepatitis-b-surface-antigen-x000d-australian-antig', name: "HEPATITIS B SURFACE ANTIGEN_x000D_ (Australian Antigen) - HBsAg", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 200, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS B SURFACE ANTIGEN_x000D_ (Australian Antigen) - HBsAg"], homeCollection: true, bookingsLast6Months: 168 },
+  { id: 'register-lipase', name: "LIPASE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 600, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIPASE"], homeCollection: true, bookingsLast6Months: 162 },
+  { id: 'register-hepatitis-c-antibody-hcv-antibody', name: "HEPATITIS C ANTIBODY (HCV Antibody)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS C ANTIBODY (HCV Antibody)"], homeCollection: true, bookingsLast6Months: 159 },
+  { id: 'register-amylase', name: "AMYLASE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 550, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["AMYLASE"], homeCollection: true, bookingsLast6Months: 151 },
+  { id: 'register-beta-human-chorionic-gonodotropin-serum-beta-hcg-c', name: "BETA HUMAN CHORIONIC GONODOTROPIN (SERUM BETA HCG) - clia", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BETA HUMAN CHORIONIC GONODOTROPIN (SERUM BETA HCG) - clia"], homeCollection: true, bookingsLast6Months: 147 },
+  { id: 'register-microalbumin-24hrs-urine', name: "MICROALBUMIN - 24hrs Urine", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["MICROALBUMIN - 24hrs Urine"], homeCollection: true, bookingsLast6Months: 146 },
+  { id: 'register-blood-urea-nitrogen-bun', name: "BLOOD UREA NITROGEN (BUN)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD UREA NITROGEN (BUN)"], homeCollection: true, bookingsLast6Months: 144 },
+  { id: 'register-salmonella-typhi-igm-typhi-dot', name: "SALMONELLA TYPHI IGM (TYPHI DOT)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 250, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["SALMONELLA TYPHI IGM (TYPHI DOT)"], homeCollection: true, bookingsLast6Months: 135 },
+  { id: 'register-albumin-creatinine-ratio', name: "ALBUMIN / CREATININE RATIO", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 1, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ALBUMIN / CREATININE RATIO"], homeCollection: true, bookingsLast6Months: 117 },
+  { id: 'register-hepatitis-b-surface-antibody-total-x000d-anti-hbs', name: "HEPATITIS B SURFACE ANTIBODY TOTAL_x000D_ (Anti Hbs)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 850, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS B SURFACE ANTIBODY TOTAL_x000D_ (Anti Hbs)"], homeCollection: true, bookingsLast6Months: 117 },
+  { id: 'register-kidney-function-test-kft-urea-uric-acid-phosphorus', name: "Kidney Function Test (KFT) { urea, uric acid , phosphorus, bun, calcium}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Kidney Function Test (KFT) { urea, uric acid , phosphorus, bun, calcium}"], homeCollection: true, bookingsLast6Months: 105 },
+  { id: 'register-prothrombin-time-inr', name: "PROTHROMBIN TIME & INR", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 350, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["PROTHROMBIN TIME & INR"], homeCollection: true, bookingsLast6Months: 100 },
+  { id: 'register-prostate-specific-antigen-total-psa', name: "PROSTATE SPECIFIC ANTIGEN (TOTAL) PSA", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 650, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["PROSTATE SPECIFIC ANTIGEN (TOTAL) PSA"], homeCollection: true, bookingsLast6Months: 92 },
+  { id: 'register-vitamin-d-25-hydroxy', name: "VITAMIN D 25-HYDROXY", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 1200, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["VITAMIN D 25-HYDROXY"], homeCollection: true, bookingsLast6Months: 90 }
 ];
 
 export const healthPackages: HealthPackage[] = [
@@ -396,7 +443,7 @@ export const healthPackages: HealthPackage[] = [
     id: 'sdl-1-3',
     name: 'SDL 1.3 Profile',
     description: 'Our most popular comprehensive health package covering essential diagnostic markers.',
-    price: 4850,
+    price: 2700,
     originalPrice: 6500,
     testsIncluded: [
       'Complete Blood Count (CBC)',
@@ -408,12 +455,14 @@ export const healthPackages: HealthPackage[] = [
       'Vitamin D3 & B12'
     ],
     recommended: true,
+    bookingsLast6Months: 535,
+    listedValue: 4950,
   },
   {
     id: 'sdl-1-1',
     name: 'SDL 1.1 Profile',
     description: 'Core baseline tests for routine health monitoring.',
-    price: 2350,
+    price: 1500,
     originalPrice: 3500,
     testsIncluded: [
       'Complete Blood Count (CBC)',
@@ -423,6 +472,8 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
+    bookingsLast6Months: 215,
+    listedValue: 1200,
   },
   {
     id: 'male-gh-profile',
@@ -438,12 +489,14 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
+    bookingsLast6Months: 179,
+    listedValue: 4499,
   },
   {
     id: 'sdl-1-2',
     name: 'SDL 1.2 Profile',
     description: 'Advanced baseline profile including vital hormone checks.',
-    price: 2850,
+    price: 1800,
     originalPrice: 4000,
     testsIncluded: [
       'Complete Blood Count (CBC)',
@@ -452,6 +505,8 @@ export const healthPackages: HealthPackage[] = [
       'Kidney Function Test (KFT)'
     ],
     recommended: false,
+    bookingsLast6Months: 81,
+    listedValue: 2900,
   },
   {
     id: 'female-hormone',
@@ -468,6 +523,7 @@ export const healthPackages: HealthPackage[] = [
       'Beta HCG'
     ],
     recommended: false,
+    listedValue: 4299,
   },
   {
     id: 'arthritis-immunology',
@@ -483,6 +539,7 @@ export const healthPackages: HealthPackage[] = [
       'IgE (Immunoglobulin E)'
     ],
     recommended: false,
+    listedValue: 2499,
   }
 ];
 

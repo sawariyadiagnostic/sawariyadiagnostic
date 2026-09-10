@@ -15,16 +15,16 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
     <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-sm animate-fade-in">
       <div className="relative w-full max-w-2xl bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_32px_80px_rgba(0,0,0,0.2)] border border-white/60 overflow-hidden max-h-[85vh] flex flex-col">
         {/* Modal Header */}
-        <div className="p-6 bg-[#072448] text-white flex items-center justify-between relative overflow-hidden">
+        <div className="p-6 bg-[#102A43] text-white flex items-center justify-between relative overflow-hidden">
           {/* Liquid Header Glow */}
           <div className="absolute inset-0 pointer-events-none opacity-40 z-0">
-            <div className="absolute top-[-50%] right-[-10%] w-[150px] h-[150px] bg-[#00A896] rounded-full blur-[40px] animate-liquid mix-blend-screen" />
+            <div className="absolute top-[-50%] right-[-10%] w-[150px] h-[150px] bg-[#C62828] rounded-full blur-[40px]  mix-blend-screen" />
           </div>
 
           <div className="flex items-center gap-3 relative z-10">
-            {type === 'privacy' && <ShieldCheck className="w-6 h-6 text-teal-400" />}
-            {type === 'terms' && <FileText className="w-6 h-6 text-teal-400" />}
-            {type === 'charter' && <HeartHandshake className="w-6 h-6 text-teal-400" />}
+            {type === 'privacy' && <ShieldCheck className="w-6 h-6 text-blue-300" />}
+            {type === 'terms' && <FileText className="w-6 h-6 text-blue-300" />}
+            {type === 'charter' && <HeartHandshake className="w-6 h-6 text-blue-300" />}
             <div>
               <h3 className="text-lg font-bold text-white">
                 {type === 'privacy' && 'Privacy & Medical Data Policy'}
@@ -85,7 +85,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
                 <li><strong>Right to Precision:</strong> Samples processed using automated calibrated analyzers with multi-point QC controls.</li>
                 <li><strong>Right to Clear Pricing:</strong> Complete transparency with no hidden convenience fees or unannounced charges.</li>
                 <li><strong>Right to Timely Reports:</strong> Fast reporting (same day / 6-24 hours) as per test parameters.</li>
-                <li><strong>Right to Re-verification:</strong> In case of clinical discrepancy, free re-run verification of the existing archived sample as per NABL guidelines.</li>
+                <li><strong>Right to Re-verification:</strong> In case of clinical discrepancy, free re-run verification of the existing archived sample according to the lab's documented process.</li>
               </ul>
 
               <h4 className="font-bold text-slate-900 text-base">3. Home Collection Protocols</h4>
@@ -131,7 +131,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
         <div className="p-4 sm:p-5 bg-white/70 backdrop-blur-md border-t border-white/80 flex justify-end">
           <button
             onClick={onClose}
-            className="px-6 py-2 rounded-full bg-[#072448] text-white text-xs font-semibold hover:bg-[#0A6E5C] transition-colors shadow-md shadow-[#072448]/20"
+            className="px-6 py-2 rounded-full bg-[#102A43] text-white text-xs font-semibold hover:bg-[#155E9A] transition-colors shadow-md shadow-[#102A43]/20"
           >
             I Understand
           </button>

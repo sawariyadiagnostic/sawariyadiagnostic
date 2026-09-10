@@ -28,8 +28,8 @@ export const LISClient = {
         Analytics.reportDownloaded(reportId);
         toast.success("Report successfully retrieved from LIS");
         
-        // In a real scenario, we might trigger a Blob download or open a new tab
-        console.log("Mock Downloading:", data.downloadUrl);
+        if (!data.downloadUrl) throw new Error("LIS returned no downloadable report");
+        window.open(data.downloadUrl, "_blank", "noopener,noreferrer");
         return data;
       }
       

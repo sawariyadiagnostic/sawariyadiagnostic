@@ -41,7 +41,8 @@ export function PatientReportPortal({
   const open = externalOpen !== undefined ? externalOpen : internalOpen;
   const setOpen = externalOnOpenChange || setInternalOpen;
 
-  const [searchQuery, setSearchQuery] = useState(defaultUhid || 'SD-2026-9082');
+  const demoMode = import.meta.env.VITE_DEMO_MODE === 'true';
+  const [searchQuery, setSearchQuery] = useState(defaultUhid || '');
   const [isLoading, setIsLoading] = useState(false);
   const [reports, setReports] = useState<PatientReport[]>([]);
   const [selectedReport, setSelectedReport] = useState<PatientReport | null>(null);
@@ -64,7 +65,7 @@ export function PatientReportPortal({
         setTrends(trendData);
         toast.success(`Found ${results.length} certified laboratory records`);
       } else {
-        toast.error('No lab records found for this UHID. Try sample ID SD-2026-9082');
+        toast.error('No report found. Check the reference or contact the lab.');
       }
     } catch {
       toast.error('Failed to query serverless database');
@@ -74,7 +75,7 @@ export function PatientReportPortal({
   };
 
   useEffect(() => {
-    if (open) {
+    if (open && demoMode) {
       ServerlessDB.getReportsByPatient('SD-2026-9082').then((results) => {
         setReports(results);
         if (results.length > 0) {
@@ -91,15 +92,13 @@ export function PatientReportPortal({
     window.print();
   };
 
-  const handleDownloadPDF = () => {
-    toast.success('Downloading Doctor-Signed Certified PDF (256-bit Encrypted)...');
-    // Simulate instant secure blob download
-    const blob = new Blob([`Sawariya Diagnostic Lab Certified Report - ${selectedReport?.id}\nPatient: ${selectedReport?.patientName}\nUHID: ${selectedReport?.uhid}\nDate: ${selectedReport?.reportGeneratedAt}\nSign: Dr. Vivek Verma MD Path`], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${selectedReport?.id || 'Report'}_Sawariya_Lab.pdf`;
-    a.click();
+  const handleDownloadPDF = async () => {
+    if (!selectedReport) return;
+    try {
+      await import('@/lib/lis-client').then(({ LISClient }) => LISClient.downloadReport(selectedReport.uhid, selectedReport.id));
+    } catch {
+      // LISClient reports the actionable error state.
+    }
   };
 
   return (
@@ -116,16 +115,16 @@ export function PatientReportPortal({
 
       <DialogContent className="sm:max-w-[840px] max-h-[92vh] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px] flex flex-col">
         {/* Header */}
-        <div className="bg-[#072448] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
+        <div className="bg-[#102A43] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-[18px] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-[#00A896]">
+              <div className="w-12 h-12 rounded-[18px] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-[#C62828]">
                 <FileText className="w-6 h-6" />
               </div>
               <div>
-                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-300">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-200">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>NABL & ICMR Digital Pathology Cloud</span>
+                  <span>Secure Digital Report Portal</span>
                 </div>
                 <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight">
                   Patient Health Records & Reports Portal
@@ -135,11 +134,13 @@ export function PatientReportPortal({
 
             {/* Quick Demo Pill */}
             <button
+              type="button"
+              disabled={!demoMode}
               onClick={() => { setSearchQuery('SD-2026-9082'); handleSearch('SD-2026-9082'); }}
-              className="bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded-full text-xs text-teal-100 flex items-center gap-1.5 transition-all self-start sm:self-auto cursor-pointer"
+              className="bg-white/10 hover:bg-white/20 border border-white/20 px-3 py-1.5 rounded-full text-xs text-blue-100 flex items-center gap-1.5 transition-all self-start sm:self-auto cursor-pointer disabled:cursor-default"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
-              <span>Sample UHID: SD-2026-9082</span>
+              <span>{demoMode ? 'Development demo data' : 'Secure report lookup'}</span>
             </button>
           </div>
 
@@ -153,7 +154,7 @@ export function PatientReportPortal({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="pl-10 h-11 bg-white/10 border-white/20 text-white placeholder:text-slate-300 rounded-[14px] text-xs sm:text-sm font-medium focus:border-teal-300"
+                className="pl-10 h-11 bg-white/10 border-white/20 text-white placeholder:text-slate-300 rounded-[14px] text-xs sm:text-sm font-medium focus:border-blue-300"
               />
             </div>
             <Button
@@ -166,14 +167,14 @@ export function PatientReportPortal({
           </div>
 
           {/* UHID Receipt Helper & Trust Badge */}
-          <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-teal-100/90 relative z-10">
+          <div className="mt-2.5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-blue-100/90 relative z-10">
             <span className="inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               Tip: Your UHID / Bill No. is printed on the top-right of your laboratory receipt or SMS.
             </span>
-            <span className="inline-flex items-center gap-1 text-teal-300 font-semibold">
-              <Lock className="w-3 h-3 text-teal-300" />
-              256-Bit Encrypted & HIPAA Compliant
+            <span className="inline-flex items-center gap-1 text-blue-200 font-semibold">
+              <Lock className="w-3 h-3 text-blue-200" />
+              Secure lookup • privacy-conscious handling
             </span>
           </div>
 
@@ -182,7 +183,7 @@ export function PatientReportPortal({
             <button
               onClick={() => setActiveTab('REPORTS')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'REPORTS' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'REPORTS' ? 'bg-white text-[#102A43]' : 'text-blue-100 hover:text-white'
               }`}
             >
               Verified Pathology Reports ({reports.length})
@@ -190,7 +191,7 @@ export function PatientReportPortal({
             <button
               onClick={() => setActiveTab('TRACKER')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'TRACKER' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'TRACKER' ? 'bg-white text-[#102A43]' : 'text-blue-100 hover:text-white'
               }`}
             >
               Live Sample Tracking
@@ -198,7 +199,7 @@ export function PatientReportPortal({
             <button
               onClick={() => setActiveTab('TRENDS')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'TRENDS' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'TRENDS' ? 'bg-white text-[#102A43]' : 'text-blue-100 hover:text-white'
               }`}
             >
               Biomarker History & Trends
@@ -225,12 +226,12 @@ export function PatientReportPortal({
                       onClick={() => setSelectedReport(r)}
                       className={`p-3.5 rounded-[18px] border transition-all cursor-pointer text-left ${
                         isSelected
-                          ? 'bg-white border-[#0A6E5C] shadow-md ring-1 ring-[#0A6E5C]'
+                          ? 'bg-white border-[#155E9A] shadow-md ring-1 ring-[#155E9A]'
                           : 'bg-white/70 border-slate-200 hover:bg-white hover:border-slate-300'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] font-bold text-[#0A6E5C] bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200">
+                        <span className="text-[10px] font-bold text-[#155E9A] bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">
                           {r.id}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">
@@ -261,20 +262,20 @@ export function PatientReportPortal({
                     {/* Lab Header in Report */}
                     <div className="flex items-start justify-between border-b border-slate-200 pb-4">
                       <div>
-                        <div className="text-base sm:text-lg font-black text-[#072448] tracking-tight">
+                        <div className="text-base sm:text-lg font-black text-[#102A43] tracking-tight">
                           SAWARIYA DIAGNOSTIC LAB
                         </div>
                         <p className="text-[10px] text-slate-500">
                           Opp. R.S. Sangwan Hospital, Loharu Road, Charkhi Dadri (HR)
                         </p>
-                        <p className="text-[10px] text-teal-700 font-semibold">
-                          NABL ACCREDITED • ICMR APPROVED • 24*7 PATHOLOGY
+                        <p className="text-[10px] text-blue-700 font-semibold">
+                          DIAGNOSTIC REPORT • CONFIDENTIAL • VERIFY BEFORE USE
                         </p>
                       </div>
 
                       <div className="text-right">
-                        <div className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                        <div className="inline-flex items-center gap-1 bg-green-50 text-green-800 border border-green-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          <CheckCircle2 className="w-3 h-3 text-green-600" />
                           <span>Doctor Verified</span>
                         </div>
                         <div className="text-[10px] font-mono text-slate-400 mt-1">
@@ -331,11 +332,11 @@ export function PatientReportPortal({
                             {selectedReport.findings.map((f, i) => (
                               <tr key={i} className="hover:bg-slate-50/80">
                                 <td className="py-2.5 px-3 font-semibold text-slate-900">{f.parameter}</td>
-                                <td className="py-2.5 px-3 font-bold text-[#072448]">{f.value}</td>
+                                <td className="py-2.5 px-3 font-bold text-[#102A43]">{f.value}</td>
                                 <td className="py-2.5 px-3 text-slate-500">{f.unit}</td>
                                 <td className="py-2.5 px-3 text-slate-600 text-[11px]">{f.referenceRange}</td>
                                 <td className="py-2.5 px-3">
-                                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                                  <span className="text-[10px] font-bold text-emerald-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded-md">
                                     {f.status}
                                   </span>
                                 </td>
@@ -403,7 +404,7 @@ export function PatientReportPortal({
           {activeTab === 'TRACKER' && (
             <div className="bg-white rounded-[24px] border border-slate-200 p-6 space-y-6 max-w-2xl mx-auto">
               <div>
-                <span className="text-[10px] font-bold text-[#0A6E5C] uppercase tracking-wider bg-teal-50 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold text-[#155E9A] uppercase tracking-wider bg-blue-50 px-2 py-0.5 rounded-full">
                   Real-time LIS Telemetry
                 </span>
                 <h3 className="text-lg font-bold text-slate-900 mt-1">Sample Processing Timeline</h3>
@@ -411,19 +412,19 @@ export function PatientReportPortal({
               </div>
 
               {/* Progress Steps */}
-              <div className="space-y-4 relative pl-6 border-l-2 border-[#0A6E5C]">
+              <div className="space-y-4 relative pl-6 border-l-2 border-[#155E9A]">
                 {[
                   { step: '1. Order Registered & Phlebotomist Assigned', time: '08:00 AM', done: true, desc: 'Technician dispatched with temperature-controlled cool box.' },
                   { step: '2. Home Sample Collected with Barcode Scan', time: '08:35 AM', done: true, desc: 'Vacuum tube barcoded and verified against Patient UHID SD-2026-9082.' },
                   { step: '3. Automated Analyzer Processing (Roche/Sysmex)', time: '10:15 AM', done: true, desc: 'Sample centrifuged and processed through dual 5-part hematology analyzers.' },
                   { step: '4. Doctor Review & Clinical Sign-off', time: '01:45 PM', done: true, desc: 'Dr. Vivek Verma verified calibration controls and approved results.' },
-                  { step: '5. Certified Digital Report Published', time: '02:15 PM', done: true, desc: 'PDF generated with ICMR QR seal and dispatched to patient WhatsApp.' }
+                  { step: '5. Certified Digital Report Published', time: '02:15 PM', done: true, desc: 'Report availability and delivery depend on the configured LIS/notification workflow.' }
                 ].map((s, idx) => (
                   <div key={idx} className="relative">
-                    <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#0A6E5C] border-2 border-white shadow-xs" />
+                    <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#155E9A] border-2 border-white shadow-xs" />
                     <div className="flex items-center justify-between">
                       <h4 className="font-bold text-xs sm:text-sm text-slate-900">{s.step}</h4>
-                      <span className="text-[10px] font-mono text-teal-800 bg-teal-50 px-2 py-0.5 rounded-md font-bold">{s.time}</span>
+                      <span className="text-[10px] font-mono text-blue-800 bg-blue-50 px-2 py-0.5 rounded-md font-bold">{s.time}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 mt-0.5">{s.desc}</p>
                   </div>
@@ -440,7 +441,7 @@ export function PatientReportPortal({
                   <h3 className="text-lg font-bold text-slate-900">Patient Health Trend Analytics</h3>
                   <p className="text-xs text-slate-500">Multi-month comparative analysis of key biomarkers for UHID SD-2026-9082</p>
                 </div>
-                <TrendingUp className="w-6 h-6 text-[#0A6E5C]" />
+                <TrendingUp className="w-6 h-6 text-[#155E9A]" />
               </div>
 
               <div className="grid sm:grid-cols-3 gap-4">
@@ -455,13 +456,13 @@ export function PatientReportPortal({
                       {data.map((point, idx) => (
                         <div key={idx} className="flex items-center justify-between text-xs bg-white p-2 rounded-[12px] border border-slate-100">
                           <span className="text-slate-500 text-[11px]">{point.date}</span>
-                          <span className="font-bold text-[#0A6E5C]">{point.value} {point.unit}</span>
+                          <span className="font-bold text-[#155E9A]">{point.value} {point.unit}</span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="text-[10.5px] text-emerald-700 bg-emerald-50 border border-emerald-200 p-2 rounded-[12px] font-medium flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                    <div className="text-[10.5px] text-emerald-700 bg-green-50 border border-green-200 p-2 rounded-[12px] font-medium flex items-center gap-1">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-green-600 flex-shrink-0" />
                       <span>Stable trend within healthy reference interval</span>
                     </div>
                   </div>

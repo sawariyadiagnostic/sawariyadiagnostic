@@ -174,7 +174,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
 
       <DialogContent className="sm:max-w-[840px] max-h-[90vh] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px] flex flex-col">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
+        <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-[18px] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-[#FDE047]">
@@ -209,7 +209,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
             <button
               onClick={() => { setActiveTab('TESTS'); setEditingTest(null); setIsCreatingNew(false); }}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'TESTS' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'TESTS' ? 'bg-white text-[#102A43]' : 'text-teal-200 hover:text-white'
               }`}
             >
               Diagnostic Tests ({tests.length})
@@ -217,7 +217,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
             <button
               onClick={() => { setActiveTab('PACKAGES'); setEditingTest(null); setIsCreatingNew(false); }}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'PACKAGES' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'PACKAGES' ? 'bg-white text-[#102A43]' : 'text-teal-200 hover:text-white'
               }`}
             >
               Health Packages ({packages.length})
@@ -225,7 +225,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
             <button
               onClick={() => setActiveTab('WEBHOOK')}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'WEBHOOK' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'WEBHOOK' ? 'bg-white text-[#102A43]' : 'text-teal-200 hover:text-white'
               }`}
             >
               GitHub Actions Webhook
@@ -233,7 +233,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
             <button
               onClick={() => setActiveTab('SCHEMA')}
               className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'SCHEMA' ? 'bg-white text-[#072448]' : 'text-teal-200 hover:text-white'
+                activeTab === 'SCHEMA' ? 'bg-white text-[#102A43]' : 'text-teal-200 hover:text-white'
               }`}
             >
               Sanity Studio Schema
@@ -414,7 +414,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
                         <div>
                           <div className="flex items-center justify-between mb-1">
                             <span className="text-[10px] font-mono text-slate-400 font-bold">{test.id}</span>
-                            <span className="text-xs font-black text-[#0A6E5C]">₹{test.price}</span>
+                            <span className="text-xs font-black text-[#155E9A]">₹{test.price}</span>
                           </div>
                           <h4 className="font-bold text-xs text-slate-900 leading-snug">{test.name}</h4>
                           <p className="text-[11px] text-slate-500 line-clamp-1 mt-0.5">{test.description}</p>
@@ -425,7 +425,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
                           <div className="flex gap-1.5">
                             <button
                               onClick={() => handleEditTest(test)}
-                              className="p-1 rounded-md text-slate-500 hover:text-[#0A6E5C] hover:bg-slate-100 transition-all cursor-pointer"
+                              className="p-1 rounded-md text-slate-500 hover:text-[#155E9A] hover:bg-slate-100 transition-all cursor-pointer"
                               title="Edit test"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
@@ -458,7 +458,7 @@ export function StaffCMSModal({ trigger, onCatalogUpdated }: StaffCMSModalProps)
                   <div key={pkg.id} className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs">
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-xs font-bold text-slate-900">{pkg.name}</span>
-                      <span className="text-sm font-black text-[#0A6E5C]">₹{pkg.price}</span>
+                      <span className="text-sm font-black text-[#155E9A]">₹{pkg.price}</span>
                     </div>
                     <p className="text-[11px] text-slate-500 mb-2">{pkg.description}</p>
                     <div className="text-[10.5px] text-slate-600 bg-slate-50 p-2 rounded-[12px] border border-slate-100">

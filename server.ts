@@ -88,15 +88,9 @@ async function startServer() {
         });
       }
       
-      // Returning Mock Data Structure
-      res.json({
-        success: true,
-        downloadUrl: "https://example.com/mock-report.pdf",
-        reportMetadata: {
-          status: "VERIFIED",
-          signedBy: "Dr. Consultant",
-          generatedAt: new Date().toISOString()
-        }
+      return res.status(503).json({
+        error: "LIS integration is not configured. No report was downloaded.",
+        code: "LIS_NOT_CONFIGURED"
       });
     } catch (error) {
       console.error("[LIS Engine Error]", error);

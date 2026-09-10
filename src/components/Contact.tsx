@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { siteConfig, telHref } from '@/config/site';
 import { Calendar, FileCheck, Home, Clock, PhoneCall, ChevronRight, MapPin, Navigation, ExternalLink, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import Cal, { getCalApi } from "@calcom/embed-react";
@@ -22,17 +23,17 @@ export function Contact() {
       title: '1. Select Test / Package',
       description: 'Choose routine panels or custom doctor prescriptions.',
       style: {
-        iconBg: 'bg-blue-50 text-[#0A3663] border-blue-200/80',
-        accentBar: 'bg-[#0A3663]',
+        iconBg: 'bg-blue-50 text-[#102A43] border-blue-200/80',
+        accentBar: 'bg-[#102A43]',
       }
     },
     {
       icon: Home,
       title: '2. Lab or Home Sample',
-      description: 'Visit our 24*7 modern facility or book doorstep collection.',
+      description: 'Visit our facility or request a doorstep collection; availability is confirmed at booking.',
       style: {
-        iconBg: 'bg-emerald-50 text-[#0A6E5C] border-emerald-200/80',
-        accentBar: 'bg-[#0A6E5C]',
+        iconBg: 'bg-green-50 text-[#155E9A] border-green-200/80',
+        accentBar: 'bg-[#155E9A]',
       }
     },
     {
@@ -40,8 +41,8 @@ export function Contact() {
       title: '3. Express WhatsApp Report',
       description: 'Get verified digital PDF reports with direct QR validation.',
       style: {
-        iconBg: 'bg-amber-50 text-[#D97706] border-amber-200/80',
-        accentBar: 'bg-[#D97706]',
+        iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
+        accentBar: 'bg-[#7A4B2A]',
       }
     },
   ];
@@ -50,7 +51,7 @@ export function Contact() {
     <section id="contact" className="relative fluid-section bg-[#F5F5F7] overflow-hidden">
       {/* Liquid Organic Mesh Gradient Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-amber-500/10 blur-[100px] animate-liquid mix-blend-multiply" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#FFF9F3]0/10 blur-[100px]  mix-blend-multiply" />
       </div>
 
       <div className="fluid-container relative z-10">
@@ -58,8 +59,8 @@ export function Contact() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-2xs">
-            <Calendar className="w-3.5 h-3.5 text-[#0A6E5C]" />
-            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">24*7 Appointments & Location</span>
+            <Calendar className="w-3.5 h-3.5 text-[#155E9A]" />
+            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Appointments & Location</span>
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#1D1D1F] tracking-tight leading-tight">
@@ -67,7 +68,7 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Open 24*7 always. Walk-in samples, home collections, and doctor consultations.
+            Walk-in samples and home collections are available subject to current operating capacity.
           </p>
         </div>
 
@@ -75,21 +76,21 @@ export function Contact() {
         <div className="max-w-4xl mx-auto mb-10 sm:mb-14 relative z-10">
           <div className="glass-panel bg-white/70 rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
             {/* Widget Header */}
-            <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-teal-500/30">
+            <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15">
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:text-lg font-bold text-white">Online Appointment & Doctor Desk</h3>
-                  <span className="bg-white/20 text-[#FDE047] text-xs font-bold px-2.5 py-0.5 rounded-full border border-teal-300/30 inline-flex items-center">
-                    24*7 Active
+                  <span className="bg-white/20 text-[#F1C27D] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
+                    Availability subject to confirmation
                   </span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-teal-100 font-normal truncate">
-                  Instant confirmation • Helpline: +91 99919 41207
+                <p className="text-[11px] sm:text-xs text-blue-100 font-normal truncate">
+                  Instant confirmation • Helpline: {siteConfig.contact.phone}
                 </p>
               </div>
               <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white shrink-0">
                 <span className="w-2 h-2 bg-[#FDE047] rounded-full animate-pulse" />
-                <span className="font-semibold">Always Open (24*7)</span>
+                <span className="font-semibold">{siteConfig.claims.operatingHours}</span>
               </div>
             </div>
             
@@ -98,7 +99,7 @@ export function Contact() {
               {!showCalendar ? (
                 <div className="text-center max-w-md mx-auto space-y-4 sm:space-y-5 py-4">
                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-slate-50 rounded-[20px] flex items-center justify-center mx-auto border border-slate-200 shadow-2xs">
-                     <Calendar className="w-7 h-7 sm:w-8 sm:h-8 text-[#0A6E5C]" />
+                     <Calendar className="w-7 h-7 sm:w-8 sm:h-8 text-[#155E9A]" />
                    </div>
                     
                     <div className="space-y-1.5">
@@ -121,9 +122,9 @@ export function Contact() {
                         variant="outline"
                         className="btn-outline h-12 px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-2xs hover:shadow-sm"
                       >
-                        <a href="tel:+919991941207">
-                          <PhoneCall className="w-4 h-4 mr-2 text-[#0A6E5C]" />
-                          <span>Call Desk (+91 99919 41207)</span>
+                        <a href={telHref(siteConfig.contact.phone)}>
+                          <PhoneCall className="w-4 h-4 mr-2 text-[#155E9A]" />
+                          <span>Call Desk ({siteConfig.contact.phone})</span>
                         </a>
                       </Button>
                     </div>
@@ -157,7 +158,7 @@ export function Contact() {
               {/* Location Details (5 cols) */}
               <div className="lg:col-span-5 space-y-4 sm:space-y-6 min-w-0">
                 <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                  <MapPin className="w-3.5 h-3.5 text-[#0A6E5C]" />
+                  <MapPin className="w-3.5 h-3.5 text-[#155E9A]" />
                   <span className="text-xs font-bold text-[#1D1D1F]">Lab Center Location</span>
                 </div>
 
@@ -172,7 +173,7 @@ export function Contact() {
 
                 <div className="space-y-3 text-xs sm:text-sm text-slate-700 border-y border-slate-100 py-3.5">
                   <div className="flex items-start gap-2.5 min-w-0">
-                    <MapPin className="w-4 h-4 text-[#0A3663] flex-shrink-0 mt-0.5" />
+                    <MapPin className="w-4 h-4 text-[#102A43] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Address:</span>
                       <span className="text-[#032B65] leading-relaxed break-words">{footer.contact.address}</span>
@@ -183,16 +184,16 @@ export function Contact() {
                     <Clock className="w-4 h-4 text-[#068174] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Operating Hours:</span>
-                      <span className="text-[#075640] font-bold">24*7 Active (Always Open)</span>
+                      <span className="text-[#155E9A] font-bold">{siteConfig.claims.operatingHours}</span>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2.5 min-w-0">
-                    <PhoneCall className="w-4 h-4 text-[#0A6E5C] flex-shrink-0 mt-0.5" />
+                    <PhoneCall className="w-4 h-4 text-[#155E9A] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
-                      <span className="font-semibold text-slate-900 block">24*7 Lab Helpline:</span>
-                      <a href="tel:+919991941207" className="text-[#035B4B] font-bold hover:underline">
-                        +91 99919 41207
+                      <span className="font-semibold text-slate-900 block">Lab contact:</span>
+                      <a href={telHref(siteConfig.contact.phone)} className="text-[#155E9A] font-bold hover:underline">
+                        {siteConfig.contact.phone}
                       </a>
                     </div>
                   </div>
@@ -201,18 +202,18 @@ export function Contact() {
                     <Phone className="w-4 h-4 text-[#AF6106] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Emergency & Lab Director:</span>
-                      <a href="tel:+917015290782" className="text-[#7F3304] font-semibold hover:underline">
-                        +91 70152 90782 (Director/Manager)
+                      <a href={telHref(siteConfig.contact.phone)} className="text-[#7F3304] font-semibold hover:underline">
+                        {siteConfig.contact.emergencyPhone}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2.5 min-w-0">
-                    <Mail className="w-4 h-4 text-[#0A3663] flex-shrink-0 mt-0.5" />
+                    <Mail className="w-4 h-4 text-[#102A43] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Official Lab Email:</span>
-                      <a href="mailto:sawariyadiagnosticckd11@gmail.com" className="text-[#0A3663] font-medium hover:underline break-all">
-                        sawariyadiagnosticckd11@gmail.com
+                      <a href={`mailto:${siteConfig.contact.email}`} className="text-[#102A43] font-medium hover:underline break-all">
+                        {siteConfig.contact.email}
                       </a>
                     </div>
                   </div>

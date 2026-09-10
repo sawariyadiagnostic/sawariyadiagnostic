@@ -1,0 +1,296 @@
+# Sawariya Catalog Selection & Pricing Workshop
+
+Tick what should remain public. Leave unticked items for removal/hold.
+
+## How we will price everything
+
+1. **Canonical source:** your supplied register values are the starting point.
+2. **Individual tests:** retain supplied MRP/list value; propose a customer price within ±10%, rounded to a practical regional price ending in 0/50/99.
+3. **Packages:** customer price is the confirmed package charge; crossed-out value is the sum of included-test list MRPs, never below the customer price.
+4. **Value rule:** show `Included test value ₹X` → `Package price ₹Y` → `You save ₹Z` only when X > Y.
+5. **No publish gate:** anything with ambiguous name, missing included tests, or implausible source data stays “Confirm with lab”.
+6. **Review loop:** you approve package membership, base charge, public list value, preparation, turnaround, and availability before publication.
+
+## Package decisions
+
+### Core SDL profiles
+- [ ] SDL 1.1 (SDL 1.1) — base ₹1080 — listed/value ₹850 — bookings 0
+- [ ] SDL 1.2 (SDL 1.2) — base ₹2610 — listed/value ₹1300 — bookings 0
+- [ ] SDL 1.3 (SDL 1.3) — base ₹4460 — listed/value ₹3350 — bookings 0
+- [ ] SDL 1.4 (SDL 1.4) — base ₹5440 — listed/value ₹4250 — bookings 0
+- [ ] SDL 1.0 (SDL 1.0) — base ₹1580 — listed/value ₹350 — bookings 0
+- [ ] SDL 1.3 Profile — base ₹2700 — listed/value ₹4950 — bookings 0
+- [ ] SDL 1.1 Profile — base ₹1500 — listed/value ₹1200 — bookings 0
+- [ ] SDL 1.2 Profile — base ₹1800 — listed/value ₹2900 — bookings 0
+
+### Sawariya tiers
+- [ ] SAWARIYA BRONZE (BRONZE) — base ₹1440 — listed/value ₹1450
+- [ ] SAWARIYA SILVER (SILVER) — base ₹1800 — listed/value ₹2300
+- [ ] SAWARIYA GOLD (GOLD) — base ₹3240 — listed/value ₹5800
+- [ ] SAWARIYA PLATINIUM (PLATINIUM) — base ₹3600 — listed/value ₹6700
+
+### Hormonal, ANC, fertility, PCOD and other special packages
+- [ ] Package 13 (PACKAGE 13) — base ₹9420 — listed/value ₹8352 — bookings 0
+- [ ] ANC DELIVERY — base ₹1600 — listed/value ₹1450 — bookings 9
+- [ ] ANC NORMAL — base ₹1600 — listed/value ₹1450 — bookings 17
+- [ ] FERTILITY PROFILE (FERTILITY 1) — base ₹1800 — listed/value ₹1900 — bookings 0
+- [ ] HORMONES  PROFILE  (FERTILITY 2) — base ₹3150 — listed/value ₹4300 — bookings 0
+- [ ] Male GH Profile (mGHP1) — base ₹4050 — listed/value ₹4400 — bookings 0
+- [ ] fe HORMONE HEALTH PROFILE  (fH001) — base ₹2520 — listed/value ₹3500 — bookings 0
+- [ ] HORMONES  Health PROFILE  (H001) — base ₹2520 — listed/value ₹3500 — bookings 0
+- [ ] Female GH Profile (fGHP) — base ₹4050 — listed/value ₹4500 — bookings 0
+- [ ] PCOD PROFILE  (PCODP) — base ₹2880 — listed/value ₹2700 — bookings 0
+- [ ] MALE FERITILITY  (MF11) — base ₹3200 — listed/value ₹4850 — bookings 0
+- [ ] HORMONE JUNIOR (HJ01) — base ₹2970 — listed/value ₹4300 — bookings 0
+- [ ] SWASTHYA SATHI 1.1 (SH11) — base ₹1080 — listed/value ₹850 — bookings 0
+- [ ] SWASTHYA SATHI 1.2 (SH12) — base ₹1710 — listed/value ₹1400 — bookings 0
+- [ ] SWASTHYA SATHI  1.3 (SH13) — base ₹2160 — listed/value ₹3450 — bookings 0
+- [ ] SWASTHYA SATHI  1.4 (SH14) — base ₹3600 — listed/value ₹5950 — bookings 0
+- [ ] Male GH Profile — base ₹4499 — listed/value ₹4499 — bookings 0
+- [ ] Female Hormone & Fertility — base ₹2199 — listed/value ₹4299 — bookings 0
+- [ ] Arthritis & Inflammation — base ₹1299 — listed/value ₹2499 — bookings 0
+
+### Excluded by current rule — confirm if any should return
+- [ ] STARHEALTH Package 1 (P1) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 5 (P5) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 2 (Package 2) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 6 (P6) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 3 (Package 3) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 7 (7) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 4 (Package 4) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 8 (8) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 10 (P10) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 9 (9) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 11 (P11) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 12 (PACKAGE 12) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 14 (Package 14) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 15 (Package 15) — insurer-branded package; currently excluded
+- [ ] STARHEALTH Package 16-Male (Package 16-Male) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_NIVA PACKAGE Less than 35 Age (BUPA_Less than 35 Age) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_NIVA PACKAGE (36-50) Age (NIVA PACKAGE (36-50) Age) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_NIVA PACKAGE Greater than 50 Age (BUPA_NIVA PACKAGE Greater than 50 Age) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 1 (BUPA_PACKAGE 1) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 4 (BUPA_PACKAGE 4) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE Extended Check-up (BUPA_PACKAGE Extended Check-up) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 2 (BUPA_PACKAGE 2) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 5 (BUPA_PACKAGE 5) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE Vitality B Check-up (BUPA_PACKAGE Vitality B Check-up) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 3 (BUPA_PACKAGE 3) — insurer-branded package; currently excluded
+- [ ] NIVA BUPA_PACKAGE 7A (BUPA_PACKAGE 7A) — insurer-branded package; currently excluded
+
+## Individual-test decisions
+
+Tick tests to keep in the public searchable catalog. Prices shown are source MRP/list values; final customer prices are approved in the workshop.
+- [ ] COMPLETE BLOOD COUNT (CBC) — list/MRP ₹200 — proposed customer price ₹1900 — bookings 2378
+- [ ] LIVER FUNCTION TEST (LFT) { tbil, dbil,ibil, ot, pt, alp, tprotein, alb, glob} — list/MRP ₹500 — proposed customer price ₹4750 — bookings 1638
+- [ ] THYROID PROFILE — list/MRP ₹400 — proposed customer price ₹3800 — bookings 1593
+- [ ] LIPID PROFILE { chol, tg, hdl, ldl, vldl, ratios} — list/MRP ₹500 — proposed customer price ₹4750 — bookings 1484
+- [ ] HBA1C — list/MRP ₹450 — proposed customer price ₹4280 — bookings 1095
+- [ ] KIDNEY FUNCTION TEST e (KFTe) {kft with electrolytes} — list/MRP ₹700 — proposed customer price ₹6650 — bookings 1052
+- [ ] BLOOD GLUCOSE FASTING — list/MRP ₹50 — proposed customer price ₹480 — bookings 1046
+- [ ] HAEMOGRAM (CBC+ESR) — list/MRP ₹300 — proposed customer price ₹2850 — bookings 916
+- [ ] URINE EXAMINATION ROUTINE — list/MRP ₹100 — proposed customer price ₹950 — bookings 782
+- [ ] Vitamin D3 — list/MRP ₹800 — proposed customer price ₹7600 — bookings 782
+- [ ] VITAMIN B12 — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 717
+- [ ] BLOOD GLUCOSE RANDOM — list/MRP ₹50 — proposed customer price ₹480 — bookings 715
+- [ ] CALCIUM — list/MRP ₹150 — proposed customer price ₹1420 — bookings 464
+- [ ] ERYTHROCYTE SEDIMENTATION RATE (ESR) — list/MRP ₹100 — proposed customer price ₹950 — bookings 415
+- [ ] BLOOD GROUP (ABO & Rh TYPING) — list/MRP ₹100 — proposed customer price ₹950 — bookings 360
+- [ ] WIDAL (SLIDE AGGLUTINATION) — list/MRP ₹150 — proposed customer price ₹1420 — bookings 356
+- [ ] RHEUMATOID FACTOR (RA FACTOR) - QUANTITATIVE — list/MRP ₹450 — proposed customer price ₹4280 — bookings 303
+- [ ] CRP QUANTITATIVE — list/MRP ₹450 — proposed customer price ₹4280 — bookings 300
+- [ ] Renal Function Test { kft without calcium} { urea, uric acid , phosphorus, bun} — list/MRP ₹400 — proposed customer price ₹3800 — bookings 290
+- [ ] CREATININE — list/MRP ₹150 — proposed customer price ₹1420 — bookings 249
+- [ ] URIC ACID -  SERUM — list/MRP ₹150 — proposed customer price ₹1420 — bookings 242
+- [ ] THYROID STIMULATING HORMONE (TSH) — list/MRP ₹300 — proposed customer price ₹2850 — bookings 215
+- [ ] Total Testosterone - Male — list/MRP ₹600 — proposed customer price ₹5700 — bookings 214
+- [ ] Free Testosterone - Male — list/MRP ₹900 — proposed customer price ₹8550 — bookings 195
+- [ ] HEMOGLOBIN (HB) — list/MRP ₹100 — proposed customer price ₹950 — bookings 189
+- [ ] ELECTROLYTE PLUS PROFILE{ na , k , cl , ica} — list/MRP ₹350 — proposed customer price ₹3320 — bookings 184
+- [ ] Estradiol (E2) - Male — list/MRP ₹650 — proposed customer price ₹6180 — bookings 182
+- [ ] Follicle Stimulating Hormone (FSH) - Male — list/MRP ₹400 — proposed customer price ₹3800 — bookings 181
+- [ ] Luteinizing Hormone (LH) - Male — list/MRP ₹400 — proposed customer price ₹3800 — bookings 181
+- [ ] Prolactin (PRL) - Male — list/MRP ₹550 — proposed customer price ₹5220 — bookings 181
+- [ ] Growth Hormone (GH) - Male — list/MRP ₹900 — proposed customer price ₹8550 — bookings 180
+- [ ] THYROID PROFILE FREE — list/MRP ₹700 — proposed customer price ₹6650 — bookings 178
+- [ ] HIV 1 & 2 ANTIBODY - Rapid Screening — list/MRP ₹400 — proposed customer price ₹3800 — bookings 175
+- [ ] VDRL — list/MRP ₹200 — proposed customer price ₹1900 — bookings 173
+- [ ] HEPATITIS B SURFACE ANTIGEN_x000D_ (Australian Antigen) - HBsAg — list/MRP ₹200 — proposed customer price ₹1900 — bookings 168
+- [ ] LIPASE — list/MRP ₹600 — proposed customer price ₹5700 — bookings 162
+- [ ] HEPATITIS C ANTIBODY (HCV Antibody) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 159
+- [ ] AMYLASE — list/MRP ₹550 — proposed customer price ₹5220 — bookings 151
+- [ ] BETA HUMAN CHORIONIC GONODOTROPIN (SERUM BETA HCG) - clia — list/MRP ₹700 — proposed customer price ₹6650 — bookings 147
+- [ ] MICROALBUMIN - 24hrs Urine — list/MRP ₹500 — proposed customer price ₹4750 — bookings 146
+- [ ] BLOOD UREA NITROGEN (BUN) — list/MRP ₹150 — proposed customer price ₹1420 — bookings 144
+- [ ] SALMONELLA TYPHI IGM (TYPHI DOT) — list/MRP ₹250 — proposed customer price ₹2380 — bookings 135
+- [ ] ALBUMIN / CREATININE RATIO — list/MRP ₹1 — proposed customer price ₹100 — bookings 117
+- [ ] HEPATITIS B SURFACE ANTIBODY TOTAL_x000D_ (Anti Hbs) — list/MRP ₹850 — proposed customer price ₹8080 — bookings 117
+- [ ] Kidney Function Test (KFT) { urea, uric acid , phosphorus, bun, calcium} — list/MRP ₹500 — proposed customer price ₹4750 — bookings 105
+- [ ] PROTHROMBIN TIME & INR — list/MRP ₹350 — proposed customer price ₹3320 — bookings 100
+- [ ] PROSTATE SPECIFIC ANTIGEN (TOTAL) PSA — list/MRP ₹650 — proposed customer price ₹6180 — bookings 92
+- [ ] VITAMIN D 25-HYDROXY — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 90
+- [ ] MALARIAL FALCIPARUM AND VIVAX ANTIGEN (PARASITE V) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 71
+- [ ] TOTAL IgE — list/MRP ₹650 — proposed customer price ₹6180 — bookings 69
+- [ ] PREGNANCY TEST - URINE — list/MRP ₹150 — proposed customer price ₹1420 — bookings 66
+- [ ] CHOLESTEROL -TOTAL — list/MRP ₹150 — proposed customer price ₹1420 — bookings 60
+- [ ] Bleeding Time & Clotting Time — list/MRP ₹100 — proposed customer price ₹950 — bookings 56
+- [ ] SGPT/ALT (ALANINE AMINO-TRANSFERASE) — list/MRP ₹150 — proposed customer price ₹1420 — bookings 56
+- [ ] TESTOSTERONE TOTAL — list/MRP ₹600 — proposed customer price ₹5700 — bookings 53
+- [ ] UREA - SERUM — list/MRP ₹150 — proposed customer price ₹1420 — bookings 52
+- [ ] TRIGLYCERIDES - Serum — list/MRP ₹230 — proposed customer price ₹2180 — bookings 48
+- [ ] PROLACTIN(PRL) — list/MRP ₹500 — proposed customer price ₹4750 — bookings 40
+- [ ] IRON — list/MRP ₹400 — proposed customer price ₹3800 — bookings 37
+- [ ] IRON PROFILE FULL — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 37
+- [ ] LH (LEUTINIZING HORMONE) — list/MRP ₹500 — proposed customer price ₹4750 — bookings 37
+- [ ] FERRITIN — list/MRP ₹600 — proposed customer price ₹5700 — bookings 35
+- [ ] FSH (FOLLICLE STIMULATING HORMONE) — list/MRP ₹500 — proposed customer price ₹4750 — bookings 35
+- [ ] HIGH SENSITIVE CRP (HSCRP) — list/MRP ₹650 — proposed customer price ₹6180 — bookings 32
+- [ ] SEMEN ROUTINE EXAMINATION — list/MRP ₹250 — proposed customer price ₹2380 — bookings 31
+- [ ] TISSUE TRANSGLUTAMINASE ANTIBODY IGA (TTG IgA) — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 31
+- [ ] URINE FOR CULTURE AND SENSITIVITY — list/MRP ₹400 — proposed customer price ₹3800 — bookings 29
+- [ ] BILIRUBIN - TOTAL, DIRECT & INDIRECT — list/MRP ₹150 — proposed customer price ₹1420 — bookings 28
+- [ ] HCV Antibody - Qualiative — list/MRP ₹700 — proposed customer price ₹6650 — bookings 26
+- [ ] BILIRUBIN -TOTAL — list/MRP ₹150 — proposed customer price ₹1420 — bookings 25
+- [ ] FIBRINOGEN — list/MRP ₹1250 — proposed customer price ₹11880 — bookings 25
+- [ ] SGOT/AST (ASPARTATE AMINO-TRANSFERASE) — list/MRP ₹120 — proposed customer price ₹1140 — bookings 25
+- [ ] URINARY ELECTROLYTES (Na,K & Cl) — list/MRP ₹950 — proposed customer price ₹9020 — bookings 25
+- [ ] Liver Function Test  with GGT(LFT_GGT) — list/MRP ₹700 — proposed customer price ₹6650 — bookings 24
+- [ ] BLOOD PICTURE - PERIPHERAL SMEAR EXAMINATION (P/S) — list/MRP ₹300 — proposed customer price ₹2850 — bookings 23
+- [ ] EGFR (ESTIMATED GLOMERULAR FILTRATION RATE) — list/MRP ₹350 — proposed customer price ₹3320 — bookings 21
+- [ ] ESTRADIOL (E2) — list/MRP ₹600 — proposed customer price ₹5700 — bookings 21
+- [ ] IRON DEFICIENCY PROFILE{ iron , tibc, uibc,transferrin saturation} — list/MRP ₹850 — proposed customer price ₹8080 — bookings 21
+- [ ] ANTI MULLERIAN HORMONE (AMH) — list/MRP ₹1800 — proposed customer price ₹17100 — bookings 19
+- [ ] SEMEN ANALYSIS — list/MRP ₹230 — proposed customer price ₹2180 — bookings 19
+- [ ] RA Factor - Qualitative ( Rheumatoid Factor) — list/MRP ₹200 — proposed customer price ₹1900 — bookings 18
+- [ ] TESTOSTERONE FREE — list/MRP ₹1100 — proposed customer price ₹10450 — bookings 18
+- [ ] ACTIVATED PARTIAL THROMBOPLASTIN TIME(APTT/PTTK) — list/MRP ₹500 — proposed customer price ₹4750 — bookings 17
+- [ ] CA125 — list/MRP ₹850 — proposed customer price ₹8080 — bookings 17
+- [ ] Prolactin (PRL) - Female — list/MRP ₹650 — proposed customer price ₹6180 — bookings 17
+- [ ] GROWTH HORMONE (GH) — list/MRP ₹850 — proposed customer price ₹8080 — bookings 16
+- [ ] ANTI CCP (ANTI CYCLIC CIRULLINATED PEPTIDE) — list/MRP ₹1250 — proposed customer price ₹11880 — bookings 15
+- [ ] Malaria Parasite rapid card — list/MRP ₹150 — proposed customer price ₹1420 — bookings 12
+- [ ] AFB (Ziehl Nelsen) STAIN — list/MRP ₹200 — proposed customer price ₹1900 — bookings 11
+- [ ] Follicle Stimulating Hormone (FSH) - Female — list/MRP ₹400 — proposed customer price ₹3800 — bookings 11
+- [ ] HAEMOGLOBIN ELECTROPHORESIS (HPLC) — list/MRP ₹850 — proposed customer price ₹8080 — bookings 11
+- [ ] Luteinizing Hormone (LH) - Female — list/MRP ₹400 — proposed customer price ₹3800 — bookings 11
+- [ ] ABSOLUTE EOSINOPHIL COUNT — list/MRP ₹100 — proposed customer price ₹950 — bookings 10
+- [ ] C-PEPTIDE — list/MRP ₹1250 — proposed customer price ₹11880 — bookings 10
+- [ ] KOH PREPARATION FOR FUNGAL ELEMENTS — list/MRP ₹400 — proposed customer price ₹3800 — bookings 10
+- [ ] ANTI TPO (THYROID PEROXIDASE) ANTIBODY — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 9
+- [ ] BLOOD FOR CULTURE & SENSTIVITY — list/MRP ₹900 — proposed customer price ₹8550 — bookings 9
+- [ ] BLOOD GLUCOSE PP — list/MRP ₹100 — proposed customer price ₹950 — bookings 9
+- [ ] COOMB S TEST INDIRECT — list/MRP ₹550 — proposed customer price ₹5220 — bookings 9
+- [ ] BLOOD SUGAR 1,h (o-gtt, 1,h) — list/MRP ₹150 — proposed customer price ₹1420 — bookings 8
+- [ ] CREATININE KINASE (CPK) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 8
+- [ ] CRP QUALITATIVE — list/MRP ₹150 — proposed customer price ₹1420 — bookings 7
+- [ ] DENGUE IgG & IgM ANTIBODY — list/MRP ₹1650 — proposed customer price ₹15680 — bookings 7
+- [ ] HEMOGRAM — list/MRP ₹300 — proposed customer price ₹2850 — bookings 7
+- [ ] MAGNESIUM — list/MRP ₹500 — proposed customer price ₹4750 — bookings 7
+- [ ] SALMONELLA TYPHI IgG (TYPHI DOT) — list/MRP ₹650 — proposed customer price ₹6180 — bookings 7
+- [ ] Total Testosterone - Female — list/MRP ₹600 — proposed customer price ₹5700 — bookings 7
+- [ ] COOMB S TEST DIRECT — list/MRP ₹500 — proposed customer price ₹4750 — bookings 6
+- [ ] Estradiol (E2) - Female — list/MRP ₹650 — proposed customer price ₹6180 — bookings 6
+- [ ] CEA (CARCINO EMBRYONIC ANTIGEN) - CANCER MARKERS — list/MRP ₹750 — proposed customer price ₹7120 — bookings 5
+- [ ] Dual Marker Test — list/MRP ₹2800 — proposed customer price ₹26600 — bookings 5
+- [ ] INSULIN - FASTING — list/MRP ₹650 — proposed customer price ₹6180 — bookings 5
+- [ ] PLATELET COUNT — list/MRP ₹100 — proposed customer price ₹950 — bookings 5
+- [ ] PRO-BETA NATRIURETIC PEPTIDE (BNP) — list/MRP ₹2850 — proposed customer price ₹27080 — bookings 5
+- [ ] ALLERGY COMPREHENSIVE PANEL(FOOD+INHALANT+NON VEG+DRUG) — list/MRP ₹4500 — proposed customer price ₹42750 — bookings 4
+- [ ] APOLIPOPROTEIN B (APO-B) — list/MRP ₹700 — proposed customer price ₹6650 — bookings 4
+- [ ] BILE ACIDS - TOTAL — list/MRP ₹2450 — proposed customer price ₹23280 — bookings 4
+- [ ] Complete Urinogram — list/MRP ₹1 — proposed customer price ₹100 — bookings 4
+- [ ] CREATINE KINASE MB (CK-MB) — list/MRP ₹500 — proposed customer price ₹4750 — bookings 4
+- [ ] CULTURE - SEMEN (AEROBIC) — list/MRP ₹550 — proposed customer price ₹5220 — bookings 4
+- [ ] CYTOLOGY -PAP — list/MRP ₹550 — proposed customer price ₹5220 — bookings 4
+- [ ] DENGUE NS1(Qualitative) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 4
+- [ ] HbsAg (Australian Antigen) - Qualitative — list/MRP ₹450 — proposed customer price ₹4280 — bookings 4
+- [ ] HEPATITIS C VIRUS (HCV Antibody)-IgG — list/MRP ₹1500 — proposed customer price ₹14250 — bookings 4
+- [ ] LACTIC DEHYDEROGENASE (LDH) — list/MRP ₹350 — proposed customer price ₹3320 — bookings 4
+- [ ] Thyroid  Profile 3rd Trimester — list/MRP ₹400 — proposed customer price ₹3800 — bookings 4
+- [ ] Thyroid Profile 2nd Trimester — list/MRP ₹400 — proposed customer price ₹3800 — bookings 4
+- [ ] TORCH PROFILE — list/MRP ₹1800 — proposed customer price ₹17100 — bookings 4
+- [ ] ALLERGY CONTACTS — list/MRP ₹6000 — proposed customer price ₹57000 — bookings 3
+- [ ] ANTI NUCLEAR ANTIBODY (ANA) — list/MRP ₹750 — proposed customer price ₹7120 — bookings 3
+- [ ] APOLIPOPROTEIN A1 (APO-A1) — list/MRP ₹7000 — proposed customer price ₹66500 — bookings 3
+- [ ] CA19.9 (PANCREATIC CANCER) - CANCER MARKERS — list/MRP ₹1250 — proposed customer price ₹11880 — bookings 3
+- [ ] CORTISOL  (7 TO 9 AM) — list/MRP ₹600 — proposed customer price ₹5700 — bookings 3
+- [ ] D DIMER — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 3
+- [ ] DENGUE NS1 ANTIGEN (Quantitative) — list/MRP ₹600 — proposed customer price ₹5700 — bookings 3
+- [ ] Free Testosterone - Female — list/MRP ₹900 — proposed customer price ₹8550 — bookings 3
+- [ ] SHBG (SEX HORMONE BINDING GLOBULIN) - HORMONE ASSAY — list/MRP ₹2550 — proposed customer price ₹24220 — bookings 3
+- [ ] STOOL EXAMINATION - ROUTINE — list/MRP ₹200 — proposed customer price ₹1900 — bookings 3
+- [ ] ABSOLUTE RETICULOCYTE COUNT — list/MRP ₹200 — proposed customer price ₹1900 — bookings 2
+- [ ] ALLERGY - FOOD(VEG ONLY) — list/MRP ₹4050 — proposed customer price ₹38480 — bookings 2
+- [ ] ALPHA FETO PROTEIN (AFP) TUMOR MARKER — list/MRP ₹850 — proposed customer price ₹8080 — bookings 2
+- [ ] ANTI NUCLEAR ANTIBODY-IFA — list/MRP ₹1250 — proposed customer price ₹11880 — bookings 2
+- [ ] ASPERGILLUS IGE ANTIBODY — list/MRP ₹2050 — proposed customer price ₹19480 — bookings 2
+- [ ] CULTURE - SPUTUM (AEROBIC) — list/MRP ₹550 — proposed customer price ₹5220 — bookings 2
+- [ ] CULTURE - STOOL (AEROBIC) — list/MRP ₹690 — proposed customer price ₹6560 — bookings 2
+- [ ] DEHYDROEPIANDROSTERONE (DHEA) — list/MRP ₹600 — proposed customer price ₹5700 — bookings 2
+- [ ] GAMMA GLUTAMYL TRANSFERASE (GGT) — list/MRP ₹230 — proposed customer price ₹2180 — bookings 2
+- [ ] GLUCOSE 6 PHOSPHATE DEHYDROGENASE (G6PD QUANTITATIVE) — list/MRP ₹800 — proposed customer price ₹7600 — bookings 2
+- [ ] Growth Hormone (GH) - Female — list/MRP ₹900 — proposed customer price ₹8550 — bookings 2
+- [ ] HIV 1 & 2 ANTIBODY by ELISA — list/MRP ₹750 — proposed customer price ₹7120 — bookings 2
+- [ ] HLA B-27 — list/MRP ₹1850 — proposed customer price ₹17580 — bookings 2
+- [ ] LH/FSH RATIO — list/MRP ₹900 — proposed customer price ₹8550 — bookings 2
+- [ ] PHOSPHORUS — list/MRP ₹150 — proposed customer price ₹1420 — bookings 2
+- [ ] PROGESTERONE — list/MRP ₹650 — proposed customer price ₹6180 — bookings 2
+- [ ] RETICULOCYTE COUNT — list/MRP ₹300 — proposed customer price ₹2850 — bookings 2
+- [ ] THYROXINE FREE (FT4) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 2
+- [ ] TIBC (TOTAL IRON BINDING CAPACITY) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 2
+- [ ] TPHA (TREPONEMA PALLIDUM HAEMAGGIUTINATION) — list/MRP ₹750 — proposed customer price ₹7120 — bookings 2
+- [ ] TROPONIN - I — list/MRP ₹1650 — proposed customer price ₹15680 — bookings 2
+- [ ] TUBERCULOSIS - GAMMA INTERFERON - QUANTIFERON — list/MRP ₹2050 — proposed customer price ₹19480 — bookings 2
+- [ ] ZINC -Serum — list/MRP ₹2050 — proposed customer price ₹19480 — bookings 2
+- [ ] AFB Genexpert — list/MRP ₹2500 — proposed customer price ₹23750 — bookings 1
+- [ ] ALBUMIN — list/MRP ₹150 — proposed customer price ₹1420 — bookings 1
+- [ ] ALCOHOL — list/MRP ₹1600 — proposed customer price ₹15200 — bookings 1
+- [ ] ALKALINE PHOSPHATASE (ALP) — list/MRP ₹150 — proposed customer price ₹1420 — bookings 1
+- [ ] ANTI PHOSPHOLIPID ANTIBODY IgG — list/MRP ₹750 — proposed customer price ₹7120 — bookings 1
+- [ ] ANTI THYROGLOBULIN (ATG) — list/MRP ₹1450 — proposed customer price ₹13780 — bookings 1
+- [ ] BICARBONATE — list/MRP ₹850 — proposed customer price ₹8080 — bookings 1
+- [ ] C3 COMPLEMENT COMPONENT — list/MRP ₹650 — proposed customer price ₹6180 — bookings 1
+- [ ] CORTISOL ( 3 TO 5 PM) — list/MRP ₹600 — proposed customer price ₹5700 — bookings 1
+- [ ] CREATNINE CLEARANCE TEST — list/MRP ₹450 — proposed customer price ₹4280 — bookings 1
+- [ ] CULTURE - BODY FLUIDS (AEROBIC) — list/MRP ₹550 — proposed customer price ₹5220 — bookings 1
+- [ ] DEHYDROEPIANDROSTERONE SULPHATE(DHEA-S) — list/MRP ₹850 — proposed customer price ₹8080 — bookings 1
+- [ ] DENGUE IgG — list/MRP ₹600 — proposed customer price ₹5700 — bookings 1
+- [ ] ERYTHROPOIETIN (EPO) — list/MRP ₹1950 — proposed customer price ₹18520 — bookings 1
+- [ ] FOLIC ACID — list/MRP ₹850 — proposed customer price ₹8080 — bookings 1
+- [ ] HLA B-27 - PCR — list/MRP ₹3050 — proposed customer price ₹28980 — bookings 1
+- [ ] IHC - INHIBIN — list/MRP ₹1750 — proposed customer price ₹16620 — bookings 1
+- [ ] IMMUNOGLOBULIN A (IgA) — list/MRP ₹850 — proposed customer price ₹8080 — bookings 1
+- [ ] INSULIN (RANDOM) - HORMONE ASSAYS — list/MRP ₹650 — proposed customer price ₹6180 — bookings 1
+- [ ] INTACT PARATHYROID HORMONE (IPTH) — list/MRP ₹1500 — proposed customer price ₹14250 — bookings 1
+- [ ] IRON STUDIES (FOR ANEMIA PROFILE) — list/MRP ₹2450 — proposed customer price ₹23280 — bookings 1
+- [ ] LUPUS ANTICOAGULANT — list/MRP ₹1400 — proposed customer price ₹13300 — bookings 1
+- [ ] MILK ALLERGY — list/MRP ₹850 — proposed customer price ₹8080 — bookings 1
+- [ ] PARATHYROID HORMONE (PTH) — list/MRP ₹1450 — proposed customer price ₹13780 — bookings 1
+- [ ] PRO CALCITONIN — list/MRP ₹3300 — proposed customer price ₹31350 — bookings 1
+- [ ] PROTEIN TOTAL — list/MRP ₹150 — proposed customer price ₹1420 — bookings 1
+- [ ] RAPID PLASMA REAGIN (RPR TEST) — list/MRP ₹190 — proposed customer price ₹1800 — bookings 1
+- [ ] RUBELLA VIRUS IgG — list/MRP ₹550 — proposed customer price ₹5220 — bookings 1
+- [ ] SGOT/SGPT Ratio — list/MRP ₹250 — proposed customer price ₹2380 — bookings 1
+- [ ] THYROGLOBULIN — list/MRP ₹1650 — proposed customer price ₹15680 — bookings 1
+- [ ] Thyroid Profile (Pregnancy) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 1
+- [ ] Torch IgG — list/MRP ₹1200 — proposed customer price ₹11400 — bookings 1
+- [ ] TRIODOTHYRONINE FREE (FT3) — list/MRP ₹400 — proposed customer price ₹3800 — bookings 1
+- [ ] TROPONIN - T — list/MRP ₹1650 — proposed customer price ₹15680 — bookings 1
+- [ ] TROPONIN-I RAPID CARD SCREENING — list/MRP ₹1000 — proposed customer price ₹9500 — bookings 1
+- [ ] URINE PROTEIN - 24Hrs. Urine — list/MRP ₹230 — proposed customer price ₹2180 — bookings 1
+- [ ] VIRAL MARKER — list/MRP ₹600 — proposed customer price ₹5700 — bookings 1
+- [ ] vit B7 — list/MRP ₹5000 — proposed customer price ₹47500 — bookings 1
+- [ ] VITAMIN B12 (CYANOCOBALAMIN) — list/MRP ₹800 — proposed customer price ₹7600 — bookings 1
+- [ ] Vitamin K — list/MRP ₹5000 — proposed customer price ₹47500 — bookings 1
+
+## Approval fields for each selected item
+
+- [ ] Name cleaned and clinically correct
+- [ ] Included tests/parameters confirmed
+- [ ] Customer price approved
+- [ ] Crossed-out/list value approved
+- [ ] Preparation/fasting verified
+- [ ] Turnaround verified
+- [ ] Home collection availability verified
+- [ ] SEO page allowed (yes/no)
+- [ ] Publish to website

@@ -11,8 +11,8 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const DEFAULT_TITLE = 'Sawariya Diagnostic - NABL Accredited Diagnostic Lab';
-const DEFAULT_DESC = 'NABL accredited diagnostic lab offering blood tests, health packages, and home sample collection with test catalog and online booking.';
+const DEFAULT_TITLE = 'Sawariya Diagnostic Lab - Diagnostic Testing & Home Collection';
+const DEFAULT_DESC = 'Diagnostic testing, health packages, home sample collection, and patient report access in Charkhi Dadri.';
 const BASE_CANONICAL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/';
 const DEFAULT_OG_IMAGE = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.jpg';
 

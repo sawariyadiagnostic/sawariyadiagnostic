@@ -8,11 +8,11 @@ export function About() {
     {
       icon: CalendarCheck,
       title: '1. Select Test',
-      description: 'Book online or via WhatsApp with instant 24*7 slot confirmation.',
+      description: 'Request a booking online or by phone; the lab confirms availability.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
-        accentBar: 'bg-[#0A3663]',
+        accentBar: 'bg-[#102A43]',
       }
     },
     {
@@ -22,27 +22,27 @@ export function About() {
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-cyan-50 text-cyan-800 border-cyan-200/80',
-        accentBar: 'bg-[#00A896]',
+        accentBar: 'bg-[#C62828]',
       }
     },
     {
       icon: Microscope,
-      title: '3. NABL Processing',
+      title: '3. Laboratory Processing',
       description: 'Automated 5-part analyzers ensure zero cross-contamination.',
       theme: {
         bg: 'bg-white',
-        iconBg: 'bg-emerald-50 text-emerald-800 border-emerald-200/80',
-        accentBar: 'bg-[#0A6E5C]',
+        iconBg: 'bg-green-50 text-green-800 border-green-200/80',
+        accentBar: 'bg-[#155E9A]',
       }
     },
     {
       icon: FileCheck,
       title: '4. Digital Delivery',
-      description: 'Receive doctor-verified QR-coded report on WhatsApp in 6h.',
+      description: 'Receive a digital report through the configured delivery workflow.',
       theme: {
         bg: 'bg-white',
-        iconBg: 'bg-amber-50 text-amber-800 border-amber-200/80',
-        accentBar: 'bg-[#D97706]',
+        iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
+        accentBar: 'bg-[#7A4B2A]',
       }
     },
   ];
@@ -51,9 +51,9 @@ export function About() {
     'Fully Automated 5-Part Hematology Analyzers',
     'Certified MD Pathologists on Active Duty',
     'Barcode-Tracked Sterile Vacutainer Tubes',
-    'Same-Day WhatsApp & Email Digital Delivery',
-    'Free Doorstep Home Collection in Charkhi Dadri',
-    '24*7 Open Lab & Direct Doctor Consultation',
+    'Digital report delivery when configured',
+    'Home collection availability confirmed at booking',
+    'Patient-focused lab support',
   ];
 
   return (
@@ -61,8 +61,8 @@ export function About() {
       
       {/* Liquid Mesh Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-teal-500/5 blur-[80px] animate-liquid mix-blend-multiply" />
-        <div className="absolute top-[30%] right-[0%] w-[30vw] h-[30vw] bg-emerald-500/5 blur-[80px] animate-liquid mix-blend-multiply" style={{ animationDelay: '-12s' }} />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[#155E9A]/5 blur-[80px]  mix-blend-multiply" />
+        <div className="absolute top-[30%] right-[0%] w-[30vw] h-[30vw] bg-green-600/5 blur-[80px]  mix-blend-multiply" style={{ animationDelay: '-12s' }} />
       </div>
 
       <div className="fluid-container relative z-10">
@@ -111,20 +111,20 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="bg-[#072448] text-white rounded-[28px] sm:rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative overflow-hidden border border-white/10"
+          className="bg-[#102A43] text-white rounded-[28px] sm:rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.2)] relative overflow-hidden border border-white/10"
         >
           {/* Liquid Liquid Glow inside Dark Container */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#00A896]/20 rounded-full blur-[100px] animate-liquid mix-blend-screen" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#0A6E5C]/20 rounded-full blur-[100px] animate-liquid mix-blend-screen" style={{ animationDelay: '-7s' }} />
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#C62828]/20 rounded-full blur-[100px]  mix-blend-screen" />
+            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#155E9A]/20 rounded-full blur-[100px]  mix-blend-screen" style={{ animationDelay: '-7s' }} />
           </div>
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center relative z-10">
             {/* Left - Quality Commitment */}
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               <div className="inline-flex items-center gap-2 bg-white/10 px-3.5 py-1 rounded-full backdrop-blur-md border border-white/15">
-                <Award className="w-3.5 h-3.5 text-teal-300" />
-                <span className="text-xs font-bold text-teal-100">Certified Quality Standards</span>
+                <Award className="w-3.5 h-3.5 text-blue-200" />
+                <span className="text-xs font-bold text-blue-100">Certified Quality Standards</span>
               </div>
 
               <h3 className="text-xl sm:text-3xl font-black tracking-tight text-white leading-snug">
@@ -132,13 +132,13 @@ export function About() {
               </h3>
 
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                At Sawariya Diagnostic, our laboratory adheres strictly to National Accreditation Board for Testing and Calibration Laboratories (NABL) guidelines. Each sample undergoes multi-level internal quality controls before doctor validation.
+                At Sawariya Diagnostic, samples are handled according to the lab's documented quality and review procedures. Confirm current accreditation scope and report workflow with the lab.
               </p>
               
               <div className="grid sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
                 {features.map((feature) => (
                   <div key={feature} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-400 flex-shrink-0 mt-0.5" />
                     <span className="text-xs sm:text-sm text-slate-200 font-normal leading-snug">{feature}</span>
                   </div>
                 ))}
@@ -148,22 +148,22 @@ export function About() {
             {/* Right - Quality Metric Card */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-sm bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[24px] p-5 sm:p-7 space-y-4 text-center shadow-2xl">
-                <div className="w-14 h-14 rounded-[18px] bg-gradient-to-br from-[#0A3663] to-[#0A6E5C] border border-teal-300/30 flex items-center justify-center mx-auto text-teal-300 shadow-md">
+                <div className="w-14 h-14 rounded-[18px] bg-gradient-to-br from-[#102A43] to-[#155E9A] border border-white/20 flex items-center justify-center mx-auto text-blue-200 shadow-md">
                   <Microscope className="w-7 h-7" />
                 </div>
                 
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-white mb-0.5">NABL Accredited Facility</h4>
+                  <h4 className="text-base sm:text-lg font-bold text-white mb-0.5">Quality Review Process</h4>
                   <p className="text-[11px] sm:text-xs text-slate-300">Opposite R.S. Sangwan Hospital, Loharu Road</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-emerald-400">10,000+</p>
+                    <p className="text-xl sm:text-2xl font-black text-green-400">10,000+</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-300">Samples Processed</p>
                   </div>
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-amber-300">180+</p>
+                    <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">180+</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-300">Validated Profiles</p>
                   </div>
                 </div>

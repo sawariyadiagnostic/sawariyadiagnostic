@@ -140,7 +140,8 @@ export const ServerlessDB = {
    * Search reports by UHID or Report ID (RLS Protected)
    */
   getReportsByPatient: async (query: string): Promise<PatientReport[]> => {
-    // Simulate network latency
+    if (import.meta.env.VITE_DEMO_MODE !== 'true') return [];
+    // Development-only demo latency
     await new Promise((r) => setTimeout(r, 450));
 
     const normalized = query.trim().toUpperCase();
@@ -180,6 +181,7 @@ export const ServerlessDB = {
    * Create a new test booking
    */
   createBooking: async (bookingData: Omit<TestBooking, 'id' | 'bookingDate' | 'status'>): Promise<TestBooking> => {
+    if (import.meta.env.VITE_DEMO_MODE !== 'true') throw new Error('Durable booking API is not configured');
     await new Promise((r) => setTimeout(r, 600));
 
     const id = `BOOK-${Date.now().toString().slice(-6)}`;

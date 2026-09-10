@@ -12,16 +12,16 @@ export function Team() {
       
       {/* Liquid Mesh Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] bg-blue-300/10 blur-[80px] animate-liquid mix-blend-multiply" />
+        <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] bg-blue-300/10 blur-[80px]  mix-blend-multiply" />
       </div>
 
       <div className="fluid-container relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-          <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-[#0A6E5C]/20 px-3.5 py-1 rounded-full shadow-2xs">
-            <Stethoscope className="w-3.5 h-3.5 text-[#0A6E5C]" />
-            <span className="text-[11px] font-bold text-[#0A6E5C] uppercase tracking-wider">Clinical Leadership</span>
+          <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-[#155E9A]/20 px-3.5 py-1 rounded-full shadow-2xs">
+            <Stethoscope className="w-3.5 h-3.5 text-[#155E9A]" />
+            <span className="text-[11px] font-bold text-[#155E9A] uppercase tracking-wider">Clinical Leadership</span>
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#1D1D1F] tracking-tight leading-tight">
@@ -39,26 +39,26 @@ export function Team() {
             const memberThemes = [
               {
                 ring: 'ring-blue-100 group-hover:ring-blue-300',
-                roleColor: 'text-[#0A3663]',
+                roleColor: 'text-[#102A43]',
                 avatarBg: '0A3663',
                 avatarText: '93C5FD',
                 qualTag: 'bg-blue-50 text-blue-900 border-blue-200/80',
-                accentBar: 'bg-[#0A3663]',
+                accentBar: 'bg-[#102A43]',
               },
               {
                 ring: 'ring-emerald-100 group-hover:ring-emerald-300',
-                roleColor: 'text-[#0A6E5C]',
+                roleColor: 'text-[#155E9A]',
                 avatarBg: '0A6E5C',
                 avatarText: 'A7F3D0',
-                qualTag: 'bg-emerald-50 text-emerald-900 border-emerald-200/80',
-                accentBar: 'bg-[#0A6E5C]',
+                qualTag: 'bg-green-50 text-green-900 border-green-200/80',
+                accentBar: 'bg-[#155E9A]',
               },
               {
                 ring: 'ring-purple-100 group-hover:ring-purple-300',
                 roleColor: 'text-[#581C87]',
                 avatarBg: '581C87',
                 avatarText: 'E9D5FF',
-                qualTag: 'bg-purple-50 text-purple-900 border-purple-200/80',
+                qualTag: 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8]',
                 accentBar: 'bg-[#581C87]',
               },
             ];
@@ -107,8 +107,8 @@ export function Team() {
                 </div>
 
                 <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-center gap-1.5 text-xs text-slate-600 font-medium">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>NABL Quality Sign-off</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
+                  <span>Clinical review workflow</span>
                 </div>
               </motion.div>
             );

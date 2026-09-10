@@ -1,3 +1,4 @@
+import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,6 @@ import {
   QrCode,
   Banknote
 } from 'lucide-react';
-import { ServerlessDB } from '@/lib/serverless-db';
 import { FormsService } from '@/lib/forms';
 import { toast } from 'sonner';
 
@@ -78,7 +78,7 @@ export function TestBookingModal({
 
   const handleQuickWhatsAppBook = () => {
     const text = `Hi Sawariya Diagnostic, I would like to book the test "${testName}" (₹${price}) with doorstep collection in Charkhi Dadri.`;
-    window.open(`https://wa.me/919991941207?text=${encodeURIComponent(text)}`, '_blank');
+    const url = whatsappHref(text); if (url) window.open(url, '_blank');
     setOpen(false);
   };
 
@@ -86,29 +86,30 @@ export function TestBookingModal({
     setIsProcessing(true);
 
     try {
-      const booking = await ServerlessDB.createBooking({
-        patientName: patientName.trim(),
+      const result = await FormsService.submitForm({
+        name: patientName.trim(),
         phone: phone.trim(),
-        address: visitType === 'HOME' ? address.trim() || 'Charkhi Dadri' : 'Lab Walk-in (Opp. R.S. Sangwan Hospital)',
-        testNames: [testName],
-        totalAmount: price,
-        paymentMethod: 'CASH_ON_COLLECTION',
-        paymentStatus: 'PENDING',
-        slotTime: selectedSlot
-      });
-
-      // Trigger notification
-      FormsService.dispatchToWhatsApp({
-        name: patientName,
-        phone,
-        address: visitType === 'HOME' ? address : 'Lab Walk-in',
+        address: visitType === 'HOME' ? address.trim() || 'Charkhi Dadri' : 'Lab Walk-in',
         serviceType: `${testName} (₹${price}) - Pay on Sample Collection`,
-        date: selectedSlot
-      });
+        date: selectedSlot,
+      }, import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
 
-      setConfirmedBookingId(booking.id);
+      if (!result.success) {
+        const handoff = FormsService.dispatchToWhatsApp({
+          name: patientName,
+          phone,
+          address: visitType === 'HOME' ? address : 'Lab Walk-in',
+          serviceType: `${testName} (₹${price}) - Pay on Sample Collection`,
+          date: selectedSlot,
+        });
+        toast.info(handoff ? 'WhatsApp opened. Send the prepared request to finish booking.' : result.message);
+        setOpen(false);
+        return;
+      }
+
+      setConfirmedBookingId('REQUEST-SENT');
       setStep('CONFIRMED');
-      toast.success('Appointment booked successfully!');
+      toast.success('Booking request sent to the lab team.');
     } catch (err) {
       console.error('Booking failed', err);
       toast.error('Could not complete booking record. Please try again.');
@@ -132,10 +133,10 @@ export function TestBookingModal({
 
       <DialogContent className="w-[calc(100vw-32px)] sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[28px] sm:rounded-[32px] mx-auto">
         {/* Header Strip */}
-        <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] p-4 sm:p-5 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-4 sm:p-5 text-white relative overflow-hidden">
           <div className="flex items-center justify-between relative z-10 gap-3">
             <div className="min-w-0">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-200 bg-white/10 px-2 py-0.5 rounded-full inline-block mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-100 bg-white/10 px-2 py-0.5 rounded-full inline-block mb-1">
                 {isPackage ? 'Health Package Booking' : 'Diagnostic Test Booking'}
               </span>
               <DialogTitle className="text-base sm:text-xl font-bold text-white tracking-tight leading-snug truncate">
@@ -145,12 +146,12 @@ export function TestBookingModal({
             <div className="text-right flex-shrink-0">
               <span className="text-xl sm:text-2xl font-black text-white">₹{price}</span>
               {originalPrice && (
-                <span className="text-xs text-teal-200 line-through block font-normal">₹{originalPrice}</span>
+                <span className="text-xs text-blue-100 line-through block font-normal">₹{originalPrice}</span>
               )}
             </div>
           </div>
-          <DialogDescription className="text-xs text-teal-100/80 mt-1 relative z-10">
-            NABL accredited lab • Free doorstep collection • Express digital report
+          <DialogDescription className="text-xs text-blue-100/80 mt-1 relative z-10">
+            Quality-focused lab • Home collection where available • Report timing depends on the test
           </DialogDescription>
         </div>
 
@@ -158,17 +159,17 @@ export function TestBookingModal({
         {step === 'DETAILS' && (
           <form onSubmit={handleProceedToReview} className="p-4 sm:p-6 space-y-4">
             {/* 10-Second WhatsApp Fast Track Option */}
-            <div className="bg-emerald-50/80 border border-emerald-200/80 rounded-[18px] p-3 flex items-center justify-between gap-2.5">
+            <div className="bg-green-50/80 border border-green-200/80 rounded-[18px] p-3 flex items-center justify-between gap-2.5">
               <div className="min-w-0">
-                <span className="text-[11px] font-bold text-emerald-900 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Fast Booking Option
+                <span className="text-[11px] font-bold text-green-900 flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5 text-green-600" /> Fast Booking Option
                 </span>
-                <p className="text-[10.5px] text-emerald-800 truncate">Book directly with our coordinator in 10 seconds</p>
+                <p className="text-[10.5px] text-green-800 truncate">Book directly with our coordinator in 10 seconds</p>
               </div>
               <button
                 type="button"
                 onClick={handleQuickWhatsAppBook}
-                className="bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-xs active:scale-95 transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
+                className="bg-[#128C7E] hover:bg-[#075E54] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-xs active:scale-95 transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
               >
                 <span>WhatsApp</span>
               </button>
@@ -181,7 +182,7 @@ export function TestBookingModal({
                 onClick={() => setVisitType('HOME')}
                 className={`py-2 px-2.5 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   visitType === 'HOME'
-                    ? 'bg-white text-[#0A6E5C] shadow-xs'
+                    ? 'bg-white text-[#155E9A] shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -193,12 +194,12 @@ export function TestBookingModal({
                 onClick={() => setVisitType('LAB')}
                 className={`py-2 px-2.5 rounded-[14px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   visitType === 'LAB'
-                    ? 'bg-white text-[#0A6E5C] shadow-xs'
+                    ? 'bg-white text-[#155E9A] shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 <Building2 className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className="truncate">Lab Walk-in (24*7)</span>
+                <span className="truncate">Lab Walk-in (24 hours)</span>
               </button>
             </div>
 
@@ -212,7 +213,7 @@ export function TestBookingModal({
                   value={patientName}
                   onChange={(e) => setPatientName(e.target.value)}
                   required
-                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
+                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#155E9A] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
                 />
               </div>
 
@@ -225,11 +226,11 @@ export function TestBookingModal({
                   id="b-phone"
                   type="tel"
                   maxLength={10}
-                  placeholder="e.g. 9991941207"
+                  placeholder="e.g. your mobile number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
                   required
-                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900 font-mono"
+                  className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#155E9A] rounded-[14px] mt-1 text-sm font-medium text-slate-900 font-mono"
                 />
               </div>
 
@@ -242,7 +243,7 @@ export function TestBookingModal({
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     required
-                    className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#0A6E5C] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
+                    className="h-11 bg-slate-50 border-slate-200 focus-visible:ring-[#155E9A] rounded-[14px] mt-1 text-sm font-medium text-slate-900"
                   />
                 </div>
               )}
@@ -253,7 +254,7 @@ export function TestBookingModal({
                   id="b-slot"
                   value={selectedSlot}
                   onChange={(e) => setSelectedSlot(e.target.value)}
-                  className="w-full h-11 bg-slate-50 border border-slate-200 focus:border-[#0A6E5C] rounded-[14px] px-3 mt-1 text-xs font-medium text-slate-900"
+                  className="w-full h-11 bg-slate-50 border border-slate-200 focus:border-[#155E9A] rounded-[14px] px-3 mt-1 text-xs font-medium text-slate-900"
                 >
                   {slots.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -277,7 +278,7 @@ export function TestBookingModal({
             <div className="bg-slate-50 border border-slate-200 rounded-[18px] p-3.5 space-y-1.5 text-xs text-slate-700">
               <div className="flex justify-between font-bold text-slate-900 text-sm">
                 <span>Total Amount Payable:</span>
-                <span className="text-[#0A6E5C] font-black text-base">₹{price}</span>
+                <span className="text-[#155E9A] font-black text-base">₹{price}</span>
               </div>
               <div className="flex justify-between text-slate-500">
                 <span>Patient: {patientName}</span>
@@ -293,22 +294,22 @@ export function TestBookingModal({
             <div className="space-y-2">
               <Label className="text-xs font-bold text-slate-800">Payment Mode</Label>
               
-              <div className="p-4 rounded-[18px] border-2 border-[#0A6E5C] bg-teal-50/60 ring-2 ring-[#00A896]/20 transition-all">
+              <div className="p-4 rounded-[18px] border-2 border-[#155E9A] bg-blue-50/60 ring-2 ring-[#C62828]/20 transition-all">
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#0A6E5C] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                  <div className="w-10 h-10 rounded-full bg-[#155E9A] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
                     <Banknote className="w-5 h-5" />
                   </div>
                   <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-bold text-xs sm:text-sm text-slate-900">Pay on Sample Collection</span>
-                      <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-300">
+                      <span className="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-green-300">
                         Default
                       </span>
                     </div>
                     <p className="text-[11.5px] text-slate-600 leading-relaxed font-normal">
                       Pay <strong className="text-slate-900 font-bold">₹{price}</strong> via <strong className="text-slate-800">Cash</strong> or <strong className="text-slate-800">UPI QR Code</strong> (GPay, PhonePe, Paytm) directly to the certified phlebotomist when your sample is collected.
                     </p>
-                    <div className="flex items-center gap-1.5 text-[11px] text-[#0A6E5C] font-semibold pt-1">
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#155E9A] font-semibold pt-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
                       <span>Zero advance fee • 100% Secure & Verified</span>
                     </div>
@@ -347,14 +348,14 @@ export function TestBookingModal({
         {/* STEP 3: BOOKING CONFIRMED */}
         {step === 'CONFIRMED' && (
           <div className="p-5 sm:p-6 text-center space-y-4">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-200 shadow-md">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto border-2 border-green-200 shadow-md">
               <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8" />
             </div>
 
             <div className="space-y-1">
               <h3 className="text-lg sm:text-xl font-bold text-slate-900">Booking Confirmed!</h3>
               <p className="text-xs text-slate-500">
-                Booking ID: <span className="font-mono font-bold text-[#0A6E5C]">{confirmedBookingId}</span>
+                Booking ID: <span className="font-mono font-bold text-[#155E9A]">{confirmedBookingId}</span>
               </p>
             </div>
 

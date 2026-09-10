@@ -1,5 +1,6 @@
 'use client';
 
+import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { Menu, X, FileDown, Phone, ShieldCheck, Database } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Logo } from '../ui/Logo';
@@ -22,23 +23,23 @@ export function Navbar({
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-[110] transition-all duration-300 pt-[env(safe-area-inset-top,0px)]">
       {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-slate-200 text-xs py-1.5 px-4 hidden sm:block border-b border-teal-500/25">
+      <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-slate-200 text-xs py-1.5 px-4 hidden sm:block border-b border-white/15">
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 text-[#FDE047] font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00A896] animate-pulse" />
-              NABL Certified Diagnostic Center • 24*7 Open Lab
+            <span className="inline-flex items-center gap-1.5 text-white font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
+              Diagnostic testing • Home collection
             </span>
-            <span className="text-teal-400/50">|</span>
-            <span className="text-teal-100 font-medium">Free Doorstep Home Sample Collection in Charkhi Dadri</span>
+            <span className="text-white/35">|</span>
+            <span className="text-white/80 font-medium">Serving Charkhi Dadri — details subject to current availability</span>
           </div>
           <div className="flex items-center gap-4">
             <a 
-              href="tel:+919991941207" 
-              className="flex items-center gap-1.5 text-[#FDE047] font-bold hover:text-white transition-colors"
+              href={telHref(siteConfig.contact.phone)} 
+              className="flex items-center gap-1.5 text-white font-bold hover:text-white transition-colors"
             >
-              <Phone className="w-3.5 h-3.5 text-[#FDE047]" />
-              <span>24*7 Helpline: +91 99919 41207</span>
+              <Phone className="w-3.5 h-3.5 text-white" />
+              <span>Lab contact: {siteConfig.contact.phone}</span>
             </a>
           </div>
         </div>
@@ -66,7 +67,7 @@ export function Navbar({
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="px-4 py-1.5 rounded-full text-xs font-bold tracking-tight text-slate-700 hover:text-[#0A6E5C] hover:bg-white/90 hover:shadow-2xs transition-all duration-300 cursor-pointer active:scale-[0.97]"
+                className="px-4 py-1.5 rounded-full text-xs font-bold tracking-tight text-slate-700 hover:text-[#155E9A] hover:bg-white/90 hover:shadow-2xs transition-all duration-300 cursor-pointer active:scale-[0.97]"
               >
                 {link.label}
               </button>
@@ -82,9 +83,9 @@ export function Navbar({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold h-9 sm:h-10 px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#0A6E5C] hover:bg-white hover:text-[#0A6E5C] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold h-9 sm:h-10 px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#155E9A] hover:bg-white hover:text-[#155E9A] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
                 >
-                  <FileDown className="w-3.5 h-3.5 text-[#0A6E5C]" />
+                  <FileDown className="w-3.5 h-3.5 text-[#155E9A]" />
                   <span>Patient Portal</span>
                 </Button>
               } />
@@ -93,7 +94,7 @@ export function Navbar({
             {/* Book Now CTA (Tablet & Desktop) */}
             <Button
               size="sm"
-              className="hidden md:inline-flex bg-gradient-to-r from-[#072448] to-[#0A6E5C] text-white hover:opacity-90 h-10 px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
+              className="hidden md:inline-flex bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 h-10 px-5 rounded-[18px] text-xs font-bold shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-[0.97] transition-all cursor-pointer"
               onClick={() => scrollToSection('home-collection')}
             >
               <span>Book Home Visit</span>

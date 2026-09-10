@@ -14,3 +14,12 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sawariyadiagnostic.github.io/sawariyadiagnostic/sitemap.xml
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /

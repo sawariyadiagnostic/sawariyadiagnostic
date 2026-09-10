@@ -1,0 +1,3 @@
+sawariyadiagnostic/sawariyadiagnostic
+branch=main
+commit=fe7b5226796c1fb899b863ffdae49ad85295514f

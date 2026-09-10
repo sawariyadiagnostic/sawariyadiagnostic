@@ -1,4 +1,5 @@
 import { toast } from 'sonner';
+import { siteConfig, whatsappHref } from '@/config/site';
 
 /**
  * Dynamic Third-Party Form Submission Service
@@ -50,14 +51,13 @@ export const FormsService = {
       }
     }
 
-    // Default high-reliability static client flow:
-    await new Promise((r) => setTimeout(r, 600));
-    toast.success('Appointment booked successfully! Our phlebotomist will contact you shortly.');
-
-    return {
-      success: true,
-      message: 'Booking registered and dispatched to lab coordinator'
-    };
+    const whatsappUrl = whatsappHref(
+      `New booking request: ${payload.name} | ${payload.phone} | ${payload.serviceType} | ${payload.address || 'Lab walk-in'}`
+    );
+    const message = whatsappUrl
+      ? 'No online form provider is configured. WhatsApp is ready as a manual handoff.'
+      : `Request captured locally only. Configure VITE_WEB3FORMS_ACCESS_KEY or ${siteConfig.contact.whatsapp}.`;
+    return { success: false, message };
   },
 
   /**
@@ -65,9 +65,8 @@ export const FormsService = {
    */
   dispatchToWhatsApp: (payload: FormSubmissionPayload) => {
     const text = `🏥 *NEW LAB APPOINTMENT REQUEST*\n\n*Patient Name:* ${payload.name}\n*Phone:* ${payload.phone}\n*Service/Test:* ${payload.serviceType}\n*Address:* ${payload.address || 'Lab Walk-in'}\n*Date:* ${payload.date || 'Earliest available'}\n\nPlease confirm my sample collection slot!`;
-    const url = `https://wa.me/919991941207?text=${encodeURIComponent(text)}`;
-    if (typeof window !== 'undefined') {
-      window.open(url, '_blank');
-    }
+    const url = whatsappHref(text);
+    if (url && typeof window !== 'undefined') { window.open(url, '_blank'); }
+    return url;
   }
 };

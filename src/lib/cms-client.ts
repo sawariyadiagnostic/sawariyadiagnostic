@@ -1,4 +1,5 @@
 import { medicalTests as defaultTests, healthPackages as defaultPackages, type MedicalTest, type HealthPackage } from '@/data/mockTests';
+import { registerTests, registerPackages } from '@/data/registerCatalog';
 
 /**
  * Headless CMS Client (Sanity.io & Contentful Integration)
@@ -13,8 +14,8 @@ export interface CMSConfig {
   webhookUrl?: string;
 }
 
-const STORAGE_KEY_TESTS = 'sawariya_cms_tests_v1';
-const STORAGE_KEY_PACKAGES = 'sawariya_cms_packages_v1';
+const STORAGE_KEY_TESTS = 'sawariya_cms_tests_v2_approved';
+const STORAGE_KEY_PACKAGES = 'sawariya_cms_packages_v2';
 const STORAGE_KEY_CONFIG = 'sawariya_cms_config_v1';
 
 export const CMSClient = {
@@ -55,7 +56,7 @@ export const CMSClient = {
     } catch (e) {
       console.error('Failed to parse cached CMS tests', e);
     }
-    return defaultTests;
+    return []; // Public catalog reset: publish only owner-approved records.
   },
 
   /**
@@ -70,7 +71,7 @@ export const CMSClient = {
     } catch (e) {
       console.error('Failed to parse cached CMS packages', e);
     }
-    return defaultPackages;
+    return []; // Public package catalog reset: build from approved records only.
   },
 
   /**

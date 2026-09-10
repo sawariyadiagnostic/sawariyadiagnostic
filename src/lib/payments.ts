@@ -30,61 +30,24 @@ export const PaymentsClient = {
    * Initiate Razorpay Checkout
    */
   openRazorpay: (options: PaymentOptions) => {
-    // Generate transaction ID
-    const mockTxnId = `pay_rzp_${Date.now().toString(36)}_${Math.random().toString(36).substring(2, 6)}`;
-
-    // In a live environment with window.Razorpay SDK loaded:
-    const customWin = typeof window !== 'undefined' ? (window as unknown as CustomWindow) : undefined;
-    if (customWin?.Razorpay) {
-      const rzp = new customWin.Razorpay({
-        key: 'rzp_test_SawariyaDemoKey',
-        amount: options.amount * 100,
-        currency: 'INR',
-        name: 'Sawariya Diagnostic Lab',
-        description: `Booking: ${options.testName}`,
-        image: '/public/logo.svg',
-        prefill: {
-          name: options.patientName,
-          contact: options.patientPhone,
-          email: options.patientEmail || ''
-        },
-        theme: {
-          color: '#0A6E5C'
-        },
-        handler: (response: RazorpayResponse) => {
-          toast.success(`Payment verified: ₹${options.amount} received via Razorpay!`);
-          options.onSuccess(response.razorpay_payment_id || mockTxnId);
-        }
-      });
-      rzp.open();
-      return;
-    }
-
-    // Client-side seamless simulated Razorpay processing
-    toast.loading('Connecting to Razorpay Secure Gateway...', { id: 'payment-toast' });
-    setTimeout(() => {
-      toast.success(`Payment Successful: ₹${options.amount} received!`, { id: 'payment-toast' });
-      options.onSuccess(mockTxnId);
-    }, 1200);
+    options.onFailure?.('Online payment is not configured yet. Please use pay-on-collection or contact the lab.');
+    toast.error('Online payment is not configured. No payment was taken.');
   },
 
   /**
    * Stripe Payment Link Redirection
    */
   redirectToStripe: (options: PaymentOptions) => {
-    const mockTxnId = `stripe_cs_${Date.now().toString(36)}`;
-    toast.loading('Redirecting to Stripe Secure Hosted Checkout...', { id: 'stripe-toast' });
-    setTimeout(() => {
-      toast.success(`Stripe checkout simulated: ₹${options.amount} authorized`, { id: 'stripe-toast' });
-      options.onSuccess(mockTxnId);
-    }, 1000);
+    options.onFailure?.('Stripe is not configured yet.');
+    toast.error('Online payment is not configured. No payment was taken.');
   },
 
   /**
    * Direct UPI App Intent / QR Payload Generator
    */
   generateUPIUrl: (amount: number, testName: string) => {
-    const upiId = '9991941207@okbizaxis';
+    const upiId = import.meta.env.VITE_LAB_UPI_ID || '';
+    if (!upiId) return ''; 
     const payeeName = 'Sawariya Diagnostic';
     const note = encodeURIComponent(`Test Booking: ${testName.slice(0, 25)}`);
     return `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amount}&cu=INR&tn=${note}`;

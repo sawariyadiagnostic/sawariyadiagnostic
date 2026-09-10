@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,15 +23,15 @@
   --apple-indigo: #5856D6;
 
   /* Healthcare & Natural Peacock Feather Design System Tokens */
-  --background: 210 33% 99%;
-  --foreground: 218 45% 12%;
+  --background: 36 100% 98%;
+  --foreground: 215 45% 14%;
   --card: 0 0% 100%;
   --card-foreground: 218 45% 12%;
   --popover: 0 0% 100%;
   --popover-foreground: 218 45% 12%;
   
   /* Peacock Feather Natural Harmonic Palette */
-  --primary: 195 85% 23%;             /* Deep Peacock Cerulean (#0A4D68) */
+  --primary: 210 76% 34%;             /* Deep Peacock Cerulean (#0A4D68) */
   --primary-foreground: 0 0% 100%;
   
   /* Secondary: Soft Natural Slate */
@@ -52,14 +52,14 @@
   --input: 214 20% 90%;
   --input-background: 0 0% 100%;
   --switch-background: 214 20% 90%;
-  --ring: 195 85% 23%;
+  --ring: 210 76% 34%;
 
   /* Peacock Feather Iridescent Accents */
-  --accent-teal: 184 90% 25%;        /* Rich Peacock Teal (#066163) */
-  --accent-emerald: 168 85% 28%;     /* Malachite Feather Green (#0A6E5C) */
-  --accent-blue: 216 75% 20%;        /* Midnight Sapphire (#0C223F) */
-  --accent-orange: 38 65% 50%;       /* Gilded Feather Gold (#C5A880 / #D4AF37) */
-  --accent-purple: 220 50% 30%;      /* Royal Indigo */
+  --accent-teal: 210 76% 34%;        /* Rich Peacock Teal (#066163) */
+  --accent-emerald: 0 64% 43%;     /* Malachite Feather Green (#0A6E5C) */
+  --accent-blue: 210 76% 34%;        /* Midnight Sapphire (#0C223F) */
+  --accent-orange: 0 64% 43%;       /* Gilded Feather Gold (#C5A880 / #D4AF37) */
+  --accent-purple: 25 48% 32%;      /* Royal Indigo */
 
   --radius: 1rem;
 }
@@ -142,7 +142,7 @@
   body {
     @apply bg-background text-foreground;
     font-family:
-      "Plus Jakarta Sans",
+      "DM Sans",
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -411,7 +411,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #C2410C 0%, #EA580C 42%, #D97706 78%, #F59E0B 100%);
+    background: linear-gradient(135deg, #8F1D1D 0%, #C62828 48%, #D96B43 100%);
     color: #FFFFFF !important;
     font-weight: 700;
     font-size: 0.875rem;
@@ -426,7 +426,7 @@
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #9A3412 0%, #C2410C 42%, #EA580C 78%, #F59E0B 100%);
+    background: linear-gradient(135deg, #741616 0%, #A61E1E 48%, #C62828 100%);
     border-color: rgba(254, 240, 138, 0.65);
     transform: translateY(-1.5px);
     box-shadow: 0 8px 26px rgba(234, 88, 12, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -470,7 +470,7 @@
   }
 
   /* Lush Emerald Malachite CTA (WhatsApp & Rapid Action) */
-  .btn-emerald {
+  .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -487,13 +487,13 @@
     cursor: pointer;
   }
 
-  .btn-emerald:hover {
+  .btn-secondary:hover {
     background: linear-gradient(135deg, #047857 0%, #059669 50%, #34D399 100%);
     transform: translateY(-1.5px);
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
-  .btn-emerald:active {
+  .btn-secondary:active {
     transform: scale(0.97) translateY(0);
     box-shadow: 0 2px 8px rgba(10, 110, 92, 0.25);
   }
@@ -617,9 +617,6 @@
     }
   }
 
-  .animate-liquid {
-    animation: liquid-mesh 18s ease-in-out infinite alternate;
-  }
 
   .glass-panel {
     @apply bg-white/40 backdrop-blur-[40px] border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.08)];
@@ -886,4 +883,56 @@ html {
   pointer-events: none;
   mix-blend-mode: overlay;
   z-index: 0;
+}
+
+/* Sawariya brand overrides: red lab mark, blue diagnostics, brown promise line. */
+:root { --sawariya-red: #C62828; --sawariya-blue: #155E9A; --sawariya-brown: #7A4B2A; --sawariya-cream: #FFF9F3; }
+.brand-red { color: var(--sawariya-red); }
+.brand-blue { color: var(--sawariya-blue); }
+.brand-brown { color: var(--sawariya-brown); }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--sawariya-red) 70%, white); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .float-gentle, .pulse-glow { animation: none !important; } }
+
+
+/* Canonical Sawariya + Apple-synergy layer. Keep semantic roles stable; do not add ad-hoc brand colors. */
+:root {
+  --brand-red-600: #C62828; --brand-red-700: #A61E1E;
+  --brand-blue-600: #155E9A; --brand-blue-700: #0F4775;
+  --brand-brown-700: #7A4B2A; --brand-navy-900: #102A43;
+  --surface-cream: #FFF9F3; --surface-white: #FFFFFF;
+  --text-ink: #102A43; --text-muted: #455468; --border-warm: #D7C7B8;
+  --brand-spectrum: linear-gradient(135deg, #C62828 0%, #7A4B2A 46%, #155E9A 100%);
+}
+body { background: var(--surface-cream); color: var(--text-ink); }
+body, input, button, textarea, select { font-synthesis: none; }
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+p, li, label, .text-muted-foreground { text-wrap: pretty; }
+input, textarea, select { font-size: 16px; }
+.tabular-nums, [data-price], [data-count] { font-variant-numeric: tabular-nums; }
+.btn-primary { background: var(--brand-red-600); border-color: var(--brand-red-600); box-shadow: 0 4px 18px rgb(198 40 40 / 24%); }
+.btn-primary:hover { background: var(--brand-red-700); border-color: var(--brand-red-700); box-shadow: 0 8px 24px rgb(166 30 30 / 30%); }
+.btn-secondary { background: var(--brand-blue-600); border-color: var(--brand-blue-600); }
+.btn-secondary:hover { background: var(--brand-blue-700); border-color: var(--brand-blue-700); }
+.glass-card { background: rgb(255 255 255 / 88%); border-color: rgb(215 199 184 / 70%); box-shadow: 0 8px 28px rgb(16 42 67 / 8%); }
+.glass-navbar { background: rgb(255 255 255 / 84%); border-bottom-color: rgb(215 199 184 / 60%); }
+.brand-spectrum { background: var(--brand-spectrum); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .float-gentle, .pulse-glow { animation: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass-card, .glass-navbar, .glass-panel, .glass-effect { background: var(--surface-white) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+@media (prefers-contrast: more) {
+  .glass-card, .glass-navbar, .glass-panel { border-color: var(--text-ink) !important; }
+}
+
+
+/* P3 interaction/material rules: direct feedback, opaque fallback, no decorative motion dependency. */
+button, a, input, textarea, select { touch-action: manipulation; }
+button:active, a[role="button"]:active { transform: scale(.98); }
+:focus-visible { outline: 3px solid var(--brand-blue-600); outline-offset: 3px; }
+.glass-card, .glass-navbar { transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+@media (prefers-reduced-transparency: reduce), (forced-colors: active) {
+  .glass-card, .glass-navbar, .apple-card, .glass-card:hover { background: var(--surface-white) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: 0 1px 3px rgb(16 42 67 / 14%) !important; }
 }

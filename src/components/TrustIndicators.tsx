@@ -13,7 +13,7 @@ export function TrustIndicators() {
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
-        accentBar: 'bg-[#0A3663]',
+        accentBar: 'bg-[#102A43]',
       }
     },
     {
@@ -24,38 +24,38 @@ export function TrustIndicators() {
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-cyan-50 text-cyan-800 border-cyan-200/80',
-        accentBar: 'bg-[#00A896]',
+        accentBar: 'bg-[#C62828]',
       }
     },
     {
       icon: Clock,
-      value: '24*7 Active',
+      value: 'Patient-first',
       label: 'Lab & Home Sample',
       subtext: 'Same-day 6h report time',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
-        iconBg: 'bg-emerald-50 text-emerald-800 border-emerald-200/80',
-        accentBar: 'bg-[#0A6E5C]',
+        iconBg: 'bg-green-50 text-green-800 border-green-200/80',
+        accentBar: 'bg-[#155E9A]',
       }
     },
     {
       icon: Award,
       value: '100%',
-      label: 'NABL Compliant',
+      label: 'Quality Process',
       subtext: 'ISO 9001:2015 certified',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
-        iconBg: 'bg-amber-50 text-amber-800 border-amber-200/80',
-        accentBar: 'bg-[#D97706]',
+        iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
+        accentBar: 'bg-[#7A4B2A]',
       }
     },
   ];
 
   const certifications = [
-    { name: 'NABL Accredited Lab', tag: 'bg-emerald-50 text-emerald-900 border-emerald-200/90', iconColor: 'text-emerald-600' },
+    { name: 'Quality process documented', tag: 'bg-green-50 text-green-900 border-green-200/90', iconColor: 'text-green-700' },
     { name: 'ISO 9001:2015 Certified', tag: 'bg-blue-50 text-blue-900 border-blue-200/90', iconColor: 'text-blue-600' },
-    { name: 'ICMR Guidelines Compliant', tag: 'bg-cyan-50 text-cyan-900 border-cyan-200/90', iconColor: 'text-cyan-600' },
-    { name: '24*7 Doctor On Duty', tag: 'bg-amber-50 text-amber-900 border-amber-200/90', iconColor: 'text-amber-600' },
+    { name: 'Patient records handled carefully', tag: 'bg-cyan-50 text-cyan-900 border-cyan-200/90', iconColor: 'text-cyan-600' },
+    { name: 'Support availability confirmed at booking', tag: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]', iconColor: 'text-[#7A4B2A]' },
   ];
 
   return (
@@ -63,7 +63,7 @@ export function TrustIndicators() {
       
       {/* Liquid Abstract Underlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-teal-500/5 rounded-full blur-[100px] animate-liquid mix-blend-multiply" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-[#155E9A]/5 rounded-full blur-[100px]  mix-blend-multiply" />
       </div>
 
       <div className="relative fluid-container z-10">
@@ -101,8 +101,8 @@ export function TrustIndicators() {
           className="glass-panel bg-white/70 rounded-[24px] p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-5 relative overflow-hidden"
         >
           <div className="flex items-center gap-3.5 text-center md:text-left relative z-10">
-            <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-[#072448] via-[#0D5C75] to-[#0A6E5C] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#0D5C75]/20">
-              <ShieldCheck className="w-6 h-6 text-emerald-300" />
+            <div className="w-12 h-12 rounded-[16px] bg-gradient-to-br from-[#102A43] via-[#155E9A] to-[#155E9A] text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#155E9A]/20">
+              <ShieldCheck className="w-6 h-6 text-green-300" />
             </div>
             <div>
               <h3 className="font-bold text-[#1D1D1F] text-sm sm:text-base tracking-tight">Accredited & Certified Diagnostic Facility</h3>

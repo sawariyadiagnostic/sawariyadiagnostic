@@ -12,8 +12,9 @@ interface LogoProps {
 /**
  * Premium Logo for Sawariya Diagnostic
  * Uses sophisticated typography and the new Teal/Emerald theme.
- * - "SAWARIYA" -> Reddish Brown (#7E2222) / White
- * - "DIAGNOSTIC" -> Emerald (#00A896) / Teal (#0A6E5C)
+ * - SAWARIYA -> laboratory red
+ * - DIAGNOSTIC LAB -> diagnostic blue
+ * - Detect / Diagnose / Deliver -> warm brown
  */
 export function Logo({
   variant = 'horizontal',
@@ -23,10 +24,10 @@ export function Logo({
   showTagline = true,
 }: LogoProps) {
   // Brand colors
-  const brandColor = inverted ? 'text-[#FEFEFE]' : 'text-[#7E2222]';
-  const diagColor = inverted ? 'text-[#62A2F2]' : 'text-[#17365D]';
-  const taglineColor = inverted ? 'text-teal-100/90' : 'text-slate-500';
-  const accentColor = inverted ? 'text-teal-400' : 'text-[#00A896]';
+  const brandColor = inverted ? 'text-white' : 'text-[#C62828]';
+  const diagColor = inverted ? 'text-[#B9D9FF]' : 'text-[#155E9A]';
+  const taglineColor = inverted ? 'text-[#F1D4BE]' : 'text-[#7A4B2A]';
+  const accentColor = inverted ? 'text-[#F2B38B]' : 'text-[#7A4B2A]';
 
   const sizeConfigs = {
     xs: {
@@ -67,9 +68,9 @@ export function Logo({
     <svg width="0" height="0" className="absolute pointer-events-none">
       <defs>
         <linearGradient id="sawariya-dna-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#E11D48" />
-          <stop offset="50%" stopColor="#F59E0B" />
-          <stop offset="100%" stopColor="#3B82F6" />
+          <stop offset="0%" stopColor="#C62828" />
+          <stop offset="50%" stopColor="#7A4B2A" />
+          <stop offset="100%" stopColor="#155E9A" />
         </linearGradient>
       </defs>
     </svg>
@@ -125,14 +126,14 @@ export function Logo({
   if (variant === 'badge') {
     return (
       <div className={`inline-flex flex-col bg-white/70 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.04)] select-none text-left leading-none ${className}`}>
-        <span className="font-black tracking-tight text-[#7E2222] text-sm sm:text-base">
+        <span className="font-black tracking-tight text-[#C62828] text-sm sm:text-base">
           SAWARIYA
         </span>
-        <span className="font-bold tracking-widest uppercase text-[10px] sm:text-xs text-[#17365D] mt-0.5">
+        <span className="font-bold tracking-widest uppercase text-[10px] sm:text-xs text-[#155E9A] mt-0.5">
           DIAGNOSTIC LAB
         </span>
         <span className="text-[8.5px] font-semibold text-slate-500 mt-1.5 flex items-center gap-1">
-          <ShieldCheck className="w-2.5 h-2.5 text-[#00A896]" />
+          <ShieldCheck className="w-2.5 h-2.5 text-[#7A4B2A]" />
           Detect • Diagnose • Deliver
         </span>
       </div>

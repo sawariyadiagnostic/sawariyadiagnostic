@@ -1,5 +1,6 @@
 'use client';
 
+import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { FileDown, Phone, ShieldCheck, X, Home, Calendar, MessageCircle, ChevronRight, Activity, TestTube, MapPin } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Logo } from '../ui/Logo';
@@ -17,7 +18,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
   const handleWhatsApp = () => {
     const encoded = encodeURIComponent('Hi, I want to book a blood test or health package at Sawariya Diagnostic.');
-    window.open(`https://wa.me/919991941207?text=${encoded}`, '_blank');
+    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank');
     onClose();
   };
 
@@ -55,7 +56,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
                   scrollToSection(link.href);
                   onClose();
                 }}
-                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#0A6E5C] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-all duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
+                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-all duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
               >
                 <span>{link.label}</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -81,14 +82,14 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
                 className="w-full h-12 bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
                 onClick={onClose}
               >
-                <FileDown className="w-4 h-4 text-[#0A6E5C]" />
+                <FileDown className="w-4 h-4 text-[#155E9A]" />
                 <span>Patient Reports Portal</span>
               </button>
             } />
 
             <button
               onClick={handleWhatsApp}
-              className="w-full h-12 btn-emerald text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.97] shadow-xs cursor-pointer"
+              className="w-full h-12 btn-secondary text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.97] shadow-xs cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-white" fill="white" />
               <span>WhatsApp Doctor Consultation</span>
@@ -98,25 +99,25 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
         {/* Bottom 24*7 Calling Card */}
         <div className="glass-card p-4 m-3 bg-white/60 rounded-[20px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.04)] space-y-2.5">
-          <div className="flex items-center justify-between text-xs text-[#0A6E5C] font-bold">
+          <div className="flex items-center justify-between text-xs text-[#155E9A] font-bold">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#00A896] animate-pulse" />
-              Open 24*7 Laboratory
+              <span className="w-2 h-2 rounded-full bg-[#C62828] animate-pulse" />
+              Diagnostic Laboratory
             </span>
             <span className="text-[10px] text-slate-400 font-medium">Charkhi Dadri</span>
           </div>
 
           <a
-            href="tel:+919991941207"
-            className="flex items-center justify-center gap-2 bg-[#072448] text-white rounded-[14px] py-3 px-4 text-xs font-bold shadow-xs hover:bg-[#0A3663] active:scale-[0.97] transition-all"
+            href={telHref(siteConfig.contact.phone)}
+            className="flex items-center justify-center gap-2 bg-[#102A43] text-white rounded-[14px] py-3 px-4 text-xs font-bold shadow-xs hover:bg-[#102A43] active:scale-[0.97] transition-all"
           >
-            <Phone className="w-4 h-4 text-[#FDE047]" />
-            <span>24*7 Emergency: +91 99919 41207</span>
+            <Phone className="w-4 h-4 text-[#F1C27D]" />
+            <span>Contact lab: {siteConfig.contact.phone}</span>
           </a>
 
           <div className="flex items-center justify-center gap-1.5 text-[10.5px] text-slate-500 font-medium">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>NABL Certified Diagnostic Facility</span>
+            <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
+            <span>Diagnostic facility details to be confirmed</span>
           </div>
         </div>
       </div>
