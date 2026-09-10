@@ -376,7 +376,7 @@ export function PatientReportPortal({
                     <div className="flex gap-2 pt-2 print:hidden">
                       <Button
                         onClick={handleDownloadPDF}
-                        className="flex-1 h-11 btn-primary rounded-[14px] text-xs font-bold gap-1.5"
+                        className="flex-1 action-button min-h-11 h-auto btn-primary rounded-[14px] text-xs font-bold gap-1.5"
                       >
                         <FileDown className="w-4 h-4" />
                         <span>Download Certified PDF Report ({selectedReport.fileSize})</span>
@@ -384,7 +384,7 @@ export function PatientReportPortal({
                       <Button
                         variant="outline"
                         onClick={handlePrint}
-                        className="h-11 px-4 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200"
+                        className="action-button min-h-11 h-auto px-4 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200"
                       >
                         <Printer className="w-4 h-4" />
                         <span>Print</span>

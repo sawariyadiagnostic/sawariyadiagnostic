@@ -119,7 +119,7 @@ export function ReportDownloadModal({ trigger }: { trigger?: React.ReactNode }) 
           <Button 
             type="submit" 
             disabled={loading}
-            className="w-full h-12 btn-primary rounded-[16px] font-bold text-sm shadow-md active:scale-[0.98] transition-all"
+            className="action-button w-full min-h-12 h-auto btn-primary rounded-[16px] font-bold text-sm shadow-md active:scale-[0.98] transition-all"
           >
             {loading ? (
               <>

@@ -265,7 +265,7 @@ export function TestBookingModal({
 
             <Button
               type="submit"
-              className="w-full h-12 btn-primary rounded-[16px] font-bold text-sm shadow-md mt-2 cursor-pointer"
+              className="action-button w-full min-h-12 h-auto btn-primary rounded-[16px] font-bold text-sm shadow-md mt-2 cursor-pointer"
             >
               <span>Continue to Confirmation (Pay on Collection)</span>
             </Button>
@@ -323,7 +323,7 @@ export function TestBookingModal({
                 type="button"
                 variant="outline"
                 onClick={() => setStep('DETAILS')}
-                className="h-12 rounded-[16px] text-xs font-bold px-4"
+                className="action-button min-h-12 h-auto rounded-[16px] text-xs font-bold px-4"
               >
                 Back
               </Button>
@@ -331,7 +331,7 @@ export function TestBookingModal({
                 type="button"
                 onClick={handleFinalBooking}
                 disabled={isProcessing}
-                className="flex-1 h-12 btn-primary rounded-[16px] text-xs sm:text-sm font-bold shadow-md"
+                className="action-button flex-1 min-h-12 h-auto btn-primary rounded-[16px] text-xs sm:text-sm font-bold shadow-md"
               >
                 {isProcessing ? (
                   <span className="flex items-center gap-2">
@@ -386,7 +386,7 @@ export function TestBookingModal({
 
             <Button
               onClick={resetModal}
-              className="w-full h-11 btn-primary rounded-[16px] text-xs font-bold"
+              className="action-button w-full min-h-11 h-auto btn-primary rounded-[16px] text-xs font-bold"
             >
               Done & Return to Test Catalog
             </Button>

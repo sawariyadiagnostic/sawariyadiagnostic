@@ -79,7 +79,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
             <PatientReportPortal trigger={
               <button
-                className="w-full h-12 bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
+                className="action-button w-full min-h-12 h-auto bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
                 onClick={onClose}
               >
                 <FileDown className="w-4 h-4 text-[#155E9A]" />
@@ -89,7 +89,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
             <button
               onClick={handleWhatsApp}
-              className="w-full h-12 btn-secondary text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.97] shadow-xs cursor-pointer"
+              className="action-button w-full min-h-12 h-auto btn-secondary text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.97] shadow-xs cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-white" fill="white" />
               <span>WhatsApp Doctor Consultation</span>

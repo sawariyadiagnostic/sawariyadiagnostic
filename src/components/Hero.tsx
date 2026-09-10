@@ -140,7 +140,7 @@ export function Hero() {
                     />
                     <Button 
                       type="submit" 
-                      className="bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 h-10 sm:h-12 text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
+                      className="action-button bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
                       <span>Find Test</span>

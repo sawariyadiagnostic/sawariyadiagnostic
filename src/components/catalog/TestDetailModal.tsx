@@ -151,7 +151,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             <Button
               variant="outline"
               onClick={onClose}
-              className="h-11 px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
+              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
               title="Return to catalog"
             >
               <ArrowLeft className="w-3.5 h-3.5" />

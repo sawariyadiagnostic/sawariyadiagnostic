@@ -83,7 +83,7 @@ export function Navbar({
                 <Button
                   variant="outline"
                   size="sm"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold h-9 sm:h-10 px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#155E9A] hover:bg-white hover:text-[#155E9A] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
+                  className="action-button inline-flex items-center gap-1.5 text-xs font-bold min-h-9 sm:min-h-10 h-auto px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#155E9A] hover:bg-white hover:text-[#155E9A] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
                 >
                   <FileDown className="w-3.5 h-3.5 text-[#155E9A]" />
                   <span>Patient Portal</span>

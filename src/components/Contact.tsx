@@ -120,7 +120,7 @@ export function Contact() {
                       <Button 
                         asChild
                         variant="outline"
-                        className="btn-outline h-12 px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-2xs hover:shadow-sm"
+                        className="action-button btn-outline min-h-12 h-auto px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-2xs hover:shadow-sm"
                       >
                         <a href={telHref(siteConfig.contact.phone)}>
                           <PhoneCall className="w-4 h-4 mr-2 text-[#155E9A]" />
@@ -222,7 +222,7 @@ export function Contact() {
                 <div className="w-full pt-1">
                   <Button
                     asChild
-                    className="btn-primary h-11 sm:h-12 px-4 sm:px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98] w-full sm:w-auto max-w-full"
+                    className="action-button btn-primary min-h-11 sm:min-h-12 h-auto px-4 sm:px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98] w-full sm:w-auto max-w-full"
                   >
                     <a href={footer.contact.mapsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 max-w-full">
                       <Navigation className="w-4 h-4 shrink-0" />

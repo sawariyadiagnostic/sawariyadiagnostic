@@ -262,7 +262,7 @@ export function HomeCollection() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-12 text-sm font-bold btn-primary mt-2 shadow-md hover:shadow-lg active:scale-[0.98] rounded-[18px]"
+                    className="action-button w-full min-h-12 h-auto text-sm font-bold btn-primary mt-2 shadow-md hover:shadow-lg active:scale-[0.98] rounded-[18px]"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
