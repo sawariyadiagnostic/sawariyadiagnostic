@@ -1,0 +1,4 @@
+## 2024-05-24 - Path Traversal & SSRF in Express Proxy Endpoints
+**Vulnerability:** The `/api/lis/download-report` endpoint directly concatenated user input (`patientId` and `reportId`) into an outbound fetch URL without validation or sanitization. This allowed attackers to use paths like `../../../../admin` to bypass intended routing and perform Server-Side Request Forgery (SSRF) and Path Traversal, effectively forcing the server to authenticate malicious requests to other backend endpoints.
+**Learning:** Even when making outbound requests from a secure backend to trusted APIs, all user-provided data must be treated as hostile. String concatenation for URLs is a significant attack vector if inputs aren't sanitized.
+**Prevention:** Always use strict Regex validation (e.g., `/^[a-zA-Z0-9-_]+$/`) on dynamic route parameters and wrap user inputs in `encodeURIComponent()` when constructing URLs to ensure they are treated purely as data, not structural URL components.
