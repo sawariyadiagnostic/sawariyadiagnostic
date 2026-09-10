@@ -80,6 +80,12 @@ export function TestCatalog() {
     return packages;
   }, [filteredItems, searchQuery, packages]);
 
+  // ⚡ Bolt: Cache the max bookings calculation to avoid O(N^2) evaluation during renders.
+  const maxBookings = useMemo(() => {
+    if (!packages || packages.length === 0) return 0;
+    return Math.max(...packages.map((p) => p.bookingsLast6Months ?? 0));
+  }, [packages]);
+
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
     { label: 'Sugar & Diabetes', query: 'sugar', cat: 'all' },
@@ -228,7 +234,8 @@ export function TestCatalog() {
               ) : filteredPackages.map((pkg, idx) => {
                 const listedValue = Math.max(pkg.listedValue ?? pkg.originalPrice, pkg.price);
                 const discountPercent = listedValue > pkg.price ? Math.round((1 - pkg.price / listedValue) * 100) : 0;
-                const mostBooked = pkg.bookingsLast6Months === Math.max(...packages.map((p) => p.bookingsLast6Months ?? 0));
+                // ⚡ Bolt: Use memoized maxBookings instead of mapping packages every render iteration
+                const mostBooked = pkg.bookingsLast6Months === maxBookings;
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
                   { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-[#102A43]' },
