@@ -231,12 +231,12 @@ export function Hero() {
                 <div className="relative bg-white/95 backdrop-blur-2xl rounded-[22px] sm:rounded-[27px] border-0 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-hidden">
                   
                   {/* Card Header with Official Wordmark & Verified Pill */}
-                  <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-100">
-                    <div className="min-w-0 flex-1">
-                      <Logo variant="horizontal" size="xs" showTagline={false} />
+                  <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100 flex-wrap sm:flex-nowrap">
+                    <div className="min-w-0 flex-1 basis-full sm:basis-auto">
+                      <Logo variant="horizontal" size="xs" showTagline={true} />
                       <p className="text-[10px] text-slate-400 mt-0.5 font-medium truncate">Sample #SD-2026-9082 • MD Sign-off</p>
                     </div>
-                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-800 text-[10px] sm:text-[10.5px] font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-green-200 shrink-0">
+                    <span className="order-2 sm:order-none inline-flex items-center gap-1 bg-green-50 text-green-800 text-[10px] sm:text-[10.5px] font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-green-200 shrink-0">
                       <CheckCircle2 className="w-3 h-3 text-green-700 shrink-0" /> Verified
                     </span>
                   </div>
@@ -275,7 +275,7 @@ export function Hero() {
                         <span className="text-[#7A4B2A] font-bold text-xs">2.4 mIU/L <span className="text-slate-400 font-normal">(Normal)</span></span>
                       </div>
                       <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#102A43] to-[#155E9A] h-full rounded-full w-[60%]" />
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[60%]" />
                       </div>
                     </div>
 
@@ -286,7 +286,7 @@ export function Hero() {
                         <span className="text-[#102A43] font-bold text-xs">92 mg/dL <span className="text-slate-400 font-normal">(Healthy)</span></span>
                       </div>
                       <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#102A43] to-[#155E9A] h-full rounded-full w-[52%]" />
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[52%]" />
                       </div>
                     </div>
                   </div>

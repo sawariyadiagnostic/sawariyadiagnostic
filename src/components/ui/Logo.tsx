@@ -64,6 +64,7 @@ export function Logo({
 
   const cfg = sizeConfigs[size];
   const dnaMarkSrc = `${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`;
+  const horizontalMarkClass = 'w-[42px] h-[42px] sm:w-[54px] sm:h-[54px] md:w-[63px] md:h-[63px]';
 
   const gradientDef = (
     <svg width="0" height="0" className="absolute pointer-events-none">
@@ -146,24 +147,19 @@ export function Logo({
     <div className={`inline-flex flex-col text-left leading-none select-none ${className}`}>
       {gradientDef}
       <div className="flex items-center gap-2 flex-nowrap">
-        <img src={dnaMarkSrc} alt="" className={`${cfg.icon} flex-shrink-0 object-contain`} aria-hidden="true" />
-        <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap">
-          <span className={`font-sans tracking-tight ${brandColor} ${cfg.brand}`}>
-            SAWARIYA
-          </span>
-          <span className={`font-sans uppercase ${diagColor} ${cfg.diag}`}>
-            DIAGNOSTIC
-          </span>
+        <img src={dnaMarkSrc} alt="" className={`${horizontalMarkClass} flex-shrink-0 object-contain`} aria-hidden="true" />
+        <div className="min-w-0 flex flex-col items-start leading-none">
+          <span className={`font-sans tracking-tight ${brandColor} ${cfg.brand}`}>SAWARIYA</span>
+          {showTagline && (
+            <span className={`mt-1 font-semibold tracking-wide whitespace-nowrap ${taglineColor} ${cfg.tagline}`}>
+              Detect <span className="opacity-40">|</span> Diagnose <span className="opacity-40">|</span> Deliver
+            </span>
+          )}
+          <span className={`mt-1 font-sans uppercase ${diagColor} ${cfg.diag}`}>DIAGNOSTIC LAB</span>
         </div>
       </div>
       
-      {showTagline && (
-        <div className="hidden sm:flex items-center gap-1.5 mt-1.5 ml-1 leading-none pl-6 sm:pl-8">
-          <span className={`font-semibold tracking-wide whitespace-nowrap ${taglineColor} ${cfg.tagline}`}>
-            Detect <span className="opacity-40">|</span> Diagnose <span className="opacity-40">|</span> Deliver
-          </span>
-        </div>
-      )}
+
     </div>
   );
 }
