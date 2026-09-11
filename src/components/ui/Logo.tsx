@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Dna } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface LogoProps {
   variant?: 'horizontal' | 'full' | 'badge' | 'compact';
@@ -96,7 +96,7 @@ export function Logo({
       <div className={`flex flex-col items-center text-center select-none ${className}`}>
         {gradientDef}
         <div className="flex flex-col items-center leading-none space-y-1">
-          <Dna className={`${cfg.icon} mb-2`} stroke="url(#sawariya-dna-gradient)" strokeWidth={2.2} />
+          <img src="/brand/sawariya-dna-original.svg" alt="" className={`${cfg.icon} mb-2 object-contain`} aria-hidden="true" />
           <span className={`font-black tracking-tight font-sans text-2xl sm:text-3xl lg:text-4xl ${brandColor}`}>
             SAWARIYA
           </span>
@@ -145,7 +145,7 @@ export function Logo({
     <div className={`inline-flex flex-col text-left leading-none select-none ${className}`}>
       {gradientDef}
       <div className="flex items-center gap-2 flex-nowrap">
-        <Dna className={`${cfg.icon} flex-shrink-0`} stroke="url(#sawariya-dna-gradient)" strokeWidth={2.2} />
+        <img src='/brand/sawariya-dna-original.svg' alt="" className={`${cfg.icon} flex-shrink-0 object-contain`} aria-hidden="true" />
         <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap">
           <span className={`font-sans tracking-tight ${brandColor} ${cfg.brand}`}>
             SAWARIYA
