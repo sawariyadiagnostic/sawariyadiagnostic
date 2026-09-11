@@ -34,37 +34,37 @@ export function Logo({
       brand: 'text-base sm:text-lg font-black tracking-tight leading-none',
       diag: 'text-xs sm:text-sm font-bold tracking-widest leading-none',
       tagline: 'text-[8px] xs:text-[9px]',
-      icon: 'w-[54px] h-[54px] sm:w-[63px] sm:h-[63px]',
+      icon: 'w-[42px] h-[42px] sm:w-[48px] sm:h-[48px]',
     },
     sm: {
       brand: 'text-lg sm:text-xl md:text-2xl font-black tracking-tight leading-none',
       diag: 'text-xs sm:text-sm md:text-base font-bold tracking-widest leading-none',
       tagline: 'text-[8.5px] xs:text-[9.5px] sm:text-[10.5px]',
-      icon: 'w-[63px] h-[63px] sm:w-[72px] sm:h-[72px] md:w-[81px] md:h-[81px]',
+      icon: 'w-[48px] h-[48px] sm:w-[54px] sm:h-[54px] md:w-[60px] md:h-[60px]',
     },
     md: {
       brand: 'text-xl sm:text-2xl md:text-[26px] font-black tracking-tight leading-none',
       diag: 'text-sm sm:text-base md:text-[17px] font-bold tracking-widest leading-tight',
       tagline: 'text-[10px] sm:text-xs',
-      icon: 'w-[72px] h-[72px] sm:w-[81px] sm:h-[81px] md:w-[90px] md:h-[90px]',
+      icon: 'w-[54px] h-[54px] sm:w-[60px] sm:h-[60px] md:w-[66px] md:h-[66px]',
     },
     lg: {
       brand: 'text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-none',
       diag: 'text-base sm:text-xl lg:text-2xl font-bold tracking-widest leading-none',
       tagline: 'text-xs sm:text-sm',
-      icon: 'w-[90px] h-[90px] sm:w-[108px] sm:h-[108px] md:w-[126px] md:h-[126px]',
+      icon: 'w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] md:w-[96px] md:h-[96px]',
     },
     xl: {
       brand: 'text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none',
       diag: 'text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest leading-none',
       tagline: 'text-sm sm:text-base',
-      icon: 'w-[108px] h-[108px] sm:w-[126px] sm:h-[126px] md:w-[144px] md:h-[144px]',
+      icon: 'w-[84px] h-[84px] sm:w-[96px] sm:h-[96px] md:w-[108px] md:h-[108px]',
     },
   };
 
   const cfg = sizeConfigs[size];
   const dnaMarkSrc = `${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`;
-  const horizontalMarkClass = 'w-[42px] h-[42px] sm:w-[54px] sm:h-[54px] md:w-[63px] md:h-[63px]';
+  const horizontalMarkClass = 'w-[42px] h-[42px] sm:w-[54px] sm:h-[54px] md:w-[60px] md:h-[60px]';
 
   const gradientDef = (
     <svg width="0" height="0" className="absolute pointer-events-none">
@@ -146,13 +146,13 @@ export function Logo({
   return (
     <div className={`inline-flex flex-col text-left leading-none select-none ${className}`}>
       {gradientDef}
-      <div className="flex items-center gap-2 flex-nowrap">
+      <div className="flex items-center gap-[6px] sm:gap-2 flex-nowrap">
         <img src={dnaMarkSrc} alt="" className={`${horizontalMarkClass} flex-shrink-0 object-contain`} aria-hidden="true" />
         <div className="min-w-0 flex flex-col items-start justify-center leading-none">
           <span className={`font-sans tracking-tight ${brandColor} ${cfg.brand}`}>SAWARIYA</span>
-          <span className={`mt-1 font-sans uppercase ${diagColor} ${cfg.diag}`}>DIAGNOSTIC LAB</span>
+          <span className={`mt-0.5 font-sans uppercase ${diagColor} ${cfg.diag}`}>DIAGNOSTIC LAB</span>
           {showTagline && (
-            <span className={`mt-1 font-semibold tracking-wide whitespace-nowrap ${taglineColor} ${cfg.tagline}`}>
+            <span className={`mt-1.5 font-semibold tracking-wide whitespace-nowrap ${taglineColor} ${cfg.tagline}`}>
               Detect <span className="opacity-40">|</span> Diagnose <span className="opacity-40">|</span> Deliver
             </span>
           )}

@@ -37,7 +37,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
         <div className="p-5">
           {/* Header with Logo */}
           <div className="flex items-center justify-between pb-4 border-b border-black/[0.06]">
-            <Logo variant="horizontal" size="xs" showTagline={false} />
+            <Logo variant="horizontal" size="xs" showTagline={true} />
             <button
               onClick={onClose}
               className="w-9 h-9 flex items-center justify-center rounded-full text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-all cursor-pointer border border-white/80"
