@@ -27,3 +27,6 @@ dist-ssr
 har_files/
 stats.html
 analyze_har.cjs
+
+# Hermes desktop attachments are source inputs, not release assets
+.hermes/desktop-attachments/
