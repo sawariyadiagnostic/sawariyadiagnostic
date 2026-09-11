@@ -63,6 +63,7 @@ export function Logo({
   };
 
   const cfg = sizeConfigs[size];
+  const dnaMarkSrc = `${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`;
 
   const gradientDef = (
     <svg width="0" height="0" className="absolute pointer-events-none">
@@ -96,7 +97,7 @@ export function Logo({
       <div className={`flex flex-col items-center text-center select-none ${className}`}>
         {gradientDef}
         <div className="flex flex-col items-center leading-none space-y-1">
-          <img src="/brand/sawariya-dna-original.svg" alt="" className={`${cfg.icon} mb-2 object-contain`} aria-hidden="true" />
+          <img src={dnaMarkSrc} alt="" className={`${cfg.icon} mb-2 object-contain`} aria-hidden="true" />
           <span className={`font-black tracking-tight font-sans text-2xl sm:text-3xl lg:text-4xl ${brandColor}`}>
             SAWARIYA
           </span>
@@ -145,7 +146,7 @@ export function Logo({
     <div className={`inline-flex flex-col text-left leading-none select-none ${className}`}>
       {gradientDef}
       <div className="flex items-center gap-2 flex-nowrap">
-        <img src='/brand/sawariya-dna-original.svg' alt="" className={`${cfg.icon} flex-shrink-0 object-contain`} aria-hidden="true" />
+        <img src={dnaMarkSrc} alt="" className={`${cfg.icon} flex-shrink-0 object-contain`} aria-hidden="true" />
         <div className="flex items-baseline gap-1 sm:gap-1.5 flex-nowrap">
           <span className={`font-sans tracking-tight ${brandColor} ${cfg.brand}`}>
             SAWARIYA
