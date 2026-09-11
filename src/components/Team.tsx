@@ -1,118 +1,63 @@
-'use client';
-
 import { motion } from 'framer-motion';
-import { Stethoscope, ShieldCheck } from 'lucide-react';
-import { team } from '@/data/website-content';
+import { Microscope, ShieldCheck, Users, ClipboardCheck, Truck, Stethoscope, FlaskConical, UserRound } from 'lucide-react';
+import { teamStructure, type TeamRole } from '@/data/team-structure';
+
+const governanceIcons = [Stethoscope, ShieldCheck, ClipboardCheck, Microscope, Truck];
+const operationsIcons = [FlaskConical, Microscope, UserRound, Users];
+
+function RoleCard({ role, index }: { role: TeamRole; index: number }) {
+  const Icon = role.tier === 'governance' ? governanceIcons[index % governanceIcons.length] : operationsIcons[index % operationsIcons.length];
+  const isGovernance = role.tier === 'governance';
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay: index * 0.05 }}
+      viewport={{ once: true, margin: '-40px' }}
+      className={`relative flex h-full flex-col overflow-hidden rounded-[22px] border p-5 shadow-[0_8px_28px_rgba(16,42,67,0.06)] ${isGovernance ? 'border-[#102A43]/10 bg-[#102A43] text-[#F5F5F7]' : 'border-[#D7C7B8]/70 bg-white/90 text-[#1D1D1F]'}`}
+    >
+      <div className={`absolute inset-x-0 top-0 h-1 ${isGovernance ? 'bg-[#C62828]' : 'bg-[#155E9A]'}`} />
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] border ${isGovernance ? 'border-white/15 bg-white/10 text-[#B9D9FF]' : 'border-[#155E9A]/15 bg-[#E8F1F8] text-[#0F4775]'}`}>
+          <Icon className="h-5 w-5" aria-hidden="true" />
+        </div>
+        {role.publishState === 'owner-review' && <span className={`rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-wider ${isGovernance ? 'bg-white/10 text-[#E8C8AE]' : 'bg-[#FFF9F3] text-[#7A4B2A]'}`}>Role profile</span>}
+      </div>
+      <h3 className="text-base font-bold leading-tight">{role.label}</h3>
+      <p className={`mt-2 text-xs leading-relaxed ${isGovernance ? 'text-slate-200' : 'text-slate-600'}`}>{role.shortDescription}</p>
+      <ul className={`mt-4 space-y-2 border-t pt-4 text-[11px] leading-relaxed ${isGovernance ? 'border-white/15 text-slate-200' : 'border-slate-100 text-slate-600'}`}>
+        {role.responsibilities.map((item) => <li key={item} className="flex gap-2"><span className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${isGovernance ? 'bg-[#E54848]' : 'bg-[#155E9A]'}`} />{item}</li>)}
+      </ul>
+    </motion.article>
+  );
+}
 
 export function Team() {
-  const teamMembers = team.members;
-
+  const governance = teamStructure.filter((role) => role.tier === 'governance' && role.publishState === 'public');
+  const operations = teamStructure.filter((role) => role.tier === 'operations');
   return (
-    <section id="team" className="relative fluid-section bg-[#FBFBFD] overflow-hidden">
-      
-      {/* Liquid Mesh Overlay */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] left-[-10%] w-[40vw] h-[40vw] bg-blue-300/10 blur-[80px]  mix-blend-multiply" />
-      </div>
-
-      <div className="fluid-container relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-          <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-[#155E9A]/20 px-3.5 py-1 rounded-full shadow-2xs">
-            <Stethoscope className="w-3.5 h-3.5 text-[#155E9A]" />
-            <span className="text-[11px] font-bold text-[#155E9A] uppercase tracking-wider">Clinical Leadership</span>
+    <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#FBFBFD] fluid-section">
+      <div className="pointer-events-none absolute left-[-10%] top-[20%] h-[40vw] w-[40vw] bg-[#155E9A]/5 blur-[80px]" />
+      <div className="relative z-10 fluid-container">
+        <header className="mx-auto mb-9 max-w-3xl space-y-3 text-center sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-[#155E9A]/20 bg-white/70 px-3.5 py-1 shadow-2xs">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#155E9A]" aria-hidden="true" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#155E9A]">Laboratory Team &amp; Quality Structure</span>
           </div>
-          
-          <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#1D1D1F] tracking-tight leading-tight">
-            Led by Experienced Medical Specialists
-          </h2>
-          
-          <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Every test report is evaluated, validated, and signed by qualified pathologists and diagnostic consultants
-          </p>
-        </div>
+          <h2 id="team-heading" className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black leading-tight tracking-tight text-[#1D1D1F]">A quality system built around accountable roles.</h2>
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">Clinical oversight, quality ownership, technical control, and coordinated collection—working together across the diagnostic journey.</p>
+        </header>
 
-        {/* Team Grid */}
-        <div className="fluid-grid-cards-md max-w-5xl mx-auto">
-          {teamMembers.map((member, index) => {
-            const memberThemes = [
-              {
-                ring: 'ring-blue-100 group-hover:ring-blue-300',
-                roleColor: 'text-[#102A43]',
-                avatarBg: '0A3663',
-                avatarText: '93C5FD',
-                qualTag: 'bg-blue-50 text-blue-900 border-blue-200/80',
-                accentBar: 'bg-[#102A43]',
-              },
-              {
-                ring: 'ring-emerald-100 group-hover:ring-emerald-300',
-                roleColor: 'text-[#155E9A]',
-                avatarBg: '0A6E5C',
-                avatarText: 'A7F3D0',
-                qualTag: 'bg-green-50 text-[#102A43] border-green-200/80',
-                accentBar: 'bg-[#155E9A]',
-              },
-              {
-                ring: 'ring-purple-100 group-hover:ring-purple-300',
-                roleColor: 'text-[#581C87]',
-                avatarBg: '581C87',
-                avatarText: 'E9D5FF',
-                qualTag: 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8]',
-                accentBar: 'bg-[#581C87]',
-              },
-            ];
-            const theme = memberThemes[index % memberThemes.length];
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-4 flex items-center gap-3"><span className="h-px flex-1 bg-[#D7C7B8]" /><h3 className="shrink-0 text-xs font-bold uppercase tracking-[0.16em] text-[#102A43]">Clinical &amp; Laboratory Governance</h3><span className="h-px flex-1 bg-[#D7C7B8]" /></div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{governance.map((role, index) => <RoleCard key={role.id} role={role} index={index} />)}</div>
 
-            return (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
-                viewport={{ once: true }}
-                className="glass-card p-6 text-center group flex flex-col justify-between bg-white/70 rounded-[26px] border border-white/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden"
-              >
-                {/* Top Accent Bar */}
-                <div className={`absolute top-0 left-0 right-0 h-1 ${theme.accentBar}`} />
+          <div className="mt-10 rounded-[26px] border border-[#D7C7B8]/70 bg-white/90 p-5 shadow-[0_8px_28px_rgba(16,42,67,0.05)] sm:mt-12 sm:p-7">
+            <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between"><div><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#155E9A]">Core operations team</p><h3 className="mt-1 text-xl font-bold tracking-tight text-[#1D1D1F]">The people behind every controlled handoff.</h3></div><p className="max-w-md text-xs leading-relaxed text-slate-500">Defined roles support the journey from patient identification and collection through technical workflow and report delivery.</p></div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{operations.map((role, index) => <RoleCard key={role.id} role={role} index={index} />)}</div>
+          </div>
 
-                <div>
-                  {/* Avatar */}
-                  <div className="relative mb-4 mx-auto">
-                    <div className={`w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ${theme.ring} transition-all flex items-center justify-center shadow-md`}>
-                      <img
-                        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=${theme.avatarBg}&color=${theme.avatarText}&size=200&bold=true`}
-                        alt={`Portrait of ${member.name}, ${member.role} at Sawariya Diagnostic Lab`}
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Info */}
-                  <h3 className="font-bold text-lg text-[#1D1D1F] mb-0.5 leading-snug">
-                    {member.name}
-                  </h3>
-                  <p className={`font-bold text-xs sm:text-sm mb-2 ${theme.roleColor}`}>
-                    {member.role}
-                  </p>
-                  <div className="mb-3">
-                    <span className={`text-[11px] font-bold px-3 py-0.5 rounded-full inline-block border ${theme.qualTag}`}>
-                      {member.qualification}
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                    {member.bio}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-center gap-1.5 text-xs text-slate-600 font-medium">
-                  <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
-                  <span>Clinical review workflow</span>
-                </div>
-              </motion.div>
-            );
-          })}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-full border border-[#102A43]/10 bg-[#102A43] px-5 py-3 text-center text-[10px] font-bold uppercase tracking-wider text-[#F5F5F7] sm:gap-5"><span>Clinical oversight</span><span className="text-[#E54848]">·</span><span>Quality ownership</span><span className="text-[#E54848]">·</span><span>Technical control</span><span className="text-[#E54848]">·</span><span>Coordinated collection</span></div>
         </div>
       </div>
     </section>
