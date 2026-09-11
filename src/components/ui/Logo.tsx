@@ -34,31 +34,31 @@ export function Logo({
       brand: 'text-base sm:text-lg font-black tracking-tight leading-none',
       diag: 'text-xs sm:text-sm font-bold tracking-widest leading-none',
       tagline: 'text-[8px] xs:text-[9px]',
-      icon: 'w-9 h-9 sm:w-[42px] sm:h-[42px]',
+      icon: 'w-[54px] h-[54px] sm:w-[63px] sm:h-[63px]',
     },
     sm: {
       brand: 'text-lg sm:text-xl md:text-2xl font-black tracking-tight leading-none',
       diag: 'text-xs sm:text-sm md:text-base font-bold tracking-widest leading-none',
       tagline: 'text-[8.5px] xs:text-[9.5px] sm:text-[10.5px]',
-      icon: 'w-[42px] h-[42px] sm:w-12 sm:h-12 md:w-[54px] md:h-[54px]',
+      icon: 'w-[63px] h-[63px] sm:w-[72px] sm:h-[72px] md:w-[81px] md:h-[81px]',
     },
     md: {
       brand: 'text-xl sm:text-2xl md:text-[26px] font-black tracking-tight leading-none',
       diag: 'text-sm sm:text-base md:text-[17px] font-bold tracking-widest leading-tight',
       tagline: 'text-[10px] sm:text-xs',
-      icon: 'w-12 h-12 sm:w-[54px] sm:h-[54px] md:w-15 md:h-15',
+      icon: 'w-[72px] h-[72px] sm:w-[81px] sm:h-[81px] md:w-[90px] md:h-[90px]',
     },
     lg: {
       brand: 'text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-none',
       diag: 'text-base sm:text-xl lg:text-2xl font-bold tracking-widest leading-none',
       tagline: 'text-xs sm:text-sm',
-      icon: 'w-[60px] h-[60px] sm:w-[72px] sm:h-[72px] md:w-[84px] md:h-[84px]',
+      icon: 'w-[90px] h-[90px] sm:w-[108px] sm:h-[108px] md:w-[126px] md:h-[126px]',
     },
     xl: {
       brand: 'text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none',
       diag: 'text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest leading-none',
       tagline: 'text-sm sm:text-base',
-      icon: 'w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] md:w-24 md:h-24',
+      icon: 'w-[108px] h-[108px] sm:w-[126px] sm:h-[126px] md:w-[144px] md:h-[144px]',
     },
   };
 
