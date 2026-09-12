@@ -2,8 +2,9 @@
 
 ## Applied fixes
 
-- Added a keyboard-visible skip link to the main content.
-- Added scroll positioning support for focused anchors.
+- Consolidated semantic, spacing, typography, motion, surface, and brand roles into `src/styles/tokens.css`; `src/index.css` now imports the token layer.
+- Added approved-only bilingual guide route support with GitHub Pages base-path handling, canonical URLs, reciprocal `hreflang`, language metadata, sitemap inclusion, and MedicalWebPage JSON-LD when approved records exist.
+
 - Replaced loading `...` with the typographic ellipsis `…`.
 - Replaced broad CSS `transition: all` declarations with explicit transition properties.
 - Preserved visible focus styling and verified serious/critical axe results.
@@ -17,8 +18,15 @@
 - `npm run typecheck`: passed.
 - `npm run lint`: passed with 0 errors and 6 existing Fast Refresh warnings.
 - `npm run test:e2e -- --workers=1`: 2 tests passed.
+- `npm run test:a11y -- --workers=1`: 1 test passed.
+- `npm run validate:content`: 0 records, 0 publishable.
 - `npm run build`: passed; 84 static pages generated; no SSG write warnings.
-- Unsupported-claim scan for active `src/`, `public/`, `scripts/`, and `index.html`: clean for the removed accreditation/accuracy/report phrases.
+- `npm ci --ignore-scripts --dry-run`: passed.
+- `npm audit --omit=dev --audit-level=high`: 0 production vulnerabilities.
+- Two consecutive build output hashes were identical.
+- Markdown link scan: 60 files, 0 broken internal links.
+- Active source claim/integration scan: no removed accreditation, accuracy, report, LIS, analytics, Web3Forms, or localStorage strings.
+- Generated output: 86 HTML files including catalog routes and 404; no report portal route; 0 guide routes because no guide has approval.
 
 ## Remaining known warning
 

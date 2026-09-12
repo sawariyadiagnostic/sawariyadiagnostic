@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { medicalTests, healthPackages } from '../src/data/mockTests';
+import { approvedGuideManifest } from '../src/data/approvedGuideManifest';
 import { generateOgImage } from './generate-og-image';
 
 const BASE_URL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic';
@@ -12,6 +13,8 @@ interface RouteConfig {
   description: string;
   type: string;
   jsonLd: Record<string, unknown>;
+  language?: 'en' | 'hi';
+  alternatePath?: string;
 }
 
 function ensureDirectoryExistence(filePath: string) {
@@ -20,7 +23,7 @@ function ensureDirectoryExistence(filePath: string) {
 }
 
 function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): string {
-  let html = baseIndexHtml;
+  let html = baseIndexHtml.replace(/<html lang="[^"]*">/i, `<html lang="${config.language === 'hi' ? 'hi' : 'en'}">`);
   html = html.replace(/<title>.*?<\/title>/i, `<title>${config.title}</title>`);
   html = html.replace(
     /<meta\s+name="description"\s+content=".*?"\s*\/?>/i,
@@ -36,8 +39,13 @@ function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): strin
   );
 
   const canonicalUrl = `${BASE_URL}/${config.path}`;
+  const languageLinks = config.alternatePath
+    ? `
+    <link rel="alternate" hreflang="${config.language === 'hi' ? 'hi' : 'en'}" href="${canonicalUrl}" />
+    <link rel="alternate" hreflang="${config.language === 'hi' ? 'en' : 'hi'}" href="${BASE_URL}/${config.alternatePath}" />`
+    : '';
   const headInject = `
-    <link rel="canonical" href="${canonicalUrl}" />
+    <link rel="canonical" href="${canonicalUrl}" />${languageLinks}
     <meta property="og:url" content="${canonicalUrl}" />
     <meta name="twitter:title" content="${config.title}" />
     <meta name="twitter:description" content="${config.description}" />
@@ -82,6 +90,36 @@ export function buildSSG() {
       description: `${pkg.name} includes ${pkg.testsIncluded.length} key tests: ${pkg.testsIncluded.slice(0, 3).join(', ')}. Home collection availability is confirmed separately.`,
       type: 'Product',
       jsonLd: { '@context': 'https://schema.org', '@type': 'Product', name: pkg.name, description: pkg.description, url: `${BASE_URL}/package/${pkg.id}.html`, offers: { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock' } },
+    });
+  }
+
+  for (const guide of approvedGuideManifest) {
+    const guideJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      name: guide.titleEn,
+      description: guide.summaryEn,
+      url: `${BASE_URL}/guide/${guide.slug}.html`,
+      inLanguage: 'en',
+      about: { '@type': 'MedicalTest', name: guide.titleEn },
+    };
+    routes.push({
+      path: `guide/${guide.slug}.html`,
+      title: `${guide.titleEn} | Sawariya Diagnostic`,
+      description: guide.summaryEn,
+      type: 'MedicalWebPage',
+      language: 'en',
+      alternatePath: `guide/${guide.slug}-hi.html`,
+      jsonLd: guideJsonLd,
+    });
+    routes.push({
+      path: `guide/${guide.slug}-hi.html`,
+      title: `${guide.titleHi} | Sawariya Diagnostic`,
+      description: guide.summaryHi,
+      type: 'MedicalWebPage',
+      language: 'hi',
+      alternatePath: `guide/${guide.slug}.html`,
+      jsonLd: { ...guideJsonLd, name: guide.titleHi, description: guide.summaryHi, url: `${BASE_URL}/guide/${guide.slug}-hi.html`, inLanguage: 'hi' },
     });
   }
 

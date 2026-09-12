@@ -1,4 +1,4 @@
-import { BookOpen, Calendar, CheckCircle2, ExternalLink, MessageCircle, Phone } from 'lucide-react';
+import { BookOpen, Calendar, MessageCircle, Phone } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { approvedGuideManifest, type ApprovedGuideRecord } from '@/data/approvedGuideManifest';
 import { Button } from './ui/button';
@@ -27,7 +27,7 @@ export function TestGuidePage({ guide, language = 'en' }: TestGuidePageProps) {
           <p className="max-w-2xl text-base leading-relaxed text-slate-600">{summary}</p>
           <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500">
             <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4" aria-hidden="true" />Reviewed {guide.lastReviewedAt.slice(0, 10)}</span>
-            <a className="font-bold text-[#155E9A] underline" href={`?language=${alternateLanguage}`}>View {alternateLanguage === 'hi' ? 'Hindi' : 'English'}</a>
+            <a className="font-bold text-[#155E9A] underline" href={`${import.meta.env.BASE_URL}guide/${guide.slug}${alternateLanguage === 'hi' ? '-hi' : ''}.html`}>View {alternateLanguage === 'hi' ? 'Hindi' : 'English'}</a>
           </div>
         </header>
 

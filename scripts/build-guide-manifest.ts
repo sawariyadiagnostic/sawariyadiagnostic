@@ -22,13 +22,25 @@ function readGuideRecords(directory: string): PublishedGuideRecord[] {
   if (!fs.existsSync(directory)) return [];
 
   const records: PublishedGuideRecord[] = [];
-  for (const file of fs.readdirSync(directory).filter((entry) => entry.endsWith('.json')).sort()) {
-    const source = JSON.parse(fs.readFileSync(path.join(directory, file), 'utf8'));
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true }).filter((item) => item.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+    const file = `${entry.name}/guide.json`;
+    const metadataPath = path.join(directory, entry.name, 'guide.json');
+    if (!fs.existsSync(metadataPath)) throw new Error(`${file}: guide.json is required`);
+    const source = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
     const parsed = bilingualGuideSchema.safeParse(source);
     if (!parsed.success) {
       throw new Error(`${file}: ${parsed.error.issues.map((issue) => issue.message).join('; ')}`);
     }
+    if (parsed.data.slug !== entry.name) {
+      throw new Error(`${file}: slug must match its guide directory`);
+    }
     if (!isPublishableGuide(parsed.data)) continue;
+
+    const expectedEnglishPath = `content/test-guides/${entry.name}/en.md`;
+    const expectedHindiPath = `content/test-guides/${entry.name}/hi.md`;
+    if (parsed.data.englishPath !== expectedEnglishPath || parsed.data.hindiPath !== expectedHindiPath) {
+      throw new Error(`${file}: language paths must point to this guide directory`);
+    }
 
     const englishPath = path.resolve(process.cwd(), parsed.data.englishPath);
     const hindiPath = path.resolve(process.cwd(), parsed.data.hindiPath);

@@ -1,0 +1,139 @@
+/* Sawariya design tokens: brand, semantic state, type, spacing, motion, and surfaces. */
+:root {
+  --font-size: 16px;
+  --font-weight-normal: 400;
+
+  /* Semantic UI roles */
+  --background: 36 100% 98%;
+  --foreground: 215 45% 14%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 45% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 218 45% 12%;
+  --primary: 210 76% 34%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 25% 95%;
+  --secondary-foreground: 218 45% 12%;
+  --muted: 210 20% 95%;
+  --muted-foreground: 215 16% 45%;
+  --accent: 190 60% 94%;
+  --accent-foreground: 195 85% 23%;
+  --destructive: 0 84.2% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 20% 90%;
+  --input: 214 20% 90%;
+  --input-background: 0 0% 100%;
+  --switch-background: 214 20% 90%;
+  --ring: 210 76% 34%;
+
+  /* Existing semantic accent API used by Tailwind classes. */
+  --accent-teal: 210 76% 34%;
+  --accent-emerald: 0 64% 43%;
+  --accent-blue: 210 76% 34%;
+  --accent-orange: 0 64% 43%;
+  --accent-purple: 25 48% 32%;
+
+  /* Fluid type and spacing scale. */
+  --fluid-font-display: clamp(2rem, 1.25rem + 3.75vw, 4.25rem);
+  --fluid-font-h1: clamp(1.75rem, 1.15rem + 3vw, 3.5rem);
+  --fluid-font-h2: clamp(1.45rem, 1.05rem + 2vw, 2.65rem);
+  --fluid-font-h3: clamp(1.2rem, 0.95rem + 1.25vw, 1.75rem);
+  --fluid-font-h4: clamp(1.05rem, 0.92rem + 0.65vw, 1.35rem);
+  --fluid-font-lead: clamp(0.95rem, 0.85rem + 0.5vw, 1.2rem);
+  --fluid-font-body: clamp(0.875rem, 0.82rem + 0.28vw, 1.025rem);
+  --fluid-font-caption: clamp(0.725rem, 0.68rem + 0.22vw, 0.875rem);
+  --fluid-section-py: clamp(2.5rem, 1.5rem + 5vw, 6.5rem);
+  --fluid-container-px: clamp(0.75rem, 0.4rem + 3vw, 3.25rem);
+  --fluid-gap-xs: clamp(0.375rem, 0.25rem + 0.5vw, 0.625rem);
+  --fluid-gap-sm: clamp(0.5rem, 0.35rem + 0.75vw, 1rem);
+  --fluid-gap-md: clamp(0.875rem, 0.65rem + 1.1vw, 1.75rem);
+  --fluid-gap-lg: clamp(1.25rem, 0.95rem + 1.5vw, 2.5rem);
+  --fluid-card-p: clamp(0.875rem, 0.75rem + 1.25vw, 1.85rem);
+  --fluid-radius: clamp(0.875rem, 0.65rem + 1vw, 1.5rem);
+
+  /* Approved Sawariya roles. */
+  --sawariya-red: #C62828;
+  --sawariya-blue: #155E9A;
+  --sawariya-brown: #7A4B2A;
+  --sawariya-cream: #FFF9F3;
+  --brand-red-600: #C62828;
+  --brand-red-700: #A61E1E;
+  --brand-red-deep: #A61E1E;
+  --brand-red-dark: #7F1717;
+  --brand-blue-600: #155E9A;
+  --brand-blue-700: #0F4775;
+  --brand-blue: #155E9A;
+  --brand-blue-deep: #0F4775;
+  --brand-brown-700: #7A4B2A;
+  --brand-brown: #7A4B2A;
+  --brand-navy-900: #102A43;
+  --brand-navy: #102A43;
+  --brand-graphite: #1D1D1F;
+  --brand-off-white: #F5F5F7;
+  --surface-cream: #FFF9F3;
+  --surface-paper: #FFF9F3;
+  --surface-white: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --text-ink: #102A43;
+  --text-muted: #455468;
+  --text-secondary: #455468;
+  --border-warm: #D7C7B8;
+  --brand-spectrum: linear-gradient(135deg, #A61E1E 0%, #7A4B2A 46%, #155E9A 100%);
+
+  --radius: 1rem;
+}
+
+.dark {
+  --background: 218 55% 6%;
+  --foreground: 210 33% 98%;
+  --card: 218 50% 9%;
+  --card-foreground: 210 33% 98%;
+  --popover: 218 50% 9%;
+  --popover-foreground: 210 33% 98%;
+  --primary: 188 85% 42%;
+  --primary-foreground: 218 55% 6%;
+  --secondary: 217 30% 15%;
+  --secondary-foreground: 210 33% 98%;
+  --muted: 217 30% 15%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 188 40% 16%;
+  --accent-foreground: 210 33% 98%;
+  --destructive: 0 62.8% 50.6%;
+  --destructive-foreground: 210 33% 98%;
+  --border: 217 28% 18%;
+  --input: 217 28% 18%;
+  --ring: 188 85% 42%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-input-background: hsl(var(--input-background));
+  --color-switch-background: hsl(var(--switch-background));
+  --color-ring: hsl(var(--ring));
+  --color-accent-blue: hsl(var(--accent-blue));
+  --color-accent-emerald: hsl(var(--accent-emerald));
+  --color-accent-purple: hsl(var(--accent-purple));
+  --color-accent-teal: hsl(var(--accent-teal));
+  --color-accent-orange: hsl(var(--accent-orange));
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+}

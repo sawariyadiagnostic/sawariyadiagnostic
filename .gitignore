@@ -28,5 +28,8 @@ har_files/
 stats.html
 analyze_har.cjs
 
+test-results/
+playwright-report/
+
 # Hermes desktop attachments are source inputs, not release assets
 .hermes/desktop-attachments/
