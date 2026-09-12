@@ -192,8 +192,8 @@ export function Hero() {
                     <Clock className="w-4 h-4 text-blue-700" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Same Day</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">6h Digital Report</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Current estimates</p>
+                                        <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Confirmed by test</p>
                   </div>
                 </div>
 

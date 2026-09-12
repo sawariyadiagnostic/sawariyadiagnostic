@@ -73,13 +73,13 @@ export function buildSSG() {
   for (const test of medicalTests) {
     routes.push({
       path: `test/${test.id}.html`,
-      title: `${test.name} - Price, Fasting, Turnaround | Sawariya Diagnostic Lab`,
-      description: `Book ${test.name} at ₹${test.price} (Original ₹${test.originalPrice || test.price}). Fast turnaround in ${test.turnaroundTime} with home sample collection availability subject to confirmation across Charkhi Dadri.`,
+      title: `${test.name} - Price, Preparation & Details | Sawariya Diagnostic Lab`,
+            description: `${test.name} is listed at ₹${test.price}. Review preparation, test details, and current availability with the lab.`,
       type: 'MedicalTest',
       jsonLd: {
         '@context': 'https://schema.org', '@type': 'MedicalTest', name: test.name,
         description: test.description, url: `${BASE_URL}/test/${test.id}.html`,
-        offers: { '@type': 'Offer', price: test.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock', seller: { '@type': 'DiagnosticLab', name: 'Sawariya Diagnostic Lab' } },
+        offers: { '@type': 'Offer', price: test.price, priceCurrency: 'INR', seller: { '@type': 'DiagnosticLab', name: 'Sawariya Diagnostic Lab' } },
       },
     });
   }
@@ -89,7 +89,7 @@ export function buildSSG() {
       title: `${pkg.name} Health Checkup Package - ₹${pkg.price} | Sawariya Diagnostic`,
       description: `${pkg.name} includes ${pkg.testsIncluded.length} key tests: ${pkg.testsIncluded.slice(0, 3).join(', ')}. Home collection availability is confirmed separately.`,
       type: 'Product',
-      jsonLd: { '@context': 'https://schema.org', '@type': 'Product', name: pkg.name, description: pkg.description, url: `${BASE_URL}/package/${pkg.id}.html`, offers: { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock' } },
+      jsonLd: { '@context': 'https://schema.org', '@type': 'Product', name: pkg.name, description: pkg.description, url: `${BASE_URL}/package/${pkg.id}.html`, offers: { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR' } },
     });
   }
 

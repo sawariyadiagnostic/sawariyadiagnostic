@@ -116,8 +116,8 @@ export const hero = {
   trustIndicators: [
     {
       icon: Clock,
-      title: 'Same Day',
-      subtitle: 'Reports',
+      title: 'Current estimates',
+            subtitle: 'Confirmed by test',
       color: 'accent-emerald'
     },
     {
@@ -128,8 +128,8 @@ export const hero = {
     },
     {
       icon: Users,
-      title: '24/7 Support',
-      subtitle: 'Available',
+      title: 'Lab contact',
+            subtitle: 'Availability confirmed',
       color: 'accent-purple'
     }
   ]
