@@ -6,7 +6,7 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 
 - [Repository README](../README.md) — product scope, setup, commands, and deployment.
 - [Engineering guide](../ENGINEERING.md) — runtime boundaries, configuration, extension rules, and incident basics.
-- `CONTRIBUTING.md` — planned in Wave 1; add before accepting external implementation work.
+- [Contributing guide](../CONTRIBUTING.md) — code, content, and review workflow.
 
 ## Active documentation
 
@@ -51,6 +51,8 @@ These documents preserve decisions and investigation history. They are not autom
 - [Progress log](archive/progress.md)
 - [Duplicate review report](archive/DUPLICATE-REVIEW-REPORT.md)
 - [CMS security note](../CMS-SECURITY-NOTE.md)
+- [Logo redraw notes](../logo-redraw-notes.md)
+- [Project rules](../project_rules.md)
 - [Plan continuation](plans/20260913_012832-professional-repository-next-series.md)
 
 ## Documentation rules
