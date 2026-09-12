@@ -26,6 +26,8 @@ import { buildSearchIndex, createSearchEngine, type SearchableItem } from '@/lib
 import { TestBookingModal } from './booking/TestBookingModal';
 import { TestDetailModal } from './catalog/TestDetailModal';
 
+import { useDebounce } from "@/hooks/use-debounce";
+
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -65,9 +67,11 @@ export function TestCatalog() {
   }, [tests, packages]);
 
   // Execute Fuse.js Search
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+
   const filteredItems = useMemo(() => {
-    return searchEngine.search(searchQuery, selectedCategory);
-  }, [searchEngine, searchQuery, selectedCategory]);
+    return searchEngine.search(debouncedSearchQuery, selectedCategory);
+  }, [searchEngine, debouncedSearchQuery, selectedCategory]);
 
   const filteredTests = useMemo(() => {
     return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
