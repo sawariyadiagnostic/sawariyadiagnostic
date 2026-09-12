@@ -16,41 +16,25 @@ interface RouteConfig {
 
 function ensureDirectoryExistence(filePath: string) {
   const dirname = path.dirname(filePath);
-  if (fs.existsSync(dirname)) {
-    return true;
-  }
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
+  fs.mkdirSync(dirname, { recursive: true });
 }
 
 function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): string {
   let html = baseIndexHtml;
-
-  // Replace Title
+  html = html.replace(/<title>.*?<\/title>/i, `<title>${config.title}</title>`);
   html = html.replace(
-    /<title>.*?<\/title>/i,
-    `<title>${config.title}</title>`
+    /<meta\s+name="description"\s+content=".*?"\s*\/?>/i,
+    `<meta name="description" content="${config.description}" />`,
   );
-
-  // Replace or inject Description
-  if (html.includes('<meta name="description"')) {
-    html = html.replace(
-      /<meta\s+name="description"\s+content=".*?"\s*\/?>/i,
-      `<meta name="description" content="${config.description}" />`
-    );
-  }
-
-  // Replace OpenGraph tags
   html = html.replace(
     /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/i,
-    `<meta property="og:title" content="${config.title}" />`
+    `<meta property="og:title" content="${config.title}" />`,
   );
   html = html.replace(
     /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/i,
-    `<meta property="og:description" content="${config.description}" />`
+    `<meta property="og:description" content="${config.description}" />`,
   );
 
-  // Inject canonical URL and JSON-LD schema before </head>
   const canonicalUrl = `${BASE_URL}/${config.path}`;
   const headInject = `
     <link rel="canonical" href="${canonicalUrl}" />
@@ -61,153 +45,64 @@ function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): strin
       ${JSON.stringify(config.jsonLd, null, 2)}
     </script>
   </head>`;
-
-  html = html.replace('</head>', headInject);
-
-  return html;
+  return html.replace('</head>', headInject);
 }
 
 export function buildSSG() {
   console.log('🚀 [SSG Engine] Generating static HTML pages for all tests & packages...');
-
-  if (!fs.existsSync(DIST_DIR)) {
-    console.warn('⚠️ Dist directory does not exist yet. Please run vite build first.');
-    return;
-  }
-
-  // CI-safe: dist is freshly generated; stale files must not block sitemap/route writes.
-  fs.mkdirSync(DIST_DIR, { recursive: true });
+  if (!fs.existsSync(DIST_DIR)) throw new Error('Dist directory does not exist; run vite build first');
 
   const baseIndexHtmlPath = path.join(DIST_DIR, 'index.html');
-  if (!fs.existsSync(baseIndexHtmlPath)) {
-    console.error('❌ index.html not found in dist. Aborting SSG.');
-    return;
-  }
-
+  if (!fs.existsSync(baseIndexHtmlPath)) throw new Error('dist/index.html not found');
   const baseIndexHtml = fs.readFileSync(baseIndexHtmlPath, 'utf-8');
 
-  // Keep an existing OG asset; CI must not fail on a protected/generated image file.
-  try { generateOgImage(); } catch (error) { console.warn('⚠️ OG image generation skipped:', error); }
+  for (const entry of ['test', 'package', 'portal', '404.html', 'sitemap.xml', 'og-image.jpg', 'og-image.png']) {
+    fs.rmSync(path.join(DIST_DIR, entry), { recursive: true, force: true });
+  }
+  fs.writeFileSync(baseIndexHtmlPath, baseIndexHtml, 'utf-8');
 
   const routes: RouteConfig[] = [];
-
-  // Individual Medical Tests
   for (const test of medicalTests) {
     routes.push({
       path: `test/${test.id}.html`,
       title: `${test.name} - Price, Fasting, Turnaround | Sawariya Diagnostic Lab`,
-      description: `Book ${test.name} at ₹${test.price} (Original ₹${test.originalPrice || test.price}). Fast turnaround in ${test.turnaroundTime} with free home sample collection across Charkhi Dadri.`,
+      description: `Book ${test.name} at ₹${test.price} (Original ₹${test.originalPrice || test.price}). Fast turnaround in ${test.turnaroundTime} with home sample collection availability subject to confirmation across Charkhi Dadri.`,
       type: 'MedicalTest',
       jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'MedicalTest',
-        name: test.name,
-        description: test.description,
-        url: `${BASE_URL}/test/${test.id}.html`,
-        offers: {
-          '@type': 'Offer',
-          price: test.price,
-          priceCurrency: 'INR',
-          availability: 'https://schema.org/InStock',
-          seller: {
-            '@type': 'DiagnosticLab',
-            name: 'Sawariya Diagnostic Lab',
-            telephone: '+917015290782'
-          }
-        }
-      }
+        '@context': 'https://schema.org', '@type': 'MedicalTest', name: test.name,
+        description: test.description, url: `${BASE_URL}/test/${test.id}.html`,
+        offers: { '@type': 'Offer', price: test.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock', seller: { '@type': 'DiagnosticLab', name: 'Sawariya Diagnostic Lab' } },
+      },
     });
   }
-
-  // Health Packages
   for (const pkg of healthPackages) {
     routes.push({
       path: `package/${pkg.id}.html`,
       title: `${pkg.name} Health Checkup Package - ₹${pkg.price} | Sawariya Diagnostic`,
-      description: `${pkg.name} includes ${pkg.testsIncluded.length} key tests: ${pkg.testsIncluded.slice(0, 3).join(', ')}. Save ${Math.round((1 - pkg.price / pkg.originalPrice) * 100)}% with free doorstep collection.`,
+      description: `${pkg.name} includes ${pkg.testsIncluded.length} key tests: ${pkg.testsIncluded.slice(0, 3).join(', ')}. Home collection availability is confirmed separately.`,
       type: 'Product',
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: pkg.name,
-        description: pkg.description,
-        url: `${BASE_URL}/package/${pkg.id}.html`,
-        offers: {
-          '@type': 'Offer',
-          price: pkg.price,
-          priceCurrency: 'INR',
-          availability: 'https://schema.org/InStock'
-        }
-      }
+      jsonLd: { '@context': 'https://schema.org', '@type': 'Product', name: pkg.name, description: pkg.description, url: `${BASE_URL}/package/${pkg.id}.html`, offers: { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock' } },
     });
   }
 
-  // Patient Report Portal Route
-  routes.push({
-    path: `portal/reports.html`,
-    title: `Download Doctor-Signed Lab Reports & Patient Portal | Sawariya Diagnostic`,
-    description: `Access certified pathology results, download digital PDF reports with ICMR-compliant QR verification and track sample processing status online.`,
-    type: 'WebPage',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      name: 'Sawariya Diagnostic Patient Report Portal',
-      description: 'Online pathology report download and digital sample tracking portal'
-    }
-  });
-
-  // Generate HTML for each route
   let generatedCount = 0;
   for (const route of routes) {
     const targetPath = path.join(DIST_DIR, route.path);
     ensureDirectoryExistence(targetPath);
-    const renderedHtml = generateHtmlTemplate(route, baseIndexHtml);
-    fs.writeFileSync(targetPath, renderedHtml, 'utf-8');
+    fs.writeFileSync(targetPath, generateHtmlTemplate(route, baseIndexHtml), 'utf-8');
     generatedCount++;
   }
+  fs.writeFileSync(path.join(DIST_DIR, '404.html'), baseIndexHtml, 'utf-8');
 
-  // GitHub Pages 404.html fallback
-  const fallback404Path = path.join(DIST_DIR, '404.html');
-  fs.writeFileSync(fallback404Path, baseIndexHtml, 'utf-8');
-
-  // Generate dynamic sitemap.xml
+  const date = new Date().toISOString().split('T')[0];
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${BASE_URL}/</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>${BASE_URL}/portal/reports.html</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-${routes
-  .map(
-    (r) => `  <url>
-    <loc>${BASE_URL}/${r.path}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${r.path.startsWith('package/') ? '0.9' : '0.8'}</priority>
-  </url>`
-  )
-  .join('\n')}
+  <url><loc>${BASE_URL}/</loc><lastmod>${date}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>
+${routes.map((route) => `  <url><loc>${BASE_URL}/${route.path}</loc><lastmod>${date}</lastmod><changefreq>weekly</changefreq><priority>${route.path.startsWith('package/') ? '0.9' : '0.8'}</priority></url>`).join('\n')}
 </urlset>`;
-
-  try {
-    fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf-8');
-  } catch (error) {
-    if (!fs.existsSync(path.join(DIST_DIR, 'sitemap.xml'))) throw error;
-    console.warn('⚠️ Sitemap write skipped because an existing sitemap is protected:', error);
-  }
-
-  console.log(`✅ [SSG Engine] Successfully generated ${generatedCount} static HTML pages, 404.html fallback, and updated sitemap.xml!`);
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf-8');
+  generateOgImage(DIST_DIR);
+  console.log(`✅ [SSG Engine] Generated ${generatedCount} static HTML pages, 404.html, sitemap.xml, and OG assets.`);
 }
 
-// If executed directly via tsx
-if (process.argv[1] && process.argv[1].endsWith('generate-ssg.ts')) {
-  buildSSG();
-}
+if (process.argv[1] && process.argv[1].endsWith('generate-ssg.ts')) buildSSG();

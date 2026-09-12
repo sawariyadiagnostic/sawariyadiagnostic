@@ -5,7 +5,7 @@ import { FileDown, Phone, ShieldCheck, X, Home, Calendar, MessageCircle, Chevron
 import { Button } from '../ui/button';
 import { Logo } from '../ui/Logo';
 import { navigation } from '@/data/website-content';
-import { PatientReportPortal } from '../portal/PatientReportPortal';
+import { ReportDownloadModal } from '../ui/ReportDownloadModal';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -77,13 +77,13 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
               Book Home Sample Visit
             </Button>
 
-            <PatientReportPortal trigger={
+            <ReportDownloadModal trigger={
               <button
                 className="action-button w-full min-h-12 h-auto bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
                 onClick={onClose}
               >
                 <FileDown className="w-4 h-4 text-[#155E9A]" />
-                <span>Patient Reports Portal</span>
+                <span>Report assistance</span>
               </button>
             } />
 

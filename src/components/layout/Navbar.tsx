@@ -5,7 +5,7 @@ import { Menu, X, FileDown, Phone, ShieldCheck, Database } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Logo } from '../ui/Logo';
 import { navigation } from '@/data/website-content';
-import { PatientReportPortal } from '../portal/PatientReportPortal';
+import { ReportDownloadModal } from '../ui/ReportDownloadModal';
 
 interface NavbarProps {
   isScrolled: boolean;
@@ -77,16 +77,16 @@ export function Navbar({
           {/* Right Side Action CTAs */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
             
-            {/* Patient Portal / Download Report Button (Desktop & Tablet) */}
+            {/* Report assistance button (desktop & tablet) */}
             <div className="hidden sm:block">
-              <PatientReportPortal trigger={
+              <ReportDownloadModal trigger={
                 <Button
                   variant="outline"
                   size="sm"
                   className="action-button inline-flex items-center gap-1.5 text-xs font-bold min-h-9 sm:min-h-10 h-auto px-3 sm:px-4 rounded-full bg-white/70 backdrop-blur-md border border-slate-200 text-slate-800 hover:border-[#155E9A] hover:bg-white hover:text-[#155E9A] transition-all shadow-xs active:scale-[0.97] cursor-pointer"
                 >
                   <FileDown className="w-3.5 h-3.5 text-[#155E9A]" />
-                  <span>Patient Portal</span>
+                  <span>Report assistance</span>
                 </Button>
               } />
             </div>

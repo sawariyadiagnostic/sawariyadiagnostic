@@ -1,6 +1,6 @@
 # Wave 2 Baseline — L12
 
-Captured on the `luna/L12-baseline` branch before integration cleanup.
+Captured on the the Wave 2 baseline task branch before integration cleanup.
 
 ## Verification baseline
 

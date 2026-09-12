@@ -2,6 +2,8 @@ export const siteConfig = {
   name: 'Sawariya Diagnostic Lab',
   shortName: 'Sawariya Diagnostic',
   tagline: 'Detect • Diagnose • Deliver',
+  publicBasePath: '/sawariyadiagnostic/',
+  legalReviewStatus: 'owner-review-required',
   location: {
     address: 'Opposite R.S. Sangwan Hospital, Loharu Road, Charkhi Dadri, Haryana 127306',
     city: 'Charkhi Dadri',
@@ -44,6 +46,10 @@ export function validateSiteConfig(config = siteConfig) {
     config.contact.email,
   ];
   if (required.some((value) => !value.trim())) throw new Error('Required public site configuration is missing');
+  if (!config.publicBasePath.startsWith('/') || !config.publicBasePath.endsWith('/')) throw new Error('Invalid public base path');
+  if (!config.integrations.calNamespace.trim() || !config.integrations.calLink.trim()) throw new Error('Appointment provider is not configured');
+  if (!config.claims.operatingHours.trim()) throw new Error('Operating hours are missing');
+  if (config.legalReviewStatus !== 'owner-review-required') throw new Error('Legal review status must remain explicit');
   if (config.location.country !== 'IN') throw new Error('Unsupported site country');
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(config.contact.email)) throw new Error('Invalid public contact email');
   if (config.contact.phone.replace(/\D/g, '').length < 10) throw new Error('Invalid public lab phone');

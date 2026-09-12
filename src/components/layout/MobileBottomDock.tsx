@@ -3,7 +3,7 @@
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { Phone, MessageCircle, Home, FileText } from 'lucide-react';
 import { footer } from '@/data/website-content';
-import { PatientReportPortal } from '../portal/PatientReportPortal';
+import { ReportDownloadModal } from '../ui/ReportDownloadModal';
 
 export function MobileBottomDock() {
   const scrollToHomeCollection = () => {
@@ -27,8 +27,8 @@ export function MobileBottomDock() {
           <div className="absolute bottom-[-50%] right-[-20%] w-[120px] h-[120px] bg-[#155E9A]/50 rounded-full blur-[40px] " style={{ animationDelay: '-3s' }} />
         </div>
         
-        {/* Patient Reports Portal Button */}
-        <PatientReportPortal trigger={
+        {/* Report assistance button */}
+        <ReportDownloadModal trigger={
           <button
             className="flex-1 flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[18px] h-11 min-[360px]:h-12 px-1 text-xs font-semibold text-slate-100 transition-all duration-150 active:scale-[0.95] select-none cursor-pointer min-w-0"
             aria-label="Patient Lab Portal"
@@ -36,7 +36,7 @@ export function MobileBottomDock() {
             <div className="w-5 h-5 min-[360px]:w-6 min-[360px]:h-6 rounded-[8px] bg-[#155E9A]/12 flex items-center justify-center text-blue-200 shrink-0">
               <FileText className="w-3 h-3 min-[360px]:w-3.5 min-[360px]:h-3.5" />
             </div>
-            <span className="text-[10px] min-[360px]:text-xs font-bold text-white truncate">Portal</span>
+            <span className="text-[10px] min-[360px]:text-xs font-bold text-white truncate">Reports</span>
           </button>
         } />
 

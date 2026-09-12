@@ -38,7 +38,7 @@ export function Footer() {
                     className="inline-flex items-center gap-2 bg-[#155E9A] hover:bg-[#085a4b] text-white px-4 py-2.5 rounded-[16px] text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
                   >
                     <FileDown className="w-4 h-4 text-emerald-200" />
-                    <span>Online Booking & Reports</span>
+                    <span>Report assistance</span>
                   </button>
                 } />
                 <a
