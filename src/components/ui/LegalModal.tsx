@@ -61,7 +61,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
                 <li>Conducting home phlebotomy appointments within Charkhi Dadri and surrounding villages.</li>
               </ul>
 
-              <h4 className="font-bold text-slate-900 text-base">3. Non-Disclosure & Encryption</h4>
+              <h4 className="font-bold text-slate-900 text-base">3. Non-Disclosure & Data Handling</h4>
               <p>
                 Your medical data will never be sold, rented, or shared with unauthorized commercial third parties. Reports are shared only with you or your designated treating physician.
               </p>
@@ -84,7 +84,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>Right to Precision:</strong> Samples processed using automated calibrated analyzers with multi-point QC controls.</li>
                 <li><strong>Right to Clear Pricing:</strong> Complete transparency with no hidden convenience fees or unannounced charges.</li>
-                <li><strong>Right to Timely Reports:</strong> Fast reporting (same day / 6-24 hours) as per test parameters.</li>
+                <li><strong>Right to Timely Reports:</strong> Timely reporting according to the selected test, laboratory workflow, and current operational estimate.</li>
                 <li><strong>Right to Re-verification:</strong> In case of clinical discrepancy, free re-run verification of the existing archived sample according to the lab's documented process.</li>
               </ul>
 
@@ -115,7 +115,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <h4 className="font-bold text-slate-900 text-base">3. Strict Ethical Practices</h4>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Single-use, sterile, vacuum-sealed collection vacutainers for 100% infection prevention.</li>
-                <li>Daily calibration using certified standards and bio-medical waste segregation.</li>
+                <li>Quality checks, equipment maintenance, and biomedical-waste handling follow the lab's documented operating procedures.</li>
                 <li>Empathetic, compassionate care for pediatric and geriatric patients during collection.</li>
               </ul>
 

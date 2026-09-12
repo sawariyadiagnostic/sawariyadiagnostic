@@ -2,122 +2,92 @@ import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+const PORT = Number(process.env.PORT || 3000);
+const MAX_EVENT_NAME_LENGTH = 80;
 
-  app.use(express.json());
+const isSafeEventName = (value: unknown): value is string =>
+  typeof value === "string" && /^[a-zA-Z0-9_.:-]{1,80}$/.test(value);
 
-  // ==========================================
-  // SCALABLE ANALYTICS & ADS TRACKING PROXY
-  // ==========================================
-  app.post("/api/track", async (req, res) => {
-    // Highly scalable architecture:
-    // This endpoint aggregates client-side events and pushes them to Server-Side APIs
-    // e.g., Meta Conversions API, Google Analytics Measurement Protocol
-    
-    const { event, payload, timestamp } = req.body;
-    
-    console.log(`[Analytics Engine] Received event: ${event}`, payload);
+async function getFlabsAuthToken() {
+  const clientId = process.env.FLABS_CLIENT_ID;
+  const clientSecret = process.env.FLABS_CLIENT_SECRET;
+  const baseUrl = process.env.FLABS_API_BASE_URL;
 
-    // Mock: Pushing to Meta CAPI
-    // if (process.env.META_CAPI_TOKEN) { ... }
-    
-    // Mock: Pushing to Google Server-Side Tagging
-    // if (process.env.GOOGLE_MEASUREMENT_ID) { ... }
-
-    res.json({ success: true, timestamp });
-  });
-
-  // ==========================================
-  // FLABS LIS INTEGRATION API
-  // ==========================================
-  
-  // Helper to generate FLabs Auth Token
-  async function getFlabsAuthToken() {
-    const clientId = process.env.FLABS_CLIENT_ID;
-    const clientSecret = process.env.FLABS_CLIENT_SECRET;
-    const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
-
-    if (!clientId || !clientSecret) {
-      throw new Error("FLabs credentials missing in environment variables (.env)");
-    }
-
-    const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret })
-    });
-
-    if (!response.ok) throw new Error("Failed to authenticate with FLabs");
-    const data = await response.json();
-    return data.access_token;
+  if (!clientId || !clientSecret || !baseUrl) {
+    throw new Error("LIS integration is not configured");
   }
 
-  app.post("/api/lis/download-report", async (req, res) => {
-    // This endpoint connects to FLabs securely on the server.
-    
-    const { patientId, reportId, otp } = req.body;
-    
-    console.log(`[FLabs Engine] Requesting report for Patient: ${patientId}`);
+  const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ client_id: clientId, client_secret: clientSecret }),
+    signal: AbortSignal.timeout(10_000),
+  });
 
-    // Standard Validation
-    if (!patientId || !reportId) {
-      return res.status(400).json({ error: "Missing required parameters for LIS" });
+  if (!response.ok) throw new Error("LIS authentication failed");
+  const data = (await response.json()) as { access_token?: string };
+  if (!data.access_token) throw new Error("LIS authentication returned no token");
+  return data.access_token;
+}
+
+async function startServer() {
+  const app = express();
+  app.disable("x-powered-by");
+  app.use(express.json({ limit: "32kb", strict: true }));
+
+  app.get("/health", (_req, res) => {
+    res.json({ status: "ok", service: "sawariya-diagnostic-web" });
+  });
+
+  app.post("/api/track", (req, res) => {
+    const { event, timestamp } = req.body ?? {};
+    if (!isSafeEventName(event) || event.length > MAX_EVENT_NAME_LENGTH) {
+      return res.status(400).json({ error: "Invalid analytics event" });
+    }
+    if (timestamp !== undefined && typeof timestamp !== "string") {
+      return res.status(400).json({ error: "Invalid analytics timestamp" });
+    }
+    return res.status(202).json({ accepted: true });
+  });
+
+  app.post("/api/lis/download-report", async (req, res) => {
+    const { patientId, reportId } = req.body ?? {};
+    if (typeof patientId !== "string" || typeof reportId !== "string" || !patientId || !reportId) {
+      return res.status(400).json({ error: "Missing required report identifiers" });
+    }
+    if (patientId.length > 120 || reportId.length > 120) {
+      return res.status(400).json({ error: "Report identifiers are too long" });
     }
 
     try {
-      if (process.env.FLABS_CLIENT_ID) {
-        const token = await getFlabsAuthToken();
-        const baseUrl = process.env.FLABS_API_BASE_URL || 'https://api.flabslis.com';
-        
-        // Fetch the report from FLabs
-        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-
-        if (!reportResponse.ok) {
-          throw new Error("Report not found in FLabs LIS");
-        }
-        
-        const reportData = await reportResponse.json();
-        return res.json({
-          success: true,
-          downloadUrl: reportData.pdf_url || reportData.download_url,
-          reportMetadata: reportData.metadata
-        });
-      }
-      
-      return res.status(503).json({
-        error: "LIS integration is not configured. No report was downloaded.",
-        code: "LIS_NOT_CONFIGURED"
+      const token = await getFlabsAuthToken();
+      const baseUrl = process.env.FLABS_API_BASE_URL as string;
+      const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${encodeURIComponent(patientId)}/reports/${encodeURIComponent(reportId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(15_000),
       });
-    } catch (error) {
-      console.error("[LIS Engine Error]", error);
-      res.status(500).json({ error: "Failed to communicate with LIS integration" });
+      if (!reportResponse.ok) return res.status(404).json({ error: "Report not found" });
+      const reportData = (await reportResponse.json()) as { pdf_url?: string; download_url?: string; metadata?: unknown };
+      return res.json({ success: true, downloadUrl: reportData.pdf_url || reportData.download_url, reportMetadata: reportData.metadata });
+    } catch {
+      return res.status(503).json({ error: "Report service is temporarily unavailable", code: "LIS_UNAVAILABLE" });
     }
   });
 
-  // ==========================================
-  // VITE MIDDLEWARE (Dev) & STATIC FILES (Prod)
-  // ==========================================
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
+    const vite = await createViteServer({ server: { middlewareMode: true }, appType: "spa" });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath, { fallthrough: false }));
+    app.get("*", (_req, res) => res.sendFile(path.join(distPath, "index.html")));
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Scalable Architecture] Server running on http://localhost:${PORT}`);
-  });
+  app.use((_req, res) => res.status(404).json({ error: "Not found" }));
+  app.listen(PORT, "0.0.0.0", () => console.info(`Sawariya web server listening on port ${PORT}`));
 }
 
-startServer();
+startServer().catch((error) => {
+  console.error("Server startup failed", error instanceof Error ? error.message : "unknown error");
+  process.exitCode = 1;
+});

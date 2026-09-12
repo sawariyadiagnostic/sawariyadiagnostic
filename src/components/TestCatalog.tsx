@@ -21,7 +21,6 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { TestCard } from './ui/TestCard';
 import { categories, type MedicalTest, type HealthPackage } from '@/data/mockTests';
-import { CMSClient } from '@/lib/cms-client';
 import { buildSearchIndex, createSearchEngine, type SearchableItem } from '@/lib/search-fuse';
 import { TestBookingModal } from './booking/TestBookingModal';
 import { TestDetailModal } from './catalog/TestDetailModal';
@@ -32,8 +31,9 @@ export function TestCatalog() {
   const [activeTab, setActiveTab] = useState<'packages' | 'tests'>('packages');
 
   // Load from Headless CMS state
-  const [tests, setTests] = useState<MedicalTest[]>(() => CMSClient.getTests());
-  const [packages, setPackages] = useState<HealthPackage[]>(() => CMSClient.getPackages());
+  // Public catalog is intentionally empty until owner-approved records are published.
+  const [tests] = useState<MedicalTest[]>([]);
+  const [packages] = useState<HealthPackage[]>([]);
 
   // Package booking & detail modal states
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
@@ -53,10 +53,7 @@ export function TestCatalog() {
     return () => window.removeEventListener('sawariya:search', handleExternalSearch);
   }, []);
 
-  const refreshCatalog = () => {
-    setTests(CMSClient.getTests());
-    setPackages(CMSClient.getPackages());
-  };
+
 
   // Build Fuse.js Search Engine
   const searchEngine = useMemo(() => {

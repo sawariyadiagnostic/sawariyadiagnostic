@@ -63,7 +63,7 @@ export function PatientReportPortal({
         setSelectedReport(results[0]);
         const trendData = await ServerlessDB.getBiomarkerTrends(results[0].uhid);
         setTrends(trendData);
-        toast.success(`Found ${results.length} certified laboratory records`);
+        toast.success(`Found ${results.length} laboratory records`);
       } else {
         toast.error('No report found. Check the reference or contact the lab.');
       }
@@ -86,7 +86,7 @@ export function PatientReportPortal({
         }
       });
     }
-  }, [open]);
+  }, [open, demoMode]);
 
   const handlePrint = () => {
     window.print();
@@ -106,7 +106,7 @@ export function PatientReportPortal({
       {open && (
         <SEOHead
           title="Patient Lab Reports & Digital Sample Tracking Portal | Sawariya Diagnostic"
-          description="Download doctor-signed certified pathology reports, verify QR codes, and track your lab sample live."
+          description="Access available laboratory records and configured sample-status updates."
           canonicalUrl="https://sawariyadiagnostic.github.io/sawariyadiagnostic/portal/reports.html"
         />
       )}
@@ -379,7 +379,7 @@ export function PatientReportPortal({
                         className="flex-1 action-button min-h-11 h-auto btn-primary rounded-[14px] text-xs font-bold gap-1.5"
                       >
                         <FileDown className="w-4 h-4" />
-                        <span>Download Certified PDF Report ({selectedReport.fileSize})</span>
+                        <span>Download Report ({selectedReport.fileSize})</span>
                       </Button>
                       <Button
                         variant="outline"
@@ -418,7 +418,7 @@ export function PatientReportPortal({
                   { step: '2. Home Sample Collected with Barcode Scan', time: '08:35 AM', done: true, desc: 'Vacuum tube barcoded and verified against Patient UHID SD-2026-9082.' },
                   { step: '3. Automated Analyzer Processing (Roche/Sysmex)', time: '10:15 AM', done: true, desc: 'Sample centrifuged and processed through dual 5-part hematology analyzers.' },
                   { step: '4. Doctor Review & Clinical Sign-off', time: '01:45 PM', done: true, desc: 'Dr. Vivek Verma verified calibration controls and approved results.' },
-                  { step: '5. Certified Digital Report Published', time: '02:15 PM', done: true, desc: 'Report availability and delivery depend on the configured LIS/notification workflow.' }
+                  { step: '5. Digital Report Published', time: '02:15 PM', done: true, desc: 'Report availability and delivery depend on the configured LIS/notification workflow.' }
                 ].map((s, idx) => (
                   <div key={idx} className="relative">
                     <div className="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-[#155E9A] border-2 border-white shadow-xs" />

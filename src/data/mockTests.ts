@@ -9,6 +9,7 @@ export interface MedicalTest {
   parameters?: string[];
   homeCollection: boolean;
   popular?: boolean;
+  bookingsLast6Months?: number;
 }
 
 export interface HealthPackage {

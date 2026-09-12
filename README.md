@@ -15,7 +15,7 @@
 </div>
 
 
-**Sawariya Diagnostic** is a NABL-accredited pathology lab based in Charkhi Dadri, Haryana.
+**Sawariya Diagnostic** is a patient-focused diagnostic laboratory based in Charkhi Dadri, Haryana. Accreditation and regulatory details should be confirmed with the lab before publication.
 
 ## 🌐 Live Website
 **[Visit Sawariya Diagnostic](https://sawariyadiagnostic.github.io/sawariyadiagnostic/)**
