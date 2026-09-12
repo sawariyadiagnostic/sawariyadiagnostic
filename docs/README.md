@@ -6,6 +6,7 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 
 - [Repository README](../README.md) — product scope, setup, commands, and deployment.
 - [Engineering guide](../ENGINEERING.md) — runtime boundaries, configuration, extension rules, and incident basics.
+- [Agent rules](../AGENTS.md) — repository operating constraints for coding agents.
 - [Contributing guide](../CONTRIBUTING.md) — code, content, and review workflow.
 
 ## Active documentation
@@ -22,6 +23,7 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 - [Ralph audit report](../RALPH-AUDIT-REPORT.md) — latest audited findings and remaining gates.
 - [Catalog reset and build plan](operations/CATALOG-RESET-AND-BUILD-PLAN.md) — approved-catalog workflow.
 - [Catalog data provenance](operations/CATALOG-DATA-PROVENANCE.md) — source and pricing provenance.
+- [Dependency review](operations/dependency-review.md) — production/full-tree audit policy and upgrade rules.
 
 ### Content system
 
