@@ -129,7 +129,7 @@ export function Hero() {
               {/* Clean Apple-Optimized Search Bar inside Glass */}
               <div className="space-y-2.5 w-full max-w-xl">
                 <form onSubmit={handleSearch} className="relative">
-                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[20px] sm:rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#155E9A]/40 focus-within:bg-white focus-within:border-[#155E9A] focus-within:ring-2 focus-within:ring-[#155E9A]/15 transition-all p-1 sm:p-1.5 duration-300">
+                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[20px] sm:rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#155E9A]/40 focus-within:bg-white focus-within:border-[#155E9A] focus-within:ring-2 focus-within:ring-[#155E9A]/15 transition-surface p-1 sm:p-1.5 duration-300">
                     <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
@@ -140,7 +140,7 @@ export function Hero() {
                     />
                     <Button 
                       type="submit" 
-                      className="action-button bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-all"
+                      className="action-button bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-surface"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
                       <span>Find Test</span>
@@ -156,7 +156,7 @@ export function Hero() {
                       key={tag.label}
                       type="button"
                       onClick={() => handleQuickTagClick(tag.label)}
-                      className={`h-7 sm:h-8 px-2.5 sm:px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#155E9A] hover:border-[#155E9A]/30 transition-all duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                      className={`h-7 sm:h-8 px-2.5 sm:px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#155E9A] hover:border-[#155E9A]/30 transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}
                     </button>

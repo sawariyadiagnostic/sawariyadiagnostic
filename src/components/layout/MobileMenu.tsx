@@ -40,7 +40,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
             <Logo variant="horizontal" size="xs" showTagline={true} />
             <button
               onClick={onClose}
-              className="w-9 h-9 flex items-center justify-center rounded-full text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-all cursor-pointer border border-white/80"
+              className="w-9 h-9 flex items-center justify-center rounded-full text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-surface cursor-pointer border border-white/80"
               aria-label="Close Menu"
             >
               <X className="w-4 h-4" />
@@ -56,7 +56,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
                   scrollToSection(link.href);
                   onClose();
                 }}
-                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-all duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
+                className="flex items-center justify-between px-4 py-3 text-slate-800 hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-surface duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
               >
                 <span>{link.label}</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -79,7 +79,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
             <ReportDownloadModal trigger={
               <button
-                className="action-button w-full min-h-12 h-auto bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-all shadow-2xs cursor-pointer"
+                className="action-button w-full min-h-12 h-auto bg-white hover:bg-slate-50 border border-slate-200 rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.97] transition-surface shadow-2xs cursor-pointer"
                 onClick={onClose}
               >
                 <FileDown className="w-4 h-4 text-[#155E9A]" />
@@ -109,7 +109,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
           <a
             href={telHref(siteConfig.contact.phone)}
-            className="flex items-center justify-center gap-2 bg-[#102A43] text-white rounded-[14px] py-3 px-4 text-xs font-bold shadow-xs hover:bg-[#102A43] active:scale-[0.97] transition-all"
+            className="flex items-center justify-center gap-2 bg-[#102A43] text-white rounded-[14px] py-3 px-4 text-xs font-bold shadow-xs hover:bg-[#102A43] active:scale-[0.97] transition-surface"
           >
             <Phone className="w-4 h-4 text-[#F1C27D]" />
             <span>Contact lab: {siteConfig.contact.phone}</span>

@@ -560,7 +560,8 @@
   }
 
   .glass-card {
-    @apply bg-white/70 backdrop-blur-[24px] border border-white/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:bg-white/80 transition-all duration-300;
+    @apply bg-white/70 backdrop-blur-[24px] border border-white/80 shadow-[0_4px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:bg-white/80;
+    transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease, color .2s ease;
     position: relative;
   }
 
@@ -791,6 +792,8 @@ html {
   mix-blend-mode: overlay;
   z-index: 0;
 }
+
+.transition-surface { transition: var(--transition-surface); }
 
 /* Sawariya brand overrides: red lab mark, blue diagnostics, brown promise line. */
 :root { --sawariya-red: #C62828; --sawariya-blue: #155E9A; --sawariya-brown: #7A4B2A; --sawariya-cream: #FFF9F3; }

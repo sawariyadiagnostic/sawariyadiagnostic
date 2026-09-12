@@ -56,8 +56,8 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
                 We collect your name, age, gender, contact number, and address strictly for:
               </p>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Accurate sample tagging and barcoding to prevent mix-ups.</li>
-                <li>Dispatching digital PDF test reports directly to your WhatsApp / Email.</li>
+                <li>Sample identification and barcoding follow the lab's documented process.</li>
+                <li>Receiving report assistance through the lab's configured contact channels.</li>
                 <li>Conducting home phlebotomy appointments within Charkhi Dadri and surrounding villages.</li>
               </ul>
 
@@ -68,7 +68,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
 
               <h4 className="font-bold text-slate-900 text-base">4. Contact Grievance Officer</h4>
               <p>
-                For privacy or report verification inquiries, email us at <strong className="text-slate-900">sawariyadiagnosticckd11@gmail.com</strong> or call our 24/7 Desk at <strong className="text-slate-900">+91 99919 41207</strong>.
+                For privacy or report assistance inquiries, email us at <strong className="text-slate-900">sawariyadiagnosticckd11@gmail.com</strong> or call <strong className="text-slate-900">+91 99919 41207</strong>.
               </p>
             </>
           )}
@@ -82,20 +82,20 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
 
               <h4 className="font-bold text-slate-900 text-base">2. Patient Rights</h4>
               <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Right to Precision:</strong> Samples processed using automated calibrated analyzers with multi-point QC controls.</li>
-                <li><strong>Right to Clear Pricing:</strong> Complete transparency with no hidden convenience fees or unannounced charges.</li>
-                <li><strong>Right to Timely Reports:</strong> Timely reporting according to the selected test, laboratory workflow, and current operational estimate.</li>
-                <li><strong>Right to Re-verification:</strong> In case of clinical discrepancy, free re-run verification of the existing archived sample according to the lab's documented process.</li>
+                <li><strong>Right to a clear process:</strong> Collection and testing follow the lab's documented operating procedures.</li>
+                <li><strong>Right to clear pricing:</strong> Current charges are confirmed before an appointment or service is arranged.</li>
+                <li><strong>Right to a current estimate:</strong> Reporting time depends on the selected test and current laboratory workflow.</li>
+                <li><strong>Right to ask for review:</strong> Re-verification requests are handled according to the lab's documented process and current sample availability.</li>
               </ul>
 
               <h4 className="font-bold text-slate-900 text-base">3. Home Collection Protocols</h4>
               <p>
-                Patients requesting home collection must provide accurate location and fasting/pre-test conditions as advised by our staff (e.g. 10-12 hours fasting for Lipid and Blood Glucose tests).
+                Patients requesting home collection should provide the location and pre-test conditions advised by the lab team.
               </p>
 
-              <h4 className="font-bold text-slate-900 text-base">4. 24/7 Lab Escalations</h4>
+              <h4 className="font-bold text-slate-900 text-base">4. Contact support</h4>
               <p>
-                For any immediate clinical escalations or urgent reports, our 24/7 Desk is reachable at <strong className="text-slate-900">+91 99919 41207</strong>, and emergency director assistance is available at <strong className="text-slate-900">+91 70152 90782</strong>.
+                For urgent questions or report assistance, contact the lab at <strong className="text-slate-900">+91 99919 41207</strong>. Emergency line details are available through the lab.
               </p>
             </>
           )}
@@ -114,7 +114,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
 
               <h4 className="font-bold text-slate-900 text-base">3. Strict Ethical Practices</h4>
               <ul className="list-disc pl-5 space-y-1">
-                <li>Single-use, sterile, vacuum-sealed collection vacutainers for 100% infection prevention.</li>
+                <li>Single-use collection materials are used according to the lab's documented collection procedures.</li>
                 <li>Quality checks, equipment maintenance, and biomedical-waste handling follow the lab's documented operating procedures.</li>
                 <li>Empathetic, compassionate care for pediatric and geriatric patients during collection.</li>
               </ul>

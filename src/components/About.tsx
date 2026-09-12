@@ -88,7 +88,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
               viewport={{ once: true }}
-              className={`glass-card rounded-[24px] p-5 sm:p-6 border border-white/80 transition-all duration-300 relative group overflow-hidden ${step.theme.bg}`}
+              className={`glass-card rounded-[24px] p-5 sm:p-6 border border-white/80 transition-surface duration-300 relative group overflow-hidden ${step.theme.bg}`}
             >
               {/* Top Accent Line */}
               <div className={`absolute top-0 left-0 right-0 h-1 ${step.theme.accentBar}`} />

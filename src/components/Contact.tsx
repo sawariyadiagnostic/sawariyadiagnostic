@@ -38,8 +38,8 @@ export function Contact() {
     },
     {
       icon: Clock,
-      title: '3. Express WhatsApp Report',
-      description: 'Get verified digital PDF reports with direct QR validation.',
+      title: '3. WhatsApp Report Assistance',
+      description: 'Get report assistance through the configured lab channels.',
       style: {
         iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
         accentBar: 'bg-[#7A4B2A]',
@@ -245,7 +245,7 @@ export function Contact() {
                     allowFullScreen={true}
                     loading="lazy"
                     referrerPolicy="strict-origin-when-cross-origin"
-                    className="w-full h-full mix-blend-luminosity hover:mix-blend-normal transition-all duration-700"
+                    className="w-full h-full mix-blend-luminosity hover:mix-blend-normal transition-surface duration-700"
                   />
                 </div>
               </div>
@@ -259,7 +259,7 @@ export function Contact() {
           {infoCards.map((card) => (
             <div 
               key={card.title}
-              className="glass-card p-5 text-center flex flex-col items-center justify-between bg-white/70 rounded-[24px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] relative overflow-hidden transition-all hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
+              className="glass-card p-5 text-center flex flex-col items-center justify-between bg-white/70 rounded-[24px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] relative overflow-hidden transition-surface hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
             >
               {/* Top accent line */}
               <div className={`absolute top-0 left-0 right-0 h-1 ${card.style.accentBar}`} />

@@ -124,14 +124,14 @@ export function TestCatalog() {
             <TabsList className="bg-white/60 backdrop-blur-xl p-1 rounded-full border border-white/80 h-12 grid grid-cols-2 w-full max-w-md shadow-inner">
               <TabsTrigger 
                 value="packages" 
-                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-surface flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <Package className="w-4 h-4 text-[#155E9A]" />
                 <span>Health Packages ({packages.length})</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="tests" 
-                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-surface flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <TestTube className="w-4 h-4 text-[#155E9A]" />
                 <span>Individual Tests ({tests.length}+)</span>
@@ -175,7 +175,7 @@ export function TestCatalog() {
                     <button
                       key={cat.id}
                       onClick={() => setSelectedCategory(cat.id)}
-                      className={`h-9 px-3.5 rounded-full text-xs font-bold transition-all whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
+                      className={`h-9 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
                         isSelected 
                           ? 'bg-[#102A43] text-white' 
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -201,7 +201,7 @@ export function TestCatalog() {
                     setSelectedCategory(sym.cat);
                     if (sym.query) setActiveTab('tests');
                   }}
-                  className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all whitespace-nowrap cursor-pointer ${
+                  className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-surface whitespace-nowrap cursor-pointer ${
                     searchQuery === sym.query && sym.query !== ''
                       ? 'bg-[#155E9A] text-white border-[#155E9A]'
                       : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'
@@ -237,7 +237,7 @@ export function TestCatalog() {
                 return (
                   <div 
                     key={pkg.id} 
-                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/95 border border-slate-200/90 shadow-sm hover:shadow-md transition-all overflow-hidden ${
+                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/95 border border-slate-200/90 shadow-sm hover:shadow-md transition-surface overflow-hidden ${
                       pkg.recommended 
                         ? 'border-2 border-[#155E9A] ring-2 ring-[#C62828]/20 bg-white' 
                         : ''
@@ -368,7 +368,7 @@ export function TestCatalog() {
                     <button
                       key={tag}
                       onClick={() => { setSearchQuery(tag); setSelectedCategory('all'); }}
-                      className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-[#155E9A] text-slate-700 font-semibold px-3 py-1 rounded-full border border-slate-200 transition-all cursor-pointer"
+                      className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-[#155E9A] text-slate-700 font-semibold px-3 py-1 rounded-full border border-slate-200 transition-surface cursor-pointer"
                     >
                       {tag}
                     </button>
@@ -388,7 +388,7 @@ export function TestCatalog() {
                     href={whatsappHref('Hi, I am looking for a pathology test not listed in the catalog') || undefined}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#155E9A] text-white px-3.5 py-2 rounded-full hover:bg-[#102A43] transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#155E9A] text-white px-3.5 py-2 rounded-full hover:bg-[#102A43] transition-surface"
                   >
                     <span>Ask Lab on WhatsApp</span>
                   </a>

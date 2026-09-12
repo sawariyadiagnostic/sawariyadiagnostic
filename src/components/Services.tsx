@@ -48,14 +48,14 @@ export function Services() {
               transition={{ duration: 0.4, delay: index * 0.06 }}
               viewport={{ once: true }}
               onClick={scrollToContact}
-              className="glass-card p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] border border-white/80 transition-all duration-300 active:scale-[0.98] relative overflow-hidden"
+              className="glass-card p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] border border-white/80 transition-surface duration-300 active:scale-[0.98] relative overflow-hidden"
             >
               {/* Top Accent Line */}
               <div className={`absolute top-0 left-0 right-0 h-1 ${service.theme.accentBar}`} />
 
               <div>
                 {/* Icon Container */}
-                <div className={`w-[52px] h-[48px] rounded-[16px] border flex items-center justify-center mb-4 transition-all duration-200 ${service.theme.iconBg}`}>
+                <div className={`w-[52px] h-[48px] rounded-[16px] border flex items-center justify-center mb-4 transition-surface duration-200 ${service.theme.iconBg}`}>
                   <service.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 

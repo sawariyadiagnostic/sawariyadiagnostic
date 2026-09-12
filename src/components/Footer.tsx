@@ -35,7 +35,7 @@ export function Footer() {
               <div className="pt-2 flex flex-wrap gap-2.5">
                 <ReportDownloadModal trigger={
                   <button
-                    className="inline-flex items-center gap-2 bg-[#155E9A] hover:bg-[#085a4b] text-white px-4 py-2.5 rounded-[16px] text-xs font-bold transition-all shadow-md active:scale-95 cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-[#155E9A] hover:bg-[#085a4b] text-white px-4 py-2.5 rounded-[16px] text-xs font-bold transition-surface shadow-md active:scale-95 cursor-pointer"
                   >
                     <FileDown className="w-4 h-4 text-emerald-200" />
                     <span>Report assistance</span>
@@ -45,7 +45,7 @@ export function Footer() {
                   href={contact.mapsLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/10 text-slate-200 px-3.5 py-2.5 rounded-[16px] text-xs font-semibold transition-all hover:text-white"
+                  className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/15 border border-white/10 text-slate-200 px-3.5 py-2.5 rounded-[16px] text-xs font-semibold transition-surface hover:text-white"
                 >
                   <MapPin className="w-3.5 h-3.5 text-blue-200" />
                   <span>Google Maps</span>
