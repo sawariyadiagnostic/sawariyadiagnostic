@@ -58,6 +58,9 @@ async function startServer() {
     if (patientId.length > 120 || reportId.length > 120) {
       return res.status(400).json({ error: "Report identifiers are too long" });
     }
+    if (!/^[a-zA-Z0-9_-]+$/.test(patientId) || !/^[a-zA-Z0-9_-]+$/.test(reportId)) {
+      return res.status(400).json({ error: "Invalid report identifiers format" });
+    }
 
     try {
       const token = await getFlabsAuthToken();
