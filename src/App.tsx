@@ -5,6 +5,7 @@ import { About } from './components/About'
 import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
+import { SectionErrorBoundary } from './components/ui/SectionErrorBoundary'
 import { WhatsAppButton } from './components/ui/WhatsAppButton'
 import { MobileBottomDock } from './components/layout/MobileBottomDock'
 
@@ -32,12 +33,14 @@ export default function App() {
         <HomeCollection />
 
         {/* Heavy Interactive Sections: Lazy Load */}
-        <Suspense fallback={<LoadingSpinner />}>
-          <TestCatalog />
-          <Team />
-          <Contact />
-          <Footer />
-        </Suspense>
+        <SectionErrorBoundary>
+          <Suspense fallback={<LoadingSpinner />}>
+            <TestCatalog />
+            <Team />
+            <Contact />
+            <Footer />
+          </Suspense>
+        </SectionErrorBoundary>
       </main>
       <WhatsAppButton />
       <MobileBottomDock />
