@@ -19,6 +19,8 @@ export const siteConfig = {
   brand: { red: '#C62828', blue: '#155E9A', brown: '#7A4B2A', navy: '#102A43', cream: '#FFF9F3' },
   integrations: {
     bookingUrl: import.meta.env.VITE_BOOKING_URL || '',
+    calNamespace: 'sawariya-booking',
+    calLink: 'sawariya-lab/30min',
   },
   claims: {
     accreditation: import.meta.env.VITE_ACCREDITATION_CLAIM || 'Accreditation details available on request',

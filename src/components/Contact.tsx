@@ -12,7 +12,7 @@ export function Contact() {
 
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({"namespace":"sawariya-booking"});
+      const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
       cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
     })();
   }, []);
@@ -139,8 +139,8 @@ export function Contact() {
                   }} 
                 >
                   <Cal 
-                    namespace="sawariya-booking"
-                    calLink="sawariya-lab/30min"
+                    namespace={siteConfig.integrations.calNamespace}
+                    calLink={siteConfig.integrations.calLink}
                     style={{width:"100%",height:"100%",overflow:"scroll"}}
                     config={{layout: 'month_view'}}
                   />

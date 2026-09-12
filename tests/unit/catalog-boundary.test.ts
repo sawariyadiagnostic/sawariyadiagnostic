@@ -28,6 +28,11 @@ describe('public site configuration', () => {
     expect(validateSiteConfig()).toBe(siteConfig);
   });
 
+  it('keeps the appointment provider boundary explicit', () => {
+    expect(siteConfig.integrations.calNamespace).toBe('sawariya-booking');
+    expect(siteConfig.integrations.calLink).toBe('sawariya-lab/30min');
+  });
+
   it('rejects invalid required contact data', () => {
     expect(() => validateSiteConfig({
       ...siteConfig,
