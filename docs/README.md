@@ -30,6 +30,8 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 
 - [Catalog workspace](../catalog-workspace/README.md) — raw inventory, review notes, report templates, and approved-catalog boundary.
 - [Catalog selection worksheet](content/CATALOG-SELECTION-WORKSHEET.md) — owner selection workflow.
+- [Bilingual guide contract](content/BILINGUAL-GUIDE-CONTENT-CONTRACT.md) — validated bilingual guide publication rules.
+- [Clinical content review checklist](content/clinical-content-review-checklist.md) — clinical and owner approval gate.
 - [Report parameters](../catalog-workspace/report-parameters/README.md) — clinician/owner report-template workflow.
 
 ### Design and UX

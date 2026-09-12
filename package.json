@@ -18,6 +18,7 @@
     "test:unit": "npm exec -- vitest run --config vitest.config.ts",
     "test:e2e": "playwright test --config playwright.config.ts",
     "test:a11y": "playwright test tests/e2e/accessibility.spec.ts --config playwright.config.ts",
+    "validate:content": "tsx scripts/validate-content.ts",
     "check": "npm run lint && npm run typecheck && npm run test:unit && npm run build",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
@@ -72,7 +73,8 @@
     "react-resizable-panels": "^2.1.9",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
 import { healthPackages, medicalTests } from '../../src/data/mockTests';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
@@ -38,6 +39,35 @@ describe('public site configuration', () => {
       ...siteConfig,
       contact: { ...siteConfig.contact, email: 'invalid' },
     })).toThrow('Invalid public contact email');
+  });
+});
+
+describe('bilingual guide publication boundary', () => {
+  const guide = {
+    slug: 'cbc', titleEn: 'Complete Blood Count', titleHi: 'कम्प्लीट ब्लड काउंट',
+    summaryEn: 'A guide pending clinical review.', summaryHi: 'क्लिनिकल समीक्षा लंबित है।',
+    englishPath: 'content/test-guides/cbc/en.md', hindiPath: 'content/test-guides/cbc/hi.md',
+    preparationApproved: true, specimenApproved: true,
+    clinicalReview: { status: 'approved', reviewer: 'clinical-reviewer', reviewedAt: '2026-09-13T00:00:00.000Z' },
+    ownerReview: { status: 'approved', reviewer: 'owner', reviewedAt: '2026-09-13T00:00:00.000Z' },
+    legalReview: { status: 'approved', reviewer: 'legal-reviewer', reviewedAt: '2026-09-13T00:00:00.000Z' },
+    citations: [{ id: 'CIT-CBC-1', title: 'Source', url: 'https://example.org/source', accessedAt: '2026-09-13T00:00:00.000Z' }],
+    price: { customerPriceInr: 220, listedValueInr: 400 },
+    publication: 'published', lastReviewedAt: '2026-09-13T00:00:00.000Z',
+  } as const;
+
+  it('rejects drafts from publication', () => {
+    expect(validateGuideForPublication({ ...guide, publication: 'draft' }).success).toBe(false);
+  });
+
+  it('accepts a fully approved guide', () => {
+    const result = validateGuideForPublication(guide);
+    expect(result.success).toBe(true);
+    if (result.success) expect(isPublishableGuide(result.data)).toBe(true);
+  });
+
+  it('rejects inverted price metadata', () => {
+    expect(validateGuideForPublication({ ...guide, price: { customerPriceInr: 500, listedValueInr: 400 } }).success).toBe(false);
   });
 });
 

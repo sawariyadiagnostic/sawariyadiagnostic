@@ -123,8 +123,9 @@ Before a production push, run:
 ```bash
 npm ci
 npm run lint
-npx tsc --noEmit -p tsconfig.app.json
+npm run typecheck
 npm run build
+npm run validate:content
 git diff --check
 ```
 
