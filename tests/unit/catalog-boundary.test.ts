@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
@@ -7,6 +7,14 @@ import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 
 const uniqueIds = (items: { id: string }[]) => new Set(items.map((item) => item.id));
+const runtimeSource = (root: string): string => {
+  const entries = readdirSync(resolve(process.cwd(), root), { withFileTypes: true });
+  return entries.map((entry) => {
+    const relative = `${root}/${entry.name}`;
+    if (entry.isDirectory()) return runtimeSource(relative);
+    return /\.(ts|tsx|js|jsx|html)$/.test(entry.name) ? readFileSync(resolve(process.cwd(), relative), 'utf8') : '';
+  }).join('\n');
+};
 
 describe('approved public catalog', () => {
   it('keeps test and package identifiers unique', () => {
@@ -92,6 +100,12 @@ describe('public role structure', () => {
 });
 
 describe('deployment asset contract', () => {
+  it('keeps raw register paths out of runtime source', () => {
+    const source = [runtimeSource('src'), runtimeSource('scripts'), readFileSync(resolve(process.cwd(), 'server.ts'), 'utf8'), readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')].join('\n');
+    expect(source).not.toContain('raw-inventory');
+    expect(source).not.toContain('registerCatalog');
+  });
+
   it('keeps the logo source base-path relative', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/ui/Logo.tsx'), 'utf8');
     expect(source).toContain('`${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`');

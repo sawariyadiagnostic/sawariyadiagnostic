@@ -16,7 +16,6 @@ import {
   Stethoscope
 } from 'lucide-react';
 import type { MedicalTest, HealthPackage } from '@/data/mockTests';
-import { SEOManager } from '@/lib/seo-ssg';
 import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { toast } from 'sonner';
@@ -43,9 +42,13 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     toast.success('Canonical link copied to clipboard!');
   };
 
-  const schemaJson = isPackage 
-    ? SEOManager.generatePackageSchema(item as HealthPackage)
-    : SEOManager.generateTestSchema(item as MedicalTest);
+  const schemaJson = {
+    '@context': 'https://schema.org',
+    '@type': isPackage ? 'Product' : 'MedicalTest',
+    name: item.name,
+    description: item.description,
+    offers: { '@type': 'Offer', price: item.price, priceCurrency: 'INR' },
+  };
 
   return (
     <>
