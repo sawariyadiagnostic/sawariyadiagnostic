@@ -16,6 +16,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test:unit": "npm exec -- vitest run --config vitest.config.ts",
+    "test:e2e": "playwright test --config playwright.config.ts",
+    "test:a11y": "playwright test tests/e2e/accessibility.spec.ts --config playwright.config.ts",
     "check": "npm run lint && npm run typecheck && npm run test:unit && npm run build",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
@@ -73,7 +75,9 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^9.32.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/express": "^5.0.6",
     "@types/node": "^22.16.5",
