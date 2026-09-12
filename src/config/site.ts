@@ -29,6 +29,30 @@ export const siteConfig = {
   },
 } as const;
 
+export function validateSiteConfig(config = siteConfig) {
+  const required = [
+    config.name,
+    config.shortName,
+    config.location.address,
+    config.location.city,
+    config.location.region,
+    config.location.postalCode,
+    config.contact.phone,
+    config.contact.emergencyPhone,
+    config.contact.whatsapp,
+    config.contact.email,
+  ];
+  if (required.some((value) => !value.trim())) throw new Error('Required public site configuration is missing');
+  if (config.location.country !== 'IN') throw new Error('Unsupported site country');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(config.contact.email)) throw new Error('Invalid public contact email');
+  if (config.contact.phone.replace(/\D/g, '').length < 10) throw new Error('Invalid public lab phone');
+  if (config.contact.emergencyPhone.replace(/\D/g, '').length < 10) throw new Error('Invalid public emergency phone');
+  if (config.contact.whatsapp.replace(/\D/g, '').length < 10) throw new Error('Invalid public WhatsApp number');
+  return config;
+}
+
+validateSiteConfig();
+
 export function telHref(value: string) {
   return value.startsWith('YOUR_') ? undefined : `tel:${value.replace(/\s/g, '')}`;
 }

@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { healthPackages, medicalTests } from '../../src/data/mockTests';
+import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 
 const uniqueIds = (items: { id: string }[]) => new Set(items.map((item) => item.id));
@@ -19,6 +20,19 @@ describe('approved public catalog', () => {
 
   it('does not expose insurer-branded packages', () => {
     expect(healthPackages.some((pkg) => /starhealth|niva\s*bupa/i.test(pkg.name))).toBe(false);
+  });
+});
+
+describe('public site configuration', () => {
+  it('accepts the current public configuration', () => {
+    expect(validateSiteConfig()).toBe(siteConfig);
+  });
+
+  it('rejects invalid required contact data', () => {
+    expect(() => validateSiteConfig({
+      ...siteConfig,
+      contact: { ...siteConfig.contact, email: 'invalid' },
+    })).toThrow('Invalid public contact email');
   });
 });
 
