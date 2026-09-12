@@ -109,7 +109,7 @@ export function TestCatalog() {
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#102A43] tracking-tight leading-tight">
-            Transparent Pricing. Certified Accuracy.
+            Transparent Pricing. Documented Quality Process.
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">

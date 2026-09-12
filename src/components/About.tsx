@@ -18,7 +18,7 @@ export function About() {
     {
       icon: Home,
       title: '2. Home Sample',
-      description: 'A trained, vaccinated phlebotomist collects your sample securely.',
+      description: 'A trained phlebotomy team collects samples when a home visit is confirmed.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
@@ -28,7 +28,7 @@ export function About() {
     {
       icon: Microscope,
       title: '3. Laboratory Processing',
-      description: 'Automated 5-part analyzers ensure zero cross-contamination.',
+      description: 'Samples are processed according to the lab\'s documented quality process.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-green-50 text-green-800 border-green-200/80',
@@ -48,12 +48,9 @@ export function About() {
   ];
 
   const features = [
-    'Fully Automated 5-Part Hematology Analyzers',
-    'Certified MD Pathologists on Active Duty',
-    'Barcode-Tracked Sterile Vacutainer Tubes',
-    'Digital report delivery when configured',
+    'Trained phlebotomy team for confirmed home visits',
+    'Report assistance through configured lab channels',
     'Home collection availability confirmed at booking',
-    'Patient-focused lab support',
   ];
 
   return (
@@ -78,7 +75,7 @@ export function About() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            From doorstep sample collection to certified digital reports in 4 seamless steps
+            From sample collection to report assistance through the configured lab workflow
           </p>
         </div>
 
@@ -124,7 +121,7 @@ export function About() {
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
               <div className="inline-flex items-center gap-2 bg-white/10 px-3.5 py-1 rounded-full backdrop-blur-md border border-white/15">
                 <Award className="w-3.5 h-3.5 text-blue-200" />
-                <span className="text-xs font-bold text-blue-100">Certified Quality Standards</span>
+                <span className="text-xs font-bold text-blue-100">Documented Quality Process</span>
               </div>
 
               <h3 className="text-xl sm:text-3xl font-black tracking-tight text-white leading-snug">

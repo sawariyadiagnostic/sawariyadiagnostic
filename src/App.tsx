@@ -22,7 +22,8 @@ const Footer = lazy(() => import('./components/Footer').then(module => ({ defaul
 export default function App() {
   return (
     <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
-      <main className="relative w-full max-w-full" role="main">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <main id="main-content" className="relative w-full max-w-full" role="main">
         {/* Critical Path: Load Hero Instantly */}
         <Hero />
 

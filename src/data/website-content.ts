@@ -106,7 +106,7 @@ export const contact = {
     {
       icon: Clock,
       title: 'Quick Reports',
-      description: 'Receive accurate reports within 6-24 hours on WhatsApp',
+      description: 'Receive report assistance through the configured lab workflow',
       color: 'accent-emerald',
     },
   ]

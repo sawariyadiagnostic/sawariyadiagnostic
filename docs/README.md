@@ -25,6 +25,7 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 - [Catalog data provenance](operations/CATALOG-DATA-PROVENANCE.md) — source and pricing provenance.
 - [Dependency review](operations/dependency-review.md) — production/full-tree audit policy and upgrade rules.
 - [Wave 2 baseline](operations/baseline.md) — measured pre-cleanup quality and integration inventory.
+- [Wave 4 quality audit](operations/WAVE-4-QUALITY-AUDIT.md) — visual, accessibility, performance-copy, and claim cleanup.
 
 ### Content system
 

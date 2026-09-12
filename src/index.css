@@ -59,7 +59,7 @@
   --accent-emerald: 0 64% 43%;     /* Malachite Feather Green (#0A6E5C) */
   --accent-blue: 210 76% 34%;        /* Midnight Sapphire (#0C223F) */
   --accent-orange: 0 64% 43%;       /* Gilded Feather Gold (#C5A880 / #D4AF37) */
-  --accent-purple: 25 48% 32%;      /* Royal Indigo */
+  --accent-purple: 25 48% 32%;      /* Warm brown compatibility token */
 
   --radius: 1rem;
 }
@@ -169,7 +169,29 @@
     min-height: 100dvh;
   }
 
-  /* iOS iPhone Pro Safe Area Padding Utilities */
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 200;
+    transform: translateY(-200%);
+    border-radius: 9999px;
+    background: #102A43;
+    color: #FFFFFF;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    transition: transform 0.2s ease;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+
+  :focus-visible {
+    scroll-margin-top: 6rem;
+  }
+
+
   .pt-safe {
     padding-top: env(safe-area-inset-top, 0px);
   }
@@ -365,7 +387,7 @@
     border: 1px solid rgba(203, 213, 225, 0.8);
     box-shadow: 0 4px 24px -4px rgba(10, 25, 47, 0.07);
     border-radius: 1.25rem;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .apple-card:hover {
@@ -383,7 +405,7 @@
     border: 1px solid rgba(203, 213, 225, 0.85);
     box-shadow: 0 6px 28px -4px rgba(10, 25, 47, 0.08);
     border-radius: 1.25rem;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover {
@@ -420,7 +442,7 @@
     border-radius: 9999px;
     border: 1px solid rgba(254, 215, 170, 0.45);
     box-shadow: 0 4px 18px rgba(217, 119, 6, 0.42), 0 2px 6px rgba(194, 65, 12, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   }
@@ -452,7 +474,7 @@
     border-radius: 9999px;
     border: 1px solid rgba(0, 168, 150, 0.35);
     box-shadow: 0 4px 14px rgba(5, 26, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
@@ -483,7 +505,7 @@
     border-radius: 9999px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 16px rgba(10, 110, 92, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
@@ -512,7 +534,7 @@
     border-radius: 9999px;
     border: 1px solid rgba(255, 255, 255, 0.35);
     box-shadow: 0 4px 16px rgba(217, 119, 6, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
@@ -541,7 +563,7 @@
     white-space: nowrap;
     border-radius: 9999px;
     box-shadow: 0 2px 6px rgba(10, 25, 47, 0.04);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
@@ -571,7 +593,7 @@
     white-space: nowrap;
     border-radius: 9999px;
     box-shadow: 0 2px 6px rgba(234, 88, 12, 0.06);
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
   }
 
@@ -860,7 +882,7 @@ html {
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .whatsapp-float:hover {
