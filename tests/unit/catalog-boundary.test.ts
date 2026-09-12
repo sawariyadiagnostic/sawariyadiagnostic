@@ -2,6 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
+import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { healthPackages, medicalTests } from '../../src/data/mockTests';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
@@ -76,6 +77,12 @@ describe('bilingual guide publication boundary', () => {
 
   it('rejects inverted price metadata', () => {
     expect(validateGuideForPublication({ ...guide, price: { customerPriceInr: 500, listedValueInr: 400 } }).success).toBe(false);
+  });
+});
+
+describe('approved guide manifest', () => {
+  it('does not publish unapproved guides by default', () => {
+    expect(approvedGuideManifest).toEqual([]);
   });
 });
 
