@@ -25,79 +25,79 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var import_express = __toESM(require("express"), 1);
 var import_path = __toESM(require("path"), 1);
 var import_vite = require("vite");
+var PORT = Number(process.env.PORT || 3e3);
+var MAX_EVENT_NAME_LENGTH = 80;
+var isSafeEventName = (value) => typeof value === "string" && /^[a-zA-Z0-9_.:-]{1,80}$/.test(value);
+async function getFlabsAuthToken() {
+  const clientId = process.env.FLABS_CLIENT_ID;
+  const clientSecret = process.env.FLABS_CLIENT_SECRET;
+  const baseUrl = process.env.FLABS_API_BASE_URL;
+  if (!clientId || !clientSecret || !baseUrl) {
+    throw new Error("LIS integration is not configured");
+  }
+  const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ client_id: clientId, client_secret: clientSecret }),
+    signal: AbortSignal.timeout(1e4)
+  });
+  if (!response.ok) throw new Error("LIS authentication failed");
+  const data = await response.json();
+  if (!data.access_token) throw new Error("LIS authentication returned no token");
+  return data.access_token;
+}
 async function startServer() {
   const app = (0, import_express.default)();
-  const PORT = 3e3;
-  app.use(import_express.default.json());
-  app.post("/api/track", async (req, res) => {
-    const { event, payload, timestamp } = req.body;
-    console.log(`[Analytics Engine] Received event: ${event}`, payload);
-    res.json({ success: true, timestamp });
+  app.disable("x-powered-by");
+  app.use(import_express.default.json({ limit: "32kb", strict: true }));
+  app.get("/health", (_req, res) => {
+    res.json({ status: "ok", service: "sawariya-diagnostic-web" });
   });
-  async function getFlabsAuthToken() {
-    const clientId = process.env.FLABS_CLIENT_ID;
-    const clientSecret = process.env.FLABS_CLIENT_SECRET;
-    const baseUrl = process.env.FLABS_API_BASE_URL || "https://api.flabslis.com";
-    if (!clientId || !clientSecret) {
-      throw new Error("FLabs credentials missing in environment variables (.env)");
+  app.post("/api/track", (req, res) => {
+    const { event, timestamp } = req.body ?? {};
+    if (!isSafeEventName(event) || event.length > MAX_EVENT_NAME_LENGTH) {
+      return res.status(400).json({ error: "Invalid analytics event" });
     }
-    const response = await fetch(`${baseUrl}/api/v1/auth/token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret })
-    });
-    if (!response.ok) throw new Error("Failed to authenticate with FLabs");
-    const data = await response.json();
-    return data.access_token;
-  }
+    if (timestamp !== void 0 && typeof timestamp !== "string") {
+      return res.status(400).json({ error: "Invalid analytics timestamp" });
+    }
+    return res.status(202).json({ accepted: true });
+  });
   app.post("/api/lis/download-report", async (req, res) => {
-    const { patientId, reportId, otp } = req.body;
-    console.log(`[FLabs Engine] Requesting report for Patient: ${patientId}`);
-    if (!patientId || !reportId) {
-      return res.status(400).json({ error: "Missing required parameters for LIS" });
+    const { patientId, reportId } = req.body ?? {};
+    if (typeof patientId !== "string" || typeof reportId !== "string" || !patientId || !reportId) {
+      return res.status(400).json({ error: "Missing required report identifiers" });
+    }
+    if (patientId.length > 120 || reportId.length > 120) {
+      return res.status(400).json({ error: "Report identifiers are too long" });
     }
     try {
-      if (process.env.FLABS_CLIENT_ID) {
-        const token = await getFlabsAuthToken();
-        const baseUrl = process.env.FLABS_API_BASE_URL || "https://api.flabslis.com";
-        const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${patientId}/reports/${reportId}`, {
-          headers: { "Authorization": `Bearer ${token}` }
-        });
-        if (!reportResponse.ok) {
-          throw new Error("Report not found in FLabs LIS");
-        }
-        const reportData = await reportResponse.json();
-        return res.json({
-          success: true,
-          downloadUrl: reportData.pdf_url || reportData.download_url,
-          reportMetadata: reportData.metadata
-        });
-      }
-      return res.status(503).json({
-        error: "LIS integration is not configured. No report was downloaded.",
-        code: "LIS_NOT_CONFIGURED"
+      const token = await getFlabsAuthToken();
+      const baseUrl = process.env.FLABS_API_BASE_URL;
+      const reportResponse = await fetch(`${baseUrl}/api/v1/patients/${encodeURIComponent(patientId)}/reports/${encodeURIComponent(reportId)}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(15e3)
       });
-    } catch (error) {
-      console.error("[LIS Engine Error]", error);
-      res.status(500).json({ error: "Failed to communicate with LIS integration" });
+      if (!reportResponse.ok) return res.status(404).json({ error: "Report not found" });
+      const reportData = await reportResponse.json();
+      return res.json({ success: true, downloadUrl: reportData.pdf_url || reportData.download_url, reportMetadata: reportData.metadata });
+    } catch {
+      return res.status(503).json({ error: "Report service is temporarily unavailable", code: "LIS_UNAVAILABLE" });
     }
   });
   if (process.env.NODE_ENV !== "production") {
-    const vite = await (0, import_vite.createServer)({
-      server: { middlewareMode: true },
-      appType: "spa"
-    });
+    const vite = await (0, import_vite.createServer)({ server: { middlewareMode: true }, appType: "spa" });
     app.use(vite.middlewares);
   } else {
     const distPath = import_path.default.join(process.cwd(), "dist");
-    app.use(import_express.default.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(import_path.default.join(distPath, "index.html"));
-    });
+    app.use(import_express.default.static(distPath, { fallthrough: false }));
+    app.get("*", (_req, res) => res.sendFile(import_path.default.join(distPath, "index.html")));
   }
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Scalable Architecture] Server running on http://localhost:${PORT}`);
-  });
+  app.use((_req, res) => res.status(404).json({ error: "Not found" }));
+  app.listen(PORT, "0.0.0.0", () => console.info(`Sawariya web server listening on port ${PORT}`));
 }
-startServer();
+startServer().catch((error) => {
+  console.error("Server startup failed", error instanceof Error ? error.message : "unknown error");
+  process.exitCode = 1;
+});
 //# sourceMappingURL=server.cjs.map
