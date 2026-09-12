@@ -4,6 +4,11 @@
   "version": "0.0.0",
   "homepage": "https://sawariyadiagnostic.github.io/sawariyadiagnostic/",
   "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "npm": ">=11 <12"
+  },
+  "packageManager": "npm@11.8.0",
   "scripts": {
     "dev": "tsx server.ts",
     "build": "vite build && tsx scripts/generate-ssg.ts && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
