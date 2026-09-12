@@ -110,7 +110,7 @@ This website includes specific files to help AI agents and Search Engines unders
 - `public/sitemap.xml`: Site structure for search engines.
 
 ## 🏗️ Architecture & Extensions
-For details on the project structure, performance strategies, and a comprehensive guide on how the system can be extended and scaled in the future, please refer to the [ARCHITECTURE.md](./ARCHITECTURE.md) document.
+For details on the project structure, performance strategies, and a comprehensive guide on how the system can be extended and scaled in the future, please refer to the [ARCHITECTURE.md](./docs/architecture/ARCHITECTURE.md) document.
 
 ---
 
