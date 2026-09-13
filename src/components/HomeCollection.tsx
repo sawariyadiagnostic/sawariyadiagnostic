@@ -49,7 +49,7 @@ export function HomeCollection() {
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_2px_12px_rgba(0,0,0,0.1)]">
               <Home className="w-3.5 h-3.5 text-blue-200" />
-              <span className="text-xs font-bold text-blue-100">Home collection • Availability confirmed at booking</span>
+               <span className="text-xs font-bold text-blue-100">Home collection • 24 HRS OPEN • Walk-in • Emergency night</span>
             </div>
 
             <div className="space-y-2 sm:space-y-3">
