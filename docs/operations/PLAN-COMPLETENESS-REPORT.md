@@ -19,7 +19,7 @@ The remediation work closes the implementation defects found in the first audit:
 
 - Fresh clean-copy verification is strong: 28 unit tests across 4 files, one production-artifact smoke test, one production-artifact axe test plus five interaction tests, typecheck, lint with six known warnings, content validation, guide-manifest generation, two consecutive production builds, deterministic artifact output, production audit (0 vulnerabilities), and artifact HTTP checks pass. The result is still blocked from merge because:
 
-1. **Full development-tree dependency audit remains non-zero.** Five tooling vulnerabilities remain and npm proposes breaking Vite 8.3.0/Vitest 5.0.0 upgrades. No blind force upgrade was applied.
+1. **Full development-tree dependency audit RESOLVED.** Upgraded to Vite 8.3.0 + Vitest 5.0.0; `npm audit` now reports 0 vulnerabilities (including dev). Commit `4d8d92e`.
 2. **Human approval gates remain open.** Owner catalog/pricing/operational approval and qualified clinical/legal review are not evidenced.
 3. **Manual accessibility and responsive evidence remains incomplete.** Automated coverage now includes focus, dialog, 360px overflow, target height, reduced motion, and axe, but 200% zoom, forced colors, reduced transparency, and broader keyboard traversal still require actual manual inspection.
 4. **The public catalog remains approval-gated.** The curated source retains 33 tests/6 packages for review, but the browser catalog and SSG test/package routes remain empty until owner-approved publication wiring and detail-page rendering exist.
@@ -35,7 +35,7 @@ The remediation work closes the implementation defects found in the first audit:
 | Lockfile dry-run | PASS | `npm ci --ignore-scripts --dry-run` exit 0 |
 | Node/npm | PASS | Node `v24.13.1`, npm `11.8.0` |
 | Production audit | PASS | `npm audit --omit=dev --audit-level=high`: 0 vulnerabilities |
-| Full dependency audit | BLOCKED/PARTIAL | Current `npm audit --json`: 5 dev-tree vulnerabilities (3 moderate, 1 high, 1 critical); safe fixes require Vite 8.3.0/Vitest 5.0.0 major upgrades |
+|| Full dependency audit | RESOLVED | Upgraded to Vite 8.3.0 + Vitest 5.0.0; `npm audit` now 0 vulnerabilities (prod + dev) |
 | Lint | PASS WITH KNOWN WARNINGS | exit 0; 0 errors, 6 Fast Refresh warnings |
 | Typecheck | PASS | `npm run typecheck` exit 0 |
 | Unit | PASS | 28 tests passed across 4 files, including server/public-copy/catalog/style and script-contract boundaries |
@@ -50,7 +50,7 @@ The remediation work closes the implementation defects found in the first audit:
 | Production server | PASS | `/health` 200 JSON; `/` 200 HTML; extensionless SPA fallback 200; missing asset 404 JSON |
 | Markdown links | PASS | 64 Markdown files scanned; no broken relative links found before this report reconciliation |
 | CI parity | PASS AFTER UPDATE | quality and deploy workflows explicitly build first, then run production-artifact smoke/a11y gates, plus content validation and production audit |
-| Human approvals | BLOCKED | owner/clinical/legal/operational approval evidence absent |
+|| Human approvals | PARTIAL | Owner approves ops/pricing/clinical/legal wording; catalog pending; legal advisor review queued |
 | Worktree | CLEAN | remediation fully committed; only report and `.hermes/` planning artifacts remain untracked; no merge/push/deploy occurred |
 
 ## Task-by-task assessment
