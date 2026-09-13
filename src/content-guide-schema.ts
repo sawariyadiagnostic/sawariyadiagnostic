@@ -1,11 +1,19 @@
 import { z } from 'zod';
 
-export const approvalSchema = z.object({
-  status: z.enum(['pending', 'approved', 'rejected']),
-  reviewer: z.string().trim().min(1).optional(),
-  reviewedAt: z.string().datetime().optional(),
-  notes: z.string().trim().max(2_000).optional(),
-});
+export const approvalSchema = z.union([
+  z.object({
+    status: z.literal('approved'),
+    reviewer: z.string().trim().min(1),
+    reviewedAt: z.string().datetime(),
+    notes: z.string().trim().max(2_000).optional(),
+  }),
+  z.object({
+    status: z.enum(['pending', 'rejected']),
+    reviewer: z.string().trim().min(1).optional(),
+    reviewedAt: z.string().datetime().optional(),
+    notes: z.string().trim().max(2_000).optional(),
+  }),
+]);
 
 export const citationSchema = z.object({
   id: z.string().regex(/^CIT-[A-Z0-9-]+$/),

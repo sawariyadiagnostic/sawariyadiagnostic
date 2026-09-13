@@ -37,8 +37,8 @@ export function About() {
     },
     {
       icon: FileCheck,
-      title: '4. Digital Delivery',
-      description: 'Receive a digital report through the configured delivery workflow.',
+      title: '4. Report Assistance',
+      description: 'Contact the lab through configured channels for report assistance.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
@@ -156,12 +156,12 @@ export function About() {
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-green-400">10,000+</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300">Samples Processed</p>
+                    <p className="text-xl sm:text-2xl font-black text-green-400">On request</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300">Service details</p>
                   </div>
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">180+</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300">Validated Profiles</p>
+                    <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">Documented</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300">Quality process</p>
                   </div>
                 </div>
               </div>

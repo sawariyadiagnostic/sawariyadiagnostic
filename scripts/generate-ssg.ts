@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import { medicalTests, healthPackages } from '../src/data/mockTests';
 import { approvedGuideManifest } from '../src/data/approvedGuideManifest';
 import { generateOgImage } from './generate-og-image';
 
@@ -37,6 +36,11 @@ function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): strin
     /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/i,
     `<meta property="og:description" content="${config.description}" />`,
   );
+  html = html.replace(/<link\s+rel="canonical"[^>]*>\s*/i, '');
+  html = html.replace(/<meta\s+property="og:url"[^>]*>\s*/i, '');
+  html = html.replace(/<meta\s+name="twitter:title"[^>]*>\s*/i, '');
+  html = html.replace(/<meta\s+name="twitter:description"[^>]*>\s*/i, '');
+  html = html.replace(/<script\s+type="application\/ld\+json">[\s\S]*?<\/script>\s*/i, '');
 
   const canonicalUrl = `${BASE_URL}/${config.path}`;
   const languageLinks = config.alternatePath
@@ -57,7 +61,7 @@ function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): strin
 }
 
 export function buildSSG() {
-  console.log('🚀 [SSG Engine] Generating static HTML pages for all tests & packages...');
+  console.log('🚀 [SSG Engine] Generating approved guide pages and support assets...');
   if (!fs.existsSync(DIST_DIR)) throw new Error('Dist directory does not exist; run vite build first');
 
   const baseIndexHtmlPath = path.join(DIST_DIR, 'index.html');
@@ -70,29 +74,6 @@ export function buildSSG() {
   fs.writeFileSync(baseIndexHtmlPath, baseIndexHtml, 'utf-8');
 
   const routes: RouteConfig[] = [];
-  for (const test of medicalTests) {
-    routes.push({
-      path: `test/${test.id}.html`,
-      title: `${test.name} - Price, Preparation & Details | Sawariya Diagnostic Lab`,
-            description: `${test.name} is listed at ₹${test.price}. Review preparation, test details, and current availability with the lab.`,
-      type: 'MedicalTest',
-      jsonLd: {
-        '@context': 'https://schema.org', '@type': 'MedicalTest', name: test.name,
-        description: test.description, url: `${BASE_URL}/test/${test.id}.html`,
-        offers: { '@type': 'Offer', price: test.price, priceCurrency: 'INR', seller: { '@type': 'DiagnosticLab', name: 'Sawariya Diagnostic Lab' } },
-      },
-    });
-  }
-  for (const pkg of healthPackages) {
-    routes.push({
-      path: `package/${pkg.id}.html`,
-      title: `${pkg.name} Health Checkup Package - ₹${pkg.price} | Sawariya Diagnostic`,
-      description: `${pkg.name} includes ${pkg.testsIncluded.length} key tests: ${pkg.testsIncluded.slice(0, 3).join(', ')}. Home collection availability is confirmed separately.`,
-      type: 'Product',
-      jsonLd: { '@context': 'https://schema.org', '@type': 'Product', name: pkg.name, description: pkg.description, url: `${BASE_URL}/package/${pkg.id}.html`, offers: { '@type': 'Offer', price: pkg.price, priceCurrency: 'INR' } },
-    });
-  }
-
   for (const guide of approvedGuideManifest) {
     const guideJsonLd = {
       '@context': 'https://schema.org',
