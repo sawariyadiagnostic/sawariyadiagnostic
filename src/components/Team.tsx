@@ -34,7 +34,7 @@ function RoleCard({ role, index }: { role: TeamRole; index: number }) {
 
 export function Team() {
   const governance = teamStructure.filter((role) => role.tier === 'governance' && role.publishState === 'public');
-  const operations = teamStructure.filter((role) => role.tier === 'operations');
+  const operations = teamStructure.filter((role) => role.tier === 'operations' && role.publishState === 'public');
   return (
     <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#FBFBFD] fluid-section">
       <div className="pointer-events-none absolute left-[-10%] top-[20%] h-[40vw] w-[40vw] bg-[#155E9A]/5 blur-[80px]" />

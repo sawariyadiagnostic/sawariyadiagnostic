@@ -15,9 +15,9 @@ export default defineConfig(({ mode }) => ({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'framer-motion': ['framer-motion'],
-        },
+         manualChunks: (id) => {
+           if (id.includes('framer-motion')) return 'framer-motion';
+         },
       },
     },
   },

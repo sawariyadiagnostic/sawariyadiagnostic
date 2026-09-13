@@ -8,7 +8,6 @@ export interface SearchableItem {
   category: string;
   price: number;
   originalPrice?: number;
-  turnaroundTime?: string;
   description: string;
   parameters?: string[];
   symptoms?: string[];
@@ -56,7 +55,6 @@ export function buildSearchIndex(tests: MedicalTest[], packages: HealthPackage[]
       category: t.category,
       price: t.price,
       originalPrice: t.originalPrice,
-      turnaroundTime: t.turnaroundTime,
       description: t.description,
       parameters: t.parameters || [],
       symptoms,
@@ -74,7 +72,6 @@ export function buildSearchIndex(tests: MedicalTest[], packages: HealthPackage[]
       category: 'package',
       price: p.price,
       originalPrice: p.originalPrice,
-      turnaroundTime: '12-24 hours',
       description: p.description,
       parameters: p.testsIncluded,
       symptoms: ['full body', 'checkup', 'preventive', 'wellness'],

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
+import { Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/mockTests';
 import { TestBookingModal } from '../booking/TestBookingModal';
@@ -59,7 +59,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
         aria-label={`View details for ${test.name}`}
-        className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-all duration-300 relative overflow-hidden cursor-pointer"
+        className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden cursor-pointer"
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-blue-500/5 group-hover:to-[#FFF9F3]0/5 transition-colors duration-500 pointer-events-none" />
@@ -118,7 +118,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
           )}
         </div>
         
-        {/* Price, Turnaround & Action */}
+        {/* Price & Action */}
         <div className="pt-4 mt-auto border-t border-slate-100">
           <div className="flex items-center justify-between mb-3.5">
             <div>
@@ -129,11 +129,6 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
                 )}
               </div>
               <span className="text-[9.5px] text-slate-400 font-medium">Quality process</span>
-            </div>
-
-            <div className="flex items-center gap-1 text-[10.5px] font-semibold text-slate-700 bg-slate-50 border border-slate-200/70 px-2.5 py-1 rounded-full">
-              <Clock className="w-3 h-3 text-[#155E9A]" />
-              <span>{test.turnaroundTime}</span>
             </div>
           </div>
 
@@ -152,7 +147,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
             <Button 
               size="sm"
               onClick={handleBookClick}
-              className="btn-primary action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] active:scale-[0.98] transition-all shadow-xs hover:shadow-md w-full min-w-0"
+              className="btn-primary action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] active:scale-[0.98] transition-surface shadow-xs hover:shadow-md w-full min-w-0"
             >
               <span className="truncate">Book Now</span>
               <ArrowRight className="w-3.5 h-3.5 shrink-0" />

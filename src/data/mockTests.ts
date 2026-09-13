@@ -4,12 +4,10 @@ export interface MedicalTest {
   description: string;
   price: number;
   originalPrice?: number;
-  turnaroundTime: string;
   category: 'blood' | 'hormone' | 'specialized' | 'package';
   parameters?: string[];
   homeCollection: boolean;
   popular?: boolean;
-  bookingsLast6Months?: number;
 }
 
 export interface HealthPackage {
@@ -20,7 +18,6 @@ export interface HealthPackage {
   originalPrice: number;
   testsIncluded: string[];
   recommended: boolean;
-  bookingsLast6Months?: number;
   listedValue?: number;
 }
 
@@ -31,7 +28,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Comprehensive analysis of blood cells including RBC, WBC, platelets, and hemoglobin levels.',
     price: 220,
     originalPrice: 400,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['RBC Count', 'WBC Count', 'Hemoglobin', 'Platelet Count', 'Hematocrit'],
     homeCollection: true,
@@ -43,7 +39,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the rate at which red blood cells settle, used to detect inflammation.',
     price: 150,
     originalPrice: 250,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['ESR'],
     homeCollection: true,
@@ -54,7 +49,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Complete cholesterol assessment including HDL, LDL, triglycerides, and total cholesterol.',
     price: 500,
     originalPrice: 699,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['Total Cholesterol', 'HDL', 'LDL', 'Triglycerides', 'VLDL'],
     homeCollection: true,
@@ -66,7 +60,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Complete thyroid function test to assess thyroid health and hormone levels.',
     price: 499,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['T3', 'T4', 'TSH'],
     homeCollection: true,
@@ -78,7 +71,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures unbound active thyroid hormones (Free T3, Free T4) along with TSH.',
     price: 599,
     originalPrice: 1099,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Free T3', 'Free T4', 'TSH'],
     homeCollection: true,
@@ -89,18 +81,16 @@ export const medicalTests: MedicalTest[] = [
     description: 'Follicle-stimulating hormone (FSH) is a hormone that plays a crucial role in sexual development and reproduction.',
     price: 399,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['FSH'],
     homeCollection: true,
-  }, 
+  },
   {
     id: 'lh',
     name: 'LH',
     description: 'Luteinizing hormone (LH) is a hormone that plays a crucial role in sexual development and reproduction.',
     price: 499,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['LH'],
     homeCollection: true,
@@ -111,7 +101,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the level of prolactin hormone, important for reproductive health.',
     price: 450,
     originalPrice: 850,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Prolactin'],
     homeCollection: true,
@@ -122,7 +111,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures total testosterone levels in the blood.',
     price: 550,
     originalPrice: 999,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Total Testosterone'],
     homeCollection: true,
@@ -133,7 +121,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the active, unbound form of testosterone in the blood.',
     price: 850,
     originalPrice: 1299,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Free Testosterone'],
     homeCollection: true,
@@ -144,7 +131,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Sex Hormone Binding Globulin test, often used with testosterone levels.',
     price: 950,
     originalPrice: 1499,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['SHBG'],
     homeCollection: true,
@@ -155,7 +141,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Assesses ovarian reserve and fertility potential in women.',
     price: 1500,
     originalPrice: 2200,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['AMH'],
     homeCollection: true,
@@ -166,7 +151,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures DHEAS levels, evaluating adrenal gland function.',
     price: 850,
     originalPrice: 1250,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['DHEAS'],
     homeCollection: true,
@@ -177,7 +161,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures human growth hormone levels.',
     price: 750,
     originalPrice: 1150,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['Growth Hormone'],
     homeCollection: true,
@@ -188,7 +171,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Insulin-like Growth Factor 1, helps assess growth hormone disorders.',
     price: 1100,
     originalPrice: 1800,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['IGF-1'],
     homeCollection: true,
@@ -199,7 +181,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Quantitative measurement of Beta HCG for pregnancy confirmation.',
     price: 600,
     originalPrice: 950,
-    turnaroundTime: '6-8 hours',
     category: 'hormone',
     parameters: ['Beta HCG'],
     homeCollection: true,
@@ -210,7 +191,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures average blood sugar levels over the past 2-3 months for diabetes monitoring.',
     price: 399,
     originalPrice: 699,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['HbA1c Percentage', 'Estimated Average Glucose'],
     homeCollection: true,
@@ -221,7 +201,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures vitamin D levels to assess bone health and immune function.',
     price: 799,
     originalPrice: 1199,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['25-Hydroxy Vitamin D'],
     homeCollection: true,
@@ -233,7 +212,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Essential test for detecting B12 deficiency affecting energy and nerve function.',
     price: 1199,
     originalPrice: 1999,
-    turnaroundTime: '24 hours',
     category: 'specialized',
     parameters: ['Vitamin B12 Level'],
     homeCollection: true,
@@ -244,7 +222,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Comprehensive assessment of liver health including enzymes and bilirubin.',
     price: 599,
     originalPrice: 999,
-    turnaroundTime: '12-24 hours',
     category: 'blood',
     parameters: ['SGOT', 'SGPT', 'Total Bilirubin', 'Direct Bilirubin', 'Alkaline Phosphatase', 'Total Protein', 'Globulin', 'Albumin'],
     homeCollection: true,
@@ -255,9 +232,8 @@ export const medicalTests: MedicalTest[] = [
     description: 'Evaluates kidney health through creatinine, urea, and other markers.',
     price: 599,
     originalPrice: 999,
-    turnaroundTime: '12-24 hours',
     category: 'blood',
-    parameters: ['Creatinine', 'Urea', 'Uric Acid', 'BUN','Calcium','Phosphorus','Potassium','Sodium','Chloride'],
+    parameters: ['Creatinine', 'Urea', 'Uric Acid', 'BUN', 'Calcium', 'Phosphorus', 'Potassium', 'Sodium', 'Chloride'],
     homeCollection: true,
   },
   {
@@ -266,7 +242,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measurement of iron levels in the blood.',
     price: 350,
     originalPrice: 550,
-    turnaroundTime: '8-10 hours',
     category: 'blood',
     parameters: ['Serum Iron'],
     homeCollection: true,
@@ -277,7 +252,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the amount of iron stored in the body.',
     price: 500,
     originalPrice: 850,
-    turnaroundTime: '8-10 hours',
     category: 'blood',
     parameters: ['Ferritin'],
     homeCollection: true,
@@ -288,7 +262,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'C-Reactive Protein test to measure general levels of inflammation in the body.',
     price: 450,
     originalPrice: 750,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CRP Quantitative'],
     homeCollection: true,
@@ -299,7 +272,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Rheumatoid Factor quantitative test for autoimmune diagnosis.',
     price: 550,
     originalPrice: 900,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['RA Factor'],
     homeCollection: true,
@@ -310,7 +282,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures total IgE antibodies in the blood, indicating allergic response.',
     price: 650,
     originalPrice: 1050,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['Total IgE'],
     homeCollection: true,
@@ -321,7 +292,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Tissue Transglutaminase IgA, primary test for Celiac disease.',
     price: 800,
     originalPrice: 1300,
-    turnaroundTime: '12-24 hours',
     category: 'specialized',
     parameters: ['tTG IgA'],
     homeCollection: true,
@@ -332,7 +302,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Cardiac marker test used to detect heart injury.',
     price: 850,
     originalPrice: 1400,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Troponin I'],
     homeCollection: true,
@@ -343,7 +312,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Cardiac marker test for assessing heart muscle damage.',
     price: 850,
     originalPrice: 1400,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Troponin T'],
     homeCollection: true,
@@ -354,7 +322,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Creatine Kinase NAC to detect muscle damage.',
     price: 350,
     originalPrice: 600,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CK-NAC'],
     homeCollection: true,
@@ -365,7 +332,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Creatine Kinase-MB test primarily for heart muscle damage.',
     price: 450,
     originalPrice: 750,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CK-MB'],
     homeCollection: true,
@@ -376,7 +342,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Routine examination of urine for various physical, chemical, and microscopic parameters.',
     price: 150,
     originalPrice: 250,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Physical', 'Chemical', 'Microscopic'],
     homeCollection: true,
@@ -387,56 +352,10 @@ export const medicalTests: MedicalTest[] = [
     description: 'Evaluation of male fertility and sperm health.',
     price: 600,
     originalPrice: 1000,
-    turnaroundTime: '12-24 hours',
     category: 'specialized',
     parameters: ['Count', 'Motility', 'Morphology'],
     homeCollection: false,
   },
-  { id: 'register-liver-function-test-lft-tbil-dbil-ibil-ot-pt-alp-t', name: "LIVER FUNCTION TEST (LFT) { tbil, dbil,ibil, ot, pt, alp, tprotein, alb, glob}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIVER FUNCTION TEST (LFT) { tbil, dbil,ibil, ot, pt, alp, tprotein, alb, glob}"], homeCollection: true, bookingsLast6Months: 1638 },
-  { id: 'register-thyroid-profile', name: "THYROID PROFILE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID PROFILE"], homeCollection: true, bookingsLast6Months: 1593 },
-  { id: 'register-lipid-profile-chol-tg-hdl-ldl-vldl-ratios', name: "LIPID PROFILE { chol, tg, hdl, ldl, vldl, ratios}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIPID PROFILE { chol, tg, hdl, ldl, vldl, ratios}"], homeCollection: true, bookingsLast6Months: 1484 },
-  { id: 'register-hba1c', name: "HBA1C", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 450, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HBA1C"], homeCollection: true, bookingsLast6Months: 1095 },
-  { id: 'register-kidney-function-test-e-kfte-kft-with-electrolytes', name: "KIDNEY FUNCTION TEST e (KFTe) {kft with electrolytes}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["KIDNEY FUNCTION TEST e (KFTe) {kft with electrolytes}"], homeCollection: true, bookingsLast6Months: 1052 },
-  { id: 'register-blood-glucose-fasting', name: "BLOOD GLUCOSE FASTING", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 50, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GLUCOSE FASTING"], homeCollection: true, bookingsLast6Months: 1046 },
-  { id: 'register-haemogram-cbc-esr', name: "HAEMOGRAM (CBC+ESR)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 300, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HAEMOGRAM (CBC+ESR)"], homeCollection: true, bookingsLast6Months: 916 },
-  { id: 'register-vitamin-d3', name: "Vitamin D3", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 800, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Vitamin D3"], homeCollection: true, bookingsLast6Months: 782 },
-  { id: 'register-urine-examination-routine', name: "URINE EXAMINATION ROUTINE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["URINE EXAMINATION ROUTINE"], homeCollection: true, bookingsLast6Months: 782 },
-  { id: 'register-blood-glucose-random', name: "BLOOD GLUCOSE RANDOM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 50, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GLUCOSE RANDOM"], homeCollection: true, bookingsLast6Months: 715 },
-  { id: 'register-calcium', name: "CALCIUM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["CALCIUM"], homeCollection: true, bookingsLast6Months: 464 },
-  { id: 'register-erythrocyte-sedimentation-rate-esr', name: "ERYTHROCYTE SEDIMENTATION RATE (ESR)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ERYTHROCYTE SEDIMENTATION RATE (ESR)"], homeCollection: true, bookingsLast6Months: 415 },
-  { id: 'register-blood-group-abo-rh-typing', name: "BLOOD GROUP (ABO & Rh TYPING)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD GROUP (ABO & Rh TYPING)"], homeCollection: true, bookingsLast6Months: 360 },
-  { id: 'register-widal-slide-agglutination', name: "WIDAL (SLIDE AGGLUTINATION)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["WIDAL (SLIDE AGGLUTINATION)"], homeCollection: true, bookingsLast6Months: 356 },
-  { id: 'register-rheumatoid-factor-ra-factor-quantitative', name: "RHEUMATOID FACTOR (RA FACTOR) - QUANTITATIVE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 450, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["RHEUMATOID FACTOR (RA FACTOR) - QUANTITATIVE"], homeCollection: true, bookingsLast6Months: 303 },
-  { id: 'register-renal-function-test-kft-without-calcium-urea-uric-', name: "Renal Function Test { kft without calcium} { urea, uric acid , phosphorus, bun}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Renal Function Test { kft without calcium} { urea, uric acid , phosphorus, bun}"], homeCollection: true, bookingsLast6Months: 290 },
-  { id: 'register-creatinine', name: "CREATININE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["CREATININE"], homeCollection: true, bookingsLast6Months: 249 },
-  { id: 'register-uric-acid-serum', name: "URIC ACID -  SERUM", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["URIC ACID -  SERUM"], homeCollection: true, bookingsLast6Months: 242 },
-  { id: 'register-thyroid-stimulating-hormone-tsh', name: "THYROID STIMULATING HORMONE (TSH)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 300, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID STIMULATING HORMONE (TSH)"], homeCollection: true, bookingsLast6Months: 215 },
-  { id: 'register-total-testosterone-male', name: "Total Testosterone - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 600, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Total Testosterone - Male"], homeCollection: true, bookingsLast6Months: 214 },
-  { id: 'register-free-testosterone-male', name: "Free Testosterone - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 900, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Free Testosterone - Male"], homeCollection: true, bookingsLast6Months: 195 },
-  { id: 'register-hemoglobin-hb', name: "HEMOGLOBIN (HB)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 100, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["HEMOGLOBIN (HB)"], homeCollection: true, bookingsLast6Months: 189 },
-  { id: 'register-electrolyte-plus-profile-na-k-cl-ica', name: "ELECTROLYTE PLUS PROFILE{ na , k , cl , ica}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 350, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ELECTROLYTE PLUS PROFILE{ na , k , cl , ica}"], homeCollection: true, bookingsLast6Months: 184 },
-  { id: 'register-estradiol-e2-male', name: "Estradiol (E2) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 650, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Estradiol (E2) - Male"], homeCollection: true, bookingsLast6Months: 182 },
-  { id: 'register-follicle-stimulating-hormone-fsh-male', name: "Follicle Stimulating Hormone (FSH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Follicle Stimulating Hormone (FSH) - Male"], homeCollection: true, bookingsLast6Months: 181 },
-  { id: 'register-luteinizing-hormone-lh-male', name: "Luteinizing Hormone (LH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Luteinizing Hormone (LH) - Male"], homeCollection: true, bookingsLast6Months: 181 },
-  { id: 'register-prolactin-prl-male', name: "Prolactin (PRL) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 550, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Prolactin (PRL) - Male"], homeCollection: true, bookingsLast6Months: 181 },
-  { id: 'register-growth-hormone-gh-male', name: "Growth Hormone (GH) - Male", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 900, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["Growth Hormone (GH) - Male"], homeCollection: true, bookingsLast6Months: 180 },
-  { id: 'register-thyroid-profile-free', name: "THYROID PROFILE FREE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'hormone', parameters: ["THYROID PROFILE FREE"], homeCollection: true, bookingsLast6Months: 178 },
-  { id: 'register-hiv-1-2-antibody-rapid-screening', name: "HIV 1 & 2 ANTIBODY - Rapid Screening", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HIV 1 & 2 ANTIBODY - Rapid Screening"], homeCollection: true, bookingsLast6Months: 175 },
-  { id: 'register-vdrl', name: "VDRL", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 200, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["VDRL"], homeCollection: true, bookingsLast6Months: 173 },
-  { id: 'register-hepatitis-b-surface-antigen-x000d-australian-antig', name: "HEPATITIS B SURFACE ANTIGEN_x000D_ (Australian Antigen) - HBsAg", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 200, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS B SURFACE ANTIGEN_x000D_ (Australian Antigen) - HBsAg"], homeCollection: true, bookingsLast6Months: 168 },
-  { id: 'register-lipase', name: "LIPASE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 600, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["LIPASE"], homeCollection: true, bookingsLast6Months: 162 },
-  { id: 'register-hepatitis-c-antibody-hcv-antibody', name: "HEPATITIS C ANTIBODY (HCV Antibody)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 400, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS C ANTIBODY (HCV Antibody)"], homeCollection: true, bookingsLast6Months: 159 },
-  { id: 'register-amylase', name: "AMYLASE", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 550, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["AMYLASE"], homeCollection: true, bookingsLast6Months: 151 },
-  { id: 'register-beta-human-chorionic-gonodotropin-serum-beta-hcg-c', name: "BETA HUMAN CHORIONIC GONODOTROPIN (SERUM BETA HCG) - clia", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 700, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BETA HUMAN CHORIONIC GONODOTROPIN (SERUM BETA HCG) - clia"], homeCollection: true, bookingsLast6Months: 147 },
-  { id: 'register-microalbumin-24hrs-urine', name: "MICROALBUMIN - 24hrs Urine", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["MICROALBUMIN - 24hrs Urine"], homeCollection: true, bookingsLast6Months: 146 },
-  { id: 'register-blood-urea-nitrogen-bun', name: "BLOOD UREA NITROGEN (BUN)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 150, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["BLOOD UREA NITROGEN (BUN)"], homeCollection: true, bookingsLast6Months: 144 },
-  { id: 'register-salmonella-typhi-igm-typhi-dot', name: "SALMONELLA TYPHI IGM (TYPHI DOT)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 250, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["SALMONELLA TYPHI IGM (TYPHI DOT)"], homeCollection: true, bookingsLast6Months: 135 },
-  { id: 'register-albumin-creatinine-ratio', name: "ALBUMIN / CREATININE RATIO", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 1, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["ALBUMIN / CREATININE RATIO"], homeCollection: true, bookingsLast6Months: 117 },
-  { id: 'register-hepatitis-b-surface-antibody-total-x000d-anti-hbs', name: "HEPATITIS B SURFACE ANTIBODY TOTAL_x000D_ (Anti Hbs)", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 850, turnaroundTime: 'Confirm with lab', category: 'specialized', parameters: ["HEPATITIS B SURFACE ANTIBODY TOTAL_x000D_ (Anti Hbs)"], homeCollection: true, bookingsLast6Months: 117 },
-  { id: 'register-kidney-function-test-kft-urea-uric-acid-phosphorus', name: "Kidney Function Test (KFT) { urea, uric acid , phosphorus, bun, calcium}", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 500, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["Kidney Function Test (KFT) { urea, uric acid , phosphorus, bun, calcium}"], homeCollection: true, bookingsLast6Months: 105 },
-  { id: 'register-prothrombin-time-inr', name: "PROTHROMBIN TIME & INR", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 350, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["PROTHROMBIN TIME & INR"], homeCollection: true, bookingsLast6Months: 100 },
-  { id: 'register-prostate-specific-antigen-total-psa', name: "PROSTATE SPECIFIC ANTIGEN (TOTAL) PSA", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 650, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["PROSTATE SPECIFIC ANTIGEN (TOTAL) PSA"], homeCollection: true, bookingsLast6Months: 92 },
-  { id: 'register-vitamin-d-25-hydroxy', name: "VITAMIN D 25-HYDROXY", description: 'Listed diagnostic test from the recent six-month register. Confirm preparation, availability, and current charge with the lab.', price: 1200, turnaroundTime: 'Confirm with lab', category: 'blood', parameters: ["VITAMIN D 25-HYDROXY"], homeCollection: true, bookingsLast6Months: 90 }
 ];
 
 export const healthPackages: HealthPackage[] = [
@@ -456,7 +375,6 @@ export const healthPackages: HealthPackage[] = [
       'Vitamin D3 & B12'
     ],
     recommended: true,
-    bookingsLast6Months: 535,
     listedValue: 4950,
   },
   {
@@ -473,8 +391,7 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
-    bookingsLast6Months: 215,
-    listedValue: 1200,
+
   },
   {
     id: 'male-gh-profile',
@@ -490,7 +407,6 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
-    bookingsLast6Months: 179,
     listedValue: 4499,
   },
   {
@@ -506,7 +422,6 @@ export const healthPackages: HealthPackage[] = [
       'Kidney Function Test (KFT)'
     ],
     recommended: false,
-    bookingsLast6Months: 81,
     listedValue: 2900,
   },
   {
@@ -541,7 +456,7 @@ export const healthPackages: HealthPackage[] = [
     ],
     recommended: false,
     listedValue: 2499,
-  }
+  },
 ];
 
 export const categories = [

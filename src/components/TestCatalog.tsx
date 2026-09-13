@@ -109,11 +109,11 @@ export function TestCatalog() {
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#102A43] tracking-tight leading-tight">
-            Transparent Pricing. Certified Accuracy.
+            Transparent Pricing. Documented Quality Process.
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Choose from comprehensive preventive packages or individual tests listed in the current catalog with instant search & online booking
+            Review the current catalog and contact the lab to request an appointment.
           </p>
 
         </div>
@@ -124,14 +124,14 @@ export function TestCatalog() {
             <TabsList className="bg-white/60 backdrop-blur-xl p-1 rounded-full border border-white/80 h-12 grid grid-cols-2 w-full max-w-md shadow-inner">
               <TabsTrigger 
                 value="packages" 
-                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-surface flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <Package className="w-4 h-4 text-[#155E9A]" />
                 <span>Health Packages ({packages.length})</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="tests" 
-                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+                className="rounded-full px-2 sm:px-6 py-2 text-xs sm:text-sm font-bold data-[state=active]:bg-white data-[state=active]:text-[#102A43] data-[state=active]:shadow-sm text-slate-600 transition-surface flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
               >
                 <TestTube className="w-4 h-4 text-[#155E9A]" />
                 <span>Individual Tests ({tests.length}+)</span>
@@ -142,12 +142,12 @@ export function TestCatalog() {
           {/* Quick Fuse.js Search & Symptom Shortcut Bar */}
           <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
             <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
-              {/* Search Field with Fuse.js Instant Fuzzy Match */}
+              {/* Search Field with Fuse.js matching */}
               <div className="relative flex-1">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
                 <Input
                   type="text"
-                  placeholder="Search 180+ tests by name, symptom (e.g. fatigue, sugar, cbc, thyroid)..."
+                  placeholder="Search current tests by name or symptom..."
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -175,7 +175,7 @@ export function TestCatalog() {
                     <button
                       key={cat.id}
                       onClick={() => setSelectedCategory(cat.id)}
-                      className={`h-9 px-3.5 rounded-full text-xs font-bold transition-all whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
+                      className={`h-9 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
                         isSelected 
                           ? 'bg-[#102A43] text-white' 
                           : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -201,7 +201,7 @@ export function TestCatalog() {
                     setSelectedCategory(sym.cat);
                     if (sym.query) setActiveTab('tests');
                   }}
-                  className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-all whitespace-nowrap cursor-pointer ${
+                  className={`text-[11px] font-semibold px-2.5 py-1 rounded-full border transition-surface whitespace-nowrap cursor-pointer ${
                     searchQuery === sym.query && sym.query !== ''
                       ? 'bg-[#155E9A] text-white border-[#155E9A]'
                       : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'
@@ -223,9 +223,8 @@ export function TestCatalog() {
                   <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">We are validating included tests, report parameters, and pricing before publishing the new package list.</p>
                 </div>
               ) : filteredPackages.map((pkg, idx) => {
-                const listedValue = Math.max(pkg.listedValue ?? pkg.originalPrice, pkg.price);
+                const listedValue = pkg.listedValue ?? pkg.originalPrice;
                 const discountPercent = listedValue > pkg.price ? Math.round((1 - pkg.price / listedValue) * 100) : 0;
-                const mostBooked = pkg.bookingsLast6Months === Math.max(...packages.map((p) => p.bookingsLast6Months ?? 0));
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
                   { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-[#102A43]' },
@@ -237,17 +236,13 @@ export function TestCatalog() {
                 return (
                   <div 
                     key={pkg.id} 
-                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/95 border border-slate-200/90 shadow-sm hover:shadow-md transition-all overflow-hidden ${
+                    className={`glass-card p-4 sm:p-6 flex flex-col justify-between h-full relative rounded-[24px] sm:rounded-[26px] bg-white/95 border border-slate-200/90 shadow-sm hover:shadow-md transition-surface overflow-hidden ${
                       pkg.recommended 
                         ? 'border-2 border-[#155E9A] ring-2 ring-[#C62828]/20 bg-white' 
                         : ''
                     }`}
                   >
-                    {mostBooked && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white text-[10px] sm:text-[11px] font-bold px-3 py-0.5 rounded-full shadow-md border border-blue-300/40 flex items-center gap-1.5 whitespace-nowrap z-10">
-                        <Sparkles className="w-3 h-3 text-[#FDE047]" /> Most booked · 535 in last 6 months
-                      </div>
-                    )}
+
                     
                     <div className="flex-1 flex flex-col justify-between min-w-0">
                       <div>
@@ -368,7 +363,7 @@ export function TestCatalog() {
                     <button
                       key={tag}
                       onClick={() => { setSearchQuery(tag); setSelectedCategory('all'); }}
-                      className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-[#155E9A] text-slate-700 font-semibold px-3 py-1 rounded-full border border-slate-200 transition-all cursor-pointer"
+                      className="text-xs bg-slate-100 hover:bg-blue-50 hover:text-[#155E9A] text-slate-700 font-semibold px-3 py-1 rounded-full border border-slate-200 transition-surface cursor-pointer"
                     >
                       {tag}
                     </button>
@@ -388,7 +383,7 @@ export function TestCatalog() {
                     href={whatsappHref('Hi, I am looking for a pathology test not listed in the catalog') || undefined}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#155E9A] text-white px-3.5 py-2 rounded-full hover:bg-[#102A43] transition-all"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#155E9A] text-white px-3.5 py-2 rounded-full hover:bg-[#102A43] transition-surface"
                   >
                     <span>Ask Lab on WhatsApp</span>
                   </a>

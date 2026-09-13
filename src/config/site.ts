@@ -2,6 +2,8 @@ export const siteConfig = {
   name: 'Sawariya Diagnostic Lab',
   shortName: 'Sawariya Diagnostic',
   tagline: 'Detect • Diagnose • Deliver',
+  publicBasePath: '/sawariyadiagnostic/',
+  legalReviewStatus: 'owner-review-required',
   location: {
     address: 'Opposite R.S. Sangwan Hospital, Loharu Road, Charkhi Dadri, Haryana 127306',
     city: 'Charkhi Dadri',
@@ -19,15 +21,44 @@ export const siteConfig = {
   brand: { red: '#C62828', blue: '#155E9A', brown: '#7A4B2A', navy: '#102A43', cream: '#FFF9F3' },
   integrations: {
     bookingUrl: import.meta.env.VITE_BOOKING_URL || '',
-    web3FormsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '',
+    calNamespace: 'sawariya-booking',
+    calLink: 'sawariya-lab/30min',
   },
   claims: {
     accreditation: import.meta.env.VITE_ACCREDITATION_CLAIM || 'Accreditation details available on request',
-    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Open 24 hours',
+    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Hours and service availability subject to confirmation',
     reportTurnaround: import.meta.env.VITE_REPORT_TAT || 'Turnaround depends on the test',
     serviceArea: import.meta.env.VITE_SERVICE_AREA || 'Service area to be confirmed',
   },
 } as const;
+
+export function validateSiteConfig(config = siteConfig) {
+  const required = [
+    config.name,
+    config.shortName,
+    config.location.address,
+    config.location.city,
+    config.location.region,
+    config.location.postalCode,
+    config.contact.phone,
+    config.contact.emergencyPhone,
+    config.contact.whatsapp,
+    config.contact.email,
+  ];
+  if (required.some((value) => !value.trim())) throw new Error('Required public site configuration is missing');
+  if (!config.publicBasePath.startsWith('/') || !config.publicBasePath.endsWith('/')) throw new Error('Invalid public base path');
+  if (!config.integrations.calNamespace.trim() || !config.integrations.calLink.trim()) throw new Error('Appointment provider is not configured');
+  if (!config.claims.operatingHours.trim()) throw new Error('Operating hours are missing');
+  if (config.legalReviewStatus !== 'owner-review-required') throw new Error('Legal review status must remain explicit');
+  if (config.location.country !== 'IN') throw new Error('Unsupported site country');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(config.contact.email)) throw new Error('Invalid public contact email');
+  if (config.contact.phone.replace(/\D/g, '').length < 10) throw new Error('Invalid public lab phone');
+  if (config.contact.emergencyPhone.replace(/\D/g, '').length < 10) throw new Error('Invalid public emergency phone');
+  if (config.contact.whatsapp.replace(/\D/g, '').length < 10) throw new Error('Invalid public WhatsApp number');
+  return config;
+}
+
+validateSiteConfig();
 
 export function telHref(value: string) {
   return value.startsWith('YOUR_') ? undefined : `tel:${value.replace(/\s/g, '')}`;

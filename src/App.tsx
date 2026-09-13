@@ -1,10 +1,14 @@
 import { Suspense, lazy } from 'react'
+import { siteConfig } from './config/site'
 import { Hero } from './components/Hero'
 import { TrustIndicators } from './components/TrustIndicators'
 import { About } from './components/About'
 import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
+import { SectionErrorBoundary } from './components/ui/SectionErrorBoundary'
+import { TestGuidePage } from './components/TestGuidePage'
+import { approvedGuideManifest } from './data/approvedGuideManifest'
 import { WhatsAppButton } from './components/ui/WhatsAppButton'
 import { MobileBottomDock } from './components/layout/MobileBottomDock'
 
@@ -19,9 +23,15 @@ const Contact = lazy(() => import('./components/Contact').then(module => ({ defa
 const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })))
 
 export default function App() {
+  const pathname = window.location.pathname.replace(siteConfig.publicBasePath, '').replace(/^\/+/, '')
+  const guideMatch = pathname.match(/^guide\/([^/]+?)(-hi)?\.html$/)
+  const guide = guideMatch ? approvedGuideManifest.find((item) => item.slug === guideMatch[1]) : undefined
+  if (guide) return <TestGuidePage guide={guide} language={guideMatch?.[2] ? 'hi' : 'en'} />
+
   return (
     <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
-      <main className="relative w-full max-w-full" role="main">
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <main id="main-content" tabIndex={-1} className="relative w-full max-w-full" role="main">
         {/* Critical Path: Load Hero Instantly */}
         <Hero />
 
@@ -32,12 +42,14 @@ export default function App() {
         <HomeCollection />
 
         {/* Heavy Interactive Sections: Lazy Load */}
-        <Suspense fallback={<LoadingSpinner />}>
-          <TestCatalog />
-          <Team />
-          <Contact />
-          <Footer />
-        </Suspense>
+        <SectionErrorBoundary>
+          <Suspense fallback={<LoadingSpinner />}>
+            <TestCatalog />
+            <Team />
+            <Contact />
+            <Footer />
+          </Suspense>
+        </SectionErrorBoundary>
       </main>
       <WhatsAppButton />
       <MobileBottomDock />

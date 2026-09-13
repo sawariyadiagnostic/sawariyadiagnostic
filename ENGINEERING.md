@@ -24,6 +24,7 @@ npm run dev
 npm run lint
 npx tsc --noEmit -p tsconfig.app.json
 npm run build
+npm run validate:content
 npm run preview
 ```
 

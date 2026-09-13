@@ -1,0 +1,71 @@
+# Documentation Index
+
+Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry points remain intentionally small; detailed plans and operational material live under `docs/`.
+
+## Start here
+
+- [Repository README](../README.md) — product scope, setup, commands, and deployment.
+- [Engineering guide](../ENGINEERING.md) — runtime boundaries, configuration, extension rules, and incident basics.
+- [Agent rules](../AGENTS.md) — repository operating constraints for coding agents.
+- [Contributing guide](../CONTRIBUTING.md) — code, content, and review workflow.
+
+## Active documentation
+
+### Architecture
+
+- [Architecture](architecture/ARCHITECTURE.md) — current system boundaries and extension direction.
+- [Architecture target](architecture/ARCHITECTURE-TARGET.md) — target-state decisions and constraints.
+
+### Operations and release
+
+- [Content publication policy](../CONTENT-PUBLICATION-POLICY.md) — owner approval gate for public catalog facts.
+- [Legal and operational readiness](../LEGAL-OPERATIONAL-READINESS.md) — launch and ongoing compliance checklist.
+- [Ralph audit report](../RALPH-AUDIT-REPORT.md) — latest audited findings and remaining gates.
+- [Catalog reset and build plan](operations/CATALOG-RESET-AND-BUILD-PLAN.md) — approved-catalog workflow.
+- [Catalog data provenance](operations/CATALOG-DATA-PROVENANCE.md) — source and pricing provenance.
+- [Dependency review](operations/dependency-review.md) — production/full-tree audit policy and upgrade rules.
+- [Wave 2 baseline](operations/baseline.md) — measured pre-cleanup quality and integration inventory.
+- [Wave 4 quality audit](operations/WAVE-4-QUALITY-AUDIT.md) — visual, accessibility, performance-copy, and claim cleanup.
+- [Previous plan completeness report](operations/PLAN-COMPLETENESS-REPORT.md) — L01–L31 implementation evidence and merge blockers.
+
+### Content system
+
+- [Catalog workspace](../catalog-workspace/README.md) — raw inventory, review notes, report templates, and approved-catalog boundary.
+- [Catalog selection worksheet](content/CATALOG-SELECTION-WORKSHEET.md) — owner selection workflow.
+- [Bilingual guide contract](content/BILINGUAL-GUIDE-CONTENT-CONTRACT.md) — validated bilingual guide publication rules.
+- [Approved guide page contract](content/APPROVED-GUIDE-PAGE-CONTRACT.md) — approved-only page and SEO route behavior.
+- [Clinical content review checklist](content/clinical-content-review-checklist.md) — clinical and owner approval gate.
+- [Report parameters](../catalog-workspace/report-parameters/README.md) — clinician/owner report-template workflow.
+
+### Design and UX
+
+- [Brand guidelines](../brand-guidelines.md) — identity, color roles, typography, and accessibility rules.
+- [Apple synergy design plan](design/APPLE-SYNERGY-DESIGN-PLAN.md) — interaction and material direction.
+- [Color schema plan](design/COLOR-SCHEMA-PLAN.md) — semantic color system.
+- [Color synergy refinement](design/COLOR-SYNERGY-REFINEMENT-PLAN.md) — current refinement direction.
+- [Logo sizing and spacing](design/LOGO-SIZING-SPACING-PLAN.md) — responsive logo contract.
+- [Desktop button-wrap audit](design/DESKTOP-BUTTON-WRAP-AUDIT.md) — responsive action-label audit.
+- [Team structure blueprint](design/TEAM-STRUCTURE-IMPLEMENTATION-BLUEPRINT.md) — role-first public team system.
+- [Team structure plan](design/TEAM-STRUCTURE-PLAN.md) — role hierarchy and ownership questions.
+
+## Historical and planning material
+
+These documents preserve decisions and investigation history. They are not automatically normative when they conflict with the current code, `ENGINEERING.md`, or the content publication policy.
+
+- [PRD](archive/PRD.md)
+- [Execution plan](archive/EXECUTION-PLAN.md)
+- [Task plan](archive/task_plan.md)
+- [Findings](archive/findings.md)
+- [Progress log](archive/progress.md)
+- [Duplicate review report](archive/DUPLICATE-REVIEW-REPORT.md)
+- [CMS security note](../CMS-SECURITY-NOTE.md)
+- [Logo redraw notes](../logo-redraw-notes.md)
+- [Project rules](../project_rules.md)
+- [Plan continuation](plans/20260913_012832-professional-repository-next-series.md)
+
+## Documentation rules
+
+- Link to exact files; do not rely on filenames discovered by memory.
+- Mark a document active or historical when its recommendations may differ from code.
+- Keep patient, pricing, clinical, and legal facts in approved source files—not in planning prose.
+- Update this index when a new normative document is added.
