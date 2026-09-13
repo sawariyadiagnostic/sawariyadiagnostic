@@ -17,11 +17,17 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath, { fallthrough: false }));
-    app.get('*', (_req, res) => res.sendFile(path.join(distPath, 'index.html')));
+    app.use(express.static(distPath));
+    app.get('/{*splat}', (req, res, next) => {
+      if (path.extname(req.path)) return next();
+      return res.sendFile(path.join(distPath, 'index.html'));
+    });
   }
 
-  app.use((_req, res) => res.status(404).json({ error: 'Not found' }));
+  app.use((_req, res) => {
+    if (res.headersSent) return;
+    res.status(404).json({ error: 'Not found' });
+  });
   app.listen(PORT, '0.0.0.0', () => console.info(`Sawariya web server listening on port ${PORT}`));
 }
 
