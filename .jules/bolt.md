@@ -1,0 +1,3 @@
+## 2025-02-24 - Redundant API Handshakes in Express Proxy
+**Learning:** Found an N+1 API latency bottleneck in the Express proxy (`server.ts`). The `getFlabsAuthToken` function was executing a full OAuth handshake to the external LIS service on *every* request to `/api/lis/download-report`, bypassing the opportunity to cache the retrieved `access_token`. This introduced 200-500ms of unnecessary latency per PDF download and risked rate-limiting.
+**Action:** When a Node proxy interfaces with an external service using token-based auth, always implement in-memory caching with a TTL slightly shorter than the token's exact expiry time (or a conservative 5-minute fallback) to drastically reduce outbound handshakes.
