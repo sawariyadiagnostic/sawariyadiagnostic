@@ -382,7 +382,7 @@ export function TestCatalog() {
                   <a
                     href={whatsappHref('Hi, I am looking for a pathology test not listed in the catalog') || undefined}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-bold bg-[#155E9A] text-white px-3.5 py-2 rounded-full hover:bg-[#102A43] transition-surface"
                   >
                     <span>Ask Lab on WhatsApp</span>
