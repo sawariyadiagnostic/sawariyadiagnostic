@@ -26,6 +26,7 @@ Sawariya Diagnostic's documentation is grouped by purpose. Root-level entry poin
 - [Dependency review](operations/dependency-review.md) — production/full-tree audit policy and upgrade rules.
 - [Wave 2 baseline](operations/baseline.md) — measured pre-cleanup quality and integration inventory.
 - [Wave 4 quality audit](operations/WAVE-4-QUALITY-AUDIT.md) — visual, accessibility, performance-copy, and claim cleanup.
+- [Previous plan completeness report](operations/PLAN-COMPLETENESS-REPORT.md) — L01–L31 implementation evidence and merge blockers.
 
 ### Content system
 

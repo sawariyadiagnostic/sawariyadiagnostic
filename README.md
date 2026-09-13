@@ -10,7 +10,7 @@ The site presents the approved public catalog, laboratory contact routes, home-c
 - **Phone:** `+91 99919 41207`
 - **Emergency line:** `+91 70152 90782`
 - **Email:** `sawariyadiagnosticckd11@gmail.com`
-- **Hours:** configured as open 24 hours; service availability and home collection remain subject to confirmation
+- **Hours:** hours and service availability require confirmation; home collection is subject to confirmation
 - **Booking:** Cal.com embed/handoff where configured; the provider and event must be verified before operational changes
 
 Accreditation, certification, clinical-performance, turnaround, privacy, and security claims require owner and qualified-adviser approval before publication.
@@ -128,6 +128,26 @@ npm run build
 npm run validate:content
 git diff --check
 ```
+
+## Troubleshooting
+
+- If `npm ci` fails, use Node.js 24 and npm 11, remove the local `node_modules/` directory, and retry from the committed lockfile. Do not replace `npm ci` with an unpinned install for release verification.
+- If the development server cannot bind to port `3000`, stop the process already using it or set `PORT` to another local port before running `npm run dev`. The Playwright configuration expects port `3000` unless it is changed with the configuration.
+- If browser checks cannot start, install the Chromium browser required by Playwright with `npx playwright install chromium`, then run `npm run test:e2e` and `npm run test:a11y` separately.
+- If content validation fails, inspect the reported records and approvals; do not bypass `npm run validate:content` or publish unapproved content.
+- If a build fails, inspect the first reported error, fix the source or configuration, and rerun the relevant command before deployment.
+
+## Rollback
+
+There is no repository rollback script. GitHub Pages upload and deployment occur only after the deploy workflow's lint, typecheck, unit, content-validation, production-audit, smoke, accessibility, and build steps pass. If a release must be reverted, revert the offending commit on `main`, run the local production checks, and push the corrective commit so the workflow rebuilds the previous source state. Do not delete or manually edit generated `dist/` output as a rollback mechanism.
+
+## Known limitations
+
+- The site is a static public frontend and optional server bundle. It does not provide a laboratory information system, patient-record store, report hosting/download, payment processing, LIS integration, notification delivery, or home-collection dispatch backend.
+- Booking is a configured Cal.com or published phone/WhatsApp handoff; a rendered link or embed is not proof that an appointment was created or accepted.
+- The configured hours and public catalog are informational. Service availability, home collection, turnaround, and other operational details require confirmation outside this repository.
+- `npm run validate:content` checks the repository's content contract; it does not replace owner, clinical, legal, or operational review.
+- Automated accessibility coverage currently exercises the homepage browser path. It does not replace a broader manual accessibility review.
 
 ## Legal and clinical review boundary
 
