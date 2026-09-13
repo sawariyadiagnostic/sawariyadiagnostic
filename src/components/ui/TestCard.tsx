@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Clock, Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
+import { Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/mockTests';
 import { TestBookingModal } from '../booking/TestBookingModal';
@@ -118,7 +118,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
           )}
         </div>
         
-        {/* Price, Turnaround & Action */}
+        {/* Price & Action */}
         <div className="pt-4 mt-auto border-t border-slate-100">
           <div className="flex items-center justify-between mb-3.5">
             <div>
@@ -129,11 +129,6 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
                 )}
               </div>
               <span className="text-[9.5px] text-slate-400 font-medium">Quality process</span>
-            </div>
-
-            <div className="flex items-center gap-1 text-[10.5px] font-semibold text-slate-700 bg-slate-50 border border-slate-200/70 px-2.5 py-1 rounded-full">
-              <Clock className="w-3 h-3 text-[#155E9A]" />
-              <span>{test.turnaroundTime}</span>
             </div>
           </div>
 

@@ -91,7 +91,7 @@ export function Footer() {
 
             {/* Contact Info (3 cols) */}
             <div className="lg:col-span-3 space-y-2.5">
-              <h3 className="font-bold text-[12px] uppercase tracking-wider text-slate-200">24 hours Calling Desk & Center</h3>
+              <h3 className="font-bold text-[12px] uppercase tracking-wider text-slate-200">Contact & availability</h3>
               <div className="space-y-2.5 text-xs">
                 <div className="flex items-start gap-2.5">
                   <Phone className="w-4 h-4 text-blue-200 flex-shrink-0 mt-0.5" />
@@ -109,7 +109,7 @@ export function Footer() {
                     <a href={`tel:${contact.emergencyPhone.replace(/\s/g, '')}`} className="text-[#FDF2C6] hover:text-[#F1C27D] font-semibold transition-colors">
                       {contact.emergencyPhone}
                     </a>
-                    <p className="text-[11px] text-slate-400">Lab Director / Escalation line</p>
+                    <p className="text-[11px] text-slate-400">Additional contact</p>
                   </div>
                 </div>
 
@@ -136,7 +136,7 @@ export function Footer() {
                   <Clock className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                   <div className="text-slate-300 space-y-0.5">
                     <p className="text-[#B5F3DC] font-bold text-[12px]">Hours: {siteConfig.claims.operatingHours}</p>
-                    <p className="text-[12px] text-slate-400">Emergency & walk-in samples anytime</p>
+                    <p className="text-[11px] text-slate-400">Contact and walk-in options subject to confirmation</p>
                   </div>
                 </div>
               </div>

@@ -75,6 +75,17 @@ describe('bilingual guide publication boundary', () => {
     if (result.success) expect(isPublishableGuide(result.data)).toBe(true);
   });
 
+  it('requires reviewer identity and date for every approved review', () => {
+    const withoutAuditFields = {
+      ...guide,
+      clinicalReview: { status: 'approved' },
+      ownerReview: { status: 'approved' },
+      legalReview: { status: 'approved' },
+    };
+
+    expect(validateGuideForPublication(withoutAuditFields).success).toBe(false);
+  });
+
   it('rejects inverted price metadata', () => {
     expect(validateGuideForPublication({ ...guide, price: { customerPriceInr: 500, listedValueInr: 400 } }).success).toBe(false);
   });
@@ -107,6 +118,29 @@ describe('public role structure', () => {
 });
 
 describe('deployment asset contract', () => {
+  it('runs the full interaction accessibility suite and release check', () => {
+    const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), 'package.json'), 'utf8')) as { scripts: Record<string, string> };
+    expect(packageJson.scripts['test:a11y']).toContain('tests/e2e/accessibility-interactions.spec.ts');
+    expect(packageJson.scripts.check).toContain('npm run validate:content');
+    expect(packageJson.scripts.check).toContain('npm run test:a11y');
+  });
+
+  it('does not generate unrendered test or package SSG routes', () => {
+    const ssg = readFileSync(resolve(process.cwd(), 'scripts/generate-ssg.ts'), 'utf8');
+    expect(ssg).not.toContain("from '../src/data/mockTests'");
+    expect(ssg).not.toContain('path: `test/');
+    expect(ssg).not.toContain('path: `package/');
+  });
+
+  it('replaces base route metadata instead of appending duplicate SEO blocks', () => {
+    const ssg = readFileSync(resolve(process.cwd(), 'scripts/generate-ssg.ts'), 'utf8');
+    expect(ssg).toContain("html = html.replace(/<link\\s+rel=\"canonical\"[^>]*>\\s*/i, '')");
+    expect(ssg).toContain("html = html.replace(/<meta\\s+property=\"og:url\"[^>]*>\\s*/i, '')");
+    expect(ssg).toContain("html = html.replace(/<meta\\s+name=\"twitter:title\"[^>]*>\\s*/i, '')");
+    expect(ssg).toContain("html = html.replace(/<meta\\s+name=\"twitter:description\"[^>]*>\\s*/i, '')");
+    expect(ssg).toContain("html = html.replace(/<script\\s+type=\"application\\/ld\\+json\">[\\s\\S]*?<\\/script>\\s*/i, '')");
+  });
+
   it('keeps raw register paths out of runtime source', () => {
     const source = [runtimeSource('src'), runtimeSource('scripts'), readFileSync(resolve(process.cwd(), 'server.ts'), 'utf8'), readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')].join('\n');
     expect(source).not.toContain('raw-inventory');

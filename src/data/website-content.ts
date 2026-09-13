@@ -30,36 +30,36 @@ export const about = {
   journeySteps: [
     {
       icon: CalendarCheck,
-      title: 'Book Online',
-      description: 'Schedule your test online or call us anytime',
+      title: 'Appointment Request',
+      description: 'Contact the lab to ask about appointment options',
       color: 'accent-teal',
     },
     {
       icon: Home,
       title: 'Sample Collection',
-      description: 'Our trained phlebotomist visits your home',
+      description: 'Home collection can be requested through the appointment desk',
       color: 'accent-blue',
     },
     {
       icon: Microscope,
       title: 'Lab Analysis',
-      description: "Samples processed according to the lab's documented quality process",
+      description: "Samples handled according to the lab's documented process",
       color: 'accent-emerald',
     },
     {
       icon: FileCheck,
-      title: 'Get Reports',
-      description: 'Receive results through the configured delivery workflow',
+      title: 'Report Assistance',
+      description: 'Contact the lab through configured channels for report assistance',
       color: 'accent-purple',
     },
   ],
   features: [
-    'State-of-the-art equipment',
-    'Experienced pathologists',
-    'Quick turnaround time',
+    'Documented laboratory process',
+    'Clinical review available on request',
+    'Current estimate',
     'Affordable pricing',
     'Home sample collection',
-    'Digital reports',
+    'Report assistance',
   ]
 };
 
@@ -105,7 +105,7 @@ export const contact = {
     },
     {
       icon: Clock,
-      title: 'Quick Reports',
+      title: 'Report assistance',
       description: 'Receive report assistance through the configured lab workflow',
       color: 'accent-emerald',
     },
@@ -116,20 +116,20 @@ export const hero = {
   trustIndicators: [
     {
       icon: Clock,
-      title: 'Current estimates',
-            subtitle: 'Confirmed by test',
+      title: 'Current scope',
+      subtitle: 'Confirm with the lab',
       color: 'accent-emerald'
     },
     {
       icon: Shield,
-      title: 'Quality Reviewed',
-      subtitle: 'Lab Process',
+      title: 'Documented process',
+      subtitle: 'Review on request',
       color: 'accent-blue'
     },
     {
       icon: Users,
       title: 'Lab contact',
-            subtitle: 'Availability confirmed',
+      subtitle: 'Ask for current details',
       color: 'accent-purple'
     }
   ]
@@ -166,7 +166,7 @@ export const services = {
   list: [
     {
       title: 'Clinical Pathology',
-      description: 'Automated blood, fluid & cytology examination with multi-level QC calibration.',
+      description: 'Blood, fluid & cytology examination; confirm current scope with the lab.',
       icon: Microscope,
       theme: {
         badge: 'bg-blue-50 text-blue-900 border-blue-200/80',
@@ -177,7 +177,7 @@ export const services = {
     },
     {
       title: 'Biochemistry & Metabolism',
-      description: 'Kidney (KFT), Liver (LFT), Lipid profile & automated electrolyte panels.',
+      description: 'Kidney (KFT), Liver (LFT), Lipid profile & electrolyte panels; confirm current scope with the lab.',
       icon: Activity,
       theme: {
         badge: 'bg-cyan-50 text-cyan-900 border-cyan-200/80',
@@ -188,7 +188,7 @@ export const services = {
     },
     {
       title: 'Microbiology & Cultures',
-      description: 'Sterile culture, antibiotic sensitivity, fungal stains & infectious disease testing.',
+      description: 'Culture, antibiotic sensitivity, fungal stains & infectious disease testing; confirm current scope with the lab.',
       icon: Dna,
       theme: {
         badge: 'bg-green-50 text-green-900 border-green-200/80',
@@ -243,7 +243,7 @@ export const services = {
     },
     {
       title: 'Priority Diagnostic Requests',
-      description: 'Immediate STAT turnaround for critical care, ICU referrals & trauma support.',
+      description: 'Priority requests are handled subject to current lab capacity and confirmation.',
       icon: Sparkles,
       theme: {
         badge: 'bg-gradient-to-r from-teal-50 to-emerald-50 text-green-900 border-green-200/80',
@@ -257,11 +257,11 @@ export const services = {
 
 export const homeCollection = {
   title: "Home Collection Service",
-  subtitle: "Get tested from the comfort of your home. Our trained phlebotomists ensure safe and hygienic sample collection.",
+  subtitle: "Request home collection through the appointment desk; timing and service availability require confirmation.",
   features: [
-    "Flexible Timing",
-    "Hygienic Collection",
-    "On-time Arrival",
-    "Digital Reports"
+    "Timing subject to confirmation",
+    "Collection process to be confirmed",
+    "Arrival subject to confirmation",
+    "Report assistance"
   ]
 };

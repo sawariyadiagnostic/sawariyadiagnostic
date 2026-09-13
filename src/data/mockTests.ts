@@ -4,12 +4,10 @@ export interface MedicalTest {
   description: string;
   price: number;
   originalPrice?: number;
-  turnaroundTime: string;
   category: 'blood' | 'hormone' | 'specialized' | 'package';
   parameters?: string[];
   homeCollection: boolean;
   popular?: boolean;
-  bookingsLast6Months?: number;
 }
 
 export interface HealthPackage {
@@ -20,7 +18,6 @@ export interface HealthPackage {
   originalPrice: number;
   testsIncluded: string[];
   recommended: boolean;
-  bookingsLast6Months?: number;
   listedValue?: number;
 }
 
@@ -31,7 +28,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Comprehensive analysis of blood cells including RBC, WBC, platelets, and hemoglobin levels.',
     price: 220,
     originalPrice: 400,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['RBC Count', 'WBC Count', 'Hemoglobin', 'Platelet Count', 'Hematocrit'],
     homeCollection: true,
@@ -43,7 +39,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the rate at which red blood cells settle, used to detect inflammation.',
     price: 150,
     originalPrice: 250,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['ESR'],
     homeCollection: true,
@@ -54,7 +49,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Complete cholesterol assessment including HDL, LDL, triglycerides, and total cholesterol.',
     price: 500,
     originalPrice: 699,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['Total Cholesterol', 'HDL', 'LDL', 'Triglycerides', 'VLDL'],
     homeCollection: true,
@@ -66,7 +60,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Complete thyroid function test to assess thyroid health and hormone levels.',
     price: 499,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['T3', 'T4', 'TSH'],
     homeCollection: true,
@@ -78,7 +71,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures unbound active thyroid hormones (Free T3, Free T4) along with TSH.',
     price: 599,
     originalPrice: 1099,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Free T3', 'Free T4', 'TSH'],
     homeCollection: true,
@@ -89,18 +81,16 @@ export const medicalTests: MedicalTest[] = [
     description: 'Follicle-stimulating hormone (FSH) is a hormone that plays a crucial role in sexual development and reproduction.',
     price: 399,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['FSH'],
     homeCollection: true,
-  }, 
+  },
   {
     id: 'lh',
     name: 'LH',
     description: 'Luteinizing hormone (LH) is a hormone that plays a crucial role in sexual development and reproduction.',
     price: 499,
     originalPrice: 899,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['LH'],
     homeCollection: true,
@@ -111,7 +101,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the level of prolactin hormone, important for reproductive health.',
     price: 450,
     originalPrice: 850,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Prolactin'],
     homeCollection: true,
@@ -122,7 +111,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures total testosterone levels in the blood.',
     price: 550,
     originalPrice: 999,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Total Testosterone'],
     homeCollection: true,
@@ -133,7 +121,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the active, unbound form of testosterone in the blood.',
     price: 850,
     originalPrice: 1299,
-    turnaroundTime: '8-10 hours',
     category: 'hormone',
     parameters: ['Free Testosterone'],
     homeCollection: true,
@@ -144,7 +131,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Sex Hormone Binding Globulin test, often used with testosterone levels.',
     price: 950,
     originalPrice: 1499,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['SHBG'],
     homeCollection: true,
@@ -155,7 +141,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Assesses ovarian reserve and fertility potential in women.',
     price: 1500,
     originalPrice: 2200,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['AMH'],
     homeCollection: true,
@@ -166,7 +151,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures DHEAS levels, evaluating adrenal gland function.',
     price: 850,
     originalPrice: 1250,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['DHEAS'],
     homeCollection: true,
@@ -177,7 +161,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures human growth hormone levels.',
     price: 750,
     originalPrice: 1150,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['Growth Hormone'],
     homeCollection: true,
@@ -188,7 +171,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Insulin-like Growth Factor 1, helps assess growth hormone disorders.',
     price: 1100,
     originalPrice: 1800,
-    turnaroundTime: '12-24 hours',
     category: 'hormone',
     parameters: ['IGF-1'],
     homeCollection: true,
@@ -199,7 +181,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Quantitative measurement of Beta HCG for pregnancy confirmation.',
     price: 600,
     originalPrice: 950,
-    turnaroundTime: '6-8 hours',
     category: 'hormone',
     parameters: ['Beta HCG'],
     homeCollection: true,
@@ -210,7 +191,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures average blood sugar levels over the past 2-3 months for diabetes monitoring.',
     price: 399,
     originalPrice: 699,
-    turnaroundTime: '4-6 hours',
     category: 'blood',
     parameters: ['HbA1c Percentage', 'Estimated Average Glucose'],
     homeCollection: true,
@@ -221,7 +201,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures vitamin D levels to assess bone health and immune function.',
     price: 799,
     originalPrice: 1199,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['25-Hydroxy Vitamin D'],
     homeCollection: true,
@@ -233,7 +212,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Essential test for detecting B12 deficiency affecting energy and nerve function.',
     price: 1199,
     originalPrice: 1999,
-    turnaroundTime: '24 hours',
     category: 'specialized',
     parameters: ['Vitamin B12 Level'],
     homeCollection: true,
@@ -244,7 +222,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Comprehensive assessment of liver health including enzymes and bilirubin.',
     price: 599,
     originalPrice: 999,
-    turnaroundTime: '12-24 hours',
     category: 'blood',
     parameters: ['SGOT', 'SGPT', 'Total Bilirubin', 'Direct Bilirubin', 'Alkaline Phosphatase', 'Total Protein', 'Globulin', 'Albumin'],
     homeCollection: true,
@@ -255,9 +232,8 @@ export const medicalTests: MedicalTest[] = [
     description: 'Evaluates kidney health through creatinine, urea, and other markers.',
     price: 599,
     originalPrice: 999,
-    turnaroundTime: '12-24 hours',
     category: 'blood',
-    parameters: ['Creatinine', 'Urea', 'Uric Acid', 'BUN','Calcium','Phosphorus','Potassium','Sodium','Chloride'],
+    parameters: ['Creatinine', 'Urea', 'Uric Acid', 'BUN', 'Calcium', 'Phosphorus', 'Potassium', 'Sodium', 'Chloride'],
     homeCollection: true,
   },
   {
@@ -266,7 +242,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measurement of iron levels in the blood.',
     price: 350,
     originalPrice: 550,
-    turnaroundTime: '8-10 hours',
     category: 'blood',
     parameters: ['Serum Iron'],
     homeCollection: true,
@@ -277,7 +252,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures the amount of iron stored in the body.',
     price: 500,
     originalPrice: 850,
-    turnaroundTime: '8-10 hours',
     category: 'blood',
     parameters: ['Ferritin'],
     homeCollection: true,
@@ -288,7 +262,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'C-Reactive Protein test to measure general levels of inflammation in the body.',
     price: 450,
     originalPrice: 750,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CRP Quantitative'],
     homeCollection: true,
@@ -299,7 +272,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Rheumatoid Factor quantitative test for autoimmune diagnosis.',
     price: 550,
     originalPrice: 900,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['RA Factor'],
     homeCollection: true,
@@ -310,7 +282,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Measures total IgE antibodies in the blood, indicating allergic response.',
     price: 650,
     originalPrice: 1050,
-    turnaroundTime: '8-10 hours',
     category: 'specialized',
     parameters: ['Total IgE'],
     homeCollection: true,
@@ -321,7 +292,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Tissue Transglutaminase IgA, primary test for Celiac disease.',
     price: 800,
     originalPrice: 1300,
-    turnaroundTime: '12-24 hours',
     category: 'specialized',
     parameters: ['tTG IgA'],
     homeCollection: true,
@@ -332,7 +302,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Cardiac marker test used to detect heart injury.',
     price: 850,
     originalPrice: 1400,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Troponin I'],
     homeCollection: true,
@@ -343,7 +312,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Cardiac marker test for assessing heart muscle damage.',
     price: 850,
     originalPrice: 1400,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Troponin T'],
     homeCollection: true,
@@ -354,7 +322,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Creatine Kinase NAC to detect muscle damage.',
     price: 350,
     originalPrice: 600,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CK-NAC'],
     homeCollection: true,
@@ -365,7 +332,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Creatine Kinase-MB test primarily for heart muscle damage.',
     price: 450,
     originalPrice: 750,
-    turnaroundTime: '6-8 hours',
     category: 'specialized',
     parameters: ['CK-MB'],
     homeCollection: true,
@@ -376,7 +342,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Routine examination of urine for various physical, chemical, and microscopic parameters.',
     price: 150,
     originalPrice: 250,
-    turnaroundTime: '4-6 hours',
     category: 'specialized',
     parameters: ['Physical', 'Chemical', 'Microscopic'],
     homeCollection: true,
@@ -387,7 +352,6 @@ export const medicalTests: MedicalTest[] = [
     description: 'Evaluation of male fertility and sperm health.',
     price: 600,
     originalPrice: 1000,
-    turnaroundTime: '12-24 hours',
     category: 'specialized',
     parameters: ['Count', 'Motility', 'Morphology'],
     homeCollection: false,
@@ -411,7 +375,6 @@ export const healthPackages: HealthPackage[] = [
       'Vitamin D3 & B12'
     ],
     recommended: true,
-    bookingsLast6Months: 535,
     listedValue: 4950,
   },
   {
@@ -428,8 +391,7 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
-    bookingsLast6Months: 215,
-    listedValue: 1200,
+
   },
   {
     id: 'male-gh-profile',
@@ -445,7 +407,6 @@ export const healthPackages: HealthPackage[] = [
       'Lipid Profile'
     ],
     recommended: false,
-    bookingsLast6Months: 179,
     listedValue: 4499,
   },
   {
@@ -461,7 +422,6 @@ export const healthPackages: HealthPackage[] = [
       'Kidney Function Test (KFT)'
     ],
     recommended: false,
-    bookingsLast6Months: 81,
     listedValue: 2900,
   },
   {
@@ -496,7 +456,7 @@ export const healthPackages: HealthPackage[] = [
     ],
     recommended: false,
     listedValue: 2499,
-  }
+  },
 ];
 
 export const categories = [

@@ -7,9 +7,9 @@ export function TrustIndicators() {
   const stats = [
     {
       icon: Users,
-      value: '7,000+',
-      label: 'Patients in 2026',
-      subtext: 'Across Haryana & NCR',
+      value: 'Patient-first',
+      label: 'Diagnostic testing',
+      subtext: 'Confirm current service details',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
@@ -18,9 +18,9 @@ export function TrustIndicators() {
     },
     {
       icon: Microscope,
-      value: '180+',
-      label: 'Automated Tests',
-      subtext: 'High-precision analyzers',
+      value: 'On request',
+      label: 'Test menu',
+      subtext: 'Confirm current scope with the lab',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',

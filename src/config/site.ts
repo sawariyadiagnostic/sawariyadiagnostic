@@ -26,7 +26,7 @@ export const siteConfig = {
   },
   claims: {
     accreditation: import.meta.env.VITE_ACCREDITATION_CLAIM || 'Accreditation details available on request',
-    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Open 24 hours',
+    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Hours and service availability subject to confirmation',
     reportTurnaround: import.meta.env.VITE_REPORT_TAT || 'Turnaround depends on the test',
     serviceArea: import.meta.env.VITE_SERVICE_AREA || 'Service area to be confirmed',
   },

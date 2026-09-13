@@ -34,7 +34,7 @@ export function Services() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Advanced pathology testing powered by high-throughput analyzers with multi-point QC verification
+            Diagnostic services listed in the current catalog; confirm scope and availability with the lab.
           </p>
         </div>
 

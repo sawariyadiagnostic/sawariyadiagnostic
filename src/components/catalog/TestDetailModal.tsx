@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { 
-  TestTube, 
-  Clock, 
-  ShieldCheck, 
+  TestTube,
+  ShieldCheck,
   Home, 
   Check, 
   Sparkles, 
@@ -105,29 +104,20 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </div>
 
             {/* Test Specific Details */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
-              <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
-                <span className="text-[10px] text-slate-400 block font-medium">Turnaround Time:</span>
-                <span className="font-bold text-[#155E9A] flex items-center gap-1 mt-0.5">
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>{isPackage ? '12-24 hours' : (item as MedicalTest).turnaroundTime}</span>
-                </span>
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
 
               <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
                 <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
                 <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
                   <Home className="w-3.5 h-3.5 text-[#C62828]" />
-                  <span>Free Doorstep</span>
+                  <span>Doorstep collection • Confirmation required</span>
                 </span>
               </div>
 
               <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs col-span-2 sm:col-span-1">
-                <span className="text-[10px] text-slate-400 block font-medium">Fasting Advice:</span>
+                <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
                 <span className="font-bold text-slate-800 mt-0.5 block">
-                  {item.name.toLowerCase().includes('lipid') || item.name.toLowerCase().includes('sugar') || item.name.toLowerCase().includes('glucose')
-                    ? '10-12 Hrs Fasting'
-                    : 'No Fasting Needed'}
+                  Confirm current preparation with the lab
                 </span>
               </div>
             </div>

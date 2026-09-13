@@ -113,7 +113,7 @@ export function TestCatalog() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Choose from comprehensive preventive packages or individual tests listed in the current catalog with instant search & online booking
+            Review the current catalog and contact the lab to request an appointment.
           </p>
 
         </div>
@@ -142,12 +142,12 @@ export function TestCatalog() {
           {/* Quick Fuse.js Search & Symptom Shortcut Bar */}
           <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
             <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
-              {/* Search Field with Fuse.js Instant Fuzzy Match */}
+              {/* Search Field with Fuse.js matching */}
               <div className="relative flex-1">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
                 <Input
                   type="text"
-                  placeholder="Search 180+ tests by name, symptom (e.g. fatigue, sugar, cbc, thyroid)..."
+                  placeholder="Search current tests by name or symptom..."
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -223,9 +223,8 @@ export function TestCatalog() {
                   <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">We are validating included tests, report parameters, and pricing before publishing the new package list.</p>
                 </div>
               ) : filteredPackages.map((pkg, idx) => {
-                const listedValue = Math.max(pkg.listedValue ?? pkg.originalPrice, pkg.price);
+                const listedValue = pkg.listedValue ?? pkg.originalPrice;
                 const discountPercent = listedValue > pkg.price ? Math.round((1 - pkg.price / listedValue) * 100) : 0;
-                const mostBooked = pkg.bookingsLast6Months === Math.max(...packages.map((p) => p.bookingsLast6Months ?? 0));
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
                   { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-[#102A43]' },
@@ -243,11 +242,7 @@ export function TestCatalog() {
                         : ''
                     }`}
                   >
-                    {mostBooked && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white text-[10px] sm:text-[11px] font-bold px-3 py-0.5 rounded-full shadow-md border border-blue-300/40 flex items-center gap-1.5 whitespace-nowrap z-10">
-                        <Sparkles className="w-3 h-3 text-[#FDE047]" /> Most booked · 535 in last 6 months
-                      </div>
-                    )}
+
                     
                     <div className="flex-1 flex flex-col justify-between min-w-0">
                       <div>

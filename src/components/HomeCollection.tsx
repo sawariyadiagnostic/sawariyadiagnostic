@@ -13,7 +13,7 @@ export function HomeCollection() {
     {
       icon: ShieldCheck,
       title: 'Documented Collection Protocols',
-      description: 'Sterile, single-use vacuum tubes',
+      description: 'Collection supplies and process confirmed at booking',
       iconStyle: 'bg-green-600/20 text-green-400 border-green-600/40',
     },
     {

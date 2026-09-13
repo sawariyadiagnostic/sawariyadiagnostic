@@ -68,7 +68,7 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Walk-in samples and home collections are available subject to current operating capacity.
+            Contact the lab to confirm appointment and collection options.
           </p>
         </div>
 
@@ -79,13 +79,13 @@ export function Contact() {
             <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15">
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-sm sm:text-lg font-bold text-white">Online Appointment & Doctor Desk</h3>
+                  <h3 className="text-sm sm:text-lg font-bold text-white">Appointment Desk</h3>
                   <span className="bg-white/20 text-[#F1C27D] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
                     Availability subject to confirmation
                   </span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-blue-100 font-normal truncate">
-                  Instant confirmation • Helpline: {siteConfig.contact.phone}
+                  Availability subject to confirmation • Helpline: {siteConfig.contact.phone}
                 </p>
               </div>
               <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white shrink-0">
@@ -105,7 +105,7 @@ export function Contact() {
                     <div className="space-y-1.5">
                       <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Choose Your Date & Time</h4>
                       <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                        Check live available time slots for our Charkhi Dadri center or request a dedicated home visit.
+                        Choose an appointment option; timing and home-collection availability are confirmed by the lab.
                       </p>
                     </div>
 
@@ -167,7 +167,7 @@ export function Contact() {
                     Visit Our Diagnostic Facility
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                    Centrally located on Loharu Road, right opposite R.S. Sangwan Hospital with dedicated patient parking and sample collection rooms.
+                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Contact the lab to confirm current facility and collection arrangements.
                   </p>
                 </div>
 
@@ -201,8 +201,8 @@ export function Contact() {
                   <div className="flex items-start gap-2.5 min-w-0">
                     <Phone className="w-4 h-4 text-[#AF6106] flex-shrink-0 mt-0.5" />
                     <div className="min-w-0">
-                      <span className="font-semibold text-slate-900 block">Emergency & Lab Director:</span>
-                      <a href={telHref(siteConfig.contact.phone)} className="text-[#7F3304] font-semibold hover:underline">
+                      <span className="font-semibold text-slate-900 block">Additional contact:</span>
+                      <a href={telHref(siteConfig.contact.emergencyPhone)} className="text-[#7F3304] font-semibold hover:underline">
                         {siteConfig.contact.emergencyPhone}
                       </a>
                     </div>

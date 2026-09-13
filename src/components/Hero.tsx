@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, Shield, Sparkles, CheckCircle2, Clock, ArrowRight, FileCheck, Stethoscope, Activity, Heart, ShieldCheck } from 'lucide-react';
+import { Search, CheckCircle2, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Navbar } from './layout/Navbar';
@@ -107,7 +107,7 @@ export function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
                 <span className="text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 truncate">
-                  Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Open 24 hours</span>
+                  Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Hours and availability by confirmation</span>
                   <span className="hidden sm:inline text-slate-400"> • </span><span className="hidden sm:inline">Charkhi Dadri</span>
                 </span>
               </div>
@@ -203,7 +203,7 @@ export function Hero() {
                   </div>
                   <div className="min-w-0">
                     <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Quality</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Clinical Accuracy</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Quality process</p>
                   </div>
                 </div>
 
@@ -212,102 +212,64 @@ export function Hero() {
                     <ShieldCheck className="w-4 h-4 text-[#7A4B2A]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">7,000+</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Patients in 2026</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Patient-first</p>
+                                        <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Service details on request</p>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column - Apple Health Specimen Card Preview (5 cols) */}
+            {/* Service information preview */}
             <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0 w-full min-w-0">
               <div className="relative w-full max-w-full sm:max-w-[430px] mx-auto min-w-0">
                 
                 {/* Background Ambient Aura */}
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#155E9A]/20 via-[#C62828]/15 to-[#C62828]/15 rounded-[34px] blur-2xl opacity-70 pointer-events-none" />
 
-                {/* Primary Apple Glass Card */}
+                {/* Neutral service-information card */}
                 <div className="relative bg-white/95 backdrop-blur-2xl rounded-[22px] sm:rounded-[27px] border-0 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-hidden">
-                  
-                  {/* Card Header with Official Wordmark & Verified Pill */}
-                  <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100 flex-wrap sm:flex-nowrap">
-                    <div className="min-w-0 flex-1 basis-full sm:basis-auto">
+                  <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100">
+                    <div className="min-w-0">
                       <Logo variant="horizontal" size="xs" showTagline={true} />
-                      <p className="text-[10px] text-slate-400 mt-0.5 font-medium truncate">Sample #SD-2026-9082 • MD Sign-off</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Current service information</p>
                     </div>
-                    <span className="order-2 sm:order-none inline-flex items-center gap-1 bg-green-50 text-green-800 text-[10px] sm:text-[10.5px] font-bold px-2.5 py-0.5 sm:py-1 rounded-full border border-green-200 shrink-0">
-                      <CheckCircle2 className="w-3 h-3 text-green-700 shrink-0" /> Verified
+                    <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-200 shrink-0">
+                      <CheckCircle2 className="w-3 h-3 text-blue-700 shrink-0" /> Confirmed separately
                     </span>
                   </div>
 
-                  {/* Patient Sample Details */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 bg-slate-50/90 p-3 rounded-[16px] border border-slate-100 text-xs">
-                    <div className="min-w-0">
-                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Test Specimen</span>
-                      <span className="font-bold text-slate-800 text-xs sm:text-sm truncate block">Complete Blood Count</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+                    <div className="rounded-[16px] bg-slate-50 p-3 border border-slate-100">
+                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Test information</span>
+                      <span className="font-bold text-slate-800 text-sm">Current menu on request</span>
                     </div>
-                    <div className="min-w-0">
-                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Collection Mode</span>
-                      <span className="font-bold text-[#155E9A] text-xs sm:text-sm flex items-center gap-1 truncate">
-                        <span className="w-2 h-2 rounded-full bg-[#C62828] animate-pulse shrink-0" /> Free Home Visit (₹0)
-                      </span>
+                    <div className="rounded-[16px] bg-slate-50 p-3 border border-slate-100">
+                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Collection</span>
+                      <span className="font-bold text-[#155E9A] text-sm">Subject to confirmation</span>
                     </div>
                   </div>
 
-                  {/* Diagnostic Metric Bars */}
-                  <div className="space-y-2.5 sm:space-y-3">
-                    {/* Hemoglobin */}
-                    <div>
-                      <div className="flex justify-between text-xs font-semibold mb-1">
-                        <span className="text-slate-700 text-xs font-bold">Hemoglobin (Hb)</span>
-                        <span className="text-blue-900 font-bold text-xs">14.2 g/dL <span className="text-slate-400 font-normal">(Optimal)</span></span>
-                      </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[78%]" />
+                  <div className="space-y-2.5">
+                    <div className="flex items-center gap-2.5 rounded-[16px] border border-slate-100 bg-slate-50/90 p-3">
+                      <Clock className="w-4 h-4 text-[#155E9A] shrink-0" />
+                      <div>
+                        <p className="text-xs font-bold text-slate-800">Current estimate</p>
+                        <p className="text-[11px] text-slate-500">Confirm timing with the lab for the selected test.</p>
                       </div>
                     </div>
-
-                    {/* Thyroid */}
-                    <div>
-                      <div className="flex justify-between text-xs font-semibold mb-1">
-                        <span className="text-slate-700 text-xs font-bold">Thyroid (TSH)</span>
-                        <span className="text-[#7A4B2A] font-bold text-xs">2.4 mIU/L <span className="text-slate-400 font-normal">(Normal)</span></span>
-                      </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[60%]" />
-                      </div>
-                    </div>
-
-                    {/* Fasting Glucose */}
-                    <div>
-                      <div className="flex justify-between text-xs font-semibold mb-1">
-                        <span className="text-slate-700 text-xs font-bold">Fasting Glucose</span>
-                        <span className="text-[#102A43] font-bold text-xs">92 mg/dL <span className="text-slate-400 font-normal">(Healthy)</span></span>
-                      </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[52%]" />
+                    <div className="flex items-center gap-2.5 rounded-[16px] border border-slate-100 bg-slate-50/90 p-3">
+                      <ShieldCheck className="w-4 h-4 text-[#7A4B2A] shrink-0" />
+                      <div>
+                        <p className="text-xs font-bold text-slate-800">Report assistance</p>
+                        <p className="text-[11px] text-slate-500">Use a configured lab contact channel for help.</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Verification Footer */}
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#102A43]/10 flex items-center justify-center text-[#102A43] shrink-0">
-                        <Stethoscope className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs font-bold text-slate-800 truncate">Dr. Radhika Vashisth</p>
-                        <p className="text-[10px] text-slate-500 truncate">Chief Pathologist (MD)</p>
-                      </div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className="text-[9px] text-slate-400 block font-medium">Verification</span>
-                      <span className="text-[10px] sm:text-[10.5px] font-mono font-bold text-[#155E9A] flex items-center gap-1 justify-end">
-                        <FileCheck className="w-3.5 h-3.5 text-green-700 shrink-0" /> QR-Secured
-                      </span>
-                    </div>
+                  <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-[11px] text-slate-500">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-700 shrink-0" />
+                    <span>Ask the lab to confirm current scope, pricing, and availability.</span>
                   </div>
                 </div>
 
