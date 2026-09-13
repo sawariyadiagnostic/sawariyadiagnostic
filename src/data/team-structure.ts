@@ -20,7 +20,7 @@ export const teamStructure: TeamRole[] = [
     order: 1,
     shortDescription: 'Clinical interpretation and pathology oversight.',
     responsibilities: ['Clinical review', 'Result interpretation', 'Escalation coordination'],
-    publishState: 'owner-review',
+     publishState: 'public',
   },
   {
     id: 'laboratory-direction',
@@ -65,7 +65,7 @@ export const teamStructure: TeamRole[] = [
     order: 1,
     shortDescription: 'Instrument-led testing, technical validation, and analytical workflow.',
     responsibilities: ['Testing workflow', 'Technical validation', 'Analytical process support'],
-    publishState: 'owner-review',
+     publishState: 'public',
   },
   {
     id: 'laboratory-technicians',
@@ -83,7 +83,7 @@ export const teamStructure: TeamRole[] = [
     order: 3,
     shortDescription: 'Sample-collection professionals for lab and home visits.',
     responsibilities: ['Patient identification', 'Sample collection', 'Collection safety and handoff'],
-    publishState: 'owner-review',
+     publishState: 'public',
   },
   {
     id: 'laboratory-assistants',
@@ -92,6 +92,6 @@ export const teamStructure: TeamRole[] = [
     order: 4,
     shortDescription: 'Organized support across preparation, records, and laboratory workflow.',
     responsibilities: ['Workflow support', 'Records coordination', 'Material readiness'],
-    publishState: 'owner-review',
+     publishState: 'public',
   },
 ];
