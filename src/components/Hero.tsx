@@ -107,7 +107,7 @@ export function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
                 <span className="text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 truncate">
-                  Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Hours and availability by confirmation</span>
+                   Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">24 HRS OPEN • Walk-in • Emergency night</span>
                   <span className="hidden sm:inline text-slate-400"> • </span><span className="hidden sm:inline">Charkhi Dadri</span>
                 </span>
               </div>
