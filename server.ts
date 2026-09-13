@@ -8,7 +8,15 @@ const MAX_EVENT_NAME_LENGTH = 80;
 const isSafeEventName = (value: unknown): value is string =>
   typeof value === "string" && /^[a-zA-Z0-9_.:-]{1,80}$/.test(value);
 
+// Cache variables to prevent redundant API calls to external auth server
+let cachedToken: string | null = null;
+let tokenExpiresAt: number = 0;
+
 async function getFlabsAuthToken() {
+  if (cachedToken && Date.now() < tokenExpiresAt) {
+    return cachedToken;
+  }
+
   const clientId = process.env.FLABS_CLIENT_ID;
   const clientSecret = process.env.FLABS_CLIENT_SECRET;
   const baseUrl = process.env.FLABS_API_BASE_URL;
@@ -27,6 +35,11 @@ async function getFlabsAuthToken() {
   if (!response.ok) throw new Error("LIS authentication failed");
   const data = (await response.json()) as { access_token?: string };
   if (!data.access_token) throw new Error("LIS authentication returned no token");
+
+  // Cache the token with a 5-minute TTL to reduce redundant requests
+  cachedToken = data.access_token;
+  tokenExpiresAt = Date.now() + 5 * 60 * 1000;
+
   return data.access_token;
 }
 
