@@ -14,7 +14,8 @@ import {
   SlidersHorizontal,
   Flame,
   Zap,
-  Info
+  Info,
+  X
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Input } from './ui/input';
@@ -159,10 +160,12 @@ export function TestCatalog() {
                 />
                 {searchQuery && (
                   <button
+                    type="button"
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors cursor-pointer flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155E9A]"
+                    aria-label="Clear search"
                   >
-                    Clear
+                    <X className="w-4 h-4" />
                   </button>
                 )}
               </div>
