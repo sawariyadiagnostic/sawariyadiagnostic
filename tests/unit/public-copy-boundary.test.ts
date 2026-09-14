@@ -47,6 +47,10 @@ describe('public copy claim boundary', () => {
     expect(publicCopy).not.toMatch(/live available time slots|dedicated patient parking|sample collection rooms|Online Appointment & Doctor Desk|Emergency & Lab Director|policy confirms compliance|will never be sold|regular subsidized|free diabetes checks/i);
   });
 
+  it('does not label handoffs as completed services or doctor consultation', () => {
+    expect(publicCopy).not.toMatch(/Patient Lab Portal|WhatsApp Doctor Consultation|Chat with Doctor|Call 24\*7 Helpline/i);
+  });
+
   it('does not publish report-like patient fixtures or verification promises', () => {
     expect(publicCopy).not.toMatch(/Sample #SD-|MD Sign-off|QR-Secured|14\.2 g\/dL|2\.4 mIU\/L|92 mg\/dL|Free Home Visit \(₹0\)|>Verified</i);
   });

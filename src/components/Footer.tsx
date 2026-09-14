@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { siteConfig, telHref } from '@/config/site';
+import { telHref } from '@/config/site';
 import { Phone, Mail, MapPin, Clock, FileDown, ShieldCheck, ExternalLink, PhoneCall } from 'lucide-react';
 import { footer } from '@/data/website-content';
 import { LegalModal, PolicyType } from './ui/LegalModal';
@@ -135,7 +135,7 @@ export function Footer() {
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                   <div className="text-slate-300 space-y-0.5">
-                    <p className="text-[#B5F3DC] font-bold text-[12px]">Hours: {siteConfig.claims.operatingHours}</p>
+                    <p className="text-[#B5F3DC] font-bold text-[12px]">Hours shared by lab; confirm before visiting</p>
                     <p className="text-[11px] text-slate-400">Contact and walk-in options subject to confirmation</p>
                   </div>
                 </div>

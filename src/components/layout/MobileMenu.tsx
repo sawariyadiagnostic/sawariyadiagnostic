@@ -92,12 +92,12 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
               className="action-button w-full min-h-12 h-auto btn-secondary text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.97] shadow-xs cursor-pointer"
             >
               <MessageCircle className="w-4 h-4 text-white" fill="white" />
-              <span>WhatsApp Doctor Consultation</span>
+              <span>WhatsApp lab contact</span>
             </button>
           </div>
         </div>
 
-        {/* Bottom 24*7 Calling Card */}
+        {/* Bottom contact card */}
         <div className="glass-card p-4 m-3 bg-white/60 rounded-[20px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.04)] space-y-2.5">
           <div className="flex items-center justify-between text-xs text-[#155E9A] font-bold">
             <span className="flex items-center gap-1.5">
