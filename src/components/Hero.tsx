@@ -220,59 +220,64 @@ export function Hero() {
 
             </div>
 
-            {/* Service information preview */}
+            {/* Illustrative test preview */}
             <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0 w-full min-w-0">
               <div className="relative w-full max-w-full sm:max-w-[430px] mx-auto min-w-0">
-                
-                {/* Background Ambient Aura */}
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#155E9A]/20 via-[#C62828]/15 to-[#C62828]/15 rounded-[34px] blur-2xl opacity-70 pointer-events-none" />
 
-                {/* Neutral service-information card */}
                 <div className="relative bg-white/95 backdrop-blur-2xl rounded-[22px] sm:rounded-[27px] border-0 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 sm:p-6 space-y-3.5 sm:space-y-4 overflow-hidden">
                   <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100">
                     <div className="min-w-0">
                       <Logo variant="horizontal" size="xs" showTagline={true} />
-                      <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Current service information</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Illustrative test preview</p>
                     </div>
                     <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-200 shrink-0">
-                      <CheckCircle2 className="w-3 h-3 text-blue-700 shrink-0" /> Confirmed separately
+                      <CheckCircle2 className="w-3 h-3 text-blue-700 shrink-0" /> Test menu
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
-                    <div className="rounded-[16px] bg-slate-50 p-3 border border-slate-100">
-                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Test information</span>
-                      <span className="font-bold text-slate-800 text-sm">Current menu on request</span>
-                    </div>
-                    <div className="rounded-[16px] bg-slate-50 p-3 border border-slate-100">
-                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Collection</span>
-                      <span className="font-bold text-[#155E9A] text-sm">Subject to confirmation</span>
-                    </div>
+                  <div className="rounded-[16px] bg-slate-50/90 p-3 border border-slate-100">
+                    <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Featured test views</span>
+                    <span className="font-bold text-slate-800 text-sm">CBC • Thyroid • Glucose</span>
                   </div>
 
-                  <div className="space-y-2.5">
-                    <div className="flex items-center gap-2.5 rounded-[16px] border border-slate-100 bg-slate-50/90 p-3">
-                      <Clock className="w-4 h-4 text-[#155E9A] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800">Current estimate</p>
-                        <p className="text-[11px] text-slate-500">Confirm timing with the lab for the selected test.</p>
+                  <div className="space-y-2.5 sm:space-y-3">
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Hemoglobin (Hb)</span>
+                        <span className="text-[#C62828] font-bold text-xs">CBC marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[78%]" />
                       </div>
                     </div>
-                    <div className="flex items-center gap-2.5 rounded-[16px] border border-slate-100 bg-slate-50/90 p-3">
-                      <ShieldCheck className="w-4 h-4 text-[#7A4B2A] shrink-0" />
-                      <div>
-                        <p className="text-xs font-bold text-slate-800">Report assistance</p>
-                        <p className="text-[11px] text-slate-500">Use a configured lab contact channel for help.</p>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Thyroid (TSH)</span>
+                        <span className="text-[#7A4B2A] font-bold text-xs">Thyroid marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[60%]" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Fasting Glucose</span>
+                        <span className="text-[#102A43] font-bold text-xs">Glucose marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[52%]" />
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-[11px] text-slate-500">
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-700 shrink-0" />
-                    <span>Ask the lab to confirm current scope, pricing, and availability.</span>
+                    <span>Visual guide only — ask the lab about current scope and pricing.</span>
                   </div>
                 </div>
-
               </div>
             </div>
 
