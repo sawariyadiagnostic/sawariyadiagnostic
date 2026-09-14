@@ -153,19 +153,19 @@ export function Footer() {
                 onClick={() => setActiveModal('privacy')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
               >
-                Privacy Policy
+                Privacy Policy — draft, review required
               </button>
               <button 
                 onClick={() => setActiveModal('terms')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
               >
-                Terms & Patient Rights
+                Terms & Patient Rights — draft, review required
               </button>
               <button 
                 onClick={() => setActiveModal('charter')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
               >
-                Quality Charter & Charity Camps
+                Quality Charter & Charity Camps — draft, review required
               </button>
             </div>
           </div>

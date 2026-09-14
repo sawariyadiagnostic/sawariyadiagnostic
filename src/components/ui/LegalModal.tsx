@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { ShieldCheck, FileText, HeartHandshake, X } from 'lucide-react';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { ShieldCheck, FileText, HeartHandshake } from 'lucide-react';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
 export type PolicyType = 'privacy' | 'terms' | 'charter' | null;
 
@@ -46,32 +46,27 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
               <Icon className="w-6 h-6 text-blue-300" aria-hidden="true" />
               <div>
                 <DialogTitle className="text-lg font-bold text-white">{policy.title}</DialogTitle>
-                <DialogDescription className="text-xs text-slate-400">Sawariya Diagnostic Lab • Charkhi Dadri</DialogDescription>
+                <DialogDescription className="text-xs text-slate-400">
+                  Sawariya Diagnostic Lab • Charkhi Dadri
+                </DialogDescription>
               </div>
             </div>
-            <DialogClose asChild>
-              <button aria-label="Close policy dialog" className="p-2 rounded-full hover:bg-white/20 text-slate-300 hover:text-white transition-colors relative z-10">
-                <X className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </DialogClose>
           </div>
 
           <div className="p-6 sm:p-8 space-y-4 text-sm text-slate-600 leading-relaxed bg-white/50">
-            <h4 className="font-bold text-slate-900 text-base">Review required before publication</h4>
+            <div
+              role="status"
+              aria-label="DRAFT — REVIEW REQUIRED BEFORE PUBLICATION"
+              className="inline-flex rounded-full bg-amber-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-amber-950"
+            >
+              Draft — review required before publication
+            </div>
             <p>
               This policy text is being prepared for owner and qualified legal review. The public site does not treat this draft as a legal notice, compliance certificate, or complete statement of rights and obligations.
             </p>
             <p>
               For current questions about privacy, appointments, reports, services, or patient rights, contact the lab directly through the published phone or email channels.
             </p>
-          </div>
-
-          <div className="p-4 sm:p-5 bg-white/70 border-t border-white/80 flex justify-end">
-            <DialogClose asChild>
-              <button className="px-6 py-2 rounded-full bg-[#102A43] text-white text-xs font-semibold hover:bg-[#155E9A] transition-colors shadow-md shadow-[#102A43]/20">
-                Close
-              </button>
-            </DialogClose>
           </div>
         </DialogContent>
       )}

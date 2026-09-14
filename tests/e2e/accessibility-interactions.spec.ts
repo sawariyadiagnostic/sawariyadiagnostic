@@ -14,19 +14,28 @@ test('skip link moves focus to the main content landmark', async ({ page }) => {
   await expect(page.locator('#main-content')).toBeFocused();
 });
 
-test('policy dialog has an accessible name and returns focus to its trigger', async ({ page }) => {
+test('draft policy dialog exposes status, one close action, and restores focus', async ({ page }) => {
   await openPage(page);
-  const trigger = page.getByRole('button', { name: 'Privacy Policy' });
+  const trigger = page.getByRole('button', { name: 'Privacy Policy — draft, review required' });
 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Privacy & Medical Data Policy' });
   await expect(dialog).toBeVisible();
   await expect(dialog.getByRole('heading', { name: 'Privacy & Medical Data Policy' })).toBeVisible();
+  await expect(dialog.getByRole('status', { name: 'DRAFT — REVIEW REQUIRED BEFORE PUBLICATION' })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Close' })).toHaveCount(1);
 
   await page.keyboard.press('Escape');
 
   await expect(dialog).toBeHidden();
   await expect(trigger).toBeFocused();
+});
+
+test('all legal footer actions identify drafts requiring review', async ({ page }) => {
+  await openPage(page);
+
+  const legalActions = page.locator('footer button').filter({ hasText: /draft, review required/i });
+  await expect(legalActions).toHaveCount(3);
 });
 
 test('homepage has no horizontal overflow at 360px', async ({ page }) => {
