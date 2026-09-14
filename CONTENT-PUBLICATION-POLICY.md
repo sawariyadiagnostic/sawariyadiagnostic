@@ -4,6 +4,10 @@
 
 Raw, AI-extracted, historical, or owner-unreviewed data is never public by default.
 
+Legal and patient-facing notices follow the same boundary. See `docs/legal/README.md` and
+`docs/legal/approval-ledger.md`; all eight legal document records are draft-only until owner,
+clinical, and qualified legal/privacy approvals are recorded.
+
 ## Required approval for every test/package
 
 - [ ] Canonical public name

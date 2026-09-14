@@ -2,6 +2,11 @@
 
 This is an implementation checklist, not legal advice. A qualified India-focused lawyer and the lab's compliance/quality owner must review final text before launch.
 
+The metadata contract in `src/data/legal-document-index.ts` is fail-closed: every legal document
+starts as `draft`, version `0.0.0`, with no effective date and pending owner, clinical, and legal
+approval. Follow `docs/legal/README.md` and record decisions in `docs/legal/approval-ledger.md`.
+This contract does not claim compliance or replace professional review.
+
 ## Business identity
 
 - [ ] Confirm legal entity name and operating name
