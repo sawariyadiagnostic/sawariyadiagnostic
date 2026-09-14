@@ -7,6 +7,8 @@ import { healthPackages, medicalTests } from '../../src/data/mockTests';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 
+const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
+
 const uniqueIds = (items: { id: string }[]) => new Set(items.map((item) => item.id));
 const runtimeSource = (root: string): string => {
   const entries = readdirSync(resolve(process.cwd(), root), { withFileTypes: true });
@@ -18,6 +20,13 @@ const runtimeSource = (root: string): string => {
 };
 
 describe('approved public catalog', () => {
+  it('uses one request path while the public catalog is empty', () => {
+    expect(visitorSource).toContain('The public catalog is being prepared');
+    expect(visitorSource).toContain('Request a test or package on WhatsApp');
+    expect(visitorSource).not.toContain('Clear Search Filters');
+    expect(visitorSource).not.toContain('Try searching with generic terms');
+  });
+
   it('keeps test and package identifiers unique', () => {
     expect(uniqueIds(medicalTests).size).toBe(medicalTests.length);
     expect(uniqueIds(healthPackages).size).toBe(healthPackages.length);

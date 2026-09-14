@@ -2,7 +2,7 @@
 
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { Phone, MessageCircle, Home, FileText } from 'lucide-react';
-import { footer } from '@/data/website-content';
+
 import { ReportDownloadModal } from '../ui/ReportDownloadModal';
 
 export function MobileBottomDock() {
@@ -40,7 +40,7 @@ export function MobileBottomDock() {
           </button>
         } />
 
-        {/* Primary CTA: Book Home Sample */}
+        {/* Primary CTA: Request home collection */}
         <button
           onClick={scrollToHomeCollection}
           className="flex-[1.2] flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white text-[#102A43] rounded-[18px] h-11 min-[360px]:h-12 px-1.5 min-[360px]:px-2.5 text-xs font-bold shadow-[0_4px_12px_rgba(255,255,255,0.2)] transition-surface duration-150 hover:bg-white/90 active:scale-[0.95] select-none border border-white cursor-pointer min-w-0"

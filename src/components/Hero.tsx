@@ -133,7 +133,7 @@ export function Hero() {
                     <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
-                      placeholder="Search tests..."
+                      placeholder="Ask about a test or package..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-xs sm:text-sm placeholder:text-slate-500 bg-transparent px-2 sm:px-2.5 h-10 sm:h-12 w-full min-w-0"
@@ -143,14 +143,14 @@ export function Hero() {
                       className="action-button bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-surface"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
-                      <span>Find Test</span>
+                      <span>Ask the lab</span>
                     </Button>
                   </div>
                 </form>
 
                 {/* Quick search suggestion pills: touch-friendly horizontal scroll */}
                 <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 w-full max-w-full scrollbar-none text-xs">
-                  <span className="font-bold text-slate-500 mr-1 text-[11px] uppercase tracking-wider whitespace-nowrap flex-shrink-0">Popular:</span>
+                  <span className="font-bold text-slate-500 mr-1 text-[11px] uppercase tracking-wider whitespace-nowrap flex-shrink-0">Ask about:</span>
                   {quickSearchTags.map((tag) => (
                     <button
                       key={tag.label}
@@ -171,7 +171,7 @@ export function Hero() {
                   className="btn-primary w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
-                  <span className="truncate">Book Doorstep Sample</span>
+                  <span className="truncate">Request home collection</span>
                   <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
                 </Button>
 
@@ -181,7 +181,7 @@ export function Hero() {
                   className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
-                  <span className="truncate">Explore Health Packages</span>
+                  <span className="truncate">Ask about packages</span>
                 </Button>
               </div>
 

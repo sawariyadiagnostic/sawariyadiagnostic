@@ -74,7 +74,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
               }}
             >
               <Home className="w-4 h-4 mr-2" />
-              Book Home Sample Visit
+              Request home collection
             </Button>
 
             <ReportDownloadModal trigger={

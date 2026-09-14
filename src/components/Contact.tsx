@@ -21,7 +21,7 @@ export function Contact() {
     {
       icon: FileCheck,
       title: '1. Select Test / Package',
-      description: 'Choose routine panels or custom doctor prescriptions.',
+      description: 'Tell the lab which test or package you want to request.',
       style: {
         iconBg: 'bg-blue-50 text-[#102A43] border-blue-200/80',
         accentBar: 'bg-[#102A43]',

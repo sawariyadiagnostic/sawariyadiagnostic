@@ -31,6 +31,11 @@ const publicCopy = publicCopyFiles
   .join('\n');
 
 describe('public copy claim boundary', () => {
+  it('uses request language for visitor actions and avoids unsupported handoff labels', () => {
+    expect(publicCopy).not.toMatch(/Find Test|Explore Health Packages|Book Doorstep Sample|Book Home Sample Visit|WhatsApp Doctor Consultation|Patient Lab Portal|Call 24\*7 Helpline/i);
+    expect(publicCopy).toMatch(/Ask the lab|Request home collection|Request a test/i);
+  });
+
   it('does not publish unsupported speed or instant-confirmation promises', () => {
     expect(publicCopy).not.toMatch(/Immediate STAT turnaround|Quick Reports|Quick turnaround time|Instant confirmation/i);
   });

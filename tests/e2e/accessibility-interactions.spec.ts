@@ -46,6 +46,15 @@ test('homepage has no horizontal overflow at 360px', async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
+test('empty catalog offers one truthful request handoff', async ({ page }) => {
+  await openPage(page);
+
+  await expect(page.getByText('The public catalog is being prepared')).toBeVisible();
+  const requestLinks = page.getByRole('link', { name: 'Request a test or package on WhatsApp' });
+  await expect(requestLinks).toHaveCount(1);
+  await expect(requestLinks).toHaveAttribute('href', /wa\.me/);
+});
+
 test('visible action buttons meet the 44px minimum target height', async ({ page }) => {
   await openPage(page);
 
