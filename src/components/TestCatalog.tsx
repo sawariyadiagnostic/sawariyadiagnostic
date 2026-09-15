@@ -123,7 +123,7 @@ export function TestCatalog() {
             <a
               href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
             >
               Request a test or package on WhatsApp
@@ -236,7 +236,7 @@ export function TestCatalog() {
                   <a
                     href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
                   >
                     Request a test or package on WhatsApp
@@ -362,7 +362,7 @@ export function TestCatalog() {
                 <a
                   href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
                 >
                   Request a test or package on WhatsApp

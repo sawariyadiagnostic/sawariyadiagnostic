@@ -27,6 +27,11 @@ describe('approved public catalog', () => {
     expect(visitorSource).not.toContain('Try searching with generic terms');
   });
 
+  it('protects external catalog handoffs from opener access', () => {
+    expect(visitorSource).not.toContain('rel="noreferrer"');
+    expect(visitorSource).toContain('rel="noopener noreferrer"');
+  });
+
   it('keeps test and package identifiers unique', () => {
     expect(uniqueIds(medicalTests).size).toBe(medicalTests.length);
     expect(uniqueIds(healthPackages).size).toBe(healthPackages.length);
