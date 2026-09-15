@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useDeferredValue } from 'react';
 import { whatsappHref } from '@/config/site';
 import {
   Search,
@@ -36,6 +36,8 @@ export function TestCatalog() {
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<MedicalTest | HealthPackage | null>(null);
 
+  const deferredSearchQuery = useDeferredValue(searchQuery);
+
   useEffect(() => {
     const handleExternalSearch = (e: Event) => {
       const customEvent = e as CustomEvent<{ query: string; tab?: 'packages' | 'tests' }>;
@@ -60,19 +62,19 @@ export function TestCatalog() {
 
   // Execute Fuse.js Search
   const filteredItems = useMemo(() => {
-    return searchEngine.search(searchQuery, selectedCategory);
-  }, [searchEngine, searchQuery, selectedCategory]);
+    return searchEngine.search(deferredSearchQuery, selectedCategory);
+  }, [searchEngine, deferredSearchQuery, selectedCategory]);
 
   const filteredTests = useMemo(() => {
     return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
   }, [filteredItems]);
 
   const filteredPackages = useMemo(() => {
-    if (searchQuery.trim().length > 0) {
+    if (deferredSearchQuery.trim().length > 0) {
       return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
     }
     return packages;
-  }, [filteredItems, searchQuery, packages]);
+  }, [filteredItems, deferredSearchQuery, packages]);
 
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
@@ -346,9 +348,9 @@ export function TestCatalog() {
           {/* Individual Tests Tab */}
           <TabsContent value="tests" className="mt-0">
             {/* Search Result Count */}
-            {searchQuery && (
+            {deferredSearchQuery && (
               <div className="text-xs text-slate-600 mb-4 px-1 font-medium">
-                Found <strong>{filteredTests.length}</strong> tests matching "{searchQuery}"
+                Found <strong>{filteredTests.length}</strong> tests matching "{deferredSearchQuery}"
               </div>
             )}
 
