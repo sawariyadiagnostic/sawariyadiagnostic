@@ -11,4 +11,11 @@ describe('production server boundary', () => {
     expect(serverSource).toContain("app.get('/{*splat}'");
     expect(serverSource).toContain('path.extname(req.path)');
   });
+
+  it('sets modern response security headers before serving the app', () => {
+    expect(serverSource).toContain("res.setHeader('X-Content-Type-Options', 'nosniff')");
+    expect(serverSource).toContain("res.setHeader('X-Frame-Options', 'DENY')");
+    expect(serverSource).toContain("res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')");
+    expect(serverSource).not.toContain('X-XSS-Protection');
+  });
 });
