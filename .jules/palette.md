@@ -1,0 +1,3 @@
+## 2024-10-27 - [Avoid Fake Buttons and Redundant ARIA Labels]
+**Learning:** Adding `role="button"` to non-interactive elements like `div` without also adding `tabIndex={0}` and keyboard event handlers (for Enter and Space keys) creates an inaccessible "fake button". Additionally, adding an `aria-label` that exactly matches the visible text of an element is a redundant anti-pattern that can cause double-reading for screen reader users.
+**Action:** When creating custom buttons out of `div` or `span` elements, ensure full keyboard support (`tabIndex`, `onKeyDown`). Only use `aria-label` when the visible text is absent (e.g., icon-only buttons) or insufficient to convey the full purpose of the interactive element.

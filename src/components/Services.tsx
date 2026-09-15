@@ -48,7 +48,16 @@ export function Services() {
               transition={{ duration: 0.4, delay: index * 0.06 }}
               viewport={{ once: true }}
               onClick={scrollToContact}
-              className="glass-card p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] border border-white/80 transition-surface duration-300 active:scale-[0.98] relative overflow-hidden"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  scrollToContact();
+                }
+              }}
+              tabIndex={0}
+              role="button"
+              aria-label={`View details about ${service.title}`}
+              className="glass-card p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] border border-white/80 transition-surface duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155E9A] active:scale-[0.98] relative overflow-hidden"
             >
               {/* Top Accent Line */}
               <div className={`absolute top-0 left-0 right-0 h-1 ${service.theme.accentBar}`} />
