@@ -13,6 +13,11 @@ export interface SearchableItem {
   symptoms?: string[];
   homeCollection: boolean;
   popular?: boolean;
+  // Enriched fields for detail modal
+  specimen?: string;
+  method?: string;
+  preparation?: string;
+  turnaround?: string;
 }
 
 // Map of common symptoms/conditions to diagnostic tests
@@ -69,18 +74,22 @@ export function buildSearchIndex(tests: MedicalTest[], packages: HealthPackage[]
       }
 
       items.push({
-      id: t.id,
-      type: 'test',
-      name: t.name,
-      category: t.category,
-      price: t.price,
-      originalPrice: t.price,
-      description: t.description,
-      parameters: t.parameters || [],
-      symptoms,
-      homeCollection: false,
-      popular: t.popular
-    });
+            id: t.id,
+            type: 'test',
+            name: t.name,
+            category: t.category,
+            price: t.price,
+            originalPrice: t.price,
+            description: t.description,
+            parameters: t.parameters || [],
+            symptoms,
+            homeCollection: false,
+            popular: t.popular,
+            specimen: t.specimen,
+            method: t.method,
+            preparation: t.preparation,
+            turnaround: t.turnaround
+          });
   }
 
   // Add packages

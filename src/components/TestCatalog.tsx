@@ -49,26 +49,35 @@ export function TestCatalog() {
 
 
   // Build Fuse.js Search Engine
-  const searchEngine = useMemo(() => {
-    const items = buildSearchIndex(tests, packages);
-    return createSearchEngine(items);
-  }, [tests, packages]);
+    const searchEngine = useMemo(() => {
+      const items = buildSearchIndex(tests, packages);
+      return createSearchEngine(items);
+    }, [tests, packages]);
 
-  // Execute Fuse.js Search
-  const filteredItems = useMemo(() => {
-    return searchEngine.search(searchQuery, selectedCategory);
-  }, [searchEngine, searchQuery, selectedCategory]);
+    // Execute Fuse.js Search
+    const filteredItems = useMemo(() => {
+      return searchEngine.search(searchQuery, selectedCategory);
+    }, [searchEngine, searchQuery, selectedCategory]);
 
-  const filteredTests = useMemo(() => {
-    return filteredItems.filter((i) => i.type === 'test') as unknown as MedicalTest[];
-  }, [filteredItems]);
+    // Keep full test objects for detail modal
+    const testLookup = useMemo(() => {
+      const lookup: Record<string, MedicalTest> = {};
+      for (const test of tests) {
+        lookup[test.id] = test;
+      }
+      return lookup;
+    }, [tests]);
 
-  const filteredPackages = useMemo(() => {
-    if (searchQuery.trim().length > 0) {
-      return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
-    }
-    return packages;
-  }, [filteredItems, searchQuery, packages]);
+    const filteredTests = useMemo(() => {
+      return filteredItems.filter((i) => i.type === 'test').map(item => testLookup[item.id]);
+    }, [filteredItems, testLookup]);
+
+    const filteredPackages = useMemo(() => {
+      if (searchQuery.trim().length > 0) {
+        return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
+      }
+      return packages;
+    }, [filteredItems, searchQuery, packages]);
 
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
