@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
 import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
-import { healthPackages, medicalTests } from '../../src/data/mockTests';
+import { healthPackages, medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 
@@ -20,16 +20,25 @@ const runtimeSource = (root: string): string => {
 };
 
 describe('approved public catalog', () => {
-  it('uses one request path while the public catalog is empty', () => {
-    expect(visitorSource).toContain('The public catalog is being prepared');
-    expect(visitorSource).toContain('Request a test or package on WhatsApp');
-    expect(visitorSource).not.toContain('Clear Search Filters');
-    expect(visitorSource).not.toContain('Try searching with generic terms');
+  it('uses the authorized sanitized publication projection', () => {
+    expect(publishedCatalogManifest.publicationStatus).toBe('APPROVED');
+    expect(publishedCatalogManifest.publicationMode).toBe('manual_exception');
+    expect(medicalTests).toHaveLength(74);
+    expect(healthPackages).toHaveLength(17);
+    expect(JSON.stringify(publishedCatalogManifest)).not.toMatch(/provenance|source_file|b2b|wholesale|floor|margin|profit|review_ledgers|original_text/i);
   });
 
-  it('protects external catalog handoffs from opener access', () => {
+  it('renders the approved catalog instead of the empty-state gate', () => {
+    expect(visitorSource).not.toContain('The public catalog is being prepared');
+    expect(visitorSource).toContain('Health Packages ({packages.length})');
+    expect(visitorSource).toContain('Individual Tests ({tests.length}+)');
+    expect(visitorSource).not.toContain('Free Doorstep Home Sample');
+    expect(visitorSource).not.toContain('Save {discountPercent}%');
+  });
+
+  it('does not expose unsafe external links from the catalog surface', () => {
+    expect(visitorSource).not.toContain('target="_blank"');
     expect(visitorSource).not.toContain('rel="noreferrer"');
-    expect(visitorSource).toContain('rel="noopener noreferrer"');
   });
 
   it('keeps test and package identifiers unique', () => {
@@ -39,7 +48,7 @@ describe('approved public catalog', () => {
 
   it('keeps listed values at or above customer prices', () => {
     expect(medicalTests.every((test) => test.originalPrice === undefined || test.originalPrice >= test.price)).toBe(true);
-    expect(healthPackages.every((pkg) => pkg.originalPrice >= pkg.price)).toBe(true);
+    expect(healthPackages.every((pkg) => pkg.originalPrice === undefined || pkg.originalPrice >= pkg.price)).toBe(true);
   });
 
   it('does not expose insurer-branded packages', () => {

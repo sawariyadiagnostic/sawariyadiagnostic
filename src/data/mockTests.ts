@@ -15,7 +15,7 @@ export interface HealthPackage {
   name: string;
   description: string;
   price: number;
-  originalPrice: number;
+  originalPrice?: number;
   testsIncluded: string[];
   recommended: boolean;
   listedValue?: number;

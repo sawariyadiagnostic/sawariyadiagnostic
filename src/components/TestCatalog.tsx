@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { whatsappHref } from '@/config/site';
 import {
   Search,
   Package, 
@@ -16,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { TestCard } from './ui/TestCard';
-import { categories, type MedicalTest, type HealthPackage } from '@/data/mockTests';
+import { categories, healthPackages as publishedPackages, medicalTests as publishedTests, type MedicalTest, type HealthPackage } from '@/data/publishedCatalog';
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 import { TestBookingModal } from './booking/TestBookingModal';
 import { TestDetailModal } from './catalog/TestDetailModal';
@@ -26,11 +25,8 @@ export function TestCatalog() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeTab, setActiveTab] = useState<'packages' | 'tests'>('packages');
 
-  // Load from Headless CMS state
-  // Public catalog is intentionally empty until owner-approved records are published.
-  const [tests] = useState<MedicalTest[]>([]);
-  const [packages] = useState<HealthPackage[]>([]);
-  const catalogEmpty = tests.length === 0 && packages.length === 0;
+  const [tests] = useState<MedicalTest[]>(publishedTests);
+  const [packages] = useState<HealthPackage[]>(publishedPackages);
 
   // Package booking & detail modal states
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
@@ -115,22 +111,6 @@ export function TestCatalog() {
 
         </div>
 
-        {catalogEmpty ? (
-          <div className="mx-auto max-w-2xl rounded-[24px] border border-dashed border-[#D7C7B8] bg-white/80 p-8 text-center sm:p-10">
-            <Package className="mx-auto mb-3 h-8 w-8 text-[#155E9A]" />
-            <h3 className="text-lg font-bold text-[#102A43]">The public catalog is being prepared</h3>
-            <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">Ask the lab for current tests, packages, prices, and collection availability.</p>
-            <a
-              href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
-            >
-              Request a test or package on WhatsApp
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-        ) : (
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'packages' | 'tests')} className="w-full">
           <div className="flex justify-center mb-6 px-1">
             <TabsList className="bg-white/60 backdrop-blur-xl p-1 rounded-full border border-white/80 h-12 grid grid-cols-2 w-full max-w-md shadow-inner">
@@ -151,7 +131,7 @@ export function TestCatalog() {
             </TabsList>
           </div>
 
-          {/* Request prompt while the public catalog is empty */}
+          {/* Search and category controls */}
           <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
             <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
               {/* Search Field with Fuse.js matching */}
@@ -202,7 +182,7 @@ export function TestCatalog() {
 
             {/* Symptom shortcuts */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 px-1 scrollbar-none">
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1 flex-shrink-0">
+              <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1 flex-shrink-0">
                 <Zap className="w-3 h-3 text-[#7A4B2A]" /> Ask about:
               </span>
               {quickSymptoms.map((sym) => (
@@ -228,24 +208,7 @@ export function TestCatalog() {
           {/* Health Packages Tab */}
           <TabsContent value="packages" className="mt-0">
             <div className="fluid-grid-cards-md">
-              {filteredPackages.length === 0 ? (
-                <div className="col-span-full rounded-[24px] border border-dashed border-[#D7C7B8] bg-white/80 p-10 text-center">
-                  <Package className="mx-auto mb-3 h-8 w-8 text-[#155E9A]" />
-                  <h3 className="text-lg font-bold text-[#102A43]">The public catalog is being prepared</h3>
-                  <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">Ask the lab for current tests, packages, prices, and collection availability.</p>
-                  <a
-                    href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
-                  >
-                    Request a test or package on WhatsApp
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                </div>
-              ) : filteredPackages.map((pkg, idx) => {
-                const listedValue = pkg.listedValue ?? pkg.originalPrice;
-                const discountPercent = listedValue > pkg.price ? Math.round((1 - pkg.price / listedValue) * 100) : 0;
+              {filteredPackages.map((pkg, idx) => {
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
                   { accent: 'border-green-300 hover:border-green-600', badge: 'bg-green-50 text-[#102A43]' },
@@ -280,20 +243,14 @@ export function TestCatalog() {
                         <div className="bg-slate-50 border border-slate-100 rounded-[18px] p-3.5 mb-4">
                           <div className="flex items-baseline gap-2 flex-wrap">
                             <span className="text-2xl sm:text-3xl font-black text-[#102A43]">₹{pkg.price}</span>
-                            <span className="text-xs text-slate-400 line-through font-medium">₹{listedValue}</span>
-                            <span className="ml-auto text-[10.5px] font-bold text-green-800 bg-green-100/80 border border-green-200 px-2 py-0.5 rounded-full">
-                              Save {discountPercent}%
-                            </span>
                           </div>
-                          <p className="text-[10.5px] text-blue-800 font-semibold mt-1.5 flex items-center gap-1">
-                            <ShieldCheck className="w-3.5 h-3.5 text-green-600 flex-shrink-0" /> Free Doorstep Home Sample
-                          </p>
+                          <p className="text-[10.5px] text-slate-600 font-semibold mt-1.5">Confirm current scope and availability with the lab.</p>
                         </div>
                       </div>
                       
                       {/* Tests Included List */}
                       <div className="space-y-1.5 mb-5">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                        <p className="text-[10px] font-bold text-slate-600 uppercase tracking-wider">
                           Key Tests Included ({pkg.testsIncluded.length}):
                         </p>
                         <ul className="space-y-1">
@@ -354,22 +311,7 @@ export function TestCatalog() {
 
             {/* Tests Grid */}
             <div className="fluid-grid-cards-sm">
-              {filteredTests.length === 0 ? (
-              <div className="rounded-[24px] border border-dashed border-[#D7C7B8] bg-white/80 p-10 text-center">
-                <TestTube className="mx-auto mb-3 h-8 w-8 text-[#155E9A]" />
-                <h3 className="text-lg font-bold text-[#102A43]">The public catalog is being prepared</h3>
-                <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">Ask the lab for the current test list, preparation details, and prices.</p>
-                <a
-                  href={whatsappHref('Hi, I would like to request a test or health package not listed in the public catalog.') || undefined}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#155E9A] px-5 py-2.5 text-xs font-bold text-white transition-surface hover:bg-[#102A43]"
-                >
-                  Request a test or package on WhatsApp
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            ) : filteredTests.map((test) => (
+              {filteredTests.map((test) => (
                 <TestCard 
                   key={test.id} 
                   test={test} 
@@ -381,7 +323,6 @@ export function TestCatalog() {
 
           </TabsContent>
         </Tabs>
-        )}
       </div>
 
       {/* Package Booking Modal */}

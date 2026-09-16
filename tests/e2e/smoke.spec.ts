@@ -16,8 +16,9 @@ test('renders the public homepage and core trust sections', async ({ page }) => 
   const bodyText = (await page.locator('body').innerText()).toLowerCase();
   expect(bodyText).not.toContain('cms editor');
   expect(bodyText).not.toContain('schema.org structured data & seo preview');
-  expect(bodyText).toContain('the public catalog is being prepared');
-  expect(bodyText).toContain('request a test or package on whatsapp');
+  expect(bodyText).toContain('health packages (17)');
+  expect(bodyText).toContain('individual tests (74+)');
+  expect(bodyText).not.toContain('the public catalog is being prepared');
   expect(bodyText).not.toMatch(/patient lab portal|doctor consultation|call 24\*7 helpline/i);
   await expect(page.getByText('Illustrative test preview')).toBeVisible();
   await expect(page.getByText('CBC • Thyroid • Glucose')).toBeVisible();

@@ -110,7 +110,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
                 <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
                   <Home className="w-3.5 h-3.5 text-[#C62828]" />
-                  <span>Doorstep collection • Confirmation required</span>
+                  <span>Collection availability • Confirm with the lab</span>
                 </span>
               </div>
 
