@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
 import { Button } from './button';
-import type { MedicalTest } from '@/data/mockTests';
+import type { MedicalTest } from '@/data/publishedCatalog';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 
