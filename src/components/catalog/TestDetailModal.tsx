@@ -104,23 +104,30 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </div>
 
             {/* Test Specific Details */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
 
-              <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
-                              <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
-                              <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
-                                                              <Home className="w-3.5 h-3.5 text-[#C62828]" />
-                                                              <span>{!isPackage && (item as MedicalTest).specimen ? (item as MedicalTest).specimen : 'Collection availability • Confirm with the lab'}</span>
-                                                            </span>
-                            </div>
+                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
+                                          <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
+                                          <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
+                                                                          <Home className="w-3.5 h-3.5 text-[#C62828]" />
+                                                                          <span>{!isPackage && (item as MedicalTest).specimen ? (item as MedicalTest).specimen : 'Collection availability • Confirm with the lab'}</span>
+                                                                        </span>
+                                        </div>
 
-              <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs col-span-2 sm:col-span-1">
-                              <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
-                              <span className="font-bold text-slate-800 mt-0.5 block">
-                                                              {!isPackage && (item as MedicalTest).preparation ? (item as MedicalTest).preparation : 'Confirm current preparation with the lab'}
-                                                            </span>
-                            </div>
-            </div>
+                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
+                                          <span className="text-[10px] text-slate-400 block font-medium">Methodology:</span>
+                                          <span className="font-bold text-slate-800 mt-0.5 block">
+                                                                          {!isPackage && (item as MedicalTest).method ? (item as MedicalTest).method : 'Documented laboratory protocols'}
+                                                                        </span>
+                                        </div>
+
+                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs col-span-2 sm:col-span-1">
+                                          <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
+                                          <span className="font-bold text-slate-800 mt-0.5 block">
+                                                                          {!isPackage && (item as MedicalTest).preparation ? (item as MedicalTest).preparation : 'Confirm current preparation with the lab'}
+                                                                        </span>
+                                        </div>
+                        </div>
 
             {/* Parameters or Included Tests */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-2">
