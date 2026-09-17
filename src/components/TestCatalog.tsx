@@ -72,12 +72,26 @@ export function TestCatalog() {
       return filteredItems.filter((i) => i.type === 'test').map(item => testLookup[item.id]);
     }, [filteredItems, testLookup]);
 
-    const filteredPackages = useMemo(() => {
-      if (searchQuery.trim().length > 0) {
-        return filteredItems.filter((i) => i.type === 'package') as unknown as HealthPackage[];
+    const packageLookup = useMemo(() => {
+      const lookup: Record<string, HealthPackage> = {};
+      for (const pkg of packages) {
+        lookup[pkg.id] = pkg;
       }
-      return packages;
-    }, [filteredItems, searchQuery, packages]);
+      return lookup;
+    }, [packages]);
+
+    const filteredPackages = useMemo(() => {
+      return filteredItems
+        .filter((i) => i.type === 'package')
+        .map((item) => packageLookup[item.id])
+        .filter((pkg): pkg is HealthPackage => Boolean(pkg));
+    }, [filteredItems, packageLookup]);
+
+  const hasCatalogFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
+  const clearCatalogFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+  };
 
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
@@ -216,7 +230,16 @@ export function TestCatalog() {
 
           {/* Health Packages Tab */}
           <TabsContent value="packages" className="mt-0">
-            <div className="fluid-grid-cards-md">
+            {hasCatalogFilter && filteredPackages.length === 0 ? (
+              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
+                <h3 className="text-base font-bold text-[#102A43]">No packages match this search</h3>
+                <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all packages.</p>
+                <Button type="button" variant="outline" onClick={clearCatalogFilters} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">
+                  Clear filters
+                </Button>
+              </div>
+            ) : (
+              <div className="fluid-grid-cards-md">
               {filteredPackages.map((pkg, idx) => {
                 const packageThemes = [
                   { accent: 'border-blue-200 hover:border-blue-400', badge: 'bg-blue-50 text-blue-900' },
@@ -307,6 +330,7 @@ export function TestCatalog() {
                 );
               })}
             </div>
+            )}
           </TabsContent>
 
           {/* Individual Tests Tab */}
@@ -319,7 +343,16 @@ export function TestCatalog() {
             )}
 
             {/* Tests Grid */}
-            <div className="fluid-grid-cards-sm">
+            {hasCatalogFilter && filteredTests.length === 0 ? (
+              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
+                <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
+                <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
+                <Button type="button" variant="outline" onClick={clearCatalogFilters} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">
+                  Clear filters
+                </Button>
+              </div>
+            ) : (
+              <div className="fluid-grid-cards-sm">
               {filteredTests.map((test) => (
                 <TestCard 
                   key={test.id} 
@@ -328,6 +361,7 @@ export function TestCatalog() {
                 />
               ))}
             </div>
+            )}
 
 
           </TabsContent>

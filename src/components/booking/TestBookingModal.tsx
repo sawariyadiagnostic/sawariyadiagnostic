@@ -40,7 +40,7 @@ export function TestBookingModal({
             <DialogTitle className="text-base sm:text-xl font-bold text-white tracking-tight leading-snug">{testName}</DialogTitle>
             <div className="text-right shrink-0">
               <span className="text-xl sm:text-2xl font-black text-white">₹{price}</span>
-              {originalPrice && <span className="text-xs text-blue-100 line-through block">₹{originalPrice}</span>}
+              {originalPrice !== undefined && originalPrice > price && <span className="text-xs text-blue-100 line-through block">₹{originalPrice}</span>}
             </div>
           </div>
           <DialogDescription className="text-xs text-blue-100/90 mt-1">

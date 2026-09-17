@@ -10,6 +10,7 @@ import { teamStructure } from '../../src/data/team-structure';
 const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
 
 const uniqueIds = (items: { id: string }[]) => new Set(items.map((item) => item.id));
+const publishedTestIds = new Set(medicalTests.map((test) => test.id.toUpperCase()));
 const runtimeSource = (root: string): string => {
   const entries = readdirSync(resolve(process.cwd(), root), { withFileTypes: true });
   return entries.map((entry) => {
@@ -44,6 +45,30 @@ describe('approved public catalog', () => {
   it('keeps test and package identifiers unique', () => {
     expect(uniqueIds(medicalTests).size).toBe(medicalTests.length);
     expect(uniqueIds(healthPackages).size).toBe(healthPackages.length);
+  });
+
+  it('provides resettable accessible empty states for filtered catalog results', () => {
+    expect(visitorSource).toContain('No packages match this search');
+    expect(visitorSource).toContain('No tests match this search');
+    expect(visitorSource).toContain('aria-live="polite"');
+    expect(visitorSource).toContain('clearCatalogFilters');
+  });
+
+  it('keeps package members resolvable to published tests', () => {
+    expect(healthPackages.flatMap((pkg) => pkg.testsIncluded).every((memberId) => publishedTestIds.has(memberId.toUpperCase()))).toBe(true);
+  });
+
+  it('does not render equal customer and listed prices as discounts', () => {
+    const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
+    const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');
+    expect(detailModalSource).toContain('item.originalPrice > item.price');
+    expect(bookingModalSource).toContain('originalPrice !== undefined && originalPrice > price');
+  });
+
+  it('renders canonical names for package member IDs', () => {
+    const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
+    expect(detailModalSource).toContain('medicalTests.find');
+    expect(detailModalSource).toContain('?? memberId');
   });
 
   it('keeps listed values at or above customer prices', () => {

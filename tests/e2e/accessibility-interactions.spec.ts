@@ -46,12 +46,28 @@ test('homepage has no horizontal overflow at 360px', async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
-test('approved catalog exposes the published test and package counts', async ({ page }) => {
+test('catalog package details show canonical member names', async ({ page }) => {
   await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  await expect(page.getByText('Health Packages (17)')).toBeVisible();
-  await expect(page.getByText('Individual Tests (74+)')).toBeVisible();
-  await expect(page.getByText('The public catalog is being prepared')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Overview' }).first().click();
+  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible();
+  await expect(dialog.getByText('WEB-001', { exact: true })).toHaveCount(0);
+});
+
+test('catalog filters expose a resettable no-results state', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+
+  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package...');
+  await search.fill('zzzz-no-catalog-match');
+  await expect(page.getByRole('status').filter({ hasText: 'No tests match this search' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Clear filters' }).click();
+  await expect(search).toHaveValue('');
+  await expect(page.getByText('Individual Tests (74+)', { exact: true })).toBeVisible();
 });
 
 test('visible action buttons meet the 44px minimum target height', async ({ page }) => {

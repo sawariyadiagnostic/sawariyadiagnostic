@@ -14,7 +14,7 @@ import {
   ArrowLeft,
   Stethoscope
 } from 'lucide-react';
-import type { MedicalTest, HealthPackage } from '@/data/publishedCatalog';
+import { medicalTests, type MedicalTest, type HealthPackage } from '@/data/publishedCatalog';
 import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { toast } from 'sonner';
@@ -31,9 +31,15 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   if (!item) return null;
 
   const isPackage = 'testsIncluded' in item;
-  const discountPercent = item.originalPrice 
-    ? Math.round((1 - item.price / item.originalPrice) * 100) 
+  const discountPercent = item.originalPrice > item.price
+    ? Math.round((1 - item.price / item.originalPrice) * 100)
     : null;
+
+  const packageMemberNames = isPackage
+    ? (item as HealthPackage).testsIncluded.map((memberId) =>
+        medicalTests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId,
+      )
+    : [];
 
   const handleShare = () => {
     const url = `${window.location.origin}/#/${isPackage ? 'package' : 'test'}/${item.id}`;
@@ -79,7 +85,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
               <div className="text-right flex-shrink-0">
                 <div className="text-2xl sm:text-3xl font-black text-white">₹{item.price}</div>
-                {item.originalPrice && (
+                {item.originalPrice > item.price && (
                   <div className="text-xs text-blue-200 line-through">₹{item.originalPrice}</div>
                 )}
                 {discountPercent && (
@@ -135,7 +141,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 {isPackage ? `Tests Included in Package (${(item as HealthPackage).testsIncluded.length})` : 'Diagnostic Parameters Measured:'}
               </span>
               <div className="grid sm:grid-cols-2 gap-2">
-                {(isPackage ? (item as HealthPackage).testsIncluded : ((item as MedicalTest).parameters || [(item as MedicalTest).name])).map((param, i) => (
+                {(isPackage ? packageMemberNames : ((item as MedicalTest).parameters || [(item as MedicalTest).name])).map((param, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2 rounded-[12px] border border-slate-100">
                     <Check className="w-3.5 h-3.5 text-green-700 flex-shrink-0" />
                     <span className="font-medium">{param}</span>
