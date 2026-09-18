@@ -97,6 +97,30 @@ test('catalog detail panel fits viewport sizes and scrolls long content', async 
   }
 });
 
+test('catalog detail modal stays above the mobile dock', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  const overview = page.getByRole('button', { name: 'Overview' }).first();
+  await expect(overview).toBeVisible();
+  await overview.click();
+  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  await expect(dialog).toBeVisible();
+  const result = await dialog.evaluate((element) => {
+    const dock = [...document.querySelectorAll('div')].find((candidate) => {
+      const className = typeof candidate.className === 'string' ? candidate.className : '';
+      return className.includes('fixed') && className.includes('bottom-0') && className.includes('sm:hidden');
+    });
+    const dockBox = dock?.getBoundingClientRect();
+    const point = dockBox ? { x: dockBox.left + dockBox.width / 2, y: dockBox.top + dockBox.height / 2 } : null;
+    const hit = point ? document.elementFromPoint(point.x, point.y) : null;
+    return { dialogZ: getComputedStyle(element).zIndex, dockZ: dock ? getComputedStyle(dock).zIndex : null, hitInsideDialog: Boolean(hit && element.contains(hit)) };
+  });
+  expect(Number(result.dialogZ)).toBeGreaterThan(Number(result.dockZ));
+  expect(result.hitInsideDialog).toBe(true);
+});
+
 test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

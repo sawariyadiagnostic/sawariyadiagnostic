@@ -67,6 +67,12 @@ describe('approved public catalog', () => {
     expect(visitorSource).toContain('tests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId');
   });
 
+  it('keeps dialog layers above the mobile dock', () => {
+    const dialogSource = readFileSync(resolve(process.cwd(), 'src/components/ui/dialog.tsx'), 'utf8');
+    expect(dialogSource).toContain('inset-0 z-[110]');
+    expect(dialogSource).toContain('top-[50%] z-[110]');
+  });
+
   it('keeps package members resolvable to published tests', () => {
     expect(healthPackages.flatMap((pkg) => pkg.testsIncluded).every((memberId) => publishedTestIds.has(memberId.toUpperCase()))).toBe(true);
   });
