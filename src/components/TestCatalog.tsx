@@ -373,7 +373,7 @@ export function TestCatalog() {
           <TabsContent value="tests" className="mt-0">
             {/* Search Result Count */}
             {searchQuery && (
-              <div className="text-xs text-slate-600 mb-4 px-1 font-medium">
+              <div role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium">
                 Found <strong>{filteredTests.length}</strong> tests matching "{searchQuery}"
               </div>
             )}

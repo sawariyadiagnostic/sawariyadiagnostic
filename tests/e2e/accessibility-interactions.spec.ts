@@ -142,6 +142,16 @@ test('catalog cards show real test descriptions', async ({ page }) => {
   await expect(card.locator('..').getByText(/Current test details are published/)).toHaveCount(0);
 });
 
+test('catalog search result count is announced as a status update', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+
+  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package…');
+  await search.fill('thyroid');
+  const resultCount = page.locator('#tests [role="status"][aria-live="polite"]').filter({ hasText: 'tests matching' });
+  await expect(resultCount).toBeVisible();
+});
+
 test('catalog filters expose a resettable no-results state', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

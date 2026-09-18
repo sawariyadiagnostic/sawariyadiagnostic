@@ -100,6 +100,11 @@ describe('approved public catalog', () => {
     }
   });
 
+  it('announces catalog search result counts to assistive technology', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
+    expect(source).toContain('role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium"');
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');
