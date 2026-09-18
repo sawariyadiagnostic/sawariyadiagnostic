@@ -57,6 +57,14 @@ test('catalog package details show canonical member names', async ({ page }) => 
   await expect(dialog.getByText('WEB-001', { exact: true })).toHaveCount(0);
 });
 
+test('package cards show canonical member names', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  const firstPackage = page.locator('#tests .glass-card').filter({ hasText: 'Master Iron Metabolism & Anemia Workup' }).first();
+  await expect(firstPackage.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible();
+  await expect(firstPackage.getByText('WEB-001', { exact: true })).toHaveCount(0);
+});
+
 test('catalog filters expose a resettable no-results state', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

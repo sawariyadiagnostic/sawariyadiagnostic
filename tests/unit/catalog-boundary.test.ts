@@ -54,6 +54,10 @@ describe('approved public catalog', () => {
     expect(visitorSource).toContain('clearCatalogFilters');
   });
 
+  it('renders canonical names on visible package cards', () => {
+    expect(visitorSource).toContain('tests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId');
+  });
+
   it('keeps package members resolvable to published tests', () => {
     expect(healthPackages.flatMap((pkg) => pkg.testsIncluded).every((memberId) => publishedTestIds.has(memberId.toUpperCase()))).toBe(true);
   });

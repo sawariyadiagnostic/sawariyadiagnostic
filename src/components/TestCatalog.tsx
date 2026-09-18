@@ -286,10 +286,10 @@ export function TestCatalog() {
                           Key Tests Included ({pkg.testsIncluded.length}):
                         </p>
                         <ul className="space-y-1">
-                          {pkg.testsIncluded.slice(0, 5).map((test) => (
-                            <li key={test} className="flex items-start gap-1.5 text-xs text-slate-700 font-medium">
+                          {pkg.testsIncluded.slice(0, 5).map((memberId) => (
+                            <li key={memberId} className="flex items-start gap-1.5 text-xs text-slate-700 font-medium">
                               <Check className="w-3.5 h-3.5 text-green-600 flex-shrink-0 mt-0.5" />
-                              <span className="leading-snug break-words">{test}</span>
+                              <span className="leading-snug break-words">{tests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId}</span>
                             </li>
                           ))}
                           {pkg.testsIncluded.length > 5 && (
