@@ -146,7 +146,7 @@ test('catalog filters expose a resettable no-results state', async ({ page }) =>
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package...');
+  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package…');
   await search.fill('zzzz-no-catalog-match');
   await expect(page.getByRole('status').filter({ hasText: 'No tests match this search' })).toBeVisible();
 
