@@ -65,6 +65,16 @@ test('package cards show canonical member names', async ({ page }) => {
   await expect(firstPackage.getByText('WEB-001', { exact: true })).toHaveCount(0);
 });
 
+test('catalog cards show real test descriptions', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  await page.getByRole('tab', { name: /Individual Tests/ }).click();
+  const card = page.locator('#tests').getByRole('button', { name: /View details for COMPLETE BLOOD COUNT/ }).first();
+  await expect(card).toBeVisible();
+  await expect(card.locator('..').getByText('Comprehensive evaluation of cellular blood components.', { exact: true })).toBeVisible();
+  await expect(card.locator('..').getByText(/Current test details are published/)).toHaveCount(0);
+});
+
 test('catalog filters expose a resettable no-results state', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

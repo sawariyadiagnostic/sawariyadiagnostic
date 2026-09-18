@@ -28,7 +28,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-001",
     name: "COMPLETE BLOOD COUNT (CBC)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Comprehensive evaluation of cellular blood components.",
     price: 350,
     category: 'specialized',
     homeCollection: false,
@@ -42,7 +42,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-002",
     name: "HEMOGLOBIN (Hb)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures oxygen-carrying protein in red blood cells.",
     price: 100,
     category: 'specialized',
     homeCollection: false,
@@ -56,7 +56,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-003",
     name: "PLATELET COUNT",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for PLATELET COUNT; see the specimen, method, preparation, and parameters below.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -70,7 +70,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-004",
     name: "ABSOLUTE EOSINOPHIL COUNT (AEC)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures circulating eosinophil granulocytes.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -84,7 +84,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-005",
     name: "RBC COUNT",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Quantifies total erythrocytes per microliter.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -98,7 +98,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-006",
     name: "TOTAL LEUKOCYTE COUNT (TLC / WBC)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for TOTAL LEUKOCYTE COUNT (TLC / WBC); see the specimen, method, preparation, and parameters below.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -112,7 +112,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-007",
     name: "ERYTHROCYTE SEDIMENTATION RATE (ESR)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for ERYTHROCYTE SEDIMENTATION RATE (ESR); see the specimen, method, preparation, and parameters below.",
     price: 100,
     category: 'specialized',
     homeCollection: false,
@@ -126,7 +126,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-008",
     name: "BLOOD GROUP (ABO & Rh TYPING)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Determines ABO blood group and Rh(D) status.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -140,7 +140,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-009",
     name: "PROTHROMBIN TIME (PT/INR)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Evaluates the extrinsic and common pathways of coagulation (Factors VII, X, V, II, and Fibrinogen).",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -154,7 +154,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-010",
     name: "ACTIVATED PARTIAL THROMBOPLASTIN TIME (APTT)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Evaluates the intrinsic and common coagulation pathways (Factors XII, XI, IX, VIII, X, V, II, Fibrinogen).",
     price: 500,
     category: 'specialized',
     homeCollection: false,
@@ -168,7 +168,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-011",
     name: "BLEEDING TIME & CLOTTING TIME (BT & CT)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for BLEEDING TIME & CLOTTING TIME (BT & CT); see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -182,7 +182,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-012",
     name: "TOTAL BILIRUBIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures combined conjugated and unconjugated bile pigment from hemoglobin breakdown.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -196,7 +196,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-013",
     name: "DIRECT BILIRUBIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures water-soluble, conjugated bilirubin excreted by hepatocytes into bile.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -210,7 +210,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-014",
     name: "INDIRECT BILIRUBIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures unconjugated, lipid-soluble bilirubin bound to albumin.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -224,7 +224,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-015",
     name: "SGOT (AST / Aspartate Aminotransferase)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Intracellular enzyme found in hepatocytes, cardiac myocytes, and skeletal muscle.",
     price: 100,
     category: 'specialized',
     homeCollection: false,
@@ -238,7 +238,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-016",
     name: "SGPT (ALT / Alanine Aminotransferase)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Highly liver-specific cytosolic enzyme.",
     price: 100,
     category: 'specialized',
     homeCollection: false,
@@ -252,7 +252,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-017",
     name: "ALKALINE PHOSPHATASE (ALP)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Enzyme concentrated in biliary canalicular membranes, osteoblasts (bone), and placenta.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -266,7 +266,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-018",
     name: "GAMMA-GLUTAMYL TRANSFERASE (GGT)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for GAMMA-GLUTAMYL TRANSFERASE (GGT); see the specimen, method, preparation, and parameters below.",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -280,7 +280,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-019",
     name: "TOTAL PROTEIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures total circulating serum proteins (Albumin + Globulins).",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -294,7 +294,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-020",
     name: "SERUM ALBUMIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary circulating oncotic protein synthesized exclusively by liver hepatocytes.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -308,7 +308,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-021",
     name: "SERUM GLOBULIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for SERUM GLOBULIN; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -322,7 +322,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-022",
     name: "A/G RATIO",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Physiological balance of albumin relative to globulins.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -336,7 +336,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-023",
     name: "BLOOD UREA NITROGEN (BUN)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures nitrogen component of urea, the chief end product of dietary and endogenous protein catabolism.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -350,7 +350,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-024",
     name: "BLOOD UREA",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Direct metric of total circulating urea molecule.",
     price: 120,
     category: 'specialized',
     homeCollection: false,
@@ -364,7 +364,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-025",
     name: "SERUM CREATININE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Gold-standard endogenous marker of glomerular filtration rate (GFR).",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -378,7 +378,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-026",
     name: "URIC ACID",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Final breakdown product of purine nucleotide metabolism.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -392,7 +392,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-027",
     name: "CALCIUM",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for CALCIUM; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -406,7 +406,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-028",
     name: "PHOSPHORUS",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Inorganic phosphate is vital for cellular energy (ATP), bone mineralization, and acid-base buffering.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -420,7 +420,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-029",
     name: "eGFR (MDRD)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Estimated Glomerular Filtration Rate normalized to 1.73 m2 body surface area.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -434,7 +434,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-030",
     name: "TOTAL CHOLESTEROL",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Assesses total circulating sterol particles.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -448,7 +448,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-031",
     name: "REAL HDL (DIRECT)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Directly quantifies high-density lipoprotein cholesterol without manual chemical precipitation.",
     price: 200,
     category: 'specialized',
     homeCollection: false,
@@ -462,7 +462,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-032",
     name: "LDL CHOLESTEROL",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary atherogenic lipoprotein ('bad cholesterol').",
     price: 200,
     category: 'specialized',
     homeCollection: false,
@@ -476,7 +476,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-033",
     name: "VLDL CHOLESTEROL",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures triglyceride-rich very-low-density lipoproteins synthesized by the liver.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -490,7 +490,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-034",
     name: "TRIGLYCERIDES",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary storage form of body fat.",
     price: 180,
     category: 'specialized',
     homeCollection: false,
@@ -504,7 +504,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-035",
     name: "TC/HDL RATIO",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for TC/HDL RATIO; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -518,7 +518,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-036",
     name: "LDL/HDL RATIO",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for LDL/HDL RATIO; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -532,7 +532,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-037",
     name: "FASTING BLOOD GLUCOSE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for FASTING BLOOD GLUCOSE; see the specimen, method, preparation, and parameters below.",
     price: 80,
     category: 'specialized',
     homeCollection: false,
@@ -546,7 +546,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-038",
     name: "POST PRANDIAL (PP) BLOOD GLUCOSE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Assesses pancreatic beta-cell insulin secretory capacity under a real-life physiological carbohydrate challenge.",
     price: 80,
     category: 'specialized',
     homeCollection: false,
@@ -560,7 +560,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-039",
     name: "RANDOM BLOOD GLUCOSE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for RANDOM BLOOD GLUCOSE; see the specimen, method, preparation, and parameters below.",
     price: 80,
     category: 'specialized',
     homeCollection: false,
@@ -574,7 +574,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-040",
     name: "HbA1c (GLYCOSYLATED HEMOGLOBIN)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Reflects weighted average blood glucose over the preceding 90-120 days via non-enzymatic glycation of hemoglobin.",
     price: 450,
     category: 'specialized',
     homeCollection: false,
@@ -588,7 +588,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-041",
     name: "SERUM IRON",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures circulating ferric ions (Fe3+) bound to transferrin.",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -602,7 +602,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-042",
     name: "% TRANSFERRIN SATURATION",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Percentage of transferrin iron-binding sites currently occupied by iron.",
     price: 350,
     category: 'specialized',
     homeCollection: false,
@@ -616,7 +616,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-043",
     name: "SERUM FERRITIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary cellular iron storage protein.",
     price: 600,
     category: 'specialized',
     homeCollection: false,
@@ -630,7 +630,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-044",
     name: "TROPONIN I",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for TROPONIN I; see the specimen, method, preparation, and parameters below.",
     price: 1150,
     category: 'specialized',
     homeCollection: false,
@@ -644,7 +644,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-045",
     name: "TROPONIN T (HIGH SENSITIVE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for TROPONIN T (HIGH SENSITIVE); see the specimen, method, preparation, and parameters below.",
     price: 2250,
     category: 'specialized',
     homeCollection: false,
@@ -658,7 +658,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-046",
     name: "TOTAL CPK (CREATINE KINASE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Enzyme concentrated in skeletal muscle, myocardium, and brain.",
     price: 350,
     category: 'specialized',
     homeCollection: false,
@@ -672,7 +672,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-047",
     name: "CK-MB",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Cardiac-specific isoenzyme of creatine kinase.",
     price: 450,
     category: 'specialized',
     homeCollection: false,
@@ -686,7 +686,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-048",
     name: "SERUM AMYLASE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Digestive enzyme secreted by the pancreas and salivary glands.",
     price: 460,
     category: 'specialized',
     homeCollection: false,
@@ -700,7 +700,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-049",
     name: "SERUM LIPASE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for SERUM LIPASE; see the specimen, method, preparation, and parameters below.",
     price: 600,
     category: 'specialized',
     homeCollection: false,
@@ -714,7 +714,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-050",
     name: "TSH (THYROID STIMULATING HORMONE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for TSH (THYROID STIMULATING HORMONE); see the specimen, method, preparation, and parameters below.",
     price: 180,
     category: 'specialized',
     homeCollection: false,
@@ -728,7 +728,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-051",
     name: "TOTAL T3 (TRIIODOTHYRONINE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures total circulating active thyroid hormone (protein-bound + free).",
     price: 180,
     category: 'specialized',
     homeCollection: false,
@@ -742,7 +742,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-052",
     name: "TOTAL T4 (THYROXINE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary prohormone secreted by the thyroid gland.",
     price: 180,
     category: 'specialized',
     homeCollection: false,
@@ -756,7 +756,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-053",
     name: "FREE T3",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures biologically active, unbound Triiodothyronine (0.3% of total T3).",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -770,7 +770,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-054",
     name: "FREE T4",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures unbound, metabolically active Thyroxine (0.03% of total T4).",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -784,7 +784,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-055",
     name: "FSH (FOLLICLE STIMULATING HORMONE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Secreted by anterior pituitary.",
     price: 450,
     category: 'specialized',
     homeCollection: false,
@@ -798,7 +798,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-056",
     name: "LH (LUTEINIZING HORMONE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Triggers ovulation and corpus luteum formation in women; stimulates Leydig cell testosterone synthesis in men.",
     price: 450,
     category: 'specialized',
     homeCollection: false,
@@ -812,7 +812,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-057",
     name: "PROLACTIN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for PROLACTIN; see the specimen, method, preparation, and parameters below.",
     price: 450,
     category: 'specialized',
     homeCollection: false,
@@ -826,7 +826,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-058",
     name: "TESTOSTERONE (TOTAL)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Primary androgen steroid hormone.",
     price: 550,
     category: 'specialized',
     homeCollection: false,
@@ -840,7 +840,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-059",
     name: "BETA-hCG (QUANTITATIVE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Human chorionic gonadotropin secreted by syncytiotrophoblasts.",
     price: 550,
     category: 'specialized',
     homeCollection: false,
@@ -854,7 +854,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-060",
     name: "AMH (ANTI-MULLERIAN HORMONE)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Produced by granulosa cells of pre-antral and small antral ovarian follicles.",
     price: 1850,
     category: 'specialized',
     homeCollection: false,
@@ -868,7 +868,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-061",
     name: "E2 (ESTRADIOL)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for E2 (ESTRADIOL); see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
     homeCollection: false,
@@ -882,7 +882,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-062",
     name: "PSA (PROSTATE-SPECIFIC ANTIGEN)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for PSA (PROSTATE-SPECIFIC ANTIGEN); see the specimen, method, preparation, and parameters below.",
     price: 750,
     category: 'specialized',
     homeCollection: false,
@@ -896,7 +896,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-063",
     name: "CA 19.9",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for CA 19.9; see the specimen, method, preparation, and parameters below.",
     price: 1250,
     category: 'specialized',
     homeCollection: false,
@@ -910,7 +910,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-064",
     name: "VITAMIN D (25-OH)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Measures total circulating 25-hydroxyvitamin D [25(OH)D2 + D3].",
     price: 1050,
     category: 'specialized',
     homeCollection: false,
@@ -924,7 +924,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-065",
     name: "VITAMIN B12",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for VITAMIN B12; see the specimen, method, preparation, and parameters below.",
     price: 750,
     category: 'specialized',
     homeCollection: false,
@@ -938,7 +938,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-066",
     name: "C-REACTIVE PROTEIN (CRP) - QUANTITATIVE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for C-REACTIVE PROTEIN (CRP) - QUANTITATIVE; see the specimen, method, preparation, and parameters below.",
     price: 550,
     category: 'specialized',
     homeCollection: false,
@@ -952,7 +952,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-067",
     name: "RHEUMATOID FACTOR (RA) - QUANTITATIVE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Autoantibody (chiefly IgM) directed against the Fc portion of human IgG.",
     price: 550,
     category: 'specialized',
     homeCollection: false,
@@ -966,7 +966,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-068",
     name: "TOTAL IgE",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Quantifies total circulating Immunoglobulin E.",
     price: 650,
     category: 'specialized',
     homeCollection: false,
@@ -980,7 +980,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-069",
     name: "tTG-IgA (CELIAC ANTIBODY)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for tTG-IgA (CELIAC ANTIBODY); see the specimen, method, preparation, and parameters below.",
     price: 1100,
     category: 'specialized',
     homeCollection: false,
@@ -994,7 +994,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-070",
     name: "DENGUE NS1 ANTIGEN (CLIA)",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for DENGUE NS1 ANTIGEN (CLIA); see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
     homeCollection: false,
@@ -1008,7 +1008,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-071",
     name: "DENGUE IgG ANTIBODY",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for DENGUE IgG ANTIBODY; see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
     homeCollection: false,
@@ -1022,7 +1022,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-072",
     name: "DENGUE IgM ANTIBODY",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for DENGUE IgM ANTIBODY; see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
     homeCollection: false,
@@ -1036,7 +1036,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-073",
     name: "WIDAL TEST",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for WIDAL TEST; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
     homeCollection: false,
@@ -1050,7 +1050,7 @@ export const medicalTests: MedicalTest[] = [
   {
     id: "web-074",
     name: "MALARIA PARASITE ANTIGEN",
-    description: "Current test details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Laboratory measurement for MALARIA PARASITE ANTIGEN; see the specimen, method, preparation, and parameters below.",
     price: 250,
     category: 'specialized',
     homeCollection: false,
@@ -1067,7 +1067,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-anemia",
     name: "Master Iron Metabolism & Anemia Workup",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 5 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 1499,
     originalPrice: 1499,
     testsIncluded: ["WEB-001", "WEB-041", "WEB-042", "WEB-043", "WEB-065"],
@@ -1076,7 +1076,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-autoimmune-arthritis-mega",
     name: "Master Rheumatology & Autoimmune Joint Battery (16 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 15 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 4299,
     originalPrice: 4299,
     testsIncluded: ["WEB-001", "WEB-007", "WEB-019", "WEB-020", "WEB-026", "WEB-027", "WEB-028", "WEB-049", "WEB-064", "WEB-065", "WEB-066", "WEB-067", "WEB-068", "WEB-069", "WEB-074"],
@@ -1085,7 +1085,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-bone",
     name: "Senior Citizen Bone, Joint & Vitality Screen",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 2199,
     originalPrice: 2199,
     testsIncluded: ["WEB-026", "WEB-027", "WEB-028", "WEB-064", "WEB-065", "WEB-066", "WEB-067"],
@@ -1094,7 +1094,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-cardiac-thrombosis-mega",
     name: "Advanced Cardiovascular, Lipoprotein & Thrombosis Risk Panel (18 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 18 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 4799,
     originalPrice: 4799,
     testsIncluded: ["WEB-001", "WEB-011", "WEB-025", "WEB-027", "WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036", "WEB-037", "WEB-040", "WEB-044", "WEB-045", "WEB-046", "WEB-049", "WEB-066"],
@@ -1103,7 +1103,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-diabetes",
     name: "Master Diabetic & Glycemic Control Audit",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 799,
     originalPrice: 799,
     testsIncluded: ["WEB-025", "WEB-029", "WEB-030", "WEB-034", "WEB-037", "WEB-038", "WEB-040"],
@@ -1112,7 +1112,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-diabetic-end-organ-mega",
     name: "Diabetic End-Organ & Microvascular Surveillance (20 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 20 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 2949,
     originalPrice: 2949,
     testsIncluded: ["WEB-001", "WEB-015", "WEB-016", "WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-035", "WEB-037", "WEB-038", "WEB-040", "WEB-049", "WEB-065", "WEB-074"],
@@ -1121,7 +1121,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-executive",
     name: "Executive 360° Master Wellness Checkup",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 22 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 3399,
     originalPrice: 3399,
     testsIncluded: ["WEB-001", "WEB-012", "WEB-013", "WEB-015", "WEB-016", "WEB-017", "WEB-019", "WEB-020", "WEB-023", "WEB-025", "WEB-026", "WEB-027", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-037", "WEB-040", "WEB-050", "WEB-064", "WEB-065"],
@@ -1130,7 +1130,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-fever",
     name: "Acute Monsoon & Tropical Fever Triage",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 2099,
     originalPrice: 2099,
     testsIncluded: ["WEB-001", "WEB-066", "WEB-070", "WEB-071", "WEB-072", "WEB-073", "WEB-074"],
@@ -1139,7 +1139,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-geriatric-longevity-mega",
     name: "Master Senior Citizen 60+ Longevity & Vitality Audit (34 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 30 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 5199,
     originalPrice: 5199,
     testsIncluded: ["WEB-001", "WEB-007", "WEB-012", "WEB-015", "WEB-016", "WEB-017", "WEB-019", "WEB-020", "WEB-023", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-035", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-049", "WEB-050", "WEB-064", "WEB-065", "WEB-066", "WEB-067", "WEB-074"],
@@ -1148,7 +1148,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-kft",
     name: "Comprehensive Renal & Metabolic Profile (KFT-7)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 649,
     originalPrice: 649,
     testsIncluded: ["WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029"],
@@ -1157,7 +1157,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-lft",
     name: "Complete Liver Health Spectrum (LFT-11)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 11 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 1049,
     originalPrice: 1049,
     testsIncluded: ["WEB-012", "WEB-013", "WEB-014", "WEB-015", "WEB-016", "WEB-017", "WEB-018", "WEB-019", "WEB-020", "WEB-021", "WEB-022"],
@@ -1166,7 +1166,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-lipid",
     name: "Advanced Atherosclerotic Lipid Profile (LIPID-7)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 749,
     originalPrice: 749,
     testsIncluded: ["WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036"],
@@ -1175,7 +1175,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-pcos",
     name: "Women's Hormonal Balance & PCOS / Fertility Screen",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 2999,
     originalPrice: 2999,
     testsIncluded: ["WEB-050", "WEB-055", "WEB-056", "WEB-057", "WEB-058", "WEB-060", "WEB-061"],
@@ -1184,7 +1184,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-platinum-360-mega",
     name: "Platinum 360° Comprehensive Full Body Checkup (42 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 42 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 6999,
     originalPrice: 6999,
     testsIncluded: ["WEB-001", "WEB-007", "WEB-012", "WEB-013", "WEB-014", "WEB-015", "WEB-016", "WEB-017", "WEB-018", "WEB-019", "WEB-020", "WEB-021", "WEB-022", "WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-043", "WEB-047", "WEB-048", "WEB-049", "WEB-050", "WEB-053", "WEB-054", "WEB-064", "WEB-065", "WEB-066", "WEB-074"],
@@ -1193,7 +1193,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-preoperative-surgical",
     name: "Pre-Operative Anesthetic & Surgical Clearance Battery (20 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 18 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 2449,
     originalPrice: 2449,
     testsIncluded: ["WEB-001", "WEB-007", "WEB-008", "WEB-009", "WEB-010", "WEB-011", "WEB-012", "WEB-015", "WEB-016", "WEB-020", "WEB-023", "WEB-025", "WEB-027", "WEB-037", "WEB-039", "WEB-040", "WEB-066", "WEB-074"],
@@ -1202,7 +1202,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-thyroid",
     name: "Complete Thyroid Spectrum Profile",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 5 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 699,
     originalPrice: 699,
     testsIncluded: ["WEB-050", "WEB-051", "WEB-052", "WEB-053", "WEB-054"],
@@ -1211,7 +1211,7 @@ export const healthPackages: HealthPackage[] = [
   {
     id: "panel-women-wellness-mega",
     name: "Master Women's Hormonal, Ovarian Reserve & Bone Health Screen (22 Parameters)",
-    description: "Current package details are published from the Lab Director-authorized source catalog; confirm scope and availability with the lab.",
+    description: "Published package listing with 22 included test entries. See the included tests below; confirm current scope and availability with the lab.",
     price: 7049,
     originalPrice: 7049,
     testsIncluded: ["WEB-001", "WEB-027", "WEB-028", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-043", "WEB-050", "WEB-053", "WEB-054", "WEB-055", "WEB-056", "WEB-057", "WEB-058", "WEB-059", "WEB-060", "WEB-061", "WEB-062", "WEB-064", "WEB-065", "WEB-074"],

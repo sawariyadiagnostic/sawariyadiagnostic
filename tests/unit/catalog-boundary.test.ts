@@ -29,6 +29,14 @@ describe('approved public catalog', () => {
     expect(JSON.stringify(publishedCatalogManifest)).not.toMatch(/provenance|source_file|b2b|wholesale|floor|margin|profit|review_ledgers|original_text/i);
   });
 
+  it('publishes real source-derived test descriptions', () => {
+    expect(medicalTests).toHaveLength(74);
+    expect(new Set(medicalTests.map((test) => test.description)).size).toBeGreaterThan(70);
+    expect(medicalTests.every((test) => !test.description.includes('Current test details are published'))).toBe(true);
+    expect(medicalTests.find((test) => test.id === 'web-001')?.description).toBe('Comprehensive evaluation of cellular blood components.');
+    expect(medicalTests.find((test) => test.id === 'web-074')?.description).toBe('Laboratory measurement for MALARIA PARASITE ANTIGEN; see the specimen, method, preparation, and parameters below.');
+  });
+
   it('renders the approved catalog instead of the empty-state gate', () => {
     expect(visitorSource).not.toContain('The public catalog is being prepared');
     expect(visitorSource).toContain('Health Packages ({packages.length})');
