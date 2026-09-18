@@ -6,6 +6,7 @@ import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { healthPackages, medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
+import { formatInr } from '../../src/lib/utils';
 
 const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
 
@@ -68,6 +69,11 @@ describe('approved public catalog', () => {
 
   it('keeps package members resolvable to published tests', () => {
     expect(healthPackages.flatMap((pkg) => pkg.testsIncluded).every((memberId) => publishedTestIds.has(memberId.toUpperCase()))).toBe(true);
+  });
+
+  it('formats INR prices consistently with Indian grouping', () => {
+    expect(formatInr(100)).toBe('₹100');
+    expect(formatInr(4299)).toBe('₹4,299');
   });
 
   it('does not render equal customer and listed prices as discounts', () => {

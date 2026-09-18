@@ -17,6 +17,7 @@ import {
 import { medicalTests, type MedicalTest, type HealthPackage } from '@/data/publishedCatalog';
 import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
+import { formatInr } from '@/lib/utils';
 import { toast } from 'sonner';
 
 interface TestDetailModalProps {
@@ -59,7 +60,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     <>
       {isOpen && (
         <SEOHead
-          title={`${item.name} - Price ₹${item.price} | Sawariya Diagnostic`}
+          title={`${item.name} - Price ${formatInr(item.price)} | Sawariya Diagnostic`}
           description={item.description || `Book ${item.name} test at Sawariya Diagnostic Lab with free home sample collection.`}
           canonicalUrl={`https://sawariyadiagnostic.github.io/sawariyadiagnostic/${isPackage ? 'package' : 'test'}/${item.id}.html`}
           jsonLd={schemaJson}
@@ -84,9 +85,9 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               </div>
 
               <div className="text-right flex-shrink-0">
-                <div className="text-2xl sm:text-3xl font-black text-white">₹{item.price}</div>
+                <div className="text-2xl sm:text-3xl font-black text-white">{formatInr(item.price)}</div>
                 {item.originalPrice > item.price && (
-                  <div className="text-xs text-blue-200 line-through">₹{item.originalPrice}</div>
+                  <div className="text-xs text-blue-200 line-through">{formatInr(item.originalPrice)}</div>
                 )}
                 {discountPercent && (
                   <span className="text-[10px] font-bold bg-[#FDE047] text-[#102A43] px-2 py-0.5 rounded-full inline-block mt-1">
@@ -178,7 +179,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               onClick={() => setShowBooking(true)}
               className="action-button flex-1 min-h-11 h-auto btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
             >
-              <span>Book Appointment (₹{item.price})</span>
+              <span>Book Appointment ({formatInr(item.price)})</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>

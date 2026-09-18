@@ -14,6 +14,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
+import { formatInr } from '@/lib/utils';
 import { TestCard } from './ui/TestCard';
 import { categories, healthPackages as publishedPackages, medicalTests as publishedTests, type MedicalTest, type HealthPackage } from '@/data/publishedCatalog';
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
@@ -274,7 +275,7 @@ export function TestCatalog() {
                         {/* Price Strip */}
                         <div className="bg-slate-50 border border-slate-100 rounded-[18px] p-3.5 mb-4">
                           <div className="flex items-baseline gap-2 flex-wrap">
-                            <span className="text-2xl sm:text-3xl font-black text-[#102A43]">₹{pkg.price}</span>
+                            <span className="text-2xl sm:text-3xl font-black text-[#102A43]">{formatInr(pkg.price)}</span>
                           </div>
                           <p className="text-[10.5px] text-slate-600 font-semibold mt-1.5">Confirm current scope and availability with the lab.</p>
                         </div>

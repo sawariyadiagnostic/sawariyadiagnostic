@@ -4,6 +4,7 @@ import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { TestDetailModal } from '../catalog/TestDetailModal';
+import { formatInr } from '@/lib/utils';
 
 interface TestCardProps {
   test: MedicalTest;
@@ -123,9 +124,9 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
           <div className="flex items-center justify-between mb-3.5">
             <div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-black text-[#1D1D1F]">₹{test.price}</span>
+                <span className="text-2xl font-black text-[#1D1D1F]">{formatInr(test.price)}</span>
                 {test.originalPrice && test.originalPrice > test.price && (
-                  <span className="text-xs text-slate-400 line-through font-normal">₹{test.originalPrice}</span>
+                  <span className="text-xs text-slate-400 line-through font-normal">{formatInr(test.originalPrice)}</span>
                 )}
               </div>
               <span className="text-[9.5px] text-slate-400 font-medium">Quality process</span>
