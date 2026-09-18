@@ -65,6 +65,38 @@ test('package cards show canonical member names', async ({ page }) => {
   await expect(firstPackage.getByText('WEB-001', { exact: true })).toHaveCount(0);
 });
 
+test('catalog detail panel fits viewport sizes and scrolls long content', async ({ page }) => {
+  test.setTimeout(90_000);
+  for (const viewport of [{ width: 360, height: 800 }, { width: 768, height: 900 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await openPage(page);
+    await page.locator('#tests').scrollIntoViewIfNeeded();
+    const overview = page.getByRole('button', { name: 'Overview' }).first();
+    await expect(overview).toBeVisible();
+    await overview.click();
+
+    const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+    await expect(dialog).toBeVisible();
+    const box = await dialog.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.x).toBeGreaterThanOrEqual(0);
+      expect(box.y).toBeGreaterThanOrEqual(0);
+      expect(box.x + box.width).toBeLessThanOrEqual(viewport.width);
+      expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+    }
+    const scrollState = await dialog.locator('.overflow-y-auto').evaluate((element) => ({
+      scrollable: element.scrollHeight > element.clientHeight,
+      hasScrollRegion: element.classList.contains('overflow-y-auto'),
+    }));
+    expect(scrollState.hasScrollRegion).toBe(true);
+    if (viewport.width <= 360) expect(scrollState.scrollable).toBe(true);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
+  }
+});
+
 test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

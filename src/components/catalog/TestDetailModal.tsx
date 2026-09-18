@@ -66,7 +66,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
         />
       )}
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
-        <DialogContent className="sm:max-w-[620px] max-h-[90vh] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[32px] flex flex-col">
+        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[24px] sm:rounded-[32px] flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-6 text-white relative overflow-hidden flex-shrink-0">
             <div className="flex items-start justify-between gap-4 relative z-10">
@@ -98,7 +98,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
           </div>
 
           {/* Body Content */}
-          <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5 bg-slate-50">
+          <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-slate-50">
             {/* Description */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-1.5">
               <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider block">
@@ -153,7 +153,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
           </div>
 
           {/* Footer CTAs */}
-          <div className="p-4 bg-white border-t border-slate-200 flex gap-2 flex-shrink-0">
+          <div className="p-3 sm:p-4 bg-white border-t border-slate-200 flex flex-wrap gap-2 flex-shrink-0">
             <Button
               variant="outline"
               onClick={onClose}
