@@ -90,6 +90,16 @@ describe('approved public catalog', () => {
     expect(source).toContain("window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)");
   });
 
+  it('gives both catalog search inputs stable form metadata', () => {
+    const heroSource = readFileSync(resolve(process.cwd(), 'src/components/Hero.tsx'), 'utf8');
+    const catalogSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
+    for (const source of [heroSource, catalogSource]) {
+      expect(source).toContain('name="catalog-search"');
+      expect(source).toContain('autoComplete="off"');
+      expect(source).toContain('placeholder="Ask about a test or package…"');
+    }
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

@@ -133,7 +133,9 @@ export function Hero() {
                     <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
-                      placeholder="Ask about a test or package..."
+                      placeholder="Ask about a test or package…"
+                      name="catalog-search"
+                      autoComplete="off"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-xs sm:text-sm placeholder:text-slate-500 bg-transparent px-2 sm:px-2.5 h-10 sm:h-12 w-full min-w-0"
