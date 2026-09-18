@@ -33,14 +33,47 @@ export function TestCatalog() {
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState<HealthPackage | null>(null);
   const [selectedItemForDetail, setSelectedItemForDetail] = useState<MedicalTest | HealthPackage | null>(null);
 
+  const detailHash = (item: MedicalTest | HealthPackage) => `#/${'testsIncluded' in item ? 'package' : 'test'}/${item.id}`;
+  const openDetail = (item: MedicalTest | HealthPackage, updateHash = true) => {
+    setSelectedItemForDetail(item);
+    if (updateHash && window.location.hash !== detailHash(item)) {
+      window.history.pushState({ catalogDetail: true }, '', detailHash(item));
+    }
+  };
+  const closeDetail = (updateHistory = true) => {
+    setSelectedItemForDetail(null);
+    if (!updateHistory) return;
+    if (window.history.state?.catalogDetail) {
+      window.history.back();
+    } else {
+      window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    }
+  };
+
+  useEffect(() => {
+    const openHashDetail = () => {
+      const match = window.location.hash.match(/^#\/(test|package)\/([^/]+)$/);
+      if (!match) {
+        setSelectedItemForDetail(null);
+        return;
+      }
+      const [kind, id] = match.slice(1);
+      const item = kind === 'test'
+        ? tests.find((test) => test.id === id)
+        : packages.find((pkg) => pkg.id === id);
+      if (item) setSelectedItemForDetail(item);
+    };
+    openHashDetail();
+    window.addEventListener('hashchange', openHashDetail);
+    return () => window.removeEventListener('hashchange', openHashDetail);
+  }, [packages, tests]);
+
   useEffect(() => {
     const handleExternalSearch = (e: Event) => {
       const customEvent = e as CustomEvent<{ query: string; tab?: 'packages' | 'tests' }>;
       if (customEvent.detail?.query !== undefined) {
         setSearchQuery(customEvent.detail.query);
-        if (customEvent.detail.tab) {
-          setActiveTab(customEvent.detail.tab);
-        }
+        if (customEvent.detail.tab) setActiveTab(customEvent.detail.tab);
       }
     };
     window.addEventListener('sawariya:search', handleExternalSearch);
@@ -295,7 +328,7 @@ export function TestCatalog() {
                           ))}
                           {pkg.testsIncluded.length > 5 && (
                             <li 
-                              onClick={() => setSelectedItemForDetail(pkg)}
+                              onClick={() => openDetail(pkg)}
                               className="text-xs text-[#155E9A] font-semibold pl-5 flex items-center gap-1 cursor-pointer hover:underline active:opacity-75 transition-opacity"
                             >
                               <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]" />
@@ -311,7 +344,7 @@ export function TestCatalog() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => setSelectedItemForDetail(pkg)}
+                        onClick={() => openDetail(pkg)}
                         className="action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
                       >
                         <Info className="w-3.5 h-3.5 text-slate-500 shrink-0" />
@@ -358,7 +391,7 @@ export function TestCatalog() {
                 <TestCard 
                   key={test.id} 
                   test={test} 
-                  onViewDetails={(t) => setSelectedItemForDetail(t)}
+                  onViewDetails={(t) => openDetail(t)}
                 />
               ))}
             </div>
@@ -386,7 +419,7 @@ export function TestCatalog() {
         <TestDetailModal
           item={selectedItemForDetail}
           isOpen={!!selectedItemForDetail}
-          onClose={() => setSelectedItemForDetail(null)}
+          onClose={() => closeDetail()}
         />
       )}
     </section>

@@ -121,6 +121,17 @@ test('catalog detail modal stays above the mobile dock', async ({ page }) => {
   expect(result.hitInsideDialog).toBe(true);
 });
 
+test('catalog hash links restore the matching package and browser Back closes it', async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto('/#/package/panel-anemia', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+  await expect(page.locator('#tests')).toBeVisible({ timeout: 60_000 });
+  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  await expect(dialog).toBeVisible({ timeout: 20_000 });
+  await expect(dialog.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible({ timeout: 20_000 });
+  await page.goBack();
+  await expect(dialog).toBeHidden({ timeout: 20_000 });
+});
+
 test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

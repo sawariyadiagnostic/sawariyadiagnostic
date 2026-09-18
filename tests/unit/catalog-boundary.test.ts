@@ -82,6 +82,14 @@ describe('approved public catalog', () => {
     expect(formatInr(4299)).toBe('₹4,299');
   });
 
+  it('restores and owns catalog detail hash state', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
+    expect(source).toContain("/^#\\/(test|package)\\/([^/]+)$/");
+    expect(source).toContain("window.history.pushState({ catalogDetail: true }");
+    expect(source).toContain('window.history.state?.catalogDetail');
+    expect(source).toContain("window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)");
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');
