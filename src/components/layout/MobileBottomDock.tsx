@@ -14,8 +14,7 @@ export function MobileBottomDock() {
   };
 
   const handleWhatsApp = () => {
-    const encoded = encodeURIComponent('Hi, I would like to book a blood test / health package at Sawariya Diagnostic.');
-    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank');
+    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (

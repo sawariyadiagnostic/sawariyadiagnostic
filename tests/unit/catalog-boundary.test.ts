@@ -144,6 +144,19 @@ describe('approved public catalog', () => {
     expect(source).toContain("window.scrollTo({ top: 0, behavior: 'smooth' })");
   });
 
+  it('protects WhatsApp new tabs from opener access', () => {
+    const files = [
+      ['src/components/ui/WhatsAppButton.tsx', "window.open(whatsappUrl, '_blank', 'noopener,noreferrer')"],
+      ['src/components/layout/MobileBottomDock.tsx', "window.open(url, '_blank', 'noopener,noreferrer')"],
+      ['src/components/layout/MobileMenu.tsx', "window.open(url, '_blank', 'noopener,noreferrer')"],
+    ] as const;
+    for (const [file, opener] of files) {
+      const source = readFileSync(resolve(process.cwd(), file), 'utf8');
+      expect(source).toContain(opener);
+      expect(source).not.toContain("window.open(url, '_blank')");
+    }
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

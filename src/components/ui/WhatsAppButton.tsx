@@ -13,7 +13,7 @@ export function WhatsAppButton({
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = whatsappHref(message) || (phoneNumber ? `https://wa.me/${phoneNumber}?text=${encodedMessage}` : undefined);
-    if (whatsappUrl) window.open(whatsappUrl, '_blank');
+    if (whatsappUrl) window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (

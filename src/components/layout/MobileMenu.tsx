@@ -27,8 +27,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
   if (!isOpen) return null;
 
   const handleWhatsApp = () => {
-    const encoded = encodeURIComponent('Hi, I want to book a blood test or health package at Sawariya Diagnostic.');
-    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank');
+    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank', 'noopener,noreferrer');
     onClose();
   };
 
