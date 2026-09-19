@@ -119,6 +119,14 @@ describe('approved public catalog', () => {
     expect(source).toContain("toast.error('Could not copy the link. Please copy the page URL manually.')");
   });
 
+  it('gives calendar initialization an honest contact fallback', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/Contact.tsx'), 'utf8');
+    expect(source).toContain('const [calendarError, setCalendarError] = useState(false);');
+    expect(source).toContain('catch {');
+    expect(source).toContain('Calendar temporarily unavailable');
+    expect(source).toContain('role="alert"');
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

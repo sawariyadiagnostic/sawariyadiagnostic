@@ -9,11 +9,16 @@ import { footer } from '@/data/website-content';
 
 export function Contact() {
   const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarError, setCalendarError] = useState(false);
 
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
-      cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+      try {
+        const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
+        cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+      } catch {
+        setCalendarError(true);
+      }
     })();
   }, []);
 
@@ -96,7 +101,21 @@ export function Contact() {
             
             {/* Cal.com Embed Container or Facade */}
             <div className="p-5 sm:p-10 bg-white/40 backdrop-blur-md min-h-[380px] sm:min-h-[420px] flex items-center justify-center">
-              {!showCalendar ? (
+              {calendarError ? (
+                <div role="alert" className="text-center max-w-md mx-auto space-y-4 py-4">
+                  <Calendar className="w-10 h-10 text-[#155E9A] mx-auto" />
+                  <div className="space-y-1.5">
+                    <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Calendar temporarily unavailable</h4>
+                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">Please call the lab desk to confirm an appointment or collection slot.</p>
+                  </div>
+                  <Button asChild className="btn-primary action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px]">
+                    <a href={telHref(siteConfig.contact.phone)}>
+                      <PhoneCall className="w-4 h-4 mr-2" />
+                      Call Desk ({siteConfig.contact.phone})
+                    </a>
+                  </Button>
+                </div>
+              ) : !showCalendar ? (
                 <div className="text-center max-w-md mx-auto space-y-4 sm:space-y-5 py-4">
                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-slate-50 rounded-[20px] flex items-center justify-center mx-auto border border-slate-200 shadow-2xs">
                      <Calendar className="w-7 h-7 sm:w-8 sm:h-8 text-[#155E9A]" />
