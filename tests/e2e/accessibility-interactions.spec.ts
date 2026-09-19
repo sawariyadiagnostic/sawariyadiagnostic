@@ -5,6 +5,18 @@ const openPage = async (page: Parameters<typeof test>[0]['page']) => {
   await expect(page.locator('#main-content')).toBeVisible();
 };
 
+test('mobile navigation is a dialog and closes with Escape', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openPage(page);
+
+  const trigger = page.getByRole('button', { name: 'Open navigation menu' });
+  await trigger.click();
+  const menu = page.getByRole('dialog', { name: 'Mobile navigation' });
+  await expect(menu).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+});
+
 test('skip link moves focus to the main content landmark', async ({ page }) => {
   await openPage(page);
 

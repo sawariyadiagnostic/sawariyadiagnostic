@@ -127,6 +127,15 @@ describe('approved public catalog', () => {
     expect(source).toContain('role="alert"');
   });
 
+  it('gives the mobile menu dialog semantics and Escape dismissal', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/layout/MobileMenu.tsx'), 'utf8');
+    expect(source).toContain('role="dialog"');
+    expect(source).toContain('aria-modal="true"');
+    expect(source).toContain('aria-label="Mobile navigation"');
+    expect(source).toContain("if (event.key === 'Escape') onClose();");
+    expect(source).toContain('window.removeEventListener');
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

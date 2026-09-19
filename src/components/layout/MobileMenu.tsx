@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { FileDown, Phone, ShieldCheck, X, Home, Calendar, MessageCircle, ChevronRight, Activity, TestTube, MapPin } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -14,6 +15,15 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleWhatsApp = () => {
@@ -32,6 +42,9 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
       {/* Sheet Drawer */}
       <div 
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
         className="lg:hidden fixed top-0 right-0 h-full w-[340px] max-w-[88vw] bg-white/70 backdrop-blur-[40px] border-l border-white/60 z-[130] shadow-[-20px_0_50px_rgba(0,0,0,0.1)] flex flex-col justify-between overflow-y-auto pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)] transition-transform duration-300"
       >
         <div className="p-5">
