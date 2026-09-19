@@ -5,6 +5,16 @@ const openPage = async (page: Parameters<typeof test>[0]['page']) => {
   await expect(page.locator('#main-content')).toBeVisible();
 };
 
+test('footer draft legal actions meet the 44px touch target', async ({ page }) => {
+  await openPage(page);
+  await page.locator('footer').scrollIntoViewIfNeeded();
+  const heights = await page.locator('footer button').filter({ hasText: /draft, review required/i }).evaluateAll((buttons) =>
+    buttons.map((button) => button.getBoundingClientRect().height),
+  );
+  expect(heights).toHaveLength(3);
+  expect(Math.min(...heights)).toBeGreaterThanOrEqual(44);
+});
+
 test('navbar logo is keyboard accessible as Back to top', async ({ page }) => {
   await openPage(page);
   const logo = page.getByRole('button', { name: 'Back to top' });

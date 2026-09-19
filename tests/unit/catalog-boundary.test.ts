@@ -157,6 +157,11 @@ describe('approved public catalog', () => {
     }
   });
 
+  it('keeps draft legal actions at accessible touch height', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/Footer.tsx'), 'utf8');
+    expect(source.match(/min-h-11 px-2 py-2 text-center/g)).toHaveLength(3);
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

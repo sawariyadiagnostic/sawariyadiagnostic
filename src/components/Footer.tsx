@@ -151,19 +151,19 @@ export function Footer() {
             <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
               <button 
                 onClick={() => setActiveModal('privacy')}
-                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
                 Privacy Policy — draft, review required
               </button>
               <button 
                 onClick={() => setActiveModal('terms')}
-                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
                 Terms & Patient Rights — draft, review required
               </button>
               <button 
                 onClick={() => setActiveModal('charter')}
-                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer"
+                className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
                 Quality Charter & Charity Camps — draft, review required
               </button>
