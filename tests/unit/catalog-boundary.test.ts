@@ -136,6 +136,14 @@ describe('approved public catalog', () => {
     expect(source).toContain('window.removeEventListener');
   });
 
+  it('keeps the navbar logo keyboard accessible as Back to top', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/layout/Navbar.tsx'), 'utf8');
+    expect(source).toContain('<button');
+    expect(source).toContain('type="button"');
+    expect(source).toContain('aria-label="Back to top"');
+    expect(source).toContain("window.scrollTo({ top: 0, behavior: 'smooth' })");
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

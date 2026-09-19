@@ -54,12 +54,14 @@ export function Navbar({
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Official Typography Logo */}
-          <div
+          <button
+            type="button"
+            aria-label="Back to top"
             className="cursor-pointer group flex-shrink-0 flex items-center select-none"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <Logo variant="horizontal" size="sm" showTagline={true} />
-          </div>
+          </button>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center space-x-1 bg-white/40 p-1 rounded-full border border-white/80 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.04)]">

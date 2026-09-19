@@ -5,6 +5,14 @@ const openPage = async (page: Parameters<typeof test>[0]['page']) => {
   await expect(page.locator('#main-content')).toBeVisible();
 };
 
+test('navbar logo is keyboard accessible as Back to top', async ({ page }) => {
+  await openPage(page);
+  const logo = page.getByRole('button', { name: 'Back to top' });
+  await expect(logo).toBeVisible();
+  await logo.focus();
+  await expect(logo).toBeFocused();
+});
+
 test('mobile navigation is a dialog and closes with Escape', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openPage(page);
