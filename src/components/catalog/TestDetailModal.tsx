@@ -42,10 +42,14 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
       )
     : [];
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const url = `${window.location.origin}/#/${isPackage ? 'package' : 'test'}/${item.id}`;
-    navigator.clipboard.writeText(url);
-    toast.success('Canonical link copied to clipboard!');
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success('Canonical link copied to clipboard!');
+    } catch {
+      toast.error('Could not copy the link. Please copy the page URL manually.');
+    }
   };
 
   const schemaJson = {

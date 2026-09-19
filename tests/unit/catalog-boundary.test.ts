@@ -112,6 +112,13 @@ describe('approved public catalog', () => {
     expect(source).toContain('onClick={(e) => { e.stopPropagation(); handleCardClick(); }}');
   });
 
+  it('reports clipboard share success and failure honestly', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
+    expect(source).toContain('const handleShare = async () =>');
+    expect(source).toContain('await navigator.clipboard.writeText(url)');
+    expect(source).toContain("toast.error('Could not copy the link. Please copy the page URL manually.')");
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');
