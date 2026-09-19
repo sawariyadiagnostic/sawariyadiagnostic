@@ -1,9 +1,9 @@
 import Fuse from 'fuse.js';
-import type { MedicalTest, HealthPackage } from '@/data/publishedCatalog';
+import type { MedicalTest } from '@/data/publishedCatalog';
 
 export interface SearchableItem {
   id: string;
-  type: 'test' | 'package';
+  type: 'test';
   name: string;
   category: string;
   price: number;
@@ -13,33 +13,12 @@ export interface SearchableItem {
   symptoms?: string[];
   homeCollection: boolean;
   popular?: boolean;
-  // Enriched fields for detail modal
   specimen?: string;
   method?: string;
   preparation?: string;
   turnaround?: string;
 }
 
-// Map of common symptoms/conditions to diagnostic tests
-const SYMPTOM_MAP: Record<string, string[]> = {
- fatigue: ['cbc', 'vitamin-d', 'vitamin-b12', 'thyroid', 'ferritin', 'iron'],
- fever: ['cbc', 'esr', 'crp-quant', 'urine-analysis'],
- sugar: ['hba1c', 'diabetes'],
- diabetes: ['hba1c', 'sdl-1-3'],
- thyroid: ['thyroid', 'free-thyroid', 'sdl-1-3', 'sdl-1-2'],
- cholesterol: ['lipid', 'sdl-1-3', 'sdl-1-1'],
- heart: ['lipid', 'troponin-i', 'troponin-t', 'ck-mb'],
- joint: ['ra-quant', 'crp-quant', 'esr', 'vitamin-d', 'arthritis-immunology'],
- hairfall: ['ferritin', 'iron', 'thyroid', 'vitamin-d', 'vitamin-b12', 'testo-total'],
- pregnancy: ['beta-hcg', 'fsh', 'lh', 'prl', 'female-hormone'],
- liver: ['liver', 'sdl-1-3', 'sdl-1-1', 'sdl-1-2'],
- kidney: ['kidney', 'sdl-1-3', 'sdl-1-1', 'sdl-1-2', 'urine-analysis'],
- allergy: ['ige', 'cbc'],
- weakness: ['vitamin-d', 'vitamin-b12', 'cbc', 'iron', 'ferritin'],
- pcos: ['fsh', 'lh', 'testo-total', 'prl', 'amh', 'female-hormone'],
- fertility: ['semen-analysis', 'amh', 'fsh', 'lh', 'prl', 'testo-total'],
-};
-// Update symptom map to use published catalog stable_ids
 const UPDATED_SYMPTOM_MAP: Record<string, string[]> = {
   fatigue: ['WEB-001', 'WEB-064', 'WEB-065', 'WEB-050', 'WEB-043', 'WEB-041'],
   fever: ['WEB-001', 'WEB-007', 'WEB-066', 'WEB-039'],
@@ -59,94 +38,50 @@ const UPDATED_SYMPTOM_MAP: Record<string, string[]> = {
   fertility: ['WEB-035', 'WEB-060', 'WEB-055', 'WEB-056', 'WEB-057', 'WEB-058'],
 };
 
-// Update symptom map to use published catalog stable_ids
-export function buildSearchIndex(tests: MedicalTest[], packages: HealthPackage[]): SearchableItem[] {
-  const items: SearchableItem[] = [];
-
-  // Add tests
-    for (const t of tests) {
-      // Find matching symptoms
-      const symptoms: string[] = [];
-      for (const [sym, testIds] of Object.entries(UPDATED_SYMPTOM_MAP)) {
-        if (testIds.includes(t.id) || t.description?.toLowerCase().includes(sym) || t.name.toLowerCase().includes(sym)) {
-          symptoms.push(sym);
-        }
-      }
-
-      items.push({
-            id: t.id,
-            type: 'test',
-            name: t.name,
-            category: t.category,
-            price: t.price,
-            originalPrice: t.price,
-            description: t.description,
-            parameters: t.parameters || [],
-            symptoms,
-            homeCollection: false,
-            popular: t.popular,
-            specimen: t.specimen,
-            method: t.method,
-            preparation: t.preparation,
-            turnaround: t.turnaround
-          });
-  }
-
-  // Add packages
-  for (const p of packages) {
-    items.push({
-      id: p.id,
-      type: 'package',
-      name: p.name,
-      category: 'package',
-      price: p.price,
-      originalPrice: p.price,
-      description: p.description,
-      parameters: p.testsIncluded,
-      symptoms: ['full body', 'checkup', 'preventive', 'wellness'],
-      homeCollection: false,
-      popular: p.recommended
-    });
-  }
-
-  return items;
+export function buildSearchIndex(tests: MedicalTest[]): SearchableItem[] {
+  return tests.map((test) => {
+    const symptoms = Object.entries(UPDATED_SYMPTOM_MAP)
+      .filter(([symptom, ids]) => ids.includes(test.id) || test.description.toLowerCase().includes(symptom) || test.name.toLowerCase().includes(symptom))
+      .map(([symptom]) => symptom);
+    return {
+      id: test.id,
+      type: 'test',
+      name: test.name,
+      category: test.category,
+      price: test.price,
+      originalPrice: test.price,
+      description: test.description,
+      parameters: test.parameters || [],
+      symptoms,
+      homeCollection: test.homeCollection,
+      popular: test.popular,
+      specimen: test.specimen,
+      method: test.method,
+      preparation: test.preparation,
+      turnaround: test.turnaround,
+    };
+  });
 }
 
 export function createSearchEngine(items: SearchableItem[]) {
-  const options = {
+  const fuse = new Fuse(items, {
     keys: [
       { name: 'name', weight: 0.4 },
       { name: 'parameters', weight: 0.25 },
       { name: 'symptoms', weight: 0.2 },
       { name: 'category', weight: 0.1 },
-      { name: 'description', weight: 0.05 }
+      { name: 'description', weight: 0.05 },
     ],
-    threshold: 0.35, // Fuzzy matching tolerance
+    threshold: 0.35,
     ignoreLocation: true,
-    minMatchCharLength: 2
-  };
-
-  const fuse = new Fuse(items, options);
+    minMatchCharLength: 2,
+  });
 
   return {
-    search: (query: string, categoryFilter?: string) => {
-      let results = items;
-
-      if (query && query.trim().length > 0) {
-        results = fuse.search(query.trim()).map((r) => r.item);
-      }
-
-      if (categoryFilter && categoryFilter !== 'all') {
-        if (categoryFilter === 'packages') {
-          results = results.filter((i) => i.type === 'package');
-        } else if (categoryFilter === 'tests') {
-          results = results.filter((i) => i.type === 'test');
-        } else {
-          results = results.filter((i) => i.category === categoryFilter);
-        }
-      }
-
+    search: (query: string, categoryFilter = 'all') => {
+      let results = query.trim() ? fuse.search(query.trim()).map((result) => result.item) : items;
+      if (categoryFilter !== 'all') results = results.filter((item) => item.category === categoryFilter);
       return results;
-    }
+    },
   };
 }

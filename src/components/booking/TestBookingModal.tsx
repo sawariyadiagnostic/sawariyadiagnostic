@@ -9,7 +9,6 @@ interface TestBookingModalProps {
   testName: string;
   price: number;
   originalPrice?: number;
-  isPackage?: boolean;
   trigger?: React.ReactNode;
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -19,7 +18,6 @@ export function TestBookingModal({
   testName,
   price,
   originalPrice,
-  isPackage,
   trigger,
   isOpen: externalOpen,
   onOpenChange: externalOnOpenChange,
@@ -35,7 +33,7 @@ export function TestBookingModal({
       <DialogContent className="w-[calc(100vw-32px)] sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[28px] sm:rounded-[32px] mx-auto">
         <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-4 sm:p-5 text-white">
           <span className="text-[10px] font-bold uppercase tracking-wider text-blue-100 bg-white/10 px-2 py-0.5 rounded-full inline-block mb-1">
-            {isPackage ? 'Health Package' : 'Diagnostic Test'}
+            Diagnostic Test
           </span>
           <div className="flex items-start justify-between gap-3">
             <DialogTitle className="text-base sm:text-xl font-bold text-white tracking-tight leading-snug">{testName}</DialogTitle>

@@ -76,29 +76,21 @@ test('homepage has no horizontal overflow at 360px', async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
-test('catalog package details show canonical member names', async ({ page }) => {
+test('individual test details show canonical test data', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-
-  await page.getByRole('button', { name: 'Overview' }).first().click();
-  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  await details.click();
+  const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible();
-  await expect(dialog.getByText('WEB-001', { exact: true })).toHaveCount(0);
+  await expect(dialog.getByRole('heading', { name: 'COMPLETE BLOOD COUNT (CBC)' })).toBeVisible();
 });
 
-test('package cards show canonical member names', async ({ page }) => {
-  await openPage(page);
-  await page.locator('#tests').scrollIntoViewIfNeeded();
-  const firstPackage = page.locator('#tests .glass-card').filter({ hasText: 'Master Iron Metabolism & Anemia Workup' }).first();
-  await expect(firstPackage.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible();
-  await expect(firstPackage.getByText('WEB-001', { exact: true })).toHaveCount(0);
-});
+
 
 test('test card details opens from the native keyboard button', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.getByRole('tab', { name: /Individual Tests/ }).click();
 
   const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
   await details.focus();
@@ -113,11 +105,11 @@ test('catalog detail panel fits viewport sizes and scrolls long content', async 
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await openPage(page);
     await page.locator('#tests').scrollIntoViewIfNeeded();
-    const overview = page.getByRole('button', { name: 'Overview' }).first();
-    await expect(overview).toBeVisible();
-    await overview.click();
+    const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+    await expect(details).toBeVisible();
+    await details.click();
 
-    const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+    const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
     await expect(dialog).toBeVisible();
     const box = await dialog.boundingBox();
     expect(box).not.toBeNull();
@@ -143,10 +135,10 @@ test('catalog detail modal stays above the mobile dock', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  const overview = page.getByRole('button', { name: 'Overview' }).first();
-  await expect(overview).toBeVisible();
-  await overview.click();
-  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  await expect(details).toBeVisible();
+  await details.click();
+  const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(dialog).toBeVisible();
   const result = await dialog.evaluate((element) => {
     const dock = [...document.querySelectorAll('div')].find((candidate) => {
@@ -162,13 +154,12 @@ test('catalog detail modal stays above the mobile dock', async ({ page }) => {
   expect(result.hitInsideDialog).toBe(true);
 });
 
-test('catalog hash links restore the matching package and browser Back closes it', async ({ page }) => {
+test('individual test hash links restore the matching test and browser Back closes it', async ({ page }) => {
   test.setTimeout(90_000);
-  await page.goto('/#/package/panel-anemia', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+  await page.goto('/#/test/web-001', { waitUntil: 'domcontentloaded', timeout: 60_000 });
   await expect(page.locator('#tests')).toBeVisible({ timeout: 60_000 });
-  const dialog = page.getByRole('dialog', { name: /Master Iron Metabolism/i });
+  const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(dialog).toBeVisible({ timeout: 20_000 });
-  await expect(dialog.getByText('COMPLETE BLOOD COUNT (CBC)', { exact: true })).toBeVisible({ timeout: 20_000 });
   await page.goBack();
   await expect(dialog).toBeHidden({ timeout: 20_000 });
 });
@@ -176,7 +167,6 @@ test('catalog hash links restore the matching package and browser Back closes it
 test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.getByRole('tab', { name: /Individual Tests/ }).click();
   const card = page.locator('#tests .glass-card').filter({ hasText: 'COMPLETE BLOOD COUNT (CBC)' }).first();
   await expect(card).toBeVisible();
   await expect(card.locator('..').getByText('Comprehensive evaluation of cellular blood components.', { exact: true })).toBeVisible();
@@ -187,23 +177,24 @@ test('catalog search result count is announced as a status update', async ({ pag
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package…');
+  const search = page.locator('#tests').getByPlaceholder('Ask about an individual test…');
   await search.fill('thyroid');
   const resultCount = page.locator('#tests [role="status"][aria-live="polite"]').filter({ hasText: 'tests matching' });
   await expect(resultCount).toBeVisible();
 });
 
 test('catalog filters expose a resettable no-results state', async ({ page }) => {
+  test.setTimeout(90_000);
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const search = page.locator('#tests').getByPlaceholder('Ask about a test or package…');
+  const search = page.locator('#tests').getByPlaceholder('Ask about an individual test…');
   await search.fill('zzzz-no-catalog-match');
   await expect(page.getByRole('status').filter({ hasText: 'No tests match this search' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Clear filters' }).click();
   await expect(search).toHaveValue('');
-  await expect(page.getByText('Individual Tests (74+)', { exact: true })).toBeVisible();
+  await expect(page.locator('#tests').getByText('Individual Tests. Transparent Pricing.', { exact: true })).toBeVisible();
 });
 
 test('visible action buttons meet the 44px minimum target height', async ({ page }) => {

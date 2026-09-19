@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
 import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
-import { healthPackages, medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
+import { medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 import { formatInr } from '../../src/lib/utils';
@@ -11,7 +11,6 @@ import { formatInr } from '../../src/lib/utils';
 const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
 
 const uniqueIds = (items: { id: string }[]) => new Set(items.map((item) => item.id));
-const publishedTestIds = new Set(medicalTests.map((test) => test.id.toUpperCase()));
 const runtimeSource = (root: string): string => {
   const entries = readdirSync(resolve(process.cwd(), root), { withFileTypes: true });
   return entries.map((entry) => {
@@ -26,7 +25,7 @@ describe('approved public catalog', () => {
     expect(publishedCatalogManifest.publicationStatus).toBe('APPROVED');
     expect(publishedCatalogManifest.publicationMode).toBe('manual_exception');
     expect(medicalTests).toHaveLength(74);
-    expect(healthPackages).toHaveLength(17);
+    expect(publishedCatalogManifest.packages).toBe(0);
     expect(JSON.stringify(publishedCatalogManifest)).not.toMatch(/provenance|source_file|b2b|wholesale|floor|margin|profit|review_ledgers|original_text/i);
   });
 
@@ -38,10 +37,11 @@ describe('approved public catalog', () => {
     expect(medicalTests.find((test) => test.id === 'web-074')?.description).toBe('Laboratory measurement for MALARIA PARASITE ANTIGEN; see the specimen, method, preparation, and parameters below.');
   });
 
-  it('renders the approved catalog instead of the empty-state gate', () => {
-    expect(visitorSource).not.toContain('The public catalog is being prepared');
-    expect(visitorSource).toContain('Health Packages ({packages.length})');
-    expect(visitorSource).toContain('Individual Tests ({tests.length}+)');
+  it('renders the approved individual-test catalog only', () => {
+    expect(visitorSource).not.toContain('Health Packages');
+    expect(visitorSource).toContain('Individual Tests. Transparent Pricing.');
+    expect(visitorSource).toContain('Diagnostic Test Catalog');
+    expect(visitorSource).not.toContain('packages.length');
     expect(visitorSource).not.toContain('Free Doorstep Home Sample');
     expect(visitorSource).not.toContain('Save {discountPercent}%');
   });
@@ -51,21 +51,16 @@ describe('approved public catalog', () => {
     expect(visitorSource).not.toContain('rel="noreferrer"');
   });
 
-  it('keeps test and package identifiers unique', () => {
+  it('keeps individual test identifiers unique', () => {
     expect(uniqueIds(medicalTests).size).toBe(medicalTests.length);
-    expect(uniqueIds(healthPackages).size).toBe(healthPackages.length);
   });
 
-  it('provides resettable accessible empty states for filtered catalog results', () => {
-    expect(visitorSource).toContain('No packages match this search');
+  it('provides a resettable accessible empty state for filtered tests', () => {
     expect(visitorSource).toContain('No tests match this search');
     expect(visitorSource).toContain('aria-live="polite"');
-    expect(visitorSource).toContain('clearCatalogFilters');
+    expect(visitorSource).toContain('clearFilters');
   });
 
-  it('renders canonical names on visible package cards', () => {
-    expect(visitorSource).toContain('tests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId');
-  });
 
   it('keeps dialog layers above the mobile dock', () => {
     const dialogSource = readFileSync(resolve(process.cwd(), 'src/components/ui/dialog.tsx'), 'utf8');
@@ -73,8 +68,8 @@ describe('approved public catalog', () => {
     expect(dialogSource).toContain('top-[50%] z-[110]');
   });
 
-  it('keeps package members resolvable to published tests', () => {
-    expect(healthPackages.flatMap((pkg) => pkg.testsIncluded).every((memberId) => publishedTestIds.has(memberId.toUpperCase()))).toBe(true);
+  it('keeps individual tests resolvable for public detail views', () => {
+    expect(medicalTests.every((test) => test.id && test.name && test.price >= 0)).toBe(true);
   });
 
   it('formats INR prices consistently with Indian grouping', () => {
@@ -82,22 +77,18 @@ describe('approved public catalog', () => {
     expect(formatInr(4299)).toBe('₹4,299');
   });
 
-  it('restores and owns catalog detail hash state', () => {
+  it('restores and owns individual test hash state', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
-    expect(source).toContain("/^#\\/(test|package)\\/([^/]+)$/");
+    expect(source).toContain("/^#\\/test\\/([^/]+)$/");
     expect(source).toContain("window.history.pushState({ catalogDetail: true }");
     expect(source).toContain('window.history.state?.catalogDetail');
-    expect(source).toContain("window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)");
   });
 
   it('gives both catalog search inputs stable form metadata', () => {
     const heroSource = readFileSync(resolve(process.cwd(), 'src/components/Hero.tsx'), 'utf8');
     const catalogSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
-    for (const source of [heroSource, catalogSource]) {
-      expect(source).toContain('name="catalog-search"');
-      expect(source).toContain('autoComplete="off"');
-      expect(source).toContain('placeholder="Ask about a test or package…"');
-    }
+    expect(heroSource).toContain('placeholder="Ask about a test or package…"');
+    expect(catalogSource).toContain('placeholder="Ask about an individual test…"');
   });
 
   it('announces catalog search result counts to assistive technology', () => {
@@ -169,20 +160,11 @@ describe('approved public catalog', () => {
     expect(bookingModalSource).toContain('originalPrice !== undefined && originalPrice > price');
   });
 
-  it('renders canonical names for package member IDs', () => {
-    const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
-    expect(detailModalSource).toContain('medicalTests.find');
-    expect(detailModalSource).toContain('?? memberId');
-  });
 
   it('keeps listed values at or above customer prices', () => {
     expect(medicalTests.every((test) => test.originalPrice === undefined || test.originalPrice >= test.price)).toBe(true);
-    expect(healthPackages.every((pkg) => pkg.originalPrice === undefined || pkg.originalPrice >= pkg.price)).toBe(true);
   });
 
-  it('does not expose insurer-branded packages', () => {
-    expect(healthPackages.some((pkg) => /starhealth|niva\s*bupa/i.test(pkg.name))).toBe(false);
-  });
 });
 
 describe('public site configuration', () => {

@@ -1,24 +1,31 @@
 export interface MedicalTest {
-  id: string; name: string; description: string; price: number; category: 'blood' | 'hormone' | 'specialized' | 'package'; parameters?: string[]; homeCollection: boolean; popular?: boolean; specimen?: string; method?: string; preparation?: string; turnaround?: string; originalPrice?: number;
-}
-
-export interface HealthPackage {
-  id: string; name: string; description: string; price: number; originalPrice?: number; testsIncluded: string[]; recommended: boolean; listedValue?: number;
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: 'blood' | 'hormone' | 'specialized';
+  parameters?: string[];
+  homeCollection: boolean;
+  popular?: boolean;
+  specimen?: string;
+  method?: string;
+  preparation?: string;
+  turnaround?: string;
+  originalPrice?: number;
 }
 
 export const categories = [
   { id: 'all', name: 'All Tests' },
   { id: 'specialized', name: 'Specialized Tests' },
-  { id: 'package', name: 'Health Packages' },
 ];
 
 export const publishedCatalogManifest = {
   publicationStatus: 'APPROVED' as const,
   publicationMode: 'manual_exception' as const,
-  manifestVersion: "MANUAL-PUBLICATION-EXCEPTION-2026-09-16",
-  manifestHash: "44d34634c810206642c2a390b171147e683ee6956f8e06829acf2dd9f2594c29:18bdc628bec8176769a87970021501dfa3761b5e6bd645fdb7dab557c685b124",
+  manifestVersion: "MANUAL-PUBLICATION-EXCEPTION-2026-09-19-TESTS-ONLY",
+  manifestHash: "5a07c4c1c6ebb72dddca68238235616241ce7c6df2136dd9bb2af1e8b8a4a4f3",
   tests: 74,
-  packages: 17,
+  packages: 0,
   blockersPreserved: 216,
   commercialRisksPreserved: 127,
   forbiddenFieldsPresent: false,
@@ -1063,160 +1070,4 @@ export const medicalTests: MedicalTest[] = [
   },
 ];
 
-export const healthPackages: HealthPackage[] = [
-  {
-    id: "panel-anemia",
-    name: "Master Iron Metabolism & Anemia Workup",
-    description: "Published package listing with 5 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 1499,
-    originalPrice: 1499,
-    testsIncluded: ["WEB-001", "WEB-041", "WEB-042", "WEB-043", "WEB-065"],
-    recommended: false,
-  },
-  {
-    id: "panel-autoimmune-arthritis-mega",
-    name: "Master Rheumatology & Autoimmune Joint Battery (16 Parameters)",
-    description: "Published package listing with 15 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 4299,
-    originalPrice: 4299,
-    testsIncluded: ["WEB-001", "WEB-007", "WEB-019", "WEB-020", "WEB-026", "WEB-027", "WEB-028", "WEB-049", "WEB-064", "WEB-065", "WEB-066", "WEB-067", "WEB-068", "WEB-069", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-bone",
-    name: "Senior Citizen Bone, Joint & Vitality Screen",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 2199,
-    originalPrice: 2199,
-    testsIncluded: ["WEB-026", "WEB-027", "WEB-028", "WEB-064", "WEB-065", "WEB-066", "WEB-067"],
-    recommended: false,
-  },
-  {
-    id: "panel-cardiac-thrombosis-mega",
-    name: "Advanced Cardiovascular, Lipoprotein & Thrombosis Risk Panel (18 Parameters)",
-    description: "Published package listing with 18 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 4799,
-    originalPrice: 4799,
-    testsIncluded: ["WEB-001", "WEB-011", "WEB-025", "WEB-027", "WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036", "WEB-037", "WEB-040", "WEB-044", "WEB-045", "WEB-046", "WEB-049", "WEB-066"],
-    recommended: false,
-  },
-  {
-    id: "panel-diabetes",
-    name: "Master Diabetic & Glycemic Control Audit",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 799,
-    originalPrice: 799,
-    testsIncluded: ["WEB-025", "WEB-029", "WEB-030", "WEB-034", "WEB-037", "WEB-038", "WEB-040"],
-    recommended: false,
-  },
-  {
-    id: "panel-diabetic-end-organ-mega",
-    name: "Diabetic End-Organ & Microvascular Surveillance (20 Parameters)",
-    description: "Published package listing with 20 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 2949,
-    originalPrice: 2949,
-    testsIncluded: ["WEB-001", "WEB-015", "WEB-016", "WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-035", "WEB-037", "WEB-038", "WEB-040", "WEB-049", "WEB-065", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-executive",
-    name: "Executive 360° Master Wellness Checkup",
-    description: "Published package listing with 22 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 3399,
-    originalPrice: 3399,
-    testsIncluded: ["WEB-001", "WEB-012", "WEB-013", "WEB-015", "WEB-016", "WEB-017", "WEB-019", "WEB-020", "WEB-023", "WEB-025", "WEB-026", "WEB-027", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-037", "WEB-040", "WEB-050", "WEB-064", "WEB-065"],
-    recommended: false,
-  },
-  {
-    id: "panel-fever",
-    name: "Acute Monsoon & Tropical Fever Triage",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 2099,
-    originalPrice: 2099,
-    testsIncluded: ["WEB-001", "WEB-066", "WEB-070", "WEB-071", "WEB-072", "WEB-073", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-geriatric-longevity-mega",
-    name: "Master Senior Citizen 60+ Longevity & Vitality Audit (34 Parameters)",
-    description: "Published package listing with 30 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 5199,
-    originalPrice: 5199,
-    testsIncluded: ["WEB-001", "WEB-007", "WEB-012", "WEB-015", "WEB-016", "WEB-017", "WEB-019", "WEB-020", "WEB-023", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-034", "WEB-035", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-049", "WEB-050", "WEB-064", "WEB-065", "WEB-066", "WEB-067", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-kft",
-    name: "Comprehensive Renal & Metabolic Profile (KFT-7)",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 649,
-    originalPrice: 649,
-    testsIncluded: ["WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029"],
-    recommended: false,
-  },
-  {
-    id: "panel-lft",
-    name: "Complete Liver Health Spectrum (LFT-11)",
-    description: "Published package listing with 11 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 1049,
-    originalPrice: 1049,
-    testsIncluded: ["WEB-012", "WEB-013", "WEB-014", "WEB-015", "WEB-016", "WEB-017", "WEB-018", "WEB-019", "WEB-020", "WEB-021", "WEB-022"],
-    recommended: false,
-  },
-  {
-    id: "panel-lipid",
-    name: "Advanced Atherosclerotic Lipid Profile (LIPID-7)",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 749,
-    originalPrice: 749,
-    testsIncluded: ["WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036"],
-    recommended: false,
-  },
-  {
-    id: "panel-pcos",
-    name: "Women's Hormonal Balance & PCOS / Fertility Screen",
-    description: "Published package listing with 7 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 2999,
-    originalPrice: 2999,
-    testsIncluded: ["WEB-050", "WEB-055", "WEB-056", "WEB-057", "WEB-058", "WEB-060", "WEB-061"],
-    recommended: false,
-  },
-  {
-    id: "panel-platinum-360-mega",
-    name: "Platinum 360° Comprehensive Full Body Checkup (42 Parameters)",
-    description: "Published package listing with 42 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 6999,
-    originalPrice: 6999,
-    testsIncluded: ["WEB-001", "WEB-007", "WEB-012", "WEB-013", "WEB-014", "WEB-015", "WEB-016", "WEB-017", "WEB-018", "WEB-019", "WEB-020", "WEB-021", "WEB-022", "WEB-023", "WEB-024", "WEB-025", "WEB-026", "WEB-027", "WEB-028", "WEB-029", "WEB-030", "WEB-031", "WEB-032", "WEB-033", "WEB-034", "WEB-035", "WEB-036", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-043", "WEB-047", "WEB-048", "WEB-049", "WEB-050", "WEB-053", "WEB-054", "WEB-064", "WEB-065", "WEB-066", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-preoperative-surgical",
-    name: "Pre-Operative Anesthetic & Surgical Clearance Battery (20 Parameters)",
-    description: "Published package listing with 18 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 2449,
-    originalPrice: 2449,
-    testsIncluded: ["WEB-001", "WEB-007", "WEB-008", "WEB-009", "WEB-010", "WEB-011", "WEB-012", "WEB-015", "WEB-016", "WEB-020", "WEB-023", "WEB-025", "WEB-027", "WEB-037", "WEB-039", "WEB-040", "WEB-066", "WEB-074"],
-    recommended: false,
-  },
-  {
-    id: "panel-thyroid",
-    name: "Complete Thyroid Spectrum Profile",
-    description: "Published package listing with 5 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 699,
-    originalPrice: 699,
-    testsIncluded: ["WEB-050", "WEB-051", "WEB-052", "WEB-053", "WEB-054"],
-    recommended: false,
-  },
-  {
-    id: "panel-women-wellness-mega",
-    name: "Master Women's Hormonal, Ovarian Reserve & Bone Health Screen (22 Parameters)",
-    description: "Published package listing with 22 included test entries. See the included tests below; confirm current scope and availability with the lab.",
-    price: 7049,
-    originalPrice: 7049,
-    testsIncluded: ["WEB-001", "WEB-027", "WEB-028", "WEB-037", "WEB-040", "WEB-041", "WEB-042", "WEB-043", "WEB-050", "WEB-053", "WEB-054", "WEB-055", "WEB-056", "WEB-057", "WEB-058", "WEB-059", "WEB-060", "WEB-061", "WEB-062", "WEB-064", "WEB-065", "WEB-074"],
-    recommended: false,
-  },
-];
-
-export { medicalTests as publishedTests, healthPackages as publishedPackages };
+export { medicalTests as publishedTests };

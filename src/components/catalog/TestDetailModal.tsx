@@ -14,14 +14,14 @@ import {
   ArrowLeft,
   Stethoscope
 } from 'lucide-react';
-import { medicalTests, type MedicalTest, type HealthPackage } from '@/data/publishedCatalog';
+import { medicalTests, type MedicalTest } from '@/data/publishedCatalog';
 import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { formatInr } from '@/lib/utils';
 import { toast } from 'sonner';
 
 interface TestDetailModalProps {
-  item: MedicalTest | HealthPackage | null;
+  item: MedicalTest | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -31,19 +31,12 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
   if (!item) return null;
 
-  const isPackage = 'testsIncluded' in item;
   const discountPercent = item.originalPrice > item.price
     ? Math.round((1 - item.price / item.originalPrice) * 100)
     : null;
 
-  const packageMemberNames = isPackage
-    ? (item as HealthPackage).testsIncluded.map((memberId) =>
-        medicalTests.find((test) => test.id.toUpperCase() === memberId.toUpperCase())?.name ?? memberId,
-      )
-    : [];
-
   const handleShare = async () => {
-    const url = `${window.location.origin}/#/${isPackage ? 'package' : 'test'}/${item.id}`;
+    const url = `${window.location.origin}/#/test/${item.id}`;
     try {
       await navigator.clipboard.writeText(url);
       toast.success('Canonical link copied to clipboard!');
@@ -54,7 +47,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
   const schemaJson = {
     '@context': 'https://schema.org',
-    '@type': isPackage ? 'Product' : 'MedicalTest',
+    '@type': 'MedicalTest',
     name: item.name,
     description: item.description,
     offers: { '@type': 'Offer', price: item.price, priceCurrency: 'INR' },
@@ -66,7 +59,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
         <SEOHead
           title={`${item.name} - Price ${formatInr(item.price)} | Sawariya Diagnostic`}
           description={item.description || `Book ${item.name} test at Sawariya Diagnostic Lab with free home sample collection.`}
-          canonicalUrl={`https://sawariyadiagnostic.github.io/sawariyadiagnostic/${isPackage ? 'package' : 'test'}/${item.id}.html`}
+          canonicalUrl={`https://sawariyadiagnostic.github.io/sawariyadiagnostic/test/${item.id}.html`}
           jsonLd={schemaJson}
         />
       )}
@@ -78,7 +71,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               <div>
                 <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200 mb-2">
                   <TestTube className="w-3.5 h-3.5" />
-                  <span>{isPackage ? 'PREVENTIVE HEALTH PACKAGE' : `${(item as MedicalTest).category?.toUpperCase()} PATHOLOGY`}</span>
+                  <span>{item.category?.toUpperCase()} PATHOLOGY</span>
                 </div>
                 <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
                   {item.name}
@@ -121,21 +114,21 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                                           <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
                                           <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
                                                                           <Home className="w-3.5 h-3.5 text-[#C62828]" />
-                                                                          <span>{!isPackage && (item as MedicalTest).specimen ? (item as MedicalTest).specimen : 'Collection availability • Confirm with the lab'}</span>
+                                                                          <span>{item.specimen || 'Collection availability • Confirm with the lab'}</span>
                                                                         </span>
                                         </div>
 
                           <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
                                           <span className="text-[10px] text-slate-400 block font-medium">Methodology:</span>
                                           <span className="font-bold text-slate-800 mt-0.5 block">
-                                                                          {!isPackage && (item as MedicalTest).method ? (item as MedicalTest).method : 'Documented laboratory protocols'}
+                                                                          <span>{item.method || 'Documented laboratory protocols'}</span>
                                                                         </span>
                                         </div>
 
                           <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs col-span-2 sm:col-span-1">
                                           <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
                                           <span className="font-bold text-slate-800 mt-0.5 block">
-                                                                          {!isPackage && (item as MedicalTest).preparation ? (item as MedicalTest).preparation : 'Confirm current preparation with the lab'}
+                                                                          <span>{item.preparation || 'Confirm current preparation with the lab'}</span>
                                                                         </span>
                                         </div>
                         </div>
@@ -143,10 +136,10 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             {/* Parameters or Included Tests */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-2">
               <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider block">
-                {isPackage ? `Tests Included in Package (${(item as HealthPackage).testsIncluded.length})` : 'Diagnostic Parameters Measured:'}
+                {'Diagnostic Parameters Measured:'}
               </span>
               <div className="grid sm:grid-cols-2 gap-2">
-                {(isPackage ? packageMemberNames : ((item as MedicalTest).parameters || [(item as MedicalTest).name])).map((param, i) => (
+                {(item.parameters || [item.name]).map((param, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2 rounded-[12px] border border-slate-100">
                     <Check className="w-3.5 h-3.5 text-green-700 flex-shrink-0" />
                     <span className="font-medium">{param}</span>
@@ -196,7 +189,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
           testName={item.name}
           price={item.price}
           originalPrice={item.originalPrice}
-          isPackage={isPackage}
+
           isOpen={showBooking}
           onOpenChange={(v) => setShowBooking(v)}
         />

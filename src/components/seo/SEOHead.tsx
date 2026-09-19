@@ -12,7 +12,7 @@ interface SEOHeadProps {
 }
 
 const DEFAULT_TITLE = 'Sawariya Diagnostic Lab - Diagnostic Testing & Home Collection';
-const DEFAULT_DESC = 'Diagnostic testing, health packages, home collection availability, and report assistance in Charkhi Dadri.';
+const DEFAULT_DESC = 'Individual diagnostic testing, home collection availability, and report assistance in Charkhi Dadri.';
 const BASE_CANONICAL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/';
 const DEFAULT_OG_IMAGE = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/og-image.png';
 
