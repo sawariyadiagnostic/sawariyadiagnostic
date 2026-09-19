@@ -105,6 +105,13 @@ describe('approved public catalog', () => {
     expect(source).toContain('role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium"');
   });
 
+  it('keeps test cards free of nested interactive semantics', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/ui/TestCard.tsx'), 'utf8');
+    expect(source).not.toContain('role="button"');
+    expect(source).not.toContain('tabIndex={0}');
+    expect(source).toContain('onClick={(e) => { e.stopPropagation(); handleCardClick(); }}');
+  });
+
   it('does not render equal customer and listed prices as discounts', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');

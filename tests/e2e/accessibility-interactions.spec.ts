@@ -65,6 +65,17 @@ test('package cards show canonical member names', async ({ page }) => {
   await expect(firstPackage.getByText('WEB-001', { exact: true })).toHaveCount(0);
 });
 
+test('test card details opens from the native keyboard button', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  await page.getByRole('tab', { name: /Individual Tests/ }).click();
+
+  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  await details.focus();
+  await details.press('Enter');
+  await expect(page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i })).toBeVisible();
+});
+
 test('catalog detail panel fits viewport sizes and scrolls long content', async ({ page }) => {
   test.setTimeout(90_000);
   for (const viewport of [{ width: 360, height: 800 }, { width: 768, height: 900 }, { width: 1440, height: 900 }]) {
@@ -136,7 +147,7 @@ test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
   await page.getByRole('tab', { name: /Individual Tests/ }).click();
-  const card = page.locator('#tests').getByRole('button', { name: /View details for COMPLETE BLOOD COUNT/ }).first();
+  const card = page.locator('#tests .glass-card').filter({ hasText: 'COMPLETE BLOOD COUNT (CBC)' }).first();
   await expect(card).toBeVisible();
   await expect(card.locator('..').getByText('Comprehensive evaluation of cellular blood components.', { exact: true })).toBeVisible();
   await expect(card.locator('..').getByText(/Current test details are published/)).toHaveCount(0);

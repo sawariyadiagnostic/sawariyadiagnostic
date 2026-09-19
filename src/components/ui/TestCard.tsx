@@ -55,12 +55,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
   return (
     <>
       <div 
-        onClick={handleCardClick}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
-        aria-label={`View details for ${test.name}`}
-        className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden cursor-pointer"
+        className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden"
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-blue-500/5 group-hover:to-[#FFF9F3]0/5 transition-colors duration-500 pointer-events-none" />
@@ -138,7 +133,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
             <Button 
               variant="outline"
               size="sm"
-              onClick={(e) => { e.stopPropagation(); setShowDetail(true); }}
+              onClick={(e) => { e.stopPropagation(); handleCardClick(); }}
               className="action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
             >
               <Info className="w-3.5 h-3.5 text-[#155E9A] shrink-0" />
