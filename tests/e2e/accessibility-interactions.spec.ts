@@ -83,11 +83,30 @@ test('current terms and patient rights dialog exposes the approved version and s
   await expect(trigger).toBeFocused();
 });
 
+test('current quality charter dialog exposes the approved identifier and source content', async ({ page }) => {
+  await openPage(page);
+  const trigger = page.getByRole('button', { name: 'Quality Charter & Charity Camps — approved legal standard' });
+
+  await trigger.click();
+  const dialog = page.getByRole('dialog', { name: 'Patient Quality & Community Charter' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('status', { name: /QUALITY \x26 COMMUNITY CHARTER — APPROVED; EFFECTIVE OCTOBER 1, 2026/i })).toBeVisible();
+  const charterContent = dialog.locator('pre');
+  await expect(charterContent).toContainText('Document Identifier: SDL-QMS-CC-2026-V2');
+  await expect(charterContent).toContainText('CLINICAL GOVERNANCE & QUALITY CHARTER APPROVAL RECORD');
+  await expect(charterContent).toContainText('Effective Date    : October 1, 2026');
+
+  await page.keyboard.press('Escape');
+
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
 test('remaining legal footer actions identify drafts requiring review', async ({ page }) => {
   await openPage(page);
 
   const legalActions = page.locator('footer button').filter({ hasText: /draft, review required/i });
-  await expect(legalActions).toHaveCount(1);
+  await expect(legalActions).toHaveCount(0);
 });
 
 test('homepage has no horizontal overflow at 360px', async ({ page }) => {

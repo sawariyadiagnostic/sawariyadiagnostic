@@ -10,8 +10,8 @@ describe('approval-gated legal SSG boundary', () => {
     const documents = Object.values(legalDocumentIndex);
 
     expect(documents).toHaveLength(8);
-    expect(filterApprovedLegalMetadata(legalDocumentIndex).map((document) => document.key)).toEqual(['terms']);
-    expect(documents.filter((document) => document.state === 'draft')).toHaveLength(7);
+    expect(filterApprovedLegalMetadata(legalDocumentIndex).map((document) => document.key)).toEqual(['terms', 'patient-rights']);
+    expect(documents.filter((document) => document.state === 'draft')).toHaveLength(6);
   });
 
   it('does not include legal routes or draft prose in the SSG generator', () => {

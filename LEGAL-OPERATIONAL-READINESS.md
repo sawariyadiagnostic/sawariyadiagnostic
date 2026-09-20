@@ -5,7 +5,7 @@ This is an implementation checklist, not legal advice. A qualified India-focused
 The metadata contract in `src/data/legal-document-index.ts` is fail-closed: records remain `draft`,
 version `0.0.0`, with no effective date and pending owner, clinical, and legal approval unless an
 exact supplied document has a complete independent sign-off ledger. The Terms & Patient Rights
-record is the current approved exception. Follow `docs/legal/README.md` and record decisions in
+records are current approved exceptions. Follow `docs/legal/README.md` and record decisions in
 `docs/legal/approval-ledger.md`.
 This contract does not claim compliance or replace professional review.
 

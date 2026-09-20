@@ -165,7 +165,7 @@ export function Footer() {
                 onClick={() => setActiveModal('charter')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
-                Quality Charter & Charity Camps — draft, review required
+                Quality Charter & Charity Camps — approved legal standard
               </button>
             </div>
           </div>

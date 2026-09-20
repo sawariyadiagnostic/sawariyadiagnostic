@@ -2,7 +2,7 @@
 
 This directory defines the metadata boundary for legal and patient-facing notices. It does **not** contain final legal prose and is not legal advice.
 
-The current website privacy modal uses the owner-supplied `docs/legal/privacy-policy.md` text as the operative Privacy & Medical Data Policy (version 2.0-Operative Standard, effective October 1, 2025). The Terms & Patient Rights modal uses the owner-supplied `docs/legal/terms-and-patient-rights.md` text as the approved Version 2.0-Legal Standard, effective October 1, 2026, with the supplied operations, clinical/quality, and legal/regulatory sign-off ledger. The separate Quality & Community Charter and all other records remain draft/review-required until their own wording and approvals are supplied.
+The current website privacy modal uses the owner-supplied `docs/legal/privacy-policy.md` text as the operative Privacy & Medical Data Policy (version 2.0-Operative Standard, effective October 1, 2025). The Terms & Patient Rights modal uses the owner-supplied `docs/legal/terms-and-patient-rights.md` text as the approved Version 2.0-Legal Standard, effective October 1, 2026, with the supplied operations, clinical/quality, and legal/regulatory sign-off ledger. The Quality & Community Charter modal uses the owner-supplied `docs/legal/quality-community-charter.md` text as the approved SDL-QMS-CC-2026-V2 framework, effective October 1, 2026, with the supplied executive, clinical/quality, and legal sign-off ledger. Other records remain draft/review-required until their own wording and approvals are supplied.
 
 ## Fail-closed contract
 
@@ -25,7 +25,8 @@ Every record requires `state`, semantic `version`, nullable `effectiveAt`, and t
 records: owner, clinical, and legal. Each approval requires status, reviewer identity, and review
 time before publication. Records remain `draft`, version `0.0.0`, with no effective date and
 pending approvals until an exact supplied document and independent sign-off ledger authorize a
-specific exception. The Terms & Patient Rights record is the current approved exception.
+specific exception. The Terms & Patient Rights and Quality & Community Charter records are
+current approved exceptions with separate source documents and sign-off ledgers.
 
 ## Review workflow
 

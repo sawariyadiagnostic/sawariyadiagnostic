@@ -20,10 +20,10 @@ describe('legal document publication boundary', () => {
     expect(Object.keys(legalDocumentIndex)).toEqual(LEGAL_DOCUMENT_KEYS);
   });
 
-  it('keeps unapproved documents blocked and the supplied terms record approved', () => {
+  it('keeps unapproved documents blocked and the supplied legal records approved', () => {
     for (const key of LEGAL_DOCUMENT_KEYS) {
       const document = legalDocumentIndex[key];
-      if (key === 'terms') {
+      if (key === 'terms' || key === 'patient-rights') {
         expect(document.state).toBe('published');
         expect(document.version).toBe('2.0.0');
         expect(document.effectiveAt).toBe('2026-10-01');

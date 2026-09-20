@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { privacyPolicyText } from '@/data/privacy-policy';
+import { qualityCommunityCharterText } from '@/data/quality-community-charter';
 import { termsPatientRightsText } from '@/data/terms-patient-rights';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
@@ -29,9 +30,9 @@ const policyCopy = {
   charter: {
     icon: HeartHandshake,
     title: 'Patient Quality & Community Charter',
-    description: 'Sawariya Diagnostic Lab • Charkhi Dadri',
-    status: 'Draft — review required before publication',
-    content: null,
+    description: 'SDL-QMS-CC-2026-V2 • Effective October 1, 2026 • Republic of India',
+    status: 'Quality & Community Charter — approved; effective October 1, 2026',
+    content: qualityCommunityCharterText,
   },
 } as const;
 
@@ -72,25 +73,12 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
           </div>
 
           <div className="min-h-0 overflow-y-auto bg-white/50 p-6 sm:p-8 text-sm leading-relaxed text-slate-600">
-            <div
-              role="status"
-              aria-label={policy.status.toUpperCase()}
-              className={`mb-5 inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] ${policy.content ? 'bg-emerald-100 text-emerald-950' : 'bg-amber-100 text-amber-950'}`}
-            >
+            <div className="mb-5 inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-emerald-950" role="status" aria-label={policy.status.toUpperCase()}>
               {policy.status}
             </div>
-
-            {policy.content ? (
-              <article aria-label={`${policy.title} content`}>
-                <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-700">{policy.content}</pre>
-              </article>
-            ) : (
-              <div className="space-y-4">
-                <p>This document is being prepared for owner, clinical/quality, and qualified legal review.</p>
-                <p>The website does not treat this draft as an operative legal notice, compliance certificate, or complete statement of rights and obligations.</p>
-                <p>For current questions about appointments, reports, services, or patient rights, contact the lab through the published phone or email channels.</p>
-              </div>
-            )}
+            <article aria-label={`${policy.title} content`}>
+              <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-700">{policy.content}</pre>
+            </article>
           </div>
         </DialogContent>
       )}

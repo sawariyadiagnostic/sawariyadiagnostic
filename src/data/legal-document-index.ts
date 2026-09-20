@@ -78,7 +78,11 @@ export const legalDocumentIndex: Record<LegalDocumentKey, LegalDocumentMetadata>
     clinical: 'Consulting Pathologist / Quality Manager',
     legal: 'Legal Counsel & Data Protection Advisor',
   }),
-  'patient-rights': draft('patient-rights', 'Patient rights and responsibilities', ['patient access, communication, consent, correction, and complaint expectations'], ['owner, clinical, and legal review of patient-safety language and operational commitments']),
+  'patient-rights': approved('patient-rights', 'Patient rights and responsibilities', ['patient access, communication, consent, correction, and complaint expectations'], ['owner, clinical, and legal review of patient-safety language and operational commitments'], {
+    owner: 'Managing Director / Operational Lead',
+    clinical: 'Consulting Pathologist / Quality Assurance Lead',
+    legal: 'Legal Counsel & Data Protection Advisor',
+  }),
   'home-collection': draft('home-collection', 'Home collection terms', ['service area, scheduling, preparation, collection logistics, cancellations, and safety instructions'], ['owner, clinical, operations, and legal review of availability, safety, pricing, and responsibility claims']),
   'report-assistance': draft('report-assistance', 'Report assistance notice', ['how to request help understanding a report and the limits of assistance'], ['owner, clinical, and legal review to prevent diagnosis, treatment, or emergency-care claims']),
   accessibility: draft('accessibility', 'Accessibility statement', ['supported access methods, known limitations, feedback, and accommodation contact'], ['owner and legal review of support commitments and accessibility claims against the real service']),

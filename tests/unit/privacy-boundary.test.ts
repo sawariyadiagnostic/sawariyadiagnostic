@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { privacyPolicyText } from '../../src/data/privacy-policy';
+import { qualityCommunityCharterText } from '../../src/data/quality-community-charter';
 import { termsPatientRightsText } from '../../src/data/terms-patient-rights';
 
 const activeSourceFiles = [
@@ -32,6 +33,11 @@ const termsDocument = readFileSync(
   'utf8',
 ).replace(/^<!-- [\s\S]*? -->\s*/u, '');
 
+const charterDocument = readFileSync(
+  resolve(process.cwd(), 'docs/legal/quality-community-charter.md'),
+  'utf8',
+).replace(/^<!-- [\s\S]*? -->\s*/u, '');
+
 describe('privacy and trust boundary', () => {
   it('keeps the supplied privacy policy identical in website docs and runtime copy', () => {
     expect(policyDocument).toBe(privacyPolicyText);
@@ -48,6 +54,13 @@ describe('privacy and trust boundary', () => {
     expect(termsPatientRightsText).toContain('LEGAL AND CLINICAL REVIEW SIGN-OFF LEDGER');
   });
 
+  it('keeps the supplied quality charter identical in website docs and runtime copy', () => {
+    expect(charterDocument).toBe(qualityCommunityCharterText);
+    expect(qualityCommunityCharterText).toContain('Document Identifier: SDL-QMS-CC-2026-V2');
+    expect(qualityCommunityCharterText).toContain('Version: 2.0-Legal Standard');
+    expect(qualityCommunityCharterText).toContain('Effective Date    : October 1, 2026');
+    expect(qualityCommunityCharterText).toContain('CLINICAL GOVERNANCE & QUALITY CHARTER APPROVAL RECORD');
+  });
   it('does not retain the stale browser-visible Web3Forms key', () => {
     expect(readFileSync(resolve(process.cwd(), '.env.example'), 'utf8')).not.toContain(
       'VITE_WEB3FORMS_ACCESS_KEY',
