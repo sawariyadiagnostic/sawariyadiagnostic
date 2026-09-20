@@ -47,7 +47,7 @@ export function TestGuidePage({ guide, language = 'en' }: TestGuidePageProps) {
         <footer className="flex flex-col gap-3 rounded-[24px] bg-[#102A43] p-5 text-white sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="font-bold">{language === 'hi' ? 'अपॉइंटमेंट पूछें' : 'Ask about an appointment'}</h2>
-            <p className="mt-1 text-xs text-blue-100">Availability and collection timing are confirmed separately.</p>
+            <p className="mt-1 text-xs text-blue-100">Home collection: 06:30 AM–08:00 PM. Reports verified within 12 hours.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="outline" className="border-white/30 bg-transparent text-white hover:bg-white/10">

@@ -34,7 +34,7 @@ export function Services() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Diagnostic services listed in the current catalog; confirm scope and availability with the lab.
+            Diagnostic services listed in the current catalog with home collection available 06:30 AM–08:00 PM.
           </p>
         </div>
 

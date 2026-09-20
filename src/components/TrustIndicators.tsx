@@ -9,7 +9,7 @@ export function TrustIndicators() {
       icon: Users,
       value: 'Patient-first',
       label: 'Diagnostic testing',
-      subtext: 'Confirm current service details',
+      subtext: 'Clear service information',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
@@ -18,9 +18,9 @@ export function TrustIndicators() {
     },
     {
       icon: Microscope,
-      value: 'On request',
+      value: 'Available',
       label: 'Test menu',
-      subtext: 'Confirm current scope with the lab',
+      subtext: 'Current test menu',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
@@ -31,7 +31,7 @@ export function TrustIndicators() {
       icon: Clock,
       value: 'Patient-first',
       label: 'Lab & Home Sample',
-      subtext: 'Availability confirmed at booking',
+      subtext: '06:30 AM–08:00 PM',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-green-50 text-green-800 border-green-200/80',
@@ -42,7 +42,7 @@ export function TrustIndicators() {
       icon: Award,
       value: 'Documented',
       label: 'Quality Process',
-      subtext: 'Review procedures available',
+      subtext: 'Reports verified within 12 hours',
       theme: {
         card: 'hover:shadow-[0_12px_32px_rgba(0,0,0,0.06)] bg-white',
         iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
@@ -53,9 +53,9 @@ export function TrustIndicators() {
 
   const certifications = [
     { name: 'Quality process documented', tag: 'bg-green-50 text-[#102A43] border-green-200/90', iconColor: 'text-green-700' },
-    { name: 'Review scope available on request', tag: 'bg-blue-50 text-blue-900 border-blue-200/90', iconColor: 'text-blue-600' },
+    { name: 'Current test menu', tag: 'bg-blue-50 text-blue-900 border-blue-200/90', iconColor: 'text-blue-600' },
     { name: 'Patient information handled carefully', tag: 'bg-blue-50 text-[#102A43] border-blue-200/90', iconColor: 'text-blue-700' },
-    { name: 'Support availability confirmed at booking', tag: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]', iconColor: 'text-[#7A4B2A]' },
+    { name: 'Reports verified within 12 hours', tag: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]', iconColor: 'text-[#7A4B2A]' },
   ];
 
   return (
@@ -106,7 +106,7 @@ export function TrustIndicators() {
             </div>
             <div>
               <h3 className="font-bold text-[#1D1D1F] text-sm sm:text-base tracking-tight">Documented Quality Process</h3>
-              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Review scope and service details are available on request.</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Home collection is available 06:30 AM–08:00 PM.</p>
             </div>
           </div>
           

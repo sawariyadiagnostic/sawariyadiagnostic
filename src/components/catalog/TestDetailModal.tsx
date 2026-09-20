@@ -77,7 +77,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                   {item.name}
                 </DialogTitle>
                 <DialogDescription className="text-xs text-blue-100/90 mt-1">
-                  Documented laboratory protocols • Confirm current scope with the lab
+                  Documented laboratory protocols • Reports verified within 12 hours
                 </DialogDescription>
               </div>
 
@@ -113,7 +113,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
                 <span className="min-w-0 font-bold text-slate-800 flex items-start gap-1 mt-0.5 break-words">
                   <Home className="w-3.5 h-3.5 text-[#C62828] flex-shrink-0" />
-                  <span className="min-w-0 break-words">{item.specimen || 'Collection availability • Confirm with the lab'}</span>
+                  <span className="min-w-0 break-words">{item.specimen || 'Home collection: 06:30 AM–08:00 PM'}</span>
                 </span>
               </div>
 
@@ -127,7 +127,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
                 <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
                 <span className="min-w-0 font-bold text-slate-800 mt-0.5 block break-words">
-                  <span className="break-words">{item.preparation || 'Confirm current preparation with the lab'}</span>
+                  <span className="break-words">{item.preparation || 'Preparation instructions are provided with the appointment'}</span>
                 </span>
               </div>
             </div>

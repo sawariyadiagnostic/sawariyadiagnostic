@@ -35,7 +35,7 @@ export function Contact() {
     {
       icon: Home,
       title: '2. Lab or Home Sample',
-      description: 'Visit our facility or request a doorstep collection; availability is confirmed at booking.',
+      description: 'Visit our facility or request home collection from 06:30 AM to 08:00 PM.',
       style: {
         iconBg: 'bg-green-50 text-[#155E9A] border-green-200/80',
         accentBar: 'bg-[#155E9A]',
@@ -73,7 +73,7 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Contact the lab to confirm appointment and collection options.
+            Book an appointment or request home collection from 06:30 AM to 08:00 PM.
           </p>
         </div>
 
@@ -86,11 +86,11 @@ export function Contact() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:text-lg font-bold text-white">Appointment Desk</h3>
                   <span className="bg-white/20 text-[#F1C27D] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
-                    Availability subject to confirmation
+                    Home collection 06:30 AM–08:00 PM
                   </span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-blue-100 font-normal truncate">
-                  Availability subject to confirmation • Helpline: {siteConfig.contact.phone}
+                  Reports verified within 12 hours • Helpline: {siteConfig.contact.phone}
                 </p>
               </div>
               <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white shrink-0">
@@ -124,7 +124,7 @@ export function Contact() {
                     <div className="space-y-1.5">
                       <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Choose Your Date & Time</h4>
                       <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                        Choose an appointment option; timing and home-collection availability are confirmed by the lab.
+                        Choose an appointment option for home collection from 06:30 AM to 08:00 PM.
                       </p>
                     </div>
 
@@ -186,7 +186,7 @@ export function Contact() {
                     Visit Our Diagnostic Facility
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Contact the lab to confirm current facility and collection arrangements.
+                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Home collection is available from 06:30 AM to 08:00 PM.
                   </p>
                 </div>
 

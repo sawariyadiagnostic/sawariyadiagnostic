@@ -26,9 +26,9 @@ export const siteConfig = {
   },
   claims: {
     accreditation: import.meta.env.VITE_ACCREDITATION_CLAIM || 'Accreditation details available on request',
-     operatingHours: import.meta.env.VITE_OPERATING_HOURS || '24 HRS OPEN • Walk-in available • Emergency only at night for hospitals & patients',
-    reportTurnaround: import.meta.env.VITE_REPORT_TAT || 'Turnaround depends on the test',
-    serviceArea: import.meta.env.VITE_SERVICE_AREA || 'Service area to be confirmed',
+    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Home collection: 06:30 AM–08:00 PM',
+    reportTurnaround: import.meta.env.VITE_REPORT_TAT || 'Reports verified within 12 hours',
+    serviceArea: import.meta.env.VITE_SERVICE_AREA || 'Charkhi Dadri and nearby areas',
   },
 } as const;
 

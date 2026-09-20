@@ -56,7 +56,7 @@ export function TestBookingModal({
               <div>
                 <h3 className="font-bold text-sm text-slate-900">No patient form on this page</h3>
                 <p className="text-xs leading-relaxed text-slate-600 mt-1">
-                  The website does not store names, phone numbers, addresses, or medical details. Availability and collection timing are confirmed by the lab.
+                  The website does not store names, phone numbers, addresses, or medical details. Home collection is available 06:30 AM–08:00 PM.
                 </p>
               </div>
             </div>
@@ -87,7 +87,7 @@ export function TestBookingModal({
 
           <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 font-medium">
             <CheckCircle2 className="w-3.5 h-3.5 text-green-700" />
-            Price shown is the current public catalog price; service availability is confirmed separately.
+            Price shown is the current public catalog price; reports are verified within 12 hours.
           </div>
         </div>
       </DialogContent>

@@ -55,8 +55,8 @@ export const about = {
   ],
   features: [
     'Documented laboratory process',
-    'Clinical review available on request',
-    'Current estimate',
+    'Reports verified within 12 hours',
+    'Home collection 06:30 AM–08:00 PM',
     'Affordable pricing',
     'Home sample collection',
     'Report assistance',
@@ -117,19 +117,19 @@ export const hero = {
     {
       icon: Clock,
       title: 'Current scope',
-      subtitle: 'Confirm with the lab',
+      subtitle: 'Home collection 06:30 AM–08:00 PM',
       color: 'accent-emerald'
     },
     {
       icon: Shield,
       title: 'Documented process',
-      subtitle: 'Review on request',
+      subtitle: 'Reports verified within 12 hours',
       color: 'accent-blue'
     },
     {
       icon: Users,
       title: 'Lab contact',
-      subtitle: 'Ask for current details',
+      subtitle: 'Reports verified within 12 hours',
       color: 'accent-purple'
     }
   ]
@@ -166,7 +166,7 @@ export const services = {
   list: [
     {
       title: 'Clinical Pathology',
-      description: 'Blood, fluid & cytology examination; confirm current scope with the lab.',
+      description: 'Blood, fluid & cytology examination with documented laboratory protocols.',
       icon: Microscope,
       theme: {
         badge: 'bg-blue-50 text-blue-900 border-blue-200/80',
@@ -177,7 +177,7 @@ export const services = {
     },
     {
       title: 'Biochemistry & Metabolism',
-      description: 'Kidney (KFT), Liver (LFT), Lipid profile & electrolyte panels; confirm current scope with the lab.',
+      description: 'Kidney (KFT), Liver (LFT), Lipid profile & electrolyte panels.',
       icon: Activity,
       theme: {
         badge: 'bg-cyan-50 text-cyan-900 border-cyan-200/80',
@@ -188,7 +188,7 @@ export const services = {
     },
     {
       title: 'Microbiology & Cultures',
-      description: 'Culture, antibiotic sensitivity, fungal stains & infectious disease testing; confirm current scope with the lab.',
+      description: 'Culture, antibiotic sensitivity, fungal stains & infectious disease testing.',
       icon: Dna,
       theme: {
         badge: 'bg-green-50 text-green-900 border-green-200/80',
@@ -243,7 +243,7 @@ export const services = {
     },
     {
       title: 'Priority Diagnostic Requests',
-      description: 'Priority requests are handled subject to current lab capacity and confirmation.',
+      description: 'Priority diagnostic requests are handled through the appointment desk.',
       icon: Sparkles,
       theme: {
         badge: 'bg-gradient-to-r from-teal-50 to-emerald-50 text-green-900 border-green-200/80',
@@ -257,11 +257,11 @@ export const services = {
 
 export const homeCollection = {
   title: "Home Collection Service",
-  subtitle: "Request home collection through the appointment desk; timing and service availability require confirmation.",
+  subtitle: "Home collection is available from 06:30 AM to 08:00 PM through the appointment desk.",
   features: [
-    "Timing subject to confirmation",
-    "Collection process to be confirmed",
-    "Arrival subject to confirmation",
+    "Home collection: 06:30 AM–08:00 PM",
+    "Trained phlebotomy team",
+    "Reports verified within 12 hours",
     "Report assistance"
   ]
 };

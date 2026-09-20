@@ -31,7 +31,7 @@ export function Navbar({
               Diagnostic testing • Home collection
             </span>
             <span className="text-white/35">|</span>
-            <span className="text-white/80 font-medium">Serving Charkhi Dadri — details subject to current availability</span>
+            <span className="text-white/80 font-medium">Serving Charkhi Dadri • Home collection 06:30 AM–08:00 PM • Reports verified within 12 hours</span>
           </div>
           <div className="flex items-center gap-4">
             <a 

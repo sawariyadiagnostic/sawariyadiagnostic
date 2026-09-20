@@ -8,7 +8,7 @@ export function About() {
     {
       icon: CalendarCheck,
       title: '1. Select Test',
-      description: 'Request a booking online or by phone; the lab confirms availability.',
+      description: 'Request a booking online or by phone for home collection from 06:30 AM to 08:00 PM.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
@@ -18,7 +18,7 @@ export function About() {
     {
       icon: Home,
       title: '2. Home Sample',
-      description: 'A trained phlebotomy team collects samples when a home visit is confirmed.',
+      description: 'Home collection is available from 06:30 AM to 08:00 PM.',
       theme: {
         bg: 'bg-white',
         iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
@@ -48,9 +48,9 @@ export function About() {
   ];
 
   const features = [
-    'Trained phlebotomy team for confirmed home visits',
+    'Home collection: 06:30 AM–08:00 PM',
     'Report assistance through configured lab channels',
-    'Home collection availability confirmed at booking',
+    'Reports verified within 12 hours',
   ];
 
   return (
@@ -129,7 +129,7 @@ export function About() {
               </h3>
 
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed font-normal">
-                At Sawariya Diagnostic, samples are handled according to the lab's documented quality and review procedures. Confirm current accreditation scope and report workflow with the lab.
+                At Sawariya Diagnostic, samples are handled according to the lab's documented quality and review procedures. Reports are verified within 12 hours.
               </p>
               
               <div className="grid sm:grid-cols-2 gap-2.5 sm:gap-3 pt-1">
@@ -156,8 +156,8 @@ export function About() {
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-green-400">On request</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300">Service details</p>
+                    <p className="text-xl sm:text-2xl font-black text-green-400">06:30–20:00</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300">Home collection</p>
                   </div>
                   <div>
                     <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">Documented</p>
