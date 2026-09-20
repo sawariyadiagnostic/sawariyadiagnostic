@@ -108,30 +108,29 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </div>
 
             {/* Test Specific Details */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+            <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 text-xs">
+              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
+                <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
+                <span className="min-w-0 font-bold text-slate-800 flex items-start gap-1 mt-0.5 break-words">
+                  <Home className="w-3.5 h-3.5 text-[#C62828] flex-shrink-0" />
+                  <span className="min-w-0 break-words">{item.specimen || 'Collection availability • Confirm with the lab'}</span>
+                </span>
+              </div>
 
-                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
-                                          <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
-                                          <span className="font-bold text-slate-800 flex items-center gap-1 mt-0.5">
-                                                                          <Home className="w-3.5 h-3.5 text-[#C62828]" />
-                                                                          <span>{item.specimen || 'Collection availability • Confirm with the lab'}</span>
-                                                                        </span>
-                                        </div>
+              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
+                <span className="text-[10px] text-slate-400 block font-medium">Methodology:</span>
+                <span className="min-w-0 font-bold text-slate-800 mt-0.5 block break-words">
+                  <span className="break-words">{item.method || 'Documented laboratory protocols'}</span>
+                </span>
+              </div>
 
-                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs">
-                                          <span className="text-[10px] text-slate-400 block font-medium">Methodology:</span>
-                                          <span className="font-bold text-slate-800 mt-0.5 block">
-                                                                          <span>{item.method || 'Documented laboratory protocols'}</span>
-                                                                        </span>
-                                        </div>
-
-                          <div className="bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs col-span-2 sm:col-span-1">
-                                          <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
-                                          <span className="font-bold text-slate-800 mt-0.5 block">
-                                                                          <span>{item.preparation || 'Confirm current preparation with the lab'}</span>
-                                                                        </span>
-                                        </div>
-                        </div>
+              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
+                <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
+                <span className="min-w-0 font-bold text-slate-800 mt-0.5 block break-words">
+                  <span className="break-words">{item.preparation || 'Confirm current preparation with the lab'}</span>
+                </span>
+              </div>
+            </div>
 
             {/* Parameters or Included Tests */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-2">

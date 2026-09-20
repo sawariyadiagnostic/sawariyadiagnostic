@@ -98,6 +98,27 @@ test('test card details opens from the native keyboard button', async ({ page })
   await expect(page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i })).toBeVisible();
 });
 
+test('catalog metadata cards do not overlap on narrow mobile viewports', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+
+  const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
+  const boxes = await Promise.all([
+    dialog.getByText('Sample Collection:', { exact: true }).locator('..').boundingBox(),
+    dialog.getByText('Methodology:', { exact: true }).locator('..').boundingBox(),
+  ]);
+  expect(boxes[0]).not.toBeNull();
+  expect(boxes[1]).not.toBeNull();
+
+  if (boxes[0] && boxes[1]) {
+    const horizontalOverlap = boxes[0].x < boxes[1].x + boxes[1].width && boxes[1].x < boxes[0].x + boxes[0].width;
+    const verticalOverlap = boxes[0].y < boxes[1].y + boxes[1].height && boxes[1].y < boxes[0].y + boxes[0].height;
+    expect(horizontalOverlap && verticalOverlap).toBe(false);
+  }
+});
+
 test('catalog detail panel fits viewport sizes and scrolls long content', async ({ page }) => {
   test.setTimeout(90_000);
   for (const viewport of [{ width: 360, height: 800 }, { width: 768, height: 900 }, { width: 1440, height: 900 }]) {
