@@ -1,4 +1,4 @@
-<!-- Owner-supplied Version 2.0-Legal Standard. Approved for public notice and clinical operations; effective October 1, 2026. Preserve exact wording. -->
+<!-- Owner-supplied updated Version 2.0-Legal Standard. Approved for public notice and clinical operations; effective October 1, 2026. Preserve exact wording. -->
 
 Sawariya Diagnostic Lab — Master Terms of Service & Patient Rights Charter
 
@@ -29,6 +29,8 @@ This Agreement governs all interactions across physical and digital modalities o
 * Laboratory Information System (LIS): Barcode-based accessioning, automated analyzer data transfer, digital result compilation, and electronic report dissemination.
 * Digital Communication Channels: Appointment scheduling workflows, test catalog browsing, and notification handoffs conducted via WhatsApp Business API, SMS aggregators, telephonic voice lines, and email.
 * Pre-Analytical and Post-Analytical Support: Administrative customer support, specimen rejection advisories, and test preparation guidance.
+1.2.1 Institutional & B2B Service Boundary
+This Master Charter applies to retail patients, individual customers, and direct home collection visits. Institutional sample-routing arrangements, hospital outsource contracts, and third-party laboratory referral agreements are governed independently by dedicated Business-to-Business Service Level Agreements (SLAs).
 
 
 1.3 Legal Capacity & Minor Patient Representation
@@ -219,16 +221,14 @@ ________________
 TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, THE SERVICES, TEST REPORTS, DIGITAL COMMUNICATION PLATFORMS, AND LIS DELIVERABLES ARE PROVIDED STRICTLY ON AN "AS IS" AND "AS AVAILABLE" BASIS. SAWARIYA DIAGNOSTIC LAB EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, STATUTORY, OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
 
 
-13.2 Aggregate Monetary Liability Cap
-TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE TOTAL AGGREGATE MONETARY LIABILITY OF SAWARIYA DIAGNOSTIC LAB, ITS DIRECTORS, PATHOLOGISTS, TECHNICIANS, AND EMPLOYEES FOR ANY CLAIMS, LOSSES, DAMAGES, ANALYTICAL INACCURACIES, REPORTING DELAYS, OR CONTRACTUAL BREACHES SHALL NOT EXCEED THE GREATER OF:
-
-
-1. THE TOTAL FEE ACTUALLY PAID BY THE PATIENT FOR THE SPECIFIC INDIVIDUAL DIAGNOSTIC TEST GIVING RISE TO THE CLAIM; OR
-2. ONE THOUSAND INDIAN RUPEES (INR 1,000).
-
-
-13.3 Exclusion of Consequential and Indirect Damages
-Under no circumstances, whether in contract, tort, strict liability, medical negligence, or otherwise, shall Sawariya Diagnostic Lab be liable for any indirect, incidental, special, punitive, or consequential damages. This exclusion covers, without limitation: loss of income or wages, third-party medical or surgical costs, hospitalization charges, emotional distress, loss of opportunity, or adverse clinical outcomes resulting from a treating clinician's independent medical interpretation, therapeutic decisions, or failure to correlate laboratory data with clinical presentation.
+13.2 Standard of Care & Limitation of Direct Liability
+Sawariya Diagnostic Lab adheres to recognized medical laboratory standards, rigorous Internal Quality Controls (IQC), and NABL ISO 15189 principles. In the event of an analytical non-conformity, verified pipetting discrepancy, or specimen handling failure attributable solely to laboratory error, the Laboratory’s primary legal and operational obligation shall be to:
+(a) Conduct an immediate complimentary re-collection and re-testing of the biological parameter; or
+(b) Issue a full refund of the fee paid for that specific individual diagnostic test.
+13.3 Absolute Exclusion of Consequential, Indirect & Clinical Damages
+To the maximum extent permitted under applicable Indian law:
+(a) The Laboratory disclaims all liability for analytical variations resulting from undisclosed medications, dietary non-compliance, metabolic biological fluctuations, or failure by the patient to adhere to pre-analytical fasting protocols.
+(b) In no event shall Sawariya Diagnostic Lab, its directors, pathologists, or employees be liable for indirect, incidental, special, punitive, or consequential damages. This exclusion explicitly covers loss of employment wages, travel expenses, third-party hospitalization charges, surgical delays, emotional distress, or independent clinical decisions made by a treating physician who failed to clinically correlate laboratory findings with the patient’s overall physical symptoms and medical history.
 
 
 13.4 Patient Indemnification
@@ -250,13 +250,10 @@ ________________
 Any dispute, controversy, claim, or difference arising out of or relating to these Terms, laboratory services, diagnostic reports, or billing shall first be submitted to informal resolution. The aggrieved party must serve a written Notice of Dispute to the designated Grievance Officer. Both parties agree to participate in good-faith discussions for a mandatory period of thirty (30) days from receipt of the notice.
 
 
-15.2 Sole Binding Arbitration
-If the matter is not resolved through informal negotiations within thirty (30) days, it shall be finally and exclusively settled by binding arbitration in accordance with the Indian Arbitration and Conciliation Act, 1996 (as amended).
-* The arbitral tribunal shall consist of a sole arbitrator mutually appointed by the parties, or failing agreement, appointed pursuant to Section 11 of the Act.
-* The seat and legal venue of arbitration shall be Charkhi Dadri, Haryana, India.
-* The arbitration proceedings shall be conducted in English, and the arbitral award shall be final, conclusive, and binding on both parties.
-
-
+15.2 Dispute Resolution & Statutory Consumer Protection Carve-Out
+(a) Informal Conciliation: All grievances, disputes, or claims arising out of laboratory services, reporting turnaround, or invoicing shall first be submitted in writing to our designated Grievance Redressal Officer for good-faith mutual conciliation over a thirty (30) day resolution window.
+(b) Statutory Consumer Rights: Nothing in this Agreement shall limit, impair, or prejudice the statutory right of any patient qualifying as a "Consumer" to approach a competent Consumer Disputes Redressal Commission established under the Consumer Protection Act, 2019, for adjudication of consumer grievances.
+(c) Arbitration for Commercial / Non-Consumer Disputes: For disputes arising with non-consumer entities, corporate accounts, or where mutually agreed in writing by the parties, unresolved disputes shall be submitted to sole binding arbitration seated at Charkhi Dadri, Haryana, conducted in accordance with the Arbitration and Conciliation Act, 1996.
 15.3 Class Action Waiver
 TO THE MAXIMUM EXTENT PERMISSIBLE UNDER APPLICABLE LAW, ALL CLAIMS AND DISPUTES MUST BE BROUGHT AND ADJUDICATED ON AN INDIVIDUAL BASIS. YOU EXPRESSLY AND IRREVOCABLY WAIVE ANY RIGHT TO INITIATE, JOIN, OR PARTICIPATE AS A PLAINTIFF, CLASS REPRESENTATIVE, OR CLASS MEMBER IN ANY CLASS-ACTION LITIGATION, COLLECTIVE CONSUMER ACTION, OR REPRESENTATIVE PROCEEDING AGAINST SAWARIYA DIAGNOSTIC LAB.
 
