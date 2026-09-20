@@ -63,11 +63,31 @@ test('current privacy policy dialog exposes the operative version and source con
   await expect(trigger).toBeFocused();
 });
 
+test('current terms and patient rights dialog exposes the approved version and source content', async ({ page }) => {
+  await openPage(page);
+  const trigger = page.getByRole('button', { name: 'Terms & Patient Rights — approved legal standard' });
+
+  await trigger.click();
+  const dialog = page.getByRole('dialog', { name: 'Terms of Service & Patient Rights' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('status', { name: /TERMS \x26 PATIENT RIGHTS — APPROVED; EFFECTIVE OCTOBER 1, 2026/i })).toBeVisible();
+  const termsContent = dialog.locator('pre');
+  await expect(termsContent).toContainText('Version: 2.0-Legal Standard');
+  await expect(termsContent).toContainText('Release Status    : Approved for Public Notice & Clinical Operations');
+  await expect(termsContent).toContainText('Effective Date    : October 1, 2026');
+  await expect(termsContent).toContainText('LEGAL AND CLINICAL REVIEW SIGN-OFF LEDGER');
+
+  await page.keyboard.press('Escape');
+
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
 test('remaining legal footer actions identify drafts requiring review', async ({ page }) => {
   await openPage(page);
 
   const legalActions = page.locator('footer button').filter({ hasText: /draft, review required/i });
-  await expect(legalActions).toHaveCount(2);
+  await expect(legalActions).toHaveCount(1);
 });
 
 test('homepage has no horizontal overflow at 360px', async ({ page }) => {

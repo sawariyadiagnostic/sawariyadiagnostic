@@ -2,7 +2,7 @@
 
 This directory defines the metadata boundary for legal and patient-facing notices. It does **not** contain final legal prose and is not legal advice.
 
-The current website privacy modal uses the owner-supplied `docs/legal/privacy-policy.md` text as the operative Privacy & Medical Data Policy (version 2.0-Operative Standard, effective October 1, 2025). This does not approve or publish the remaining legal documents, which stay draft/review-required until their own wording and approvals are supplied.
+The current website privacy modal uses the owner-supplied `docs/legal/privacy-policy.md` text as the operative Privacy & Medical Data Policy (version 2.0-Operative Standard, effective October 1, 2025). The Terms & Patient Rights modal uses the owner-supplied `docs/legal/terms-and-patient-rights.md` text as the approved Version 2.0-Legal Standard, effective October 1, 2026, with the supplied operations, clinical/quality, and legal/regulatory sign-off ledger. The separate Quality & Community Charter and all other records remain draft/review-required until their own wording and approvals are supplied.
 
 ## Fail-closed contract
 
@@ -23,8 +23,9 @@ The current website privacy modal uses the owner-supplied `docs/legal/privacy-po
 
 Every record requires `state`, semantic `version`, nullable `effectiveAt`, and three approval
 records: owner, clinical, and legal. Each approval requires status, reviewer identity, and review
-time before publication. The index intentionally initializes every record as `draft`, version
-`0.0.0`, with no effective date and pending approvals.
+time before publication. Records remain `draft`, version `0.0.0`, with no effective date and
+pending approvals until an exact supplied document and independent sign-off ledger authorize a
+specific exception. The Terms & Patient Rights record is the current approved exception.
 
 ## Review workflow
 
@@ -41,8 +42,8 @@ time before publication. The index intentionally initializes every record as `dr
    and repeat the affected review.
 6. Set a non-zero version and effective timestamp only after approvals are complete. A publication
    boundary must call `validateLegalDocumentForPublication`; any missing or pending field rejects.
-7. Preserve prior versions and retire superseded documents. Do not add routes or publish text from
-   this slice.
+7. Preserve prior versions and retire superseded documents. Modal publication and static legal
+   routes remain separate; approved modal text does not create a static route automatically.
 
 The metadata contract does not prove regulatory compliance, legal sufficiency, clinical accuracy,
 accessibility conformance, or vendor compliance.

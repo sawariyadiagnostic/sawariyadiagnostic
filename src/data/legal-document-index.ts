@@ -52,9 +52,32 @@ const draft = (key: LegalDocumentKey, title: string, allowedCoverage: readonly s
   legalApproval: pendingApproval(),
 });
 
+const approved = (
+  key: LegalDocumentKey,
+  title: string,
+  allowedCoverage: readonly string[],
+  reviewRequiredFor: readonly string[],
+  reviewer: { owner: string; clinical: string; legal: string },
+): LegalDocumentMetadata => ({
+  key,
+  title,
+  state: 'published',
+  version: '2.0.0',
+  effectiveAt: '2026-10-01',
+  allowedCoverage,
+  reviewRequiredFor,
+  ownerApproval: { status: 'approved', reviewer: reviewer.owner, reviewedAt: '2026-09-21' },
+  clinicalApproval: { status: 'approved', reviewer: reviewer.clinical, reviewedAt: '2026-09-21' },
+  legalApproval: { status: 'approved', reviewer: reviewer.legal, reviewedAt: '2026-09-21' },
+});
+
 export const legalDocumentIndex: Record<LegalDocumentKey, LegalDocumentMetadata> = {
   privacy: draft('privacy', 'Privacy notice', ['personal and patient data categories', 'purposes, retention, sharing, rights, and contact routes'], ['owner, privacy, and legal review of every data practice and jurisdictional claim']),
-  terms: draft('terms', 'Terms of service', ['service scope, account or booking terms, limitations, and user responsibilities'], ['owner and legal review of obligations, liability, refunds, jurisdiction, and enforceability']),
+  terms: approved('terms', 'Terms of service', ['service scope, account or booking terms, limitations, and user responsibilities'], ['owner and legal review of obligations, liability, refunds, jurisdiction, and enforceability'], {
+    owner: 'Managing Partner / Operations Lead',
+    clinical: 'Consulting Pathologist / Quality Manager',
+    legal: 'Legal Counsel & Data Protection Advisor',
+  }),
   'patient-rights': draft('patient-rights', 'Patient rights and responsibilities', ['patient access, communication, consent, correction, and complaint expectations'], ['owner, clinical, and legal review of patient-safety language and operational commitments']),
   'home-collection': draft('home-collection', 'Home collection terms', ['service area, scheduling, preparation, collection logistics, cancellations, and safety instructions'], ['owner, clinical, operations, and legal review of availability, safety, pricing, and responsibility claims']),
   'report-assistance': draft('report-assistance', 'Report assistance notice', ['how to request help understanding a report and the limits of assistance'], ['owner, clinical, and legal review to prevent diagnosis, treatment, or emergency-care claims']),

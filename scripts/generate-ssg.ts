@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { approvedGuideManifest } from '../src/data/approvedGuideManifest';
 import { generateOgImage } from './generate-og-image';
-import { filterApprovedLegalMetadata } from './legal-publication';
+
 
 const BASE_URL = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic';
 const DIST_DIR = path.resolve(process.cwd(), 'dist');
@@ -54,12 +54,6 @@ export function buildSSG() {
 
   for (const entry of ['test', 'package', 'portal', '404.html', 'sitemap.xml', 'og-image.jpg', 'og-image.png']) {
     fs.rmSync(path.join(DIST_DIR, entry), { recursive: true, force: true });
-  }
-
-  // Legal metadata is fail-closed: approval alone cannot create a route without reviewed content.
-  const approvedLegalDocuments = filterApprovedLegalMetadata();
-  if (approvedLegalDocuments.length > 0) {
-    throw new Error('Approved legal metadata requires reviewed legal page content before generation');
   }
 
   const routes: RouteConfig[] = [];

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { privacyPolicyText } from '@/data/privacy-policy';
+import { termsPatientRightsText } from '@/data/terms-patient-rights';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
 export type PolicyType = 'privacy' | 'terms' | 'charter' | null;
@@ -21,9 +22,9 @@ const policyCopy = {
   terms: {
     icon: FileText,
     title: 'Terms of Service & Patient Rights',
-    description: 'Sawariya Diagnostic Lab • Charkhi Dadri',
-    status: 'Draft — review required before publication',
-    content: null,
+    description: 'Version 2.0-Legal Standard • Effective October 1, 2026 • Republic of India',
+    status: 'Terms & Patient Rights — approved; effective October 1, 2026',
+    content: termsPatientRightsText,
   },
   charter: {
     icon: HeartHandshake,
@@ -80,7 +81,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
             </div>
 
             {policy.content ? (
-              <article aria-label="Privacy & Medical Data Policy content">
+              <article aria-label={`${policy.title} content`}>
                 <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-700">{policy.content}</pre>
               </article>
             ) : (

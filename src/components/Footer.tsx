@@ -159,7 +159,7 @@ export function Footer() {
                 onClick={() => setActiveModal('terms')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
-                Terms & Patient Rights — draft, review required
+                Terms & Patient Rights — approved legal standard
               </button>
               <button 
                 onClick={() => setActiveModal('charter')}

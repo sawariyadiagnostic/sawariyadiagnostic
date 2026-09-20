@@ -6,12 +6,12 @@ import { filterApprovedLegalMetadata } from '../../scripts/legal-publication';
 import { legalDocumentIndex } from '../../src/data/legal-document-index';
 
 describe('approval-gated legal SSG boundary', () => {
-  it('matches the legal contract export and keeps draft metadata unpublished', () => {
+  it('keeps only the supplied terms document approved in metadata', () => {
     const documents = Object.values(legalDocumentIndex);
 
     expect(documents).toHaveLength(8);
-    expect(documents.every((document) => document.state === 'draft')).toBe(true);
-    expect(filterApprovedLegalMetadata(legalDocumentIndex)).toEqual([]);
+    expect(filterApprovedLegalMetadata(legalDocumentIndex).map((document) => document.key)).toEqual(['terms']);
+    expect(documents.filter((document) => document.state === 'draft')).toHaveLength(7);
   });
 
   it('does not include legal routes or draft prose in the SSG generator', () => {

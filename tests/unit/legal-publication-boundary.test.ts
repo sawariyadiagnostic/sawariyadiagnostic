@@ -20,16 +20,23 @@ describe('legal document publication boundary', () => {
     expect(Object.keys(legalDocumentIndex)).toEqual(LEGAL_DOCUMENT_KEYS);
   });
 
-  it('keeps every document in a draft-only, review-required state by default', () => {
+  it('keeps unapproved documents blocked and the supplied terms record approved', () => {
     for (const key of LEGAL_DOCUMENT_KEYS) {
       const document = legalDocumentIndex[key];
-      expect(document.state).toBe('draft');
-      expect(document.version).toBe('0.0.0');
-      expect(document.effectiveAt).toBeNull();
-      expect(document.ownerApproval.status).toBe('pending');
-      expect(document.clinicalApproval.status).toBe('pending');
-      expect(document.legalApproval.status).toBe('pending');
-      expect(validateLegalDocumentForPublication(document).success).toBe(false);
+      if (key === 'terms') {
+        expect(document.state).toBe('published');
+        expect(document.version).toBe('2.0.0');
+        expect(document.effectiveAt).toBe('2026-10-01');
+        expect(validateLegalDocumentForPublication(document).success).toBe(true);
+      } else {
+        expect(document.state).toBe('draft');
+        expect(document.version).toBe('0.0.0');
+        expect(document.effectiveAt).toBeNull();
+        expect(document.ownerApproval.status).toBe('pending');
+        expect(document.clinicalApproval.status).toBe('pending');
+        expect(document.legalApproval.status).toBe('pending');
+        expect(validateLegalDocumentForPublication(document).success).toBe(false);
+      }
     }
   });
 

@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { privacyPolicyText } from '../../src/data/privacy-policy';
+import { termsPatientRightsText } from '../../src/data/terms-patient-rights';
 
 const activeSourceFiles = [
   '.env.example',
@@ -26,12 +27,25 @@ const policyDocument = readFileSync(
   'utf8',
 ).replace(/^<!-- [\s\S]*? -->\s*/u, '');
 
+const termsDocument = readFileSync(
+  resolve(process.cwd(), 'docs/legal/terms-and-patient-rights.md'),
+  'utf8',
+).replace(/^<!-- [\s\S]*? -->\s*/u, '');
+
 describe('privacy and trust boundary', () => {
   it('keeps the supplied privacy policy identical in website docs and runtime copy', () => {
     expect(policyDocument).toBe(privacyPolicyText);
     expect(privacyPolicyText).toContain('Document Version: 2.0-Operative Standard');
     expect(privacyPolicyText).toContain('Effective Date: October 1, 2025');
     expect(privacyPolicyText).toContain('11. Statutory Grievance Redressal and Contact Details');
+  });
+
+  it('keeps the supplied terms and patient rights charter identical in website docs and runtime copy', () => {
+    expect(termsDocument).toBe(termsPatientRightsText);
+    expect(termsPatientRightsText).toContain('Version: 2.0-Legal Standard');
+    expect(termsPatientRightsText).toContain('Release Status    : Approved for Public Notice & Clinical Operations');
+    expect(termsPatientRightsText).toContain('Effective Date    : October 1, 2026');
+    expect(termsPatientRightsText).toContain('LEGAL AND CLINICAL REVIEW SIGN-OFF LEDGER');
   });
 
   it('does not retain the stale browser-visible Web3Forms key', () => {
