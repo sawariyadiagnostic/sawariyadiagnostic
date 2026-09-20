@@ -2,6 +2,8 @@
 
 This directory defines the metadata boundary for legal and patient-facing notices. It does **not** contain final legal prose and is not legal advice.
 
+The current website privacy modal uses the owner-supplied `docs/legal/privacy-policy.md` text as the operative Privacy & Medical Data Policy (version 2.0-Operative Standard, effective October 1, 2025). This does not approve or publish the remaining legal documents, which stay draft/review-required until their own wording and approvals are supplied.
+
 ## Fail-closed contract
 
 `src/data/legal-document-index.ts` is the source of truth for the eight document keys:

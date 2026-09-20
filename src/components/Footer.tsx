@@ -153,7 +153,7 @@ export function Footer() {
                 onClick={() => setActiveModal('privacy')}
                 className="hover:text-slate-200 text-slate-400 transition-colors cursor-pointer min-h-11 px-2 py-2 text-center"
               >
-                Privacy Policy — draft, review required
+                Privacy Policy — current operative standard
               </button>
               <button 
                 onClick={() => setActiveModal('terms')}

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { privacyPolicyText } from '../../src/data/privacy-policy';
 
 const activeSourceFiles = [
   '.env.example',
@@ -20,7 +21,19 @@ const reportModal = readFileSync(
   'utf8',
 );
 
+const policyDocument = readFileSync(
+  resolve(process.cwd(), 'docs/legal/privacy-policy.md'),
+  'utf8',
+).replace(/^<!-- [\s\S]*? -->\s*/u, '');
+
 describe('privacy and trust boundary', () => {
+  it('keeps the supplied privacy policy identical in website docs and runtime copy', () => {
+    expect(policyDocument).toBe(privacyPolicyText);
+    expect(privacyPolicyText).toContain('Document Version: 2.0-Operative Standard');
+    expect(privacyPolicyText).toContain('Effective Date: October 1, 2025');
+    expect(privacyPolicyText).toContain('11. Statutory Grievance Redressal and Contact Details');
+  });
+
   it('does not retain the stale browser-visible Web3Forms key', () => {
     expect(readFileSync(resolve(process.cwd(), '.env.example'), 'utf8')).not.toContain(
       'VITE_WEB3FORMS_ACCESS_KEY',

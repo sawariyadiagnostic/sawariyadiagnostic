@@ -5,10 +5,10 @@ const openPage = async (page: Parameters<typeof test>[0]['page']) => {
   await expect(page.locator('#main-content')).toBeVisible();
 };
 
-test('footer draft legal actions meet the 44px touch target', async ({ page }) => {
+test('legal footer actions meet the 44px touch target', async ({ page }) => {
   await openPage(page);
   await page.locator('footer').scrollIntoViewIfNeeded();
-  const heights = await page.locator('footer button').filter({ hasText: /draft, review required/i }).evaluateAll((buttons) =>
+  const heights = await page.locator('footer button').filter({ hasText: /Privacy Policy|Terms & Patient Rights|Quality Charter/i }).evaluateAll((buttons) =>
     buttons.map((button) => button.getBoundingClientRect().height),
   );
   expect(heights).toHaveLength(3);
@@ -44,16 +44,18 @@ test('skip link moves focus to the main content landmark', async ({ page }) => {
   await expect(page.locator('#main-content')).toBeFocused();
 });
 
-test('draft policy dialog exposes status, one close action, and restores focus', async ({ page }) => {
+test('current privacy policy dialog exposes the operative version and source content', async ({ page }) => {
   await openPage(page);
-  const trigger = page.getByRole('button', { name: 'Privacy Policy — draft, review required' });
+  const trigger = page.getByRole('button', { name: 'Privacy Policy — current operative standard' });
 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Privacy & Medical Data Policy' });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('heading', { name: 'Privacy & Medical Data Policy' })).toBeVisible();
-  await expect(dialog.getByRole('status', { name: 'DRAFT — REVIEW REQUIRED BEFORE PUBLICATION' })).toBeVisible();
-  await expect(dialog.getByRole('button', { name: 'Close' })).toHaveCount(1);
+  await expect(dialog.getByRole('status', { name: /PRIVACY POLICY — CURRENT OPERATIVE STANDARD/i })).toBeVisible();
+  const policyContent = dialog.locator('pre');
+  await expect(policyContent).toContainText('Document Version: 2.0-Operative Standard');
+  await expect(policyContent).toContainText('11. Statutory Grievance Redressal and Contact Details');
+  await expect(policyContent).toContainText('sawariyadiagnosticckd11@gmail.com');
 
   await page.keyboard.press('Escape');
 
@@ -61,11 +63,11 @@ test('draft policy dialog exposes status, one close action, and restores focus',
   await expect(trigger).toBeFocused();
 });
 
-test('all legal footer actions identify drafts requiring review', async ({ page }) => {
+test('remaining legal footer actions identify drafts requiring review', async ({ page }) => {
   await openPage(page);
 
   const legalActions = page.locator('footer button').filter({ hasText: /draft, review required/i });
-  await expect(legalActions).toHaveCount(3);
+  await expect(legalActions).toHaveCount(2);
 });
 
 test('homepage has no horizontal overflow at 360px', async ({ page }) => {
