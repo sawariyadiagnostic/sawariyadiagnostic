@@ -24,9 +24,10 @@ interface TestDetailModalProps {
   item: MedicalTest | null;
   isOpen: boolean;
   onClose: () => void;
+  onAddToSlip?: () => void;
 }
 
-export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps) {
+export function TestDetailModal({ item, isOpen, onClose, onAddToSlip }: TestDetailModalProps) {
   const [showBooking, setShowBooking] = useState(false);
 
   if (!item) return null;
@@ -64,7 +65,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
         />
       )}
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
-        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[24px] sm:rounded-[32px] flex flex-col">
+        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] h-[calc(100dvh-1rem)] sm:h-auto max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[24px] sm:rounded-[32px] flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-6 text-white relative overflow-hidden flex-shrink-0">
             <div className="flex items-start justify-between gap-4 relative z-10">
@@ -96,7 +97,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
           </div>
 
           {/* Body Content */}
-          <div className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-slate-50">
+          <div className="flex-1 min-h-0 max-h-[280px] sm:max-h-none overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-slate-50">
             {/* Description */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-1.5">
               <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider block">
@@ -172,10 +173,10 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </Button>
 
             <Button
-              onClick={() => setShowBooking(true)}
+              onClick={() => onAddToSlip ? onAddToSlip() : setShowBooking(true)}
               className="action-button flex-1 min-h-11 h-auto btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
             >
-              <span>Book Appointment ({formatInr(item.price)})</span>
+              <span>{onAddToSlip ? `Add to requisition (${formatInr(item.price)})` : `Book Appointment (${formatInr(item.price)})`}</span>
               <ArrowRight className="w-4 h-4" />
             </Button>
           </div>

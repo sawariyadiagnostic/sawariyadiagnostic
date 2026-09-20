@@ -1,44 +1,66 @@
-'use client';
+import { useEffect, useState } from 'react';
+import { ArrowRight, Check, ClipboardList, Search, TestTube, X } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { TestDetailModal } from '@/components/catalog/TestDetailModal';
+import { formatInr } from '@/lib/utils';
+import { departmentOptions } from '@/data/requisitionCatalog';
+import type { RequisitionCatalogTest } from '@/types/requisition';
+import { RequisitionProvider, useRequisition } from './requisition/RequisitionContext';
+import { RequisitionDrawer } from './requisition/RequisitionDrawer';
 
-import { useEffect, useMemo, useState } from 'react';
-import { Search, TestTube, Zap } from 'lucide-react';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { TestCard } from './ui/TestCard';
-import { TestDetailModal } from './catalog/TestDetailModal';
-import { categories, medicalTests as publishedTests, type MedicalTest } from '@/data/publishedCatalog';
-import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
+function TestRow({ test, onDetails }: { test: RequisitionCatalogTest; onDetails: (test: RequisitionCatalogTest) => void }) {
+  const { state, toggleTest } = useRequisition();
+  const selected = state.selectedIds.includes(test.id);
+  return (
+    <article className={`glass-card p-4 sm:p-5 flex flex-col min-w-0 ${selected ? 'ring-2 ring-[#155E9A]/30 border-[#155E9A]/50' : ''}`}>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <span className="text-[10px] font-bold tracking-wider uppercase text-[#155E9A]">{test.id.replace('web-', 'SDL-')}</span>
+          <h3 className="mt-1 text-base sm:text-lg font-bold leading-snug text-[#102A43] break-words">{test.name}</h3>
+        </div>
+        <span className="shrink-0 text-base sm:text-lg font-black text-[#102A43]">{formatInr(test.price)}</span>
+      </div>
+      <p className="mt-2 text-xs sm:text-sm leading-relaxed text-slate-600 line-clamp-2">{test.description}</p>
+      <div className="mt-3 flex flex-wrap gap-1.5 text-[10px] font-semibold text-slate-600">
+        <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-1">{test.sampleGroup.split(' / ')[0]}</span>
+        {test.fastingHours > 0 && <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-1 text-amber-800">{test.fastingHours}h preparation may apply</span>}
+        {test.timing === 'POST_MEAL' && <span className="rounded-full border border-amber-200 bg-amber-50 px-2 py-1 text-amber-800">Timed post-meal draw</span>}
+        {test.timing === 'MORNING' && <span className="rounded-full border border-blue-200 bg-blue-50 px-2 py-1 text-blue-800">Morning draw may apply</span>}
+      </div>
+      <div className="mt-4 grid grid-cols-2 gap-2">
+        <Button type="button" variant="outline" onClick={() => onDetails(test)} className="action-button min-h-11 rounded-[14px] text-xs font-bold">
+          Details
+        </Button>
+        <Button type="button" onClick={() => toggleTest(test.id)} className={`action-button min-h-11 rounded-[14px] text-xs font-bold ${selected ? 'bg-[#E8F1F8] text-[#0F4775] hover:bg-[#DCECF8]' : 'btn-primary'}`} aria-pressed={selected}>
+          {selected ? <><Check className="mr-1.5 h-4 w-4" />In slip</> : <>+ Add to slip</>}
+        </Button>
+      </div>
+    </article>
+  );
+}
 
-const testCategories = categories.filter((category) => category.id !== 'package');
-
-export function TestCatalog() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
-  const tests = publishedTests;
-
-  const openTest = (test: MedicalTest, updateHash = true) => {
+function CatalogContent() {
+  const { state, filteredTests, selectedTests, manifest, setQuery, setDepartment, setDrawerOpen, toggleTest } = useRequisition();
+  const [selectedTest, setSelectedTest] = useState<RequisitionCatalogTest | null>(null);
+  const openTest = (test: RequisitionCatalogTest, updateHash = true) => {
     setSelectedTest(test);
-    if (updateHash && window.location.hash !== `#/test/${test.id}`) {
-      window.history.pushState({ catalogDetail: true }, '', `#/test/${test.id}`);
-    }
+    if (updateHash && window.location.hash !== `#/test/${test.id}`) window.history.pushState({ catalogDetail: true }, '', `#/test/${test.id}`);
   };
-
   const closeTest = () => {
     setSelectedTest(null);
     if (window.history.state?.catalogDetail) window.history.back();
     else window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
   };
-
   useEffect(() => {
     const openHashTest = () => {
       const match = window.location.hash.match(/^#\/test\/([^/]+)$/);
-      const test = match && tests.find((item) => item.id.toLowerCase() === match[1].toLowerCase());
+      const test = match && filteredTests.find((item) => item.id.toLowerCase() === match[1].toLowerCase());
       setSelectedTest(test ?? null);
     };
     const handleSearch = (event: Event) => {
       const detail = (event as CustomEvent<{ query?: string }>).detail;
-      if (detail?.query !== undefined) setSearchQuery(detail.query);
+      if (detail?.query !== undefined) setQuery(detail.query);
     };
     openHashTest();
     window.addEventListener('hashchange', openHashTest);
@@ -47,126 +69,77 @@ export function TestCatalog() {
       window.removeEventListener('hashchange', openHashTest);
       window.removeEventListener('sawariya:search', handleSearch);
     };
-  }, [tests]);
-
-  const searchEngine = useMemo(() => createSearchEngine(buildSearchIndex(tests)), [tests]);
-  const filteredTests = useMemo(
-    () => searchEngine.search(searchQuery, selectedCategory).filter((item) => item.type === 'test'),
-    [searchEngine, searchQuery, selectedCategory],
-  );
-  const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
-  const clearFilters = () => {
-    setSearchQuery('');
-    setSelectedCategory('all');
-  };
-  const quickSymptoms = [
-    { label: 'All Tests', query: '', cat: 'all' },
-    { label: 'Sugar & Diabetes', query: 'sugar', cat: 'all' },
-    { label: 'Thyroid', query: 'thyroid', cat: 'all' },
-    { label: 'Fatigue & Weakness', query: 'fatigue', cat: 'all' },
-    { label: 'Cholesterol & Heart', query: 'lipid', cat: 'all' },
-    { label: 'Vitamins D & B12', query: 'vitamin', cat: 'all' },
-    { label: 'Fever & Infection', query: 'fever', cat: 'all' },
-    { label: 'Kidney & Urine', query: 'kidney', cat: 'all' },
+  }, [filteredTests, setQuery]);
+  const hasFilter = state.query.trim().length > 0 || state.department !== 'ALL';
+  const quickSearches = [
+    { label: 'CBC & blood', value: 'cbc' },
+    { label: 'Sugar', value: 'sugar' },
+    { label: 'Thyroid', value: 'thyroid' },
+    { label: 'Cholesterol', value: 'cholesterol' },
+    { label: 'Fever', value: 'fever' },
   ];
 
   return (
-    <section id="tests" className="relative fluid-section bg-[#FFF9F3] overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] left-[10%] w-[30vw] h-[30vw] bg-[#155E9A]/10 blur-[80px] mix-blend-multiply" />
-        <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vw] bg-[#155E9A]/10 blur-[100px] mix-blend-multiply" />
-      </div>
-
-      <div className="fluid-container relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2.5">
-          <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 px-4 py-1 rounded-full shadow-2xs h-[30.1px]">
-            <TestTube className="w-6 h-6 text-[#155E9A]" />
-            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Diagnostic Test Catalog</span>
+    <>
+      <section id="tests" className="relative overflow-hidden bg-[#FFF9F3] py-14 sm:py-20">
+        <div className="fluid-container relative z-10">
+          <div className="mx-auto mb-8 max-w-3xl text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/80 px-4 py-2 shadow-sm">
+              <TestTube className="h-4 w-4 text-[#155E9A]" />
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#102A43]">Doctor-prescribed tests</span>
+            </div>
+            <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black leading-tight tracking-tight text-[#102A43]">Build one requisition slip</h2>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">Search the individual tests on your prescription, add them together, and send one collection request to the lab.</p>
           </div>
-          <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#102A43] tracking-tight leading-tight">
-            Individual Tests. Transparent Pricing.
-          </h2>
-          <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Browse individual tests and ask the lab about collection options.
-          </p>
-        </div>
 
-        <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
-          <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] space-y-3">
+          <div className="mx-auto mb-7 max-w-5xl rounded-[24px] border border-black/[0.06] bg-white p-3.5 shadow-[0_2px_16px_rgba(0,0,0,0.03)] sm:p-4">
             <div className="relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
-              <Input
-                type="text"
-                placeholder="Ask about an individual test…"
-                name="catalog-search"
-                autoComplete="off"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-medium focus:border-[#155E9A] shadow-2xs text-slate-900"
-              />
-              {searchQuery && (
-                <button type="button" onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer">
-                  Clear
-                </button>
-              )}
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[#155E9A]" />
+              <Input type="search" name="catalog-search" autoComplete="off" aria-label="Search individual laboratory tests" placeholder="Search CBC, sugar, SGPT, cholesterol, TSH, platelet…" value={state.query} onChange={(event) => setQuery(event.target.value)} className="h-12 rounded-[16px] border border-slate-200 bg-slate-50 pl-10 pr-10 text-sm font-medium text-slate-900" />
+              {state.query && <button type="button" aria-label="Clear test search" onClick={() => setQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700"><X className="h-4 w-4" /></button>}
             </div>
-            <div className="flex gap-1.5 overflow-x-auto pb-1 pt-0.5 scrollbar-none items-center">
-              {testCategories.map((category) => {
-                const selected = selectedCategory === category.id;
-                return (
-                  <button
-                    type="button"
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`min-h-11 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${selected ? 'bg-[#102A43] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
-                  >
-                    {category.name}
-                  </button>
-                );
-              })}
+            <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              {departmentOptions.map((option) => <button key={option.id} type="button" onClick={() => setDepartment(option.id)} aria-pressed={state.department === option.id} className={`min-h-11 whitespace-nowrap rounded-full px-3.5 text-xs font-bold transition-colors ${state.department === option.id ? 'bg-[#102A43] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}>{option.label}</button>)}
+            </div>
+            <div className="mt-3 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+              <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500">Quick search</span>
+              {quickSearches.map((item) => <button key={item.value} type="button" onClick={() => { setQuery(item.value); setDepartment('ALL'); }} className="min-h-11 shrink-0 rounded-full border border-slate-200 bg-white px-3 text-[11px] font-semibold text-slate-700 hover:border-[#155E9A] hover:text-[#155E9A]">{item.label}</button>)}
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 px-1 scrollbar-none">
-            <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1 flex-shrink-0">
-              <Zap className="w-3 h-3 text-[#7A4B2A]" /> Ask about:
-            </span>
-            {quickSymptoms.map((symptom) => (
-              <button
-                type="button"
-                key={symptom.label}
-                onClick={() => { setSearchQuery(symptom.query); setSelectedCategory(symptom.cat); }}
-                className={`min-h-11 text-[11px] font-semibold px-2.5 rounded-full border transition-surface whitespace-nowrap cursor-pointer ${searchQuery === symptom.query && symptom.query !== '' ? 'bg-[#155E9A] text-white border-[#155E9A]' : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'}`}
-              >
-                {symptom.label}
-              </button>
-            ))}
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 px-1" role="status" aria-live="polite">
+            <span className="text-xs font-medium text-slate-600">{hasFilter ? <>Found <strong>{filteredTests.length}</strong> individual tests</> : <><strong>{filteredTests.length}</strong> individual tests available</>}</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7A4B2A]"><ClipboardList className="h-4 w-4" /> Select multiple from one prescription</span>
           </div>
+
+          {hasFilter && filteredTests.length === 0 ? (
+            <div className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm" role="status" aria-live="polite">
+              <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
+              <p className="mt-1 text-sm text-slate-600">Try a short name, code, or biomarker such as CBC, Hb, glucose, or TSH.</p>
+              <Button type="button" variant="outline" onClick={() => { setQuery(''); setDepartment('ALL'); }} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">Clear filters</Button>
+            </div>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {filteredTests.map((test) => <TestRow key={test.id} test={test} onDetails={openTest} />)}
+            </div>
+          )}
         </div>
+      </section>
 
-        {searchQuery && (
-          <div role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium">
-            Found <strong>{filteredTests.length}</strong> tests matching &quot;{searchQuery}&quot;
-          </div>
-        )}
-
-        {hasFilter && filteredTests.length === 0 ? (
-          <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
-            <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
-            <Button type="button" variant="outline" onClick={clearFilters} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">Clear filters</Button>
-          </div>
-        ) : (
-          <div className="fluid-grid-cards-sm">
-            {filteredTests.map((item) => {
-              const test = tests.find((candidate) => candidate.id === item.id);
-              return test ? <TestCard key={test.id} test={test} onViewDetails={openTest} /> : null;
-            })}
-          </div>
-        )}
-      </div>
-
-      {selectedTest && <TestDetailModal item={selectedTest} isOpen={true} onClose={closeTest} />}
-    </section>
+      {selectedTest && <TestDetailModal item={selectedTest} isOpen={true} onClose={closeTest} onAddToSlip={() => { toggleTest(selectedTest.id); closeTest(); }} />}
+      {selectedTests.length > 0 && <RequisitionDock count={selectedTests.length} total={manifest.total} amountToFree={manifest.amountToFreeCollection} onOpen={() => setDrawerOpen(true)} />}
+      <RequisitionDrawer />
+    </>
   );
+}
+
+function RequisitionDock({ count, total, amountToFree, onOpen }: { count: number; total: number; amountToFree: number; onOpen: () => void }) {
+  return <aside className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+84px)] left-1/2 z-[105] w-[calc(100%-24px)] max-w-[560px] -translate-x-1/2 overflow-hidden rounded-[18px] border border-white/15 bg-[#102A43] text-white shadow-[0_16px_42px_rgba(16,42,67,0.35)] sm:bottom-5" aria-label="Active requisition slip">
+    <div className="bg-[#155E9A] px-3 py-1.5 text-center text-[11px] font-medium text-white">{amountToFree > 0 ? <>Add <strong>{formatInr(amountToFree)}</strong> more for no collection fee</> : <strong>Collection fee waived at this subtotal</strong>}</div>
+    <div className="flex items-center justify-between gap-3 p-2.5 sm:p-3"><div className="flex min-w-0 items-center gap-2.5"><span className="flex h-8 min-w-8 items-center justify-center rounded-full bg-[#C62828] px-2 text-sm font-black">{count}</span><div className="min-w-0"><span className="block text-[10px] uppercase tracking-wider text-slate-300">Requisition total</span><strong className="block text-lg leading-tight">{formatInr(total)}</strong></div></div><Button type="button" onClick={onOpen} className="action-button min-h-11 shrink-0 rounded-[14px] bg-white px-3 text-xs font-bold text-[#102A43] hover:bg-slate-100">Review slip <ArrowRight className="ml-1.5 h-4 w-4" /></Button></div>
+  </aside>;
+}
+
+export function TestCatalog() {
+  return <RequisitionProvider><CatalogContent /></RequisitionProvider>;
 }

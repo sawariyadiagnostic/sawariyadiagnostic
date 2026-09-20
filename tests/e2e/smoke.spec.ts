@@ -17,7 +17,7 @@ test('renders the public homepage and core trust sections', async ({ page }) => 
   expect(bodyText).not.toContain('cms editor');
   expect(bodyText).not.toContain('schema.org structured data & seo preview');
   expect(bodyText).not.toContain('health packages');
-  expect(bodyText).toContain('individual tests. transparent pricing.');
+  expect(bodyText).toContain('build one requisition slip');
   expect(bodyText).not.toContain('the public catalog is being prepared');
   expect(bodyText).not.toMatch(/patient lab portal|doctor consultation|call 24\*7 helpline/i);
   await expect(page.getByText('Illustrative test preview')).toBeVisible();

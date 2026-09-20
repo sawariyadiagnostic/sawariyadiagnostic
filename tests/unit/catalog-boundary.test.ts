@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
 import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
+import { compileRequisitionManifest, requisitionTests } from '../../src/data/requisitionCatalog';
 import { siteConfig, validateSiteConfig } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 import { formatInr } from '../../src/lib/utils';
@@ -39,8 +40,8 @@ describe('approved public catalog', () => {
 
   it('renders the approved individual-test catalog only', () => {
     expect(visitorSource).not.toContain('Health Packages');
-    expect(visitorSource).toContain('Individual Tests. Transparent Pricing.');
-    expect(visitorSource).toContain('Diagnostic Test Catalog');
+    expect(visitorSource).toContain('Build one requisition slip');
+    expect(visitorSource).toContain('Doctor-prescribed tests');
     expect(visitorSource).not.toContain('packages.length');
     expect(visitorSource).not.toContain('Free Doorstep Home Sample');
     expect(visitorSource).not.toContain('Save {discountPercent}%');
@@ -58,7 +59,7 @@ describe('approved public catalog', () => {
   it('provides a resettable accessible empty state for filtered tests', () => {
     expect(visitorSource).toContain('No tests match this search');
     expect(visitorSource).toContain('aria-live="polite"');
-    expect(visitorSource).toContain('clearFilters');
+    expect(visitorSource).toContain('Clear filters');
   });
 
 
@@ -87,13 +88,33 @@ describe('approved public catalog', () => {
   it('gives both catalog search inputs stable form metadata', () => {
     const heroSource = readFileSync(resolve(process.cwd(), 'src/components/Hero.tsx'), 'utf8');
     const catalogSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
-    expect(heroSource).toContain('placeholder="Ask about a test or package…"');
-    expect(catalogSource).toContain('placeholder="Ask about an individual test…"');
+    expect(heroSource).toContain('placeholder="Ask about an individual test…"');
+    expect(catalogSource).toContain('name="catalog-search"');
+    expect(catalogSource).toContain('aria-label="Search individual laboratory tests"');
   });
 
   it('announces catalog search result counts to assistive technology', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
-    expect(source).toContain('role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium"');
+    expect(source).toContain('role="status" aria-live="polite"');
+    expect(source).toContain('Found <strong>{filteredTests.length}</strong> individual tests');
+  });
+
+  it('keeps requisition actions and clinical handoff in the public catalog boundary', () => {
+    expect(visitorSource).toContain('Add to slip');
+    expect(visitorSource).toContain('RequisitionDrawer');
+    const drawerSource = readFileSync(resolve(process.cwd(), 'src/components/requisition/RequisitionDrawer.tsx'), 'utf8');
+    expect(drawerSource).toContain('Review and send on WhatsApp');
+    expect(drawerSource).toContain('The request is not confirmed until the lab desk replies or calls you.');
+  });
+
+  it('computes collection tiers and flags timed two-stage glucose requests', () => {
+    const low = compileRequisitionManifest([requisitionTests.find((test) => test.id === 'web-002')!]);
+    const mid = compileRequisitionManifest([requisitionTests.find((test) => test.id === 'web-001')!]);
+    const pair = compileRequisitionManifest(requisitionTests.filter((test) => ['web-037', 'web-038'].includes(test.id)));
+    expect(low.collectionFee).toBe(100);
+    expect(mid.collectionFee).toBe(50);
+    expect(pair.hasTwoStageCollection).toBe(true);
+    expect(pair.timingNotice).toMatch(/two-stage/i);
   });
 
   it('keeps test cards free of nested interactive semantics', () => {

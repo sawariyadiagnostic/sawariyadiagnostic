@@ -198,9 +198,9 @@ test('catalog search result count is announced as a status update', async ({ pag
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const search = page.locator('#tests').getByPlaceholder('Ask about an individual test…');
+  const search = page.locator('#tests').getByRole('searchbox', { name: 'Search individual laboratory tests' });
   await search.fill('thyroid');
-  const resultCount = page.locator('#tests [role="status"][aria-live="polite"]').filter({ hasText: 'tests matching' });
+  const resultCount = page.locator('#tests [role="status"][aria-live="polite"]').filter({ hasText: 'individual tests' }).first();
   await expect(resultCount).toBeVisible();
 });
 
@@ -209,13 +209,27 @@ test('catalog filters expose a resettable no-results state', async ({ page }) =>
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const search = page.locator('#tests').getByPlaceholder('Ask about an individual test…');
+  const search = page.locator('#tests').getByRole('searchbox', { name: 'Search individual laboratory tests' });
   await search.fill('zzzz-no-catalog-match');
   await expect(page.getByRole('status').filter({ hasText: 'No tests match this search' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Clear filters' }).click();
   await expect(search).toHaveValue('');
-  await expect(page.locator('#tests').getByText('Individual Tests. Transparent Pricing.', { exact: true })).toBeVisible();
+  await expect(page.locator('#tests').getByText('Build one requisition slip', { exact: true })).toBeVisible();
+});
+
+test('multi-test requisition dock opens one review flow', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  const addButtons = page.getByRole('button', { name: '+ Add to slip' });
+  await addButtons.nth(0).click();
+  await addButtons.nth(1).click();
+  await expect(page.getByRole('button', { name: /Review slip/ })).toBeVisible();
+  await page.getByRole('button', { name: /Review slip/ }).click();
+  const drawer = page.getByRole('dialog', { name: 'Test requisition slip' });
+  await expect(drawer).toBeVisible();
+  await expect(drawer.getByText('2 individual tests selected', { exact: true })).toBeVisible();
+  await expect(drawer.getByRole('button', { name: 'Continue to patient details' })).toBeVisible();
 });
 
 test('visible action buttons meet the 44px minimum target height', async ({ page }) => {
