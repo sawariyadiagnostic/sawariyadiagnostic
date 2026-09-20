@@ -49,11 +49,11 @@ describe('privacy and trust boundary', () => {
   it('keeps the supplied terms and patient rights charter identical in website docs and runtime copy', () => {
     expect(termsDocument).toBe(termsPatientRightsText);
     expect(termsPatientRightsText).toContain('Version: 2.0-Legal Standard');
-    expect(termsPatientRightsText).toContain('Release Status    : Approved for Public Notice & Clinical Operations');
-    expect(termsPatientRightsText).toContain('Effective Date    : October 1, 2026');
-    expect(termsPatientRightsText).toContain('1.2.1 Institutional & B2B Service Boundary');
-    expect(termsPatientRightsText).toContain('13.2 Standard of Care & Limitation of Direct Liability');
-    expect(termsPatientRightsText).toContain('15.2 Dispute Resolution & Statutory Consumer Protection Carve-Out');
+        expect(termsPatientRightsText).toContain('Release Status    : Approved for Public Notice & Clinical Operations');
+        expect(termsPatientRightsText).toContain('Effective Date    : October 1, 2025');
+        expect(termsPatientRightsText).toContain('1.2.1 Institutional & B2B Service Boundary');
+        expect(termsPatientRightsText).toContain('13.2 Standard of Care & Limitation of Direct Liability');
+        expect(termsPatientRightsText).toContain('15.2 Dispute Resolution & Statutory Consumer Protection Carve-Out');
   });
 
   it('keeps the supplied quality charter identical in website docs and runtime copy', () => {

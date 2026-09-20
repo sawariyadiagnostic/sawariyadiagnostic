@@ -21,12 +21,12 @@ const policyCopy = {
     content: privacyPolicyText,
   },
   terms: {
-    icon: FileText,
-    title: 'Terms of Service & Patient Rights',
-    description: 'Version 2.0-Legal Standard • Effective October 1, 2026 • Republic of India',
-    status: 'Terms & Patient Rights — approved; effective October 1, 2026',
-    content: termsPatientRightsText,
-  },
+      icon: FileText,
+      title: 'Terms of Service & Patient Rights',
+      description: 'Version 2.0-Legal Standard • Effective October 1, 2025 • Republic of India',
+      status: 'Terms & Patient Rights — approved',
+      content: termsPatientRightsText,
+    },
   charter: {
     icon: HeartHandshake,
     title: 'Patient Quality & Community Charter',

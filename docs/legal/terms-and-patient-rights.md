@@ -297,7 +297,7 @@ Document Title    : Master Terms of Service & Patient Rights Charter
 Entity Name       : Sawariya Diagnostic Lab, Charkhi Dadri, Haryana
 Document Version  : Version 2.0-Legal Standard
 Release Status    : Approved for Public Notice & Clinical Operations
-Effective Date    : October 1, 2026
+Effective Date    : October 1, 2025
 
 [X] Executive & Operations Review
    Reviewer Role : Managing Partner / Operations Lead
