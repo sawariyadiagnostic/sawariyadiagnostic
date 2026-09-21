@@ -4,12 +4,55 @@ import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-const Dialog = DialogPrimitive.Root;
+const DIALOG_HISTORY_KEY = "sawariyaDialogId";
+let nextDialogId = 0;
+
+type DialogProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Root>;
+
+function Dialog({ open: controlledOpen, defaultOpen = false, onOpenChange, ...props }: DialogProps) {
+  const id = React.useRef(`dialog-${++nextDialogId}`).current;
+  const isControlled = controlledOpen !== undefined;
+  const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
+  const previousOpen = React.useRef(Boolean(open));
+  const suppressHistoryClose = React.useRef(false);
+
+  const setOpen = React.useCallback((nextOpen: boolean) => {
+    if (!isControlled) setUncontrolledOpen(nextOpen);
+    onOpenChange?.(nextOpen);
+  }, [isControlled, onOpenChange]);
+
+  React.useEffect(() => {
+    const wasOpen = previousOpen.current;
+    previousOpen.current = Boolean(open);
+
+    if (open && !wasOpen && window.history.state?.[DIALOG_HISTORY_KEY] !== id) {
+      window.history.pushState({ ...window.history.state, [DIALOG_HISTORY_KEY]: id }, "", window.location.href);
+      return;
+    }
+
+    if (!open && wasOpen && !suppressHistoryClose.current && window.history.state?.[DIALOG_HISTORY_KEY] === id) {
+      window.history.back();
+    }
+    suppressHistoryClose.current = false;
+  }, [id, open]);
+
+  React.useEffect(() => {
+    const handlePopState = () => {
+      if (!open || window.history.state?.[DIALOG_HISTORY_KEY] === id) return;
+      suppressHistoryClose.current = true;
+      setOpen(false);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [id, open, setOpen]);
+
+  return <DialogPrimitive.Root {...props} open={open} onOpenChange={setOpen} />;
+}
 
 const DialogTrigger = DialogPrimitive.Trigger;
-
 const DialogPortal = DialogPrimitive.Portal;
-
 const DialogClose = DialogPrimitive.Close;
 
 const DialogOverlay = React.forwardRef<
@@ -42,7 +85,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[state=open]:bg-accent data-[state=open]:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none">
+      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity data-[state=open]:bg-accent data-[state=open]:text-muted-foreground hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
