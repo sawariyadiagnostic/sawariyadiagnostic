@@ -256,6 +256,25 @@ test('individual test hash links restore the matching test and browser Back clos
   await expect(dialog).toBeHidden({ timeout: 20_000 });
 });
 
+test('nested booking dialog closes before test details on browser Back', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+
+  const detail = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i }).first();
+  await expect(detail).toBeVisible();
+  await detail.getByRole('button', { name: /Book Appointment/ }).click();
+
+  const dialogs = page.locator('[role="dialog"]');
+  await expect(dialogs).toHaveCount(2);
+  await page.goBack();
+  await expect(dialogs).toHaveCount(1);
+  await expect(detail).toBeVisible();
+  await page.goBack();
+  await expect(detail).toBeHidden();
+});
+
 test('catalog pagination limits visible cards and resets after filtering', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
