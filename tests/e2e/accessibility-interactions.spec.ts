@@ -102,6 +102,19 @@ test('current quality charter dialog exposes the approved identifier and source 
   await expect(trigger).toBeFocused();
 });
 
+test('legal dialogs close with the browser back action', async ({ page }) => {
+  await openPage(page);
+  const trigger = page.getByRole('button', { name: 'Terms & Patient Rights' });
+  await trigger.click();
+  const dialog = page.getByRole('dialog', { name: 'Terms of Service & Patient Rights' });
+  await expect(dialog).toBeVisible();
+
+  await page.goBack();
+
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+});
+
 test('remaining legal footer actions identify drafts requiring review', async ({ page }) => {
   await openPage(page);
 

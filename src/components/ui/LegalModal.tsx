@@ -43,13 +43,28 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
   const policy = type ? policyCopy[type] : null;
   const Icon = policy?.icon;
 
+  const closeModal = () => {
+    if (window.history.state?.legalModal) window.history.back();
+    else onClose();
+  };
+
   useEffect(() => {
+    if (type && !previousType.current) {
+      window.history.pushState({ legalModal: true }, '', window.location.href);
+    }
+
+    const handlePopState = () => {
+      if (type) onClose();
+    };
+
+    window.addEventListener('popstate', handlePopState);
     if (previousType.current && !type) requestAnimationFrame(() => triggerRef.current?.focus());
     previousType.current = type;
-  }, [type]);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [type, onClose]);
 
   return (
-    <Dialog open={Boolean(type)} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={Boolean(type)} onOpenChange={(open) => !open && closeModal()}>
       {type && policy && Icon && (
         <DialogContent
           className="w-[calc(100vw-32px)] sm:max-w-2xl bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_32px_80px_rgba(0,0,0,0.2)] border border-white/60 overflow-hidden max-h-[85vh] p-0 flex flex-col"
@@ -84,7 +99,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
           <div className="p-3 sm:p-4 bg-white border-t border-slate-200 flex flex-wrap gap-2 flex-shrink-0">
             <Button
               variant="outline"
-              onClick={onClose}
+              onClick={closeModal}
               className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
               aria-label={`Back from ${policy.title}`}
               title="Return to legal links"
