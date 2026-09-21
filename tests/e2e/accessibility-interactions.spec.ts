@@ -239,6 +239,25 @@ test('individual test hash links restore the matching test and browser Back clos
   await expect(dialog).toBeHidden({ timeout: 20_000 });
 });
 
+test('catalog pagination limits visible cards and resets after filtering', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+
+  const catalog = page.locator('#tests');
+  const pagination = catalog.getByRole('navigation', { name: 'Test catalog pages' });
+  await expect(pagination).toBeVisible();
+  await expect(pagination).toContainText(/Showing 1–24 of 74 tests/);
+  await expect(catalog.getByRole('button', { name: 'Details' })).toHaveCount(24);
+
+  await pagination.getByRole('button', { name: 'Next' }).click();
+  await expect(pagination).toContainText(/Showing 25–48 of 74 tests/);
+  await expect(pagination.getByRole('button', { name: 'Previous' })).toBeEnabled();
+
+  await catalog.getByPlaceholder('Ask about an individual test…').fill('thyroid');
+  await expect(catalog.getByRole('status').filter({ hasText: /tests matching/ })).toContainText(/tests matching/);
+  await expect(pagination).toBeHidden();
+});
+
 test('catalog cards show real test descriptions', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();

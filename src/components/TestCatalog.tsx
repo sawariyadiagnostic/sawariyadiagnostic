@@ -10,10 +10,12 @@ import { categories, medicalTests as publishedTests, type MedicalTest } from '@/
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 
 const testCategories = categories.filter((category) => category.id !== 'package');
+const TESTS_PER_PAGE = 24;
 
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
   const tests = publishedTests;
 
@@ -54,10 +56,23 @@ export function TestCatalog() {
     () => searchEngine.search(searchQuery, selectedCategory).filter((item) => item.type === 'test'),
     [searchEngine, searchQuery, selectedCategory],
   );
+  const totalPages = Math.max(1, Math.ceil(filteredTests.length / TESTS_PER_PAGE));
+  const pageStart = (currentPage - 1) * TESTS_PER_PAGE;
+  const visibleTests = filteredTests.slice(pageStart, pageStart + TESTS_PER_PAGE);
+  const resetPage = () => setCurrentPage(1);
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
+
   const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('all');
+    resetPage();
   };
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
@@ -101,11 +116,11 @@ export function TestCatalog() {
                 name="catalog-search"
                 autoComplete="off"
                 value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
+                onChange={(event) => { setSearchQuery(event.target.value); resetPage(); }}
                 className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-medium focus:border-[#155E9A] shadow-2xs text-slate-900"
               />
               {searchQuery && (
-                <button type="button" onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer">
+                <button type="button" onClick={() => { setSearchQuery(''); resetPage(); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer">
                   Clear
                 </button>
               )}
@@ -117,7 +132,7 @@ export function TestCatalog() {
                   <button
                     type="button"
                     key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
+                    onClick={() => { setSelectedCategory(category.id); resetPage(); }}
                     className={`min-h-11 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${selected ? 'bg-[#102A43] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
                   >
                     {category.name}
@@ -135,7 +150,7 @@ export function TestCatalog() {
               <button
                 type="button"
                 key={symptom.label}
-                onClick={() => { setSearchQuery(symptom.query); setSelectedCategory(symptom.cat); }}
+                onClick={() => { setSearchQuery(symptom.query); setSelectedCategory(symptom.cat); resetPage(); }}
                 className={`min-h-11 text-[11px] font-semibold px-2.5 rounded-full border transition-surface whitespace-nowrap cursor-pointer ${searchQuery === symptom.query && symptom.query !== '' ? 'bg-[#155E9A] text-white border-[#155E9A]' : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'}`}
               >
                 {symptom.label}
@@ -157,12 +172,32 @@ export function TestCatalog() {
             <Button type="button" variant="outline" onClick={clearFilters} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">Clear filters</Button>
           </div>
         ) : (
-          <div className="fluid-grid-cards-sm">
-            {filteredTests.map((item) => {
-              const test = tests.find((candidate) => candidate.id === item.id);
-              return test ? <TestCard key={test.id} test={test} onViewDetails={openTest} /> : null;
-            })}
-          </div>
+          <>
+            <div className="fluid-grid-cards-sm">
+              {visibleTests.map((item) => {
+                const test = tests.find((candidate) => candidate.id === item.id);
+                return test ? <TestCard key={test.id} test={test} onViewDetails={openTest} /> : null;
+              })}
+            </div>
+            {filteredTests.length > TESTS_PER_PAGE && (
+              <nav aria-label="Test catalog pages" className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+                <p className="text-xs font-medium text-slate-600" aria-live="polite">
+                  Showing {pageStart + 1}–{Math.min(pageStart + TESTS_PER_PAGE, filteredTests.length)} of {filteredTests.length} tests
+                </p>
+                <div className="flex items-center gap-2">
+                  <Button type="button" variant="outline" disabled={currentPage === 1} onClick={() => setCurrentPage((page) => page - 1)} className="action-button min-h-11 rounded-[14px] font-bold">
+                    Previous
+                  </Button>
+                  <span className="min-w-20 text-center text-xs font-bold text-slate-700" aria-label={`Page ${currentPage} of ${totalPages}`}>
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <Button type="button" variant="outline" disabled={currentPage === totalPages} onClick={() => setCurrentPage((page) => page + 1)} className="action-button min-h-11 rounded-[14px] font-bold">
+                    Next
+                  </Button>
+                </div>
+              </nav>
+            )}
+          </>
         )}
       </div>
 
