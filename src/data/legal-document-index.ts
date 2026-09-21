@@ -63,7 +63,7 @@ const approved = (
   title,
   state: 'published',
   version: '2.0.0',
-  effectiveAt: '2026-10-01',
+  effectiveAt: '2025-10-01',
   allowedCoverage,
   reviewRequiredFor,
   ownerApproval: { status: 'approved', reviewer: reviewer.owner, reviewedAt: '2026-09-21' },

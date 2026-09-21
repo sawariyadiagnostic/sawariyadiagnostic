@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { privacyPolicyText } from '@/data/privacy-policy';
 import { qualityCommunityCharterText } from '@/data/quality-community-charter';
 import { termsPatientRightsText } from '@/data/terms-patient-rights';
@@ -17,7 +17,7 @@ const policyCopy = {
     icon: ShieldCheck,
     title: 'Privacy & Medical Data Policy',
     description: 'Version 2.0-Operative Standard • Effective October 1, 2025 • Republic of India',
-    status: 'Privacy Policy — current operative standard',
+    status: 'Privacy Policy ',
     content: privacyPolicyText,
   },
   terms: {
@@ -30,8 +30,8 @@ const policyCopy = {
   charter: {
     icon: HeartHandshake,
     title: 'Patient Quality & Community Charter',
-    description: 'SDL-QMS-CC-2026-V2 • Effective October 1, 2026 • Republic of India',
-    status: 'Quality & Community Charter — approved; effective October 1, 2026',
+    description: 'SDL-QMS-CC-2026-V2 • Effective October 1, 2025 • Republic of India',
+    status: 'Quality & Community Charter — approved; effective October 1, 2025',
     content: qualityCommunityCharterText,
   },
 } as const;
@@ -70,6 +70,15 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
                 <DialogDescription className="text-xs text-slate-400">{policy.description}</DialogDescription>
               </div>
             </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="relative z-10 inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/20 px-3 text-sm font-semibold text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/70"
+              aria-label={`Back from ${policy.title}`}
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              <span>Back</span>
+            </button>
           </div>
 
           <div className="min-h-0 overflow-y-auto bg-white/50 p-6 sm:p-8 text-sm leading-relaxed text-slate-600">

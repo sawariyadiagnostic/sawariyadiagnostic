@@ -26,7 +26,7 @@ describe('legal document publication boundary', () => {
       if (key === 'terms' || key === 'patient-rights') {
         expect(document.state).toBe('published');
         expect(document.version).toBe('2.0.0');
-        expect(document.effectiveAt).toBe('2026-10-01');
+        expect(document.effectiveAt).toBe('2025-10-01');
         expect(validateLegalDocumentForPublication(document).success).toBe(true);
       } else {
         expect(document.state).toBe('draft');

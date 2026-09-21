@@ -1,4 +1,4 @@
-<!-- Owner-supplied SDL-QMS-CC-2026-V2. Approved formal institutional framework; effective October 1, 2026. Preserve exact wording. -->
+<!-- Owner-supplied SDL-QMS-CC-2026-V2. Approved formal institutional framework; effective October 1, 2025. Preserve exact wording. -->
 
 Sawariya Diagnostic Lab — Master Clinical Quality Assurance, Patient Care & Community Health Charter
 
@@ -296,7 +296,7 @@ Plaintext
 Document Title    : Master Clinical Quality Assurance, Patient Care & Community Health Charter
 Unique Identifier : SDL-QMS-CC-2026-V2
 Operational Status: APPROVED — FORMAL INSTITUTIONAL FRAMEWORK
-Effective Date    : October 1, 2026
+Effective Date    : October 1, 2025
 Supersedes        : All prior preliminary drafts (Draft v0.1)
 
 [X] Executive & Operations Approval

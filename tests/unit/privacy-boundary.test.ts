@@ -60,7 +60,7 @@ describe('privacy and trust boundary', () => {
     expect(charterDocument).toBe(qualityCommunityCharterText);
     expect(qualityCommunityCharterText).toContain('Document Identifier: SDL-QMS-CC-2026-V2');
     expect(qualityCommunityCharterText).toContain('Version: 2.0-Legal Standard');
-    expect(qualityCommunityCharterText).toContain('Effective Date    : October 1, 2026');
+    expect(qualityCommunityCharterText).toContain('Effective Date    : October 1, 2025');
     expect(qualityCommunityCharterText).toContain('CLINICAL GOVERNANCE & QUALITY CHARTER APPROVAL RECORD');
   });
   it('does not retain the stale browser-visible Web3Forms key', () => {

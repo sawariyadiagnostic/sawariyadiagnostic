@@ -46,18 +46,18 @@ test('skip link moves focus to the main content landmark', async ({ page }) => {
 
 test('current privacy policy dialog exposes the operative version and source content', async ({ page }) => {
   await openPage(page);
-  const trigger = page.getByRole('button', { name: 'Privacy Policy — current operative standard' });
+  const trigger = page.getByRole('button', { name: 'Privacy Policy ' });
 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Privacy & Medical Data Policy' });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('status', { name: /PRIVACY POLICY — CURRENT OPERATIVE STANDARD/i })).toBeVisible();
+  await expect(dialog.getByRole('status', { name: /PRIVACY POLICY/i })).toBeVisible();
   const policyContent = dialog.locator('pre');
   await expect(policyContent).toContainText('Document Version: 2.0-Operative Standard');
   await expect(policyContent).toContainText('11. Statutory Grievance Redressal and Contact Details');
   await expect(policyContent).toContainText('sawariyadiagnosticckd11@gmail.com');
 
-  await page.keyboard.press('Escape');
+  await dialog.getByRole('button', { name: 'Back from Privacy & Medical Data Policy' }).click();
 
   await expect(dialog).toBeHidden();
   await expect(trigger).toBeFocused();
@@ -77,7 +77,7 @@ test('current terms and patient rights dialog exposes the approved version and s
   await expect(termsContent).toContainText('Effective Date    : October 1, 2025');
   await expect(termsContent).toContainText('LEGAL AND CLINICAL REVIEW SIGN-OFF LEDGER');
 
-  await page.keyboard.press('Escape');
+  await dialog.getByRole('button', { name: 'Back from Terms of Service & Patient Rights' }).click();
 
   await expect(dialog).toBeHidden();
   await expect(trigger).toBeFocused();
@@ -90,13 +90,13 @@ test('current quality charter dialog exposes the approved identifier and source 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Patient Quality & Community Charter' });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('status', { name: /QUALITY \x26 COMMUNITY CHARTER — APPROVED; EFFECTIVE OCTOBER 1, 2026/i })).toBeVisible();
+  await expect(dialog.getByRole('status', { name: /QUALITY \x26 COMMUNITY CHARTER — APPROVED; EFFECTIVE OCTOBER 1, 2025/i })).toBeVisible();
   const charterContent = dialog.locator('pre');
   await expect(charterContent).toContainText('Document Identifier: SDL-QMS-CC-2026-V2');
   await expect(charterContent).toContainText('CLINICAL GOVERNANCE & QUALITY CHARTER APPROVAL RECORD');
-  await expect(charterContent).toContainText('Effective Date    : October 1, 2026');
+  await expect(charterContent).toContainText('Effective Date    : October 1, 2025');
 
-  await page.keyboard.press('Escape');
+  await dialog.getByRole('button', { name: 'Back from Patient Quality & Community Charter' }).click();
 
   await expect(dialog).toBeHidden();
   await expect(trigger).toBeFocused();

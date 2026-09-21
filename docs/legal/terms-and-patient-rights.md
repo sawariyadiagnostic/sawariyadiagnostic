@@ -1,4 +1,4 @@
-<!-- Owner-supplied updated Version 2.0-Legal Standard. Approved for public notice and clinical operations; effective October 1, 2026. Preserve exact wording. -->
+<!-- Owner-supplied updated Version 2.0-Legal Standard. Approved for public notice and clinical operations; effective October 1, 2025. Preserve exact wording. -->
 
 Sawariya Diagnostic Lab — Master Terms of Service & Patient Rights Charter
 
