@@ -8,6 +8,7 @@ import { TestCard } from './ui/TestCard';
 import { TestDetailModal } from './catalog/TestDetailModal';
 import { categories, medicalTests as publishedTests, type MedicalTest } from '@/data/publishedCatalog';
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
+import { usePagination } from '@/lib/use-pagination';
 
 const testCategories = categories.filter((category) => category.id !== 'package');
 const TESTS_PER_PAGE = 24;
@@ -15,7 +16,6 @@ const TESTS_PER_PAGE = 24;
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
   const tests = publishedTests;
 
@@ -56,17 +56,7 @@ export function TestCatalog() {
     () => searchEngine.search(searchQuery, selectedCategory).filter((item) => item.type === 'test'),
     [searchEngine, searchQuery, selectedCategory],
   );
-  const totalPages = Math.max(1, Math.ceil(filteredTests.length / TESTS_PER_PAGE));
-  const pageStart = (currentPage - 1) * TESTS_PER_PAGE;
-  const visibleTests = filteredTests.slice(pageStart, pageStart + TESTS_PER_PAGE);
-  const resetPage = () => setCurrentPage(1);
-  useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(totalPages);
-  }, [currentPage, totalPages]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchQuery, selectedCategory]);
+  const { page: currentPage, setPage: setCurrentPage, resetPage, totalPages, start: pageStart, visibleItems: visibleTests } = usePagination(filteredTests, TESTS_PER_PAGE);
 
   const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
   const clearFilters = () => {
