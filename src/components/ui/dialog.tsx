@@ -36,7 +36,7 @@ function Dialog({ open: controlledOpen, defaultOpen = false, onOpenChange, ...pr
   const isControlled = controlledOpen !== undefined;
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(defaultOpen);
   const open = isControlled ? controlledOpen : uncontrolledOpen;
-  const previousOpen = React.useRef(Boolean(open));
+  const previousOpen = React.useRef(false);
   const suppressHistoryClose = React.useRef(false);
 
   const setOpen = React.useCallback((nextOpen: boolean) => {
