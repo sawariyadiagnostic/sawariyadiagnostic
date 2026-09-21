@@ -18,6 +18,7 @@ import { medicalTests, type MedicalTest } from '@/data/publishedCatalog';
 import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { formatInr } from '@/lib/utils';
+import { copyText } from '@/lib/clipboard';
 import { toast } from 'sonner';
 
 interface TestDetailModalProps {
@@ -38,8 +39,8 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   const handleShare = async () => {
     const url = `${window.location.origin}/#/test/${item.id}`;
     try {
-      await navigator.clipboard.writeText(url);
-      toast.success('Canonical link copied to clipboard!');
+      if (await copyText(url)) toast.success('Canonical link copied to clipboard!');
+      else throw new Error('clipboard unavailable');
     } catch {
       toast.error('Could not copy the link. Please copy the page URL manually.');
     }

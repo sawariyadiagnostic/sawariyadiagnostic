@@ -62,6 +62,19 @@ describe('approved public catalog', () => {
   });
 
 
+  it('centralizes dialog history, scroll lock, and focus restoration', () => {
+    const dialogSource = readFileSync(resolve(process.cwd(), 'src/components/ui/dialog.tsx'), 'utf8');
+    expect(dialogSource).toContain('window.history.pushState');
+    expect(dialogSource).toContain('window.addEventListener("popstate"');
+    expect(dialogSource).toContain('document.body.style.overflow = "hidden"');
+    expect(dialogSource).toContain('triggerRef.current.focus()');
+  });
+
+  it('uses shared safe-area tokens', () => {
+    const tokenSource = readFileSync(resolve(process.cwd(), 'src/styles/tokens.css'), 'utf8');
+    expect(tokenSource).toContain('--safe-area-bottom');
+    expect(tokenSource).toContain('--mobile-dock-clearance');
+  });
   it('keeps dialog layers above the mobile dock', () => {
     const dialogSource = readFileSync(resolve(process.cwd(), 'src/components/ui/dialog.tsx'), 'utf8');
     expect(dialogSource).toContain('inset-0 z-[110]');
@@ -106,7 +119,8 @@ describe('approved public catalog', () => {
   it('reports clipboard share success and failure honestly', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
     expect(source).toContain('const handleShare = async () =>');
-    expect(source).toContain('await navigator.clipboard.writeText(url)');
+    expect(source).toContain('await copyText(url)');
+    expect(source).toContain("toast.success('Canonical link copied to clipboard!')");
     expect(source).toContain("toast.error('Could not copy the link. Please copy the page URL manually.')");
   });
 

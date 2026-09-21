@@ -81,6 +81,9 @@
   --brand-spectrum: linear-gradient(135deg, #A61E1E 0%, #7A4B2A 46%, #155E9A 100%);
 
   --radius: 1rem;
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --mobile-dock-clearance: calc(var(--safe-area-bottom) + 76px);
 }
 
 .dark {
