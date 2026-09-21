@@ -124,6 +124,12 @@ describe('approved public catalog', () => {
     expect(source).toContain("toast.error('Could not copy the link. Please copy the page URL manually.')");
   });
 
+  it('retries failed lazy sections without reloading the page', () => {
+    const source = readFileSync(resolve(process.cwd(), 'src/components/ui/SectionErrorBoundary.tsx'), 'utf8');
+    expect(source).toContain('this.setState({ hasError: false });');
+    expect(source).not.toContain('window.location.reload');
+  });
+
   it('gives calendar initialization an honest contact fallback', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/Contact.tsx'), 'utf8');
     expect(source).toContain('const [calendarError, setCalendarError] = useState(false);');

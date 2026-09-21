@@ -18,7 +18,7 @@ export class SectionErrorBoundary extends React.Component<SectionErrorBoundaryPr
   }
 
   handleRetry = () => {
-    window.location.reload();
+    this.setState({ hasError: false });
   };
 
   render() {
