@@ -3,6 +3,7 @@ import { ArrowLeft, FileText, HeartHandshake, ShieldCheck } from 'lucide-react';
 import { privacyPolicyText } from '@/data/privacy-policy';
 import { qualityCommunityCharterText } from '@/data/quality-community-charter';
 import { termsPatientRightsText } from '@/data/terms-patient-rights';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 
 export type PolicyType = 'privacy' | 'terms' | 'charter' | null;
@@ -17,7 +18,7 @@ const policyCopy = {
     icon: ShieldCheck,
     title: 'Privacy & Medical Data Policy',
     description: 'Version 2.0-Operative Standard • Effective October 1, 2025 • Republic of India',
-    status: 'Privacy Policy ',
+    status: 'Privacy Policy',
     content: privacyPolicyText,
   },
   terms: {
@@ -70,15 +71,6 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
                 <DialogDescription className="text-xs text-slate-400">{policy.description}</DialogDescription>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="relative z-10 inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/20 px-3 text-sm font-semibold text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/70"
-              aria-label={`Back from ${policy.title}`}
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              <span>Back</span>
-            </button>
           </div>
 
           <div className="min-h-0 overflow-y-auto bg-white/50 p-6 sm:p-8 text-sm leading-relaxed text-slate-600">
@@ -88,6 +80,18 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
             <article aria-label={`${policy.title} content`}>
               <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-slate-700">{policy.content}</pre>
             </article>
+          </div>
+          <div className="p-3 sm:p-4 bg-white border-t border-slate-200 flex flex-wrap gap-2 flex-shrink-0">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
+              aria-label={`Back from ${policy.title}`}
+              title="Return to legal links"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Back</span>
+            </Button>
           </div>
         </DialogContent>
       )}
