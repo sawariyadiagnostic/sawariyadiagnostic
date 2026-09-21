@@ -23,6 +23,23 @@ test('navbar logo is keyboard accessible as Back to top', async ({ page }) => {
   await expect(logo).toBeFocused();
 });
 
+test('mobile navigation closes with browser Back and restores scroll state', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openPage(page);
+
+  const trigger = page.getByRole('button', { name: 'Open navigation menu' });
+  await trigger.click();
+  const menu = page.getByRole('dialog', { name: 'Mobile navigation' });
+  await expect(menu).toBeVisible();
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('hidden');
+
+  await page.goBack();
+
+  await expect(menu).toBeHidden();
+  await expect(trigger).toBeFocused();
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('');
+});
+
 test('mobile navigation is a dialog and closes with Escape', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await openPage(page);

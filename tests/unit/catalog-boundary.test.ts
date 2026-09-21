@@ -118,13 +118,14 @@ describe('approved public catalog', () => {
     expect(source).toContain('role="alert"');
   });
 
-  it('gives the mobile menu dialog semantics and Escape dismissal', () => {
+  it('uses the shared dialog primitive for mobile navigation behavior', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/layout/MobileMenu.tsx'), 'utf8');
-    expect(source).toContain('role="dialog"');
-    expect(source).toContain('aria-modal="true"');
+    expect(source).toContain("import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';");
+    expect(source).toContain('<Dialog open={isOpen}');
     expect(source).toContain('aria-label="Mobile navigation"');
-    expect(source).toContain("if (event.key === 'Escape') onClose();");
-    expect(source).toContain('window.removeEventListener');
+    expect(source).toContain('<DialogTitle className="sr-only">Mobile navigation</DialogTitle>');
+    expect(source).not.toContain('window.addEventListener');
+    expect(source).not.toContain('document.body.style.overflow');
   });
 
   it('keeps the navbar logo keyboard accessible as Back to top', () => {
