@@ -32,7 +32,7 @@ describe('approval-gated legal SSG boundary', () => {
       const release = JSON.parse(fs.readFileSync(path.join(target, 'release.json'), 'utf8')) as { buildSha: string; runId: string | null };
       expect(release.buildSha).toBeTruthy();
       expect(release.buildSha).not.toBe('local');
-      expect(release.runId).toBeNull();
+      expect(release.runId).toBe(process.env.GITHUB_RUN_ID ?? null);
       fs.writeFileSync(path.join(target, 'release.json'), JSON.stringify({ buildSha: 'not-a-sha', runId: null }));
       expect(() => validatePublicArtifact(target)).toThrow('invalid release.json');
     } finally {
