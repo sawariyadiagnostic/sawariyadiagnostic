@@ -9,7 +9,6 @@ export function generateOgImage(outputDir = path.resolve(process.cwd(), 'dist'))
   const svg = fs.readFileSync(svgPath, 'utf-8');
   const pngBuffer = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.writeFileSync(path.join(outputDir, 'og-image.jpg'), pngBuffer);
   fs.writeFileSync(path.join(outputDir, 'og-image.png'), pngBuffer);
   console.log('✅ Generated OG image assets in dist');
 }

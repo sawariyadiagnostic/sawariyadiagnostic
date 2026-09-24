@@ -44,6 +44,29 @@ function generateHtmlTemplate(config: RouteConfig, baseIndexHtml: string): strin
   return html.replace('</head>', `\n    <link rel="canonical" href="${canonicalUrl}" />${languageLinks}\n    <meta property="og:url" content="${canonicalUrl}" />\n    <meta name="twitter:title" content="${config.title}" />\n    <meta name="twitter:description" content="${config.description}" />\n    <script type="application/ld+json">\n      ${JSON.stringify(config.jsonLd, null, 2)}\n    </script>\n  </head>`);
 }
 
+export function generate404Html(): string {
+  const homeUrl = publicUrl('');
+  const catalogUrl = publicUrl('#tests');
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="theme-color" content="#FFF9F3" />
+    <title>Page not found | Sawariya Diagnostic Lab</title>
+    <style>body{margin:0;padding:2rem;font:16px/1.6 system-ui,sans-serif;color:#102A43;background:#FFF9F3}main{max-width:42rem;margin:12vh auto;padding:2rem;background:#fff;border:1px solid #e5e7eb;border-radius:1rem}a{color:#155E9A;font-weight:600;margin-right:1rem}</style>
+  </head>
+  <body>
+    <main>
+      <h1>Page not found</h1>
+      <p>This page may have moved or the address may be incorrect.</p>
+      <p><a href="${homeUrl}">Home</a><a href="${catalogUrl}">Browse individual tests</a></p>
+    </main>
+  </body>
+</html>`;
+}
+
 export function buildSSG() {
   console.log('🚀 [SSG Engine] Generating approved guide pages and support assets...');
   if (!fs.existsSync(DIST_DIR)) throw new Error('Dist directory does not exist; run vite build first');
@@ -87,7 +110,7 @@ export function buildSSG() {
     fs.writeFileSync(targetPath, generateHtmlTemplate(route, baseIndexHtml), 'utf8');
     generatedCount += 1;
   }
-  fs.writeFileSync(path.join(DIST_DIR, '404.html'), baseIndexHtml, 'utf8');
+  fs.writeFileSync(path.join(DIST_DIR, '404.html'), generate404Html(), 'utf8');
 
   const date = new Date().toISOString().split('T')[0];
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${publicUrl('/')}</loc><lastmod>${date}</lastmod><changefreq>daily</changefreq><priority>1.0</priority></url>\n${routes.map((route) => `  <url><loc>${publicUrl(route.path)}</loc><lastmod>${date}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`).join('\n')}\n</urlset>`;

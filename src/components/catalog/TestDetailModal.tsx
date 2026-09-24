@@ -15,9 +15,9 @@ import {
   Stethoscope
 } from 'lucide-react';
 import { medicalTests, type MedicalTest } from '@/data/publishedCatalog';
-import { SEOHead } from '../seo/SEOHead';
 import { TestBookingModal } from '../booking/TestBookingModal';
 import { formatInr } from '@/lib/utils';
+import { buildTestShareUrl } from '@/config/site';
 import { copyText } from '@/lib/clipboard';
 import { toast } from 'sonner';
 
@@ -37,7 +37,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     : null;
 
   const handleShare = async () => {
-    const url = `${window.location.origin}/#/test/${item.id}`;
+    const url = buildTestShareUrl(item.id);
     try {
       if (await copyText(url)) toast.success('Canonical link copied to clipboard!');
       else throw new Error('clipboard unavailable');
@@ -46,24 +46,8 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     }
   };
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'MedicalTest',
-    name: item.name,
-    description: item.description,
-    offers: { '@type': 'Offer', price: item.price, priceCurrency: 'INR' },
-  };
-
   return (
     <>
-      {isOpen && (
-        <SEOHead
-          title={`${item.name} - Price ${formatInr(item.price)} | Sawariya Diagnostic`}
-          description={item.description || `Book ${item.name} test at Sawariya Diagnostic Lab with free home sample collection.`}
-          canonicalUrl={`https://sawariyadiagnostic.github.io/sawariyadiagnostic/test/${item.id}.html`}
-          jsonLd={schemaJson}
-        />
-      )}
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
         <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[24px] sm:rounded-[32px] flex flex-col">
           {/* Header */}

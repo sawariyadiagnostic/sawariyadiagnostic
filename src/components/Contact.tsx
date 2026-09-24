@@ -25,8 +25,8 @@ export function Contact() {
   const infoCards = [
     {
       icon: FileCheck,
-      title: '1. Select Test / Package',
-      description: 'Tell the lab which test or package you want to request.',
+      title: '1. Select Tests',
+      description: 'Tell the lab which individual tests you want to request.',
       style: {
         iconBg: 'bg-blue-50 text-[#102A43] border-blue-200/80',
         accentBar: 'bg-[#102A43]',

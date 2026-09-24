@@ -60,6 +60,12 @@ export function validateSiteConfig(config = siteConfig) {
 
 validateSiteConfig();
 
+export function buildTestShareUrl(testId: string, origin = window.location.origin) {
+  const url = new URL(siteConfig.publicBasePath, origin);
+  url.hash = `/test/${encodeURIComponent(testId)}`;
+  return url.toString();
+}
+
 export function telHref(value: string) {
   return value.startsWith('YOUR_') ? undefined : `tel:${value.replace(/\s/g, '')}`;
 }

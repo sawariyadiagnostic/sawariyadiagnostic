@@ -121,7 +121,7 @@ export function Hero() {
                     <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
-                      placeholder="Ask about a test or package…"
+                      placeholder="Ask about an individual test…"
                       name="catalog-search"
                       autoComplete="off"
                       value={searchQuery}

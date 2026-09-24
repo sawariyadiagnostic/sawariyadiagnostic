@@ -38,16 +38,18 @@ const charterDocument = readFileSync(
   'utf8',
 ).replace(/^<!-- [\s\S]*? -->\s*/u, '');
 
+const normalizeNewlines = (value: string) => value.split(String.fromCharCode(13)).join('');
+
 describe('privacy and trust boundary', () => {
   it('keeps the supplied privacy policy identical in website docs and runtime copy', () => {
-    expect(policyDocument).toBe(privacyPolicyText);
+    expect(normalizeNewlines(policyDocument)).toBe(normalizeNewlines(privacyPolicyText));
     expect(privacyPolicyText).toContain('Document Version: 2.0-Operative Standard');
     expect(privacyPolicyText).toContain('Effective Date: October 1, 2025');
     expect(privacyPolicyText).toContain('11. Statutory Grievance Redressal and Contact Details');
   });
 
   it('keeps the supplied terms and patient rights charter identical in website docs and runtime copy', () => {
-    expect(termsDocument).toBe(termsPatientRightsText);
+    expect(normalizeNewlines(termsDocument)).toBe(normalizeNewlines(termsPatientRightsText));
     expect(termsPatientRightsText).toContain('Version: 2.0-Legal Standard');
         expect(termsPatientRightsText).toContain('Release Status    : Approved for Public Notice & Clinical Operations');
         expect(termsPatientRightsText).toContain('Effective Date    : October 1, 2025');
@@ -57,7 +59,7 @@ describe('privacy and trust boundary', () => {
   });
 
   it('keeps the supplied quality charter identical in website docs and runtime copy', () => {
-    expect(charterDocument).toBe(qualityCommunityCharterText);
+    expect(normalizeNewlines(charterDocument)).toBe(normalizeNewlines(qualityCommunityCharterText));
     expect(qualityCommunityCharterText).toContain('Document Identifier: SDL-QMS-CC-2026-V2');
     expect(qualityCommunityCharterText).toContain('Version: 2.0-Legal Standard');
     expect(qualityCommunityCharterText).toContain('Effective Date    : October 1, 2025');

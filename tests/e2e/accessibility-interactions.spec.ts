@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 const openPage = async (page: Parameters<typeof test>[0]['page']) => {
-  await page.goto('/', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+  await page.goto('./', { waitUntil: 'domcontentloaded', timeout: 60_000 });
   await expect(page.locator('#main-content')).toBeVisible();
 };
 

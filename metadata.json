@@ -1,6 +1,6 @@
 {
   "name": "Sawariya Diagnostic",
-  "description": "Diagnostic testing, health packages, home collection availability, and report assistance for Charkhi Dadri.",
+  "description": "Individual diagnostic tests, home collection requests, and report assistance for Charkhi Dadri.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

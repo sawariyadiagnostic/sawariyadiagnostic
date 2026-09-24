@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { isPublishableGuide, validateGuideForPublication } from '../../src/content-guide-schema';
 import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
-import { siteConfig, validateSiteConfig } from '../../src/config/site';
+import { siteConfig, validateSiteConfig, buildTestShareUrl } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
 import { formatInr } from '../../src/lib/utils';
 
@@ -100,8 +100,8 @@ describe('approved public catalog', () => {
   it('gives both catalog search inputs stable form metadata', () => {
     const heroSource = readFileSync(resolve(process.cwd(), 'src/components/Hero.tsx'), 'utf8');
     const catalogSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
-    expect(heroSource).toContain('placeholder="Ask about a test or package…"');
-    expect(catalogSource).toContain('placeholder="Ask about an individual test…"');
+    expect(heroSource).toContain('placeholder="Ask about an individual test…"');
+    expect(catalogSource).toContain('Individual Tests. Transparent Pricing.');
   });
 
   it('announces catalog search result counts to assistive technology', () => {
@@ -189,6 +189,11 @@ describe('approved public catalog', () => {
 });
 
 describe('public site configuration', () => {
+  it('builds a test share URL under the GitHub Pages project path', () => {
+    expect(buildTestShareUrl('web-002', 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/'))
+      .toBe('https://sawariyadiagnostic.github.io/sawariyadiagnostic/#/test/web-002');
+  });
+
   it('accepts the current public configuration', () => {
     expect(validateSiteConfig()).toBe(siteConfig);
   });

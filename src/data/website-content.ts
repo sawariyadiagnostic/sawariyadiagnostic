@@ -94,7 +94,7 @@ export const contact = {
     {
       icon: FileCheck,
       title: 'Choose Your Tests',
-      description: 'Select from our comprehensive test menu or health packages',
+      description: 'Select from our individual diagnostic test menu.',
       color: 'accent-teal',
     },
     {

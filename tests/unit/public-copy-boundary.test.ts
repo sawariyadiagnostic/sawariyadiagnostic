@@ -60,6 +60,27 @@ describe('public copy claim boundary', () => {
     expect(publicCopy).not.toMatch(/Sample #SD-|MD Sign-off|QR-Secured|14\.2 g\/dL|2\.4 mIU\/L|92 mg\/dL|Free Home Visit \(₹0\)|>Verified</i);
   });
 
+  it('does not advertise removed public health packages', () => {
+    const packageCopyFiles = [
+      'src/components/Hero.tsx',
+      'src/components/Contact.tsx',
+      'src/data/website-content.ts',
+      'index.html',
+      'public/ai.txt',
+      'public/manifest.webmanifest',
+      'public/og-image.svg',
+    ];
+    const copy = packageCopyFiles.map((file) => readFileSync(resolve(process.cwd(), file), 'utf8')).join('\n');
+    expect(copy).not.toMatch(/health packages?|test or package|package deals|tests • health packages/i);
+    expect(readFileSync(resolve(process.cwd(), 'public/ai.txt'), 'utf8')).not.toMatch(/^Services:.*health checkups?/im);
+  });
+
+  it('uses base-relative manifest URLs for the GitHub Pages project path', () => {
+    const manifest = JSON.parse(readFileSync(resolve(process.cwd(), 'public/manifest.webmanifest'), 'utf8'));
+    expect(manifest.start_url).toBe('./');
+    expect(manifest.icons[0].src).toBe('./brand/sawariya-dna-original.svg');
+  });
+
   it('uses approved operational copy instead of repetitive fallback disclaimers', () => {
     expect(publicCopy).toContain('Home collection: 06:30 AM–08:00 PM');
     expect(publicCopy).toContain('Reports verified within 12 hours');

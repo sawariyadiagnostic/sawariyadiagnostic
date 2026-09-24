@@ -12,19 +12,23 @@
   "scripts": {
     "dev": "tsx server.ts",
     "build": "npm run build:guides && vite build && tsx scripts/generate-ssg.ts && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "stage:pages": "tsx scripts/stage-pages-artifact.ts stage",
+    "validate:public-artifact": "tsx scripts/stage-pages-artifact.ts validate",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test:unit": "npm exec -- vitest run --config vitest.config.ts",
     "test:e2e": "cross-env PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 playwright test tests/e2e/smoke.spec.ts --config playwright.config.ts",
+    "test:e2e:pages": "cross-env PLAYWRIGHT_PAGES_ARTIFACT=1 PLAYWRIGHT_HEALTH_URL=http://127.0.0.1:4173 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173/sawariyadiagnostic/ playwright test tests/e2e/smoke.spec.ts tests/e2e/pages-artifact.spec.ts --config playwright.config.ts",
     "test:a11y": "cross-env PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 playwright test tests/e2e/accessibility.spec.ts tests/e2e/accessibility-interactions.spec.ts --config playwright.config.ts",
+    "test:a11y:pages": "cross-env PLAYWRIGHT_PAGES_ARTIFACT=1 PLAYWRIGHT_HEALTH_URL=http://127.0.0.1:4173 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173/sawariyadiagnostic/ playwright test tests/e2e/accessibility.spec.ts tests/e2e/accessibility-interactions.spec.ts --config playwright.config.ts",
     "validate:content": "tsx scripts/validate-content.ts",
     "build:guides": "tsx scripts/build-guide-manifest.ts",
-    "check": "npm run lint && npm run typecheck && npm run test:unit && npm run validate:content && npm run test:e2e && npm run test:a11y && npm run build",
+    "check": "npm run lint && npm run typecheck && npm run test:unit && npm run validate:content && npm run build && npm run stage:pages && npm run validate:public-artifact && npm run test:e2e:pages && npm run test:a11y:pages",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "npm run check",
+    "deploy": "npm run stage:pages && npm run validate:public-artifact && gh-pages -d dist-pages"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
