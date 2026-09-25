@@ -49,7 +49,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
-        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[24px] sm:rounded-[32px] flex flex-col">
+        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-6 text-white relative overflow-hidden flex-shrink-0">
             <div className="flex items-start justify-between gap-4 relative z-10">
@@ -61,12 +61,12 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
                   {item.name}
                 </DialogTitle>
-                <DialogDescription className="text-xs text-blue-100/90 mt-1">
+                <DialogDescription className="text-xs text-[var(--text-on-dark)] mt-1">
                   Documented laboratory protocols • Reports verified within 12 hours
                 </DialogDescription>
               </div>
 
-              <div className="text-right flex-shrink-0">
+              <div className="text-right flex-shrink-0 pt-11 sm:pt-0 sm:pr-14">
                 <div className="text-2xl sm:text-3xl font-black text-white">{formatInr(item.price)}</div>
                 {item.originalPrice > item.price && (
                   <div className="text-xs text-blue-200 line-through">{formatInr(item.originalPrice)}</div>

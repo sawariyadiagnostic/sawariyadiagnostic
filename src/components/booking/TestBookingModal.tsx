@@ -30,7 +30,7 @@ export function TestBookingModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
-      <DialogContent className="w-[calc(100vw-32px)] sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] rounded-[28px] sm:rounded-[32px] mx-auto">
+      <DialogContent className="w-[calc(100vw-32px)] sm:max-w-[480px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel mx-auto">
         <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-4 sm:p-5 text-white">
           <span className="text-[10px] font-bold uppercase tracking-wider text-blue-100 bg-white/10 px-2 py-0.5 rounded-full inline-block mb-1">
             Diagnostic Test
@@ -42,7 +42,7 @@ export function TestBookingModal({
               {originalPrice !== undefined && originalPrice > price && <span className="text-xs text-blue-100 line-through block">{formatInr(originalPrice)}</span>}
             </div>
           </div>
-          <DialogDescription className="text-xs text-blue-100/90 mt-1">
+          <DialogDescription className="text-xs text-[var(--text-on-dark)] mt-1">
             Choose an appointment channel. Patient details are entered only through the selected contact or booking provider.
           </DialogDescription>
         </div>

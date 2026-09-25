@@ -16,7 +16,7 @@ export function ReportDownloadModal({ trigger }: { trigger?: React.ReactNode }) 
           </button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl rounded-[32px]">
+      <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl ui-panel">
         <div className="bg-[#102A43] p-6 text-white text-center">
           <FileDown className="w-8 h-8 mx-auto mb-3 text-blue-200" />
           <DialogTitle className="text-xl font-bold tracking-tight text-white">Report assistance</DialogTitle>

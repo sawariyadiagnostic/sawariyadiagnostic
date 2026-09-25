@@ -24,7 +24,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         aria-label="Mobile navigation"
-        className="lg:hidden fixed top-0 right-0 left-auto h-full w-[340px] max-w-[88vw] translate-x-0 translate-y-0 rounded-none border-l border-white/60 bg-white/70 p-0 backdrop-blur-[40px] shadow-[-20px_0_50px_rgba(0,0,0,0.1)] flex flex-col justify-between overflow-y-auto pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]"
+        className="mobile-menu-panel lg:hidden fixed top-0 right-0 left-auto h-full w-[340px] max-w-[88vw] translate-x-0 translate-y-0 rounded-none border-l border-white/60 bg-white/70 p-0 backdrop-blur-[40px] shadow-[-20px_0_50px_rgba(0,0,0,0.1)] flex flex-col justify-between overflow-y-auto pt-[env(safe-area-inset-top,0px)] pb-[env(safe-area-inset-bottom,0px)]"
       >
         <div className="p-5">
           <div className="flex items-center justify-between pb-4 border-b border-black/[0.06]">
@@ -35,7 +35,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
             </div>
             <button
               onClick={onClose}
-              className="w-11 h-11 flex items-center justify-center rounded-full text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-surface cursor-pointer border border-white/80"
+              className="ui-control-button w-11 h-11 flex items-center justify-center rounded-[var(--radius-control)] text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-surface cursor-pointer border border-white/80"
               aria-label="Close Menu"
             >
               <X className="w-4 h-4" />
@@ -50,7 +50,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
                   scrollToSection(link.href);
                   onClose();
                 }}
-                className="flex items-center justify-between px-4 py-3 min-h-11 text-slate-800 hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[16px] font-semibold text-sm transition-surface duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
+                className="ui-control-button flex items-center justify-between px-4 py-3 min-h-11 text-[var(--text-primary)] hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[var(--radius-control)] font-semibold text-sm transition-surface duration-150 active:scale-[0.98] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
               >
                 <span>{link.label}</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />

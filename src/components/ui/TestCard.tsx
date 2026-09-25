@@ -55,7 +55,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
   return (
     <>
       <div 
-        className="glass-card p-5 sm:p-6 flex flex-col justify-between h-full group rounded-[24px] bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden"
+        className="glass-card ui-card p-5 sm:p-6 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden"
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-blue-500/5 group-hover:to-[#FFF9F3]0/5 transition-colors duration-500 pointer-events-none" />
@@ -65,7 +65,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
             {/* Top Badges */}
             <div className="flex items-center justify-between mb-3 gap-2">
               {test.popular ? (
-                <span className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-[#F1C27D] text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs border border-white/20">
+                <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs border border-white/20">
                   ★ Popular
                 </span>
               ) : (
@@ -86,7 +86,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
               {test.name}
             </h3>
             
-            <p className="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed font-normal">
+            <p className="text-xs text-[var(--text-muted)] mb-4 line-clamp-2 leading-relaxed font-normal">
               {test.description}
             </p>
           </div>
@@ -94,7 +94,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
           {/* Parameters Preview */}
           {test.parameters && test.parameters.length > 0 && (
             <div className="mb-4 space-y-1.5">
-              <span className="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider block">Key Parameters:</span>
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Key Parameters:</span>
               <div className="flex flex-wrap gap-1">
                 {test.parameters.slice(0, 3).map((param) => (
                   <span 
@@ -121,10 +121,10 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
               <div className="flex items-baseline gap-1.5">
                 <span className="text-2xl font-black text-[#1D1D1F]">{formatInr(test.price)}</span>
                 {test.originalPrice && test.originalPrice > test.price && (
-                  <span className="text-xs text-slate-400 line-through font-normal">{formatInr(test.originalPrice)}</span>
+                  <span className="text-xs text-[var(--text-muted)] line-through font-normal">{formatInr(test.originalPrice)}</span>
                 )}
               </div>
-              <span className="text-[9.5px] text-slate-400 font-medium">Quality process</span>
+              <span className="text-[10px] text-[var(--text-muted)] font-medium">Quality process</span>
             </div>
           </div>
 
@@ -137,7 +137,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
               className="action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
             >
               <Info className="w-3.5 h-3.5 text-[#155E9A] shrink-0" />
-              <span className="truncate">Details</span>
+              <span>Details</span>
             </Button>
 
             <Button 
@@ -145,7 +145,7 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
               onClick={handleBookClick}
               className="btn-primary action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] active:scale-[0.98] transition-surface shadow-xs hover:shadow-md w-full min-w-0"
             >
-              <span className="truncate">Book Now</span>
+              <span>Book Now</span>
               <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </Button>
           </div>

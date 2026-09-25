@@ -50,6 +50,22 @@
   --fluid-gap-lg: clamp(1.25rem, 0.95rem + 1.5vw, 2.5rem);
   --fluid-card-p: clamp(0.875rem, 0.75rem + 1.25vw, 1.85rem);
   --fluid-radius: clamp(0.875rem, 0.65rem + 1vw, 1.5rem);
+  --font-action: clamp(0.75rem, 0.72rem + 0.2vw, 0.875rem);
+  --text-primary: #102A43;
+  --text-muted: #455468;
+  --text-on-action: #FFFFFF;
+  --text-on-dark: #E8F1F8;
+  --accent-on-dark: #FFD98A;
+  --action-primary: #A61E1E;
+  --action-primary-hover: #7F1717;
+  --action-secondary: #155E9A;
+  --action-secondary-hover: #0F4775;
+  --surface-soft: #F5F5F7;
+  --radius-control: 1rem;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.5rem;
+  --control-gap: 0.5rem;
+  --target-size-min: 44px;
 
   /* Approved Sawariya roles. */
   --sawariya-red: #C62828;
@@ -75,7 +91,6 @@
   --surface-white: #FFFFFF;
   --surface-elevated: #FFFFFF;
   --text-ink: #102A43;
-  --text-muted: #455468;
   --text-secondary: #455468;
   --border-warm: #D7C7B8;
   --brand-spectrum: linear-gradient(135deg, #A61E1E 0%, #7A4B2A 46%, #155E9A 100%);

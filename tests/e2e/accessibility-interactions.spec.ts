@@ -338,6 +338,28 @@ test('visible action buttons meet the 44px minimum target height', async ({ page
   expect(Math.min(...heights)).toBeGreaterThanOrEqual(44);
 });
 
+test('patient controls use 44px targets and a readable search placeholder at 360px', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await openPage(page);
+  const result = await page.evaluate(() => {
+    const controls = [...document.querySelectorAll<HTMLElement>('button:not(.ui-calendar-day):not([data-ui-size="icon"]), a.ui-button:not([data-ui-size="icon"]), .ui-control')]
+      .filter((element) => element.getClientRects().length > 0 && getComputedStyle(element).visibility !== 'hidden');
+    const undersized = controls.map((element) => {
+      const box = element.getBoundingClientRect();
+      return { label: (element.innerText || element.getAttribute('aria-label') || element.getAttribute('placeholder') || element.tagName).trim(), width: box.width, height: box.height };
+    }).filter((box) => box.width < 44 || box.height < 44);
+    const placeholder = document.querySelector<HTMLInputElement>('input[placeholder="Ask about an individual test…"]');
+    return {
+      undersized,
+      placeholderColor: placeholder ? getComputedStyle(placeholder, '::placeholder').color : null,
+      placeholderOpacity: placeholder ? getComputedStyle(placeholder, '::placeholder').opacity : null,
+    };
+  });
+  expect(result.undersized).toEqual([]);
+  expect(result.placeholderColor).toBe('rgb(69, 84, 104)');
+  expect(result.placeholderOpacity).toBe('1');
+});
+
 test('reduced motion disables animation and transition timing', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openPage(page);

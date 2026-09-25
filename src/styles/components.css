@@ -586,3 +586,32 @@ button:active, a[role="button"]:active { transform: scale(.98); }
 .btn-primary:hover { background: var(--brand-red-dark); border-color: var(--brand-red-dark); }
 .btn-secondary { background: var(--brand-blue); border-color: var(--brand-blue); }
 .btn-secondary:hover { background: var(--brand-blue-deep); border-color: var(--brand-blue-deep); }
+
+/* Shared patient-facing controls, surfaces, and corners. */
+button:not(.ui-calendar-day), a.ui-button, .ui-control-button {
+  min-inline-size: var(--target-size-min);
+  min-block-size: var(--target-size-min);
+}
+.ui-button:not(.ui-calendar-day), a.ui-button, .ui-control-button {
+  height: auto;
+  border-radius: var(--radius-control);
+  font-size: var(--font-action);
+  line-height: 1.2;
+  text-wrap: balance;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.ui-button > span { min-width: 0; white-space: normal; overflow-wrap: anywhere; text-overflow: clip; }
+.ui-button > svg { flex: 0 0 auto; }
+button[data-ui-size="icon"] { border-radius: 50%; }
+button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25rem; min-block-size: 2.25rem; border-radius: 0.5rem; }
+.ui-control { min-block-size: var(--target-size-min); border-radius: var(--radius-control); color: var(--text-primary); font-size: 1rem; }
+.ui-control::placeholder { color: var(--text-muted); opacity: 1; }
+.ui-card, .glass-card, .apple-card { border-radius: var(--radius-card); }
+.ui-panel, .glass-panel, .glass-panel-dark { border-radius: var(--radius-panel); }
+.ui-dialog-panel:not(.mobile-menu-panel) { border-radius: var(--radius-panel); }
+.ui-dialog-panel.mobile-menu-panel { border-radius: var(--radius-panel) 0 0 var(--radius-panel); }
+@supports (corner-shape: squircle) {
+  button:not(.ui-calendar-day):not([data-ui-size="icon"]), a.ui-button:not([data-ui-size="icon"]), .ui-control-button:not([data-ui-size="icon"]), .ui-control, .ui-card, .ui-panel, .ui-dialog-panel:not(.mobile-menu-panel), .ui-dialog-panel.mobile-menu-panel, .glass-card, .glass-panel, .glass-panel-dark, .apple-card { corner-shape: squircle; }
+  button[data-ui-size="icon"] { corner-shape: round; }
+}

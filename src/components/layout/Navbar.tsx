@@ -57,7 +57,7 @@ export function Navbar({
           <button
             type="button"
             aria-label="Back to top"
-            className="cursor-pointer group flex-shrink-0 flex items-center select-none"
+            className="ui-control-button cursor-pointer group flex-shrink-0 flex items-center select-none"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <Logo variant="horizontal" size="sm" showTagline={true} />
@@ -69,7 +69,7 @@ export function Navbar({
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className="px-4 py-1.5 rounded-full text-xs font-bold tracking-tight text-slate-700 hover:text-[#155E9A] hover:bg-white/90 hover:shadow-2xs transition-surface duration-300 cursor-pointer active:scale-[0.97]"
+                className="ui-control-button h-auto min-h-11 px-4 py-2 rounded-[var(--radius-control)] text-sm font-bold tracking-tight text-[var(--text-primary)] hover:text-[#155E9A] hover:bg-white/90 hover:shadow-2xs transition-surface duration-300 cursor-pointer active:scale-[0.97]"
               >
                 {link.label}
               </button>
@@ -105,7 +105,7 @@ export function Navbar({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-[14px] text-slate-700 bg-white/80 backdrop-blur-md hover:bg-white transition-surface border border-slate-200/90 shadow-2xs active:scale-95 cursor-pointer"
+              className="ui-control-button lg:hidden w-11 h-11 flex items-center justify-center rounded-[var(--radius-control)] text-slate-700 bg-white/80 backdrop-blur-md hover:bg-white transition-surface border border-slate-200/90 shadow-2xs active:scale-95 cursor-pointer"
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}

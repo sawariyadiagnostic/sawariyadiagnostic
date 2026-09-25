@@ -81,7 +81,7 @@ export function Hero() {
 
       {/* Hero Content Area */}
       <div className="relative z-10 pt-[clamp(6rem,4rem+6vw,9rem)] pb-[clamp(3rem,2rem+4vw,6rem)] fluid-container">
-        <div className="w-full glass-card p-[clamp(1rem,4vw,3rem)] rounded-[clamp(1.25rem,1rem+2vw,3rem)] border border-white/60 relative overflow-hidden">
+        <div className="w-full glass-card ui-panel p-[clamp(1rem,4vw,3rem)] border border-white/60 relative overflow-hidden">
           
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
             
@@ -94,7 +94,7 @@ export function Hero() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C62828] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
-                <span className="text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 truncate">
+                <span className="min-w-0 text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 text-wrap">
                    Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Home collection 06:30 AM–08:00 PM</span>
                   <span className="hidden sm:inline text-slate-400"> • </span><span className="hidden sm:inline">Charkhi Dadri</span>
                 </span>
@@ -126,7 +126,7 @@ export function Hero() {
                       autoComplete="off"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="border-0 shadow-none focus-visible:ring-0 text-slate-900 font-bold text-xs sm:text-sm placeholder:text-slate-500 bg-transparent px-2 sm:px-2.5 h-10 sm:h-12 w-full min-w-0"
+                      className="ui-control border-0 shadow-none focus-visible:ring-0 text-[var(--text-primary)] font-semibold text-xs sm:text-sm bg-transparent px-2 sm:px-2.5 h-auto w-full min-w-0"
                     />
                     <Button 
                       type="submit" 
@@ -146,7 +146,7 @@ export function Hero() {
                       key={tag.label}
                       type="button"
                       onClick={() => handleQuickTagClick(tag.label)}
-                      className={`h-7 sm:h-8 px-2.5 sm:px-3 rounded-[12px] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#155E9A] hover:border-[#155E9A]/30 transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                      className={`ui-control-button h-auto min-h-11 px-2.5 sm:px-3 rounded-[var(--radius-control)] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#155E9A] hover:border-[#155E9A]/30 transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}
                     </button>
@@ -161,7 +161,7 @@ export function Hero() {
                   className="btn-primary w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
-                  <span className="truncate">Request home collection</span>
+                  <span>Request home collection</span>
                   <ArrowRight className="w-4 h-4 ml-1.5 shrink-0" />
                 </Button>
 
@@ -171,7 +171,7 @@ export function Hero() {
                   className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-slate-50 border-black/[0.08] text-slate-800 shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
-                  <span className="truncate">Ask about individual tests</span>
+                  <span>Ask about individual tests</span>
                 </Button>
               </div>
 

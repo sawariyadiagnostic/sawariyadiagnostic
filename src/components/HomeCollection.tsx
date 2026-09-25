@@ -94,7 +94,7 @@ export function HomeCollection() {
             viewport={{ once: true }}
             className="lg:col-span-5"
           >
-            <div className="glass-card p-5 sm:p-7 rounded-[32px] sm:rounded-[36px] shadow-[0_32px_80px_rgba(0,0,0,0.4)] text-slate-900 relative overflow-hidden bg-white">
+            <div className="glass-card ui-card p-5 sm:p-7 shadow-[0_32px_80px_rgba(0,0,0,0.4)] text-slate-900 relative overflow-hidden bg-white">
               <div className="mb-5 space-y-1">
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-lg sm:text-xl font-black text-[#1D1D1F] tracking-tight">Arrange a Home Visit</h3>

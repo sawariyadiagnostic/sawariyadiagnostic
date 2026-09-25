@@ -29,7 +29,7 @@ export function MobileBottomDock() {
         {/* Report assistance button */}
         <ReportDownloadModal trigger={
           <button
-            className="flex-1 flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[18px] h-11 min-[360px]:h-12 px-1 text-xs font-semibold text-slate-100 transition-surface duration-150 active:scale-[0.95] select-none cursor-pointer min-w-0"
+            className="ui-control-button flex-1 flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[var(--radius-control)] min-h-11 min-[360px]:min-h-12 px-1 text-xs font-semibold text-slate-100 transition-surface duration-150 active:scale-[0.95] select-none cursor-pointer min-w-0"
             aria-label="Report assistance"
           >
             <div className="w-5 h-5 min-[360px]:w-6 min-[360px]:h-6 rounded-[8px] bg-[#155E9A]/12 flex items-center justify-center text-blue-200 shrink-0">
@@ -42,26 +42,26 @@ export function MobileBottomDock() {
         {/* Primary CTA: Request home collection */}
         <button
           onClick={scrollToHomeCollection}
-          className="flex-[1.2] flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white text-[#102A43] rounded-[18px] h-11 min-[360px]:h-12 px-1.5 min-[360px]:px-2.5 text-xs font-bold shadow-[0_4px_12px_rgba(255,255,255,0.2)] transition-surface duration-150 hover:bg-white/90 active:scale-[0.95] select-none border border-white cursor-pointer min-w-0"
+          className="ui-control-button flex-[1.2] flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white text-[#102A43] rounded-[var(--radius-control)] min-h-11 min-[360px]:min-h-12 px-1.5 min-[360px]:px-2.5 text-xs font-bold shadow-[0_4px_12px_rgba(255,255,255,0.2)] transition-surface duration-150 hover:bg-white/90 active:scale-[0.95] select-none border border-white cursor-pointer min-w-0"
           aria-label="Request home collection"
         >
           <Home className="w-3.5 h-3.5 text-[#102A43] shrink-0" />
-          <span className="truncate tracking-tight font-bold text-[10px] min-[360px]:text-xs">Request Visit</span>
+          <span className="min-w-0 tracking-tight font-bold text-[10px] min-[360px]:text-xs">Request Visit</span>
         </button>
 
         {/* Quick call */}
         <a
           href={telHref(siteConfig.contact.phone)}
-          className="w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[18px] transition-surface duration-150 active:scale-[0.95] select-none"
+          className="ui-control-button w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[var(--radius-control)] transition-surface duration-150 active:scale-[0.95] select-none"
           aria-label="Call lab"
         >
-          <Phone className="w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 text-[#F1C27D]" />
+          <Phone className="w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 text-[var(--accent-on-dark)]" />
         </a>
 
         {/* WhatsApp Quick Chat */}
         <button
           onClick={handleWhatsApp}
-          className="w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] rounded-[18px] transition-surface duration-150 active:scale-[0.95] shadow-xs select-none border border-[#25D366] cursor-pointer"
+          className="ui-control-button w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] rounded-[var(--radius-control)] transition-surface duration-150 active:scale-[0.95] shadow-xs select-none border border-[#25D366] cursor-pointer"
           aria-label="WhatsApp lab desk"
         >
           <MessageCircle className="w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 text-white" fill="white" />

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex min-h-11 items-center justify-center gap-1.5 whitespace-nowrap rounded-full text-xs sm:text-sm font-bold tracking-wide ring-offset-background transition-surface duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155E9A] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer select-none min-w-0 max-w-full",
+  "inline-flex ui-button min-h-11 items-center justify-center gap-[var(--control-gap)] font-bold tracking-wide ring-offset-background transition-surface duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155E9A] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 cursor-pointer select-none min-w-0 max-w-full",
   {
     variants: {
       variant: {
@@ -20,11 +20,11 @@ const buttonVariants = cva(
         link: "text-[#155E9A] underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-11 px-5 py-2.5",
-        sm: "h-9 px-4 py-2 text-xs",
-        lg: "h-12 sm:h-13 px-7 sm:px-8 text-xs sm:text-sm",
-        xl: "h-14 px-8 py-3.5 text-sm sm:text-base",
-        icon: "h-10 w-10 p-0 rounded-full",
+        default: "h-auto min-h-11 px-5 py-2.5 text-[var(--font-action)] rounded-[var(--radius-control)]",
+        sm: "h-auto min-h-11 px-3 py-2 text-[var(--font-action)] rounded-[var(--radius-control)]",
+        lg: "h-auto min-h-11 sm:min-h-12 px-5 sm:px-6 text-sm rounded-[var(--radius-control)]",
+        xl: "h-auto min-h-11 sm:min-h-14 px-6 sm:px-8 py-3 text-base rounded-[var(--radius-control)]",
+        icon: "h-11 w-11 min-h-[44px] min-w-[44px] p-0 rounded-full text-sm",
       },
     },
     defaultVariants: {
@@ -43,7 +43,7 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+    return <Comp data-ui-size={size ?? "default"} className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
   },
 );
 Button.displayName = "Button";

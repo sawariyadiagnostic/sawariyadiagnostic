@@ -79,17 +79,17 @@ export function Contact() {
 
         {/* Booking Widget (Apple Card Frame) */}
         <div className="max-w-4xl mx-auto mb-10 sm:mb-14 relative z-10">
-          <div className="glass-panel bg-white/70 rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
+          <div className="glass-panel ui-panel bg-white/70 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
             {/* Widget Header */}
             <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15">
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:text-lg font-bold text-white">Appointment Desk</h3>
-                  <span className="bg-white/20 text-[#F1C27D] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
+                  <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
                     Home collection 06:30 AM–08:00 PM
                   </span>
                 </div>
-                <p className="text-[11px] sm:text-xs text-blue-100 font-normal truncate">
+                <p className="text-[11px] sm:text-xs text-[var(--text-on-dark)] font-normal">
                   Reports verified within 12 hours • Helpline: {siteConfig.contact.phone}
                 </p>
               </div>
@@ -245,7 +245,7 @@ export function Contact() {
                   >
                     <a href={footer.contact.mapsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 max-w-full">
                       <Navigation className="w-4 h-4 shrink-0" />
-                      <span className="truncate">Open Google Maps Directions</span>
+                      <span>Open Google Maps Directions</span>
                       <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                     </a>
                   </Button>
