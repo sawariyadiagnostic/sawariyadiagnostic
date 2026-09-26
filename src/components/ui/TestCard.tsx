@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, ArrowRight, ShieldCheck, Sparkles, Info } from 'lucide-react';
+import { Home, ArrowRight, ShieldCheck, Sparkles, Info, ClipboardList } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
 import { TestBookingModal } from '../booking/TestBookingModal';
@@ -8,21 +8,18 @@ import { formatInr } from '@/lib/utils';
 
 interface TestCardProps {
   test: MedicalTest;
-  onBook?: (testId: string) => void;
+  isSelected: boolean;
+  onToggleRequest: (testId: string) => void;
   onViewDetails?: (test: MedicalTest) => void;
 }
 
-export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
+export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: TestCardProps) {
   const [showBooking, setShowBooking] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
 
   const handleBookClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (onBook) {
-      onBook(test.id);
-    } else {
-      setShowBooking(true);
-    }
+    setShowBooking(true);
   };
 
   const handleCardClick = () => {
@@ -149,6 +146,16 @@ export function TestCard({ test, onBook, onViewDetails }: TestCardProps) {
               <ArrowRight className="w-3.5 h-3.5 shrink-0" />
             </Button>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            aria-pressed={isSelected}
+            onClick={() => onToggleRequest(test.id)}
+            className={`action-button mt-2.5 min-h-11 w-full rounded-[14px] text-xs font-bold ${isSelected ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775]' : 'border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]'}`}
+          >
+            <ClipboardList className="mr-2 h-3.5 w-3.5" />
+            {isSelected ? 'Remove from request' : 'Add to request'}
+          </Button>
         </div>
       </div>
 

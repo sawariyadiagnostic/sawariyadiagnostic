@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "test:unit": "npm exec -- vitest run --config vitest.config.ts",
     "test:e2e": "cross-env PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 playwright test tests/e2e/smoke.spec.ts --config playwright.config.ts",
-    "test:e2e:pages": "cross-env PLAYWRIGHT_PAGES_ARTIFACT=1 PLAYWRIGHT_HEALTH_URL=http://127.0.0.1:4173 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173/sawariyadiagnostic/ playwright test tests/e2e/smoke.spec.ts tests/e2e/pages-artifact.spec.ts --config playwright.config.ts",
+    "test:e2e:pages": "cross-env PLAYWRIGHT_PAGES_ARTIFACT=1 PLAYWRIGHT_HEALTH_URL=http://127.0.0.1:4173 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173/sawariyadiagnostic/ playwright test tests/e2e/smoke.spec.ts tests/e2e/pages-artifact.spec.ts tests/e2e/requisition.spec.ts --config playwright.config.ts",
     "test:a11y": "cross-env PLAYWRIGHT_PRODUCTION=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173 playwright test tests/e2e/accessibility.spec.ts tests/e2e/accessibility-interactions.spec.ts --config playwright.config.ts",
     "test:a11y:pages": "cross-env PLAYWRIGHT_PAGES_ARTIFACT=1 PLAYWRIGHT_HEALTH_URL=http://127.0.0.1:4173 PLAYWRIGHT_BASE_URL=http://127.0.0.1:4173/sawariyadiagnostic/ playwright test tests/e2e/accessibility.spec.ts tests/e2e/accessibility-interactions.spec.ts --config playwright.config.ts",
     "validate:content": "tsx scripts/validate-content.ts",

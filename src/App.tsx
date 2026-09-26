@@ -11,6 +11,8 @@ import { TestGuidePage } from './components/TestGuidePage'
 import { approvedGuideManifest } from './data/approvedGuideManifest'
 import { WhatsAppButton } from './components/ui/WhatsAppButton'
 import { MobileBottomDock } from './components/layout/MobileBottomDock'
+import { RequisitionProvider } from './components/requisition/RequisitionContext'
+import { RequisitionDrawer } from './components/requisition/RequisitionDrawer'
 
 // Lazy load HEAVY / Interactive components only
 // - TestCatalog: Has lots of list data (~9KB gzipped)
@@ -29,7 +31,8 @@ export default function App() {
   if (guide) return <TestGuidePage guide={guide} language={guideMatch?.[2] ? 'hi' : 'en'} />
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
+    <RequisitionProvider>
+      <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <main id="main-content" tabIndex={-1} className="relative w-full max-w-full" role="main">
         {/* Critical Path: Load Hero Instantly */}
@@ -53,6 +56,8 @@ export default function App() {
       </main>
       <WhatsAppButton />
       <MobileBottomDock />
-    </div>
+      <RequisitionDrawer />
+      </div>
+    </RequisitionProvider>
   )
 }

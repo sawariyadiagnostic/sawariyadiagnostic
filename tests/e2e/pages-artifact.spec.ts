@@ -41,6 +41,35 @@ test('returns the dedicated 404 document for unknown static routes', async ({ re
   }
 });
 
+test('serves a crawlable canonical homepage and robots-referenced sitemap', async ({ request }) => {
+  const siteBase = 'https://sawariyadiagnostic.github.io/sawariyadiagnostic/';
+  const home = await request.get(pagesBase);
+  expect(home.status()).toBe(200);
+  const html = await home.text();
+  const title = 'Diagnostic Lab in Charkhi Dadri | Sawariya Diagnostic';
+  const description = 'Sawariya Diagnostic Lab in Charkhi Dadri, Haryana. Individual diagnostic tests, home-collection requests, and report assistance.';
+  expect(html).toContain(`<title>${title}</title>`);
+  expect(html.match(/<meta\s+name="description"[\s\S]*?content="([^"]+)"/i)?.[1]).toBe(description);
+  expect(html.match(/<meta\s+property="og:title"[\s\S]*?content="([^"]+)"/i)?.[1]).toBe(title);
+  expect(html.match(/<meta\s+name="twitter:title"[\s\S]*?content="([^"]+)"/i)?.[1]).toBe(title);
+  const canonical = html.match(/<link\b[^>]*\brel="canonical"[^>]*>/i)?.[0];
+  expect(canonical).toContain(`href="${siteBase}"`);
+
+  const robots = await request.get(`${pagesBase}robots.txt`);
+  expect(robots.status()).toBe(200);
+  const robotsText = await robots.text();
+  expect(robotsText).toContain(`Sitemap: ${siteBase}sitemap.xml`);
+  expect(robotsText).not.toMatch(/Disallow:\s*\/\s*(?:\r?\n|$)/i);
+
+  const sitemap = await request.get(`${pagesBase}sitemap.xml`);
+  expect(sitemap.status()).toBe(200);
+  const sitemapText = await sitemap.text();
+  const locations = [...sitemapText.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map((match) => match[1]);
+  expect(locations).toContain(siteBase);
+  expect(new Set(locations).size).toBe(locations.length);
+  for (const location of locations) expect(location.startsWith(siteBase)).toBe(true);
+});
+
 test('does not expose preview server bundles or source maps', async ({ request }) => {
   for (const artifact of ['server.cjs', 'server.cjs.map', 'assets/index.js.map']) {
     const response = await request.get(`${pagesBase}${artifact}`);

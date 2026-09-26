@@ -9,6 +9,7 @@ import { TestDetailModal } from './catalog/TestDetailModal';
 import { categories, medicalTests as publishedTests, type MedicalTest } from '@/data/publishedCatalog';
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 import { usePagination } from '@/lib/use-pagination';
+import { useRequisition } from './requisition/RequisitionContext';
 
 const testCategories = categories.filter((category) => category.id !== 'package');
 const TESTS_PER_PAGE = 24;
@@ -18,6 +19,7 @@ export function TestCatalog() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
   const tests = publishedTests;
+  const { isSelected, toggleTest } = useRequisition();
 
   const openTest = (test: MedicalTest, updateHash = true) => {
     setSelectedTest(test);
@@ -166,7 +168,7 @@ export function TestCatalog() {
             <div className="fluid-grid-cards-sm">
               {visibleTests.map((item) => {
                 const test = tests.find((candidate) => candidate.id === item.id);
-                return test ? <TestCard key={test.id} test={test} onViewDetails={openTest} /> : null;
+                return test ? <TestCard key={test.id} test={test} isSelected={isSelected(test.id)} onToggleRequest={toggleTest} onViewDetails={openTest} /> : null;
               })}
             </div>
             {filteredTests.length > TESTS_PER_PAGE && (
