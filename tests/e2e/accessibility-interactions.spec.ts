@@ -377,3 +377,61 @@ test('reduced motion disables animation and transition timing', async ({ page })
   expect(parseFloat(motion.transitionDuration)).toBeLessThanOrEqual(0.01);
   expect(motion.scrollBehavior).toBe('auto');
 });
+
+test('team role text and individual-test hover meet WCAG AA contrast', async ({ page }) => {
+  test.setTimeout(90_000);
+  const roles = ['Pathology Oversight', 'Laboratory Director', 'Quality Manager', 'Technical Manager', 'Logistics Manager'];
+
+  for (const viewport of [{ width: 360, height: 800 }, { width: 1280, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await openPage(page);
+    const team = page.locator('#team');
+    const measured = [] as Array<{ label: string; contrast: number }>;
+
+    for (const title of roles) {
+      const heading = team.getByRole('heading', { name: title, exact: true });
+      const card = team.locator('article').filter({ hasText: title }).first();
+      await heading.scrollIntoViewIfNeeded();
+      await expect(card).toHaveCSS('opacity', '1');
+      const readings = await card.evaluate((element) => {
+        const luminance = (color: string) => {
+          const channels = color.match(/[0-9.]+/g)!.slice(0, 3).map(Number).map((channel) => {
+            const value = channel / 255;
+            return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+          });
+          return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+        };
+        const background = getComputedStyle(element).backgroundColor;
+        return [...element.querySelectorAll<HTMLElement>('h3, p, li')].map((text) => {
+          const foreground = getComputedStyle(text).color;
+          const values = [luminance(foreground), luminance(background)];
+          return {
+            label: text.textContent?.trim() ?? '',
+            contrast: (Math.max(...values) + 0.05) / (Math.min(...values) + 0.05),
+          };
+        });
+      });
+      measured.push(...readings);
+    }
+
+    expect(measured).toHaveLength(25);
+    for (const reading of measured) expect(reading.contrast, `${reading.label} at ${viewport.width}px`).toBeGreaterThanOrEqual(4.5);
+
+    const action = page.getByRole('button', { name: 'Ask about individual tests' });
+    await action.hover();
+    await expect(action).toHaveCSS('background-color', 'rgb(7, 36, 72)');
+    const actionContrast = await action.evaluate((element) => {
+      const luminance = (color: string) => {
+        const channels = color.match(/[0-9.]+/g)!.slice(0, 3).map(Number).map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+      };
+      const values = [luminance(getComputedStyle(element).color), luminance(getComputedStyle(element).backgroundColor)];
+      return (Math.max(...values) + 0.05) / (Math.min(...values) + 0.05);
+    });
+    expect(actionContrast).toBeGreaterThanOrEqual(4.5);
+  }
+});

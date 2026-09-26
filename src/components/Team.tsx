@@ -23,7 +23,7 @@ function RoleCard({ role, index }: { role: TeamRole; index: number }) {
         </div>
         {role.publishState === 'owner-review' && <span className={`rounded-full px-2 py-1 text-[9px] font-bold uppercase tracking-wider ${isGovernance ? 'bg-white/10 text-[#E8C8AE]' : 'bg-[#FFF9F3] text-[#7A4B2A]'}`}>Role profile</span>}
       </div>
-      <h3 className="text-base font-bold leading-tight">{role.label}</h3>
+      <h3 className={`text-base font-bold leading-tight ${isGovernance ? 'text-white' : ''}`}>{role.label}</h3>
        <p className={`mt-2 text-xs leading-relaxed ${isGovernance ? 'text-white' : 'text-slate-600'}`}>{role.shortDescription}</p>
        <ul className={`mt-4 space-y-2 border-t pt-4 text-[11px] leading-relaxed ${isGovernance ? 'border-white/15 text-white' : 'border-slate-100 text-slate-600'}`}>
         {role.responsibilities.map((item) => <li key={item} className="flex gap-2"><span className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${isGovernance ? 'bg-[#E54848]' : 'bg-[#155E9A]'}`} />{item}</li>)}
