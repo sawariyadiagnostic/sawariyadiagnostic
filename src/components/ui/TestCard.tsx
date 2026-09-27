@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Home, ArrowRight, ShieldCheck, Sparkles, Info, ClipboardList } from 'lucide-react';
+import { Home, Info, ClipboardList } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
-import { TestBookingModal } from '../booking/TestBookingModal';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 import { formatInr } from '@/lib/utils';
 
@@ -14,13 +13,7 @@ interface TestCardProps {
 }
 
 export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: TestCardProps) {
-  const [showBooking, setShowBooking] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
-
-  const handleBookClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setShowBooking(true);
-  };
 
   const handleCardClick = () => {
     if (onViewDetails) {
@@ -125,7 +118,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
             </div>
           </div>
 
-          {/* Book Button */}
+          {/* Request actions */}
           <div className="action-row grid grid-cols-2 gap-2">
             <Button 
               variant="outline"
@@ -136,37 +129,20 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
               <Info className="w-3.5 h-3.5 text-[#155E9A] shrink-0" />
               <span>Details</span>
             </Button>
-
-            <Button 
+            <Button
+              type="button"
+              variant={isSelected ? 'outline' : 'default'}
               size="sm"
-              onClick={handleBookClick}
-              className="btn-primary action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] active:scale-[0.98] transition-surface shadow-xs hover:shadow-md w-full min-w-0"
+              aria-pressed={isSelected}
+              onClick={() => onToggleRequest(test.id)}
+              className={`action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] w-full min-w-0 ${isSelected ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775] hover:bg-[#D8EAF5]' : ''}`}
             >
-              <span>Book Now</span>
-              <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+              <ClipboardList className="h-3.5 w-3.5 shrink-0" />
+              <span className="min-w-0">{isSelected ? 'Remove from Request' : 'Add to Request'}</span>
             </Button>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            aria-pressed={isSelected}
-            onClick={() => onToggleRequest(test.id)}
-            className={`action-button mt-2.5 min-h-11 w-full rounded-[14px] text-xs font-bold ${isSelected ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775]' : 'border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]'}`}
-          >
-            <ClipboardList className="mr-2 h-3.5 w-3.5" />
-            {isSelected ? 'Remove from request' : 'Add to request'}
-          </Button>
         </div>
       </div>
-
-      {/* Modals */}
-      <TestBookingModal
-        testName={test.name}
-        price={test.price}
-        originalPrice={test.originalPrice}
-        isOpen={showBooking}
-        onOpenChange={(v) => setShowBooking(v)}
-      />
 
       <TestDetailModal
         item={test}

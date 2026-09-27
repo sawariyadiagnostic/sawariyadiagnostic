@@ -174,11 +174,9 @@ describe('approved public catalog', () => {
     expect(source.match(/min-h-11 px-2 py-2 text-center/g)).toHaveLength(3);
   });
 
-  it('does not render equal customer and listed prices as discounts', () => {
+  it('does not render equal customer and listed prices as discounts in test details', () => {
     const detailModalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
-    const bookingModalSource = readFileSync(resolve(process.cwd(), 'src/components/booking/TestBookingModal.tsx'), 'utf8');
     expect(detailModalSource).toContain('item.originalPrice > item.price');
-    expect(bookingModalSource).toContain('originalPrice !== undefined && originalPrice > price');
   });
 
 

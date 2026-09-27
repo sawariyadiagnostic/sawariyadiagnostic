@@ -24,8 +24,8 @@ export function RequisitionDrawer() {
     </div>}
 
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogContent aria-label="Test request" className="flex max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-lg flex-col overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)]">
-        <header className="flex items-start justify-between gap-4 border-b border-slate-200 px-5 py-4 sm:px-6">
+      <DialogContent aria-label="Test request" style={{ backgroundColor: 'var(--surface-white)' }} className="flex max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-lg flex-col overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)]">
+        <header className="flex items-start justify-between gap-4 border-b border-slate-200 bg-[#FFF9F3] px-5 py-4 sm:px-6">
           <div>
             <div className="mb-1 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#155E9A]"><ClipboardList className="h-3.5 w-3.5" /> Test request</div>
             <DialogTitle className="text-xl font-black text-[#102A43]">Review your selected tests</DialogTitle>
@@ -33,7 +33,7 @@ export function RequisitionDrawer() {
           </div>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto p-5 sm:p-6">
+        <div className="min-h-0 flex-1 overflow-y-auto bg-white p-5 sm:p-6">
           {selectedTests.length ? <>
             <ul className="space-y-2" aria-label="Selected tests">
               {selectedTests.map((test) => <li key={test.id} className="flex items-center justify-between gap-3 rounded-[14px] border border-slate-200 p-3">
@@ -44,14 +44,14 @@ export function RequisitionDrawer() {
                 <strong className="shrink-0 text-sm text-[#102A43]">{formatInr(test.price)}</strong>
               </li>)}
             </ul>
-            <p className="mt-5 rounded-[14px] border border-slate-200 bg-slate-50 p-3 text-sm font-semibold text-slate-800">Published test-price subtotal: {formatInr(subtotal)}</p>
+            <p className="mt-5 rounded-[14px] border border-[#D7C7B8] bg-[#FFF9F3] p-3 text-sm font-semibold text-[#102A43]">Published test-price subtotal: {formatInr(subtotal)}</p>
             <p className="mt-3 text-xs leading-relaxed text-slate-600">The lab confirms availability and any collection charges; no appointment is booked until confirmed.</p>
           </> : <p className="rounded-[14px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">No tests selected. Return to the catalog to choose tests.</p>}
         </div>
 
-        <footer className="flex flex-wrap gap-2 border-t border-slate-200 bg-white p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:p-5">
+        <footer className="flex flex-col gap-2 border-t border-slate-200 bg-white p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:flex-row sm:p-5">
           {selectedTests.length > 0 && <Button type="button" variant="outline" onClick={clearRequest} className="min-h-11"><Trash2 className="mr-2 h-4 w-4" /> Clear tests</Button>}
-          {whatsappUrl && <Button asChild className="min-h-11 flex-1 bg-[#128C7E] font-bold text-white hover:bg-[#0F766E]">
+          {whatsappUrl && <Button asChild className="min-h-11 w-full bg-[#128C7E] px-3 font-bold text-white hover:bg-[#0F766E] sm:min-w-0 sm:flex-1 sm:px-5">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Send test request on WhatsApp"><ClipboardList className="mr-2 h-4 w-4" /> Send test request on WhatsApp</a>
           </Button>}
         </footer>

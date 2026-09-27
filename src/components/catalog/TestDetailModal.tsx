@@ -1,21 +1,15 @@
-import { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { 
+import {
   TestTube,
-  ShieldCheck,
-  Home, 
-  Check, 
-  Sparkles, 
-  Calendar, 
-  HelpCircle, 
-  Share2, 
-  ArrowRight,
+  Home,
+  Check,
+  Share2,
   ArrowLeft,
-  Stethoscope
+  ClipboardList,
 } from 'lucide-react';
-import { medicalTests, type MedicalTest } from '@/data/publishedCatalog';
-import { TestBookingModal } from '../booking/TestBookingModal';
+import { type MedicalTest } from '@/data/publishedCatalog';
+import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { buildTestShareUrl } from '@/config/site';
 import { copyText } from '@/lib/clipboard';
@@ -28,7 +22,7 @@ interface TestDetailModalProps {
 }
 
 export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps) {
-  const [showBooking, setShowBooking] = useState(false);
+  const { isSelected, toggleTest } = useRequisition();
 
   if (!item) return null;
 
@@ -135,7 +129,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
           </div>
 
           {/* Footer CTAs */}
-          <div className="p-3 sm:p-4 bg-white border-t border-slate-200 flex flex-wrap gap-2 flex-shrink-0">
+          <div className="flex flex-wrap gap-2 p-3 sm:p-4 bg-white border-t border-slate-200 flex-shrink-0">
             <Button
               variant="outline"
               onClick={onClose}
@@ -157,27 +151,18 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </Button>
 
             <Button
-              onClick={() => setShowBooking(true)}
-              className="action-button flex-1 min-h-11 h-auto btn-primary rounded-[14px] text-xs sm:text-sm font-bold shadow-md gap-1.5"
+              type="button"
+              variant={isSelected(item.id) ? 'outline' : 'default'}
+              aria-pressed={isSelected(item.id)}
+              onClick={() => { toggleTest(item.id); onClose(); }}
+              className={`action-button min-h-11 h-auto flex-1 basis-full sm:basis-auto rounded-[14px] text-xs sm:text-sm font-bold gap-1.5 ${isSelected(item.id) ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775] hover:bg-[#D8EAF5]' : ''}`}
             >
-              <span>Book Appointment ({formatInr(item.price)})</span>
-              <ArrowRight className="w-4 h-4" />
+              <ClipboardList className="w-4 h-4 shrink-0" />
+              <span>{isSelected(item.id) ? 'Remove from Request' : 'Add to Request'}</span>
             </Button>
           </div>
         </DialogContent>
       </Dialog>
-
-      {/* Booking Modal */}
-      {showBooking && (
-        <TestBookingModal
-          testName={item.name}
-          price={item.price}
-          originalPrice={item.originalPrice}
-
-          isOpen={showBooking}
-          onOpenChange={(v) => setShowBooking(v)}
-        />
-      )}
     </>
   );
 }
