@@ -51,7 +51,7 @@ export function RequisitionDrawer() {
 
         <footer className="flex flex-col gap-2 border-t border-slate-200 bg-white p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:flex-row sm:p-5">
           {selectedTests.length > 0 && <Button type="button" variant="outline" onClick={clearRequest} className="min-h-11"><Trash2 className="mr-2 h-4 w-4" /> Clear tests</Button>}
-          {whatsappUrl && <Button asChild className="min-h-12 w-full bg-[#128C7E] px-3 font-bold text-white hover:bg-[#0F766E] sm:min-w-0 sm:flex-1 sm:px-5">
+          {whatsappUrl && <Button asChild className="min-h-12 w-full bg-[#128C7E] px-3 font-bold text-white hover:bg-[#0F766E] active:!scale-100 sm:min-w-0 sm:flex-1 sm:px-5">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Send test request on WhatsApp"><ClipboardList className="mr-2 h-4 w-4" /> Send test request on WhatsApp</a>
           </Button>}
         </footer>

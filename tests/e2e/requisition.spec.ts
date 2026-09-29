@@ -97,3 +97,24 @@ test('one selected test is reviewable from details on a narrow screen', async ({
   expect(labelFits).toBe(true);
   expect(new URL((await handoff.getAttribute('href'))!).searchParams.get('text')).toContain(item.name);
 });
+
+test('request WhatsApp action remains a 44px target when pressed at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 700 });
+  await page.addInitScript(() => localStorage.clear());
+  await page.goto('./', { waitUntil: 'domcontentloaded', timeout: 60_000 });
+
+  const card = page.locator('#tests .fluid-grid-cards-sm > div').first();
+  await expect(card).toBeVisible({ timeout: 60_000 });
+  await card.getByRole('button', { name: /Add to request/i }).click();
+  await page.getByRole('button', { name: 'Review test request, 1 selected' }).click();
+
+  const request = page.getByRole('dialog', { name: 'Review your selected tests' });
+  const whatsapp = request.getByRole('link', { name: 'Send test request on WhatsApp' });
+  await expect(whatsapp).toBeVisible();
+  await whatsapp.hover();
+  await page.mouse.down();
+  const pressedHeight = await whatsapp.evaluate((element) => element.getBoundingClientRect().height);
+  await page.mouse.up();
+
+  expect(pressedHeight).toBeGreaterThanOrEqual(44);
+});
