@@ -88,6 +88,7 @@ test('one selected test is reviewable from details on a narrow screen', async ({
     return range.getClientRects().length;
   });
   expect(labelLines).toBe(1);
+  await expect.poll(async () => (await handoff.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
   const bounds = await handoff.boundingBox();
   expect(bounds).not.toBeNull();
   expect(bounds!.x).toBeGreaterThanOrEqual(0);
