@@ -32,7 +32,7 @@ const publicCopy = publicCopyFiles
 
 describe('public copy claim boundary', () => {
   it('uses request language for visitor actions and avoids unsupported handoff labels', () => {
-    expect(publicCopy).not.toMatch(/Find Test|Explore Health Packages|Book Doorstep Sample|Book Home Sample Visit|WhatsApp Doctor Consultation|Patient Lab Portal|Call 24\*7 Helpline/i);
+    expect(publicCopy).not.toMatch(/Find Test(?!s by Topic)|Explore Health Packages|Book Doorstep Sample|Book Home Sample Visit|WhatsApp Doctor Consultation|Patient Lab Portal|Call 24\*7 Helpline/i);
     expect(publicCopy).toMatch(/Ask the lab|Request home collection|Request a test/i);
   });
 

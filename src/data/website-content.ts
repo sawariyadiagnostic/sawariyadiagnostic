@@ -145,11 +145,11 @@ export const footer = {
     { label: 'Contact & Map', href: 'contact' },
   ],
   services: [
-    { label: 'Blood Testing', href: 'tests' },
-    { label: 'Thyroid Profile', href: 'tests' },
-    { label: 'Lipid Profile', href: 'tests' },
-    { label: 'Diabetes Screening', href: 'tests' },
-    { label: 'Home Collection', href: 'home-collection' },
+    { label: 'Blood Tests', href: 'tests', query: 'blood' },
+    { label: 'Thyroid Tests', href: 'tests', query: 'thyroid' },
+    { label: 'Cholesterol Tests', href: 'tests', query: 'cholesterol' },
+    { label: 'Blood Glucose Tests', href: 'tests', query: 'glucose' },
+    { label: 'Home Collection', href: 'home-collection', query: undefined },
   ],
   contact: {
     address: siteConfig.location.address,

@@ -133,7 +133,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             <Button
               variant="outline"
               onClick={onClose}
-              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
+              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:!text-[#0F4775] focus-visible:!text-[#0F4775] active:!text-[#0F4775]"
               title="Return to catalog"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -150,16 +150,21 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               <span>Share</span>
             </Button>
 
-            <Button
-              type="button"
-              variant={isSelected(item.id) ? 'outline' : 'default'}
-              aria-pressed={isSelected(item.id)}
-              onClick={() => { toggleTest(item.id); onClose(); }}
-              className={`action-button min-h-11 h-auto flex-1 basis-full sm:basis-auto rounded-[14px] text-xs sm:text-sm font-bold gap-1.5 ${isSelected(item.id) ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775] hover:bg-[#D8EAF5]' : ''}`}
-            >
-              <ClipboardList className="w-4 h-4 shrink-0" />
-              <span>{isSelected(item.id) ? 'Remove from Request' : 'Add to Request'}</span>
-            </Button>
+            {isSelected(item.id) ? (
+              <div role="status" aria-live="polite" className="action-button flex min-h-11 flex-1 basis-full items-center justify-center gap-1.5 rounded-[14px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B] sm:basis-auto sm:text-sm">
+                <Check className="h-4 w-4 shrink-0" />
+                <span>Added to Request</span>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                onClick={() => { toggleTest(item.id); onClose(); }}
+                className="action-button min-h-11 h-auto flex-1 basis-full gap-1.5 rounded-[14px] text-xs font-bold sm:basis-auto sm:text-sm"
+              >
+                <ClipboardList className="h-4 w-4 shrink-0" />
+                <span>Add to Request</span>
+              </Button>
+            )}
           </div>
         </DialogContent>
       </Dialog>

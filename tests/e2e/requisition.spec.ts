@@ -12,9 +12,12 @@ test('collects published test selections and prepares an honest WhatsApp request
   const tests = names.slice(0, 2).map((name) => medicalTests.find((item) => item.name === name)!);
   expect(tests).toHaveLength(2);
   await cards.nth(0).getByRole('button', { name: /Add to request/i }).click();
-  const remove = cards.nth(0).getByRole('button', { name: /Remove from request/i });
-  await expect(remove).toHaveAttribute('aria-pressed', 'true');
-  await remove.click();
+  const remove = cards.nth(0).getByRole('status');
+  await expect(remove).toHaveText('Added to Request');
+  await page.getByRole('button', { name: 'Review test request, 1 selected' }).click();
+  const firstRequest = page.getByRole('dialog', { name: 'Review your selected tests' });
+  await firstRequest.getByRole('button', { name: `Remove ${tests[0].name} from request` }).click();
+  await firstRequest.getByRole('button', { name: 'Close' }).click();
   await expect(page.getByRole('button', { name: /Review test request/ })).toHaveCount(0);
   await cards.nth(0).getByRole('button', { name: /Add to request/i }).click();
   await cards.nth(1).getByRole('button', { name: /Add to request/i }).click();
@@ -58,13 +61,13 @@ test('one selected test is reviewable from details on a narrow screen', async ({
   const item = medicalTests.find((test) => test.name === name)!;
   expect(item).toBeTruthy();
 
-  await card.getByRole('button', { name: 'Details' }).click();
+  await card.getByRole('button', { name: /View details for/i }).click();
   const detail = page.getByRole('dialog').filter({ has: page.getByRole('heading', { name: item.name, exact: true }) });
   await expect(detail).toBeVisible();
   await expect(detail.getByRole('button', { name: /Book Appointment/ })).toHaveCount(0);
   await detail.getByRole('button', { name: /Add to request/i }).click();
   await expect(detail).toBeHidden();
-  await expect(card.getByRole('button', { name: /Remove from request/i })).toHaveAttribute('aria-pressed', 'true');
+  await expect(card.getByRole('status')).toHaveText('Added to Request');
 
   const review = page.getByRole('button', { name: 'Review test request, 1 selected' });
   await expect(review).toContainText(formatInr(item.price));

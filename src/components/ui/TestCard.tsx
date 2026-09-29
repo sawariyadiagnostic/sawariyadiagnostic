@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, Info, ClipboardList } from 'lucide-react';
+import { Check, ClipboardList, Home } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
 import { TestDetailModal } from '../catalog/TestDetailModal';
@@ -72,8 +72,15 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
             </div>
             
             {/* Title & Description */}
-            <h3 className="font-bold text-base sm:text-lg text-[#1D1D1F] mb-1.5 group-hover:text-[#155E9A] transition-colors leading-snug">
-              {test.name}
+            <h3 aria-label={test.name} className="mb-1.5 text-base font-bold leading-snug text-[#1D1D1F] transition-colors sm:text-lg">
+              <button
+                type="button"
+                aria-label={`View details for ${test.name}`}
+                onClick={handleCardClick}
+                className="text-left underline-offset-4 hover:text-[#155E9A] hover:underline focus-visible:text-[#155E9A] focus-visible:underline"
+              >
+                {test.name}
+              </button>
             </h3>
             
             <p className="text-xs text-[var(--text-muted)] mb-4 line-clamp-2 leading-relaxed font-normal">
@@ -119,27 +126,24 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           </div>
 
           {/* Request actions */}
-          <div className="action-row grid grid-cols-2 gap-2">
-            <Button 
-              variant="outline"
-              size="sm"
-              onClick={(e) => { e.stopPropagation(); handleCardClick(); }}
-              className="action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775] hover:border-[#155E9A] focus-visible:bg-[#E8F1F8] focus-visible:text-[#0F4775] w-full min-w-0"
-            >
-              <Info className="w-3.5 h-3.5 text-[#155E9A] shrink-0" />
-              <span>Details</span>
-            </Button>
-            <Button
-              type="button"
-              variant={isSelected ? 'outline' : 'default'}
-              size="sm"
-              aria-pressed={isSelected}
-              onClick={() => onToggleRequest(test.id)}
-              className={`action-button h-auto min-h-11 px-2 sm:px-3 text-[11px] sm:text-xs font-bold rounded-[14px] w-full min-w-0 ${isSelected ? 'border-[#155E9A] bg-[#E8F1F8] text-[#0F4775] hover:bg-[#D8EAF5]' : ''}`}
-            >
-              <ClipboardList className="h-3.5 w-3.5 shrink-0" />
-              <span className="min-w-0">{isSelected ? 'Remove from Request' : 'Add to Request'}</span>
-            </Button>
+          <div className="action-row">
+            {isSelected ? (
+              <div role="status" aria-live="polite" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[14px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B]">
+                <Check className="h-4 w-4 shrink-0" />
+                <span>Added to Request</span>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                size="sm"
+                aria-pressed={false}
+                onClick={() => onToggleRequest(test.id)}
+                className="action-button h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs"
+              >
+                <ClipboardList className="h-3.5 w-3.5 shrink-0" />
+                <span className="min-w-0">Add to Request</span>
+              </Button>
+            )}
           </div>
         </div>
       </div>

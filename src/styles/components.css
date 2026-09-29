@@ -168,7 +168,7 @@
     box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
   }
 
-  /* Refined Natural Outline Button with Sunset Coral / Peacock Hover */
+  /* Pale-blue outline hover/focus keeps navy labels readable. */
   .btn-outline {
     display: inline-flex;
     align-items: center;
@@ -186,12 +186,12 @@
     cursor: pointer;
   }
 
-  .btn-outline:hover {
-    background: #072448;
-    color: #FFFFFF !important;
-    border-color: #072448;
-    transform: translateY(-1.5px);
-    box-shadow: 0 6px 18px rgba(7, 36, 72, 0.25);
+  .btn-outline:hover,
+  .btn-outline:focus-visible,
+  .btn-outline:active {
+    background: #E8F1F8 !important;
+    color: #0F4775 !important;
+    border-color: #0F4775;
   }
 
   .btn-outline:active {

@@ -12,7 +12,7 @@ import { usePagination } from '@/lib/use-pagination';
 import { useRequisition } from './requisition/RequisitionContext';
 
 const testCategories = categories.filter((category) => category.id !== 'package');
-const TESTS_PER_PAGE = 24;
+const TESTS_PER_PAGE = 12;
 
 export function TestCatalog() {
   const [searchQuery, setSearchQuery] = useState('');

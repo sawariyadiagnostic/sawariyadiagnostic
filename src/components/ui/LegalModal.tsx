@@ -85,7 +85,7 @@ export function LegalModal({ type, onClose }: LegalModalProps) {
             <Button
               variant="outline"
               onClick={onClose}
-              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:text-[#0F4775]"
+              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:!text-[#0F4775] focus-visible:!text-[#0F4775] active:!text-[#0F4775]"
               aria-label={`Back from ${policy.title}`}
               title="Return to legal links"
             >

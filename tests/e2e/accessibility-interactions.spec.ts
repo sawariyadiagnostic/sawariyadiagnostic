@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Locator } from '@playwright/test';
 
 const openPage = async (page: Parameters<typeof test>[0]['page']) => {
   await page.goto('./', { waitUntil: 'domcontentloaded', timeout: 60_000 });
@@ -150,7 +150,7 @@ test('homepage has no horizontal overflow at 360px', async ({ page }) => {
 test('individual test details show canonical test data', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  const details = page.locator('#tests').getByRole('button', { name: /View details for/i }).first();
   await details.click();
   const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(dialog).toBeVisible();
@@ -159,11 +159,11 @@ test('individual test details show canonical test data', async ({ page }) => {
 
 
 
-test('test card details opens from the native keyboard button', async ({ page }) => {
+test('test card details opens from its keyboard-accessible test name', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
 
-  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  const details = page.locator('#tests').getByRole('button', { name: /View details for/i }).first();
   await details.focus();
   await details.press('Enter');
   await expect(page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i })).toBeVisible();
@@ -173,7 +173,7 @@ test('catalog metadata cards do not overlap on narrow mobile viewports', async (
   await page.setViewportSize({ width: 375, height: 812 });
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+  await page.locator('#tests').getByRole('button', { name: /View details for/i }).first().click();
 
   const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   const boxes = await Promise.all([
@@ -197,7 +197,7 @@ test('catalog detail panel fits viewport sizes and scrolls long content', async 
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await openPage(page);
     await page.locator('#tests').scrollIntoViewIfNeeded();
-    const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+    const details = page.locator('#tests').getByRole('button', { name: /View details for/i }).first();
     await expect(details).toBeVisible();
     await details.click();
 
@@ -227,7 +227,7 @@ test('catalog detail modal stays above the mobile dock', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  const details = page.locator('#tests').getByRole('button', { name: 'Details' }).first();
+  const details = page.locator('#tests').getByRole('button', { name: /View details for/i }).first();
   await expect(details).toBeVisible();
   await details.click();
   const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
@@ -260,7 +260,7 @@ test('individual test details use the request flow and close on browser Back', a
   await page.setViewportSize({ width: 390, height: 844 });
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+  await page.locator('#tests').getByRole('button', { name: /View details for/i }).first().click();
 
   const detail = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(detail).toBeVisible();
@@ -270,6 +270,49 @@ test('individual test details use the request flow and close on browser Back', a
   await expect(detail).toBeHidden();
 });
 
+test('catalog add action retains readable contrast on hover and press', async ({ page }) => {
+  await openPage(page);
+  await page.locator('#tests').scrollIntoViewIfNeeded();
+
+  const card = page.locator('#tests .fluid-grid-cards-sm > div').first();
+  const checkContrast = async (button: Locator, foregroundColor: string) => {
+    const result = await button.evaluate((element) => {
+      const luminance = (color: string) => {
+        const channels = color.match(/[0-9.]+/g)!.slice(0, 3).map(Number).map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
+      };
+      const foreground = getComputedStyle(element).color;
+      const background = getComputedStyle(element).backgroundColor;
+      const values = [luminance(foreground), luminance(background)];
+      return { foreground, contrast: (Math.max(...values) + 0.05) / (Math.min(...values) + 0.05) };
+    });
+    expect(result.foreground).toBe(foregroundColor);
+    expect(result.contrast).toBeGreaterThanOrEqual(4.5);
+  };
+
+  const add = card.getByRole('button', { name: /Add to request/i });
+  await add.hover();
+  await checkContrast(add, 'rgb(255, 255, 255)');
+  await page.mouse.down();
+  await checkContrast(add, 'rgb(255, 255, 255)');
+  await page.mouse.up();
+  await expect(card.getByRole('status')).toHaveText('Added to Request');
+  await expect(card.getByRole('button', { name: /View details for/i })).toHaveCount(1);
+  await expect(card.getByRole('button', { name: 'Details', exact: true })).toHaveCount(0);
+  await expect(card.getByRole('button', { name: /Remove from request/i })).toHaveCount(0);
+
+  const next = page.locator('#tests').getByRole('button', { name: 'Next' });
+  await next.hover();
+  await expect(next).toHaveCSS('background-color', 'rgb(232, 241, 248)');
+  await checkContrast(next, 'rgb(15, 71, 117)');
+  await page.mouse.down();
+  await checkContrast(next, 'rgb(15, 71, 117)');
+  await page.mouse.up();
+});
+
 test('catalog pagination limits visible cards and resets after filtering', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
@@ -277,16 +320,50 @@ test('catalog pagination limits visible cards and resets after filtering', async
   const catalog = page.locator('#tests');
   const pagination = catalog.getByRole('navigation', { name: 'Test catalog pages' });
   await expect(pagination).toBeVisible();
-  await expect(pagination).toContainText(/Showing 1–24 of 74 tests/);
-  await expect(catalog.getByRole('button', { name: 'Details' })).toHaveCount(24);
+  await expect(pagination).toContainText(/Showing 1–12 of 74 tests/);
+  await expect(catalog.getByRole('button', { name: /View details for/i })).toHaveCount(12);
 
   await pagination.getByRole('button', { name: 'Next' }).click();
-  await expect(pagination).toContainText(/Showing 25–48 of 74 tests/);
+  await expect(pagination).toContainText(/Showing 13–24 of 74 tests/);
+  await expect(catalog.getByRole('button', { name: /View details for/i })).toHaveCount(12);
   await expect(pagination.getByRole('button', { name: 'Previous' })).toBeEnabled();
 
   await catalog.getByPlaceholder('Ask about an individual test…').fill('thyroid');
   await expect(catalog.getByRole('status').filter({ hasText: /tests matching/ })).toContainText(/tests matching/);
   await expect(pagination).toBeHidden();
+});
+
+test('catalog topic links filter to approved tests and home collection', async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await openPage(page);
+  const topics = page.getByRole('heading', { name: 'Find Tests by Topic' }).locator('..');
+  const links = topics.getByRole('link');
+  await expect(links).toHaveCount(5);
+  await expect(links).toHaveText([
+    'Blood Tests',
+    'Thyroid Tests',
+    'Cholesterol Tests',
+    'Blood Glucose Tests',
+    'Home Collection',
+  ]);
+
+  const footer = page.locator('footer');
+  for (const [label, query] of [
+    ['Blood Tests', 'blood'],
+    ['Thyroid Tests', 'thyroid'],
+    ['Cholesterol Tests', 'cholesterol'],
+    ['Blood Glucose Tests', 'glucose'],
+  ]) {
+    await footer.scrollIntoViewIfNeeded();
+    await footer.getByRole('link', { name: label, exact: true }).click();
+    await expect(page.locator('#tests').getByPlaceholder('Ask about an individual test…')).toHaveValue(query);
+    await expect(page.locator('#tests').getByRole('status').filter({ hasText: 'tests matching' })).not.toContainText('0 tests matching');
+  }
+
+  await footer.scrollIntoViewIfNeeded();
+  await expect(footer.getByRole('link', { name: 'Home Collection' })).toHaveAttribute('href', '#home-collection');
+  await expect(page.locator('#home-collection')).toBeVisible();
 });
 
 test('catalog cards show real test descriptions', async ({ page }) => {
@@ -415,7 +492,7 @@ test('team role text and individual-test hover meet WCAG AA contrast', async ({ 
 
     const action = page.getByRole('button', { name: 'Ask about individual tests' });
     await action.hover();
-    await expect(action).toHaveCSS('background-color', 'rgb(7, 36, 72)');
+    await expect(action).toHaveCSS('background-color', 'rgb(232, 241, 248)');
     const actionContrast = await action.evaluate((element) => {
       const luminance = (color: string) => {
         const channels = color.match(/[0-9.]+/g)!.slice(0, 3).map(Number).map((channel) => {

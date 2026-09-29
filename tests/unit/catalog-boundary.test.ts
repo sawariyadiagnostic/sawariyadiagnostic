@@ -6,6 +6,7 @@ import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
 import { siteConfig, validateSiteConfig, buildTestShareUrl } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
+import { buildSearchIndex, createSearchEngine } from '../../src/lib/search-fuse';
 import { formatInr } from '../../src/lib/utils';
 
 const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
@@ -35,6 +36,20 @@ describe('approved public catalog', () => {
     expect(medicalTests.every((test) => !test.description.includes('Current test details are published'))).toBe(true);
     expect(medicalTests.find((test) => test.id === 'web-001')?.description).toBe('Comprehensive evaluation of cellular blood components.');
     expect(medicalTests.find((test) => test.id === 'web-074')?.description).toBe('Laboratory measurement for MALARIA PARASITE ANTIGEN; see the specimen, method, preparation, and parameters below.');
+  });
+
+  it('maps topic searches to literal, published catalog test IDs', () => {
+    const engine = createSearchEngine(buildSearchIndex(medicalTests));
+    for (const [query, ids] of Object.entries({
+      blood: ['web-001', 'web-002', 'web-003', 'web-004', 'web-005', 'web-006', 'web-007'],
+      thyroid: ['web-050', 'web-051', 'web-052', 'web-053', 'web-054'],
+      cholesterol: ['web-030', 'web-032', 'web-033'],
+      glucose: ['web-037', 'web-038', 'web-039', 'web-040'],
+      lipid: ['web-030', 'web-031', 'web-032', 'web-033', 'web-034', 'web-035', 'web-036'],
+    })) {
+      const resultIds = new Set(engine.search(query).map((test) => test.id));
+      for (const id of ids) expect(resultIds, `${query} should include ${id}`).toContain(id);
+    }
   });
 
   it('renders the approved individual-test catalog only', () => {
@@ -113,7 +128,9 @@ describe('approved public catalog', () => {
     const source = readFileSync(resolve(process.cwd(), 'src/components/ui/TestCard.tsx'), 'utf8');
     expect(source).not.toContain('role="button"');
     expect(source).not.toContain('tabIndex={0}');
-    expect(source).toContain('onClick={(e) => { e.stopPropagation(); handleCardClick(); }}');
+    expect(source).toContain('aria-label={`View details for ${test.name}`}');
+    expect(source).toContain('Added to Request');
+    expect(source).not.toContain('Details</span>');
   });
 
   it('reports clipboard share success and failure honestly', () => {

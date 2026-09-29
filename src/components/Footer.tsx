@@ -78,12 +78,24 @@ export function Footer() {
 
             {/* Services (3 cols) */}
             <div className="lg:col-span-3 space-y-2.5">
-              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">Lab Specialities</h3>
+              <h3 className="font-bold text-xs uppercase tracking-wider text-slate-200">Find Tests by Topic</h3>
+              <p className="text-xs leading-relaxed text-slate-300">Browse topic-filtered tests, compare published prices and details, and confirm collection options with the lab.</p>
               <ul className="space-y-1.5">
                 {services.map((service) => (
-                  <li key={service.label} className="text-slate-400 text-xs flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#C62828]" />
-                    {service.label}
+                  <li key={service.label}>
+                    <a
+                      href={`#${service.href}`}
+                      onClick={(event) => {
+                        if (!service.query) return;
+                        event.preventDefault();
+                        window.dispatchEvent(new CustomEvent('sawariya:search', { detail: { query: service.query, tab: 'tests' } }));
+                        document.getElementById(service.href)?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+                      }}
+                      className="flex min-h-11 items-center gap-2.5 rounded-sm py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white hover:underline hover:underline-offset-4 focus-visible:text-white"
+                    >
+                      <span aria-hidden="true" className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#C62828]" />
+                      {service.label}
+                    </a>
                   </li>
                 ))}
               </ul>

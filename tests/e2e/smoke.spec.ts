@@ -34,7 +34,7 @@ test('share copies the project base path and valid test hash', async ({ page, co
   });
   await page.goto('./', { waitUntil: 'domcontentloaded', timeout: 60_000 });
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+  await page.locator('#tests').getByRole('button', { name: /View details for/i }).first().click();
   await expect(page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i })).toBeVisible();
   await page.getByRole('button', { name: 'Share' }).click();
 
@@ -48,7 +48,7 @@ test('share copies the project base path and valid test hash', async ({ page, co
 test('test detail dialogs do not publish nonexistent canonical pages or MedicalTest schema', async ({ page }) => {
   await page.goto('./', { waitUntil: 'domcontentloaded', timeout: 60_000 });
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  await page.locator('#tests').getByRole('button', { name: 'Details' }).first().click();
+  await page.locator('#tests').getByRole('button', { name: /View details for/i }).first().click();
   await expect(page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i })).toBeVisible();
   await expect(page.locator('link[rel="canonical"][href$=".html"]')).toHaveCount(0);
   const medicalTestSchemaCount = await page.locator('script[type="application/ld+json"]').evaluateAll((scripts) =>

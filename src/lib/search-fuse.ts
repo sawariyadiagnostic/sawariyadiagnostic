@@ -21,11 +21,14 @@ export interface SearchableItem {
 
 const UPDATED_SYMPTOM_MAP: Record<string, string[]> = {
   fatigue: ['WEB-001', 'WEB-064', 'WEB-065', 'WEB-050', 'WEB-043', 'WEB-041'],
+  blood: ['web-001', 'web-002', 'web-003', 'web-004', 'web-005', 'web-006', 'web-007'],
+  glucose: ['web-037', 'web-038', 'web-039', 'web-040'],
+  diabetes: ['web-037', 'web-038', 'web-039', 'web-040'],
+  thyroid: ['web-050', 'web-051', 'web-052', 'web-053', 'web-054'],
+  cholesterol: ['web-030', 'web-032', 'web-033'],
+  lipid: ['web-030', 'web-031', 'web-032', 'web-033', 'web-034', 'web-035', 'web-036'],
   fever: ['WEB-001', 'WEB-007', 'WEB-066', 'WEB-039'],
-  sugar: ['WEB-040', 'WEB-005'],
-  diabetes: ['WEB-040', 'WEB-005'],
-  thyroid: ['WEB-050', 'WEB-053', 'WEB-054', 'WEB-051', 'WEB-052'],
-  cholesterol: ['WEB-030', 'WEB-031', 'WEB-032', 'WEB-033', 'WEB-034', 'WEB-035', 'WEB-036'],
+  sugar: ['web-037', 'web-038', 'web-039', 'web-040'],
   heart: ['WEB-030', 'WEB-044', 'WEB-045', 'WEB-047'],
   joint: ['WEB-067', 'WEB-066', 'WEB-007', 'WEB-064', 'WEB-069'],
   hairfall: ['WEB-043', 'WEB-041', 'WEB-050', 'WEB-064', 'WEB-065', 'WEB-058'],
