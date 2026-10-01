@@ -61,9 +61,8 @@ test('mobile navigation has one 44px close control, not overlapping X buttons', 
   await expect(menu.getByRole('button', { name: /close/i })).toHaveCount(1);
   const close = menu.getByRole('button', { name: 'Close' });
   await expect(close).toBeVisible();
-  const size = await close.boundingBox();
-  expect(size?.width).toBeGreaterThanOrEqual(44);
-  expect(size?.height).toBeGreaterThanOrEqual(44);
+  await expect.poll(async () => (await close.boundingBox())?.width ?? 0).toBeGreaterThanOrEqual(44);
+  await expect.poll(async () => (await close.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
   await close.click();
   await expect(menu).toBeHidden();
 });

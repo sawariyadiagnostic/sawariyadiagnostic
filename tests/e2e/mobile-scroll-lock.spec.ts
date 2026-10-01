@@ -21,7 +21,7 @@ test('mobile navigation locks body scroll and restores inline styles', async ({ 
     touchAction: document.body.style.touchAction,
   }))).toEqual({ overflow: 'hidden', touchAction: 'none' });
 
-  await page.getByRole('button', { name: 'Close Menu' }).click();
+  await page.getByRole('dialog', { name: 'Mobile navigation' }).getByRole('button', { name: 'Close' }).click();
   await expect.poll(() => page.evaluate(() => ({
     overflow: document.body.style.overflow,
     touchAction: document.body.style.touchAction,

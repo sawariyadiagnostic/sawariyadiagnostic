@@ -157,7 +157,7 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/10 pt-6 sm:pt-8 mt-10 flex flex-col sm:flex-row justify-between items-center gap-3.5 text-xs text-slate-400">
-            <p className="text-center sm:text-left text-[13px]">
+            <p className="text-center sm:text-left text-[13px] text-slate-300">
               © {new Date().getFullYear()} Sawariya Diagnostic Lab. All diagnostic reports are confidential.
             </p>
             <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
