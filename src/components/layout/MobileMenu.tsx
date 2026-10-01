@@ -1,7 +1,7 @@
 'use client';
 
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
-import { FileDown, Phone, ShieldCheck, X, Home, MessageCircle, ChevronRight } from 'lucide-react';
+import { FileDown, Phone, ShieldCheck, Home, MessageCircle, ChevronRight } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../ui/dialog';
 import { Logo } from '../ui/Logo';
@@ -33,13 +33,6 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
               <DialogTitle className="sr-only">Mobile navigation</DialogTitle>
               <DialogDescription className="sr-only">Navigate to sections and contact actions</DialogDescription>
             </div>
-            <button
-              onClick={onClose}
-              className="ui-control-button w-11 h-11 flex items-center justify-center rounded-[var(--radius-control)] text-slate-700 bg-white/60 hover:bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] active:scale-90 transition-surface cursor-pointer border border-white/80"
-              aria-label="Close Menu"
-            >
-              <X className="w-4 h-4" />
-            </button>
           </div>
 
           <div className="flex flex-col space-y-1.5 pt-4">

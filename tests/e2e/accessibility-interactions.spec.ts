@@ -52,6 +52,22 @@ test('mobile navigation is a dialog and closes with Escape', async ({ page }) =>
   await expect(menu).toBeHidden();
 });
 
+test('mobile navigation has one 44px close control, not overlapping X buttons', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openPage(page);
+  await page.getByRole('button', { name: 'Open navigation menu' }).click();
+
+  const menu = page.getByRole('dialog', { name: 'Mobile navigation' });
+  await expect(menu.getByRole('button', { name: /close/i })).toHaveCount(1);
+  const close = menu.getByRole('button', { name: 'Close' });
+  await expect(close).toBeVisible();
+  const size = await close.boundingBox();
+  expect(size?.width).toBeGreaterThanOrEqual(44);
+  expect(size?.height).toBeGreaterThanOrEqual(44);
+  await close.click();
+  await expect(menu).toBeHidden();
+});
+
 test('skip link moves focus to the main content landmark', async ({ page }) => {
   await openPage(page);
 
