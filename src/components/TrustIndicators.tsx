@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { ShieldCheck, Users, Clock, Award, CheckCircle2, Microscope, Sparkles } from 'lucide-react';
 
 export function TrustIndicators() {
@@ -71,7 +71,7 @@ export function TrustIndicators() {
         {/* Apple Health Bento Stats Grid */}
         <div className="fluid-grid-cards-sm mb-6 sm:mb-8">
           {stats.map((stat, index) => (
-            <motion.div
+            <m.div
               key={stat.label}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -88,12 +88,12 @@ export function TrustIndicators() {
               <p className="text-2xl sm:text-3xl font-black text-[#1D1D1F] tracking-tight mb-0.5">{stat.value}</p>
               <p className="text-xs sm:text-sm font-bold text-slate-800 leading-snug">{stat.label}</p>
               <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">{stat.subtext}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Certifications Bar */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
@@ -121,7 +121,7 @@ export function TrustIndicators() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

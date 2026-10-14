@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Microscope, ShieldCheck, Users, ClipboardCheck, Truck, Stethoscope, FlaskConical, UserRound } from 'lucide-react';
 import { teamStructure, type TeamRole } from '@/data/team-structure';
 
@@ -9,7 +9,7 @@ function RoleCard({ role, index }: { role: TeamRole; index: number }) {
   const Icon = role.tier === 'governance' ? governanceIcons[index % governanceIcons.length] : operationsIcons[index % operationsIcons.length];
   const isGovernance = role.tier === 'governance';
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, delay: index * 0.05 }}
@@ -28,7 +28,7 @@ function RoleCard({ role, index }: { role: TeamRole; index: number }) {
        <ul className={`mt-4 space-y-2 border-t pt-4 text-[11px] leading-relaxed ${isGovernance ? 'border-white/15 text-white' : 'border-slate-100 text-slate-600'}`}>
         {role.responsibilities.map((item) => <li key={item} className="flex gap-2"><span className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${isGovernance ? 'bg-[#E54848]' : 'bg-[#155E9A]'}`} />{item}</li>)}
       </ul>
-    </motion.article>
+    </m.article>
   );
 }
 

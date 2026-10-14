@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Calendar, CheckCircle2, Clock, Home, MessageCircle, Phone, ShieldCheck } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
@@ -40,7 +40,7 @@ export function HomeCollection() {
 
       <div className="fluid-container relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -85,9 +85,9 @@ export function HomeCollection() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -134,7 +134,7 @@ export function HomeCollection() {
                 Home collection is available 06:30 AM–08:00 PM. Reports are verified within 12 hours.
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

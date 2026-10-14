@@ -615,3 +615,10 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
   button:not(.ui-calendar-day):not([data-ui-size="icon"]), a.ui-button:not([data-ui-size="icon"]), .ui-control-button:not([data-ui-size="icon"]), .ui-control, .ui-card, .ui-panel, .ui-dialog-panel:not(.mobile-menu-panel), .ui-dialog-panel.mobile-menu-panel, .glass-card, .glass-panel, .glass-panel-dark, .apple-card { corner-shape: squircle; }
   button[data-ui-size="icon"] { corner-shape: round; }
 }
+
+/* High-speed mobile rendering for long diagnostic catalogs */
+.test-card-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 180px;
+}
+

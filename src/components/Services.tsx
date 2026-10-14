@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Activity, ArrowRight, ShieldCheck } from 'lucide-react';
 import { services } from '@/data/website-content';
 
@@ -41,7 +41,7 @@ export function Services() {
         {/* Services Grid with Apple Squircles */}
         <div className="fluid-grid-cards-sm">
           {servicesList.map((service, index) => (
-            <motion.div
+            <m.div
               key={service.title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ export function Services() {
                   Book <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                 </span>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -4,8 +4,11 @@ import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { Phone, MessageCircle, Home, FileText } from 'lucide-react';
 
 import { ReportDownloadModal } from '../ui/ReportDownloadModal';
+import { useKeyboardOpen } from '@/hooks/useKeyboardOpen';
 
 export function MobileBottomDock() {
+  const isKeyboardOpen = useKeyboardOpen();
+
   const scrollToHomeCollection = () => {
     const el = document.getElementById('home-collection');
     if (el) {
@@ -18,7 +21,11 @@ export function MobileBottomDock() {
   };
 
   return (
-    <div className="sm:hidden fixed bottom-0 left-0 right-0 z-[100] px-2.5 pt-2 pb-[max(0.5rem,calc(env(safe-area-inset-bottom,0px)+4px))] pointer-events-none">
+    <div
+      className={`sm:hidden fixed bottom-0 left-0 right-0 z-[100] px-2.5 pt-2 pb-[max(0.5rem,calc(env(safe-area-inset-bottom,0px)+4px))] pointer-events-none transition-all duration-200 ${
+        isKeyboardOpen ? 'translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
+      }`}
+    >
       {/* Floating Glass Bar */}
       <div className="w-full max-w-[420px] mx-auto pointer-events-auto bg-[#102A43]/85 backdrop-blur-[30px] border border-white/20 rounded-[22px] p-1 shadow-[0_16px_40px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.08)] flex items-center justify-between gap-1 text-white overflow-hidden relative">
         <div className="absolute inset-0 z-[-1] pointer-events-none opacity-50 mix-blend-screen">

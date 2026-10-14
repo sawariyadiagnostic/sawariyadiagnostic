@@ -1,6 +1,8 @@
 import { Suspense, lazy } from 'react'
+import { LazyMotion, domAnimation } from 'framer-motion'
 import { siteConfig } from './config/site'
 import { Hero } from './components/Hero'
+import { ClinicalTrustSection } from './components/ClinicalTrustSection'
 import { TrustIndicators } from './components/TrustIndicators'
 import { About } from './components/About'
 import { Services } from './components/Services'
@@ -31,33 +33,38 @@ export default function App() {
   if (guide) return <TestGuidePage guide={guide} language={guideMatch?.[2] ? 'hi' : 'en'} />
 
   return (
-    <RequisitionProvider>
-      <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
-      <a href="#main-content" className="skip-link">Skip to main content</a>
-      <main id="main-content" tabIndex={-1} className="relative w-full max-w-full" role="main">
-        {/* Critical Path: Load Hero Instantly */}
-        <Hero />
+    <LazyMotion features={domAnimation} strict>
+      <RequisitionProvider>
+        <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
+          <a href="#main-content" className="skip-link">Skip to main content</a>
+          <main id="main-content" tabIndex={-1} className="relative w-full max-w-full" role="main">
+            {/* Critical Path: Load Hero Instantly */}
+            <Hero />
 
-        {/* Lightweight Content: Load with main bundle (Better for 3G) */}
-        <TrustIndicators />
-        <About />
-        <Services />
-        <HomeCollection />
+            {/* In-House Clinical Advantage & Quick Symptom Filters */}
+            <ClinicalTrustSection />
 
-        {/* Heavy Interactive Sections: Lazy Load */}
-        <SectionErrorBoundary>
-          <Suspense fallback={<LoadingSpinner />}>
-            <TestCatalog />
-            <Team />
-            <Contact />
-            <Footer />
-          </Suspense>
-        </SectionErrorBoundary>
-      </main>
-      <WhatsAppButton />
-      <MobileBottomDock />
-      <RequisitionDrawer />
-      </div>
-    </RequisitionProvider>
+            {/* Lightweight Content: Load with main bundle (Better for 3G) */}
+            <TrustIndicators />
+            <About />
+            <Services />
+            <HomeCollection />
+
+            {/* Heavy Interactive Sections: Lazy Load */}
+            <SectionErrorBoundary>
+              <Suspense fallback={<LoadingSpinner />}>
+                <TestCatalog />
+                <Team />
+                <Contact />
+                <Footer />
+              </Suspense>
+            </SectionErrorBoundary>
+          </main>
+          <WhatsAppButton />
+          <MobileBottomDock />
+          <RequisitionDrawer />
+        </div>
+      </RequisitionProvider>
+    </LazyMotion>
   )
 }

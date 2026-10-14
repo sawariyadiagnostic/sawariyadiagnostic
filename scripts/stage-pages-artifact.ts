@@ -54,8 +54,17 @@ export function stagePagesArtifact(source = SOURCE_DIR, target = STAGED_DIR): tr
     recursive: true,
     filter: (entry) => !FORBIDDEN_FILE.test(entry),
   });
+  let buildSha = process.env.GITHUB_SHA;
+  if (!buildSha) {
+    try {
+      buildSha = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+    } catch {
+      buildSha = '0000000000000000000000000000000000000000';
+    }
+  }
+
   fs.writeFileSync(path.join(target, 'release.json'), `${JSON.stringify({
-    buildSha: process.env.GITHUB_SHA ?? execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+    buildSha,
     runId: process.env.GITHUB_RUN_ID ?? null,
   }, null, 2)}\n`);
   return validatePublicArtifact(target);

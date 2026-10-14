@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { CalendarCheck, Home, Microscope, FileCheck, CheckCircle2, Award } from 'lucide-react';
 
 export function About() {
@@ -82,7 +82,7 @@ export function About() {
         {/* Journey Timeline (Apple Bento Step Cards) */}
         <div className="fluid-grid-cards-sm mb-10 sm:mb-14">
           {journeySteps.map((step, index) => (
-            <motion.div
+            <m.div
               key={step.title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -98,12 +98,12 @@ export function About() {
               </div>
               <h3 className="font-bold text-sm sm:text-base text-[#1D1D1F] mb-1 leading-snug">{step.title}</h3>
               <p className="text-xs text-slate-500 leading-relaxed font-normal">{step.description}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Features & Quality Assurance Container in Apple Dark Mode Material */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -167,7 +167,7 @@ export function About() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
       </div>
     </section>
