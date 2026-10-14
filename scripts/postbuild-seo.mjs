@@ -52,9 +52,27 @@ function runPostBuild() {
   fs.writeFileSync(INDEX_PATH, html, 'utf-8');
   console.log('[postbuild-seo] Injected static SEO catalog into dist/index.html');
 
-  // 2. Copy dist/index.html to dist/404.html for GitHub Pages SPA Routing resilience
-  fs.copyFileSync(INDEX_PATH, NOT_FOUND_PATH);
-  console.log('[postbuild-seo] Created dist/404.html fallback for GitHub Pages deep links');
+  // 2. Create dedicated 404.html for static routing and crawler gates
+  const notFoundHtml = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="theme-color" content="#FFF9F3" />
+    <title>Page not found | Sawariya Diagnostic Lab</title>
+    <style>body{margin:0;padding:2rem;font:16px/1.6 system-ui,sans-serif;color:#102A43;background:#FFF9F3}main{max-width:42rem;margin:12vh auto;padding:2rem;background:#fff;border:1px solid #e5e7eb;border-radius:1rem}a{color:#155E9A;font-weight:600;margin-right:1rem}</style>
+  </head>
+  <body>
+    <main>
+      <h1>Page not found</h1>
+      <p>This page may have moved or the address may be incorrect.</p>
+      <p><a href="https://sawariyadiagnostic.github.io/sawariyadiagnostic/">Home</a><a href="https://sawariyadiagnostic.github.io/sawariyadiagnostic/#tests">Browse individual tests</a></p>
+    </main>
+  </body>
+</html>`;
+  fs.writeFileSync(NOT_FOUND_PATH, notFoundHtml, 'utf-8');
+  console.log('[postbuild-seo] Created dedicated dist/404.html with noindex');
 
   // 3. Update lastmod date in dist/sitemap.xml
   if (fs.existsSync(SITEMAP_PATH)) {
