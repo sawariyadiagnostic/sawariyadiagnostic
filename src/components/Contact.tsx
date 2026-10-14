@@ -254,17 +254,17 @@ export function Contact() {
 
               {/* Embedded Google Map Iframe (7 cols) */}
               <div className="lg:col-span-7">
-                <div className="w-full h-[320px] sm:h-[400px] rounded-[22px] overflow-hidden border border-white/80 shadow-[inset_0_2px_12px_rgba(0,0,0,0.08)] relative bg-white/40 backdrop-blur-md">
+                <div className="w-full h-[320px] sm:h-[400px] rounded-[22px] overflow-hidden border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative bg-slate-50">
                   <iframe
                     title="Sawariya Diagnostic Lab Google Maps Location"
                     src={footer.contact.mapsEmbedUrl}
                     width="100%"
                     height="100%"
-                    style={{ border: 0, opacity: 0.9 }}
+                    style={{ border: 0 }}
                     allowFullScreen={true}
                     loading="lazy"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    className="w-full h-full mix-blend-luminosity hover:mix-blend-normal transition-surface duration-700"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full block"
                   />
                 </div>
               </div>
