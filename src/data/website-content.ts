@@ -158,7 +158,7 @@ export const footer = {
     whatsapp: siteConfig.contact.whatsapp,
     email: siteConfig.contact.email,
     mapsLink: siteConfig.location.mapsUrl,
-    mapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d218.94865952338844!2d76.26119347664967!3d28.59441983972724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39128f006f7356b7%3A0x7cfffa574a7089ec!2sSAWARIYA%20DIAGNOSTIC%20LAB!5e0!3m2!1sen!2sin!4v1786996989470!5m2!1sen!2sin"
+    mapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1800.0!2d76.2611935!3d28.5944198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39128f006f7356b7%3A0x7cfffa574a7089ec!2sSAWARIYA%20DIAGNOSTIC%20LAB!5e0!3m2!1sen!2sin!4v1786996989470!5m2!1sen!2sin"
   }
 };
 

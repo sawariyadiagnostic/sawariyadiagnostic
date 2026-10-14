@@ -255,6 +255,19 @@ export function Contact() {
               {/* Embedded Google Map Iframe (7 cols) */}
               <div className="lg:col-span-7">
                 <div className="w-full h-[320px] sm:h-[400px] rounded-[22px] overflow-hidden border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.06)] relative bg-slate-50">
+                  <div className="absolute top-3 right-3 z-10 pointer-events-auto">
+                    <a
+                      href={footer.contact.mapsLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-semibold text-[#155E9A] shadow-[0_2px_10px_rgba(0,0,0,0.12)] hover:bg-white hover:text-[#0A3663] transition-colors border border-slate-200/60"
+                      aria-label="View larger map in Google Maps"
+                    >
+                      <Navigation className="w-3.5 h-3.5" />
+                      <span>View larger map</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
                   <iframe
                     title="Sawariya Diagnostic Lab Google Maps Location"
                     src={footer.contact.mapsEmbedUrl}
