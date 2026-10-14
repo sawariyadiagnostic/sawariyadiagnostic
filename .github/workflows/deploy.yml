@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies cleanly
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build production bundle & SEO pre-render
         run: npm run build
