@@ -1,16 +1,30 @@
 {
-  "name": "Sawariya Diagnostic Lab",
+  "name": "Sawariya Diagnostic Lab - Charkhi Dadri",
   "short_name": "Sawariya Lab",
   "description": "Individual diagnostic tests, home collection requests, and report assistance in Charkhi Dadri.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#dc2626",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0F172A",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "./brand/sawariya-dna-original.svg",
       "sizes": "any",
       "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
