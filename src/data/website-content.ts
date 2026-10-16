@@ -270,12 +270,12 @@ export const services = {
       }
     },
     {
-      title: 'Priority Diagnostic Requests',
-      description: 'Priority diagnostic requests are handled through the appointment desk.',
+      title: 'Diabetes & Metabolic Monitoring',
+      description: 'HbA1c glycated hemoglobin, fasting & postprandial glucose with same-day digital reporting.',
       icon: Sparkles,
       methodBadge: 'Same-Day Digital Report',
       searchQuery: 'Sugar',
-      biomarkers: ['HbA1c Sugar', 'Fasting Glucose', 'Serum Creatinine', 'Electrolytes'],
+      biomarkers: ['HbA1c Sugar', 'Fasting Blood Sugar', 'Postprandial (PP)', 'Urine Microalbumin'],
       spineClass: 'spine-biochem',
       theme: {
         badge: 'bg-teal-50 text-[#074F49] border-teal-200/80',

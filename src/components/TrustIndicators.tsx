@@ -69,7 +69,21 @@ export function TrustIndicators() {
 
       <div className="relative fluid-container z-10">
         
-        {/* Apple Health Bento Stats Grid */}
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-2">
+          <div className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-md border border-slate-200/80 px-3.5 py-1 rounded-full shadow-2xs">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#0B6E66]" />
+            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Clinical Standards &amp; Quality</span>
+          </div>
+          <h2 className="text-[clamp(1.5rem,1.1rem+2vw,2.25rem)] font-black text-[#0A1128] tracking-tight leading-tight">
+            Diagnostic Accuracy &amp; Transparency
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
+            Standardized vacutainer sample collection, zero out-of-town transit, and reports verified within 12 hours.
+          </p>
+        </div>
+
+        {/* Quality Bento Stats Grid */}
         <div className="fluid-grid-cards-sm mb-6 sm:mb-8">
           {stats.map((stat, index) => (
             <m.div
@@ -80,9 +94,6 @@ export function TrustIndicators() {
               viewport={{ once: true }}
               className={`rounded-[24px] p-5 sm:p-6 border border-slate-200/80 transition-surface duration-300 relative overflow-hidden group ${stat.theme.card}`}
             >
-              {/* Subtle top accent bar */}
-              <div className={`absolute top-0 left-0 right-0 h-1 ${stat.theme.accentBar} opacity-80 group-hover:opacity-100 transition-opacity`} />
-              
               <div className={`w-10 h-10 sm:w-11 sm:h-11 mb-3.5 rounded-[14px] flex items-center justify-center border shadow-xs ${stat.theme.iconBg}`}>
                 <stat.icon className="w-5 h-5" />
               </div>

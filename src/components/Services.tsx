@@ -55,9 +55,6 @@ export function Services() {
               onClick={() => navigateToTests(service.searchQuery)}
               className={`peacock-test-card ${service.spineClass || 'spine-biochem'} p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] bg-white border border-slate-200/80 transition-all duration-300 hover:shadow-lg relative overflow-hidden`}
             >
-              {/* Top Accent Line */}
-              <div className={`absolute top-0 left-0 right-0 h-1 ${service.theme.accentBar}`} />
-
               <div>
                 {/* Header: Icon + Method Badge */}
                 <div className="flex items-center justify-between mb-4">
