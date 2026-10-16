@@ -95,6 +95,87 @@
   --border-warm: #D7C7B8;
   --brand-spectrum: linear-gradient(135deg, #A61E1E 0%, #7A4B2A 46%, #155E9A 100%);
 
+  /* ==========================================================================
+     SAWARIYA DIAGNOSTIC LAB — "PEACOCK OCELLUS (MOR-PANKH)" DESIGN SYSTEM
+     WCAG 2.1 AA/AAA Verified Clinical Color & Surface Architecture
+     ========================================================================== */
+
+  /* ------------------------------------------------------------------------
+     1. 60% CANVAS & CLINICAL SURFACES (Cool Plume Porcelain + Crisp White)
+     ------------------------------------------------------------------------ */
+  --surface-canvas: #F3F8F8;           /* 2% Peacock-Mist Porcelain so white cards pop */
+  --surface-canvas-elevated: #EAF3F3;  /* Secondary section background */
+  --surface-card: #FFFFFF;             /* Pure clinical white for 12-test batch cards */
+  --surface-card-hover: #FAFFFF;       /* Micro-tint on card hover */
+  --surface-card-selected: #F0FDF6;    /* Soft Bio-Emerald tint when test is added */
+  --surface-modal-scrim: rgba(7, 13, 28, 0.78); /* Opaque scrim preventing visual collision */
+
+  /* Borders & Hairlines */
+  --border-hairline: #D5E5E4;
+  --border-card: #CBE0DF;
+  --border-focus: #0A6C82;
+  --border-gold-subtle: rgba(255, 195, 0, 0.42);
+
+  /* ------------------------------------------------------------------------
+     2. 25% CONCENTRIC ZONE 1: THE PEACOCK PUPIL (Midnight Sapphire-Indigo)
+     ------------------------------------------------------------------------ */
+  --peacock-pupil: #0A1128;            /* 18.69:1 vs White (AAA) */
+  --peacock-sapphire: #112240;         /* 15.40:1 vs White (AAA) */
+  --peacock-indigo: #1A365D;           /* 11.75:1 vs White (AAA) */
+
+  /* Typography Hierarchy on Light Surfaces */
+  --ink-primary: #0A1128;              /* 17.59:1 on Canvas (AAA) */
+  --ink-secondary: #2C465E;            /* 9.65:1 on White (AAA) */
+  --ink-muted: #486581;                /* 6.08:1 on White (AA) */
+
+  /* ------------------------------------------------------------------------
+     3. 10% CONCENTRIC ZONE 2: THE IRIDESCENT IRIS (Kingfisher Cyan & Teal)
+     All solid tokens exceed 5.9:1 contrast with #FFFFFF text
+     ------------------------------------------------------------------------ */
+  --peacock-teal: #0B6E66;             /* 6.11:1 vs White (AA) - Replaces #0D9488 */
+  --peacock-teal-deep: #074F49;        /* 9.18:1 vs White (AAA) */
+  --peacock-cyan: #0A6C82;             /* 6.03:1 vs White (AA) - Replaces #0891B2 */
+  --peacock-cyan-deep: #085061;        /* 8.85:1 vs White (AAA) */
+
+  /* Luminous Iridescent Highlights (Strictly for dark #0A1128 backgrounds) */
+  --ocellus-cyan-glow: #38BDF8;        /* 8.72:1 on #0A1128 (AAA) */
+  --ocellus-mint-glow: #2DD4BF;        /* 10.04:1 on #0A1128 (AAA) */
+
+  /* ------------------------------------------------------------------------
+     4. 5% CONCENTRIC ZONE 3: CROWN GOLD, PLUME EMERALD & CLINICAL CRIMSON
+     ------------------------------------------------------------------------ */
+  --peacock-gold: #FFC300;             /* 11.62:1 on #0A1128 (AAA) */
+  --peacock-gold-amber: #FCA311;       /* 9.24:1 on #0A1128 (AAA) */
+  --peacock-gold-ink: #7C4406;         /* 7.45:1 on #FEF9C3 (AAA) - For light pills */
+  --peacock-emerald: #04724D;          /* 5.97:1 vs White (AA) - Replaces #059669 */
+  --peacock-emerald-deep: #035439;     /* 8.89:1 vs White (AAA) */
+  --clinical-crimson: #C81E1E;         /* 5.85:1 vs White (AA) - Replaces #E63946 */
+
+  /* ------------------------------------------------------------------------
+     5. HIGH-CONTRAST CLINICAL BADGE TOKENS (Dark Jewel Ink on 10% Pastel)
+     ------------------------------------------------------------------------ */
+  --badge-fasting-bg: #FEF9C3;
+  --badge-fasting-border: #FACC15;
+  --badge-fasting-text: #7C4406;       /* 7.45:1 contrast */
+
+  --badge-nofasting-bg: #D1FAE5;
+  --badge-nofasting-border: #6EE7B7;
+  --badge-nofasting-text: #064E3B;     /* 8.57:1 contrast */
+
+  --badge-tat-bg: #E0F2FE;
+  --badge-tat-border: #7DD3FC;
+  --badge-tat-text: #0C4A6E;           /* 8.24:1 contrast */
+
+  --badge-sample-bg: #F1F5F9;
+  --badge-sample-border: #CBD5E1;
+  --badge-sample-text: #1E293B;        /* 12.6:1 contrast */
+
+  /* Elevation Shadows with Subtle Peacock Sapphire Tint */
+  --shadow-card-rest: 0 2px 6px -1px rgba(10, 17, 40, 0.05), 0 1px 2px -1px rgba(10, 108, 130, 0.04);
+  --shadow-card-hover: 0 12px 24px -6px rgba(10, 108, 130, 0.14), 0 4px 10px -2px rgba(10, 17, 40, 0.06);
+  --shadow-ocellus-glow: 0 10px 30px -5px rgba(10, 17, 40, 0.45), 0 0 20px 0 rgba(10, 108, 130, 0.28);
+  --shadow-gold-cta: 0 4px 16px -2px rgba(255, 195, 0, 0.40);
+
   --radius: 1rem;
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);

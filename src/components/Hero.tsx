@@ -48,15 +48,17 @@ export function Hero() {
   };
 
   const quickSearchTags = [
-    { label: 'CBC Blood Count', color: 'bg-blue-50 text-blue-900 border-blue-200/80 hover:bg-blue-100' },
-    { label: 'Thyroid (T3 T4 TSH)', color: 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8] hover:bg-[#F4EEEA]' },
-    { label: 'Vitamin D3 & B12', color: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8] hover:bg-[#F4EEEA]' },
-    { label: 'Lipid (Cholesterol)', color: 'bg-green-50 text-[#102A43] border-green-200/80 hover:bg-green-100' },
-    { label: 'HbA1c Diabetes', color: 'bg-blue-50 text-[#102A43] border-blue-200/80 hover:bg-blue-100' },
+    { label: 'CBC Blood Count', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Thyroid (T3 T4 TSH)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Vitamin D3 & B12', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Lipid (Cholesterol)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'HbA1c Diabetes', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Liver (LFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Kidney (KFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#FBFBFD]">
+    <div className="relative min-h-screen w-full overflow-hidden bg-[var(--surface-canvas)]">
       {/* Liquid Organic Mesh Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-multiply">
         <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#155E9A]/14 blur-[100px] mix-blend-multiply" />
@@ -80,7 +82,7 @@ export function Hero() {
       />
 
       {/* Hero Content Area */}
-      <div className="relative z-10 pt-[clamp(6rem,4rem+6vw,9rem)] pb-[clamp(3rem,2rem+4vw,6rem)] fluid-container">
+      <div className="relative z-10 pt-[clamp(7.5rem,5.5rem+6vw,10.5rem)] pb-[clamp(3rem,2rem+4vw,6rem)] fluid-container">
         <div className="w-full glass-card ui-panel p-[clamp(1rem,4vw,3rem)] border border-white/60 relative overflow-hidden">
           
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
@@ -117,8 +119,8 @@ export function Hero() {
               {/* Clean Apple-Optimized Search Bar inside Glass */}
               <div className="space-y-2.5 w-full max-w-xl">
                 <form onSubmit={handleSearch} className="relative">
-                  <div className="relative flex items-center bg-white/70 backdrop-blur-md border border-white/60 rounded-[20px] sm:rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:border-[#155E9A]/40 focus-within:bg-white focus-within:border-[#155E9A] focus-within:ring-2 focus-within:ring-[#155E9A]/15 transition-surface p-1 sm:p-1.5 duration-300">
-                    <Search className="w-4 h-4 text-slate-500 ml-2.5 sm:ml-3 flex-shrink-0" />
+                  <div className="peacock-search-input relative flex items-center rounded-[20px] sm:rounded-[24px] p-1 sm:p-1.5 duration-300">
+                    <Search className="w-4 h-4 text-[#0A6C82] ml-2.5 sm:ml-3 flex-shrink-0" />
                     <Input
                       type="text"
                       placeholder="Ask about an individual test…"
@@ -130,7 +132,7 @@ export function Hero() {
                     />
                     <Button 
                       type="submit" 
-                      className="action-button bg-gradient-to-r from-[#102A43] to-[#155E9A] text-white hover:opacity-90 rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-surface"
+                      className="action-button btn-peacock-iris rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-surface"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
                       <span>Ask the lab</span>
@@ -146,7 +148,7 @@ export function Hero() {
                       key={tag.label}
                       type="button"
                       onClick={() => handleQuickTagClick(tag.label)}
-                      className={`ui-control-button h-auto min-h-11 px-2.5 sm:px-3 rounded-[var(--radius-control)] bg-white/50 backdrop-blur-sm border border-white/60 shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:bg-white/80 hover:text-[#155E9A] hover:border-[#155E9A]/30 transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                      className={`ui-control-button h-auto min-h-11 px-2.5 sm:px-3 rounded-[var(--radius-control)] ${tag.color} shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-[#0A6C82] transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}
                     </button>
@@ -168,7 +170,7 @@ export function Hero() {
                 <Button
                   size="xl"
                   variant="outline"
-                  className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-[#E8F1F8] border-black/[0.08] text-slate-800 hover:text-[#0F4775] focus-visible:text-[#0F4775] active:text-[#0F4775] shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
+                  className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-[#F3F8F8] border-[#CBE0DF] text-slate-800 hover:text-[#0A6C82] hover:border-[#0A6C82] shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
                   <span>Ask about individual tests</span>

@@ -2,9 +2,8 @@ import { Suspense, lazy } from 'react'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { siteConfig } from './config/site'
 import { Hero } from './components/Hero'
-import { ClinicalTrustSection } from './components/ClinicalTrustSection'
+import { ClinicalTrustSection, SymptomFilterBar } from './components/ClinicalTrustSection'
 import { TrustIndicators } from './components/TrustIndicators'
-import { About } from './components/About'
 import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
@@ -41,18 +40,19 @@ export default function App() {
             {/* Critical Path: Load Hero Instantly */}
             <Hero />
 
-            {/* In-House Clinical Advantage & Quick Symptom Filters */}
+            {/* 4-Pillar Central In-House Advantage Strip */}
             <ClinicalTrustSection />
 
             {/* Lightweight Content: Load with main bundle (Better for 3G) */}
             <TrustIndicators />
-            <About />
             <Services />
             <HomeCollection />
 
             {/* Heavy Interactive Sections: Lazy Load */}
             <SectionErrorBoundary>
               <Suspense fallback={<LoadingSpinner />}>
+                {/* Filter by Health Goal or Symptom directly connected above Test Catalog */}
+                <SymptomFilterBar />
                 <TestCatalog />
                 <Team />
                 <Contact />

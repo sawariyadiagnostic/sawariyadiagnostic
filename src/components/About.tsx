@@ -7,50 +7,51 @@ export function About() {
   const journeySteps = [
     {
       icon: CalendarCheck,
-      title: '1. Select Test',
-      description: 'Request a booking online or by phone for home collection from 06:30 AM to 08:00 PM.',
+      title: '1. Select & Request',
+      description: 'Choose your individual tests and request home collection (06:30 AM–08:00 PM) or visit our center.',
       theme: {
-        bg: 'bg-white',
-        iconBg: 'bg-blue-50 text-blue-800 border-blue-200/80',
-        accentBar: 'bg-[#102A43]',
+        bg: 'bg-white peacock-test-card spine-biochem',
+        iconBg: 'bg-teal-50 text-[#0B6E66] border-teal-200/80',
+        accentBar: 'bg-[#00686B]',
       }
     },
     {
       icon: Home,
-      title: '2. Home Sample',
-      description: 'Home collection is available from 06:30 AM to 08:00 PM.',
+      title: '2. Barcoded Blood Collection',
+      description: 'Standardized vacutainer sample collection at your doorstep with unique barcoded tracking.',
       theme: {
-        bg: 'bg-white',
-        iconBg: 'bg-blue-50 text-cyan-800 border-blue-200/80',
-        accentBar: 'bg-[#C62828]',
+        bg: 'bg-white peacock-test-card spine-clia',
+        iconBg: 'bg-cyan-50 text-[#0A6C82] border-cyan-200/80',
+        accentBar: 'bg-[#0F2537]',
       }
     },
     {
       icon: Microscope,
-      title: '3. Laboratory Processing',
-      description: 'Samples are processed according to the lab\'s documented quality process.',
+      title: '3. Central In-House Processing',
+      description: 'Zero out-of-town transit. Analyzed on-site at our Loharu Road hub via CLIA & 5-part hematology.',
       theme: {
-        bg: 'bg-white',
-        iconBg: 'bg-green-50 text-green-800 border-green-200/80',
-        accentBar: 'bg-[#155E9A]',
+        bg: 'bg-white peacock-test-card spine-metabolic',
+        iconBg: 'bg-amber-50 text-[#B4690E] border-amber-200/80',
+        accentBar: 'bg-[#B4690E]',
       }
     },
     {
       icon: FileCheck,
-      title: '4. Report Assistance',
-      description: 'Contact the lab through configured channels for report assistance.',
+      title: '4. 12-Hour Verified Delivery',
+      description: 'Digital reports verified within 12 hours and sent directly to your WhatsApp with report assistance.',
       theme: {
-        bg: 'bg-white',
-        iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
-        accentBar: 'bg-[#7A4B2A]',
+        bg: 'bg-white peacock-test-card spine-hematology',
+        iconBg: 'bg-rose-50 text-[#C81E1E] border-rose-200/80',
+        accentBar: 'bg-[#C8102E]',
       }
     },
   ];
 
   const features = [
     'Home collection: 06:30 AM–08:00 PM',
-    'Report assistance through configured lab channels',
+    'Barcoded pre-analytical sample tracking',
     'Reports verified within 12 hours',
+    'Direct digital report delivery on WhatsApp',
   ];
 
   return (
@@ -156,12 +157,12 @@ export function About() {
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-green-400">06:30–20:00</p>
+                    <p className="text-xl sm:text-2xl font-black text-emerald-400">06:30–20:00</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-300">Home collection</p>
                   </div>
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">Documented</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300">Quality process</p>
+                    <p className="text-xl sm:text-2xl font-black text-[#F1C27D]">12 Hours</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300">Verified reports</p>
                   </div>
                 </div>
               </div>

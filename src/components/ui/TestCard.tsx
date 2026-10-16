@@ -42,20 +42,38 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
     }
   };
 
+  const getDepartmentSpine = (category = '', name = '') => {
+    const combined = `${category} ${name}`.toLowerCase();
+    if (combined.includes('hemat') || combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr')) {
+      return 'spine-hematology';
+    }
+    if (combined.includes('thyroid') || combined.includes('vitamin') || combined.includes('hormone') || combined.includes('clia') || combined.includes('ferritin') || combined.includes('hcg')) {
+      return 'spine-clia';
+    }
+    if (combined.includes('sugar') || combined.includes('glucose') || combined.includes('hba1c') || combined.includes('diabet')) {
+      return 'spine-metabolic';
+    }
+    if (combined.includes('fever') || combined.includes('dengue') || combined.includes('malaria') || combined.includes('typhoid') || combined.includes('urine')) {
+      return 'spine-micro';
+    }
+    return 'spine-biochem';
+  };
+
   return (
     <>
       <div 
-        className="glass-card ui-card test-card-contain p-5 sm:p-6 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:border-[#155E9A]/40 transition-surface duration-300 relative overflow-hidden"
+        data-selected={isSelected}
+        className={`peacock-test-card glass-card ui-card p-5 sm:p-6 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-surface duration-300 relative overflow-hidden ${getDepartmentSpine(test.category, test.name)}`}
       >
         {/* Subtle hover gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-blue-500/5 group-hover:to-[#FFF9F3]0/5 transition-colors duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-[#0A6C82]/5 group-hover:to-[#0B6E66]/5 transition-colors duration-500 pointer-events-none" />
         
         <div className="flex-1 flex flex-col justify-between">
           <div>
             {/* Top Badges */}
             <div className="flex items-center justify-between mb-3 gap-2">
               {test.popular ? (
-                <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-2xs border border-white/20">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#0A1128] px-2.5 py-0.5 text-[10px] sm:text-[11px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs">
                   ★ Popular
                 </span>
               ) : (

@@ -22,24 +22,39 @@ export function Navbar({
 }: NavbarProps) {
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-[110] transition-surface duration-300 pt-[env(safe-area-inset-top,0px)]">
-      {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-slate-200 text-xs py-1.5 px-4 hidden sm:block border-b border-white/15">
-        <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 text-white font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C62828] animate-pulse" />
-              Diagnostic testing • Home collection
+      {/* Top Clinical Trust & Operational Status Strip */}
+      <div className="bg-[#0A1128] text-slate-200 text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-[#0A6C82]/30">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="inline-flex items-center gap-1.5 text-white font-bold shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF] animate-pulse" />
+              <span>07:00 AM–08:00 PM Daily</span>
             </span>
-            <span className="text-white/35">|</span>
-            <span className="text-white/80 font-medium">Serving Charkhi Dadri • Home collection 06:30 AM–08:00 PM • Reports verified within 12 hours</span>
+            <span className="text-white/30 hidden md:inline">|</span>
+            <span className="text-slate-300 font-medium hidden md:inline truncate">
+              Opp. R.S. Sangwan Hospital, Loharu Rd, Charkhi Dadri • Home collection: 06:30 AM–08:00 PM • Reports verified within 12 hours
+            </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 shrink-0">
             <a 
               href={telHref(siteConfig.contact.phone)} 
-              className="flex items-center gap-1.5 text-white font-bold hover:text-white transition-colors"
+              className="flex items-center gap-1 text-[#FFC300] font-bold hover:underline transition-colors"
+              aria-label={`Call lab at ${siteConfig.contact.phone}`}
             >
-              <Phone className="w-3.5 h-3.5 text-white" />
-              <span>Lab contact: {siteConfig.contact.phone}</span>
+              <Phone className="w-3 h-3 text-[#FFC300]" />
+              <span className="hidden sm:inline">{siteConfig.contact.phone}</span>
+              <span className="sm:hidden text-[10.5px]">Call</span>
+            </a>
+            <span className="text-white/30">|</span>
+            <a 
+              href={whatsappHref(siteConfig.contact.whatsapp)}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-[#2DD4BF] font-bold hover:underline transition-colors"
+              aria-label="Chat on WhatsApp"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF] inline-block" />
+              <span className="text-[10.5px] sm:text-xs">WhatsApp</span>
             </a>
           </div>
         </div>

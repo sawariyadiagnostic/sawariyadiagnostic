@@ -612,13 +612,303 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
 .ui-dialog-panel:not(.mobile-menu-panel) { border-radius: var(--radius-panel); }
 .ui-dialog-panel.mobile-menu-panel { border-radius: var(--radius-panel) 0 0 var(--radius-panel); }
 @supports (corner-shape: squircle) {
-  button:not(.ui-calendar-day):not([data-ui-size="icon"]), a.ui-button:not([data-ui-size="icon"]), .ui-control-button:not([data-ui-size="icon"]), .ui-control, .ui-card, .ui-panel, .ui-dialog-panel:not(.mobile-menu-panel), .ui-dialog-panel.mobile-menu-panel, .glass-card, .glass-panel, .glass-panel-dark, .apple-card { corner-shape: squircle; }
+  button:not(.ui-calendar-day):not([data-ui-size="icon"]), a.ui-button:not([data-ui-size="icon"]), .ui-control-button:not([data-ui-size="icon"]), .ui-control, .ui-card, .ui-panel, .ui-dialog-panel:not(.mobile-menu-panel), .ui-dialog-panel.mobile-menu-panel, .glass-card, .glass-panel, .glass-panel-dark, .apple-card, .peacock-test-card { corner-shape: squircle; }
   button[data-ui-size="icon"] { corner-shape: round; }
 }
 
-/* High-speed mobile rendering for long diagnostic catalogs */
-.test-card-contain {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 180px;
+/* =========================================================================
+   PEACOCK CONCENTRIC ZONE & CLINICAL SURFACE UTILITIES
+   ========================================================================= */
+
+/* Iridescent Peacock Hero & Header Mesh (Photonic Interference Effect) */
+.bg-peacock-ocellus {
+  background-color: var(--peacock-pupil);
+  background-image:
+    radial-gradient(circle at 88% 12%, rgba(10, 108, 130, 0.48) 0%, transparent 52%),
+    radial-gradient(circle at 12% 88%, rgba(11, 110, 102, 0.40) 0%, transparent 48%),
+    radial-gradient(circle at 50% 0%, rgba(255, 195, 0, 0.08) 0%, transparent 40%),
+    linear-gradient(160deg, #0A1128 0%, #10213E 55%, #091E26 100%);
 }
+
+/* Active Category Pill & Primary Banner Iridescent Gradient */
+.bg-peacock-plume-gradient {
+  background: linear-gradient(135deg, #0A1128 0%, #0A6C82 52%, #0B6E66 100%);
+  color: #FFFFFF;
+}
+
+/* Crown Gold CTA Button (Strictly paired with Peacock Pupil #0A1128 text for 11.62:1 AAA contrast) */
+.btn-peacock-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target-size-min);
+  background: linear-gradient(180deg, #FFD000 0%, #FCA311 100%);
+  color: var(--peacock-pupil);
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(252, 163, 17, 0.28);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-peacock-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(252, 163, 17, 0.40);
+}
+
+/* Accessible Primary Teal Action Button */
+.btn-peacock-teal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target-size-min);
+  background-color: var(--peacock-teal);
+  color: #FFFFFF;
+  font-weight: 700;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.btn-peacock-teal:hover {
+  background-color: var(--peacock-pupil);
+}
+
+/* Individual TestCard with Subtle Feather-Barb Department Spine */
+.peacock-test-card {
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3.5px solid var(--peacock-teal);
+  box-shadow: 0 1px 3px rgba(10, 17, 40, 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.peacock-test-card:hover {
+  border-color: var(--border-hover);
+  border-left-color: var(--peacock-pupil);
+  box-shadow: 0 8px 20px -4px rgba(10, 108, 130, 0.12);
+}
+
+.peacock-test-card[data-selected="true"] {
+  background-color: var(--surface-card-selected);
+  border-color: var(--peacock-emerald);
+  border-left: 4px solid var(--peacock-emerald);
+}
+
+/* Department Spine Modifiers for the Test Grid */
+.spine-biochem    { border-left-color: var(--peacock-teal); }
+.spine-clia       { border-left-color: var(--peacock-cyan); }
+.spine-hematology { border-left-color: var(--clinical-crimson); }
+.spine-metabolic  { border-left-color: #D97706; }
+.spine-micro      { border-left-color: var(--peacock-indigo); }
+
+/* Active & Inactive Filter Pills */
+.peacock-pill-active {
+  background: linear-gradient(135deg, #0A1128 0%, #0A6C82 52%, #0B6E66 100%);
+  color: #FFFFFF !important;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 4px 12px -2px rgba(10, 108, 130, 0.32);
+}
+
+.peacock-pill-inactive {
+  background-color: #FFFFFF;
+  color: var(--ink-secondary);
+  border: 1px solid var(--border-card);
+  transition: all 160ms ease;
+}
+
+.peacock-pill-inactive:hover {
+  border-color: var(--peacock-cyan);
+  background-color: #F4FBFB;
+  color: var(--ink-primary);
+}
+
+/* Iridescent Plume Primary Action Button */
+.btn-peacock-iris {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target-size-min);
+  background: linear-gradient(135deg, #0A1128 0%, #0A6C82 55%, #0B6E66 100%);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: 0 4px 14px -2px rgba(10, 108, 130, 0.28);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.btn-peacock-iris:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 20px -3px rgba(10, 108, 130, 0.40);
+}
+
+.btn-peacock-iris:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Search Input Halo */
+.peacock-search-input {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--border-card);
+  color: var(--ink-primary);
+  box-shadow: 0 2px 8px rgba(10, 17, 40, 0.04);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.peacock-search-input:focus,
+.peacock-search-input:focus-within {
+  outline: none;
+  border-color: var(--peacock-cyan);
+  box-shadow: 0 0 0 4px rgba(10, 108, 130, 0.15), 0 4px 12px rgba(10, 108, 130, 0.08);
+}
+
+/* High-Contrast Clinical Micro-Badges */
+.badge-fasting {
+  background-color: var(--badge-fasting-bg);
+  border: 1px solid var(--badge-fasting-border);
+  color: var(--badge-fasting-text);
+  font-weight: 700;
+}
+
+.badge-nofasting {
+  background-color: var(--badge-nofasting-bg);
+  border: 1px solid var(--badge-nofasting-border);
+  color: var(--badge-nofasting-text);
+  font-weight: 700;
+}
+
+.badge-tat {
+  background-color: var(--badge-tat-bg);
+  border: 1px solid var(--badge-tat-border);
+  color: var(--badge-tat-text);
+  font-weight: 700;
+}
+
+.badge-sample {
+  background-color: var(--badge-sample-bg);
+  border: 1px solid var(--badge-sample-border);
+  color: var(--badge-sample-text);
+  font-weight: 600;
+}
+
+/* Iridescent Progress Track for the Pagination Bar */
+.peacock-progress-fill {
+  background: linear-gradient(90deg, #0A1128 0%, #0A6C82 38%, #0B6E66 72%, #FFC300 100%);
+  transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Opaque Modal Scrim & Frame */
+.peacock-modal-overlay {
+  background-color: var(--surface-modal-scrim);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.peacock-modal-box {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(10, 108, 130, 0.25);
+  box-shadow: var(--shadow-ocellus-glow);
+}
+
+/* ==========================================================================
+   INSTANT GLOBAL TAILWIND CLASS INTERCEPTORS
+   Automatically upgrades existing component classes to WCAG AA/AAA Peacock tokens
+   ========================================================================== */
+
+/* 1. Upgrade page & section backgrounds from sterile gray to Cool Plume Porcelain */
+.bg-slate-50, .bg-gray-50 {
+  background-color: var(--surface-canvas) !important;
+}
+
+/* 2. Upgrade dark headers/heroes/docks into the Iridescent Peacock Ocellus Mesh */
+.bg-slate-900, .bg-slate-950, .bg-gray-900 {
+  background-color: var(--peacock-pupil) !important;
+  background-image:
+    radial-gradient(circle at 88% 14%, rgba(10, 108, 130, 0.45) 0%, transparent 52%),
+    radial-gradient(circle at 12% 86%, rgba(11, 110, 102, 0.38) 0%, transparent 48%),
+    linear-gradient(155deg, #0A1128 0%, #112240 52%, #081C24 100%) !important;
+}
+
+/* 3. Fix Low-Contrast Teal-600/500 (#0D9488 -> #0B6E66 for 6.11:1 AA contrast) */
+.bg-teal-600, .bg-teal-500 {
+  background-color: var(--peacock-teal) !important;
+  color: #FFFFFF !important;
+}
+.hover\:bg-teal-700:hover, .hover\:bg-teal-600:hover {
+  background-color: var(--peacock-teal-deep) !important;
+}
+.text-teal-600, .text-teal-500, .text-teal-700 {
+  color: var(--peacock-teal) !important;
+}
+.border-teal-600, .border-teal-500 {
+  border-color: var(--peacock-teal) !important;
+}
+
+/* 4. Fix Low-Contrast Cyan-600/500 (#0891B2 -> #0A6C82 for 6.03:1 AA contrast) */
+.bg-cyan-600, .bg-cyan-500, .bg-sky-600 {
+  background-color: var(--peacock-cyan) !important;
+  color: #FFFFFF !important;
+}
+.text-cyan-600, .text-cyan-500, .text-sky-600, .text-sky-700 {
+  color: var(--peacock-cyan) !important;
+}
+.border-cyan-600, .border-sky-600 {
+  border-color: var(--peacock-cyan) !important;
+}
+
+/* 5. Fix Low-Contrast Emerald-600/500 (#059669 -> #04724D for 5.97:1 AA contrast) */
+.bg-emerald-600, .bg-emerald-500, .bg-green-600 {
+  background-color: var(--peacock-emerald) !important;
+  color: #FFFFFF !important;
+}
+.hover\:bg-emerald-700:hover, .hover\:bg-green-700:hover {
+  background-color: var(--peacock-emerald-deep) !important;
+}
+.text-emerald-600, .text-emerald-700, .text-green-600 {
+  color: var(--peacock-emerald) !important;
+}
+
+/* 6. Enforce the Crown Gold Rule (Never allow illegible white text on gold or yellow on white) */
+.bg-amber-500, .bg-amber-400, .bg-yellow-500, .bg-yellow-400 {
+  background: linear-gradient(180deg, #FFD000 0%, #FCA311 100%) !important;
+  color: var(--peacock-pupil) !important;
+  font-weight: 800 !important;
+}
+.text-amber-500, .text-amber-600, .text-yellow-600 {
+  color: var(--peacock-gold-ink) !important;
+}
+.bg-slate-900 .text-amber-400,
+.bg-slate-900 .text-amber-500,
+.bg-slate-950 .text-amber-400,
+.bg-peacock-ocellus .text-amber-400 {
+  color: var(--peacock-gold) !important;
+}
+
+/* 7. Fix Clinical Crimson contrast (#E63946 -> #C81E1E for 5.85:1 AA contrast) */
+.bg-red-600, .bg-rose-600 {
+  background-color: var(--clinical-crimson) !important;
+  color: #FFFFFF !important;
+}
+.text-red-600, .text-rose-600 {
+  color: var(--clinical-crimson) !important;
+}
+
+/* 8. Upgrade Muted Gray Text so small 11px-12px clinical metadata passes AA contrast */
+.text-slate-500, .text-gray-500 {
+  color: var(--ink-muted) !important;
+}
+.text-slate-600, .text-gray-600 {
+  color: var(--ink-secondary) !important;
+}
+
+/* Hide scrollbars cleanly on horizontal category filter strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
 

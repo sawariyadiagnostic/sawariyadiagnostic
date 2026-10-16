@@ -10,6 +10,7 @@ import { categories, medicalTests as publishedTests, type MedicalTest } from '@/
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 import { usePagination } from '@/lib/use-pagination';
 import { useRequisition } from './requisition/RequisitionContext';
+import { BatchPaginationBar } from './BatchPaginationBar';
 
 const testCategories = categories.filter((category) => category.id !== 'package');
 const TESTS_PER_PAGE = 12;
@@ -125,7 +126,7 @@ export function TestCatalog() {
                     type="button"
                     key={category.id}
                     onClick={() => { setSelectedCategory(category.id); resetPage(); }}
-                    className={`min-h-11 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${selected ? 'bg-[#102A43] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                    className={`min-h-11 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${selected ? 'peacock-pill-active' : 'peacock-pill-inactive'}`}
                   >
                     {category.name}
                   </button>
@@ -171,24 +172,12 @@ export function TestCatalog() {
                 return test ? <TestCard key={test.id} test={test} isSelected={isSelected(test.id)} onToggleRequest={toggleTest} onViewDetails={openTest} /> : null;
               })}
             </div>
-            {filteredTests.length > TESTS_PER_PAGE && (
-              <nav aria-label="Test catalog pages" className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-                <p className="text-xs font-medium text-slate-600" aria-live="polite">
-                  Showing {pageStart + 1}–{Math.min(pageStart + TESTS_PER_PAGE, filteredTests.length)} of {filteredTests.length} tests
-                </p>
-                <div className="flex items-center gap-2">
-                  <Button type="button" variant="outline" disabled={currentPage === 1} onClick={() => setCurrentPage((page) => page - 1)} className="action-button min-h-11 rounded-[14px] font-bold">
-                    Previous
-                  </Button>
-                  <span className="min-w-20 text-center text-xs font-bold text-slate-700" aria-label={`Page ${currentPage} of ${totalPages}`}>
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <Button type="button" variant="outline" disabled={currentPage === totalPages} onClick={() => setCurrentPage((page) => page + 1)} className="action-button min-h-11 rounded-[14px] font-bold">
-                    Next
-                  </Button>
-                </div>
-              </nav>
-            )}
+            <BatchPaginationBar
+              currentPage={currentPage}
+              pageSize={TESTS_PER_PAGE}
+              totalItems={filteredTests.length}
+              onPageChange={setCurrentPage}
+            />
           </>
         )}
       </div>
