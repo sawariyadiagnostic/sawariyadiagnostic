@@ -39,7 +39,7 @@ export function Services() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Diagnostic services listed in the current catalog with home collection available 07:00 AM–07:00 PM.
+            Diagnostic services listed in the current catalog with home collection available 07:00 AM–07:00 PM; central lab is open 24*7 for walk-in patients and emergency from hospitals.
           </p>
         </div>
 

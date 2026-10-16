@@ -35,7 +35,7 @@ export function Contact() {
     {
       icon: Home,
       title: '2. Lab or Home Sample',
-      description: 'Visit our facility or request home collection from 07:00 AM to 07:00 PM.',
+      description: 'Visit our facility (open 24*7 for walk-in patients and emergency from hospitals) or request home collection from 07:00 AM to 07:00 PM.',
       style: {
         iconBg: 'bg-green-50 text-[#155E9A] border-green-200/80',
         accentBar: 'bg-[#155E9A]',
@@ -73,7 +73,7 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Book an appointment or request home collection from 07:00 AM to 07:00 PM.
+            Book an appointment or request home collection from 07:00 AM to 07:00 PM. Lab is open 24*7 for walk-in patients and emergency from hospitals.
           </p>
         </div>
 
@@ -86,7 +86,7 @@ export function Contact() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:lg font-bold text-white">Appointment Desk</h3>
                   <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
-                    Home collection 07:00 AM–07:00 PM
+                    Home collection 07:00 AM–07:00 PM • Lab 24*7
                   </span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-[var(--text-on-dark)] font-normal">
@@ -124,7 +124,7 @@ export function Contact() {
                     <div className="space-y-1.5">
                       <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Choose Your Date & Time</h4>
                       <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                        Choose an appointment option for home collection from 07:00 AM to 07:00 PM.
+                        Choose an appointment option for home collection from 07:00 AM to 07:00 PM, or visit our central lab open 24*7 for walk-in patients and emergency from hospitals.
                       </p>
                     </div>
 
@@ -186,7 +186,7 @@ export function Contact() {
                     Visit Our Diagnostic Facility
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Home collection is available from 07:00 AM to 07:00 PM, with our center welcoming walk-in patients and hospital emergencies.
+                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Home collection is available from 07:00 AM to 07:00 PM; central laboratory is open 24*7 for walk-in patients and emergency from hospitals.
                   </p>
                 </div>
 
@@ -204,7 +204,7 @@ export function Contact() {
                     <div className="min-w-0">
                       <span className="font-semibold text-slate-900 block">Operating Hours:</span>
                       <span className="text-[#155E9A] font-bold block">{siteConfig.claims.operatingHours}</span>
-                      <span className="text-xs text-slate-500 font-medium block">Lab walk-in &amp; hospital emergency desk</span>
+                      <span className="text-xs text-slate-500 font-medium block">Lab open 24*7 for walk-in patients and emergency from hospitals</span>
                     </div>
                   </div>
 

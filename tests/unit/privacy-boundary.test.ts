@@ -79,7 +79,8 @@ describe('privacy and trust boundary', () => {
     expect(reportModal).not.toMatch(/<form|fetch\(|axios|web3forms|access[_-]?key/i);
   });
 
-  it('does not publish portal, doctor, or round-the-clock service labels', () => {
-    expect(activeSource).not.toMatch(/\bportal\b|\bdoctor\b|24\s*[x*/:]\s*7|24-hour|24 hours/i);
+  it('does not publish portal, doctor, or round-the-clock collection claims', () => {
+    expect(activeSource).not.toMatch(/\bportal\b|\bdoctor\b|24-hour home collection|Call 24\*7/i);
+    expect(activeSource).toMatch(/open 24\*7 for walk-in patients and emergency from hospitals/i);
   });
 });

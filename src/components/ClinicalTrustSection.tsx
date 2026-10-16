@@ -8,7 +8,7 @@ export interface SymptomCategory {
   queryKeyword: string;
 }
 
-export const SYMPTOM_FILTERS: SymptomCategory[] = [
+const SYMPTOM_FILTERS: SymptomCategory[] = [
   { id: 'all', label: 'All Diagnostic Tests', sublabel: 'Complete Catalog', queryKeyword: '' },
   { id: 'full-body', label: 'Full Body Checkup', sublabel: '84+ Parameters', queryKeyword: 'Full Body' },
   { id: 'thyroid', label: 'Thyroid & Weight', sublabel: 'FT3, FT4, TSH', queryKeyword: 'Thyroid' },
@@ -129,7 +129,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Doorstep Blood Collection</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Safe vacutainer collection at your doorstep across Charkhi Dadri (07:00 AM–07:00 PM).
+              Safe vacutainer collection at your doorstep across Charkhi Dadri (07:00 AM–07:00 PM). Lab is open 24*7 for walk-in patients and emergency from hospitals.
             </p>
           </div>
         </div>
@@ -147,7 +147,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <Home className="w-3.5 h-3.5 text-[#B4690E]" /> Home collection: 07:00 AM–07:00 PM
         </span>
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50/80 border border-indigo-200/70 text-[#1E3A8A] font-semibold">
-          <Activity className="w-3.5 h-3.5 text-[#2563EB]" /> Lab walk-in &amp; hospital emergency desk
+          <Activity className="w-3.5 h-3.5 text-[#2563EB]" /> Lab open 24*7 for walk-in patients &amp; hospital emergencies
         </span>
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50/80 border border-emerald-200/70 text-[#064E3B] font-semibold">
           <Clock className="w-3.5 h-3.5 text-[#04724D]" /> Reports verified within 12 hours
