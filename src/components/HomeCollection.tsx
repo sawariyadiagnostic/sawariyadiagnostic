@@ -19,13 +19,13 @@ export function HomeCollection() {
     {
       icon: CheckCircle2,
       title: 'Phlebotomy Team',
-      description: 'Home collection is available 06:30 AM–08:00 PM',
+      description: 'Home collection is available 07:00 AM–07:00 PM',
       iconStyle: 'bg-blue-500/20 text-cyan-400 border-cyan-500/40',
     },
     {
       icon: Clock,
       title: 'Collection Hours',
-      description: '06:30 AM–08:00 PM',
+      description: '07:00 AM–07:00 PM',
       iconStyle: 'bg-[#7A4B2A]/15 text-[#F1C27D] border-[#7A4B2A]/30',
     },
   ];
@@ -49,7 +49,7 @@ export function HomeCollection() {
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_2px_12px_rgba(0,0,0,0.1)]">
               <Home className="w-3.5 h-3.5 text-blue-200" />
-               <span className="text-xs font-bold text-blue-100">Home collection • 06:30 AM–08:00 PM</span>
+               <span className="text-xs font-bold text-blue-100">Home collection: 07:00 AM–07:00 PM • Lab walk-in &amp; hospital emergency desk</span>
             </div>
 
             <div className="space-y-2 sm:space-y-3">
@@ -61,7 +61,7 @@ export function HomeCollection() {
                 </span>
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-slate-200 max-w-xl font-medium leading-relaxed">
-                Request a convenient home visit through the appointment desk or contact the lab directly. Home collection is available from 06:30 AM to 08:00 PM.
+                Request a convenient home visit through the appointment desk or contact the lab directly. Home collection is available from 07:00 AM to 07:00 PM, with our Loharu Road center welcoming walk-in patients and hospital emergencies.
               </p>
             </div>
 
@@ -99,7 +99,7 @@ export function HomeCollection() {
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-lg sm:text-xl font-black text-[#1D1D1F] tracking-tight">Arrange a Home Visit</h3>
                   <span className="bg-blue-50 text-[#102A43] text-[10.5px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200">
-                    06:30 AM–08:00 PM
+                    07:00 AM–07:00 PM
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
@@ -131,7 +131,7 @@ export function HomeCollection() {
               </div>
 
               <p className="text-[11px] text-center text-slate-500 pt-3 font-medium">
-                Home collection is available 06:30 AM–08:00 PM. Reports are verified within 12 hours.
+                Home collection is available 07:00 AM–07:00 PM. Reports are verified within 12 hours.
               </p>
             </div>
           </m.div>

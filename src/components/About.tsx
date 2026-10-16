@@ -8,7 +8,7 @@ export function About() {
     {
       icon: CalendarCheck,
       title: '1. Select & Request',
-      description: 'Choose your individual tests and request home collection (06:30 AM–08:00 PM) or visit our center.',
+      description: 'Choose your individual tests and request home collection (07:00 AM–07:00 PM) or visit our center.',
       theme: {
         bg: 'bg-white peacock-test-card spine-biochem',
         iconBg: 'bg-teal-50 text-[#0B6E66] border-teal-200/80',
@@ -48,7 +48,7 @@ export function About() {
   ];
 
   const features = [
-    'Home collection: 06:30 AM–08:00 PM',
+    'Home collection: 07:00 AM–07:00 PM',
     'Barcoded pre-analytical sample tracking',
     'Reports verified within 12 hours',
     'Direct digital report delivery on WhatsApp',
@@ -157,7 +157,7 @@ export function About() {
 
                 <div className="grid grid-cols-2 gap-3 pt-3 border-t border-white/10">
                   <div>
-                    <p className="text-xl sm:text-2xl font-black text-emerald-400">06:30–20:00</p>
+                    <p className="text-xl sm:text-2xl font-black text-emerald-400">07:00–19:00</p>
                     <p className="text-[10px] sm:text-[11px] text-slate-300">Home collection</p>
                   </div>
                   <div>

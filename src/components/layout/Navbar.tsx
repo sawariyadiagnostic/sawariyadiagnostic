@@ -28,11 +28,11 @@ export function Navbar({
           <div className="flex items-center gap-2 min-w-0">
             <span className="inline-flex items-center gap-1.5 text-white font-bold shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#2DD4BF] animate-pulse" />
-              <span>07:00 AM–08:00 PM Daily</span>
+              <span>07:00 AM–07:00 PM Daily</span>
             </span>
             <span className="text-white/30 hidden md:inline">|</span>
             <span className="text-slate-300 font-medium hidden md:inline truncate">
-              Opp. R.S. Sangwan Hospital, Loharu Rd, Charkhi Dadri • Home collection: 06:30 AM–08:00 PM • Reports verified within 12 hours
+              Opp. R.S. Sangwan Hospital, Loharu Rd, Charkhi Dadri • Home collection: 07:00 AM–07:00 PM • Reports verified within 12 hours
             </span>
           </div>
           <div className="flex items-center gap-3 shrink-0">

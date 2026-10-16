@@ -147,8 +147,8 @@ export function Footer() {
                 <div className="flex items-start gap-2.5">
                   <Clock className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
                   <div className="text-slate-300 space-y-0.5">
-                    <p className="text-[#B5F3DC] font-bold text-[12px]">Home collection: 06:30 AM–08:00 PM</p>
-                    <p className="text-[11px] text-slate-400">Reports verified within 12 hours</p>
+                    <p className="text-[#B5F3DC] font-bold text-[12px]">Home collection: 07:00 AM–07:00 PM</p>
+                    <p className="text-[11px] text-slate-400">Walk-in and hospital emergency reception desk • Reports verified within 12 hours</p>
                   </div>
                 </div>
               </div>

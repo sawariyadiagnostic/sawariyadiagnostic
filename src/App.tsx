@@ -3,7 +3,6 @@ import { LazyMotion, domAnimation } from 'framer-motion'
 import { siteConfig } from './config/site'
 import { Hero } from './components/Hero'
 import { ClinicalTrustSection, SymptomFilterBar } from './components/ClinicalTrustSection'
-import { TrustIndicators } from './components/TrustIndicators'
 import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
@@ -44,7 +43,6 @@ export default function App() {
             <ClinicalTrustSection />
 
             {/* Lightweight Content: Load with main bundle (Better for 3G) */}
-            <TrustIndicators />
             <Services />
             <HomeCollection />
 

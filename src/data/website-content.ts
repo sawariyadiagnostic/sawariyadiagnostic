@@ -56,7 +56,7 @@ export const about = {
   features: [
     'Documented laboratory process',
     'Reports verified within 12 hours',
-    'Home collection 06:30 AM–08:00 PM',
+    'Home collection 07:00 AM–07:00 PM',
     'Affordable pricing',
     'Home sample collection',
     'Report assistance',
@@ -117,7 +117,7 @@ export const hero = {
     {
       icon: Clock,
       title: 'Current scope',
-      subtitle: 'Home collection 06:30 AM–08:00 PM',
+      subtitle: 'Home collection 07:00 AM–07:00 PM',
       color: 'accent-emerald'
     },
     {
@@ -289,9 +289,9 @@ export const services = {
 
 export const homeCollection = {
   title: "Home Collection Service",
-  subtitle: "Home collection is available from 06:30 AM to 08:00 PM through the appointment desk.",
+  subtitle: "Home collection is available from 07:00 AM to 07:00 PM through the appointment desk.",
   features: [
-    "Home collection: 06:30 AM–08:00 PM",
+    "Home collection: 07:00 AM–07:00 PM",
     "Trained phlebotomy team",
     "Reports verified within 12 hours",
     "Report assistance"

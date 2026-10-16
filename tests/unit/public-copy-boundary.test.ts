@@ -82,7 +82,7 @@ describe('public copy claim boundary', () => {
   });
 
   it('uses approved operational copy instead of repetitive fallback disclaimers', () => {
-    expect(publicCopy).toContain('Home collection: 06:30 AM–08:00 PM');
+    expect(publicCopy).toContain('Home collection: 07:00 AM–07:00 PM');
     expect(publicCopy).toContain('Reports verified within 12 hours');
     expect(publicCopy).not.toMatch(/Confirm current scope with the lab|Diagnostic facility details to be confirmed|Timing subject to confirmation|Collection process to be confirmed|Availability subject to confirmation|confirm current facility|confirm appointment and collection options/i);
   });

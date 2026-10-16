@@ -97,7 +97,7 @@ export function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
                 <span className="min-w-0 text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 text-wrap">
-                   Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Home collection 06:30 AM–08:00 PM</span>
+                   Diagnostic testing <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Home collection 07:00 AM–07:00 PM</span>
                   <span className="hidden sm:inline text-slate-400"> • </span><span className="hidden sm:inline">Charkhi Dadri</span>
                 </span>
               </div>
@@ -205,7 +205,7 @@ export function Hero() {
                   </div>
                   <div className="min-w-0">
                     <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Patient-first</p>
-                                        <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Home collection 06:30 AM–08:00 PM</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Home collection 07:00 AM–07:00 PM</p>
                   </div>
                 </div>
               </div>

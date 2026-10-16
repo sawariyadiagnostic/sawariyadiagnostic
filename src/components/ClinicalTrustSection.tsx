@@ -81,7 +81,9 @@ export const SymptomFilterBar: React.FC<Props> = ({ activeFilter: propActiveFilt
 
 export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> = ({ showFilters = false, activeFilter, onSelectFilter }) => {
   return (
-    <section aria-label="In-House Diagnostic Processing Advantage" className="mx-auto max-w-6xl px-4 py-4 sm:py-6">
+    <section id="about" aria-label="In-House Diagnostic Processing Advantage" className="relative mx-auto max-w-6xl px-4 py-4 sm:py-6">
+      <div id="trust" className="sr-only" />
+
       {/* 4-Pillar Central In-House Advantage Strip */}
       <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
         <div className="peacock-test-card spine-biochem flex items-start gap-3.5 rounded-2xl p-4 sm:p-5 shadow-xs bg-white border border-slate-200/80">
@@ -103,7 +105,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">CLIA &amp; 5-Part Hematology</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              High-precision hormone immunoassays, biochemistry &amp; hematology with daily quality assurance.
+              Chemiluminescence hormone immunoassays, biochemistry &amp; hematology with daily quality assurance.
             </p>
           </div>
         </div>
@@ -127,10 +129,29 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Doorstep Blood Collection</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Safe vacutainer collection at your doorstep across Charkhi Dadri.
+              Safe vacutainer collection at your doorstep across Charkhi Dadri (07:00 AM–07:00 PM).
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Compact Operational Badges */}
+      <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 pt-1 text-[11px] sm:text-xs">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50/80 border border-teal-200/70 text-[#074F49] font-semibold">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#0B6E66]" /> Barcoded sample identification
+        </span>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/70 text-[#0F2537] font-semibold">
+          <Activity className="w-3.5 h-3.5 text-[#0A6C82]" /> Processed in-house at Loharu Road
+        </span>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50/80 border border-amber-200/70 text-[#854D0E] font-semibold">
+          <Home className="w-3.5 h-3.5 text-[#B4690E]" /> Home collection: 07:00 AM–07:00 PM
+        </span>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50/80 border border-indigo-200/70 text-[#1E3A8A] font-semibold">
+          <Activity className="w-3.5 h-3.5 text-[#2563EB]" /> Lab walk-in &amp; hospital emergency desk
+        </span>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50/80 border border-emerald-200/70 text-[#064E3B] font-semibold">
+          <Clock className="w-3.5 h-3.5 text-[#04724D]" /> Reports verified within 12 hours
+        </span>
       </div>
 
       {showFilters && (

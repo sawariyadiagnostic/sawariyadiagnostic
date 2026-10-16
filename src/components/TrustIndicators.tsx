@@ -54,7 +54,7 @@ export function TrustIndicators() {
   const certifications = [
     { name: 'Barcoded sample identification', tag: 'bg-teal-50 text-[#074F49] border-teal-200/90', iconColor: 'text-[#0B6E66]' },
     { name: 'Processed in-house at Loharu Road', tag: 'bg-blue-50 text-[#0F2537] border-blue-200/90', iconColor: 'text-[#0A6C82]' },
-    { name: 'Home collection: 06:30 AM–08:00 PM', tag: 'bg-amber-50 text-[#854D0E] border-amber-200/90', iconColor: 'text-[#B4690E]' },
+    { name: 'Home collection: 07:00 AM–07:00 PM', tag: 'bg-amber-50 text-[#854D0E] border-amber-200/90', iconColor: 'text-[#B4690E]' },
     { name: 'Reports verified within 12 hours', tag: 'bg-emerald-50 text-[#064E3B] border-emerald-200/90', iconColor: 'text-[#04724D]' },
   ];
 
@@ -118,7 +118,7 @@ export function TrustIndicators() {
             </div>
             <div>
               <h3 className="font-bold text-[#0A1128] text-sm sm:text-base tracking-tight">Central Clinical Quality Process</h3>
-              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Home collection: 06:30 AM–08:00 PM across Charkhi Dadri.</p>
+              <p className="text-[11px] sm:text-xs text-slate-500 font-medium">Home collection: 07:00 AM–07:00 PM across Charkhi Dadri.</p>
             </div>
           </div>
           

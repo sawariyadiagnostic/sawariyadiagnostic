@@ -92,7 +92,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
                 <span className="min-w-0 font-bold text-slate-800 flex items-start gap-1 mt-0.5 break-words">
                   <Home className="w-3.5 h-3.5 text-[#C62828] flex-shrink-0" />
-                  <span className="min-w-0 break-words">{item.specimen || 'Home collection: 06:30 AM–08:00 PM'}</span>
+                  <span className="min-w-0 break-words">{item.specimen || 'Home collection: 07:00 AM–07:00 PM'}</span>
                 </span>
               </div>
 
