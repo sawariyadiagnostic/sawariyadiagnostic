@@ -1,0 +1,34 @@
+{
+  "defects": [
+    "CITATION_BYPASS: hasCitations() treats arrays containing only null/empty objects as valid (e.g., citations:[null], citation_ids:[null], citations:[{}]) — allows records with effectively no citations to pass eligibility",
+    "STABLE_ID_FORMAT_NOT_ENFORCED: eligible() accepts any string stable_id (e.g., 'not-a-web-id') without enforcing WEB-\\d{3} or PKG/PANEL- patterns — allows malformed IDs into public export",
+    "PROVENANCE_VALIDATION_INCOMPLETE: eligible() only checks object(record.provenance) — accepts empty object {} or objects missing required source_file/source_line_start/source_line_end fields",
+    "CITATION_IDS_NULL_PASSES: citation_ids:[null] passes hasCitations() but provides no verifiable citation",
+    "SCHEMA_EXPORT_FORBIDDEN_DIVERGENCE: schema.js FORBIDDEN_PUBLIC_KEYS (12 items, normalized key matching) differs from public-export.js FORBIDDEN regex (broader, includes 'source', 'line', 'review.*') — schema validation allows 'sourceFile' but export forbids it, creating inconsistent defense layers",
+    "CYCLIC_REFERENCE_DOS: assertSafe() uses unbounded recursion — cyclic references in report cause 'Maximum call stack size exceeded' instead of safe rejection",
+    "ARRAY_FORBIDDEN_IN_TEST_RECORDS: generatePublicExport strips forbidden fields via publicRecord allowlist, but assertSafe in writePublicExportOutputs only checks top-level report object — if forbidden fields somehow entered tests/packages arrays they would not be caught (though current publicRecord prevents this)",
+    "MANIFEST_FIELDS_NOT_VALIDATED: manifest_version and manifest_hash accepted as-is without format validation — could leak internal versioning or non-secret hashes"
+  ],
+  "good_points": [
+    "FAIL_CLOSED_DESIGN: publication_status defaults to BLOCKED; only records with ALL approvals, valid price, no conflicts/claims, citations, and proper provenance pass",
+    "ALLOWLIST_FIELD_SELECTION: publicRecord() uses explicit RECORD_FIELDS allowlist rather than denylist — only 9 permitted fields enter public output",
+    "DETERMINISTIC_SORTING: tests and packages sorted by stable_id; package test_ids sorted — identical input order produces identical output",
+    "COMPREHENSIVE_FORBIDDEN_REGEX: FORBIDDEN regex in public-export.js catches 15+ sensitive field patterns case-insensitively including nested variants",
+    "PRICE_VALIDATION_STRICT: approvedPrice() validates finite non-negative numbers, min<=max, rejects inverted ranges, and requires explicit approval flags",
+    "LEDGER_ALL_ROLES_REQUIRED: approvedLedger() requires ALL 6 review roles to have decision='approved' — no partial approval bypass",
+    "PACKAGE_MEMBER_VALIDATION: packages require test_ids to exist in approved tests, deduplicated, count-matched, and package itself approved",
+    "NO_WEBSITE_OUTPUT: writePublicExportOutputs only writes public-export.json/.md — explicitly asserts website.json absent",
+    "TEST_COVERAGE_EXCELLENT: 35 tests cover blocked states, forbidden stripping, deterministic sorting, package validation, empty exports, manifest passthrough"
+  ],
+  "verdict": "CONDITIONAL_PASS — strong fail-closed architecture with allowlist projection, but 8 defects (3 HIGH: citation/ID/provenance bypasses; 5 MEDIUM: schema divergence, cyclic DoS, manifest validation gaps). Fix citation/ID/provenance validation before production use.",
+  "recommended_tests": [
+    "Test citations:[null] and citation_ids:[null] are BLOCKED (currently LEAKED)",
+    "Test stable_id format enforcement: reject non-WEB/PKG/PANEL patterns",
+    "Test provenance requires source_file, source_line_start, source_line_end",
+    "Test cyclic reference in report throws clean error (not stack overflow)",
+    "Test manifest_version/manifest_hash format validation (semver, SHA-256 hex)",
+    "Test schema.js and public-export.js FORBIDDEN sets align — add sourceFile/originalText/lineRange to schema FORBIDDEN_PUBLIC_KEYS",
+    "Test price field precedence: approved_customer_price > customer_price > public_price with approval flags",
+    "Test package with member referencing test not in input tests array is BLOCKED"
+  ]
+}
