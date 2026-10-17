@@ -11,19 +11,29 @@ interface TestCardProps {
   onToggleRequest: (testId: string) => void;
   onViewDetails?: (test: MedicalTest) => void;
 }
+interface DepartmentInfo {
+  name: string;
+  badgeClass: string;
+}
 
-const CATEGORY_BADGES: Record<string, string> = {
-  routine: 'bg-blue-50 text-blue-900 border-blue-200/80',
-  blood: 'bg-blue-50 text-blue-900 border-blue-200/80',
-  diabetes: 'bg-emerald-50 text-emerald-900 border-emerald-200/80',
-  thyroid: 'bg-amber-50 text-amber-900 border-amber-200/80',
-  hormone: 'bg-purple-50 text-purple-900 border-purple-200/80',
-  lipid: 'bg-orange-50 text-orange-900 border-orange-200/80',
-  specialized: 'bg-teal-50 text-teal-900 border-teal-200/80',
-};
-
-function getCategoryBadge(category: string): string {
-  return CATEGORY_BADGES[category.toLowerCase()] || 'bg-slate-50 text-slate-800 border-slate-200/80';
+function getDepartmentInfo(category = '', name = ''): DepartmentInfo {
+  const combined = `${category} ${name}`.toLowerCase();
+  if (combined.includes('hemat') || combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr') || combined.includes('platelet') || combined.includes('hemoglobin') || combined.includes('smear') || combined.includes('rbc') || combined.includes('wbc')) {
+    return { name: 'Hematology', badgeClass: 'bg-rose-50 text-rose-900 border-rose-200/80' };
+  }
+  if (combined.includes('thyroid') || combined.includes('vitamin') || combined.includes('hormone') || combined.includes('clia') || combined.includes('ferritin') || combined.includes('hcg') || combined.includes('psa') || combined.includes('prolactin') || combined.includes('fsh') || combined.includes('lh') || combined.includes('t3') || combined.includes('t4') || combined.includes('tsh') || combined.includes('b12') || combined.includes('d3')) {
+    return { name: 'Endocrinology', badgeClass: 'bg-purple-50 text-purple-900 border-purple-200/80' };
+  }
+  if (combined.includes('sugar') || combined.includes('glucose') || combined.includes('hba1c') || combined.includes('diabet')) {
+    return { name: 'Diabetes Care', badgeClass: 'bg-amber-50 text-amber-900 border-amber-200/80' };
+  }
+  if (combined.includes('lipid') || combined.includes('cholesterol') || combined.includes('triglyceride') || combined.includes('lft') || combined.includes('kft') || combined.includes('liver') || combined.includes('kidney') || combined.includes('creatinine') || combined.includes('uric') || combined.includes('bilirubin') || combined.includes('sgot') || combined.includes('sgpt') || combined.includes('protein') || combined.includes('albumin') || combined.includes('calcium') || combined.includes('amylase') || combined.includes('lipase') || combined.includes('iron') || combined.includes('urea') || combined.includes('egfr')) {
+    return { name: 'Biochemistry', badgeClass: 'bg-teal-50 text-teal-900 border-teal-200/80' };
+  }
+  if (combined.includes('fever') || combined.includes('dengue') || combined.includes('malaria') || combined.includes('typhoid') || combined.includes('urine') || combined.includes('stool') || combined.includes('widal') || combined.includes('culture') || combined.includes('hiv') || combined.includes('antibody') || combined.includes('crp') || combined.includes('rheumatoid') || combined.includes('ige')) {
+    return { name: 'Microbiology', badgeClass: 'bg-indigo-50 text-indigo-900 border-indigo-200/80' };
+  }
+  return { name: 'Pathology', badgeClass: 'bg-blue-50 text-blue-900 border-blue-200/80' };
 }
 
 function getDepartmentSpine(category = '', name = ''): string {
@@ -56,6 +66,8 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
 
   const hasParameters = Boolean(test.parameters && test.parameters.length > 0);
 
+  const dept = getDepartmentInfo(test.category, test.name);
+
   return (
     <>
       <div 
@@ -69,8 +81,8 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           {/* Top Badges Row */}
           <div className="flex items-center justify-between gap-1.5 mb-2">
             <div className="flex items-center gap-1.5 min-w-0">
-              <span className={`text-[10px] sm:text-[10.5px] font-bold px-2 py-0.5 rounded-full capitalize border shrink-0 ${getCategoryBadge(test.category)}`}>
-                {test.category}
+              <span className={`text-[10px] sm:text-[10.5px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${dept.badgeClass}`}>
+                {dept.name}
               </span>
               {test.popular && (
                 <span className="inline-flex items-center gap-0.5 rounded-full bg-[#0A1128] px-2 py-0.5 text-[9.5px] sm:text-[10px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs shrink-0">
@@ -142,7 +154,6 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
                   </span>
                 )}
               </div>
-              <span className="text-[10px] text-slate-400 font-medium">Quality process</span>
             </div>
             <span className="text-[10px] font-semibold text-[#0B6E66] bg-emerald-50/80 border border-emerald-200/60 rounded-md px-1.5 py-0.5">
               Ready in 2–6 hrs
