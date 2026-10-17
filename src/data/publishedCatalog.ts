@@ -34,7 +34,7 @@ export const publishedCatalogManifest = {
 export const medicalTests: MedicalTest[] = [
   {
     id: "web-001",
-    name: "COMPLETE BLOOD COUNT (CBC)",
+    name: "Complete Blood Count (CBC)",
     description: "Comprehensive evaluation of cellular blood components.",
     price: 350,
     category: 'specialized',
@@ -48,7 +48,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-002",
-    name: "HEMOGLOBIN (Hb)",
+    name: "Hemoglobin (Hb) Blood Test",
     description: "Measures oxygen-carrying protein in red blood cells.",
     price: 100,
     category: 'specialized',
@@ -62,7 +62,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-003",
-    name: "PLATELET COUNT",
+    name: "Platelet Count Test",
     description: "Laboratory measurement for PLATELET COUNT; see the specimen, method, preparation, and parameters below.",
     price: 120,
     category: 'specialized',
@@ -76,7 +76,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-004",
-    name: "ABSOLUTE EOSINOPHIL COUNT (AEC)",
+    name: "Absolute Eosinophil Count (AEC)",
     description: "Measures circulating eosinophil granulocytes.",
     price: 150,
     category: 'specialized',
@@ -90,7 +90,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-005",
-    name: "RBC COUNT",
+    name: "RBC Count (Red Blood Cells)",
     description: "Quantifies total erythrocytes per microliter.",
     price: 120,
     category: 'specialized',
@@ -104,7 +104,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-006",
-    name: "TOTAL LEUKOCYTE COUNT (TLC / WBC)",
+    name: "Total Leukocyte Count (TLC / WBC)",
     description: "Laboratory measurement for TOTAL LEUKOCYTE COUNT (TLC / WBC); see the specimen, method, preparation, and parameters below.",
     price: 120,
     category: 'specialized',
@@ -118,7 +118,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-007",
-    name: "ERYTHROCYTE SEDIMENTATION RATE (ESR)",
+    name: "ESR Blood Test",
     description: "Laboratory measurement for ERYTHROCYTE SEDIMENTATION RATE (ESR); see the specimen, method, preparation, and parameters below.",
     price: 100,
     category: 'specialized',
@@ -132,7 +132,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-008",
-    name: "BLOOD GROUP (ABO & Rh TYPING)",
+    name: "Blood Group & Rh Type",
     description: "Determines ABO blood group and Rh(D) status.",
     price: 120,
     category: 'specialized',
@@ -146,7 +146,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-009",
-    name: "PROTHROMBIN TIME (PT/INR)",
+    name: "Prothrombin Time (PT / INR)",
     description: "Evaluates the extrinsic and common pathways of coagulation (Factors VII, X, V, II, and Fibrinogen).",
     price: 250,
     category: 'specialized',
@@ -160,7 +160,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-010",
-    name: "ACTIVATED PARTIAL THROMBOPLASTIN TIME (APTT)",
+    name: "APTT Coagulation Test",
     description: "Evaluates the intrinsic and common coagulation pathways (Factors XII, XI, IX, VIII, X, V, II, Fibrinogen).",
     price: 500,
     category: 'specialized',
@@ -174,7 +174,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-011",
-    name: "BLEEDING TIME & CLOTTING TIME (BT & CT)",
+    name: "Bleeding & Clotting Time (BT / CT)",
     description: "Laboratory measurement for BLEEDING TIME & CLOTTING TIME (BT & CT); see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -188,7 +188,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-012",
-    name: "TOTAL BILIRUBIN",
+    name: "Total Bilirubin (Jaundice Test)",
     description: "Measures combined conjugated and unconjugated bile pigment from hemoglobin breakdown.",
     price: 150,
     category: 'specialized',
@@ -202,7 +202,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-013",
-    name: "DIRECT BILIRUBIN",
+    name: "Direct Bilirubin",
     description: "Measures water-soluble, conjugated bilirubin excreted by hepatocytes into bile.",
     price: 150,
     category: 'specialized',
@@ -216,7 +216,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-014",
-    name: "INDIRECT BILIRUBIN",
+    name: "Indirect Bilirubin",
     description: "Measures unconjugated, lipid-soluble bilirubin bound to albumin.",
     price: 150,
     category: 'specialized',
@@ -230,7 +230,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-015",
-    name: "SGOT (AST / Aspartate Aminotransferase)",
+    name: "SGOT / AST (Liver Enzyme)",
     description: "Intracellular enzyme found in hepatocytes, cardiac myocytes, and skeletal muscle.",
     price: 100,
     category: 'specialized',
@@ -244,7 +244,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-016",
-    name: "SGPT (ALT / Alanine Aminotransferase)",
+    name: "SGPT / ALT (Liver Enzyme)",
     description: "Highly liver-specific cytosolic enzyme.",
     price: 100,
     category: 'specialized',
@@ -258,7 +258,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-017",
-    name: "ALKALINE PHOSPHATASE (ALP)",
+    name: "Alkaline Phosphatase (ALP)",
     description: "Enzyme concentrated in biliary canalicular membranes, osteoblasts (bone), and placenta.",
     price: 150,
     category: 'specialized',
@@ -272,7 +272,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-018",
-    name: "GAMMA-GLUTAMYL TRANSFERASE (GGT)",
+    name: "GGT (Gamma-GT Liver Test)",
     description: "Laboratory measurement for GAMMA-GLUTAMYL TRANSFERASE (GGT); see the specimen, method, preparation, and parameters below.",
     price: 250,
     category: 'specialized',
@@ -286,7 +286,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-019",
-    name: "TOTAL PROTEIN",
+    name: "Total Protein Test",
     description: "Measures total circulating serum proteins (Albumin + Globulins).",
     price: 120,
     category: 'specialized',
@@ -300,7 +300,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-020",
-    name: "SERUM ALBUMIN",
+    name: "Serum Albumin",
     description: "Primary circulating oncotic protein synthesized exclusively by liver hepatocytes.",
     price: 120,
     category: 'specialized',
@@ -314,7 +314,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-021",
-    name: "SERUM GLOBULIN",
+    name: "Serum Globulin",
     description: "Laboratory measurement for SERUM GLOBULIN; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -328,7 +328,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-022",
-    name: "A/G RATIO",
+    name: "Albumin / Globulin (A/G) Ratio",
     description: "Physiological balance of albumin relative to globulins.",
     price: 150,
     category: 'specialized',
@@ -342,7 +342,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-023",
-    name: "BLOOD UREA NITROGEN (BUN)",
+    name: "Blood Urea Nitrogen (BUN)",
     description: "Measures nitrogen component of urea, the chief end product of dietary and endogenous protein catabolism.",
     price: 150,
     category: 'specialized',
@@ -356,7 +356,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-024",
-    name: "BLOOD UREA",
+    name: "Blood Urea (Kidney Test)",
     description: "Direct metric of total circulating urea molecule.",
     price: 120,
     category: 'specialized',
@@ -370,7 +370,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-025",
-    name: "SERUM CREATININE",
+    name: "Serum Creatinine (Kidney Test)",
     description: "Gold-standard endogenous marker of glomerular filtration rate (GFR).",
     price: 150,
     category: 'specialized',
@@ -384,7 +384,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-026",
-    name: "URIC ACID",
+    name: "Uric Acid (Gout / Joint Test)",
     description: "Final breakdown product of purine nucleotide metabolism.",
     price: 150,
     category: 'specialized',
@@ -398,7 +398,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-027",
-    name: "CALCIUM",
+    name: "Calcium Test",
     description: "Laboratory measurement for CALCIUM; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -412,7 +412,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-028",
-    name: "PHOSPHORUS",
+    name: "Phosphorus Test",
     description: "Inorganic phosphate is vital for cellular energy (ATP), bone mineralization, and acid-base buffering.",
     price: 150,
     category: 'specialized',
@@ -426,7 +426,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-029",
-    name: "eGFR (MDRD)",
+    name: "eGFR Kidney Filtration Rate",
     description: "Estimated Glomerular Filtration Rate normalized to 1.73 m2 body surface area.",
     price: 150,
     category: 'specialized',
@@ -440,7 +440,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-030",
-    name: "TOTAL CHOLESTEROL",
+    name: "Total Cholesterol Test",
     description: "Assesses total circulating sterol particles.",
     price: 150,
     category: 'specialized',
@@ -454,7 +454,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-031",
-    name: "REAL HDL (DIRECT)",
+    name: "HDL Good Cholesterol (Direct)",
     description: "Directly quantifies high-density lipoprotein cholesterol without manual chemical precipitation.",
     price: 200,
     category: 'specialized',
@@ -468,7 +468,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-032",
-    name: "LDL CHOLESTEROL",
+    name: "LDL Bad Cholesterol",
     description: "Primary atherogenic lipoprotein ('bad cholesterol').",
     price: 200,
     category: 'specialized',
@@ -482,7 +482,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-033",
-    name: "VLDL CHOLESTEROL",
+    name: "VLDL Cholesterol",
     description: "Measures triglyceride-rich very-low-density lipoproteins synthesized by the liver.",
     price: 150,
     category: 'specialized',
@@ -496,7 +496,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-034",
-    name: "TRIGLYCERIDES",
+    name: "Triglycerides Test",
     description: "Primary storage form of body fat.",
     price: 180,
     category: 'specialized',
@@ -510,7 +510,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-035",
-    name: "TC/HDL RATIO",
+    name: "TC / HDL Cholesterol Ratio",
     description: "Laboratory measurement for TC/HDL RATIO; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -524,7 +524,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-036",
-    name: "LDL/HDL RATIO",
+    name: "LDL / HDL Cholesterol Ratio",
     description: "Laboratory measurement for LDL/HDL RATIO; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -538,7 +538,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-037",
-    name: "FASTING BLOOD GLUCOSE",
+    name: "Fasting Blood Sugar (FBS)",
     description: "Laboratory measurement for FASTING BLOOD GLUCOSE; see the specimen, method, preparation, and parameters below.",
     price: 80,
     category: 'specialized',
@@ -552,7 +552,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-038",
-    name: "POST PRANDIAL (PP) BLOOD GLUCOSE",
+    name: "Post Prandial Blood Sugar (PPBS)",
     description: "Assesses pancreatic beta-cell insulin secretory capacity under a real-life physiological carbohydrate challenge.",
     price: 80,
     category: 'specialized',
@@ -566,7 +566,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-039",
-    name: "RANDOM BLOOD GLUCOSE",
+    name: "Random Blood Sugar (RBS)",
     description: "Laboratory measurement for RANDOM BLOOD GLUCOSE; see the specimen, method, preparation, and parameters below.",
     price: 80,
     category: 'specialized',
@@ -580,7 +580,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-040",
-    name: "HbA1c (GLYCOSYLATED HEMOGLOBIN)",
+    name: "HbA1c (3-Month Sugar Average)",
     description: "Reflects weighted average blood glucose over the preceding 90-120 days via non-enzymatic glycation of hemoglobin.",
     price: 450,
     category: 'specialized',
@@ -594,7 +594,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-041",
-    name: "SERUM IRON",
+    name: "Serum Iron Test",
     description: "Measures circulating ferric ions (Fe3+) bound to transferrin.",
     price: 250,
     category: 'specialized',
@@ -608,7 +608,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-042",
-    name: "% TRANSFERRIN SATURATION",
+    name: "% Transferrin Saturation",
     description: "Percentage of transferrin iron-binding sites currently occupied by iron.",
     price: 350,
     category: 'specialized',
@@ -622,7 +622,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-043",
-    name: "SERUM FERRITIN",
+    name: "Serum Ferritin (Iron Stores)",
     description: "Primary cellular iron storage protein.",
     price: 600,
     category: 'specialized',
@@ -636,7 +636,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-044",
-    name: "TROPONIN I",
+    name: "Troponin I (Cardiac Marker)",
     description: "Laboratory measurement for TROPONIN I; see the specimen, method, preparation, and parameters below.",
     price: 1150,
     category: 'specialized',
@@ -650,7 +650,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-045",
-    name: "TROPONIN T (HIGH SENSITIVE)",
+    name: "Troponin T (High Sensitive Cardiac)",
     description: "Laboratory measurement for TROPONIN T (HIGH SENSITIVE); see the specimen, method, preparation, and parameters below.",
     price: 2250,
     category: 'specialized',
@@ -664,7 +664,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-046",
-    name: "TOTAL CPK (CREATINE KINASE)",
+    name: "Total CPK (Creatine Kinase)",
     description: "Enzyme concentrated in skeletal muscle, myocardium, and brain.",
     price: 350,
     category: 'specialized',
@@ -678,7 +678,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-047",
-    name: "CK-MB",
+    name: "CK-MB (Heart Enzyme Test)",
     description: "Cardiac-specific isoenzyme of creatine kinase.",
     price: 450,
     category: 'specialized',
@@ -692,7 +692,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-048",
-    name: "SERUM AMYLASE",
+    name: "Serum Amylase (Pancreas Test)",
     description: "Digestive enzyme secreted by the pancreas and salivary glands.",
     price: 460,
     category: 'specialized',
@@ -706,7 +706,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-049",
-    name: "SERUM LIPASE",
+    name: "Serum Lipase (Pancreas Test)",
     description: "Laboratory measurement for SERUM LIPASE; see the specimen, method, preparation, and parameters below.",
     price: 600,
     category: 'specialized',
@@ -720,7 +720,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-050",
-    name: "TSH (THYROID STIMULATING HORMONE)",
+    name: "Thyroid TSH Test",
     description: "Laboratory measurement for TSH (THYROID STIMULATING HORMONE); see the specimen, method, preparation, and parameters below.",
     price: 180,
     category: 'specialized',
@@ -734,7 +734,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-051",
-    name: "TOTAL T3 (TRIIODOTHYRONINE)",
+    name: "Total T3 (Triiodothyronine)",
     description: "Measures total circulating active thyroid hormone (protein-bound + free).",
     price: 180,
     category: 'specialized',
@@ -748,7 +748,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-052",
-    name: "TOTAL T4 (THYROXINE)",
+    name: "Total T4 (Thyroxine)",
     description: "Primary prohormone secreted by the thyroid gland.",
     price: 180,
     category: 'specialized',
@@ -762,7 +762,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-053",
-    name: "FREE T3",
+    name: "Free T3 (FT3)",
     description: "Measures biologically active, unbound Triiodothyronine (0.3% of total T3).",
     price: 250,
     category: 'specialized',
@@ -776,7 +776,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-054",
-    name: "FREE T4",
+    name: "Free T4 (FT4)",
     description: "Measures unbound, metabolically active Thyroxine (0.03% of total T4).",
     price: 250,
     category: 'specialized',
@@ -790,7 +790,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-055",
-    name: "FSH (FOLLICLE STIMULATING HORMONE)",
+    name: "FSH (Follicle Stimulating Hormone)",
     description: "Secreted by anterior pituitary.",
     price: 450,
     category: 'specialized',
@@ -804,7 +804,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-056",
-    name: "LH (LUTEINIZING HORMONE)",
+    name: "LH (Luteinizing Hormone)",
     description: "Triggers ovulation and corpus luteum formation in women; stimulates Leydig cell testosterone synthesis in men.",
     price: 450,
     category: 'specialized',
@@ -818,7 +818,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-057",
-    name: "PROLACTIN",
+    name: "Prolactin Hormone Test",
     description: "Laboratory measurement for PROLACTIN; see the specimen, method, preparation, and parameters below.",
     price: 450,
     category: 'specialized',
@@ -832,7 +832,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-058",
-    name: "TESTOSTERONE (TOTAL)",
+    name: "Total Testosterone Test",
     description: "Primary androgen steroid hormone.",
     price: 550,
     category: 'specialized',
@@ -846,7 +846,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-059",
-    name: "BETA-hCG (QUANTITATIVE)",
+    name: "Beta-hCG (Pregnancy Blood Test)",
     description: "Human chorionic gonadotropin secreted by syncytiotrophoblasts.",
     price: 550,
     category: 'specialized',
@@ -860,7 +860,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-060",
-    name: "AMH (ANTI-MULLERIAN HORMONE)",
+    name: "AMH (Anti-Mullerian Hormone)",
     description: "Produced by granulosa cells of pre-antral and small antral ovarian follicles.",
     price: 1850,
     category: 'specialized',
@@ -874,7 +874,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-061",
-    name: "E2 (ESTRADIOL)",
+    name: "Estradiol (E2) Hormone Test",
     description: "Laboratory measurement for E2 (ESTRADIOL); see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
@@ -888,7 +888,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-062",
-    name: "PSA (PROSTATE-SPECIFIC ANTIGEN)",
+    name: "PSA (Prostate Specific Antigen)",
     description: "Laboratory measurement for PSA (PROSTATE-SPECIFIC ANTIGEN); see the specimen, method, preparation, and parameters below.",
     price: 750,
     category: 'specialized',
@@ -902,7 +902,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-063",
-    name: "CA 19.9",
+    name: "CA 19.9 Tumor Marker",
     description: "Laboratory measurement for CA 19.9; see the specimen, method, preparation, and parameters below.",
     price: 1250,
     category: 'specialized',
@@ -916,7 +916,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-064",
-    name: "VITAMIN D (25-OH)",
+    name: "Vitamin D (25-OH) Test",
     description: "Measures total circulating 25-hydroxyvitamin D [25(OH)D2 + D3].",
     price: 1050,
     category: 'specialized',
@@ -930,7 +930,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-065",
-    name: "VITAMIN B12",
+    name: "Vitamin B12 Test",
     description: "Laboratory measurement for VITAMIN B12; see the specimen, method, preparation, and parameters below.",
     price: 750,
     category: 'specialized',
@@ -944,7 +944,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-066",
-    name: "C-REACTIVE PROTEIN (CRP) - QUANTITATIVE",
+    name: "CRP (C-Reactive Protein - Quantitative)",
     description: "Laboratory measurement for C-REACTIVE PROTEIN (CRP) - QUANTITATIVE; see the specimen, method, preparation, and parameters below.",
     price: 550,
     category: 'specialized',
@@ -958,7 +958,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-067",
-    name: "RHEUMATOID FACTOR (RA) - QUANTITATIVE",
+    name: "RA Factor (Rheumatoid Arthritis Test)",
     description: "Autoantibody (chiefly IgM) directed against the Fc portion of human IgG.",
     price: 550,
     category: 'specialized',
@@ -972,7 +972,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-068",
-    name: "TOTAL IgE",
+    name: "Total IgE (Allergy Antibody Test)",
     description: "Quantifies total circulating Immunoglobulin E.",
     price: 650,
     category: 'specialized',
@@ -986,7 +986,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-069",
-    name: "tTG-IgA (CELIAC ANTIBODY)",
+    name: "tTG-IgA (Celiac Disease Test)",
     description: "Laboratory measurement for tTG-IgA (CELIAC ANTIBODY); see the specimen, method, preparation, and parameters below.",
     price: 1100,
     category: 'specialized',
@@ -1000,7 +1000,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-070",
-    name: "DENGUE NS1 ANTIGEN (CLIA)",
+    name: "Dengue NS1 Antigen Test",
     description: "Laboratory measurement for DENGUE NS1 ANTIGEN (CLIA); see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
@@ -1014,7 +1014,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-071",
-    name: "DENGUE IgG ANTIBODY",
+    name: "Dengue IgG Antibody Test",
     description: "Laboratory measurement for DENGUE IgG ANTIBODY; see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
@@ -1028,7 +1028,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-072",
-    name: "DENGUE IgM ANTIBODY",
+    name: "Dengue IgM Antibody Test",
     description: "Laboratory measurement for DENGUE IgM ANTIBODY; see the specimen, method, preparation, and parameters below.",
     price: 650,
     category: 'specialized',
@@ -1042,7 +1042,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-073",
-    name: "WIDAL TEST",
+    name: "Widal Typhoid Test",
     description: "Laboratory measurement for WIDAL TEST; see the specimen, method, preparation, and parameters below.",
     price: 150,
     category: 'specialized',
@@ -1056,7 +1056,7 @@ export const medicalTests: MedicalTest[] = [
   },
   {
     id: "web-074",
-    name: "MALARIA PARASITE ANTIGEN",
+    name: "Malaria Antigen Test",
     description: "Laboratory measurement for MALARIA PARASITE ANTIGEN; see the specimen, method, preparation, and parameters below.",
     price: 250,
     category: 'specialized',

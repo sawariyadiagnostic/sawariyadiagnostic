@@ -169,7 +169,7 @@ test('individual test details show canonical test data', async ({ page }) => {
   await details.click();
   const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
   await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole('heading', { name: 'COMPLETE BLOOD COUNT (CBC)' })).toBeVisible();
+  await expect(dialog.getByRole('heading', { name: /COMPLETE BLOOD COUNT \(CBC\)/i })).toBeVisible();
 });
 
 
@@ -381,13 +381,15 @@ test('catalog topic links filter to approved tests and home collection', async (
   await expect(page.locator('#home-collection')).toBeVisible();
 });
 
-test('catalog cards show real test descriptions', async ({ page }) => {
+test('catalog cards show real test descriptions in details view', async ({ page }) => {
   await openPage(page);
   await page.locator('#tests').scrollIntoViewIfNeeded();
-  const card = page.locator('#tests .glass-card').filter({ hasText: 'COMPLETE BLOOD COUNT (CBC)' }).first();
+  const card = page.locator('#tests .glass-card').filter({ hasText: /COMPLETE BLOOD COUNT/i }).first();
   await expect(card).toBeVisible();
-  await expect(card.locator('..').getByText('Comprehensive evaluation of cellular blood components.', { exact: true })).toBeVisible();
-  await expect(card.locator('..').getByText(/Current test details are published/)).toHaveCount(0);
+  await card.getByRole('button', { name: /View details for/i }).click();
+  const dialog = page.getByRole('dialog', { name: /COMPLETE BLOOD COUNT/i });
+  await expect(dialog.getByText('Comprehensive evaluation of cellular blood components.', { exact: true })).toBeVisible();
+  await expect(dialog.getByText(/Current test details are published/)).toHaveCount(0);
 });
 
 test('catalog search result count is announced as a status update', async ({ page }) => {

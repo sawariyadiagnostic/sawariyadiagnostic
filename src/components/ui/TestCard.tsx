@@ -110,10 +110,6 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
             </button>
           </h3>
 
-          <p className="text-[11.5px] sm:text-xs text-slate-500 mb-2.5 line-clamp-2 leading-snug font-normal min-h-[2rem]">
-            {test.description}
-          </p>
-
           {/* Compact Parameters Preview / Verification note */}
           <div className="mb-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600 gap-1.5 min-w-0">
             {hasParameters ? (
