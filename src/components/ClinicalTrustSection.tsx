@@ -86,8 +86,8 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
 
       {/* 4-Pillar Central In-House Advantage Strip */}
       <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="peacock-test-card spine-biochem flex items-start gap-3.5 rounded-2xl p-4 sm:p-5 shadow-xs bg-white border border-slate-200/80">
-          <div className="rounded-xl bg-teal-50 p-2.5 text-[#0B6E66] border border-teal-100 flex-shrink-0">
+        <div className="peacock-test-card spine-biochem apple-squircle-card flex items-start gap-3.5 rounded-[20px] p-4 sm:p-5 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] bg-white border border-slate-200/80">
+          <div className="apple-squircle-inner rounded-[12px] bg-teal-50 p-2.5 text-[#0B6E66] border border-teal-100 flex-shrink-0">
             <Activity className="h-5 w-5" />
           </div>
           <div>
@@ -98,8 +98,8 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           </div>
         </div>
 
-        <div className="peacock-test-card spine-clia flex items-start gap-3.5 rounded-2xl p-4 sm:p-5 shadow-xs bg-white border border-slate-200/80">
-          <div className="rounded-xl bg-cyan-50 p-2.5 text-[#0A6C82] border border-cyan-100 flex-shrink-0">
+        <div className="peacock-test-card spine-clia apple-squircle-card flex items-start gap-3.5 rounded-[20px] p-4 sm:p-5 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] bg-white border border-slate-200/80">
+          <div className="apple-squircle-inner rounded-[12px] bg-cyan-50 p-2.5 text-[#0A6C82] border border-cyan-100 flex-shrink-0">
             <ShieldCheck className="h-5 w-5" />
           </div>
           <div>
@@ -110,8 +110,8 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           </div>
         </div>
 
-        <div className="peacock-test-card spine-metabolic flex items-start gap-3.5 rounded-2xl p-4 sm:p-5 shadow-xs bg-white border border-slate-200/80">
-          <div className="rounded-xl bg-amber-50 p-2.5 text-[#B4690E] border border-amber-100 flex-shrink-0">
+        <div className="peacock-test-card spine-metabolic apple-squircle-card flex items-start gap-3.5 rounded-[20px] p-4 sm:p-5 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] bg-white border border-slate-200/80">
+          <div className="apple-squircle-inner rounded-[12px] bg-amber-50 p-2.5 text-[#B4690E] border border-amber-100 flex-shrink-0">
             <Clock className="h-5 w-5" />
           </div>
           <div>
@@ -122,8 +122,8 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           </div>
         </div>
 
-        <div className="peacock-test-card spine-hematology flex items-start gap-3.5 rounded-2xl p-4 sm:p-5 shadow-xs bg-white border border-slate-200/80">
-          <div className="rounded-xl bg-rose-50 p-2.5 text-[#C81E1E] border border-rose-100 flex-shrink-0">
+        <div className="peacock-test-card spine-hematology apple-squircle-card flex items-start gap-3.5 rounded-[20px] p-4 sm:p-5 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] bg-white border border-slate-200/80">
+          <div className="apple-squircle-inner rounded-[12px] bg-rose-50 p-2.5 text-[#C81E1E] border border-rose-100 flex-shrink-0">
             <Home className="h-5 w-5" />
           </div>
           <div>

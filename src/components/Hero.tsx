@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, CheckCircle2, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Search, CheckCircle2, Clock, ArrowRight, ShieldCheck, Camera } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Navbar } from './layout/Navbar';
 import { MobileMenu } from './layout/MobileMenu';
 import { Logo } from './ui/Logo';
+import { whatsappHref } from '@/config/site';
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -56,6 +57,8 @@ export function Hero() {
     { label: 'Liver (LFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
     { label: 'Kidney (KFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
   ];
+
+  const whatsappPrescriptionUrl = whatsappHref("Hello Sawariya Diagnostic, I would like to share a photo of my doctor's prescription slip to ask about test pricing and home collection.");
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-[var(--surface-canvas)]">
@@ -156,10 +159,11 @@ export function Hero() {
               </div>
 
               {/* Action Buttons: Primary & Secondary */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 w-full max-w-xl">
+              {/* Action Buttons: Primary, Secondary & Instant Prescription Photo */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 w-full max-w-xl flex-wrap">
                 <Button
                   size="xl"
-                  className="btn-primary squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] shadow-md hover:shadow-lg active:scale-[0.96] min-w-0"
+                  className="btn-primary squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
                   <span>Request home collection</span>
@@ -169,11 +173,29 @@ export function Hero() {
                 <Button
                   size="xl"
                   variant="outline"
-                  className="btn-outline squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] active:scale-[0.96] min-w-0"
+                  className="btn-outline squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-7 text-xs sm:text-sm font-bold rounded-[16px] active:scale-[0.96] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
                   <span>Ask about individual tests</span>
                 </Button>
+
+                {whatsappPrescriptionUrl && (
+                  <Button
+                    asChild
+                    size="xl"
+                    className="btn-secondary squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-4 sm:px-5 text-xs sm:text-sm font-bold text-white rounded-[16px] active:scale-[0.96] min-w-0 shadow-sm"
+                  >
+                    <a
+                      href={whatsappPrescriptionUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Send doctor prescription photo on WhatsApp"
+                    >
+                      <Camera className="w-4 h-4 mr-1.5 shrink-0" />
+                      <span>Send prescription photo</span>
+                    </a>
+                  </Button>
+                )}
               </div>
 
               {/* Apple Health Trust Micro-Metrics */}
@@ -184,7 +206,7 @@ export function Hero() {
                   </div>
                   <div className="min-w-0">
                     <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Current estimates</p>
-                                        <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Confirmed by test</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Confirmed by test</p>
                   </div>
                 </div>
 
@@ -193,8 +215,8 @@ export function Hero() {
                     <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Quality</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Quality process</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Standards</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Documented protocols</p>
                   </div>
                 </div>
 
@@ -203,8 +225,8 @@ export function Hero() {
                     <ShieldCheck className="w-4 h-4 text-[#7A4B2A]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Patient-first</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Home collection 07:00 AM–07:00 PM • 24*7 walk-in</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Doorstep Care</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Charkhi Dadri visits</p>
                   </div>
                 </div>
               </div>

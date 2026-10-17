@@ -53,6 +53,20 @@ function getDepartmentSpine(category = '', name = ''): string {
   return 'spine-biochem';
 }
 
+function getVacutainerDot(category = '', name = ''): { colorClass: string; label: string } {
+  const combined = `${category} ${name}`.toLowerCase();
+  if (combined.includes('urine') || combined.includes('stool')) {
+    return { colorClass: 'vacutainer-dot-container', label: 'Standard Container' };
+  }
+  if (combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr') || combined.includes('platelet') || combined.includes('hba1c')) {
+    return { colorClass: 'vacutainer-dot-edta', label: 'Lavender EDTA' };
+  }
+  if (combined.includes('sugar') || combined.includes('glucose')) {
+    return { colorClass: 'vacutainer-dot-fluoride', label: 'Grey Fluoride' };
+  }
+  return { colorClass: 'vacutainer-dot-serum', label: 'Gold Serum' };
+}
+
 export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: TestCardProps) {
   const [showDetail, setShowDetail] = useState(false);
 
@@ -67,12 +81,13 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
   const hasParameters = Boolean(test.parameters && test.parameters.length > 0);
 
   const dept = getDepartmentInfo(test.category, test.name);
+  const vac = getVacutainerDot(test.category, test.name);
 
   return (
     <>
       <div 
         data-selected={isSelected}
-        className={`peacock-test-card glass-card ui-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-2xl border border-slate-200/80 shadow-[0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[0_8px_20px_-4px_rgba(10,108,130,0.12)] ${getDepartmentSpine(test.category, test.name)}`}
+        className={`peacock-test-card glass-card ui-card apple-squircle-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-[22px] border border-slate-200/80 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] ${getDepartmentSpine(test.category, test.name)}`}
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A6C82]/0 to-[#0B6E66]/0 group-hover:from-[#0A6C82]/[0.03] group-hover:to-[#0B6E66]/[0.03] transition-colors duration-300 pointer-events-none" />
@@ -81,18 +96,19 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           {/* Top Badges Row */}
           <div className="flex items-center justify-between gap-1.5 mb-2">
             <div className="flex items-center gap-1.5 min-w-0">
-              <span className={`text-[10px] sm:text-[10.5px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${dept.badgeClass}`}>
+              <span className={`text-[10px] sm:text-[10.5px] font-bold px-2 py-0.5 rounded-[8px] border shrink-0 inline-flex items-center gap-1.5 ${dept.badgeClass}`}>
+                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${vac.colorClass}`} title={vac.label} />
                 {dept.name}
               </span>
               {test.popular && (
-                <span className="inline-flex items-center gap-0.5 rounded-full bg-[#0A1128] px-2 py-0.5 text-[9.5px] sm:text-[10px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs shrink-0">
+                <span className="inline-flex items-center gap-0.5 rounded-[8px] bg-[#0A1128] px-2 py-0.5 text-[9.5px] sm:text-[10px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs shrink-0">
                   ★ Popular
                 </span>
               )}
             </div>
 
             {test.homeCollection && (
-              <span className="inline-flex items-center gap-1 bg-blue-50/80 text-blue-800 border border-blue-200/70 text-[9.5px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0">
+              <span className="inline-flex items-center gap-1 bg-blue-50/80 text-blue-800 border border-blue-200/70 text-[9.5px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-[8px] shrink-0">
                 <Home className="w-2.5 h-2.5 text-[#155E9A]" /> Home Visit
               </span>
             )}

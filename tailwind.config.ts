@@ -88,6 +88,12 @@ export default {
         md: "var(--radius-control)",
         sm: "0.625rem",
         xl: "var(--radius-panel)",
+        'card-outer': "var(--radius-card-outer, 1.5rem)",
+        'card-inner': "var(--radius-card-inner, 0.875rem)",
+        modal: "var(--radius-modal, 1.75rem)",
+        dock: "var(--radius-dock, 1.625rem)",
+        'dock-item': "var(--radius-dock-item, 1.125rem)",
+        badge: "var(--radius-badge, 0.625rem)",
       },
       keyframes: {
         "accordion-down": {

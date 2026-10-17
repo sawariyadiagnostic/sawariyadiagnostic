@@ -94,12 +94,13 @@ export function HomeCollection() {
             viewport={{ once: true }}
             className="lg:col-span-5"
           >
-            <div className="glass-card ui-card p-5 sm:p-7 shadow-[0_32px_80px_rgba(0,0,0,0.4)] text-slate-900 relative overflow-hidden bg-white">
+            <div className="glass-card ui-card apple-squircle-card p-5 sm:p-7 shadow-[0_32px_80px_rgba(0,0,0,0.4)] text-slate-900 relative overflow-hidden bg-white rounded-[28px]">
               <div className="mb-5 space-y-1">
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-lg sm:text-xl font-black text-[#1D1D1F] tracking-tight">Arrange a Home Visit</h3>
-                  <span className="bg-blue-50 text-[#102A43] text-[10.5px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200">
-                    07:00 AM–07:00 PM Slots
+                  <span className="bg-emerald-50 text-emerald-800 text-[10.5px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 inline-flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Phlebotomy Active Now
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
@@ -108,20 +109,20 @@ export function HomeCollection() {
               </div>
 
               <div className="space-y-3">
-                <Button asChild className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[18px] active:scale-[0.96]">
+                <Button asChild className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[16px] active:scale-[0.96]">
                   <a href="#contact">
                     <Calendar className="w-4 h-4 mr-2" />
                     Open appointment calendar
                   </a>
                 </Button>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[18px] text-xs font-bold active:scale-[0.96]">
+                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[16px] text-xs font-bold active:scale-[0.96]">
                     <a href={telHref(siteConfig.contact.phone)}>
                       <Phone className="w-4 h-4 mr-2 text-[#155E9A]" />
                       Call lab desk
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[18px] text-xs font-bold active:scale-[0.96]">
+                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[16px] text-xs font-bold active:scale-[0.96]">
                     <a href={whatsappUrl || telHref(siteConfig.contact.phone)} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined}>
                       <MessageCircle className="w-4 h-4 mr-2 text-[#128C7E]" />
                       Ask on WhatsApp
@@ -130,8 +131,9 @@ export function HomeCollection() {
                 </div>
               </div>
 
-              <p className="text-[11px] text-center text-slate-500 pt-3 font-medium">
-                Home collection: 07:00 AM–07:00 PM • Fasting morning slots available from 07:00 AM
+              <p className="text-[11px] text-center text-slate-500 pt-3 font-medium flex items-center justify-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 inline shrink-0" />
+                <span>Sealed Cold-Chain Transit • Morning fasting guidance provided with slot confirmation</span>
               </p>
             </div>
           </m.div>

@@ -64,6 +64,12 @@
   --radius-control: 1rem;
   --radius-card: 1.25rem;
   --radius-panel: 1.5rem;
+  --radius-card-outer: 1.5rem;
+  --radius-card-inner: 0.875rem;
+  --radius-modal: 1.75rem;
+  --radius-dock: 1.625rem;
+  --radius-dock-item: 1.125rem;
+  --radius-badge: 0.625rem;
   --control-gap: 0.5rem;
   --target-size-min: 44px;
 

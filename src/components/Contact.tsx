@@ -73,20 +73,21 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Book an appointment or request home collection from 07:00 AM to 07:00 PM. Lab is open 24*7 for walk-in patients and emergency from hospitals.
+            Book an appointment or request doorstep sample collection with our laboratory reception team.
           </p>
         </div>
 
         {/* Booking Widget (Apple Card Frame) */}
         <div className="max-w-4xl mx-auto mb-10 sm:mb-14 relative z-10">
-          <div className="glass-panel ui-panel bg-white/70 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
+          <div className="glass-panel ui-panel apple-squircle-panel rounded-[28px] bg-white/70 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
             {/* Widget Header */}
             <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15">
               <div className="space-y-0.5 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:lg font-bold text-white">Appointment Desk</h3>
-                  <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center">
-                    Home collection 07:00 AM–07:00 PM • Lab 24*7
+                  <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD98A] animate-pulse" />
+                    Direct Lab Desk
                   </span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-[var(--text-on-dark)] font-normal">

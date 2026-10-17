@@ -2,7 +2,6 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/compone
 import { Button } from '@/components/ui/button';
 import {
   TestTube,
-  Home,
   Check,
   Share2,
   ArrowLeft,
@@ -19,6 +18,20 @@ interface TestDetailModalProps {
   item: MedicalTest | null;
   isOpen: boolean;
   onClose: () => void;
+}
+
+function getBiologicalSpecimen(item: MedicalTest): string {
+  if (item.specimen) return item.specimen;
+  const combined = `${item.name} ${item.category || ''}`.toLowerCase();
+  if (combined.includes('urine')) return 'Clean-catch midstream urine';
+  if (combined.includes('stool')) return 'Stool specimen in standard collection container';
+  if (combined.includes('cbc') || combined.includes('esr') || combined.includes('platelet') || combined.includes('hemoglobin') || combined.includes('blood count')) {
+    return 'Blood (Lavender EDTA vacuum tube)';
+  }
+  if (combined.includes('glucose') || combined.includes('sugar')) {
+    return 'Blood (Grey Sodium Fluoride tube)';
+  }
+  return 'Blood (Serum / Clot Activator tube)';
 }
 
 export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps) {
@@ -43,7 +56,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   return (
     <>
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
-        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel flex flex-col">
+        <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel apple-squircle-modal rounded-[28px] flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-6 text-white relative overflow-hidden flex-shrink-0">
             <div className="flex items-start justify-between gap-4 relative z-10">
@@ -88,22 +101,22 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
 
             {/* Test Specific Details */}
             <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 text-xs">
-              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
-                <span className="text-[10px] text-slate-400 block font-medium">Sample Collection:</span>
-                <span className="min-w-0 font-bold text-slate-800 flex items-start gap-1 mt-0.5 break-words">
-                  <Home className="w-3.5 h-3.5 text-[#C62828] flex-shrink-0" />
-                  <span className="min-w-0 break-words">{item.specimen || 'Home collection: 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients and emergency from hospitals'}</span>
+              <div className="min-w-0 bg-white p-3.5 rounded-[14px] border border-slate-200/90 shadow-2xs break-words apple-squircle-inner">
+                <span className="text-[10px] text-slate-400 block font-medium">Biological Specimen:</span>
+                <span className="min-w-0 font-bold text-slate-800 flex items-start gap-1.5 mt-0.5 break-words">
+                  <TestTube className="w-3.5 h-3.5 text-[#155E9A] flex-shrink-0 mt-0.5" />
+                  <span className="min-w-0 break-words">{getBiologicalSpecimen(item)}</span>
                 </span>
               </div>
 
-              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
+              <div className="min-w-0 bg-white p-3.5 rounded-[14px] border border-slate-200/90 shadow-2xs break-words apple-squircle-inner">
                 <span className="text-[10px] text-slate-400 block font-medium">Methodology:</span>
                 <span className="min-w-0 font-bold text-slate-800 mt-0.5 block break-words">
                   <span className="break-words">{item.method || 'Documented laboratory protocols'}</span>
                 </span>
               </div>
 
-              <div className="min-w-0 bg-white p-3 rounded-[16px] border border-slate-200 shadow-2xs break-words">
+              <div className="min-w-0 bg-white p-3.5 rounded-[14px] border border-slate-200/90 shadow-2xs break-words apple-squircle-inner">
                 <span className="text-[10px] text-slate-400 block font-medium">Preparation:</span>
                 <span className="min-w-0 font-bold text-slate-800 mt-0.5 block break-words">
                   <span className="break-words">{item.preparation || 'Preparation instructions are provided with the appointment'}</span>

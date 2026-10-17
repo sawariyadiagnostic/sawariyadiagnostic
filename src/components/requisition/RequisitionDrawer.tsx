@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ClipboardList, Trash2 } from 'lucide-react';
+import { ClipboardList, Trash2, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { siteConfig, whatsappHref } from '@/config/site';
@@ -13,6 +13,7 @@ export function RequisitionDrawer() {
     ? `*${siteConfig.name} — TEST REQUEST*\n\n${selectedTests.map((test, index) => `${index + 1}. ${test.name} — ${formatInr(test.price)}`).join('\n')}\n\nPublished test-price subtotal: ${formatInr(subtotal)}\n\nPlease confirm availability, final collection charges, preparation instructions, and the appointment with the lab desk. No appointment is booked until the lab confirms.`
     : '';
   const whatsappUrl = whatsappHref(message);
+  const prescriptionWhatsappUrl = whatsappHref("Hello Sawariya Diagnostic, I have a doctor's prescription slip and would like to share a photo to confirm test prices and book home collection.");
 
   return <>
     {selectedTests.length > 0 && <div className="fixed right-3 bottom-[calc(env(safe-area-inset-bottom,0px)+5rem)] z-[105] sm:bottom-4">
@@ -24,7 +25,7 @@ export function RequisitionDrawer() {
     </div>}
 
     <Dialog open={isOpen} onOpenChange={setOpen}>
-      <DialogContent aria-label="Test request" style={{ backgroundColor: 'var(--surface-white)' }} className="flex max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-lg flex-col overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)]">
+      <DialogContent aria-label="Test request" style={{ backgroundColor: 'var(--surface-white)' }} className="flex max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-lg flex-col overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)] apple-squircle-modal rounded-[28px]">
         <header className="flex items-start justify-between gap-4 border-b border-slate-200 bg-[#FFF9F3] px-5 py-4 sm:px-6">
           <div>
             <div className="mb-1 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#155E9A]"><ClipboardList className="h-3.5 w-3.5" /> Test request</div>
@@ -36,7 +37,7 @@ export function RequisitionDrawer() {
         <div className="min-h-0 flex-1 overflow-y-auto bg-white p-5 sm:p-6">
           {selectedTests.length ? <>
             <ul className="space-y-2" aria-label="Selected tests">
-              {selectedTests.map((test) => <li key={test.id} className="flex items-center justify-between gap-3 rounded-[14px] border border-slate-200 p-3">
+              {selectedTests.map((test) => <li key={test.id} className="flex items-center justify-between gap-3 rounded-[14px] border border-slate-200 p-3 apple-squircle-inner">
                 <div className="min-w-0">
                   <h3 className="text-sm font-bold leading-snug text-[#102A43]">{test.name}</h3>
                   <button type="button" onClick={() => toggleTest(test.id)} aria-label={`Remove ${test.name} from request`} className="mt-2 min-h-11 px-2.5 py-1 text-xs font-bold text-[#C62828] hover:bg-red-50 rounded-[10px] squircle-btn apple-pressable active:scale-[0.96] cursor-pointer inline-flex items-center">Remove</button>
@@ -44,9 +45,32 @@ export function RequisitionDrawer() {
                 <strong className="shrink-0 text-sm text-[#102A43]">{formatInr(test.price)}</strong>
               </li>)}
             </ul>
-            <p className="mt-5 rounded-[14px] border border-[#D7C7B8] bg-[#FFF9F3] p-3 text-sm font-semibold text-[#102A43]">Published test-price subtotal: {formatInr(subtotal)}</p>
+            <p className="mt-5 rounded-[14px] border border-[#D7C7B8] bg-[#FFF9F3] p-3 text-sm font-semibold text-[#102A43] apple-squircle-inner">Published test-price subtotal: {formatInr(subtotal)}</p>
+            <div className="mt-3 rounded-[14px] border border-slate-200/80 bg-slate-50 p-3 flex items-center justify-between gap-3 text-xs apple-squircle-inner">
+              <span className="text-slate-600 font-medium">Have a handwritten doctor's prescription slip?</span>
+              <a href={prescriptionWhatsappUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-700 hover:underline shrink-0">
+                Send photo
+              </a>
+            </div>
             <p className="mt-3 text-xs leading-relaxed text-slate-600">The lab confirms availability and any collection charges; no appointment is booked until confirmed.</p>
-          </> : <p className="rounded-[14px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">No tests selected. Return to the catalog to choose tests.</p>}
+          </> : <div className="space-y-4">
+            <p className="rounded-[16px] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 apple-squircle-inner">No tests selected. Return to the catalog to choose tests.</p>
+            <div className="rounded-[16px] border border-emerald-200 bg-emerald-50/60 p-4 space-y-2 apple-squircle-inner">
+              <div className="flex items-center gap-2 text-xs font-bold text-emerald-900">
+                <Camera className="w-4 h-4 text-emerald-700" />
+                <span>Have a Doctor's Prescription Slip?</span>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Skip manual test searches. Share a photo of your doctor's slip on WhatsApp to confirm tests and collection times.
+              </p>
+              <Button asChild className="btn-secondary squircle-btn apple-pressable min-h-11 w-full text-xs font-bold text-white rounded-[14px] active:scale-[0.96]">
+                <a href={prescriptionWhatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Share doctor prescription on WhatsApp">
+                  <Camera className="w-4 h-4 mr-1.5" />
+                  <span>Send prescription photo on WhatsApp</span>
+                </a>
+              </Button>
+            </div>
+          </div>}
         </div>
 
         <footer className="flex flex-col gap-2 border-t border-slate-200 bg-white p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:flex-row sm:p-5">
