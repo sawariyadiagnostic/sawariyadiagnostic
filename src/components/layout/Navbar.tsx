@@ -120,8 +120,7 @@ export function Navbar({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              data-squircle="13"
-              className="ui-control-button lg:hidden w-[42px] h-[42px] flex items-center justify-center hamburger-btn text-slate-700 bg-white/90 backdrop-blur-md hover:bg-white transition-surface shadow-2xs active:scale-95 cursor-pointer"
+              className="ui-control-button lg:hidden w-11 h-11 flex items-center justify-center rounded-[var(--radius-control)] text-slate-700 bg-white/80 backdrop-blur-md hover:bg-white transition-surface border border-slate-200/90 shadow-2xs active:scale-95 cursor-pointer"
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}

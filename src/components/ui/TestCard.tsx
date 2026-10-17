@@ -146,7 +146,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           {/* Request actions */}
           <div className="action-row">
             {isSelected ? (
-              <div role="status" aria-live="polite" data-squircle="12" className="squircle-btn squircle-card-inner flex min-h-11 w-full items-center justify-center gap-2 rounded-[12px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B]">
+              <div role="status" aria-live="polite" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[14px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B]">
                 <Check className="h-4 w-4 shrink-0" />
                 <span>Added to Request</span>
               </div>
@@ -154,10 +154,9 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
               <Button
                 type="button"
                 size="sm"
-                data-squircle="12"
                 aria-pressed={false}
                 onClick={() => onToggleRequest(test.id)}
-                className="action-button squircle-btn squircle-card-inner h-auto min-h-11 w-full min-w-0 rounded-[12px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs"
+                className="action-button h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs"
               >
                 <ClipboardList className="h-3.5 w-3.5 shrink-0" />
                 <span className="min-w-0">Add to Request</span>
