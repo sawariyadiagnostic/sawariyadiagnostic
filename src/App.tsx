@@ -3,7 +3,7 @@ import { LazyMotion, domAnimation } from 'framer-motion'
 import { siteConfig } from './config/site'
 import { initGlobalAppleSquircles } from './utils/appleSquircleEngine'
 import { Hero } from './components/Hero'
-import { ClinicalTrustSection, SymptomFilterBar } from './components/ClinicalTrustSection'
+import { ClinicalTrustSection } from './components/ClinicalTrustSection'
 import { Services } from './components/Services'
 import { HomeCollection } from './components/HomeCollection'
 import { LoadingSpinner } from './components/ui/LoadingSpinner'
@@ -55,8 +55,6 @@ export default function App() {
             {/* Heavy Interactive Sections: Lazy Load */}
             <SectionErrorBoundary>
               <Suspense fallback={<LoadingSpinner />}>
-                {/* Filter by Health Goal or Symptom directly connected above Test Catalog */}
-                <SymptomFilterBar />
                 <TestCatalog />
                 <Team />
                 <Contact />

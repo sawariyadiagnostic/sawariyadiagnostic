@@ -183,8 +183,8 @@ export function Hero() {
                     <Clock className="w-4 h-4 text-blue-700" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">2–6 Hour Reports</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Same-day digital delivery</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Current estimates</p>
+                                        <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Confirmed by test</p>
                   </div>
                 </div>
 
@@ -193,8 +193,8 @@ export function Hero() {
                     <CheckCircle2 className="w-4 h-4 text-emerald-700" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">In-House Analyzers</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Zero transit sample delay</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Quality</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Quality process</p>
                   </div>
                 </div>
 
@@ -203,15 +203,15 @@ export function Hero() {
                     <ShieldCheck className="w-4 h-4 text-[#7A4B2A]" />
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">24*7 Emergency Lab</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Opp. R.S. Sangwan Hospital</p>
+                    <p className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Patient-first</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate">Home collection 07:00 AM–07:00 PM • 24*7 walk-in</p>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            {/* Diagnostic Care Standards Preview */}
+            {/* Illustrative test preview */}
             <div className="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0 w-full min-w-0">
               <div className="relative w-full max-w-full sm:max-w-[430px] mx-auto min-w-0">
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#155E9A]/20 via-[#C62828]/15 to-[#C62828]/15 rounded-[34px] blur-2xl opacity-70 pointer-events-none" />
@@ -220,44 +220,53 @@ export function Hero() {
                   <div className="flex items-start justify-between gap-2 pb-3 border-b border-slate-100">
                     <div className="min-w-0">
                       <Logo variant="horizontal" size="xs" showTagline={true} />
-                      <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Diagnostic Care Standards</p>
+                      <p className="text-[10px] text-slate-500 mt-0.5 font-medium">Illustrative test preview</p>
                     </div>
-                    <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 shrink-0">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-700 shrink-0" /> In-House Hub
+                    <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-200 shrink-0">
+                      <CheckCircle2 className="w-3 h-3 text-blue-700 shrink-0" /> Test menu
                     </span>
                   </div>
 
-                  <div className="rounded-[16px] bg-slate-50/90 p-3 border border-slate-100 flex items-center justify-between">
+                  <div className="rounded-[16px] bg-slate-50/90 p-3 border border-slate-100">
+                    <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Featured test views</span>
+                    <span className="font-bold text-slate-800 text-sm">CBC • Thyroid • Glucose</span>
+                  </div>
+
+                  <div className="space-y-2.5 sm:space-y-3">
                     <div>
-                      <span className="text-slate-400 block text-[9.5px] uppercase font-bold tracking-wider">Fast Turnaround</span>
-                      <span className="font-bold text-slate-800 text-xs sm:text-sm">Routine Tests Ready in 2–6 Hours</span>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Hemoglobin (Hb)</span>
+                        <span className="text-[#C62828] font-bold text-xs">CBC marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[78%]" />
+                      </div>
                     </div>
-                    <span className="text-[10px] font-semibold text-[#0B6E66] bg-emerald-50 border border-emerald-200/80 rounded px-2 py-0.5">
-                      Same-Day
-                    </span>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Thyroid (TSH)</span>
+                        <span className="text-[#7A4B2A] font-bold text-xs">Thyroid marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[60%]" />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-semibold mb-1">
+                        <span className="text-slate-700 text-xs font-bold">Fasting Glucose</span>
+                        <span className="text-[#102A43] font-bold text-xs">Glucose marker</span>
+                      </div>
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                        <div className="bg-gradient-to-r from-[#C62828] to-[#155E9A] h-full rounded-full w-[52%]" />
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">Fresh local testing with zero out-of-town transit delay</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">CLIA chemiluminescence & 5-part hematology</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-2 rounded-xl bg-slate-50/70 border border-slate-100">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span className="text-slate-700 font-medium">Confidential PDF reports delivered to WhatsApp</span>
-                    </div>
-                  </div>
-
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-                    <span className="flex items-center gap-1.5 font-medium">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#0A6C82] shrink-0" />
-                      Daily instrument calibrations verified
-                    </span>
-                    <span className="font-bold text-[#102A43]">Charkhi Dadri</span>
+                  <div className="pt-3 border-t border-slate-100 flex items-center gap-2 text-[11px] text-slate-500">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-green-700 shrink-0" />
+                    <span>Reports verified within 12 hours.</span>
                   </div>
                 </div>
               </div>

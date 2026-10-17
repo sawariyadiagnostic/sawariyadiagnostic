@@ -103,11 +103,11 @@ export function Services() {
 
               {/* Bottom Action Hint */}
               <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
-                <span className="text-[11px] sm:text-xs text-slate-600 font-medium">
-                  Verified Lab Menu
+                <span className="text-[11px] text-slate-500 font-medium">
+                  In-House Testing
                 </span>
-                <span className="flex items-center gap-1 text-[#0A6C82] group-hover:text-[#0B6E66] font-bold transition-transform group-hover:translate-x-0.5 text-[11px] sm:text-xs">
-                  View Department Tests <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
+                <span className="flex items-center gap-1 text-[#0A6C82] group-hover:text-[#0B6E66] font-bold transition-transform group-hover:translate-x-0.5 text-xs">
+                  View Tests <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                 </span>
               </div>
             </m.div>
