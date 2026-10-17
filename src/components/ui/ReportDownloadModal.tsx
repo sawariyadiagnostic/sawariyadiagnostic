@@ -10,8 +10,8 @@ export function ReportDownloadModal({ trigger }: { trigger?: React.ReactNode }) 
     <Dialog>
       <DialogTrigger asChild>
         {trigger || (
-          <button className="flex-1 flex items-center justify-center gap-1.5 bg-[#082A45]/90 border border-[#155E9A]/40 rounded-[20px] h-12 px-2 text-xs font-semibold text-slate-100">
-            <FileDown className="w-3.5 h-3.5" />
+          <button className="flex-1 flex items-center justify-center gap-1.5 bg-[#082A45]/90 border border-[#155E9A]/40 rounded-[18px] h-12 px-2 text-xs font-bold text-slate-100 squircle-btn apple-pressable active:scale-[0.96] shadow-sm cursor-pointer">
+            <FileDown className="w-3.5 h-3.5 text-blue-200" />
             <span>Report assistance</span>
           </button>
         )}
@@ -25,13 +25,13 @@ export function ReportDownloadModal({ trigger }: { trigger?: React.ReactNode }) 
           </DialogDescription>
         </div>
         <div className="p-5 sm:p-6 space-y-3">
-          <Button asChild className="action-button w-full min-h-12 h-auto btn-primary rounded-[16px] font-bold text-sm">
+          <Button asChild className="action-button w-full min-h-12 h-auto btn-primary squircle-btn apple-pressable rounded-[16px] font-bold text-sm active:scale-[0.96]">
             <a href={telHref(siteConfig.contact.phone)}><Phone className="w-4 h-4 mr-2" />Call report desk</a>
           </Button>
-          <Button asChild variant="outline" className="action-button w-full min-h-12 h-auto rounded-[16px] font-bold text-sm">
+          <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable w-full min-h-12 h-auto rounded-[16px] font-bold text-sm active:scale-[0.96]">
             <a href={`mailto:${siteConfig.contact.email}`}><Mail className="w-4 h-4 mr-2 text-[#155E9A]" />Email the lab</a>
           </Button>
-          <Button asChild variant="outline" className="action-button w-full min-h-12 h-auto rounded-[16px] font-bold text-sm">
+          <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable w-full min-h-12 h-auto rounded-[16px] font-bold text-sm active:scale-[0.96]">
             <a href={whatsappUrl || telHref(siteConfig.contact.phone)} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined}>
               <MessageCircle className="w-4 h-4 mr-2 text-[#128C7E]" />Ask on WhatsApp
             </a>

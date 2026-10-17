@@ -105,10 +105,10 @@ export function Team() {
           <button
             type="button"
             onClick={() => setActiveTier('all')}
-            className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`cursor-pointer squircle-btn apple-pressable rounded-[14px] px-3.5 py-1.5 text-xs font-bold transition-all active:scale-[0.96] ${
               activeTier === 'all'
-                ? 'bg-[#0A1128] text-white shadow-xs'
-                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300'
+                ? 'bg-[#0A1128] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35),0_2px_8px_rgba(10,17,40,0.25)] border border-white/20'
+                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300 shadow-[inset_0_1px_0_0_#FFFFFF,0_1px_3px_rgba(0,0,0,0.03)]'
             }`}
           >
             All Roles ({governance.length + operations.length})
@@ -116,10 +116,10 @@ export function Team() {
           <button
             type="button"
             onClick={() => setActiveTier('governance')}
-            className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`cursor-pointer squircle-btn apple-pressable rounded-[14px] px-3.5 py-1.5 text-xs font-bold transition-all active:scale-[0.96] ${
               activeTier === 'governance'
-                ? 'bg-[#0F2537] text-white shadow-xs'
-                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300'
+                ? 'bg-[#0F2537] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35),0_2px_8px_rgba(15,37,55,0.25)] border border-white/20'
+                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300 shadow-[inset_0_1px_0_0_#FFFFFF,0_1px_3px_rgba(0,0,0,0.03)]'
             }`}
           >
             Clinical Governance ({governance.length})
@@ -127,10 +127,10 @@ export function Team() {
           <button
             type="button"
             onClick={() => setActiveTier('operations')}
-            className={`cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-bold transition-all ${
+            className={`cursor-pointer squircle-btn apple-pressable rounded-[14px] px-3.5 py-1.5 text-xs font-bold transition-all active:scale-[0.96] ${
               activeTier === 'operations'
-                ? 'bg-[#00686B] text-white shadow-xs'
-                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300'
+                ? 'bg-[#00686B] text-white shadow-[inset_0_1px_0_0_rgba(255,255,255,0.35),0_2px_8px_rgba(0,104,107,0.25)] border border-white/20'
+                : 'bg-white text-slate-600 border border-slate-200/80 hover:border-slate-300 shadow-[inset_0_1px_0_0_#FFFFFF,0_1px_3px_rgba(0,0,0,0.03)]'
             }`}
           >
             Operations &amp; Collection ({operations.length})

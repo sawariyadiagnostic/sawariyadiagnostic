@@ -131,7 +131,7 @@ export function Hero() {
                     />
                     <Button 
                       type="submit" 
-                      className="action-button btn-peacock-iris rounded-[14px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-10 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 shadow-[0_4px_12px_rgba(10,110,92,0.2)] active:scale-95 transition-surface"
+                      className="action-button btn-peacock-iris squircle-btn apple-pressable rounded-[16px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-11 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 active:scale-[0.96] cursor-pointer"
                     >
                       <Search className="w-3.5 h-3.5 mr-1 hidden sm:inline" />
                       <span>Ask the lab</span>
@@ -147,7 +147,7 @@ export function Hero() {
                       key={tag.label}
                       type="button"
                       onClick={() => handleQuickTagClick(tag.label)}
-                      className={`ui-control-button h-auto min-h-11 px-2.5 sm:px-3 rounded-[var(--radius-control)] ${tag.color} shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-[#0A6C82] transition-surface duration-300 active:scale-95 cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
+                      className={`ui-control-button squircle-btn apple-pressable h-auto min-h-11 px-3 rounded-[14px] ${tag.color} shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-[#0A6C82] transition-surface duration-200 active:scale-[0.96] cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}
                     </button>
@@ -159,7 +159,7 @@ export function Hero() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1 w-full max-w-xl">
                 <Button
                   size="xl"
-                  className="btn-primary w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] shadow-md hover:shadow-lg active:scale-[0.97] min-w-0"
+                  className="btn-primary squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] shadow-md hover:shadow-lg active:scale-[0.96] min-w-0"
                   onClick={() => scrollToSection('home-collection')}
                 >
                   <span>Request home collection</span>
@@ -169,7 +169,7 @@ export function Hero() {
                 <Button
                   size="xl"
                   variant="outline"
-                  className="w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] sm:rounded-[20px] bg-white hover:bg-[#F3F8F8] border-[#CBE0DF] text-slate-800 hover:text-[#0A6C82] hover:border-[#0A6C82] shadow-2xs hover:shadow-sm active:scale-[0.97] min-w-0"
+                  className="btn-outline squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-5 sm:px-8 text-xs sm:text-sm md:text-base font-bold rounded-[18px] active:scale-[0.96] min-w-0"
                   onClick={() => scrollToSection('tests')}
                 >
                   <span>Ask about individual tests</span>

@@ -91,7 +91,7 @@ export function Services() {
                             e.stopPropagation();
                             navigateToTests(biomarker);
                           }}
-                          className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-50 border border-slate-200/90 text-slate-700 hover:bg-[#0A1128] hover:text-white hover:border-[#0A1128] transition-colors cursor-pointer shadow-2xs"
+                          className="text-[11px] font-semibold px-2 py-0.5 rounded-[10px] bg-slate-50 border border-slate-200/90 text-slate-700 hover:bg-[#0A1128] hover:text-white hover:border-[#0A1128] transition-colors cursor-pointer shadow-2xs squircle-btn apple-pressable active:scale-[0.96]"
                         >
                           {biomarker}
                         </button>

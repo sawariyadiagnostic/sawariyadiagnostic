@@ -17,7 +17,7 @@ nav.sticky,
 }
 
 /* ==========================================================================
-   MOBILE BOTTOM DOCK SQUIRCLE TRAY & BUTTON STYLES
+   MOBILE BOTTOM DOCK & UNIVERSAL SQUIRCLE BUTTON DESIGN SYSTEM
    ========================================================================== */
 
 :root {
@@ -27,11 +27,14 @@ nav.sticky,
 }
 
 .squircle-tray,
-.squircle-dock-btn {
+.squircle-dock-btn,
+.squircle-btn,
+.ui-button {
   corner-shape: superellipse(1.4);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
+  touch-action: manipulation;
 }
 
 .squircle-tray {
@@ -50,4 +53,22 @@ nav.sticky,
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.14),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.squircle-btn {
+  border-radius: var(--radius-control, 16px);
+}
+
+.apple-pressable {
+  transition: transform 0.20s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.20s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.20s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  touch-action: manipulation;
+}
+
+.apple-pressable:active {
+  transform: scale(0.96) translateZ(0) !important;
 }

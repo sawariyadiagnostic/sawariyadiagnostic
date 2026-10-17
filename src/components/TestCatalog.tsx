@@ -114,7 +114,7 @@ export function TestCatalog() {
                 className="pl-10 h-11 rounded-[16px] border border-slate-200 bg-slate-50 text-sm font-medium focus:border-[#155E9A] shadow-2xs text-slate-900"
               />
               {searchQuery && (
-                <button type="button" onClick={() => { setSearchQuery(''); resetPage(); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer">
+                <button type="button" onClick={() => { setSearchQuery(''); resetPage(); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-slate-700 cursor-pointer apple-pressable active:scale-[0.96]">
                   Clear
                 </button>
               )}
@@ -131,7 +131,7 @@ export function TestCatalog() {
                       setSelectedCategory(symptom.cat);
                       resetPage();
                     }}
-                    className={`min-h-9 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
+                    className={`min-h-9 px-3.5 squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface whitespace-nowrap active:scale-[0.96] cursor-pointer inline-flex items-center ${
                       isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
                     }`}
                   >
@@ -153,7 +153,7 @@ export function TestCatalog() {
           <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
             <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
             <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
-            <Button type="button" variant="outline" onClick={clearFilters} className="action-button mt-4 min-h-11 rounded-[14px] font-bold">Clear filters</Button>
+            <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable mt-4 min-h-11 rounded-[16px] font-bold cursor-pointer">Clear filters</Button>
           </div>
         ) : (
           <>

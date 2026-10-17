@@ -19,7 +19,7 @@ export function WhatsAppButton({
   return (
     <button
       onClick={handleClick}
-      className="whatsapp-float !hidden sm:!flex items-center justify-center"
+      className="whatsapp-float squircle-btn apple-pressable !hidden sm:!flex items-center justify-center cursor-pointer"
       aria-label="Chat on WhatsApp"
     >
       <MessageCircle className="w-7 h-7 text-white" fill="white" />

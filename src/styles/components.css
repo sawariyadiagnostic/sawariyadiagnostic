@@ -47,7 +47,7 @@
      ========================================================================= */
 
   /* High-Contrast Primary CTA: Vibrant Sunset Coral & Tangerine (Exact Optical Opposite to Peacock Sapphire & Teal) */
-  /* High-Contrast Primary CTA: Peacock Amber-Gold & Fire Coral (Optical Complementary Contrast to Peacock Sapphire & Teal) */
+  /* High-Contrast Primary CTA: Peacock Amber-Gold & Fire Coral (Mobile Dock Crimson-Amber Specular Squircle) */
   .btn-primary {
     display: inline-flex;
     align-items: center;
@@ -57,30 +57,29 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
+    border-radius: var(--radius-control, 16px);
     border: 1px solid rgba(254, 215, 170, 0.45);
-    box-shadow: 0 4px 18px rgba(217, 119, 6, 0.42), 0 2px 6px rgba(194, 65, 12, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 4px 16px -2px rgba(198, 40, 40, 0.42);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    touch-action: manipulation;
   }
 
   .btn-primary:hover {
     background: linear-gradient(135deg, #741616 0%, #A61E1E 48%, #C62828 100%);
     border-color: rgba(254, 240, 138, 0.65);
     transform: translateY(-1.5px);
-    box-shadow: 0 8px 26px rgba(234, 88, 12, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55), 0 8px 26px rgba(234, 88, 12, 0.52);
   }
 
   .btn-primary:active {
-    transform: scale(0.97) translateY(0);
-    box-shadow: 0 2px 8px rgba(194, 65, 12, 0.35);
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 2px 8px rgba(194, 65, 12, 0.35);
   }
 
   /* Deep Peacock Sapphire Secondary Button */
-  .btn-peacock,
-  .btn-secondary {
+  .btn-peacock {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -89,25 +88,24 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
+    border-radius: var(--radius-control, 16px);
     border: 1px solid rgba(0, 168, 150, 0.35);
-    box-shadow: 0 4px 14px rgba(5, 26, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 4px 14px rgba(5, 26, 46, 0.35);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
 
-  .btn-secondary:hover,
   .btn-peacock:hover {
     background: linear-gradient(135deg, #082845 0%, #0D4968 50%, #0A6359 100%);
     border-color: rgba(5, 191, 219, 0.6);
     transform: translateY(-1.5px);
-    box-shadow: 0 8px 22px rgba(8, 40, 69, 0.5);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 8px 22px rgba(8, 40, 69, 0.5);
   }
 
-  .btn-secondary:active,
   .btn-peacock:active {
-    transform: scale(0.97) translateY(0);
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 2px 6px rgba(5, 26, 46, 0.30);
   }
 
   /* Lush Emerald Malachite CTA (WhatsApp & Rapid Action) */
@@ -120,23 +118,23 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
+    border-radius: var(--radius-control, 16px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 16px rgba(10, 110, 92, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 4px 14px rgba(5, 150, 105, 0.30);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   .btn-secondary:hover {
     background: linear-gradient(135deg, #047857 0%, #059669 50%, #34D399 100%);
     transform: translateY(-1.5px);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 8px 24px rgba(16, 185, 129, 0.42);
   }
 
   .btn-secondary:active {
-    transform: scale(0.97) translateY(0);
-    box-shadow: 0 2px 8px rgba(10, 110, 92, 0.25);
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 2px 8px rgba(10, 110, 92, 0.25);
   }
 
   /* Gilded Sun Gold CTA (Emergency & 24*7 Action) */
@@ -149,23 +147,23 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
+    border-radius: var(--radius-control, 16px);
     border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 4px 16px rgba(217, 119, 6, 0.32);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   .btn-gold:hover {
     background: linear-gradient(135deg, #B45309 0%, #F59E0B 50%, #FBBF24 100%);
     transform: translateY(-1.5px);
-    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55), 0 8px 24px rgba(245, 158, 11, 0.45);
   }
 
   .btn-gold:active {
-    transform: scale(0.97) translateY(0);
-    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.30), 0 2px 8px rgba(217, 119, 6, 0.25);
   }
 
   /* Pale-blue outline hover/focus keeps navy labels readable. */
@@ -179,23 +177,25 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
-    box-shadow: 0 2px 6px rgba(10, 25, 47, 0.04);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--radius-control, 16px);
+    box-shadow: inset 0 1px 0 0 #FFFFFF, 0 2px 8px rgba(10, 25, 47, 0.05);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   .btn-outline:hover,
-  .btn-outline:focus-visible,
-  .btn-outline:active {
+  .btn-outline:focus-visible {
     background: #E8F1F8 !important;
     color: #0F4775 !important;
     border-color: #0F4775;
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 0 #FFFFFF, 0 4px 12px rgba(15, 71, 117, 0.12);
   }
 
   .btn-outline:active {
-    transform: scale(0.97) translateY(0);
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 1px 4px rgba(10, 25, 47, 0.04);
   }
 
   /* Coral Outline for Secondary Booking */
@@ -209,11 +209,11 @@
     font-weight: 700;
     font-size: 0.875rem;
     letter-spacing: 0.015em;
-    white-space: nowrap;
-    border-radius: 9999px;
-    box-shadow: 0 2px 6px rgba(234, 88, 12, 0.06);
-    transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: var(--radius-control, 16px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.60), 0 2px 8px rgba(234, 88, 12, 0.06);
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
+    touch-action: manipulation;
   }
 
   .btn-outline-coral:hover {
@@ -221,11 +221,11 @@
     color: #FFFFFF !important;
     border-color: transparent;
     transform: translateY(-1.5px);
-    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.40), 0 6px 18px rgba(249, 115, 22, 0.35);
   }
 
   .btn-outline-coral:active {
-    transform: scale(0.97) translateY(0);
+    transform: scale(0.96) translateY(0);
   }
 
   /* Animations */
@@ -486,29 +486,34 @@ html {
   }
 }
 
-/* WhatsApp floating button */
+/* WhatsApp floating button (Desktop/Tablet Squircle Jewel) */
 .whatsapp-float {
   position: fixed;
   bottom: 24px;
   right: 24px;
   z-index: 1000;
-  width: 48px;
-  height: 48px;
-  background: rgba(37, 211, 102, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(145deg, #059669 0%, #04724D 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.3);
-  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.40), 0 8px 32px rgba(5, 150, 105, 0.40);
+  transition: transform 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s ease, filter 0.20s ease;
+  touch-action: manipulation;
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.05) translateY(-4px);
-  background: rgba(37, 211, 102, 0.95);
-  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.4);
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.50), 0 12px 36px rgba(5, 150, 105, 0.48);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.96) translateY(0);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 4px 16px rgba(5, 150, 105, 0.30);
 }
 
 @media (max-width: 639px) {
@@ -582,10 +587,6 @@ button:active, a[role="button"]:active { transform: scale(.98); }
 
 
 .brand-spectrum { background: linear-gradient(135deg, var(--brand-red-deep), var(--brand-brown), var(--brand-blue)); }
-.btn-primary { background: var(--brand-red-deep); border-color: var(--brand-red-deep); }
-.btn-primary:hover { background: var(--brand-red-dark); border-color: var(--brand-red-dark); }
-.btn-secondary { background: var(--brand-blue); border-color: var(--brand-blue); }
-.btn-secondary:hover { background: var(--brand-blue-deep); border-color: var(--brand-blue-deep); }
 
 /* Shared patient-facing controls, surfaces, and corners. */
 button:not(.ui-calendar-day), a.ui-button, .ui-control-button {
@@ -703,21 +704,35 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
 .peacock-pill-active {
   background: linear-gradient(135deg, #0A1128 0%, #0A6C82 52%, #0B6E66 100%);
   color: #FFFFFF !important;
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  box-shadow: 0 4px 12px -2px rgba(10, 108, 130, 0.32);
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.40), 0 4px 12px -2px rgba(10, 108, 130, 0.32);
+  touch-action: manipulation;
+  transition: transform 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s ease;
+}
+.peacock-pill-active:active {
+  transform: scale(0.96);
 }
 
 .peacock-pill-inactive {
   background-color: #FFFFFF;
   color: var(--ink-secondary);
-  border: 1px solid var(--border-card);
-  transition: all 160ms ease;
+  border-radius: 14px;
+  border: 1.5px solid var(--border-card);
+  box-shadow: inset 0 1px 0 0 #FFFFFF, 0 1px 4px rgba(10, 25, 47, 0.04);
+  touch-action: manipulation;
+  transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .peacock-pill-inactive:hover {
   border-color: var(--peacock-cyan);
   background-color: #F4FBFB;
   color: var(--ink-primary);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 0 #FFFFFF, 0 3px 10px rgba(10, 108, 130, 0.10);
+}
+.peacock-pill-inactive:active {
+  transform: scale(0.96);
 }
 
 /* Iridescent Plume Primary Action Button */
@@ -729,9 +744,20 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
   background: linear-gradient(135deg, #0A1128 0%, #0A6C82 55%, #0B6E66 100%);
   color: #FFFFFF !important;
   font-weight: 700;
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  box-shadow: 0 4px 14px -2px rgba(10, 108, 130, 0.28);
-  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+  border-radius: var(--radius-control, 16px);
+  border: 1px solid rgba(56, 189, 248, 0.38);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.40), 0 4px 14px -2px rgba(10, 108, 130, 0.35);
+  transition: transform 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s ease, filter 0.20s ease;
+  touch-action: manipulation;
+}
+.btn-peacock-iris:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.50), 0 6px 18px -2px rgba(10, 108, 130, 0.45);
+}
+.btn-peacock-iris:active {
+  transform: scale(0.96) translateY(0);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.20), 0 2px 6px rgba(10, 108, 130, 0.25);
 }
 
 .btn-peacock-iris:hover:not(:disabled) {

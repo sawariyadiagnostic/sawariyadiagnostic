@@ -327,21 +327,21 @@ export function Footer({
               <button
                 type="button"
                 onClick={() => handleLegalClick('privacy')}
-                className="min-h-11 px-2 py-2 text-center hover:text-blue-300 transition-colors cursor-pointer"
+                className="min-h-11 px-2 py-2 text-center hover:text-blue-300 transition-colors cursor-pointer apple-pressable active:scale-[0.96]"
               >
                 Privacy Policy
               </button>
               <button
                 type="button"
                 onClick={() => handleLegalClick('terms')}
-                className="min-h-11 px-2 py-2 text-center hover:text-blue-300 transition-colors cursor-pointer"
+                className="min-h-11 px-2 py-2 text-center hover:text-blue-300 transition-colors cursor-pointer apple-pressable active:scale-[0.96]"
               >
                 Terms & Patient Rights
               </button>
               <button
                 type="button"
                 onClick={() => handleLegalClick('charter')}
-                className="min-h-11 px-2 py-2 text-center hover:text-[#FFD98A] transition-colors cursor-pointer"
+                className="min-h-11 px-2 py-2 text-center hover:text-[#FFD98A] transition-colors cursor-pointer apple-pressable active:scale-[0.96]"
               >
                 Quality Charter & Health Camps
               </button>

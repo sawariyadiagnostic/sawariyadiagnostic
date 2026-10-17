@@ -34,3 +34,4 @@ playwright-report/
 
 # Hermes desktop attachments are source inputs, not release assets
 .hermes/desktop-attachments/
+*.tsbuildinfo

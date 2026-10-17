@@ -78,7 +78,7 @@ export function BatchPaginationBar({
             variant="outline"
             disabled={currentPage <= 1}
             onClick={() => handleStep(currentPage - 1)}
-            className="action-button min-h-11 rounded-[14px] font-bold"
+            className="action-button btn-outline squircle-btn apple-pressable min-h-11 rounded-[14px] font-bold"
           >
             <ChevronLeft className="mr-1 h-4 w-4" />
             Previous
@@ -93,7 +93,7 @@ export function BatchPaginationBar({
             variant="outline"
             disabled={currentPage >= totalPages}
             onClick={() => handleStep(currentPage + 1)}
-            className="action-button min-h-11 rounded-[14px] font-bold"
+            className="action-button btn-outline squircle-btn apple-pressable min-h-11 rounded-[14px] font-bold"
           >
             Next
             <ChevronRight className="ml-1 h-4 w-4" />

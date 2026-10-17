@@ -60,7 +60,7 @@ export const SymptomFilterBar: React.FC<Props> = ({ activeFilter: propActiveFilt
                 key={chip.id}
                 type="button"
                 onClick={() => handleFilterClick(chip.queryKeyword, chip.id)}
-                className={`flex flex-col items-start shrink-0 rounded-xl px-3.5 py-2 text-left transition-all cursor-pointer ${
+                className={`flex flex-col items-start shrink-0 rounded-[14px] px-3.5 py-2 text-left transition-all cursor-pointer squircle-btn apple-pressable active:scale-[0.96] ${
                   isActive
                     ? 'peacock-pill-active shadow-sm scale-[1.02]'
                     : 'peacock-pill-inactive hover:border-[#0A6C82]'

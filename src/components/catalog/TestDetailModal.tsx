@@ -133,7 +133,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             <Button
               variant="outline"
               onClick={onClose}
-              className="action-button min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:!text-[#0F4775] focus-visible:!text-[#0F4775] active:!text-[#0F4775]"
+              className="action-button btn-outline squircle-btn apple-pressable min-h-11 h-auto px-3 rounded-[14px] text-xs font-bold gap-1.5 border-slate-300 text-[#102A43] hover:bg-[#E8F1F8] hover:!text-[#0F4775] focus-visible:!text-[#0F4775] active:scale-[0.96]"
               title="Return to catalog"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
@@ -143,7 +143,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             <Button
               variant="outline"
               onClick={handleShare}
-              className="action-button h-auto min-h-11 px-3.5 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200"
+              className="action-button btn-outline squircle-btn apple-pressable h-auto min-h-11 px-3.5 rounded-[14px] text-xs font-bold gap-1.5 border-slate-200 active:scale-[0.96]"
               title="Copy canonical share link"
             >
               <Share2 className="w-3.5 h-3.5" />
@@ -151,7 +151,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             </Button>
 
             {isSelected(item.id) ? (
-              <div role="status" aria-live="polite" className="action-button flex min-h-11 flex-1 basis-full items-center justify-center gap-1.5 rounded-[14px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B] sm:basis-auto sm:text-sm">
+              <div role="status" aria-live="polite" className="action-button flex min-h-11 flex-1 basis-full items-center justify-center gap-1.5 rounded-[14px] border border-emerald-300/80 bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B] sm:basis-auto sm:text-sm shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_rgba(5,150,105,0.12)]">
                 <Check className="h-4 w-4 shrink-0" />
                 <span>Added to Request</span>
               </div>
@@ -159,7 +159,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               <Button
                 type="button"
                 onClick={() => { toggleTest(item.id); onClose(); }}
-                className="action-button min-h-11 h-auto flex-1 basis-full gap-1.5 rounded-[14px] text-xs font-bold sm:basis-auto sm:text-sm"
+                className="action-button btn-primary squircle-btn apple-pressable min-h-11 h-auto flex-1 basis-full gap-1.5 rounded-[14px] text-xs font-bold sm:basis-auto sm:text-sm active:scale-[0.96] shadow-md"
               >
                 <ClipboardList className="h-4 w-4 shrink-0" />
                 <span>Add to Request</span>

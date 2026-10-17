@@ -16,7 +16,7 @@ export function RequisitionDrawer() {
 
   return <>
     {selectedTests.length > 0 && <div className="fixed right-3 bottom-[calc(env(safe-area-inset-bottom,0px)+5rem)] z-[105] sm:bottom-4">
-      <Button type="button" onClick={() => setOpen(true)} aria-label={`Review test request, ${selectedTests.length} selected`} className="min-h-11 shadow-lg">
+      <Button type="button" onClick={() => setOpen(true)} aria-label={`Review test request, ${selectedTests.length} selected`} className="btn-primary squircle-btn apple-pressable min-h-12 h-auto px-4 py-2.5 rounded-[18px] shadow-2xl active:scale-[0.96] flex items-center gap-2">
         <ClipboardList className="h-4 w-4" />
         <span>Review request · {selectedTests.length}</span>
         <span className="text-[10px] font-medium">{formatInr(subtotal)}</span>
@@ -39,7 +39,7 @@ export function RequisitionDrawer() {
               {selectedTests.map((test) => <li key={test.id} className="flex items-center justify-between gap-3 rounded-[14px] border border-slate-200 p-3">
                 <div className="min-w-0">
                   <h3 className="text-sm font-bold leading-snug text-[#102A43]">{test.name}</h3>
-                  <button type="button" onClick={() => toggleTest(test.id)} aria-label={`Remove ${test.name} from request`} className="mt-2 min-h-11 text-xs font-semibold text-[#C62828] underline">Remove</button>
+                  <button type="button" onClick={() => toggleTest(test.id)} aria-label={`Remove ${test.name} from request`} className="mt-2 min-h-11 px-2.5 py-1 text-xs font-bold text-[#C62828] hover:bg-red-50 rounded-[10px] squircle-btn apple-pressable active:scale-[0.96] cursor-pointer inline-flex items-center">Remove</button>
                 </div>
                 <strong className="shrink-0 text-sm text-[#102A43]">{formatInr(test.price)}</strong>
               </li>)}
@@ -50,8 +50,8 @@ export function RequisitionDrawer() {
         </div>
 
         <footer className="flex flex-col gap-2 border-t border-slate-200 bg-white p-4 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)] sm:flex-row sm:p-5">
-          {selectedTests.length > 0 && <Button type="button" variant="outline" onClick={clearRequest} className="min-h-11"><Trash2 className="mr-2 h-4 w-4" /> Clear tests</Button>}
-          {whatsappUrl && <Button asChild className="min-h-12 w-full bg-[#128C7E] px-3 font-bold text-white hover:bg-[#0F766E] active:!scale-100 sm:min-w-0 sm:flex-1 sm:px-5">
+          {selectedTests.length > 0 && <Button type="button" variant="outline" onClick={clearRequest} className="action-button btn-outline squircle-btn apple-pressable min-h-11 rounded-[14px] font-bold"><Trash2 className="mr-2 h-4 w-4" /> Clear tests</Button>}
+          {whatsappUrl && <Button asChild className="btn-secondary squircle-btn apple-pressable min-h-12 w-full px-4 font-bold text-white rounded-[16px] active:scale-[0.96] sm:min-w-0 sm:flex-1 sm:px-5">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="Send test request on WhatsApp"><ClipboardList className="mr-2 h-4 w-4" /> Send test request on WhatsApp</a>
           </Button>}
         </footer>

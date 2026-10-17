@@ -108,7 +108,7 @@ export function Contact() {
                     <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Calendar temporarily unavailable</h4>
                     <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">Please call the lab desk to confirm an appointment or collection slot.</p>
                   </div>
-                  <Button asChild className="btn-primary action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px]">
+                  <Button asChild className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] active:scale-[0.96]">
                     <a href={telHref(siteConfig.contact.phone)}>
                       <PhoneCall className="w-4 h-4 mr-2" />
                       Call Desk ({siteConfig.contact.phone})
@@ -130,7 +130,7 @@ export function Contact() {
 
                     <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
                       <Button 
-                        className="btn-primary action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98]"
+                        className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96]"
                         onClick={() => setShowCalendar(true)}
                       >
                         <span>Launch Interactive Calendar</span>
@@ -139,7 +139,7 @@ export function Contact() {
                       <Button 
                         asChild
                         variant="outline"
-                        className="action-button btn-outline min-h-12 h-auto px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-2xs hover:shadow-sm"
+                        className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto px-6 text-xs sm:text-sm font-bold rounded-[16px] active:scale-[0.96]"
                       >
                         <a href={telHref(siteConfig.contact.phone)}>
                           <PhoneCall className="w-4 h-4 mr-2 text-[#155E9A]" />
@@ -242,7 +242,7 @@ export function Contact() {
                 <div className="w-full pt-1">
                   <Button
                     asChild
-                    className="action-button btn-primary min-h-11 sm:min-h-12 h-auto px-4 sm:px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-sm hover:shadow-md active:scale-[0.98] w-full sm:w-auto max-w-full"
+                    className="action-button btn-primary squircle-btn apple-pressable min-h-11 sm:min-h-12 h-auto px-4 sm:px-6 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96] w-full sm:w-auto max-w-full"
                   >
                     <a href={footer.contact.mapsLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 max-w-full">
                       <Navigation className="w-4 h-4 shrink-0" />
@@ -261,7 +261,7 @@ export function Contact() {
                       href={footer.contact.mapsLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md text-xs font-semibold text-[#155E9A] shadow-[0_2px_10px_rgba(0,0,0,0.12)] hover:bg-white hover:text-[#0A3663] transition-colors border border-slate-200/60"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] squircle-btn apple-pressable bg-white/95 backdrop-blur-md text-xs font-semibold text-[#155E9A] shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_10px_rgba(0,0,0,0.12)] hover:bg-white hover:text-[#0A3663] transition-colors border border-slate-200/60 active:scale-[0.96]"
                       aria-label="View larger map in Google Maps"
                     >
                       <Navigation className="w-3.5 h-3.5" />

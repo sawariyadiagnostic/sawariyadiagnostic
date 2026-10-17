@@ -108,20 +108,20 @@ export function HomeCollection() {
               </div>
 
               <div className="space-y-3">
-                <Button asChild className="action-button w-full min-h-12 h-auto text-sm font-bold btn-primary rounded-[18px]">
+                <Button asChild className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[18px] active:scale-[0.96]">
                   <a href="#contact">
                     <Calendar className="w-4 h-4 mr-2" />
                     Open appointment calendar
                   </a>
                 </Button>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <Button asChild variant="outline" className="action-button min-h-12 h-auto rounded-[18px] text-xs font-bold">
+                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[18px] text-xs font-bold active:scale-[0.96]">
                     <a href={telHref(siteConfig.contact.phone)}>
                       <Phone className="w-4 h-4 mr-2 text-[#155E9A]" />
                       Call lab desk
                     </a>
                   </Button>
-                  <Button asChild variant="outline" className="action-button min-h-12 h-auto rounded-[18px] text-xs font-bold">
+                  <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[18px] text-xs font-bold active:scale-[0.96]">
                     <a href={whatsappUrl || telHref(siteConfig.contact.phone)} target={whatsappUrl ? '_blank' : undefined} rel={whatsappUrl ? 'noopener noreferrer' : undefined}>
                       <MessageCircle className="w-4 h-4 mr-2 text-[#128C7E]" />
                       Ask on WhatsApp
