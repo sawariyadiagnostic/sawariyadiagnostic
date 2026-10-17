@@ -291,9 +291,9 @@ export const homeCollection = {
   title: "Home Collection Service",
   subtitle: "Home collection is available from 07:00 AM to 07:00 PM through the appointment desk.",
   features: [
-    "Home collection: 07:00 AM–07:00 PM",
-    "Trained phlebotomy team",
-    "Reports verified within 12 hours",
-    "Report assistance"
+    "Charkhi Dadri & Surrounding Areas",
+    "Early Fasting Slots (From 07:00 AM)",
+    "Senior Citizen Priority Care",
+    "Digital WhatsApp PDF Reports"
   ]
 };

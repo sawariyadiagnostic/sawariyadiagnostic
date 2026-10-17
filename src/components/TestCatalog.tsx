@@ -1,18 +1,17 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Search, TestTube, Zap } from 'lucide-react';
+import { Search, TestTube } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { TestCard } from './ui/TestCard';
 import { TestDetailModal } from './catalog/TestDetailModal';
-import { categories, medicalTests as publishedTests, type MedicalTest } from '@/data/publishedCatalog';
+import { medicalTests as publishedTests, type MedicalTest } from '@/data/publishedCatalog';
 import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 import { usePagination } from '@/lib/use-pagination';
 import { useRequisition } from './requisition/RequisitionContext';
 import { BatchPaginationBar } from './BatchPaginationBar';
 
-const testCategories = categories.filter((category) => category.id !== 'package');
 const TESTS_PER_PAGE = 12;
 
 export function TestCatalog() {
@@ -69,6 +68,7 @@ export function TestCatalog() {
   };
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
+    { label: 'CBC & Blood', query: 'cbc', cat: 'all' },
     { label: 'Sugar & Diabetes', query: 'sugar', cat: 'all' },
     { label: 'Thyroid', query: 'thyroid', cat: 'all' },
     { label: 'Fatigue & Weakness', query: 'fatigue', cat: 'all' },
@@ -76,6 +76,7 @@ export function TestCatalog() {
     { label: 'Vitamins D & B12', query: 'vitamin', cat: 'all' },
     { label: 'Fever & Infection', query: 'fever', cat: 'all' },
     { label: 'Kidney & Urine', query: 'kidney', cat: 'all' },
+    { label: 'Liver (LFT)', query: 'liver', cat: 'all' },
   ];
 
   return (
@@ -119,36 +120,26 @@ export function TestCatalog() {
               )}
             </div>
             <div className="flex gap-1.5 overflow-x-auto pb-1 pt-0.5 scrollbar-none items-center">
-              {testCategories.map((category) => {
-                const selected = selectedCategory === category.id;
+              {quickSymptoms.map((symptom) => {
+                const isActive = (symptom.query === '' && searchQuery === '') || (symptom.query !== '' && searchQuery.toLowerCase().includes(symptom.query.toLowerCase()));
                 return (
                   <button
                     type="button"
-                    key={category.id}
-                    onClick={() => { setSelectedCategory(category.id); resetPage(); }}
-                    className={`min-h-11 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${selected ? 'peacock-pill-active' : 'peacock-pill-inactive'}`}
+                    key={symptom.label}
+                    onClick={() => {
+                      setSearchQuery(symptom.query);
+                      setSelectedCategory(symptom.cat);
+                      resetPage();
+                    }}
+                    className={`min-h-9 px-3.5 rounded-full text-xs font-bold transition-surface whitespace-nowrap active:scale-95 cursor-pointer inline-flex items-center shadow-2xs ${
+                      isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
+                    }`}
                   >
-                    {category.name}
+                    {symptom.label}
                   </button>
                 );
               })}
             </div>
-          </div>
-
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 px-1 scrollbar-none">
-            <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1 flex-shrink-0">
-              <Zap className="w-3 h-3 text-[#7A4B2A]" /> Ask about:
-            </span>
-            {quickSymptoms.map((symptom) => (
-              <button
-                type="button"
-                key={symptom.label}
-                onClick={() => { setSearchQuery(symptom.query); setSelectedCategory(symptom.cat); resetPage(); }}
-                className={`min-h-11 text-[11px] font-semibold px-2.5 rounded-full border transition-surface whitespace-nowrap cursor-pointer ${searchQuery === symptom.query && symptom.query !== '' ? 'bg-[#155E9A] text-white border-[#155E9A]' : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80 shadow-2xs'}`}
-              >
-                {symptom.label}
-              </button>
-            ))}
           </div>
         </div>
 

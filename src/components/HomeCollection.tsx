@@ -12,20 +12,20 @@ export function HomeCollection() {
   const benefits = [
     {
       icon: ShieldCheck,
-      title: 'Documented Collection Protocols',
-      description: 'Collection supplies and process for each home visit',
+      title: 'Single-Use Vacuum Tubes',
+      description: 'Fresh sealed vacutainer supplies opened in your direct presence',
       iconStyle: 'bg-green-600/20 text-green-400 border-green-600/40',
     },
     {
       icon: CheckCircle2,
-      title: 'Phlebotomy Team',
-      description: 'Home collection is available 07:00 AM–07:00 PM',
+      title: 'Gentle Phlebotomy',
+      description: 'Experienced collection care for seniors, children & delicate veins',
       iconStyle: 'bg-blue-500/20 text-cyan-400 border-cyan-500/40',
     },
     {
       icon: Clock,
-      title: 'Collection Hours',
-      description: '07:00 AM–07:00 PM',
+      title: 'Cold-Chain Sample Transit',
+      description: 'Temperature-controlled transport directly to our central lab',
       iconStyle: 'bg-[#7A4B2A]/15 text-[#F1C27D] border-[#7A4B2A]/30',
     },
   ];
@@ -49,7 +49,7 @@ export function HomeCollection() {
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_2px_12px_rgba(0,0,0,0.1)]">
               <Home className="w-3.5 h-3.5 text-blue-200" />
-               <span className="text-xs font-bold text-blue-100">Home collection: 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients &amp; hospital emergencies</span>
+               <span className="text-xs font-bold text-blue-100">Home collection: 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients and emergency from hospitals</span>
             </div>
 
             <div className="space-y-2 sm:space-y-3">
@@ -61,7 +61,7 @@ export function HomeCollection() {
                 </span>
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-slate-200 max-w-xl font-medium leading-relaxed">
-                Request a convenient home visit through the appointment desk or contact the lab directly. Home collection is available from 07:00 AM to 07:00 PM, with our Loharu Road center open 24*7 for walk-in patients and emergency from hospitals.
+                Schedule a gentle doorstep visit at your preferred morning or evening slot. All blood and biological specimens are collected using single-use vacuum tubes and transferred with temperature logs to our central laboratory.
               </p>
             </div>
 
@@ -99,11 +99,11 @@ export function HomeCollection() {
                 <div className="flex items-center justify-between gap-3">
                   <h3 className="text-lg sm:text-xl font-black text-[#1D1D1F] tracking-tight">Arrange a Home Visit</h3>
                   <span className="bg-blue-50 text-[#102A43] text-[10.5px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200">
-                    Home 07:00 AM–07:00 PM • Lab 24*7
+                    07:00 AM–07:00 PM Slots
                   </span>
                 </div>
                 <p className="text-xs text-slate-500 font-normal">
-                  This website does not store patient details. Use the appointment desk or contact the lab to share information through the selected channel.
+                  Direct coordination via phone or WhatsApp. Our collection team confirms your preferred morning or evening time slot immediately.
                 </p>
               </div>
 
@@ -131,7 +131,7 @@ export function HomeCollection() {
               </div>
 
               <p className="text-[11px] text-center text-slate-500 pt-3 font-medium">
-                Home collection is available 07:00 AM–07:00 PM. Lab is open 24*7 for walk-in patients and emergency from hospitals. Reports are verified within 12 hours.
+                Home collection: 07:00 AM–07:00 PM • Fasting morning slots available from 07:00 AM
               </p>
             </div>
           </m.div>

@@ -10,12 +10,12 @@ export interface SymptomCategory {
 
 const SYMPTOM_FILTERS: SymptomCategory[] = [
   { id: 'all', label: 'All Diagnostic Tests', sublabel: 'Complete Catalog', queryKeyword: '' },
-  { id: 'full-body', label: 'Full Body Checkup', sublabel: '84+ Parameters', queryKeyword: 'Full Body' },
-  { id: 'thyroid', label: 'Thyroid & Weight', sublabel: 'FT3, FT4, TSH', queryKeyword: 'Thyroid' },
-  { id: 'diabetes', label: 'Diabetes (Sugar)', sublabel: 'HbA1c & Fasting', queryKeyword: 'HbA1c' },
-  { id: 'fever', label: 'Fever & Weakness', sublabel: 'CBC, Dengue, Typhoid', queryKeyword: 'Fever' },
-  { id: 'vitamins', label: 'Hair Fall & Bone', sublabel: 'Vitamin D, B12, Iron', queryKeyword: 'Vitamin' },
-  { id: 'heart-liver', label: 'Heart, Liver & Kidney', sublabel: 'Lipid, LFT, KFT', queryKeyword: 'Profile' },
+  { id: 'cbc', label: 'Complete Blood Count (CBC)', sublabel: 'Hemoglobin, Platelets & TLC', queryKeyword: 'CBC' },
+  { id: 'thyroid', label: 'Thyroid & Hormones', sublabel: 'TSH, FT3 & FT4 Profiles', queryKeyword: 'Thyroid' },
+  { id: 'diabetes', label: 'Diabetes & Sugar', sublabel: 'HbA1c & Fasting Glucose', queryKeyword: 'Sugar' },
+  { id: 'fever', label: 'Fever & Infection', sublabel: 'CBC, Dengue & Typhoid', queryKeyword: 'Fever' },
+  { id: 'vitamins', label: 'Vitamins & Bone Health', sublabel: 'Vitamin D, B12 & Calcium', queryKeyword: 'Vitamin' },
+  { id: 'heart-liver', label: 'Lipid, Liver & Kidney', sublabel: 'Cholesterol, LFT & KFT', queryKeyword: 'Lipid' },
 ];
 
 interface Props {
@@ -93,7 +93,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Processed In-House</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Zero out-of-town transit degradation. Analyzed directly at our Loharu Road hub.
+              Zero out-of-town transit delay. Samples tested directly at our central Loharu Road hub.
             </p>
           </div>
         </div>
@@ -105,7 +105,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">CLIA &amp; 5-Part Hematology</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Chemiluminescence hormone immunoassays, biochemistry &amp; hematology with daily quality assurance.
+              Chemiluminescence hormone immunoassays, biochemistry &amp; hematology with daily calibrations.
             </p>
           </div>
         </div>
@@ -117,7 +117,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Same-Day Digital Reports</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Routine &amp; hormone reports delivered directly to your WhatsApp within hours.
+              Routine blood counts ready in 2–4 hours; PDF reports delivered directly to your WhatsApp.
             </p>
           </div>
         </div>
@@ -129,29 +129,10 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Doorstep Blood Collection</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Safe vacutainer collection at your doorstep across Charkhi Dadri (07:00 AM–07:00 PM). Lab is open 24*7 for walk-in patients and emergency from hospitals.
+              Safe vacutainer collection at your home across Charkhi Dadri (07:00 AM–07:00 PM).
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Compact Operational Badges */}
-      <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 pt-1 text-[11px] sm:text-xs">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50/80 border border-teal-200/70 text-[#074F49] font-semibold">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#0B6E66]" /> Barcoded sample identification
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-200/70 text-[#0F2537] font-semibold">
-          <Activity className="w-3.5 h-3.5 text-[#0A6C82]" /> Processed in-house at Loharu Road
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50/80 border border-amber-200/70 text-[#854D0E] font-semibold">
-          <Home className="w-3.5 h-3.5 text-[#B4690E]" /> Home collection: 07:00 AM–07:00 PM
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50/80 border border-indigo-200/70 text-[#1E3A8A] font-semibold">
-          <Activity className="w-3.5 h-3.5 text-[#2563EB]" /> Lab open 24*7 for walk-in patients &amp; hospital emergencies
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50/80 border border-emerald-200/70 text-[#064E3B] font-semibold">
-          <Clock className="w-3.5 h-3.5 text-[#04724D]" /> Reports verified within 12 hours
-        </span>
       </div>
 
       {showFilters && (

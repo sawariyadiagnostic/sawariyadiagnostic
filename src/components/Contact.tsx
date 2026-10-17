@@ -25,8 +25,8 @@ export function Contact() {
   const infoCards = [
     {
       icon: FileCheck,
-      title: '1. Select Tests',
-      description: 'Tell the lab which individual tests you want to request.',
+      title: '1. Select Your Tests',
+      description: 'Choose from our transparent test menu or ask our lab team directly.',
       style: {
         iconBg: 'bg-blue-50 text-[#102A43] border-blue-200/80',
         accentBar: 'bg-[#102A43]',
@@ -35,7 +35,7 @@ export function Contact() {
     {
       icon: Home,
       title: '2. Lab or Home Sample',
-      description: 'Visit our facility (open 24*7 for walk-in patients and emergency from hospitals) or request home collection from 07:00 AM to 07:00 PM.',
+      description: 'Walk in anytime to our Loharu Road center or schedule doorstep sample collection.',
       style: {
         iconBg: 'bg-green-50 text-[#155E9A] border-green-200/80',
         accentBar: 'bg-[#155E9A]',
@@ -43,8 +43,8 @@ export function Contact() {
     },
     {
       icon: Clock,
-      title: '3. WhatsApp Report Assistance',
-      description: 'Get report assistance through the configured lab channels.',
+      title: '3. Digital WhatsApp Reports',
+      description: 'Doctor-verified PDF reports delivered directly to your WhatsApp with complete privacy.',
       style: {
         iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
         accentBar: 'bg-[#7A4B2A]',
@@ -124,7 +124,7 @@ export function Contact() {
                     <div className="space-y-1.5">
                       <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Choose Your Date & Time</h4>
                       <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                        Choose an appointment option for home collection from 07:00 AM to 07:00 PM, or visit our central lab open 24*7 for walk-in patients and emergency from hospitals.
+                        Select a convenient time slot for doorstep sample collection or schedule your visit to our central diagnostic facility.
                       </p>
                     </div>
 
@@ -186,7 +186,7 @@ export function Contact() {
                     Visit Our Diagnostic Facility
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Home collection is available from 07:00 AM to 07:00 PM; central laboratory is open 24*7 for walk-in patients and emergency from hospitals.
+                    Located on Loharu Road, opposite R.S. Sangwan Hospital. Central laboratory is open 24*7 for walk-in patients and emergency from hospitals.
                   </p>
                 </div>
 
