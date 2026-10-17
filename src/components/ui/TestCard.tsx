@@ -12,6 +12,37 @@ interface TestCardProps {
   onViewDetails?: (test: MedicalTest) => void;
 }
 
+const CATEGORY_BADGES: Record<string, string> = {
+  routine: 'bg-blue-50 text-blue-900 border-blue-200/80',
+  blood: 'bg-blue-50 text-blue-900 border-blue-200/80',
+  diabetes: 'bg-emerald-50 text-emerald-900 border-emerald-200/80',
+  thyroid: 'bg-amber-50 text-amber-900 border-amber-200/80',
+  hormone: 'bg-purple-50 text-purple-900 border-purple-200/80',
+  lipid: 'bg-orange-50 text-orange-900 border-orange-200/80',
+  specialized: 'bg-teal-50 text-teal-900 border-teal-200/80',
+};
+
+function getCategoryBadge(category: string): string {
+  return CATEGORY_BADGES[category.toLowerCase()] || 'bg-slate-50 text-slate-800 border-slate-200/80';
+}
+
+function getDepartmentSpine(category = '', name = ''): string {
+  const combined = `${category} ${name}`.toLowerCase();
+  if (combined.includes('hemat') || combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr')) {
+    return 'spine-hematology';
+  }
+  if (combined.includes('thyroid') || combined.includes('vitamin') || combined.includes('hormone') || combined.includes('clia') || combined.includes('ferritin') || combined.includes('hcg')) {
+    return 'spine-clia';
+  }
+  if (combined.includes('sugar') || combined.includes('glucose') || combined.includes('hba1c') || combined.includes('diabet')) {
+    return 'spine-metabolic';
+  }
+  if (combined.includes('fever') || combined.includes('dengue') || combined.includes('malaria') || combined.includes('typhoid') || combined.includes('urine')) {
+    return 'spine-micro';
+  }
+  return 'spine-biochem';
+}
+
 export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: TestCardProps) {
   const [showDetail, setShowDetail] = useState(false);
 
@@ -23,131 +54,106 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
     }
   };
 
-  const getCategoryBadge = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'routine':
-      case 'blood':
-        return 'bg-blue-50 text-blue-900 border-blue-200/80';
-      case 'diabetes':
-        return 'bg-green-50 text-[#102A43] border-green-200/80';
-      case 'thyroid':
-      case 'hormone':
-        return 'bg-[#F4EEEA] text-[#7A4B2A] border-[#D7C7B8]';
-      case 'lipid':
-        return 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]';
-      case 'specialized':
-        return 'bg-blue-50 text-[#102A43] border-blue-200/80';
-      default:
-        return 'bg-blue-50 text-blue-900 border-blue-200/80';
-    }
-  };
-
-  const getDepartmentSpine = (category = '', name = '') => {
-    const combined = `${category} ${name}`.toLowerCase();
-    if (combined.includes('hemat') || combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr')) {
-      return 'spine-hematology';
-    }
-    if (combined.includes('thyroid') || combined.includes('vitamin') || combined.includes('hormone') || combined.includes('clia') || combined.includes('ferritin') || combined.includes('hcg')) {
-      return 'spine-clia';
-    }
-    if (combined.includes('sugar') || combined.includes('glucose') || combined.includes('hba1c') || combined.includes('diabet')) {
-      return 'spine-metabolic';
-    }
-    if (combined.includes('fever') || combined.includes('dengue') || combined.includes('malaria') || combined.includes('typhoid') || combined.includes('urine')) {
-      return 'spine-micro';
-    }
-    return 'spine-biochem';
-  };
+  const hasParameters = Boolean(test.parameters && test.parameters.length > 0);
 
   return (
     <>
       <div 
         data-selected={isSelected}
-        className={`peacock-test-card glass-card ui-card p-5 sm:p-6 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-surface duration-300 relative overflow-hidden ${getDepartmentSpine(test.category, test.name)}`}
+        className={`peacock-test-card glass-card ui-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-2xl border border-slate-200/80 shadow-[0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[0_8px_20px_-4px_rgba(10,108,130,0.12)] ${getDepartmentSpine(test.category, test.name)}`}
       >
         {/* Subtle hover gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-[#0A6C82]/5 group-hover:to-[#0B6E66]/5 transition-colors duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A6C82]/0 to-[#0B6E66]/0 group-hover:from-[#0A6C82]/[0.03] group-hover:to-[#0B6E66]/[0.03] transition-colors duration-300 pointer-events-none" />
         
-        <div className="flex-1 flex flex-col justify-between">
-          <div>
-            {/* Top Badges */}
-            <div className="flex items-center justify-between mb-3 gap-2">
-              {test.popular ? (
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#0A1128] px-2.5 py-0.5 text-[10px] sm:text-[11px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs">
+        <div className="flex-1 flex flex-col">
+          {/* Top Badges Row */}
+          <div className="flex items-center justify-between gap-1.5 mb-2">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <span className={`text-[10px] sm:text-[10.5px] font-bold px-2 py-0.5 rounded-full capitalize border shrink-0 ${getCategoryBadge(test.category)}`}>
+                {test.category}
+              </span>
+              {test.popular && (
+                <span className="inline-flex items-center gap-0.5 rounded-full bg-[#0A1128] px-2 py-0.5 text-[9.5px] sm:text-[10px] font-extrabold text-[#FFC300] border border-white/20 shadow-2xs shrink-0">
                   ★ Popular
                 </span>
-              ) : (
-                <span className={`text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full capitalize border ${getCategoryBadge(test.category)}`}>
-                  {test.category}
-                </span>
               )}
+            </div>
 
-              {test.homeCollection && (
-                <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 border border-blue-200/80 text-[10px] sm:text-[11px] font-semibold px-2.5 py-0.5 rounded-full">
-                  <Home className="w-3 h-3 text-[#155E9A]" /> Home Visit
-                </span>
-              )}
-            </div>
-            
-            {/* Title & Description */}
-            <h3 aria-label={test.name} className="mb-1.5 text-base font-bold leading-snug text-[#1D1D1F] transition-colors sm:text-lg">
-              <button
-                type="button"
-                aria-label={`View details for ${test.name}`}
-                onClick={handleCardClick}
-                className="text-left underline-offset-4 hover:text-[#155E9A] hover:underline focus-visible:text-[#155E9A] focus-visible:underline"
-              >
-                {test.name}
-              </button>
-            </h3>
-            
-            <p className="text-xs text-[var(--text-muted)] mb-4 line-clamp-2 leading-relaxed font-normal">
-              {test.description}
-            </p>
+            {test.homeCollection && (
+              <span className="inline-flex items-center gap-1 bg-blue-50/80 text-blue-800 border border-blue-200/70 text-[9.5px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0">
+                <Home className="w-2.5 h-2.5 text-[#155E9A]" /> Home Visit
+              </span>
+            )}
           </div>
-          
-          {/* Parameters Preview */}
-          {test.parameters && test.parameters.length > 0 && (
-            <div className="mb-4 space-y-1.5">
-              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Key Parameters:</span>
-              <div className="flex flex-wrap gap-1">
-                {test.parameters.slice(0, 3).map((param) => (
-                  <span 
-                    key={param} 
-                    className="text-[10.5px] bg-slate-50 text-slate-700 px-2.5 py-0.5 rounded-md font-medium border border-slate-200/80"
-                  >
-                    {param}
+
+          {/* Title & Description with balanced vertical alignment */}
+          <h3 aria-label={test.name} className="mb-1 text-[15px] sm:text-base font-bold leading-snug text-[#102A43] group-hover:text-[#0A6C82] transition-colors">
+            <button
+              type="button"
+              aria-label={`View details for ${test.name}`}
+              onClick={handleCardClick}
+              className="text-left line-clamp-2 min-h-[2.5rem] underline-offset-4 hover:underline focus-visible:underline w-full"
+            >
+              {test.name}
+            </button>
+          </h3>
+
+          <p className="text-[11.5px] sm:text-xs text-slate-500 mb-2.5 line-clamp-2 leading-snug font-normal min-h-[2rem]">
+            {test.description}
+          </p>
+
+          {/* Compact Parameters Preview / Verification note */}
+          <div className="mb-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600 gap-1.5 min-w-0">
+            {hasParameters ? (
+              <>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">
+                  {test.parameters.length} Params
+                </span>
+                <div className="flex items-center gap-1 overflow-hidden truncate">
+                  <span className="truncate text-slate-600 font-medium text-[10.5px]">
+                    {test.parameters.slice(0, 2).join(' • ')}
                   </span>
-                ))}
-                {test.parameters.length > 3 && (
-                  <span className="text-[10.5px] bg-blue-50 text-blue-800 px-2 py-0.5 rounded-md font-semibold border border-blue-200/80">
-                    +{test.parameters.length - 3} more
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
+                  {test.parameters.length > 2 && (
+                    <span className="shrink-0 text-[9.5px] font-bold text-[#0A6C82] bg-teal-50 border border-teal-200/80 rounded px-1 py-0.2">
+                      +{test.parameters.length - 2}
+                    </span>
+                  )}
+                </div>
+              </>
+            ) : (
+              <span className="text-[10px] font-medium text-slate-400">
+                Central in-house analyzer • Verified in 12h
+              </span>
+            )}
+          </div>
         </div>
         
-        {/* Price & Action */}
-        <div className="pt-4 mt-auto border-t border-slate-100">
-          <div className="flex items-center justify-between mb-3.5">
+        {/* Price & Action Section */}
+        <div className="pt-2.5 mt-auto border-t border-slate-100/90 flex flex-col gap-2">
+          <div className="flex items-baseline justify-between">
             <div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-2xl font-black text-[#1D1D1F]">{formatInr(test.price)}</span>
+                <span className="text-xl sm:text-[22px] font-extrabold text-[#102A43] tracking-tight">
+                  {formatInr(test.price)}
+                </span>
                 {test.originalPrice && test.originalPrice > test.price && (
-                  <span className="text-xs text-[var(--text-muted)] line-through font-normal">{formatInr(test.originalPrice)}</span>
+                  <span className="text-xs text-slate-400 line-through font-normal">
+                    {formatInr(test.originalPrice)}
+                  </span>
                 )}
               </div>
-              <span className="text-[10px] text-[var(--text-muted)] font-medium">Quality process</span>
+              <span className="text-[10px] text-slate-400 font-medium">Quality process</span>
             </div>
+            <span className="text-[10px] font-semibold text-[#0B6E66] bg-emerald-50/80 border border-emerald-200/60 rounded-md px-1.5 py-0.5">
+              Ready in 2–6 hrs
+            </span>
           </div>
 
           {/* Request actions */}
           <div className="action-row">
             {isSelected ? (
-              <div role="status" aria-live="polite" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[14px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B]">
-                <Check className="h-4 w-4 shrink-0" />
+              <div role="status" aria-live="polite" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[12px] border border-[#C9DFD5] bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B] shadow-2xs">
+                <Check className="h-4 w-4 shrink-0 stroke-[2.5]" />
                 <span>Added to Request</span>
               </div>
             ) : (
@@ -156,7 +162,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
                 size="sm"
                 aria-pressed={false}
                 onClick={() => onToggleRequest(test.id)}
-                className="action-button h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs"
+                className="action-button h-auto min-h-11 w-full min-w-0 rounded-[12px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs shadow-xs hover:shadow-sm"
               >
                 <ClipboardList className="h-3.5 w-3.5 shrink-0" />
                 <span className="min-w-0">Add to Request</span>
