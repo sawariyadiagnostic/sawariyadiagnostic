@@ -61,10 +61,10 @@ export function Navbar({
       </div>
 
       {/* Main Frosted Glass Navbar */}
-      <div className={`w-full min-h-[68px] sm:min-h-[76px] py-2 flex items-center px-3.5 sm:px-6 lg:px-8 transition-surface duration-300 ${
+      <div className={`w-full min-h-[68px] sm:min-h-[76px] py-2 flex items-center px-3.5 sm:px-6 lg:px-8 transition-surface duration-300 sticky-header-glass ${
         isScrolled 
-          ? 'bg-white/70 backdrop-blur-[30px] border-b border-white/60 shadow-[0_4px_32px_rgba(0,0,0,0.06)]' 
-          : 'bg-white/80 backdrop-blur-2xl border-b border-white/40 shadow-2xs'
+          ? 'bg-white/92 backdrop-blur-[24px] saturate-[190%] border-b border-white/60 shadow-[0_4px_32px_rgba(0,0,0,0.06)]' 
+          : 'bg-white/92 backdrop-blur-2xl border-b border-white/40 shadow-2xs'
       }`}>
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
@@ -120,7 +120,8 @@ export function Navbar({
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="ui-control-button lg:hidden w-11 h-11 flex items-center justify-center rounded-[var(--radius-control)] text-slate-700 bg-white/80 backdrop-blur-md hover:bg-white transition-surface border border-slate-200/90 shadow-2xs active:scale-95 cursor-pointer"
+              data-squircle="13"
+              className="ui-control-button lg:hidden w-[42px] h-[42px] flex items-center justify-center hamburger-btn text-slate-700 bg-white/90 backdrop-blur-md hover:bg-white transition-surface shadow-2xs active:scale-95 cursor-pointer"
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5 text-slate-900" /> : <Menu className="w-5 h-5 text-slate-900" />}

@@ -1,6 +1,7 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import { siteConfig } from './config/site'
+import { initGlobalAppleSquircles } from './utils/appleSquircleEngine'
 import { Hero } from './components/Hero'
 import { ClinicalTrustSection, SymptomFilterBar } from './components/ClinicalTrustSection'
 import { Services } from './components/Services'
@@ -25,6 +26,11 @@ const Contact = lazy(() => import('./components/Contact').then(module => ({ defa
 const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })))
 
 export default function App() {
+  useEffect(() => {
+    const cleanup = initGlobalAppleSquircles();
+    return cleanup;
+  }, []);
+
   const pathname = window.location.pathname.replace(siteConfig.publicBasePath, '').replace(/^\/+/, '')
   const guideMatch = pathname.match(/^guide\/([^/]+?)(-hi)?\.html$/)
   const guide = guideMatch ? approvedGuideManifest.find((item) => item.slug === guideMatch[1]) : undefined
@@ -33,7 +39,7 @@ export default function App() {
   return (
     <LazyMotion features={domAnimation} strict>
       <RequisitionProvider>
-        <div className="min-h-screen bg-background text-foreground pb-[calc(env(safe-area-inset-bottom,16px)+76px)] sm:pb-0 w-full max-w-full relative">
+        <div className="min-h-screen bg-background text-foreground pb-0 sm:pb-0 w-full max-w-full relative">
           <a href="#main-content" className="skip-link">Skip to main content</a>
           <main id="main-content" tabIndex={-1} className="relative w-full max-w-full" role="main">
             {/* Critical Path: Load Hero Instantly */}

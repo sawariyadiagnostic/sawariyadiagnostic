@@ -1,79 +1,166 @@
+// File: src/components/layout/MobileBottomDock.tsx
 'use client';
 
-import { siteConfig, telHref, whatsappHref } from '@/config/site';
-import { Phone, MessageCircle, Home, FileText } from 'lucide-react';
-
-import { ReportDownloadModal } from '../ui/ReportDownloadModal';
+import { FileText, Home, PhoneCall, MessageCircle, Sparkles } from 'lucide-react';
 import { useKeyboardOpen } from '@/hooks/useKeyboardOpen';
+import { useRequisition } from '../requisition/RequisitionContext';
+import { ReportDownloadModal } from '../ui/ReportDownloadModal';
+import { siteConfig, telHref, whatsappHref } from '@/config/site';
 
-export function MobileBottomDock() {
+export interface MobileBottomDockProps {
+  selectedCount?: number;
+  totalPrice?: number;
+  isAnyModalOpen?: boolean;
+  onOpenReportModal?: () => void;
+  onOpenVisitModal?: () => void;
+  onOpenCartModal?: () => void;
+}
+
+export function MobileBottomDock({
+  selectedCount: propSelectedCount,
+  totalPrice: propTotalPrice,
+  isAnyModalOpen = false,
+  onOpenReportModal,
+  onOpenVisitModal,
+  onOpenCartModal,
+}: MobileBottomDockProps = {}) {
   const isKeyboardOpen = useKeyboardOpen();
+  const requisition = useRequisition();
 
-  const scrollToHomeCollection = () => {
-    const el = document.getElementById('home-collection');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const selectedCount =
+    propSelectedCount !== undefined ? propSelectedCount : requisition.selectedTests.length;
+  const totalPrice =
+    propTotalPrice !== undefined
+      ? propTotalPrice
+      : requisition.selectedTests.reduce((sum, t) => sum + (t.price || 0), 0);
+
+  // Hide dock when virtual keyboard or a modal is open
+  if (isKeyboardOpen || isAnyModalOpen) {
+    return null;
+  }
+
+  const handlePrimaryVisitOrCart = () => {
+    if (selectedCount > 0) {
+      if (onOpenCartModal) {
+        onOpenCartModal();
+      } else {
+        requisition.setOpen(true);
+      }
+    } else if (onOpenVisitModal) {
+      onOpenVisitModal();
+    } else {
+      const el = document.getElementById('home-collection');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
+  const phoneHref = telHref(siteConfig.contact.phone);
   const handleWhatsApp = () => {
-    const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank', 'noopener,noreferrer');
+    const url = whatsappHref('Hello Sawariya Diagnostic Lab, I need assistance with a diagnostic test or home collection.');
+    if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div
-      className={`sm:hidden fixed bottom-0 left-0 right-0 z-[100] px-2.5 pt-2 pb-[max(0.5rem,calc(env(safe-area-inset-bottom,0px)+4px))] pointer-events-none transition-all duration-200 ${
-        isKeyboardOpen ? 'translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
-      }`}
+    <nav
+      aria-label="Mobile Quick Actions"
+      className="fixed bottom-3 inset-x-0 z-40 px-3 md:hidden pointer-events-none"
     >
-      {/* Floating Glass Bar */}
-      <div className="w-full max-w-[420px] mx-auto pointer-events-auto bg-[#102A43]/85 backdrop-blur-[30px] border border-white/20 rounded-[22px] p-1 shadow-[0_16px_40px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.08)] flex items-center justify-between gap-1 text-white overflow-hidden relative">
-        <div className="absolute inset-0 z-[-1] pointer-events-none opacity-50 mix-blend-screen">
-          <div className="absolute top-[-50%] left-[-20%] w-[100px] h-[100px] bg-[#155E9A]/20 rounded-full blur-[40px] " />
-          <div className="absolute bottom-[-50%] right-[-20%] w-[120px] h-[120px] bg-[#155E9A]/50 rounded-full blur-[40px] " style={{ animationDelay: '-3s' }} />
-        </div>
-        
-        {/* Report assistance button */}
-        <ReportDownloadModal trigger={
+      <div className="mx-auto max-w-md pointer-events-auto">
+        <div
+          data-squircle="26"
+          className="squircle-tray flex items-center justify-between gap-1.5 rounded-[26px] p-2 border-0 shadow-2xl"
+          style={{
+            background:
+              'radial-gradient(circle at 85% 15%, rgba(21, 94, 154, 0.28), transparent 55%), rgba(16, 42, 67, 0.94)',
+            backdropFilter: 'blur(24px) saturate(190%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(190%)',
+          }}
+        >
+          {/* 1. Reports Button (Frosted Sapphire Pill) */}
+          {onOpenReportModal ? (
+            <button
+              type="button"
+              data-squircle="18"
+              onClick={onOpenReportModal}
+              className="squircle-dock-btn apple-pressable flex items-center justify-center gap-1.5 rounded-[18px] bg-white/[0.08] px-3.5 py-3 text-xs font-extrabold text-white hover:bg-white/[0.14] cursor-pointer"
+            >
+              <FileText className="h-4 w-4 text-blue-300 shrink-0" />
+              <span>Reports</span>
+            </button>
+          ) : (
+            <ReportDownloadModal
+              trigger={
+                <button
+                  type="button"
+                  data-squircle="18"
+                  className="squircle-dock-btn apple-pressable flex items-center justify-center gap-1.5 rounded-[18px] bg-white/[0.08] px-3.5 py-3 text-xs font-extrabold text-white hover:bg-white/[0.14] cursor-pointer"
+                  aria-label="Report assistance"
+                >
+                  <FileText className="h-4 w-4 text-blue-300 shrink-0" />
+                  <span>Reports</span>
+                </button>
+              }
+            />
+          )}
+
+          {/* 2. Primary Action: Request Visit in Hero Primary Gradient (Sawariya Crimson & Amber Coral) */}
           <button
-            className="ui-control-button flex-1 flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[var(--radius-control)] min-h-11 min-[360px]:min-h-12 px-1 text-xs font-semibold text-slate-100 transition-surface duration-150 active:scale-[0.95] select-none cursor-pointer min-w-0"
-            aria-label="Report assistance"
+            type="button"
+            data-squircle="18"
+            onClick={handlePrimaryVisitOrCart}
+            className="squircle-dock-btn apple-pressable flex flex-1 items-center justify-center gap-1.5 rounded-[18px] px-3.5 py-3 text-xs font-black text-white shadow-md cursor-pointer min-w-0"
+            style={{
+              background: 'linear-gradient(135deg, #8F1D1D 0%, #C62828 48%, #D96B43 100%)',
+              border: '1px solid rgba(254, 215, 170, 0.45)',
+              boxShadow:
+                'inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 4px 16px -2px rgba(198, 40, 40, 0.45)',
+            }}
           >
-            <div className="w-5 h-5 min-[360px]:w-6 min-[360px]:h-6 rounded-[8px] bg-[#155E9A]/12 flex items-center justify-center text-blue-200 shrink-0">
-              <FileText className="w-3 h-3 min-[360px]:w-3.5 min-[360px]:h-3.5" />
-            </div>
-            <span className="text-[10px] min-[360px]:text-xs font-bold text-white truncate">Reports</span>
+            {selectedCount > 0 ? (
+              <>
+                <Sparkles className="h-4 w-4 shrink-0 text-[#FFD98A]" />
+                <span className="tabular-nums truncate font-black">
+                  Book ({selectedCount}) • ₹{totalPrice}
+                </span>
+              </>
+            ) : (
+              <>
+                <Home className="h-4 w-4 shrink-0 stroke-[2.4]" />
+                <span className="truncate">Request Visit</span>
+              </>
+            )}
           </button>
-        } />
 
-        {/* Primary CTA: Request home collection */}
-        <button
-          onClick={scrollToHomeCollection}
-          className="ui-control-button flex-[1.2] flex items-center justify-center gap-1 min-[360px]:gap-1.5 bg-white text-[#102A43] rounded-[var(--radius-control)] min-h-11 min-[360px]:min-h-12 px-1.5 min-[360px]:px-2.5 text-xs font-bold shadow-[0_4px_12px_rgba(255,255,255,0.2)] transition-surface duration-150 hover:bg-white/90 active:scale-[0.95] select-none border border-white cursor-pointer min-w-0"
-          aria-label="Request home collection"
-        >
-          <Home className="w-3.5 h-3.5 text-[#102A43] shrink-0" />
-          <span className="min-w-0 tracking-tight font-bold text-[10px] min-[360px]:text-xs">Request Visit</span>
-        </button>
+          {/* 3. Direct Call Button with Warm Amber Gold Accent */}
+          <a
+            href={phoneHref}
+            data-squircle="18"
+            aria-label="Call Sawariya Diagnostic Lab"
+            className="squircle-dock-btn apple-pressable flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] bg-white/[0.08] text-[#FFD98A] hover:bg-white/[0.15]"
+          >
+            <PhoneCall className="h-4 w-4" />
+          </a>
 
-        {/* Quick call */}
-        <a
-          href={telHref(siteConfig.contact.phone)}
-          className="ui-control-button w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-white/10 hover:bg-white/15 active:bg-white/5 border border-white/10 rounded-[var(--radius-control)] transition-surface duration-150 active:scale-[0.95] select-none"
-          aria-label="Call lab"
-        >
-          <Phone className="w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 text-[var(--accent-on-dark)]" />
-        </a>
-
-        {/* WhatsApp Quick Chat */}
-        <button
-          onClick={handleWhatsApp}
-          className="ui-control-button w-11 h-11 min-[360px]:w-12 min-[360px]:h-12 shrink-0 flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] rounded-[var(--radius-control)] transition-surface duration-150 active:scale-[0.95] shadow-xs select-none border border-[#25D366] cursor-pointer"
-          aria-label="WhatsApp lab desk"
-        >
-          <MessageCircle className="w-4 h-4 min-[360px]:w-5 min-[360px]:h-5 text-white" fill="white" />
-        </button>
+          {/* 4. Peacock Emerald WhatsApp Button (Preserved exactly as requested) */}
+          <button
+            type="button"
+            data-squircle="18"
+            onClick={handleWhatsApp}
+            aria-label="Chat on WhatsApp"
+            className="squircle-dock-btn apple-pressable flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] text-white shadow-md cursor-pointer"
+            style={{
+              background: 'linear-gradient(145deg, #059669 0%, #04724D 100%)',
+              boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.35)',
+            }}
+          >
+            <MessageCircle className="h-5 w-5 fill-white/15" />
+          </button>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 }
+
+export default MobileBottomDock;
