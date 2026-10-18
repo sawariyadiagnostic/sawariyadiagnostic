@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Check, ClipboardList, Home } from 'lucide-react';
+import { Check, ClipboardList, Home, Layers } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
+import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 import { formatInr } from '@/lib/utils';
 
@@ -82,6 +83,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
 
   const dept = getDepartmentInfo(test.category, test.name);
   const vac = getVacutainerDot(test.category, test.name);
+  const parentPanel = clinicalPanels.find((panel) => panel.constituentTestIds.includes(test.id));
 
   return (
     <>
@@ -125,6 +127,13 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
               {test.name}
             </button>
           </h3>
+
+          {parentPanel && (
+            <div className="mb-2 inline-flex items-center gap-1 bg-cyan-50/80 border border-cyan-200/70 text-[10px] text-[#0A6C82] font-semibold px-2 py-0.5 rounded-[8px] w-fit max-w-full">
+              <Layers className="w-3 h-3 text-[#0A6C82] shrink-0" />
+              <span className="truncate">Also in {parentPanel.name.split('(')[0].trim()}</span>
+            </div>
+          )}
 
           {/* Compact Parameters Preview / Verification note */}
           <div className="mb-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600 gap-1.5 min-w-0">
