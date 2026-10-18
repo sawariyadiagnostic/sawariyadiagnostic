@@ -16,9 +16,15 @@ export interface ClinicalPanel {
   deptBadgeClass: string;
   spineClass: string;
   vacutainerTube: string;
+  tubeCategory: 'edta' | 'serum' | 'fluoride' | 'citrate' | 'container';
   tubeColorClass: string;
   prickCount: number;
+  needleSpec: string;
+  doctorQuestion: string;
+  doctorAnswer: string;
   parameters: string[];
+  measuredAnalytes: string[];
+  calculatedRatios: string[];
   fastingHours: number;
   fastingNote: string;
   chaiAllowed: boolean;
@@ -29,6 +35,12 @@ export interface ClinicalPanel {
   constituentTestIds: string[];
   transparentPrice: number;
   turnaroundEstimate: string;
+  costToCompleteTip?: {
+    baseTestName: string;
+    baseTestId: string;
+    deltaPrice: number;
+    message: string;
+  };
 }
 
 export const clinicalPanels: ClinicalPanel[] = [
@@ -41,8 +53,12 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-rose-50 text-rose-900 border-rose-200/80",
     spineClass: "spine-hematology",
     vacutainerTube: "1x Lavender K2/K3-EDTA (2.0 mL)",
+    tubeCategory: "edta",
     tubeColorClass: "vacutainer-dot-edta",
     prickCount: 1,
+    needleSpec: "Pediatric 23G/25G ultra-thin safety butterfly needle for delicate veins",
+    doctorQuestion: "What does CBC + ESR actually check?",
+    doctorAnswer: "Evaluates active viral or bacterial infections, anemia (hemoglobin), platelet clotting power, and chronic systemic inflammation in 1 single blood draw.",
     parameters: [
       "Hemoglobin (Hb)",
       "RBC Count",
@@ -61,8 +77,24 @@ export const clinicalPanels: ClinicalPanel[] = [
       "Mean Platelet Volume (MPV)",
       "Automated ESR (Westergren)"
     ],
+    measuredAnalytes: [
+      "Hemoglobin (Hb Photometry)",
+      "RBC Count (Impedance)",
+      "Total Leukocyte Count (TLC)",
+      "5-Part Differential (Neutrophils, Lymphocytes, Eosinophils, Monocytes, Basophils)",
+      "Platelet Count",
+      "Automated ESR (Westergren)"
+    ],
+    calculatedRatios: [
+      "Packed Cell Volume (PCV / Hematocrit)",
+      "MCV (Mean Corpuscular Volume)",
+      "MCH (Mean Corpuscular Hemoglobin)",
+      "MCHC",
+      "RDW-CV (Red Cell Distribution Width)",
+      "Mean Platelet Volume (MPV)"
+    ],
     fastingHours: 0,
-    fastingNote: "No strict fasting required for blood count. Drink 1-2 glasses of plain water to keep veins well-hydrated.",
+    fastingNote: "No strict fasting required for blood counts. Drink 1-2 glasses of plain water to keep veins well-hydrated.",
     chaiAllowed: true,
     waterAllowed: true,
     bpMedsAllowed: true,
@@ -70,7 +102,13 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Evaluates oxygen delivery, active viral/bacterial infections, allergic eosinophilia, and platelet adequacy in one single blood draw.",
     constituentTestIds: ["web-001", "web-004"],
     transparentPrice: 450,
-    turnaroundEstimate: "Ready in 2–4 hrs"
+    turnaroundEstimate: "Ready in 2–4 hrs",
+    costToCompleteTip: {
+      baseTestName: "Complete Blood Count (CBC)",
+      baseTestId: "web-001",
+      deltaPrice: 100,
+      message: "Add ₹100 to complete the Hemogram with Automated ESR from the same single lavender tube."
+    }
   },
   {
     id: "panel-lft",
@@ -81,8 +119,12 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-teal-50 text-teal-900 border-teal-200/80",
     spineClass: "spine-biochem",
     vacutainerTube: "1x Gold SST / Clot Activator (3.0 mL)",
+    tubeCategory: "serum",
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
+    needleSpec: "Pediatric 23G/25G ultra-thin needle with flash visualization for fragile veins",
+    doctorQuestion: "Why did my doctor order a Liver Function Test?",
+    doctorAnswer: "Differentiates hepatocellular liver injury (ALT/AST) from gallbladder or jaundice blockages (ALP/Bilirubin), and verifies chronic protein synthesis capacity.",
     parameters: [
       "Total Bilirubin",
       "Direct Bilirubin",
@@ -95,6 +137,21 @@ export const clinicalPanels: ClinicalPanel[] = [
       "Serum Globulin",
       "Albumin / Globulin (A:G) Ratio",
       "De Ritis Ratio (AST/ALT)"
+    ],
+    measuredAnalytes: [
+      "Total Bilirubin (Diazo method)",
+      "Direct Bilirubin (Conjugated)",
+      "SGOT / AST (IFCC Kinetic without P-5-P)",
+      "SGPT / ALT (IFCC Kinetic without P-5-P)",
+      "Alkaline Phosphatase (pNPP-AMP Kinetic)",
+      "Total Serum Protein (Biuret method)",
+      "Serum Albumin (BCG Photometry)"
+    ],
+    calculatedRatios: [
+      "Indirect (Unconjugated) Bilirubin",
+      "Serum Globulin",
+      "Albumin / Globulin (A:G) Ratio",
+      "De Ritis Ratio (AST / ALT Ratio)"
     ],
     fastingHours: 8,
     fastingNote: "8–10 hours overnight fasting preferred. Avoid heavy fatty foods or alcohol for 24 hours prior.",
@@ -116,8 +173,12 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-teal-50 text-teal-900 border-teal-200/80",
     spineClass: "spine-biochem",
     vacutainerTube: "1x Gold SST / Clot Activator (3.0 mL)",
+    tubeCategory: "serum",
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
+    needleSpec: "Pediatric 23G/25G ultra-thin safety needle with flash chamber",
+    doctorQuestion: "What does the Kidney Function & Electrolytes battery check?",
+    doctorAnswer: "Measures glomerular kidney filtration, nitrogenous waste elimination (Creatinine, Urea, Uric Acid), and life-critical cardiac/nerve electrolyte balance.",
     parameters: [
       "Serum Creatinine",
       "Blood Urea",
@@ -127,6 +188,18 @@ export const clinicalPanels: ClinicalPanel[] = [
       "Serum Sodium (Na+)",
       "Serum Potassium (K+)",
       "Serum Chloride (Cl-)"
+    ],
+    measuredAnalytes: [
+      "Serum Creatinine (Modified Jaffe Kinetic)",
+      "Blood Urea (GLDH Enzymatic Kinetic)",
+      "Serum Uric Acid (Uricase-POD)",
+      "Serum Sodium (Direct ISE)",
+      "Serum Potassium (Direct ISE)",
+      "Serum Chloride (Direct ISE)"
+    ],
+    calculatedRatios: [
+      "Blood Urea Nitrogen (BUN)",
+      "BUN / Creatinine Ratio"
     ],
     fastingHours: 8,
     fastingNote: "8 hours fasting preferred if ordered with biochemistry panels. Maintain standard fluid intake to prevent dehydration.",
@@ -148,8 +221,12 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-teal-50 text-teal-900 border-teal-200/80",
     spineClass: "spine-biochem",
     vacutainerTube: "1x Gold SST / Clot Activator (3.0 mL)",
+    tubeCategory: "serum",
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
+    needleSpec: "23G safety needle with immediate vein flashback",
+    doctorQuestion: "Why test Lipid Profile strictly with overnight fasting?",
+    doctorAnswer: "Unmasks circulating atherogenic particles, artery-clogging plaque risks, and familial hypertriglyceridemia without dietary fat interference.",
     parameters: [
       "Total Cholesterol",
       "Serum Triglycerides",
@@ -158,6 +235,18 @@ export const clinicalPanels: ClinicalPanel[] = [
       "VLDL Cholesterol",
       "Non-HDL Cholesterol",
       "Total / HDL Ratio",
+      "LDL / HDL Atherogenic Index"
+    ],
+    measuredAnalytes: [
+      "Total Cholesterol (CHOD-PAP Enzymatic)",
+      "Serum Triglycerides (GPO-PAP Enzymatic)",
+      "HDL Cholesterol (Direct Immunoinhibition)",
+      "Direct LDL Cholesterol (Selective Detergent Clearance)"
+    ],
+    calculatedRatios: [
+      "VLDL Cholesterol (Triglycerides / 5)",
+      "Non-HDL Cholesterol (Total Chol - HDL)",
+      "Total / HDL Cardiovascular Risk Ratio",
       "LDL / HDL Atherogenic Index"
     ],
     fastingHours: 10,
@@ -179,14 +268,26 @@ export const clinicalPanels: ClinicalPanel[] = [
     department: "Biochemistry",
     deptBadgeClass: "bg-amber-50 text-amber-900 border-amber-200/80",
     spineClass: "spine-metabolic",
-    vacutainerTube: "1x Grey Fluoride + 1x Lavender EDTA (1 Prick)",
+    vacutainerTube: "1x Grey Fluoride + 1x Lavender EDTA (1 Puncture)",
+    tubeCategory: "fluoride",
     tubeColorClass: "vacutainer-dot-fluoride",
     prickCount: 1,
+    needleSpec: "Ultra-gentle 23G/25G needle with 1 single vein puncture for both tubes",
+    doctorQuestion: "Why do I need both Fasting Sugar and HbA1c?",
+    doctorAnswer: "Pairs exact morning fasting blood glucose with the gold-standard 90-day biological red cell hemoglobin turnover window to prevent hidden spikes.",
     parameters: [
       "Fasting Blood Sugar (FBS)",
       "Glycated Hemoglobin (HbA1c)",
       "Estimated Average Glucose (eAG)",
       "Spot Urine Glucose & Protein Screening"
+    ],
+    measuredAnalytes: [
+      "Fasting Blood Sugar (Hexokinase / Glucose Dehydrogenase)",
+      "Glycated Hemoglobin HbA1c (NGSP Certified Ion-Exchange HPLC)",
+      "Spot Urine Protein & Glucose (Multi-pad Strip Reflectance)"
+    ],
+    calculatedRatios: [
+      "Estimated Average Glucose (eAG Formula = 28.7 × HbA1c - 46.7)"
     ],
     fastingHours: 8,
     fastingNote: "Strict 8–10 hours overnight fast. Plain water is permitted. Carry your morning diabetic medicine and breakfast for intake right after the blood draw.",
@@ -208,8 +309,12 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-purple-50 text-purple-900 border-purple-200/80",
     spineClass: "spine-clia",
     vacutainerTube: "1x Gold SST (3.0 mL) CLIA",
+    tubeCategory: "serum",
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
+    needleSpec: "23G safety needle with immediate vein flashback",
+    doctorQuestion: "What is the difference between Total and Free Thyroid tests?",
+    doctorAnswer: "Total tests measure circulating thyroid hormone stores; Free fractions (FT3/FT4) measure the actual active hormone reaching your tissues and metabolism.",
     parameters: [
       "Total Triiodothyronine (T3)",
       "Total Thyroxine (T4)",
@@ -217,6 +322,14 @@ export const clinicalPanels: ClinicalPanel[] = [
       "Free T3 (FT3)",
       "Free T4 (FT4)"
     ],
+    measuredAnalytes: [
+      "Total Triiodothyronine T3 (Chemiluminescence CLIA)",
+      "Total Thyroxine T4 (Chemiluminescence CLIA)",
+      "Ultrasensitive 3rd-Gen TSH (Chemiluminescence CLIA)",
+      "Free Triiodothyronine FT3 (Chemiluminescence CLIA)",
+      "Free Thyroxine FT4 (Chemiluminescence CLIA)"
+    ],
+    calculatedRatios: [],
     fastingHours: 8,
     fastingNote: "Fasting preferred. Take your daily thyroid medicine (e.g. Thyronorm/Eltroxin) AFTER the morning blood draw. Avoid biotin supplements for 48h.",
     chaiAllowed: false,
@@ -237,14 +350,28 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-purple-50 text-purple-900 border-purple-200/80",
     spineClass: "spine-clia",
     vacutainerTube: "1x Gold SST (Protected from light)",
+    tubeCategory: "serum",
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
+    needleSpec: "23G safety needle (amber light-shielded sample transport)",
+    doctorQuestion: "Why check Vitamins D3, B12, and Iron together?",
+    doctorAnswer: "Identifies hidden drivers of bone weakness, chronic muscular fatigue, neuropathic tingling, and microcytic iron deficiency anemia.",
     parameters: [
       "Vitamin D (25-OH Total)",
       "Vitamin B12 (Cyanocobalamin)",
       "Serum Ferritin",
       "Serum Iron",
       "Total Iron Binding Capacity (TIBC)"
+    ],
+    measuredAnalytes: [
+      "25-Hydroxy Vitamin D Total (Chemiluminescence CLIA)",
+      "Vitamin B12 Cyanocobalamin (Chemiluminescence CLIA)",
+      "Serum Ferritin (Chemiluminescence CLIA)",
+      "Serum Iron (Ferene-B Kinetic Photometry)",
+      "Total Iron Binding Capacity TIBC (Direct Saturation Assay)"
+    ],
+    calculatedRatios: [
+      "Transferrin Saturation Percentage (%)"
     ],
     fastingHours: 8,
     fastingNote: "Morning draw (07:00 AM–10:00 AM) optimal due to diurnal biological variation in serum iron. Fasting 8 hours preferred.",
@@ -266,13 +393,25 @@ export const clinicalPanels: ClinicalPanel[] = [
     deptBadgeClass: "bg-rose-50 text-rose-900 border-rose-200/80",
     spineClass: "spine-hematology",
     vacutainerTube: "1x Light Blue Sodium Citrate (9:1 Ratio)",
+    tubeCategory: "citrate",
     tubeColorClass: "vacutainer-dot-container",
     prickCount: 1,
+    needleSpec: "Pediatric butterfly needle with 9:1 exact blood-to-anticoagulant fill volume",
+    doctorQuestion: "Why is PT/INR and aPTT required before surgery or on blood thinners?",
+    doctorAnswer: "Assesses both extrinsic and intrinsic blood clotting cascades to prevent excessive bleeding or dangerous clot formation.",
     parameters: [
       "Prothrombin Time (PT)",
       "International Normalized Ratio (INR)",
       "Activated Partial Thromboplastin Time (aPTT)",
       "Plasma Fibrinogen (Clauss)"
+    ],
+    measuredAnalytes: [
+      "Prothrombin Time PT (Photo-optical Clot Detection)",
+      "Activated Partial Thromboplastin Time aPTT (Photo-optical)",
+      "Plasma Fibrinogen (Clauss Clotting Method)"
+    ],
+    calculatedRatios: [
+      "International Normalized Ratio (INR = (PT_patient / PT_normal)^ISI)"
     ],
     fastingHours: 0,
     fastingNote: "No fasting required. Inform the phlebotomist of any blood thinner or anticoagulant medications (Warfarin, Heparin, Ecospirin).",

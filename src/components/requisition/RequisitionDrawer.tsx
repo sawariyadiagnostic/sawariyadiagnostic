@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ClipboardList, Trash2, Camera } from 'lucide-react';
+import { ClipboardList, Trash2, Camera, Syringe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { siteConfig, whatsappHref } from '@/config/site';
@@ -9,6 +9,40 @@ import { useRequisition } from './RequisitionContext';
 export function RequisitionDrawer() {
   const { selectedTests, clearRequest, toggleTest, isOpen, setOpen } = useRequisition();
   const subtotal = useMemo(() => selectedTests.reduce((sum, test) => sum + test.price, 0), [selectedTests]);
+
+  const vacutainerRequirements = useMemo(() => {
+    let hasEdta = false;
+    let hasSerum = false;
+    let hasFluoride = false;
+    let hasCitrate = false;
+    let hasContainer = false;
+
+    for (const test of selectedTests) {
+      const combined = `${test.name} ${test.category || ''}`.toLowerCase();
+      if (combined.includes('urine') || combined.includes('stool')) {
+        hasContainer = true;
+      } else if (combined.includes('sugar') || combined.includes('glucose')) {
+        hasFluoride = true;
+      } else if (combined.includes('cbc') || combined.includes('esr') || combined.includes('platelet') || combined.includes('hemoglobin') || combined.includes('blood count') || combined.includes('hba1c')) {
+        hasEdta = true;
+      } else if (combined.includes('pt') || combined.includes('inr') || combined.includes('aptt') || combined.includes('coagulation') || combined.includes('d-dimer')) {
+        hasCitrate = true;
+      } else {
+        hasSerum = true;
+      }
+    }
+
+    const bloodTubesCount = (hasEdta ? 1 : 0) + (hasSerum ? 1 : 0) + (hasFluoride ? 1 : 0) + (hasCitrate ? 1 : 0);
+    return {
+      hasEdta,
+      hasSerum,
+      hasFluoride,
+      hasCitrate,
+      hasContainer,
+      bloodTubesCount,
+    };
+  }, [selectedTests]);
+
   const message = selectedTests.length
     ? `*${siteConfig.name} — TEST REQUEST*\n\n${selectedTests.map((test, index) => `${index + 1}. ${test.name} — ${formatInr(test.price)}`).join('\n')}\n\nPublished test-price subtotal: ${formatInr(subtotal)}\n\nPlease confirm availability, final collection charges, preparation instructions, and the appointment with the lab desk. No appointment is booked until the lab confirms.`
     : '';
@@ -36,6 +70,58 @@ export function RequisitionDrawer() {
 
         <div className="min-h-0 flex-1 overflow-y-auto bg-white p-5 sm:p-6">
           {selectedTests.length ? <>
+            {/* Vacutainer Tube Physics & Single Puncture Confirmation */}
+            {vacutainerRequirements.bloodTubesCount > 0 && (
+              <div className="mb-4 rounded-[16px] border border-slate-200/90 bg-slate-50/90 p-3.5 space-y-2 apple-squircle-inner">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-bold text-[#102A43] inline-flex items-center gap-1.5">
+                    <Syringe className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Physical Vacutainer Tube Dock:</span>
+                  </span>
+                  <span className="text-[10.5px] font-extrabold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    1 Single Needle Puncture
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
+                  {vacutainerRequirements.hasEdta && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-purple-50 text-purple-900 border border-purple-200">
+                      <span className="w-2 h-2 rounded-full vacutainer-dot-edta" />
+                      Lavender EDTA
+                    </span>
+                  )}
+                  {vacutainerRequirements.hasSerum && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200">
+                      <span className="w-2 h-2 rounded-full vacutainer-dot-serum" />
+                      Gold SST (Serum)
+                    </span>
+                  )}
+                  {vacutainerRequirements.hasFluoride && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-200 text-slate-800 border border-slate-300">
+                      <span className="w-2 h-2 rounded-full vacutainer-dot-fluoride" />
+                      Grey Fluoride
+                    </span>
+                  )}
+                  {vacutainerRequirements.hasCitrate && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 border border-blue-200">
+                      <span className="w-2 h-2 rounded-full bg-sky-500" />
+                      Blue Citrate
+                    </span>
+                  )}
+                  {vacutainerRequirements.hasContainer && (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-100 text-stone-800 border border-stone-200">
+                      <span className="w-2 h-2 rounded-full bg-amber-700" />
+                      Clean Container
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-[10.5px] text-slate-500 leading-normal">
+                  All selected blood investigations are collected sequentially during <strong>one single vein entry</strong> using multi-sample vacuum adapter needles.
+                </p>
+              </div>
+            )}
+
             <ul className="space-y-2" aria-label="Selected tests">
               {selectedTests.map((test) => <li key={test.id} className="flex items-center justify-between gap-3 rounded-[14px] border border-slate-200 p-3 apple-squircle-inner">
                 <div className="min-w-0">
