@@ -3,19 +3,20 @@ import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 
-export function ReportDownloadModal({ trigger }: { trigger?: React.ReactNode }) {
+export function ReportDownloadModal({
+  trigger,
+  open,
+  onOpenChange,
+}: {
+  trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) {
   const whatsappUrl = whatsappHref('Hello Sawariya Diagnostic, I need help accessing a laboratory report.');
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        {trigger || (
-          <button className="flex-1 flex items-center justify-center gap-1.5 bg-[#082A45]/90 border border-[#155E9A]/40 rounded-[18px] h-12 px-2 text-xs font-bold text-slate-100 squircle-btn apple-pressable active:scale-[0.96] shadow-sm cursor-pointer">
-            <FileDown className="w-3.5 h-3.5 text-blue-200" />
-            <span>Report assistance</span>
-          </button>
-        )}
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="sm:max-w-[420px] p-0 overflow-hidden bg-white/95 backdrop-blur-2xl ui-panel">
         <div className="bg-[#102A43] p-6 text-white text-center">
           <FileDown className="w-8 h-8 mx-auto mb-3 text-blue-200" />

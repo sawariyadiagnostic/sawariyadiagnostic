@@ -6,12 +6,14 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Navbar } from './layout/Navbar';
 import { MobileMenu } from './layout/MobileMenu';
+import { ReportDownloadModal } from './ui/ReportDownloadModal';
 import { Logo } from './ui/Logo';
 import { whatsappHref } from '@/config/site';
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Scroll detection
@@ -43,9 +45,39 @@ export function Hero() {
   };
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    section?.scrollIntoView({ behavior: 'smooth' });
+    const wasMenuOpen = isMobileMenuOpen;
     setIsMobileMenuOpen(false);
+    const cleanId = sectionId.replace(/^#/, '');
+
+    const performScroll = () => {
+      const section = document.getElementById(cleanId);
+      if (section) {
+        const header = document.querySelector('header');
+        const headerOffset = header ? header.getBoundingClientRect().height : 80;
+        const elementPosition = section.getBoundingClientRect().top + window.pageYOffset;
+        const targetScroll = Math.max(0, elementPosition - headerOffset - 12);
+
+        window.scrollTo({
+          top: targetScroll,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        });
+      }
+    };
+
+    if (wasMenuOpen) {
+      setTimeout(performScroll, 180);
+    } else {
+      performScroll();
+    }
+  };
+
+  const handleOpenReportModal = () => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+      setTimeout(() => setIsReportModalOpen(true), 200);
+    } else {
+      setIsReportModalOpen(true);
+    }
   };
 
   const quickSearchTags = [
@@ -82,6 +114,13 @@ export function Hero() {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
         scrollToSection={scrollToSection}
+        onOpenReportModal={handleOpenReportModal}
+      />
+
+      {/* Controlled Report Assistance Modal */}
+      <ReportDownloadModal
+        open={isReportModalOpen}
+        onOpenChange={setIsReportModalOpen}
       />
 
       {/* Hero Content Area */}
@@ -221,7 +260,7 @@ export function Hero() {
                 </div>
 
                 <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-[#FFF9F3] flex items-center justify-center border border-[#D7C7B8] flex-shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-[12px] bg-[#F8FAFC] flex items-center justify-center border border-slate-200 flex-shrink-0">
                     <ShieldCheck className="w-4 h-4 text-[#7A4B2A]" />
                   </div>
                   <div className="min-w-0">

@@ -35,7 +35,7 @@ export function TestGuidePage({ guide, language = 'en' }: TestGuidePageProps) {
           <div className="whitespace-pre-wrap leading-relaxed">{content}</div>
         </div>
 
-        <section className="rounded-[24px] border border-amber-200 bg-[#FFF9F3] p-5" aria-labelledby="guide-disclaimer">
+        <section className="rounded-[24px] border border-slate-200 bg-[#F8FAFC] p-5" aria-labelledby="guide-disclaimer">
           <h2 id="guide-disclaimer" className="text-lg font-bold text-slate-900">{language === 'hi' ? 'महत्वपूर्ण सूचना' : 'Important information'}</h2>
           <p className="mt-2 text-sm leading-relaxed text-slate-700">
             {language === 'hi'

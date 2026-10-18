@@ -4,7 +4,7 @@
   --font-weight-normal: 400;
 
   /* Semantic UI roles */
-  --background: 36 100% 98%;
+  --background: 210 20% 98%;
   --foreground: 215 45% 14%;
   --card: 0 0% 100%;
   --card-foreground: 218 45% 12%;
@@ -77,7 +77,7 @@
   --sawariya-red: #C62828;
   --sawariya-blue: #155E9A;
   --sawariya-brown: #7A4B2A;
-  --sawariya-cream: #FFF9F3;
+  --sawariya-cream: #F8FAFC;
   --brand-red-600: #C62828;
   --brand-red-700: #A61E1E;
   --brand-red-deep: #A61E1E;
@@ -92,8 +92,8 @@
   --brand-navy: #102A43;
   --brand-graphite: #1D1D1F;
   --brand-off-white: #F5F5F7;
-  --surface-cream: #FFF9F3;
-  --surface-paper: #FFF9F3;
+  --surface-cream: #F8FAFC;
+  --surface-paper: #F8FAFC;
   --surface-white: #FFFFFF;
   --surface-elevated: #FFFFFF;
   --text-ink: #102A43;

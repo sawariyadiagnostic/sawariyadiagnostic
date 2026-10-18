@@ -10,9 +10,6 @@ import {
   FileText,
   ExternalLink,
   ShieldCheck,
-  Activity,
-  Sparkles,
-  ChevronRight,
 } from 'lucide-react';
 import { LegalModal, PolicyType } from './ui/LegalModal';
 import { ReportDownloadModal } from './ui/ReportDownloadModal';
@@ -23,22 +20,6 @@ export interface FooterProps {
   onOpenLegalModal?: (section: 'privacy' | 'terms' | 'charter') => void;
 }
 
-const QUICK_LINKS = [
-  { label: 'Home', href: '#top' },
-  { label: 'About Lab', href: '#about' },
-  { label: 'Diagnostic Services', href: '#services' },
-  { label: 'Full Test Menu', href: '#test-catalog' },
-  { label: 'Location & Map', href: '#contact' },
-];
-
-const TOPIC_CHIPS = [
-  { label: 'Blood Tests', keyword: 'blood', dotColor: 'bg-[#C62828]', href: '#tests' },
-  { label: 'Thyroid Tests', keyword: 'thyroid', dotColor: 'bg-[#7A4B2A]', href: '#tests' },
-  { label: 'Cholesterol Tests', keyword: 'cholesterol', dotColor: 'bg-[#0A6C82]', href: '#tests' },
-  { label: 'Blood Glucose Tests', keyword: 'glucose', dotColor: 'bg-[#155E9A]', href: '#tests' },
-  { label: 'Home Collection', keyword: 'home', dotColor: 'bg-[#0B6E66]', href: '#home-collection' },
-];
-
 export function Footer({
   onOpenReportModal,
   onSelectTopic,
@@ -46,28 +27,6 @@ export function Footer({
 }: FooterProps) {
   const [internalLegalModal, setInternalLegalModal] = useState<PolicyType>(null);
   const dnaMarkSrc = `${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`;
-
-  const handleTopicClick = (keyword: string) => {
-    if (keyword === 'home') {
-      const el = document.getElementById('home-collection');
-      el?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
-    if (onSelectTopic) {
-      onSelectTopic(keyword);
-    }
-    window.dispatchEvent(
-      new CustomEvent('sawariya:search', { detail: { query: keyword, tab: 'tests' } })
-    );
-    const menuEl =
-      document.getElementById('tests') ||
-      document.getElementById('test-catalog') ||
-      document.getElementById('root');
-    menuEl?.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      block: 'start',
-    });
-  };
 
   const handleLegalClick = (section: 'privacy' | 'terms' | 'charter') => {
     if (onOpenLegalModal) {
@@ -80,7 +39,7 @@ export function Footer({
   return (
     <>
       <footer
-        id="contact"
+        id="site-footer"
         className="relative overflow-hidden bg-[#102A43] text-slate-200 border-t border-white/10 pt-12 pb-28 md:pb-12"
       >
         {/* Top Brand Spectrum Specular Hairline */}
@@ -104,10 +63,10 @@ export function Footer({
         />
 
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          {/* Main 4-Column Desktop / Compact Bento Mobile Grid */}
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-8">
-            {/* COLUMN 1: Brand Identity, In-House Authority & Quick Actions (4 Cols on Desktop) */}
-            <div className="lg:col-span-4 space-y-5">
+          {/* Main 2-Column Desktop / Focused Mobile Grid */}
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+            {/* COLUMN 1: Brand Identity, In-House Authority & Quick Actions (6 Cols on Desktop) */}
+            <div className="lg:col-span-6 space-y-5">
               <div className="flex items-center gap-3.5">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 border border-white/20 p-2 shadow-inner">
                   <img
@@ -176,73 +135,20 @@ export function Footer({
                 </a>
               </div>
 
-              {/* Upgraded Clinical Quality Micro-Strip (Hero Badge Schema) */}
-              <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] text-slate-300">
-                <span data-squircle="8" className="inline-flex items-center gap-1.5 rounded-[8px] bg-emerald-500/12 border border-emerald-400/30 px-2.5 py-1 font-semibold text-emerald-300">
-                  <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" />
-                  <span>Daily Quality Control Verified</span>
-                </span>
-                <span data-squircle="8" className="inline-flex items-center gap-1.5 rounded-[8px] bg-blue-500/12 border border-blue-400/30 px-2.5 py-1 font-semibold text-blue-300">
-                  <Activity className="h-3.5 w-3.5 text-blue-400" />
-                  <span>In-House CLIA & 5-Part</span>
-                </span>
+              {/* Sample Cold-Chain & Local Processing Note */}
+              <div className="rounded-xl bg-white/[0.04] border border-white/10 p-3.5 text-xs text-slate-300 space-y-1">
+                <div className="flex items-center gap-2 font-bold text-slate-200">
+                  <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0" />
+                  <span>On-Site Specimen Preservation</span>
+                </div>
+                <p className="text-[11.5px] text-slate-400 leading-relaxed">
+                  All routine blood and hormone samples are processed directly at our Loharu Road facility. Zero long-distance transit preserves sample stability and test accuracy.
+                </p>
               </div>
             </div>
 
-            {/* COLUMN 2 & 3: Quick Links + Interactive Topic Chips (4 Cols on Desktop) */}
-            <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-              {/* Find Tests by Topic — Compact 2-Column Glass Pill Grid */}
-              <div>
-                <div className="flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-white">
-                  <Sparkles className="h-3.5 w-3.5 text-[#FFD98A]" />
-                  <span>Find Tests by Topic</span>
-                </div>
-
-                <div className="mt-3 grid grid-cols-2 gap-2">
-                  {TOPIC_CHIPS.map((topic) => (
-                    <a
-                      key={topic.label}
-                      href={topic.href}
-                      data-squircle="14"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleTopicClick(topic.keyword);
-                      }}
-                      className="apple-pressable squircle-btn group flex items-center justify-between rounded-[14px] bg-white/[0.05] border border-white/10 px-3 py-2 text-left text-xs font-semibold text-slate-200 hover:border-blue-400/40 hover:bg-white/[0.09] hover:text-white active:scale-[0.96] transition-all cursor-pointer"
-                    >
-                      <span className="flex items-center gap-2 truncate">
-                        <span className={`h-2 w-2 shrink-0 rounded-full ${topic.dotColor}`} />
-                        <span className="truncate">{topic.label}</span>
-                      </span>
-                      <ChevronRight className="h-3.5 w-3.5 shrink-0 text-slate-500 group-hover:text-blue-300 transition-transform group-hover:translate-x-0.5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Navigation Links — Compact Horizontal Pill Strip on Mobile */}
-              <div>
-                <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400">
-                  Quick Navigation
-                </h3>
-                <ul className="mt-2.5 flex flex-wrap gap-2">
-                  {QUICK_LINKS.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        data-squircle="10"
-                        className="inline-flex items-center rounded-[10px] bg-white/[0.05] border border-white/10 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:border-white/25 hover:text-white transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* COLUMN 4: Contact & Availability Bento Cards (4 Cols on Desktop) */}
-            <div className="lg:col-span-4 space-y-3">
+            {/* COLUMN 2: Contact & Availability Bento Cards (6 Cols on Desktop) */}
+            <div className="lg:col-span-6 space-y-3">
               <h3 className="text-xs font-extrabold uppercase tracking-wider text-white">
                 Contact & Central Hub Availability
               </h3>

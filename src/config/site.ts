@@ -18,7 +18,7 @@ export const siteConfig = {
     whatsapp: import.meta.env.VITE_LAB_WHATSAPP || '919991941207',
     email: import.meta.env.VITE_LAB_EMAIL || 'sawariyadiagnosticckd11@gmail.com',
   },
-  brand: { red: '#C62828', blue: '#155E9A', brown: '#7A4B2A', navy: '#102A43', cream: '#FFF9F3' },
+  brand: { red: '#C62828', blue: '#155E9A', brown: '#7A4B2A', navy: '#102A43', cream: '#F8FAFC' },
   integrations: {
     bookingUrl: import.meta.env.VITE_BOOKING_URL || '',
     calNamespace: 'sawariya-booking',

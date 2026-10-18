@@ -86,7 +86,7 @@ export function TestCatalog() {
   ];
 
   return (
-    <section id="tests" className="relative fluid-section bg-[#FFF9F3] overflow-hidden">
+    <section id="tests" className="relative fluid-section bg-[#F8FAFC] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-[20%] left-[10%] w-[30vw] h-[30vw] bg-[#155E9A]/10 blur-[80px] mix-blend-multiply" />
         <div className="absolute bottom-[20%] right-[10%] w-[40vw] h-[40vw] bg-[#155E9A]/10 blur-[100px] mix-blend-multiply" />

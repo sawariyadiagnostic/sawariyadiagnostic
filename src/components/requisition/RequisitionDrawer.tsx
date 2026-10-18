@@ -60,7 +60,7 @@ export function RequisitionDrawer() {
 
     <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogContent aria-label="Test request" style={{ backgroundColor: 'var(--surface-white)' }} className="flex max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] max-w-lg flex-col overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)] apple-squircle-modal rounded-[28px]">
-        <header className="flex items-start justify-between gap-4 border-b border-slate-200 bg-[#FFF9F3] px-5 py-4 sm:px-6">
+        <header className="flex items-start justify-between gap-4 border-b border-slate-200 bg-[#F8FAFC] px-5 py-4 sm:px-6">
           <div>
             <div className="mb-1 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#155E9A]"><ClipboardList className="h-3.5 w-3.5" /> Test request</div>
             <DialogTitle className="text-xl font-black text-[#102A43]">Review your selected tests</DialogTitle>
@@ -131,7 +131,7 @@ export function RequisitionDrawer() {
                 <strong className="shrink-0 text-sm text-[#102A43]">{formatInr(test.price)}</strong>
               </li>)}
             </ul>
-            <p className="mt-5 rounded-[14px] border border-[#D7C7B8] bg-[#FFF9F3] p-3 text-sm font-semibold text-[#102A43] apple-squircle-inner">Published test-price subtotal: {formatInr(subtotal)}</p>
+            <p className="mt-5 rounded-[14px] border border-slate-200 bg-[#F8FAFC] p-3 text-sm font-semibold text-[#102A43] apple-squircle-inner">Published test-price subtotal: {formatInr(subtotal)}</p>
             <div className="mt-3 rounded-[14px] border border-slate-200/80 bg-slate-50 p-3 flex items-center justify-between gap-3 text-xs apple-squircle-inner">
               <span className="text-slate-600 font-medium">Have a handwritten doctor's prescription slip?</span>
               <a href={prescriptionWhatsappUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-700 hover:underline shrink-0">

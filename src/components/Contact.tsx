@@ -10,7 +10,7 @@ export function Contact() {
     <section id="contact" className="relative fluid-section bg-[#F5F5F7] overflow-hidden">
       {/* Liquid Organic Mesh Gradient Background */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#FFF9F3]0/10 blur-[100px]  mix-blend-multiply" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[#155E9A]/5 blur-[100px] mix-blend-multiply" />
       </div>
 
       <div className="fluid-container relative z-10">

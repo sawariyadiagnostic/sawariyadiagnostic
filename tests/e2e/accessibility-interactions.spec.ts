@@ -117,7 +117,7 @@ test('current terms and patient rights dialog exposes the approved version and s
 
 test('current quality charter dialog exposes the approved identifier and source content', async ({ page }) => {
   await openPage(page);
-  const trigger = page.getByRole('button', { name: 'Quality Charter & Charity Camps' });
+  const trigger = page.getByRole('button', { name: /Quality Charter & (?:Health|Charity) Camps/i });
 
   await trigger.click();
   const dialog = page.getByRole('dialog', { name: 'Patient Quality & Community Charter' });

@@ -12,9 +12,10 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   scrollToSection: (sectionId: string) => void;
+  onOpenReportModal?: () => void;
 }
 
-export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, scrollToSection, onOpenReportModal }: MobileMenuProps) {
   const handleWhatsApp = () => {
     const url = whatsappHref('Hi, I want to book a test at Sawariya Diagnostic.'); if (url) window.open(url, '_blank', 'noopener,noreferrer');
     onClose();
@@ -39,9 +40,9 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
             {navigation.links.map((link) => (
               <button
                 key={link.href}
+                type="button"
                 onClick={() => {
                   scrollToSection(link.href);
-                  onClose();
                 }}
                 className="ui-control-button squircle-btn apple-pressable flex items-center justify-between px-4 py-3 min-h-11 text-[var(--text-primary)] hover:text-[#155E9A] hover:bg-white/60 active:bg-white/80 rounded-[14px] font-semibold text-sm transition-surface duration-150 active:scale-[0.96] border border-transparent hover:border-white/60 hover:shadow-2xs cursor-pointer"
               >
@@ -53,27 +54,33 @@ export function MobileMenu({ isOpen, onClose, scrollToSection }: MobileMenuProps
 
           <div className="mt-5 space-y-2.5 pt-4 border-t border-black/[0.06]">
             <Button
+              type="button"
               className="w-full btn-primary squircle-btn apple-pressable min-h-12 h-auto text-sm font-bold shadow-md rounded-[16px] active:scale-[0.96] cursor-pointer"
               onClick={() => {
                 scrollToSection('home-collection');
-                onClose();
               }}
             >
               <Home className="w-4 h-4 mr-2" />
               Request home collection
             </Button>
 
-            <ReportDownloadModal trigger={
-              <button
-                className="action-button btn-outline squircle-btn apple-pressable w-full min-h-12 h-auto rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.96] cursor-pointer"
-                onClick={onClose}
-              >
-                <FileDown className="w-4 h-4 text-[#155E9A]" />
-                <span>Report assistance</span>
-              </button>
-            } />
+            <button
+              type="button"
+              className="action-button btn-outline squircle-btn apple-pressable w-full min-h-12 h-auto rounded-[16px] text-slate-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 active:scale-[0.96] cursor-pointer"
+              onClick={() => {
+                if (onOpenReportModal) {
+                  onOpenReportModal();
+                } else {
+                  onClose();
+                }
+              }}
+            >
+              <FileDown className="w-4 h-4 text-[#155E9A]" />
+              <span>Report assistance</span>
+            </button>
 
             <button
+              type="button"
               onClick={handleWhatsApp}
               className="action-button btn-secondary squircle-btn apple-pressable w-full min-h-12 h-auto text-xs sm:text-sm font-bold rounded-[16px] flex items-center justify-center gap-2 active:scale-[0.96] shadow-xs cursor-pointer"
             >
