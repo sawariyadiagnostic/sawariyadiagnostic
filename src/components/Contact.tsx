@@ -1,27 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { siteConfig, telHref } from '@/config/site';
-import { Calendar, Clock, PhoneCall, ChevronRight, MapPin, Navigation, ExternalLink, Mail, Phone } from 'lucide-react';
+import { Clock, PhoneCall, MapPin, Navigation, ExternalLink, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
-import Cal, { getCalApi } from "@calcom/embed-react";
 import { footer } from '@/data/website-content';
 
 export function Contact() {
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [calendarError, setCalendarError] = useState(false);
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
-        cal("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-      } catch {
-        setCalendarError(true);
-      }
-    })();
-  }, []);
-
   return (
     <section id="contact" className="relative fluid-section bg-[#F5F5F7] overflow-hidden">
       {/* Liquid Organic Mesh Gradient Background */}
@@ -34,100 +18,17 @@ export function Contact() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
           <div className="inline-flex items-center gap-1.5 bg-white/60 backdrop-blur-md border border-white/80 px-3.5 py-1 rounded-full shadow-2xs">
-            <Calendar className="w-3.5 h-3.5 text-[#155E9A]" />
-            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Appointments & Location</span>
+            <MapPin className="w-3.5 h-3.5 text-[#155E9A]" />
+            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Lab Center &amp; Visiting Hours</span>
           </div>
           
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#1D1D1F] tracking-tight leading-tight">
-            Schedule Your Test or Visit Us
+            Visit Our Central Diagnostic Facility
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Book an appointment or request doorstep sample collection with our laboratory reception team.
+            Located on Loharu Road, opposite R.S. Sangwan Hospital. Central laboratory is open 24*7 for walk-in patients and emergency from hospitals.
           </p>
-        </div>
-
-        {/* Booking Widget (Apple Card Frame) */}
-        <div className="max-w-4xl mx-auto mb-10 sm:mb-14 relative z-10">
-          <div className="glass-panel ui-panel apple-squircle-panel rounded-[28px] bg-white/70 overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-white/80">
-            {/* Widget Header */}
-            <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] text-white px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15">
-              <div className="space-y-0.5 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h3 className="text-sm sm:lg font-bold text-white">Appointment Desk</h3>
-                  <span className="bg-[#155E9A] text-[var(--accent-on-dark)] text-xs font-bold px-2.5 py-0.5 rounded-full border border-white/20 inline-flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFD98A] animate-pulse" />
-                    Direct Lab Desk
-                  </span>
-                </div>
-                <p className="text-[11px] sm:text-xs text-[var(--text-on-dark)] font-normal">
-                  Reports verified within 12 hours • Helpline: {siteConfig.contact.phone}
-                </p>
-              </div>
-              <div className="hidden sm:flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs text-white shrink-0">
-                <span className="w-2 h-2 bg-[#FDE047] rounded-full animate-pulse" />
-                <span className="font-semibold">{siteConfig.claims.operatingHours}</span>
-              </div>
-            </div>
-            
-            {/* Cal.com Embed Container or Facade */}
-            <div className="p-5 sm:p-10 bg-white/40 backdrop-blur-md min-h-[380px] sm:min-h-[420px] flex items-center justify-center">
-              {calendarError ? (
-                <div role="alert" className="text-center max-w-md mx-auto space-y-4 py-4">
-                  <Calendar className="w-10 h-10 text-[#155E9A] mx-auto" />
-                  <div className="space-y-1.5">
-                    <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Calendar temporarily unavailable</h4>
-                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">Please call the lab desk to confirm an appointment or collection slot.</p>
-                  </div>
-                  <Button asChild className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] active:scale-[0.96]">
-                    <a href={telHref(siteConfig.contact.phone)}>
-                      <PhoneCall className="w-4 h-4 mr-2" />
-                      Call Desk ({siteConfig.contact.phone})
-                    </a>
-                  </Button>
-                </div>
-              ) : !showCalendar ? (
-                <div className="text-center max-w-md mx-auto space-y-4 sm:space-y-5 py-4">
-                   <div className="w-14 h-14 sm:w-16 sm:h-16 bg-slate-50 rounded-[20px] flex items-center justify-center mx-auto border border-slate-200 shadow-2xs">
-                     <Calendar className="w-7 h-7 sm:w-8 sm:h-8 text-[#155E9A]" />
-                   </div>
-                    
-                    <div className="space-y-1.5">
-                      <h4 className="text-lg sm:text-2xl font-black text-[#1D1D1F] tracking-tight">Choose Your Date & Time</h4>
-                      <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-                        Select a convenient time slot for doorstep sample collection or schedule your visit to our central diagnostic facility.
-                      </p>
-                    </div>
-
-                    <div className="pt-2 flex justify-center">
-                      <Button 
-                        className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-8 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96] cursor-pointer"
-                        onClick={() => setShowCalendar(true)}
-                      >
-                        <span>Launch Interactive Calendar</span>
-                        <ChevronRight className="w-4 h-4 ml-1.5" />
-                      </Button>
-                    </div>
-                </div>
-              ) : (
-                <div 
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    minHeight: '540px',
-                    overflow: 'scroll'
-                  }} 
-                >
-                  <Cal 
-                    namespace={siteConfig.integrations.calNamespace}
-                    calLink={siteConfig.integrations.calLink}
-                    style={{width:"100%",height:"100%",overflow:"scroll"}}
-                    config={{layout: 'month_view'}}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
         </div>
 
         {/* Interactive Google Map Embed & Location Card */}

@@ -1,13 +1,26 @@
-'use client';
-
+import { useState, useEffect } from 'react';
 import { m } from 'framer-motion';
-import { ArrowRight, Calendar, CheckCircle2, Clock, Coffee, Droplets, Home, MessageCircle, Phone, Pill, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, ChevronDown, ChevronUp, Clock, Coffee, Droplets, ExternalLink, Home, MessageCircle, Phone, Pill, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
 import { Button } from './ui/button';
-import { AppointmentBookingModal } from './ui/AppointmentBookingModal';
+import Cal, { getCalApi } from "@calcom/embed-react";
 
 export function HomeCollection() {
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarError, setCalendarError] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
+        cal("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
+      } catch {
+        setCalendarError(true);
+      }
+    })();
+  }, []);
+
   const whatsappUrl = whatsappHref('Hello Sawariya Diagnostic, I would like to ask about home sample collection.');
 
   const benefits = [
@@ -110,14 +123,63 @@ export function HomeCollection() {
               </div>
 
               <div className="space-y-3">
-                <AppointmentBookingModal
-                  trigger={
-                    <Button className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[16px] active:scale-[0.96] cursor-pointer">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Open appointment calendar
-                    </Button>
-                  }
-                />
+                <Button
+                  type="button"
+                  onClick={() => setShowCalendar(!showCalendar)}
+                  className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[16px] active:scale-[0.96] cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>{showCalendar ? 'Hide appointment calendar' : 'Open appointment calendar'}</span>
+                  {showCalendar ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
+                </Button>
+
+                {showCalendar && (
+                  <div className="pt-2 animate-fade-in space-y-2">
+                    <div className="rounded-[20px] bg-slate-50 border border-slate-200/90 p-2 sm:p-3 shadow-inner overflow-hidden">
+                      <div className="flex items-center justify-between px-2 pb-2 border-b border-slate-200/60 mb-2">
+                        <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                          <Calendar className="w-3.5 h-3.5 text-[#155E9A]" />
+                          <span>Choose Date &amp; Time</span>
+                        </span>
+                        <a
+                          href={`https://cal.com/${siteConfig.integrations.calLink}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] font-semibold text-[#155E9A] hover:underline inline-flex items-center gap-1"
+                        >
+                          <span>Full window</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                      {calendarError ? (
+                        <div role="alert" className="text-center py-6 px-4 space-y-3">
+                          <Calendar className="w-8 h-8 text-[#155E9A] mx-auto" />
+                          <div className="space-y-1">
+                            <h4 className="font-bold text-sm text-[#1D1D1F]">Calendar temporarily unavailable</h4>
+                            <p className="text-xs text-slate-500">
+                              Please call the lab desk to confirm an appointment or collection slot.
+                            </p>
+                          </div>
+                          <Button asChild size="sm" className="action-button btn-primary squircle-btn rounded-[12px] font-bold text-xs">
+                            <a href={telHref(siteConfig.contact.phone)}>
+                              <Phone className="w-3.5 h-3.5 mr-1.5" />
+                              Call Lab Desk ({siteConfig.contact.phone})
+                            </a>
+                          </Button>
+                        </div>
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', minHeight: '480px', overflow: 'scroll' }}>
+                          <Cal
+                            namespace={siteConfig.integrations.calNamespace}
+                            calLink={siteConfig.integrations.calLink}
+                            style={{ width: '100%', height: '100%', minHeight: '480px', overflow: 'scroll' }}
+                            config={{ layout: 'month_view' }}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[16px] text-xs font-bold active:scale-[0.96]">
                     <a href={telHref(siteConfig.contact.phone)}>

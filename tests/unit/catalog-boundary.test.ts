@@ -148,7 +148,7 @@ describe('approved public catalog', () => {
   });
 
   it('gives calendar initialization an honest contact fallback', () => {
-    const source = readFileSync(resolve(process.cwd(), 'src/components/Contact.tsx'), 'utf8');
+    const source = readFileSync(resolve(process.cwd(), 'src/components/HomeCollection.tsx'), 'utf8');
     expect(source).toContain('const [calendarError, setCalendarError] = useState(false);');
     expect(source).toContain('catch {');
     expect(source).toContain('Calendar temporarily unavailable');
