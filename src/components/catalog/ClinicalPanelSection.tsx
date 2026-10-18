@@ -7,7 +7,7 @@ import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { Button } from '../ui/button';
 
-export function ClinicalPanelSection() {
+export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: string } = {}) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [expandedPanelId, setExpandedPanelId] = useState<string | null>(null);
   const { isSelected, toggleTest } = useRequisition();
@@ -33,7 +33,7 @@ export function ClinicalPanelSection() {
   };
 
   const categories = [
-    { id: 'all', label: 'All 8 Master Batteries' },
+    { id: 'all', label: 'All 8 Health Profiles' },
     { id: 'hematology', label: 'Blood & Clotting' },
     { id: 'biochem', label: 'Liver, Kidney & Heart' },
     { id: 'metabolic', label: 'Diabetes & Metabolism' },
@@ -41,6 +41,16 @@ export function ClinicalPanelSection() {
   ];
 
   const filteredPanels = clinicalPanels.filter((panel) => {
+    if (searchQuery.trim().length > 0) {
+      const q = searchQuery.toLowerCase().trim();
+      const match =
+        panel.name.toLowerCase().includes(q) ||
+        panel.hindiName.toLowerCase().includes(q) ||
+        panel.parameters.some((p) => p.toLowerCase().includes(q)) ||
+        panel.doctorQuestion.toLowerCase().includes(q) ||
+        panel.doctorAnswer.toLowerCase().includes(q);
+      if (!match) return false;
+    }
     if (selectedCategory === 'all') return true;
     if (selectedCategory === 'hematology') return panel.department === 'Hematology';
     if (selectedCategory === 'biochem') return panel.department === 'Biochemistry' && panel.id !== 'panel-diabetes';
@@ -56,14 +66,14 @@ export function ClinicalPanelSection() {
         <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200/90 px-3.5 py-1 rounded-full shadow-2xs">
           <Layers className="w-4 h-4 text-[#155E9A]" />
           <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">
-            Accredited Diagnostic Batteries (Multi-Test Panels)
+            Accredited Clinical Profiles (Multi-Analyte Panels)
           </span>
         </div>
         <h3 className="text-xl sm:text-2xl font-black text-[#102A43] tracking-tight">
-          Single-Prick Multi-Analyte Batteries
+          Single-Prick Multi-Analyte Health Profiles
         </h3>
         <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-          Standardized clinical test batteries from our central laboratory SOPs. Sister tests share the exact same physical vacutainer tube — <strong>only 1 gentle needle prick</strong> required.
+          Standardized clinical profiles from our central laboratory SOPs. Sister tests share the exact same physical vacutainer tube — <strong>only 1 gentle needle prick</strong> required.
         </p>
 
         {/* Category Pills */}
@@ -86,8 +96,14 @@ export function ClinicalPanelSection() {
         </div>
       </div>
 
-      {/* Grid of Batteries */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+      {/* Grid of Clinical Profiles */}
+      {filteredPanels.length === 0 ? (
+        <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
+          <h4 className="text-base font-bold text-[#102A43]">No clinical profiles match &quot;{searchQuery}&quot;</h4>
+          <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all 74 individual lab tests.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         {filteredPanels.map((panel) => {
           const isExpanded = expandedPanelId === panel.id;
           const allSelected = areAllTestsSelected(panel);
@@ -257,12 +273,12 @@ export function ClinicalPanelSection() {
                   {allSelected ? (
                     <>
                       <Check className="h-3.5 w-3.5 mr-1.5 shrink-0 stroke-[2.5]" />
-                      <span>All Battery Tests Added</span>
+                      <span>All Profile Tests Added</span>
                     </>
                   ) : (
                     <>
                       <Plus className="h-3.5 w-3.5 mr-1.5 shrink-0" />
-                      <span>Add Battery to Request</span>
+                      <span>Add Complete Profile to Request</span>
                     </>
                   )}
                 </Button>
@@ -271,6 +287,7 @@ export function ClinicalPanelSection() {
           );
         })}
       </div>
+      )}
     </div>
   );
 }

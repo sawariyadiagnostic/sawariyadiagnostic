@@ -1,9 +1,9 @@
 /**
- * Accredited Clinical Diagnostic Batteries (Multi-Analyte Panels)
+ * Accredited Clinical Diagnostic Health Profiles & Panels (Multi-Analyte Profiles)
  * Extracted directly from central laboratory Standard Operating Procedures:
  * C:\Users\Dell\Desktop\python\REFERENCES AND INTERPREATIONS
  *
- * Each panel represents an unbundled, medically coherent battery of sister analytes
+ * Each panel represents an unbundled, medically coherent profile of sister analytes
  * sharing the same physical vacutainer tube and requiring only ONE single needle prick.
  */
 
@@ -177,7 +177,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     tubeColorClass: "vacutainer-dot-serum",
     prickCount: 1,
     needleSpec: "Pediatric 23G/25G ultra-thin safety needle with flash chamber",
-    doctorQuestion: "What does the Kidney Function & Electrolytes battery check?",
+    doctorQuestion: "What does the Kidney Function & Electrolytes profile check?",
     doctorAnswer: "Measures glomerular kidney filtration, nitrogenous waste elimination (Creatinine, Urea, Uric Acid), and life-critical cardiac/nerve electrolyte balance.",
     parameters: [
       "Serum Creatinine",
@@ -264,7 +264,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     id: "panel-diabetes",
     name: "Comprehensive Diabetic & Glycemic Panel",
     hindiName: "मधुमेह एवं तीन महीने की शुगर (HbA1c) जांच",
-    clusterRef: "Cluster 2.1 — Master Diabetic Battery",
+    clusterRef: "Cluster 2.1 — Master Diabetic Glycemic Profile",
     department: "Biochemistry",
     deptBadgeClass: "bg-amber-50 text-amber-900 border-amber-200/80",
     spineClass: "spine-metabolic",

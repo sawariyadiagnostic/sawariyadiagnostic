@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { siteConfig, telHref } from '@/config/site';
-import { Calendar, FileCheck, Home, Clock, PhoneCall, ChevronRight, MapPin, Navigation, ExternalLink, Mail, Phone } from 'lucide-react';
+import { Calendar, Clock, PhoneCall, ChevronRight, MapPin, Navigation, ExternalLink, Mail, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { footer } from '@/data/website-content';
@@ -21,36 +21,6 @@ export function Contact() {
       }
     })();
   }, []);
-
-  const infoCards = [
-    {
-      icon: FileCheck,
-      title: '1. Select Your Tests',
-      description: 'Choose from our transparent test menu or ask our lab team directly.',
-      style: {
-        iconBg: 'bg-blue-50 text-[#102A43] border-blue-200/80',
-        accentBar: 'bg-[#102A43]',
-      }
-    },
-    {
-      icon: Home,
-      title: '2. Lab or Home Sample',
-      description: 'Walk in anytime to our Loharu Road center or schedule doorstep sample collection.',
-      style: {
-        iconBg: 'bg-green-50 text-[#155E9A] border-green-200/80',
-        accentBar: 'bg-[#155E9A]',
-      }
-    },
-    {
-      icon: Clock,
-      title: '3. Digital WhatsApp Reports',
-      description: 'Doctor-verified PDF reports delivered directly to your WhatsApp with complete privacy.',
-      style: {
-        iconBg: 'bg-[#FFF9F3] text-[#7A4B2A] border-[#D7C7B8]',
-        accentBar: 'bg-[#7A4B2A]',
-      }
-    },
-  ];
 
   return (
     <section id="contact" className="relative fluid-section bg-[#F5F5F7] overflow-hidden">
@@ -129,23 +99,13 @@ export function Contact() {
                       </p>
                     </div>
 
-                    <div className="pt-2 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
+                    <div className="pt-2 flex justify-center">
                       <Button 
-                        className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-7 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96]"
+                        className="btn-primary squircle-btn apple-pressable action-button min-h-12 h-auto px-8 text-xs sm:text-sm font-bold rounded-[16px] shadow-md hover:shadow-lg active:scale-[0.96] cursor-pointer"
                         onClick={() => setShowCalendar(true)}
                       >
                         <span>Launch Interactive Calendar</span>
                         <ChevronRight className="w-4 h-4 ml-1.5" />
-                      </Button>
-                      <Button 
-                        asChild
-                        variant="outline"
-                        className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto px-6 text-xs sm:text-sm font-bold rounded-[16px] active:scale-[0.96]"
-                      >
-                        <a href={telHref(siteConfig.contact.phone)}>
-                          <PhoneCall className="w-4 h-4 mr-2 text-[#155E9A]" />
-                          <span>Call Desk ({siteConfig.contact.phone})</span>
-                        </a>
                       </Button>
                     </div>
                 </div>
@@ -286,25 +246,6 @@ export function Contact() {
 
             </div>
           </div>
-        </div>
-
-        {/* 3 Step Workflow Bento Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto relative z-10">
-          {infoCards.map((card) => (
-            <div 
-              key={card.title}
-              className="glass-card p-5 text-center flex flex-col items-center justify-between bg-white/70 rounded-[24px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] relative overflow-hidden transition-surface hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
-            >
-              {/* Top accent line */}
-              <div className={`absolute top-0 left-0 right-0 h-1 ${card.style.accentBar}`} />
-
-              <div className={`w-11 h-11 mx-auto mb-3 rounded-[16px] border flex items-center justify-center ${card.style.iconBg}`}>
-                <card.icon className="w-5 h-5" />
-              </div>
-              <h4 className="font-bold text-xs sm:text-sm text-[#1D1D1F] mb-1 leading-snug">{card.title}</h4>
-              <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed font-normal">{card.description}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>

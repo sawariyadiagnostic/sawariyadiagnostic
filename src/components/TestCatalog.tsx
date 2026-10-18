@@ -16,6 +16,7 @@ import { ClinicalPanelSection } from './catalog/ClinicalPanelSection';
 const TESTS_PER_PAGE = 12;
 
 export function TestCatalog() {
+  const [activeCatalogTab, setActiveCatalogTab] = useState<'panels' | 'tests'>('panels');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
@@ -39,11 +40,15 @@ export function TestCatalog() {
     const openHashTest = () => {
       const match = window.location.hash.match(/^#\/test\/([^/]+)$/);
       const test = match && tests.find((item) => item.id.toLowerCase() === match[1].toLowerCase());
-      setSelectedTest(test ?? null);
+      if (test) {
+        setSelectedTest(test);
+        setActiveCatalogTab('tests');
+      }
     };
     const handleSearch = (event: Event) => {
-      const detail = (event as CustomEvent<{ query?: string }>).detail;
+      const detail = (event as CustomEvent<{ query?: string; tab?: 'panels' | 'tests' }>).detail;
       if (detail?.query !== undefined) setSearchQuery(detail.query);
+      if (detail?.tab) setActiveCatalogTab(detail.tab);
     };
     openHashTest();
     window.addEventListener('hashchange', openHashTest);
@@ -88,7 +93,7 @@ export function TestCatalog() {
       </div>
 
       <div className="fluid-container relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2.5">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2.5">
           <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 px-4 py-1 rounded-full shadow-2xs h-[30.1px]">
             <TestTube className="w-6 h-6 text-[#155E9A]" />
             <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Diagnostic Test Catalog</span>
@@ -101,15 +106,46 @@ export function TestCatalog() {
           </p>
         </div>
 
-        <ClinicalPanelSection />
+        {/* Apple Segmented Switch: Complete Health Panels vs Individual Tests */}
+        <div className="max-w-md mx-auto mb-6 p-1.5 bg-slate-200/75 backdrop-blur-md rounded-[20px] flex items-center gap-1 border border-slate-300/50 shadow-inner">
+          <button
+            type="button"
+            onClick={() => { setActiveCatalogTab('panels'); }}
+            className={`flex-1 py-2.5 px-3 rounded-[16px] text-xs sm:text-sm font-black transition-all cursor-pointer active:scale-[0.97] flex items-center justify-center gap-1.5 ${
+              activeCatalogTab === 'panels'
+                ? 'bg-white text-[#102A43] shadow-[0_2px_8px_rgba(0,0,0,0.1)] border border-black/[0.04]'
+                : 'text-slate-600 hover:text-slate-900 font-bold'
+            }`}
+          >
+            <span>📦 Complete Health Panels</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
+              8
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => { setActiveCatalogTab('tests'); }}
+            className={`flex-1 py-2.5 px-3 rounded-[16px] text-xs sm:text-sm font-black transition-all cursor-pointer active:scale-[0.97] flex items-center justify-center gap-1.5 ${
+              activeCatalogTab === 'tests'
+                ? 'bg-white text-[#102A43] shadow-[0_2px_8px_rgba(0,0,0,0.1)] border border-black/[0.04]'
+                : 'text-slate-600 hover:text-slate-900 font-bold'
+            }`}
+          >
+            <span>🔬 Individual Tests</span>
+            <span className="text-[10.5px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
+              74
+            </span>
+          </button>
+        </div>
 
+        {/* Unified Search Box & Quick Symptom Pills */}
         <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
           <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] space-y-3">
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
               <Input
                 type="text"
-                placeholder="Ask about an individual test…"
+                placeholder={activeCatalogTab === 'panels' ? "Search health panels or organ checkups…" : "Ask about an individual test…"}
                 name="catalog-search"
                 autoComplete="off"
                 value={searchQuery}
@@ -146,32 +182,42 @@ export function TestCatalog() {
           </div>
         </div>
 
-        {searchQuery && (
-          <div role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium">
-            Found <strong>{filteredTests.length}</strong> tests matching &quot;{searchQuery}&quot;
-          </div>
+        {/* Tab 1: Complete Health Panels */}
+        {activeCatalogTab === 'panels' && (
+          <ClinicalPanelSection searchQuery={searchQuery} />
         )}
 
-        {hasFilter && filteredTests.length === 0 ? (
-          <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
-            <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
-            <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable mt-4 min-h-11 rounded-[16px] font-bold cursor-pointer">Clear filters</Button>
-          </div>
-        ) : (
+        {/* Tab 2: Individual Tests */}
+        {activeCatalogTab === 'tests' && (
           <>
-            <div className="fluid-grid-cards-sm">
-              {visibleTests.map((item) => {
-                const test = tests.find((candidate) => candidate.id === item.id);
-                return test ? <TestCard key={test.id} test={test} isSelected={isSelected(test.id)} onToggleRequest={toggleTest} onViewDetails={openTest} /> : null;
-              })}
-            </div>
-            <BatchPaginationBar
-              currentPage={currentPage}
-              pageSize={TESTS_PER_PAGE}
-              totalItems={filteredTests.length}
-              onPageChange={setCurrentPage}
-            />
+            {searchQuery && (
+              <div role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium">
+                Found <strong>{filteredTests.length}</strong> tests matching &quot;{searchQuery}&quot;
+              </div>
+            )}
+
+            {hasFilter && filteredTests.length === 0 ? (
+              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
+                <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
+                <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
+                <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable mt-4 min-h-11 rounded-[16px] font-bold cursor-pointer">Clear filters</Button>
+              </div>
+            ) : (
+              <>
+                <div className="fluid-grid-cards-sm">
+                  {visibleTests.map((item) => {
+                    const test = tests.find((candidate) => candidate.id === item.id);
+                    return test ? <TestCard key={test.id} test={test} isSelected={isSelected(test.id)} onToggleRequest={toggleTest} onViewDetails={openTest} /> : null;
+                  })}
+                </div>
+                <BatchPaginationBar
+                  currentPage={currentPage}
+                  pageSize={TESTS_PER_PAGE}
+                  totalItems={filteredTests.length}
+                  onPageChange={setCurrentPage}
+                />
+              </>
+            )}
           </>
         )}
       </div>

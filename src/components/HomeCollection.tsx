@@ -5,6 +5,7 @@ import { ArrowRight, Calendar, CheckCircle2, Clock, Coffee, Droplets, Home, Mess
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
 import { Button } from './ui/button';
+import { AppointmentBookingModal } from './ui/AppointmentBookingModal';
 
 export function HomeCollection() {
   const whatsappUrl = whatsappHref('Hello Sawariya Diagnostic, I would like to ask about home sample collection.');
@@ -109,12 +110,14 @@ export function HomeCollection() {
               </div>
 
               <div className="space-y-3">
-                <Button asChild className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[16px] active:scale-[0.96]">
-                  <a href="#contact">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Open appointment calendar
-                  </a>
-                </Button>
+                <AppointmentBookingModal
+                  trigger={
+                    <Button className="action-button btn-primary squircle-btn apple-pressable w-full min-h-12 h-auto text-sm font-bold rounded-[16px] active:scale-[0.96] cursor-pointer">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      Open appointment calendar
+                    </Button>
+                  }
+                />
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Button asChild variant="outline" className="action-button btn-outline squircle-btn apple-pressable min-h-12 h-auto rounded-[16px] text-xs font-bold active:scale-[0.96]">
                     <a href={telHref(siteConfig.contact.phone)}>

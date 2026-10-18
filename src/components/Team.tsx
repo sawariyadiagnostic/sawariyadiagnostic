@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { m, AnimatePresence } from 'framer-motion';
-import { Microscope, ShieldCheck, Users, ClipboardCheck, Truck, Stethoscope, FlaskConical, UserRound } from 'lucide-react';
+import { Microscope, ShieldCheck, Users, ClipboardCheck, Truck, Stethoscope, FlaskConical, UserRound, ChevronDown, ChevronUp } from 'lucide-react';
 import { teamStructure, type TeamRole } from '@/data/team-structure';
 
 const governanceIcons = [Stethoscope, ShieldCheck, ClipboardCheck, Microscope, Truck];
@@ -68,6 +68,7 @@ function RoleCard({ role, index }: { role: TeamRole; index: number }) {
 }
 
 export function Team() {
+  const [isExpanded, setIsExpanded] = useState(false);
   const [activeTier, setActiveTier] = useState<'all' | 'governance' | 'operations'>('all');
 
   const governance = teamStructure.filter((role) => role.tier === 'governance' && role.publishState === 'public');
@@ -79,26 +80,53 @@ export function Team() {
       ? governance
       : operations;
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#team') {
+      setIsExpanded(true);
+    }
+    const handleHash = () => {
+      if (window.location.hash === '#team') {
+        setIsExpanded(true);
+      }
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   return (
-    <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#FBFBFD] py-8 sm:py-12 border-t border-slate-200/60">
+    <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#FBFBFD] py-6 sm:py-10 border-t border-slate-200/60">
       <div className="pointer-events-none absolute left-[-10%] top-[20%] h-[40vw] w-[40vw] bg-teal-600/5 blur-[80px]" />
       
       <div className="relative z-10 fluid-container">
         {/* Compact Header */}
-        <header className="mx-auto mb-5 max-w-2xl space-y-2 text-center sm:mb-6">
+        <header className="mx-auto mb-4 max-w-2xl space-y-2 text-center">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-white/80 px-3.5 py-1 shadow-2xs">
             <ShieldCheck className="h-3.5 w-3.5 text-[#0B6E66]" aria-hidden="true" />
             <span className="text-[11px] font-bold uppercase tracking-wider text-slate-800">Laboratory Quality Structure</span>
           </div>
           
-          <h2 id="team-heading" className="text-[clamp(1.5rem,1.1rem+2vw,2.25rem)] font-black leading-tight tracking-tight text-[#0A1128]">
+          <h2 id="team-heading" className="text-[clamp(1.35rem,1rem+1.8vw,2rem)] font-black leading-tight tracking-tight text-[#0A1128]">
             A Quality System Built Around Accountable Roles
           </h2>
           
           <p className="text-xs sm:text-sm leading-relaxed text-slate-600">
             Clinical oversight, quality ownership, technical control, and coordinated collection working together across the diagnostic journey.
           </p>
+
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="inline-flex items-center gap-2 squircle-btn apple-pressable px-4 py-2 rounded-[14px] text-xs font-bold bg-white border border-slate-200/90 text-[#0A1128] hover:border-slate-300 shadow-2xs hover:shadow-sm cursor-pointer active:scale-[0.96] transition-all"
+            >
+              <span>{isExpanded ? 'Hide Role Profiles' : `View Quality Roles & Structure (${governance.length + operations.length} Roles)`}</span>
+              {isExpanded ? <ChevronUp className="w-3.5 h-3.5 text-slate-500" /> : <ChevronDown className="w-3.5 h-3.5 text-slate-500" />}
+            </button>
+          </div>
         </header>
+
+        {isExpanded && (
+          <div className="pt-4 animate-fade-in">
 
         {/* Space-Saving Segmented Filter Tabs */}
         <div className="mx-auto mb-6 flex flex-wrap items-center justify-center gap-2">
@@ -154,6 +182,8 @@ export function Team() {
             </m.div>
           </AnimatePresence>
         </div>
+          </div>
+        )}
       </div>
     </section>
   );
