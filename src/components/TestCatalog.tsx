@@ -158,7 +158,7 @@ export function TestCatalog() {
                 </button>
               )}
             </div>
-            <div className="flex gap-1.5 overflow-x-auto pb-1 pt-0.5 scrollbar-none items-center">
+            <div className="flex gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none items-center scroll-smooth overscroll-x-contain">
               {quickSymptoms.map((symptom) => {
                 const isActive = (symptom.query === '' && searchQuery === '') || (symptom.query !== '' && searchQuery.toLowerCase().includes(symptom.query.toLowerCase()));
                 return (
@@ -170,11 +170,11 @@ export function TestCatalog() {
                       setSelectedCategory(symptom.cat);
                       resetPage();
                     }}
-                    className={`min-h-9 px-3.5 squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface whitespace-nowrap active:scale-[0.96] cursor-pointer inline-flex items-center ${
+                    className={`min-h-9 px-3.5 shrink-0 flex-shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface active:scale-[0.96] cursor-pointer inline-flex items-center ${
                       isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
                     }`}
                   >
-                    {symptom.label}
+                    <span>{symptom.label}</span>
                   </button>
                 );
               })}

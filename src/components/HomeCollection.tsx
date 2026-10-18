@@ -9,6 +9,7 @@ import Cal, { getCalApi } from "@calcom/embed-react";
 export function HomeCollection() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [calendarError, setCalendarError] = useState(false);
+  const [useDirectEmbed, setUseDirectEmbed] = useState(false);
 
   useEffect(() => {
     (async function () {
@@ -20,6 +21,19 @@ export function HomeCollection() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (showCalendar && !useDirectEmbed) {
+      // If the embed script is blocked by an ad-blocker or hangs, automatically switch to direct iframe
+      const timer = setTimeout(() => {
+        const calIframe = document.querySelector('.cal-inline-container iframe, iframe[src*="cal.com"]');
+        if (!calIframe) {
+          setUseDirectEmbed(true);
+        }
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [showCalendar, useDirectEmbed]);
 
   const whatsappUrl = whatsappHref('Hello Sawariya Diagnostic, I would like to ask about home sample collection.');
 
@@ -136,20 +150,30 @@ export function HomeCollection() {
                 {showCalendar && (
                   <div className="pt-2 animate-fade-in space-y-2">
                     <div className="rounded-[20px] bg-slate-50 border border-slate-200/90 p-2 sm:p-3 shadow-inner overflow-hidden">
-                      <div className="flex items-center justify-between px-2 pb-2 border-b border-slate-200/60 mb-2">
+                      <div className="flex items-center justify-between px-2 pb-2 border-b border-slate-200/60 mb-2 gap-2 flex-wrap">
                         <span className="text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
                           <Calendar className="w-3.5 h-3.5 text-[#155E9A]" />
                           <span>Choose Date &amp; Time</span>
                         </span>
-                        <a
-                          href={`https://cal.com/${siteConfig.integrations.calLink}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[11px] font-semibold text-[#155E9A] hover:underline inline-flex items-center gap-1"
-                        >
-                          <span>Full window</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
+                        <div className="flex items-center gap-2 text-[11px]">
+                          <button
+                            type="button"
+                            onClick={() => setUseDirectEmbed(!useDirectEmbed)}
+                            className="font-semibold text-slate-500 hover:text-[#155E9A] underline decoration-dotted cursor-pointer transition-colors"
+                          >
+                            {useDirectEmbed ? 'Switch to widget' : 'Trouble loading? Direct view'}
+                          </button>
+                          <span className="text-slate-300">•</span>
+                          <a
+                            href={`https://cal.com/${siteConfig.integrations.calLink}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold text-[#155E9A] hover:underline inline-flex items-center gap-1"
+                          >
+                            <span>Full window</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
                       </div>
                       {calendarError ? (
                         <div role="alert" className="text-center py-6 px-4 space-y-3">
@@ -168,13 +192,23 @@ export function HomeCollection() {
                           </Button>
                         </div>
                       ) : (
-                        <div style={{ width: '100%', height: '100%', minHeight: '480px', overflow: 'scroll' }}>
-                          <Cal
-                            namespace={siteConfig.integrations.calNamespace}
-                            calLink={siteConfig.integrations.calLink}
-                            style={{ width: '100%', height: '100%', minHeight: '480px', overflow: 'scroll' }}
-                            config={{ layout: 'month_view' }}
-                          />
+                        <div className="w-full h-[620px] min-h-[600px] rounded-[16px] overflow-hidden bg-white shadow-inner relative">
+                          {useDirectEmbed ? (
+                            <iframe
+                              src={`https://cal.com/${siteConfig.integrations.calLink}?embed=true`}
+                              className="w-full h-full min-h-[600px] border-0"
+                              title="Sawariya Diagnostics Appointment Booking"
+                            />
+                          ) : (
+                            <div style={{ width: '100%', height: '620px', minHeight: '600px', overflow: 'scroll' }}>
+                              <Cal
+                                namespace={siteConfig.integrations.calNamespace}
+                                calLink={siteConfig.integrations.calLink}
+                                style={{ width: '100%', height: '620px', minHeight: '600px', overflow: 'scroll' }}
+                                config={{ layout: 'month_view' }}
+                              />
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
