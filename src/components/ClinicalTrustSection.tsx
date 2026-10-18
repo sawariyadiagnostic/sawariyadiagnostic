@@ -129,7 +129,7 @@ export const ClinicalTrustSection: React.FC<Props & { showFilters?: boolean }> =
           <div>
             <h3 className="font-bold text-[#0A1128] text-sm">Doorstep Blood Collection</h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-              Safe vacutainer collection at your home across Charkhi Dadri (07:00 AM–07:00 PM).
+              Single-prick vacutainer collection at your home across Charkhi Dadri with cold-chain box.
             </p>
           </div>
         </div>

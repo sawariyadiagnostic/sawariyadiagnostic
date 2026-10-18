@@ -117,6 +117,10 @@ Pick 5 per run.
 
 | Frame | Vantage prompt | Tags |
 |---|---|---|
+| **information entropy crusher** | You calculate information density. Slogans and facts repeated >1 time are dead weight. Omitted critical answers are systemic failures. Purge redundancy, maximize bits of new useful knowledge per word. | code, design, general |
+| **clinical regulator (NABL/ISO 15189)** | You audit clinical laboratories for regulatory compliance, patient safety, specimen integrity, and medico-legal liability. What clinical fact is unverified or repetitive? What must be provable, documented, and unambiguous? | design, general |
+| **diagnostic panel architect** | You deconstruct and synthesize multi-analyte batteries. How do individual biomarkers link into cohesive clinical panels (e.g. LFT, KFT, CBC+ESR, Lipid ASCVD)? How does the interface clearly distinguish between single tests and multi-test panels without cognitive overload? | code, design |
+| **anxious patient / health literacy** | You are a worried patient or family member holding a doctor's slip. You have low bandwidth and high anxiety. What medical jargon confuses you? What immediate, water-only, fasting, and specimen reassurance calms your anxiety in 3 seconds? | design, general, wild |
 | **hardware engineer** | You think in latency, memory layout, and physical constraints. Re-ask this as a hardware/firmware problem. What does the bus topology, cache, timing budget tell you? | code, wild |
 | **regulator** | You audit systems for compliance and failure modes. What must be provable, traceable, or refusable here? | design, general |
 | **10-year-old** | You are a curious 10 year old who has never seen software. Describe naive but unencumbered approaches. Ignore convention. | general, wild |
@@ -132,6 +136,16 @@ Pick 5 per run.
 | **speedrunner** | You are a speedrunner. Find glitches, skips, out-of-bounds tricks, frame-perfect shortcuts. What is the abusive-but-legal path? | code, wild |
 | **ant colony** | No central planner. Many dumb agents, local rules, pheromone trails. How does the problem solve itself emergently? | code, wild |
 | **3am on-call** | You are the on-call engineer woken at 3am when this breaks. What design would let you not get paged? | code, design |
+
+### Autonomous Time-Boxing & Timer Governance (`schedule` integration)
+
+When running ADHD on large-scale audits (e.g. multi-gigabyte reference corpuses or deep codebase audits):
+1. **Safety Watchdog Timer:** Set a one-shot watchdog timer via `schedule(DurationSeconds=300, Prompt="Watchdog check on divergent subagents", TimerCondition="any")` before launching parallel subagents. If any subagent finishes early, the timer automatically cancels early and execution wakes up reactively.
+2. **Timer Extension Protocol:** When an exhaustive reference extraction exceeds the initial time window, use `schedule` with an extended duration to maintain autonomous momentum without looping or idle spinning.
+3. **Information Entropy Ratio ($\mathbb{H}_{\text{audit}}$):**
+   - Calculate Redundancy Score: count occurrences of identical strings across viewports (e.g., hours stated 3x in 80 lines).
+   - Calculate Omission Score: count clinical reference parameters present in SOP canon but absent in patient interface.
+   - Target state: Redundancy $\to 0$, Omission $\to 0$.
 
 ### Picking frames
 

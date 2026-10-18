@@ -11,6 +11,7 @@ import { buildSearchIndex, createSearchEngine } from '@/lib/search-fuse';
 import { usePagination } from '@/lib/use-pagination';
 import { useRequisition } from './requisition/RequisitionContext';
 import { BatchPaginationBar } from './BatchPaginationBar';
+import { ClinicalPanelSection } from './catalog/ClinicalPanelSection';
 
 const TESTS_PER_PAGE = 12;
 
@@ -99,6 +100,8 @@ export function TestCatalog() {
             Browse individual tests and ask the lab about collection options.
           </p>
         </div>
+
+        <ClinicalPanelSection />
 
         <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
           <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] space-y-3">

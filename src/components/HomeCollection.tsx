@@ -1,7 +1,7 @@
 'use client';
 
 import { m } from 'framer-motion';
-import { Calendar, CheckCircle2, Clock, Home, MessageCircle, Phone, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, Clock, Coffee, Droplets, Home, MessageCircle, Phone, Pill, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
 import { Button } from './ui/button';
@@ -49,7 +49,7 @@ export function HomeCollection() {
           >
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-[0_2px_12px_rgba(0,0,0,0.1)]">
               <Home className="w-3.5 h-3.5 text-blue-200" />
-               <span className="text-xs font-bold text-blue-100">Home collection: 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients and emergency from hospitals</span>
+              <span className="text-xs font-bold text-blue-100">Single-Prick Multi-Test Consolidation • Sealed Cold-Chain Transit</span>
             </div>
 
             <div className="space-y-2 sm:space-y-3">
@@ -137,6 +137,140 @@ export function HomeCollection() {
               </p>
             </div>
           </m.div>
+        </div>
+
+        {/* Caregiver Pre-Analytical Clarity & Evening OPD Catchment Grid */}
+        <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 grid md:grid-cols-2 gap-6 sm:gap-8">
+          {/* Caregiver Fasting Checklist */}
+          <div className="glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15">
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center shrink-0">
+                <Coffee className="w-4 h-4" />
+              </span>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-white">
+                  Caregiver Clarity: &quot;Can Dad Drink Chai or Take His BP Pill?&quot;
+                </h4>
+                <p className="text-[11px] text-slate-300">
+                  Pre-analytical morning guidance for fasting blood draws
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-2.5 text-xs">
+              <div className="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white/5 border border-white/10">
+                <span className="p-1 rounded-full bg-emerald-500/20 text-emerald-400 mt-0.5 shrink-0">
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                </span>
+                <div>
+                  <strong className="text-white">Plain Drinking Water: Allowed</strong>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    1–2 glasses of water are recommended. Well-hydrated veins plump up, making needle insertion smooth and virtually painless.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white/5 border border-white/10">
+                <span className="p-1 rounded-full bg-rose-500/20 text-rose-400 mt-0.5 shrink-0">
+                  <Coffee className="w-3.5 h-3.5" />
+                </span>
+                <div>
+                  <strong className="text-white">Morning Chai, Coffee &amp; Milk: Hold Until After Draw</strong>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Milk fat, caffeine, and sugar interfere with lipid, enzyme, and glucose assays. Please have morning tea right after sample collection.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white/5 border border-white/10">
+                <span className="p-1 rounded-full bg-blue-500/20 text-cyan-400 mt-0.5 shrink-0">
+                  <Pill className="w-3.5 h-3.5" />
+                </span>
+                <div>
+                  <strong className="text-white">Blood Pressure &amp; Heart Meds: Take With Water</strong>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Never skip routine blood pressure medicines. Take with a small sip of water, unless your cardiologist specifically directs otherwise.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white/5 border border-white/10">
+                <span className="p-1 rounded-full bg-amber-500/20 text-amber-400 mt-0.5 shrink-0">
+                  <Syringe className="w-3.5 h-3.5" />
+                </span>
+                <div>
+                  <strong className="text-white">Diabetic Medication &amp; Insulin: Hold for Breakfast</strong>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Fasting glucose must reflect your natural morning baseline. Keep morning diabetes pills or insulin ready to take with breakfast right after the prick.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Evening OPD Catchment Clock */}
+          <div className="glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15">
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-[10px] bg-blue-500/20 text-cyan-300 border border-blue-500/30 flex items-center justify-center shrink-0">
+                <Clock className="w-4 h-4" />
+              </span>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-white">
+                  Evening OPD Clock: In Time for Doctor&apos;s Clinic
+                </h4>
+                <p className="text-[11px] text-slate-300">
+                  Predictable workflow so you never have to visit the doctor twice
+                </p>
+              </div>
+            </div>
+
+            <div className="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-white/20">
+              <div className="relative">
+                <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-teal-400 ring-4 ring-slate-900" />
+                <div className="text-xs">
+                  <span className="font-extrabold text-teal-300">07:00 AM – 10:30 AM • Doorstep Draw</span>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Sample collected at your home and sealed in a temperature-monitored cold-chain box.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-blue-400 ring-4 ring-slate-900" />
+                <div className="text-xs">
+                  <span className="font-extrabold text-blue-300">11:00 AM • Central Laboratory Accession</span>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Centrifuged and run on central in-house calibrated analyzers following NABL standard protocols.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-amber-400 ring-4 ring-slate-900" />
+                <div className="text-xs">
+                  <span className="font-extrabold text-amber-300">02:00 PM • Digital Report Verification</span>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Doctor-verified PDF report delivered straight to your WhatsApp with full biomarker breakdown.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-slate-900" />
+                <div className="text-xs">
+                  <span className="font-extrabold text-emerald-300">05:00 PM • Ready for Doctor&apos;s Evening OPD</span>
+                  <p className="text-slate-300 text-[11px] mt-0.5">
+                    Walk into your treating doctor&apos;s clinic with completed diagnostic reports ready on your phone.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-2.5 rounded-[12px] bg-white/5 border border-white/10 text-[11px] text-slate-300 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+              <span>Single-prick multi-analyte panels save elderly patients from repeated venipunctures.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
