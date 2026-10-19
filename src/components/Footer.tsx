@@ -102,7 +102,7 @@ export function Footer({
                     type="button"
                     data-squircle="14"
                     onClick={onOpenReportModal}
-                    className="apple-pressable squircle-btn inline-flex items-center gap-2 rounded-[14px] bg-gradient-to-r from-[#155E9A] to-[#0F4775] px-4 py-2.5 text-xs font-extrabold text-white shadow-md border border-blue-400/30 hover:brightness-110 active:scale-[0.96] transition-transform cursor-pointer"
+                    className="apple-pressable squircle-btn btn-specular-sapphire inline-flex items-center gap-2 rounded-[14px] px-4 py-2.5 text-xs font-extrabold text-white active:scale-[0.96] transition-transform cursor-pointer"
                   >
                     <FileText className="h-4 w-4 text-[#FFD98A]" />
                     <span>Report Assistance</span>
@@ -113,7 +113,7 @@ export function Footer({
                       <button
                         type="button"
                         data-squircle="14"
-                        className="apple-pressable squircle-btn inline-flex items-center gap-2 rounded-[14px] bg-gradient-to-r from-[#155E9A] to-[#0F4775] px-4 py-2.5 text-xs font-extrabold text-white shadow-md border border-blue-400/30 hover:brightness-110 active:scale-[0.96] transition-transform cursor-pointer"
+                        className="apple-pressable squircle-btn btn-specular-sapphire inline-flex items-center gap-2 rounded-[14px] px-4 py-2.5 text-xs font-extrabold text-white active:scale-[0.96] transition-transform cursor-pointer"
                       >
                         <FileText className="h-4 w-4 text-[#FFD98A]" />
                         <span>Report Assistance</span>

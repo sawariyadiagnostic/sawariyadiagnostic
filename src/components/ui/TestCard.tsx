@@ -19,22 +19,23 @@ interface DepartmentInfo {
 
 function getDepartmentInfo(category = '', name = ''): DepartmentInfo {
   const combined = `${category} ${name}`.toLowerCase();
+  const baseBadge = 'bg-slate-100 text-slate-700 border-slate-200/90';
   if (combined.includes('hemat') || combined.includes('cbc') || combined.includes('blood count') || combined.includes('esr') || combined.includes('platelet') || combined.includes('hemoglobin') || combined.includes('smear') || combined.includes('rbc') || combined.includes('wbc')) {
-    return { name: 'Hematology', badgeClass: 'bg-rose-50 text-rose-900 border-rose-200/80' };
+    return { name: 'Hematology', badgeClass: baseBadge };
   }
   if (combined.includes('thyroid') || combined.includes('vitamin') || combined.includes('hormone') || combined.includes('clia') || combined.includes('ferritin') || combined.includes('hcg') || combined.includes('psa') || combined.includes('prolactin') || combined.includes('fsh') || combined.includes('lh') || combined.includes('t3') || combined.includes('t4') || combined.includes('tsh') || combined.includes('b12') || combined.includes('d3')) {
-    return { name: 'Endocrinology', badgeClass: 'bg-purple-50 text-purple-900 border-purple-200/80' };
+    return { name: 'Endocrinology', badgeClass: baseBadge };
   }
   if (combined.includes('sugar') || combined.includes('glucose') || combined.includes('hba1c') || combined.includes('diabet')) {
-    return { name: 'Diabetes Care', badgeClass: 'bg-amber-50 text-amber-900 border-amber-200/80' };
+    return { name: 'Diabetes Care', badgeClass: baseBadge };
   }
   if (combined.includes('lipid') || combined.includes('cholesterol') || combined.includes('triglyceride') || combined.includes('lft') || combined.includes('kft') || combined.includes('liver') || combined.includes('kidney') || combined.includes('creatinine') || combined.includes('uric') || combined.includes('bilirubin') || combined.includes('sgot') || combined.includes('sgpt') || combined.includes('protein') || combined.includes('albumin') || combined.includes('calcium') || combined.includes('amylase') || combined.includes('lipase') || combined.includes('iron') || combined.includes('urea') || combined.includes('egfr')) {
-    return { name: 'Biochemistry', badgeClass: 'bg-teal-50 text-teal-900 border-teal-200/80' };
+    return { name: 'Biochemistry', badgeClass: baseBadge };
   }
   if (combined.includes('fever') || combined.includes('dengue') || combined.includes('malaria') || combined.includes('typhoid') || combined.includes('urine') || combined.includes('stool') || combined.includes('widal') || combined.includes('culture') || combined.includes('hiv') || combined.includes('antibody') || combined.includes('crp') || combined.includes('rheumatoid') || combined.includes('ige')) {
-    return { name: 'Microbiology', badgeClass: 'bg-indigo-50 text-indigo-900 border-indigo-200/80' };
+    return { name: 'Microbiology', badgeClass: baseBadge };
   }
-  return { name: 'Pathology', badgeClass: 'bg-blue-50 text-blue-900 border-blue-200/80' };
+  return { name: 'Pathology', badgeClass: baseBadge };
 }
 
 function getDepartmentSpine(category = '', name = ''): string {
@@ -184,7 +185,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           {/* Request actions */}
           <div className="action-row">
             {isSelected ? (
-              <div role="status" aria-live="polite" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-[14px] border border-emerald-300/80 bg-[#EFF7F2] px-3 py-2 text-xs font-bold text-[#185B3B] shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_rgba(5,150,105,0.12)]">
+              <div role="status" aria-live="polite" className="btn-specular-emerald flex min-h-11 w-full items-center justify-center gap-2 rounded-[14px] px-3 py-2 text-xs font-bold text-white">
                 <Check className="h-4 w-4 shrink-0 stroke-[2.5]" />
                 <span>Added to Request</span>
               </div>

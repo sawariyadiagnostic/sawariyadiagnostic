@@ -58,18 +58,18 @@ export function Services() {
               <div>
                 {/* Header: Icon + Method Badge */}
                 <div className="flex items-center justify-between mb-4">
-                  <div className={`w-[48px] h-[44px] rounded-[14px] border flex items-center justify-center transition-colors duration-200 ${service.theme.iconBg}`}>
+                  <div className="w-[48px] h-[44px] rounded-[14px] border border-slate-200/90 bg-slate-50 text-[#102A43] flex items-center justify-center group-hover:bg-[#102A43] group-hover:text-white transition-colors duration-200 shadow-2xs">
                     <service.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
                   {service.methodBadge && (
-                    <span className={`flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full border shadow-2xs ${service.theme.badge}`}>
-                      <ShieldCheck className="w-3 h-3 text-[#0B6E66]" /> {service.methodBadge}
+                    <span className="flex items-center gap-1 text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-slate-200/80 bg-slate-100 text-slate-700 shadow-2xs">
+                      <ShieldCheck className="w-3 h-3 text-[#155E9A]" /> {service.methodBadge}
                     </span>
                   )}
                 </div>
                 
                 {/* Content */}
-                <h3 className="font-bold text-base sm:text-lg text-[#0A1128] mb-1.5 group-hover:text-[#0A6C82] transition-colors leading-snug">
+                <h3 className="font-bold text-base sm:text-lg text-[#0A1128] mb-1.5 group-hover:text-[#155E9A] transition-colors leading-snug">
                   {service.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
@@ -79,7 +79,7 @@ export function Services() {
                 {/* Clickable Biomarker Tags */}
                 {service.biomarkers && service.biomarkers.length > 0 && (
                   <div className="mt-3.5 pt-3 border-t border-slate-100">
-                    <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                       Key Biomarkers &amp; Tests:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -106,12 +106,25 @@ export function Services() {
                 <span className="text-[11px] text-slate-500 font-medium">
                   In-House Testing
                 </span>
-                <span className="flex items-center gap-1 text-[#0A6C82] group-hover:text-[#0B6E66] font-bold transition-transform group-hover:translate-x-0.5 text-xs">
+                <span className="flex items-center gap-1 text-[#155E9A] group-hover:text-[#0F4775] font-bold transition-transform group-hover:translate-x-0.5 text-xs">
                   View Tests <ArrowRight className="w-3.5 h-3.5 ml-0.5" />
                 </span>
               </div>
             </m.div>
           ))}
+        </div>
+
+        {/* The Star CTA of the Services Section */}
+        <div className="mt-8 sm:mt-10 text-center">
+          <button
+            type="button"
+            onClick={() => navigateToTests('')}
+            className="action-button btn-specular-sapphire squircle-btn apple-pressable px-6 py-3.5 text-xs sm:text-sm font-bold active:scale-[0.96] shadow-md inline-flex items-center gap-2 cursor-pointer"
+          >
+            <Activity className="w-4 h-4 text-cyan-200" />
+            <span>Explore All 74 Individual Diagnostic Tests</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </section>

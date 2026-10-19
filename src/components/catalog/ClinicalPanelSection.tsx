@@ -131,7 +131,7 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
 
                 {/* Top Row: Department + 1-Prick Badge */}
                 <div className="flex items-center justify-between gap-1.5 mb-2">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-[8px] border inline-flex items-center gap-1.5 ${panel.deptBadgeClass}`}>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-[8px] border inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 border-slate-200/90">
                     <span className={`w-1.5 h-1.5 rounded-full ${panel.tubeColorClass}`} />
                     {panel.department}
                   </span>
@@ -266,7 +266,7 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
                   onClick={() => handleTogglePanel(panel)}
                   className={`action-button squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold active:scale-[0.96] cursor-pointer shadow-md ${
                     allSelected
-                      ? 'bg-[#EFF7F2] text-[#185B3B] border border-emerald-300/80 hover:bg-[#E2F1E7]'
+                      ? 'btn-specular-emerald text-white'
                       : 'btn-primary'
                   }`}
                 >

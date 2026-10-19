@@ -228,6 +228,62 @@
     transform: scale(0.96) translateY(0);
   }
 
+  /* Specular Sapphire Action Jewel (The Star Button) */
+  .btn-specular-sapphire {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0D4968 0%, #155E9A 50%, #0F4775 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    border-radius: var(--radius-control, 16px);
+    border: 1px solid rgba(147, 197, 253, 0.45);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 4px 16px -2px rgba(21, 94, 154, 0.4);
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), transform 0.20s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-specular-sapphire:hover {
+    background: linear-gradient(135deg, #105980 0%, #1A6EB2 50%, #13558A 100%);
+    transform: translateY(-1.5px);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55), 0 8px 24px -2px rgba(21, 94, 154, 0.5);
+  }
+  .btn-specular-sapphire:active {
+    transform: scale(0.96) translateY(0);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 2px 6px rgba(21, 94, 154, 0.3);
+  }
+
+  /* Specular Emerald Action Jewel (Selected / Success Affirmation) */
+  .btn-specular-emerald {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #059669 0%, #04724D 100%);
+    color: #FFFFFF !important;
+    font-weight: 700;
+    border-radius: var(--radius-control, 14px);
+    border: 1px solid rgba(167, 243, 208, 0.45);
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), 0 4px 14px rgba(5, 150, 105, 0.35);
+  }
+
+  /* Star Card Focus Highlight */
+  .card-star-highlight {
+    position: relative;
+    border-color: rgba(21, 94, 154, 0.4) !important;
+    box-shadow: inset 0 2.5px 0 0 #155E9A, 0 8px 24px -4px rgba(16, 42, 67, 0.08) !important;
+  }
+
+  /* Star Focus Badge */
+  .badge-specular-star {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: linear-gradient(135deg, #0A1128 0%, #155E9A 100%);
+    color: #FFFFFF !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(147, 197, 253, 0.4);
+  }
+
   /* Animations */
   @keyframes float-gentle {
     0%,
@@ -755,12 +811,12 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
   border-left: 4px solid var(--peacock-emerald);
 }
 
-/* Department Spine Modifiers for the Test Grid */
-.spine-biochem    { border-left-color: var(--peacock-teal); }
-.spine-clia       { border-left-color: var(--peacock-cyan); }
-.spine-hematology { border-left-color: var(--clinical-crimson); }
-.spine-metabolic  { border-left-color: #D97706; }
-.spine-micro      { border-left-color: var(--peacock-indigo); }
+/* Department Spine Modifiers for the Test Grid - Harmonized Clinical Sapphire/Slate */
+.spine-biochem    { border-left-color: #0D4968; }
+.spine-clia       { border-left-color: #155E9A; }
+.spine-hematology { border-left-color: #102A43; }
+.spine-metabolic  { border-left-color: #0A6C82; }
+.spine-micro      { border-left-color: #1A365D; }
 
 /* Active & Inactive Filter Pills */
 .peacock-pill-active {

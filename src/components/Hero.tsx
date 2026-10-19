@@ -96,9 +96,9 @@ export function Hero() {
     <div className="relative min-h-screen w-full overflow-hidden bg-[var(--surface-canvas)]">
       {/* Liquid Organic Mesh Gradient Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 mix-blend-multiply">
-        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#155E9A]/14 blur-[100px] mix-blend-multiply" />
-        <div className="absolute top-[20%] right-[-10%] w-[50vw] h-[50vw] bg-[#C62828]/10 blur-[100px] mix-blend-multiply" style={{ animationDelay: '-6s' }} />
-        <div className="absolute bottom-[-20%] left-[20%] w-[70vw] h-[70vw] bg-[#7A4B2A]/10 blur-[120px] mix-blend-multiply" style={{ animationDelay: '-12s' }} />
+        <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] bg-[#155E9A]/5 blur-[100px] mix-blend-multiply" />
+        <div className="absolute top-[20%] right-[-10%] w-[50vw] h-[50vw] bg-[#C62828]/4 blur-[100px] mix-blend-multiply" style={{ animationDelay: '-6s' }} />
+        <div className="absolute bottom-[-20%] left-[20%] w-[70vw] h-[70vw] bg-[#7A4B2A]/4 blur-[120px] mix-blend-multiply" style={{ animationDelay: '-12s' }} />
       </div>
 
       {/* Modular Navbar */}
