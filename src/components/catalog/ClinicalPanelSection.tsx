@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, ChevronDown, ChevronUp, Clock, HelpCircle, Home, Layers, Plus, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Clock, HelpCircle, Layers, Plus, Sparkles } from 'lucide-react';
 import { clinicalPanels, type ClinicalPanel } from '@/data/clinicalPanelManifest';
 import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
@@ -70,10 +70,10 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
           </span>
         </div>
         <h3 className="text-xl sm:text-2xl font-black text-[#102A43] tracking-tight">
-          Single-Prick Multi-Analyte Health Profiles
+          Accredited Clinical Health Profiles
         </h3>
         <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-          Standardized clinical profiles from our central laboratory SOPs. Sister tests share the exact same physical vacutainer tube — <strong>only 1 gentle needle prick</strong> required.
+          Standardized multi-test clinical profiles from central laboratory SOPs with clear turnaround times and transparent pricing.
         </p>
 
         {/* Category Pills */}
@@ -114,30 +114,22 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
               className={`peacock-test-card glass-card apple-squircle-card p-4 flex flex-col justify-between bg-white rounded-[22px] border border-slate-200/90 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] transition-all ${panel.spineClass}`}
             >
               <div>
-                {/* 3-Token Micro-Glyph Header */}
-                <div className="flex items-center justify-between text-[10px] text-slate-500 font-medium pb-2 mb-2 border-b border-slate-100">
-                  <span className="inline-flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-400" />
+                {/* Top Meta Bar: Fasting Status & Fixed TAT */}
+                <div className="flex items-center justify-between text-[10.5px] pb-2 mb-2.5 border-b border-slate-100">
+                  <span className="inline-flex items-center gap-1 text-slate-500 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-slate-400" />
                     {panel.fastingHours > 0 ? `${panel.fastingHours}h Fasting` : 'Non-Fasting'}
                   </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Home className="w-3 h-3 text-blue-500" />
-                    Home Collection
-                  </span>
-                  <span className="inline-flex items-center gap-1 font-bold text-emerald-700">
+                  <span className="inline-flex items-center font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2 py-0.5 rounded-[6px] text-[10px] tracking-wide">
                     {panel.turnaroundEstimate}
                   </span>
                 </div>
 
-                {/* Top Row: Department + 1-Prick Badge */}
-                <div className="flex items-center justify-between gap-1.5 mb-2">
+                {/* Department Pill */}
+                <div className="mb-2">
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-[8px] border inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 border-slate-200/90">
                     <span className={`w-1.5 h-1.5 rounded-full ${panel.tubeColorClass}`} />
                     {panel.department}
-                  </span>
-                  <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-900 border border-amber-200/80 text-[10px] font-extrabold px-2 py-0.5 rounded-[8px] shrink-0">
-                    <Syringe className="w-2.5 h-2.5 text-amber-700" />
-                    1 Single Prick
                   </span>
                 </div>
 
@@ -160,18 +152,12 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
                   </p>
                 </div>
 
-                {/* Vacutainer & Parameter Pill */}
-                <div className="text-[10.5px] text-slate-600 space-y-1 mb-2.5 bg-white rounded-[12px] p-2 border border-slate-100">
-                  <div className="flex items-center justify-between font-medium">
-                    <span className="text-slate-500">Vacutainer:</span>
-                    <span className="font-semibold text-slate-800 text-right">{panel.vacutainerTube}</span>
-                  </div>
-                  <div className="flex items-center justify-between font-medium">
-                    <span className="text-slate-500">Parameters:</span>
-                    <span className="font-bold text-[#155E9A]">
-                      {panel.measuredAnalytes.length} Measured + {panel.calculatedRatios.length} Ratios
-                    </span>
-                  </div>
+                {/* Parameters Scope */}
+                <div className="flex items-center justify-between p-2 rounded-[12px] bg-slate-50/70 border border-slate-100 text-[11px] mb-2.5">
+                  <span className="text-slate-500 font-medium">Total Parameters:</span>
+                  <span className="font-extrabold text-[#155E9A] bg-blue-50/80 px-2 py-0.5 rounded-[6px] border border-blue-100/80 text-[11px]">
+                    {panel.parameters.length} Parameters
+                  </span>
                 </div>
 
                 {/* Fasting & Chai Status */}
@@ -195,46 +181,26 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
                   onClick={() => toggleExpand(panel.id)}
                   className="w-full text-left text-[11px] font-bold text-[#155E9A] hover:text-[#0A6C82] flex items-center justify-between py-1.5 px-2 rounded-[10px] bg-blue-50/60 border border-blue-100/70 mb-3 active:scale-[0.98] transition-transform cursor-pointer"
                 >
-                  <span>{isExpanded ? 'Hide Analyte Ledger' : `View Full Analyte Ledger (${panel.parameters.length})`}</span>
+                  <span>{isExpanded ? 'Hide Parameters' : `View All ${panel.parameters.length} Parameters`}</span>
                   {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                 </button>
 
                 {isExpanded && (
-                  <div className="mb-3 p-3 bg-slate-50 rounded-[14px] border border-slate-200/90 space-y-2.5 text-[10.5px]">
-                    <div>
-                      <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider mb-1 flex items-center justify-between">
-                        <span>Measured Laboratory Assays ({panel.measuredAnalytes.length}):</span>
-                        <span className="text-emerald-700 font-extrabold">Physical Tests</span>
-                      </p>
-                      <ul className="space-y-0.5 text-slate-600 list-disc list-inside">
-                        {panel.measuredAnalytes.map((analyte) => (
-                          <li key={analyte} className="truncate">{analyte}</li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="mb-3 p-3 bg-slate-50 rounded-[14px] border border-slate-200/90 space-y-2 text-[10.5px]">
+                    <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider">
+                      Included Parameters ({panel.parameters.length}):
+                    </p>
+                    <ul className="space-y-0.5 text-slate-600 list-disc list-inside">
+                      {panel.parameters.map((param) => (
+                        <li key={param} className="truncate">{param}</li>
+                      ))}
+                    </ul>
 
-                    {panel.calculatedRatios.length > 0 && (
-                      <div className="pt-2 border-t border-slate-200/70">
-                        <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider mb-1 flex items-center justify-between">
-                          <span>Calculated Clinical Formulas ({panel.calculatedRatios.length}):</span>
-                          <span className="text-blue-700 font-bold">Zero-Cost Math</span>
-                        </p>
-                        <ul className="space-y-0.5 text-slate-500 list-disc list-inside">
-                          {panel.calculatedRatios.map((ratio) => (
-                            <li key={ratio} className="truncate">{ratio}</li>
-                          ))}
-                        </ul>
-                      </div>
+                    {panel.fastingNote && (
+                      <p className="pt-2 border-t border-slate-200/70 text-[9.5px] text-slate-500 leading-relaxed">
+                        <strong>Preparation:</strong> {panel.fastingNote}
+                      </p>
                     )}
-
-                    <div className="pt-2 border-t border-slate-200/70 space-y-1">
-                      <p className="text-[9.5px] text-slate-600 font-medium">
-                        <strong>Needle Spec:</strong> {panel.needleSpec}
-                      </p>
-                      <p className="text-[9.5px] text-slate-500">
-                        {panel.fastingNote}
-                      </p>
-                    </div>
 
                     {panel.costToCompleteTip && (
                       <div className="p-2 rounded-[10px] bg-amber-50/90 border border-amber-200/80 text-[10px] text-amber-900 font-medium flex items-start gap-1.5">
@@ -250,14 +216,11 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
               <div className="pt-2.5 mt-auto border-t border-slate-100 flex flex-col gap-2">
                 <div className="flex items-baseline justify-between">
                   <div>
-                    <span className="text-[10px] text-slate-400 font-medium block">Itemized Sum</span>
+                    <span className="text-[10px] text-slate-400 font-medium block">Profile Test Price</span>
                     <span className="text-lg font-extrabold text-[#102A43] tracking-tight">
                       {formatInr(panel.transparentPrice)}
                     </span>
                   </div>
-                  <span className="text-[10px] font-semibold text-[#0B6E66] bg-emerald-50/80 border border-emerald-200/60 rounded-md px-1.5 py-0.5">
-                    Central In-House Lab
-                  </span>
                 </div>
 
                 <Button

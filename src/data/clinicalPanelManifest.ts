@@ -102,7 +102,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Evaluates oxygen delivery, active viral/bacterial infections, allergic eosinophilia, and platelet adequacy in one single blood draw.",
     constituentTestIds: ["web-001", "web-004"],
     transparentPrice: 450,
-    turnaroundEstimate: "Ready in 2–4 hrs",
+    turnaroundEstimate: "TAT: 4 Hours",
     costToCompleteTip: {
       baseTestName: "Complete Blood Count (CBC)",
       baseTestId: "web-001",
@@ -162,7 +162,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Differentiates hepatocellular liver injury from biliary gallstone/cholestatic obstruction and chronic protein synthesis capacity.",
     constituentTestIds: ["web-020"],
     transparentPrice: 600,
-    turnaroundEstimate: "Ready in 3–6 hrs"
+    turnaroundEstimate: "TAT: 6 Hours"
   },
   {
     id: "panel-kft",
@@ -210,7 +210,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Measures kidney filtration efficiency, nitrogenous waste excretion, and life-critical cardiac/nerve electrolyte balance.",
     constituentTestIds: ["web-021", "web-028"],
     transparentPrice: 1000,
-    turnaroundEstimate: "Ready in 3–6 hrs"
+    turnaroundEstimate: "TAT: 6 Hours"
   },
   {
     id: "panel-lipid",
@@ -258,7 +258,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Unmasks circulating atherogenic particles, artery-clogging plaque risks, and familial hypertriglyceridemia.",
     constituentTestIds: ["web-030"],
     transparentPrice: 450,
-    turnaroundEstimate: "Ready in 3–6 hrs"
+    turnaroundEstimate: "TAT: 6 Hours"
   },
   {
     id: "panel-diabetes",
@@ -298,7 +298,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Pairs exact morning fasting blood glucose with the gold-standard 90-day biological red cell hemoglobin turnover window.",
     constituentTestIds: ["web-037", "web-040", "web-066"],
     transparentPrice: 510,
-    turnaroundEstimate: "Ready in 3–6 hrs"
+    turnaroundEstimate: "TAT: 6 Hours"
   },
   {
     id: "panel-thyroid",
@@ -339,7 +339,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Evaluates pituitary-thyroid feedback loop for unexplained weight fluctuation, persistent lethargy, cold sensitivity, and hair thinning.",
     constituentTestIds: ["web-050", "web-053", "web-054"],
     transparentPrice: 750,
-    turnaroundEstimate: "Ready in 4–8 hrs"
+    turnaroundEstimate: "TAT: 12 Hours"
   },
   {
     id: "panel-vitamins-bone",
@@ -382,7 +382,7 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Identifies hidden drivers of bone weakness, chronic muscular fatigue, neuropathic tingling, and microcytic iron deficiency.",
     constituentTestIds: ["web-060", "web-061", "web-062"],
     transparentPrice: 1950,
-    turnaroundEstimate: "Ready in 6–12 hrs"
+    turnaroundEstimate: "TAT: 16 Hours"
   },
   {
     id: "panel-coagulation",
@@ -422,6 +422,6 @@ export const clinicalPanels: ClinicalPanel[] = [
     clinicalPearl: "Essential pre-operative screening and anticoagulant safety verification assessing extrinsic and intrinsic clotting cascades.",
     constituentTestIds: ["web-015", "web-016"],
     transparentPrice: 600,
-    turnaroundEstimate: "Ready in 2–4 hrs"
+    turnaroundEstimate: "TAT: 4 Hours"
   }
 ];
