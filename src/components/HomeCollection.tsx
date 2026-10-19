@@ -10,6 +10,7 @@ export function HomeCollection() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [calendarError, setCalendarError] = useState(false);
   const [useDirectEmbed, setUseDirectEmbed] = useState(false);
+  const [activeBentoTab, setActiveBentoTab] = useState<'fasting' | 'opd'>('fasting');
 
   useEffect(() => {
     (async function () {
@@ -239,9 +240,36 @@ export function HomeCollection() {
         </div>
 
         {/* Caregiver Pre-Analytical Clarity & Evening OPD Catchment Grid */}
-        <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10 grid md:grid-cols-2 gap-6 sm:gap-8">
-          {/* Caregiver Fasting Checklist */}
-          <div className="glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15">
+        <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10">
+          {/* Mobile Bento Tab Switcher */}
+          <div className="flex md:hidden gap-1.5 p-1 bg-white/10 backdrop-blur-md rounded-[16px] mb-4 border border-white/10">
+            <button
+              type="button"
+              onClick={() => setActiveBentoTab('fasting')}
+              className={`flex-1 py-2 px-2.5 rounded-[12px] text-xs font-bold transition-all cursor-pointer ${
+                activeBentoTab === 'fasting'
+                  ? 'bg-white text-[#102A43] shadow-sm'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              💧 Fasting &amp; Chai Rules
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveBentoTab('opd')}
+              className={`flex-1 py-2 px-2.5 rounded-[12px] text-xs font-bold transition-all cursor-pointer ${
+                activeBentoTab === 'opd'
+                  ? 'bg-white text-[#102A43] shadow-sm'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              ⏱️ Evening OPD Timeline
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+            {/* Caregiver Fasting Checklist */}
+            <div className={`glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15 ${activeBentoTab === 'fasting' ? 'block' : 'hidden md:block'}`}>
             <div className="flex items-center gap-2">
               <span className="w-8 h-8 rounded-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center shrink-0">
                 <Coffee className="w-4 h-4" />
@@ -308,7 +336,7 @@ export function HomeCollection() {
           </div>
 
           {/* Evening OPD Catchment Clock */}
-          <div className="glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15">
+          <div className={`glass-panel-dark rounded-[24px] p-5 sm:p-6 space-y-4 border border-white/15 ${activeBentoTab === 'opd' ? 'block' : 'hidden md:block'}`}>
             <div className="flex items-center gap-2">
               <span className="w-8 h-8 rounded-[10px] bg-blue-500/20 text-cyan-300 border border-blue-500/30 flex items-center justify-center shrink-0">
                 <Clock className="w-4 h-4" />
@@ -371,6 +399,7 @@ export function HomeCollection() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -44,7 +44,7 @@ export function Services() {
         </div>
 
         {/* Services Grid with Peacock Department Spines & Biomarker Tags */}
-        <div className="fluid-grid-cards-sm">
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 overflow-x-auto sm:overflow-visible pb-3.5 sm:pb-0 scrollbar-none snap-x snap-mandatory">
           {servicesList.map((service, index) => (
             <m.div
               key={service.title}
@@ -53,7 +53,7 @@ export function Services() {
               transition={{ duration: 0.4, delay: index * 0.05 }}
               viewport={{ once: true }}
               onClick={() => navigateToTests(service.searchQuery)}
-              className={`peacock-test-card ${service.spineClass || 'spine-biochem'} p-5 sm:p-6 cursor-pointer flex flex-col justify-between group rounded-[24px] bg-white border border-slate-200/80 transition-all duration-300 hover:shadow-lg relative overflow-hidden`}
+              className={`peacock-test-card ${service.spineClass || 'spine-biochem'} min-w-[270px] sm:min-w-0 snap-start flex-shrink-0 sm:flex-shrink p-4 sm:p-5 cursor-pointer flex flex-col justify-between group rounded-[22px] bg-white border border-slate-200/80 transition-all duration-300 hover:shadow-lg relative overflow-hidden`}
             >
               <div>
                 {/* Header: Icon + Method Badge */}

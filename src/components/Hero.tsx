@@ -133,13 +133,13 @@ export function Hero() {
             <div className="lg:col-span-7 w-full min-w-0 space-y-5 sm:space-y-6 animate-slide-in-left">
               
               {/* Apple Pill Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-md border border-white/40 px-3.5 py-1.5 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)] max-w-full">
+              <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/60 px-3.5 py-1.5 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)] max-w-full">
                 <span className="flex h-2 w-2 relative flex-shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C62828] opacity-75"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#155E9A] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
                 <span className="min-w-0 text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 text-wrap">
-                  Home collection: 07:00 AM–07:00 PM <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Lab open 24*7 for walk-in patients &amp; hospital emergencies</span>
+                  Central Pathology Hub <span className="text-slate-400">•</span> <span className="text-[#155E9A]">In-House Analyzers &amp; Zero Transit Delay</span>
                 </span>
               </div>
 
@@ -222,7 +222,7 @@ export function Hero() {
                   <Button
                     asChild
                     size="xl"
-                    className="btn-secondary squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-4 sm:px-5 text-xs sm:text-sm font-bold text-white rounded-[16px] active:scale-[0.96] min-w-0 shadow-sm"
+                    className="btn-specular-emerald squircle-btn apple-pressable w-full sm:w-auto action-button min-h-12 h-auto px-4 sm:px-5 text-xs sm:text-sm font-bold text-white rounded-[16px] active:scale-[0.96] min-w-0 shadow-md"
                   >
                     <a
                       href={whatsappPrescriptionUrl}
