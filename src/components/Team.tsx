@@ -94,7 +94,7 @@ export function Team() {
   }, []);
 
   return (
-    <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#FBFBFD] py-6 sm:py-10 border-t border-slate-200/60">
+    <section id="team" aria-labelledby="team-heading" className="relative overflow-hidden bg-[#F8FAFC] py-6 sm:py-10 border-t border-slate-200/60">
       <div className="pointer-events-none absolute left-[-10%] top-[20%] h-[40vw] w-[40vw] bg-teal-600/5 blur-[80px]" />
       
       <div className="relative z-10 fluid-container">

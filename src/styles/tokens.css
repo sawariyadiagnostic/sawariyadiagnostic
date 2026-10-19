@@ -60,7 +60,7 @@
   --action-primary-hover: #7F1717;
   --action-secondary: #155E9A;
   --action-secondary-hover: #0F4775;
-  --surface-soft: #F5F5F7;
+  --surface-soft: #F8FAFC;
   --radius-control: 1rem;
   --radius-card: 1.25rem;
   --radius-panel: 1.5rem;
@@ -91,7 +91,7 @@
   --brand-navy-900: #102A43;
   --brand-navy: #102A43;
   --brand-graphite: #1D1D1F;
-  --brand-off-white: #F5F5F7;
+  --brand-off-white: #F8FAFC;
   --surface-cream: #F8FAFC;
   --surface-paper: #F8FAFC;
   --surface-white: #FFFFFF;
@@ -109,8 +109,8 @@
   /* ------------------------------------------------------------------------
      1. 60% CANVAS & CLINICAL SURFACES (Cool Plume Porcelain + Crisp White)
      ------------------------------------------------------------------------ */
-  --surface-canvas: #F3F8F8;           /* 2% Peacock-Mist Porcelain so white cards pop */
-  --surface-canvas-elevated: #EAF3F3;  /* Secondary section background */
+  --surface-canvas: #F8FAFC;           /* Crisp Cool Platinum Slate so pure white cards pop */
+  --surface-canvas-elevated: #F1F5F9;  /* Secondary section background */
   --surface-card: #FFFFFF;             /* Pure clinical white for 12-test batch cards */
   --surface-card-hover: #FAFFFF;       /* Micro-tint on card hover */
   --surface-card-selected: #F0FDF6;    /* Soft Bio-Emerald tint when test is added */

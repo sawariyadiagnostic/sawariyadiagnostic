@@ -16,7 +16,11 @@ export function HomeCollection() {
     (async function () {
       try {
         const cal = await getCalApi({ namespace: siteConfig.integrations.calNamespace });
-        cal("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        cal("ui", {
+          "hideEventTypeDetails": false,
+          "layout": isMobile ? "column_view" : "month_view"
+        });
       } catch {
         setCalendarError(true);
       }
@@ -201,12 +205,12 @@ export function HomeCollection() {
                               title="Sawariya Diagnostics Appointment Booking"
                             />
                           ) : (
-                            <div style={{ width: '100%', height: '620px', minHeight: '600px', overflow: 'scroll' }}>
+                            <div className="w-full h-[620px] min-h-[600px] overflow-auto touch-pan-y">
                               <Cal
                                 namespace={siteConfig.integrations.calNamespace}
                                 calLink={siteConfig.integrations.calLink}
-                                style={{ width: '100%', height: '620px', minHeight: '600px', overflow: 'scroll' }}
-                                config={{ layout: 'month_view' }}
+                                style={{ width: '100%', height: '100%', minHeight: '600px' }}
+                                config={{ layout: typeof window !== 'undefined' && window.innerWidth < 768 ? 'column_view' : 'month_view' }}
                               />
                             </div>
                           )}

@@ -18,7 +18,7 @@ export function Services() {
   };
 
   return (
-    <section id="services" className="relative fluid-section bg-[#FBFBFD] overflow-hidden">
+    <section id="services" className="relative fluid-section bg-[#F8FAFC] overflow-hidden">
       
       {/* Liquid Mesh Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
