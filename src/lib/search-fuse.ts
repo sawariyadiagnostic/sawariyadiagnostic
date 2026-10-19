@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js';
-import type { MedicalTest } from '../data/publishedCatalog';
-import { getPanelsForTest } from '../data/clinicalPanelManifest';
+import { medicalTests, type MedicalTest } from '../data/publishedCatalog';
+import { clinicalPanels, getPanelsForTest } from '../data/clinicalPanelManifest';
 
 export interface SearchableItem {
   id: string;
@@ -196,4 +196,277 @@ export function createSearchEngine(items: SearchableItem[]) {
       return results;
     },
   };
+}
+
+// -----------------------------------------------------------------------------
+// SEMANTIC CONVERSATIONAL & PHONETIC SYNONYM DICTIONARY FOR HERO SEARCH
+// -----------------------------------------------------------------------------
+
+export interface SemanticSearchResult {
+  type: 'panel' | 'test';
+  id: string;
+  name: string;
+  hindiName?: string;
+  subtitle: string;
+  price: number;
+  parameterCount?: number;
+  matchReason: string;
+  tab: 'panels' | 'tests';
+}
+
+export const SEMANTIC_SYNONYM_REPLACEMENTS: Record<string, string[]> = {
+  // Fatigue / Weakness / Energy
+  tiredness: ['fatigue', 'weakness'],
+  exhaustion: ['fatigue', 'weakness'],
+  lethargy: ['fatigue', 'weakness', 'thyroid'],
+  sleepy: ['fatigue', 'thyroid'],
+  drowsy: ['fatigue', 'diabetes'],
+
+  // Liver / Jaundice / Digestion
+  jaundis: ['jaundice', 'piliya', 'liver'],
+  peelya: ['jaundice', 'piliya', 'liver'],
+  'yellow eyes': ['jaundice', 'bilirubin', 'liver'],
+  'yellow urine': ['jaundice', 'bilirubin', 'liver'],
+  'fatty liver': ['liver', 'lft', 'lipid'],
+  alcohol: ['liver', 'lft', 'sgpt', 'sgot', 'ggt'],
+  digestion: ['liver', 'lft', 'pancreas'],
+
+  // Sugar / Diabetes / Insulin
+  diabetis: ['diabetes', 'sugar', 'glucose', 'hba1c'],
+  diabatic: ['diabetes', 'sugar', 'glucose', 'hba1c'],
+  shakar: ['diabetes', 'sugar', 'glucose'],
+  'sweet urine': ['diabetes', 'sugar', 'glucose'],
+  thirst: ['diabetes', 'sugar'],
+  polyuria: ['diabetes', 'sugar'],
+
+  // Kidney / Creatinine / Swelling
+  creatin: ['creatinine', 'kidney', 'kft'],
+  createnine: ['creatinine', 'kidney', 'kft'],
+  gurda: ['kidney', 'kft', 'renal'],
+  'swollen feet': ['swelling', 'edema', 'kidney', 'kft'],
+  'swollen legs': ['swelling', 'edema', 'kidney', 'kft'],
+  'swollen face': ['swelling', 'edema', 'kidney', 'kft'],
+  'face swelling': ['swelling', 'edema', 'kidney', 'kft'],
+  'foot swelling': ['swelling', 'edema', 'kidney', 'kft'],
+  'burning urine': ['kidney', 'kft', 'urine'],
+
+  // Cholesterol / Heart / Lipids
+  chole: ['cholesterol', 'lipid'],
+  colestrol: ['cholesterol', 'lipid'],
+  cholestrol: ['cholesterol', 'lipid'],
+  bp: ['lipid', 'heart', 'cardiac'],
+  'high bp': ['lipid', 'kidney'],
+  hypertension: ['lipid', 'kidney', 'heart'],
+  'chest pain': ['heart', 'cardiac', 'troponin', 'lipid'],
+  'heart attack': ['heart', 'cardiac', 'troponin'],
+  dhadkan: ['heart', 'cardiac', 'thyroid'],
+
+  // Thyroid / Metabolism / Neck
+  thryoid: ['thyroid', 'tsh'],
+  thyrod: ['thyroid', 'tsh'],
+  'weight gain': ['thyroid', 'pcod', 'lipid'],
+  'weight loss': ['thyroid', 'diabetes', 'cbc'],
+  chills: ['fever', 'thyroid', 'malaria'],
+  'gale me sujan': ['thyroid'],
+  gala: ['thyroid'],
+
+  // Hormones / PCOD / Female health
+  periods: ['pcod', 'pcos', 'mahawari', 'hormone'],
+  'irregular periods': ['pcod', 'pcos', 'mahawari'],
+  'masik dharm': ['pcod', 'pcos', 'mahawari'],
+  'facial hair': ['pcod', 'pcos', 'testosterone'],
+  'chehre pe baal': ['pcod', 'pcos', 'testosterone'],
+  infertility: ['pcod', 'amh', 'fsh', 'lh', 'fertility'],
+  nissantaan: ['pcod', 'amh', 'fertility'],
+  harmone: ['hormone', 'thyroid', 'pcod', 'testosterone'],
+
+  // Joint / Arthritis / Pain
+  gathia: ['gathiya', 'arthritis', 'uric acid', 'ra factor'],
+  'knee pain': ['joint', 'joints', 'arthritis', 'gathiya', 'uric acid'],
+  'ghutno ka dard': ['joint', 'joints', 'arthritis', 'gathiya'],
+  'jodo ka dard': ['joint', 'joints', 'arthritis', 'gathiya'],
+  'morning stiffness': ['arthritis', 'gathiya', 'crp', 'ra factor'],
+  uricacid: ['uric acid', 'gout', 'arthritis'],
+
+  // Fever / Infections / Seasonal
+  shivering: ['fever', 'bukhar', 'malaria'],
+  'thand lagna': ['fever', 'bukhar', 'malaria'],
+  dengu: ['dengue', 'platelet', 'cbc'],
+  maleria: ['malaria', 'fever'],
+  motijhara: ['typhoid', 'widal', 'fever'],
+  tyfoid: ['typhoid', 'widal'],
+  'low platelets': ['platelet', 'cbc', 'dengue'],
+  platlet: ['platelet', 'cbc'],
+  platelets: ['platelet', 'cbc'],
+  haemoglobin: ['hemoglobin', 'cbc', 'anemia', 'khoon'],
+  hemo: ['hemoglobin', 'cbc', 'khoon'],
+  'blood count': ['cbc', 'hemogram', 'blood', 'khoon'],
+
+  // Vitamins / Bone / Tingling
+  vitamn: ['vitamin', 'vitamins'],
+  vitamen: ['vitamin', 'vitamins'],
+  sunlight: ['vitamin', 'd3'],
+  'nerve pain': ['b12', 'vitamin'],
+  tingling: ['b12', 'vitamin'],
+  numbness: ['b12', 'vitamin'],
+  'haddiyo me dard': ['calcium', 'vitamin', 'bone'],
+
+  // Hair / Iron / Ferritin
+  'hair fall': ['hairfall', 'iron', 'ferritin', 'thyroid', 'b12'],
+  'hair loss': ['hairfall', 'iron', 'ferritin', 'thyroid'],
+  'baal girna': ['hairfall', 'iron', 'thyroid'],
+  'baal jhadna': ['hairfall', 'iron', 'thyroid'],
+
+  // Prostate / Men's Health
+  prostet: ['prostate', 'psa'],
+  'urine blockage': ['prostate', 'psa', 'kidney'],
+  'night urination': ['prostate', 'diabetes', 'kidney'],
+  purush: ['prostate', 'testosterone'],
+
+  // Growth / Height
+  'short height': ['growth hormone', 'gh'],
+  height: ['growth hormone', 'gh'],
+  kad: ['growth hormone', 'gh'],
+  lambai: ['growth hormone', 'gh'],
+
+  // Allergy
+  itching: ['allergy', 'ige', 'khujli'],
+  khujli: ['allergy', 'ige'],
+  sneezing: ['allergy', 'ige'],
+  allerji: ['allergy', 'ige'],
+  rash: ['allergy', 'ige'],
+
+  // Abdominal / Pancreas / Gluten
+  'stomach pain': ['amylase', 'lipase', 'pancreas', 'liver'],
+  'loose motions': ['celiac', 'gluten', 'dast'],
+  'wheat allergy': ['celiac', 'gluten'],
+  gehun: ['celiac', 'gluten'],
+
+  // Coagulation / Surgery
+  'blood thinner': ['coagulation', 'clotting', 'pt', 'inr'],
+  surgery: ['coagulation', 'clotting', 'pt', 'inr', 'cbc'],
+  operation: ['coagulation', 'clotting', 'pt', 'inr', 'cbc'],
+  bruising: ['coagulation', 'clotting', 'platelet'],
+
+  // Pregnancy
+  pregnancy: ['pregnancy', 'hcg', 'fertility'],
+  garbh: ['pregnancy', 'hcg'],
+  garbhavastha: ['pregnancy', 'hcg'],
+};
+
+export function detectBestCatalogTab(query: string): 'panels' | 'tests' {
+  const q = query.toLowerCase().trim();
+  if (!q) return 'panels';
+
+  // Explicit panel words always route to panels
+  const explicitPanelWords = [
+    'panel', 'profile', 'package', 'checkup', 'full body',
+    'lft', 'kft', 'rft', 'pcod', 'pcos', 'tft', 'ascvd',
+    'hemogram', 'sugar panel', 'diabetic panel'
+  ];
+
+  if (explicitPanelWords.some((indicator) => q.includes(indicator))) {
+    return 'panels';
+  }
+
+  // If query directly matches an individual test name, route to tests
+  const testMatch = medicalTests.some(
+    (t) => t.name.toLowerCase().includes(q) || t.id.toLowerCase() === q
+  );
+  if (testMatch) {
+    return 'tests';
+  }
+
+  // Check if any panel has a direct match on its name or keywords
+  const panelMatches = clinicalPanels.some(
+    (p) =>
+      p.name.toLowerCase().includes(q) ||
+      p.hindiName.toLowerCase().includes(q) ||
+      p.keywords.some((k) => k.toLowerCase() === q)
+  );
+
+  return panelMatches ? 'panels' : 'tests';
+}
+
+export function searchSemanticCatalog(query: string, limit = 6): SemanticSearchResult[] {
+  const rawQ = query.toLowerCase().trim();
+  if (!rawQ) return [];
+
+  // Expand query with semantic synonyms
+  const termsToSearch = new Set<string>([rawQ]);
+  for (const [key, replacements] of Object.entries(SEMANTIC_SYNONYM_REPLACEMENTS)) {
+    if (rawQ.includes(key) || key.includes(rawQ)) {
+      for (const r of replacements) termsToSearch.add(r);
+    }
+  }
+
+  const results: SemanticSearchResult[] = [];
+  const seenIds = new Set<string>();
+
+  // 1. Search Clinical Health Profiles
+  for (const panel of clinicalPanels) {
+    const pName = panel.name.toLowerCase();
+    const pHindi = panel.hindiName.toLowerCase();
+    const pKeywords = panel.keywords.map((k) => k.toLowerCase());
+    const pParams = panel.parameters.map((param) => param.toLowerCase());
+
+    let matchScore = 0;
+    let reason = '';
+
+    for (const term of termsToSearch) {
+      if (pName.includes(term) || pHindi.includes(term)) {
+        matchScore = Math.max(matchScore, 100);
+        reason = 'Clinical Profile Match';
+      } else if (pKeywords.some((k) => k === term || k.includes(term))) {
+        matchScore = Math.max(matchScore, 85);
+        reason = `Condition Match (${term})`;
+      } else if (pParams.some((param) => param.includes(term))) {
+        matchScore = Math.max(matchScore, 70);
+        reason = `Includes Parameter (${term})`;
+      }
+    }
+
+    if (matchScore > 0 && !seenIds.has(panel.id)) {
+      seenIds.add(panel.id);
+      results.push({
+        type: 'panel',
+        id: panel.id,
+        name: panel.name,
+        hindiName: panel.hindiName,
+        subtitle: `${panel.parameters.length} Parameters • 1 Single Needle Prick • ${panel.turnaroundEstimate}`,
+        price: panel.transparentPrice,
+        parameterCount: panel.parameters.length,
+        matchReason: reason,
+        tab: 'panels',
+      });
+    }
+  }
+
+  // 2. Search Individual Tests using Fuse engine
+  const defaultIndex = buildSearchIndex(medicalTests);
+  const searchEngine = createSearchEngine(defaultIndex);
+
+  // Search each expanded term
+  for (const term of termsToSearch) {
+    const testMatches = searchEngine.search(term);
+    for (const item of testMatches) {
+      if (!seenIds.has(item.id)) {
+        seenIds.add(item.id);
+        const test = medicalTests.find((t) => t.id === item.id);
+        results.push({
+          type: 'test',
+          id: item.id,
+          name: item.name,
+          subtitle: test?.specimen || `${item.category.toUpperCase()} Laboratory Analyte`,
+          price: item.price,
+          parameterCount: item.parameters?.length || 1,
+          matchReason: term === rawQ ? 'Direct Test Match' : `Related to "${term}"`,
+          tab: 'tests',
+        });
+      }
+      if (results.length >= limit * 2) break;
+    }
+  }
+
+  return results.slice(0, limit);
 }

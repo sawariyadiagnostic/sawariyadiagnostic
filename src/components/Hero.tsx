@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Search, CheckCircle2, Clock, ArrowRight, ShieldCheck, Camera } from 'lucide-react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { Search, CheckCircle2, Clock, ArrowRight, ShieldCheck, Camera, Layers, TestTube, Sparkles, ChevronRight, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Navbar } from './layout/Navbar';
@@ -9,12 +9,16 @@ import { MobileMenu } from './layout/MobileMenu';
 import { ReportDownloadModal } from './ui/ReportDownloadModal';
 import { Logo } from './ui/Logo';
 import { whatsappHref } from '@/config/site';
+import { searchSemanticCatalog, detectBestCatalogTab, type SemanticSearchResult } from '@/lib/search-fuse';
+import { formatInr } from '@/lib/utils';
 
 export function Hero() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Scroll detection
   useEffect(() => {
@@ -26,10 +30,56 @@ export function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Compute live semantic suggestions
+  const semanticResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    return searchSemanticCatalog(searchQuery, 6);
+  }, [searchQuery]);
+
+  const showSuggestions = isSearchFocused && searchQuery.trim().length >= 1;
+
+  // Close suggestions when clicking outside or pressing Escape
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setIsSearchFocused(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsSearchFocused(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleSelectResult = (result: SemanticSearchResult) => {
+    setSearchQuery(result.name);
+    setIsSearchFocused(false);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('sawariya:search', {
+          detail: { query: result.name, tab: result.tab }
+        })
+      );
+    }
+    const testsSection = document.getElementById('tests');
+    testsSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('sawariya:search', { detail: { query: searchQuery, tab: 'tests' } }));
+      const bestTab = detectBestCatalogTab(searchQuery);
+      window.dispatchEvent(
+        new CustomEvent('sawariya:search', { detail: { query: searchQuery, tab: bestTab } })
+      );
     }
     const testsSection = document.getElementById('tests');
     testsSection?.scrollIntoView({ behavior: 'smooth' });
@@ -37,8 +87,12 @@ export function Hero() {
 
   const handleQuickTagClick = (tag: string) => {
     setSearchQuery(tag);
+    setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('sawariya:search', { detail: { query: tag, tab: 'tests' } }));
+      const bestTab = detectBestCatalogTab(tag);
+      window.dispatchEvent(
+        new CustomEvent('sawariya:search', { detail: { query: tag, tab: bestTab } })
+      );
     }
     const testsSection = document.getElementById('tests');
     testsSection?.scrollIntoView({ behavior: 'smooth' });
@@ -158,7 +212,7 @@ export function Hero() {
               </div>
 
               {/* Clean Apple-Optimized Search Bar inside Glass */}
-              <div className="space-y-2.5 w-full max-w-xl">
+              <div ref={searchContainerRef} className="space-y-2.5 w-full max-w-xl relative">
                 <form onSubmit={handleSearch} className="relative">
                   <div className="peacock-search-input relative flex items-center rounded-[20px] sm:rounded-[24px] p-1 sm:p-1.5 duration-300">
                     <Search className="w-4 h-4 text-[#0A6C82] ml-2.5 sm:ml-3 flex-shrink-0" />
@@ -168,9 +222,26 @@ export function Hero() {
                       name="catalog-search"
                       autoComplete="off"
                       value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onFocus={() => setIsSearchFocused(true)}
+                      onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        setIsSearchFocused(true);
+                      }}
                       className="ui-control border-0 shadow-none focus-visible:ring-0 text-[var(--text-primary)] font-semibold text-xs sm:text-sm bg-transparent px-2 sm:px-2.5 h-auto w-full min-w-0"
                     />
+                    {searchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchQuery('');
+                          setIsSearchFocused(false);
+                        }}
+                        className="p-1 mr-1 text-slate-400 hover:text-slate-600 rounded-full cursor-pointer transition-colors"
+                        title="Clear search"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                     <Button 
                       type="submit" 
                       className="action-button btn-peacock-iris squircle-btn apple-pressable rounded-[16px] sm:rounded-[18px] px-3.5 sm:px-6 min-h-11 sm:min-h-12 h-auto text-xs sm:text-sm font-bold flex-shrink-0 active:scale-[0.96] cursor-pointer"
@@ -179,6 +250,94 @@ export function Hero() {
                       <span>Ask the lab</span>
                     </Button>
                   </div>
+
+                  {/* Floating Semantic Dropdown */}
+                  {showSuggestions && (
+                    <div
+                      role="listbox"
+                      aria-label="Semantic search suggestions"
+                      className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 bg-white/95 backdrop-blur-2xl rounded-[22px] border border-slate-200/90 shadow-[0_16px_40px_-8px_rgba(16,42,67,0.18)] p-2 space-y-1 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[380px] overflow-y-auto"
+                    >
+                      <div className="px-3 py-1.5 flex items-center justify-between text-[10.5px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                        <span className="flex items-center gap-1.5 text-[#0A6C82]">
+                          <Sparkles className="w-3.5 h-3.5 text-[#0A6C82]" />
+                          Available on our lab list
+                        </span>
+                        <span>{semanticResults.length} {semanticResults.length === 1 ? 'match' : 'matches'}</span>
+                      </div>
+
+                      {semanticResults.length === 0 ? (
+                        <div className="p-4 text-center space-y-1">
+                          <p className="text-xs font-bold text-slate-700">No direct match for &quot;{searchQuery}&quot;</p>
+                          <p className="text-[11px] text-slate-500">
+                            Press Enter to view all results or ask the desk on WhatsApp.
+                          </p>
+                        </div>
+                      ) : (
+                        semanticResults.map((item) => {
+                          const isPanel = item.type === 'panel';
+                          return (
+                            <button
+                              key={`${item.type}-${item.id}`}
+                              type="button"
+                              onClick={() => handleSelectResult(item)}
+                              className="w-full text-left p-2.5 rounded-[14px] flex items-center justify-between gap-2.5 transition-all cursor-pointer group active:scale-[0.98] hover:bg-slate-50"
+                            >
+                              <div className="flex items-start gap-2.5 min-w-0">
+                                <div className={`w-8 h-8 rounded-[10px] flex items-center justify-center shrink-0 mt-0.5 ${
+                                  isPanel ? 'bg-amber-50 text-amber-800 border border-amber-200/80' : 'bg-cyan-50 text-[#0A6C82] border border-cyan-200/80'
+                                }`}>
+                                  {isPanel ? <Layers className="w-4 h-4" /> : <TestTube className="w-4 h-4" />}
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="flex items-center gap-1.5 flex-wrap">
+                                    <span className="text-xs sm:text-sm font-bold text-[#102A43] group-hover:text-[#0A6C82] transition-colors truncate">
+                                      {item.name}
+                                    </span>
+                                    <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded-full border shrink-0 ${
+                                      isPanel ? 'bg-amber-100/70 text-amber-900 border-amber-200' : 'bg-teal-50 text-teal-800 border-teal-200'
+                                    }`}>
+                                      {isPanel ? 'Health Profile' : 'Individual Test'}
+                                    </span>
+                                  </div>
+                                  <p className="text-[10.5px] text-slate-500 truncate mt-0.5">
+                                    {item.hindiName ? `${item.hindiName} • ` : ''}{item.subtitle}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="text-right shrink-0 flex items-center gap-2">
+                                <div>
+                                  <span className="text-xs font-black text-[#102A43] block">
+                                    {formatInr(item.price)}
+                                  </span>
+                                  {item.matchReason && (
+                                    <span className="text-[9px] font-semibold text-[#0A6C82] block">
+                                      {item.matchReason}
+                                    </span>
+                                  )}
+                                </div>
+                                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-[#0A6C82] group-hover:translate-x-0.5 transition-all shrink-0" />
+                              </div>
+                            </button>
+                          );
+                        })
+                      )}
+
+                      {/* Footer row */}
+                      <div className="p-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                        <span>Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 font-mono text-[10px] text-slate-700 border">Enter</kbd> to search full catalog</span>
+                        <button
+                          type="button"
+                          onClick={handleSearch}
+                          className="text-[#155E9A] hover:underline font-bold text-[11px] cursor-pointer inline-flex items-center gap-1"
+                        >
+                          <span>View all results</span>
+                          <span>➔</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </form>
 
                 {/* Quick search suggestion pills: touch-friendly horizontal scroll */}

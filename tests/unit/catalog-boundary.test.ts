@@ -6,7 +6,7 @@ import { approvedGuideManifest } from '../../src/data/approvedGuideManifest';
 import { medicalTests, publishedCatalogManifest } from '../../src/data/publishedCatalog';
 import { siteConfig, validateSiteConfig, buildTestShareUrl } from '../../src/config/site';
 import { teamStructure } from '../../src/data/team-structure';
-import { buildSearchIndex, createSearchEngine } from '../../src/lib/search-fuse';
+import { buildSearchIndex, createSearchEngine, detectBestCatalogTab, searchSemanticCatalog } from '../../src/lib/search-fuse';
 import { formatInr } from '../../src/lib/utils';
 
 const visitorSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
@@ -69,6 +69,34 @@ describe('approved public catalog', () => {
         expect(resultIds, `${query} should include ${id}`).toContain(id);
       }
     }
+  });
+
+  it('resolves conversational symptoms, typos, and vernacular terms semantically', () => {
+    // 1. Symptom synonyms
+    const fatigueResults = searchSemanticCatalog('tiredness');
+    expect(fatigueResults.length).toBeGreaterThan(0);
+    expect(fatigueResults.some((r) => r.name.includes('Hemogram') || r.name.includes('Vitamin') || r.name.includes('CBC'))).toBe(true);
+
+    // 2. Typo tolerance
+    const typoCholesterol = searchSemanticCatalog('colestrol');
+    expect(typoCholesterol.some((r) => r.name.includes('Lipid') || r.name.includes('Cholesterol'))).toBe(true);
+
+    const typoThyroid = searchSemanticCatalog('thryoid');
+    expect(typoThyroid.some((r) => r.name.includes('Thyroid'))).toBe(true);
+
+    // 3. Vernacular / colloquial phrases
+    const jaundiceResults = searchSemanticCatalog('jaundice');
+    expect(jaundiceResults.some((r) => r.name.includes('Liver') || r.name.includes('Bilirubin'))).toBe(true);
+
+    const kneePainResults = searchSemanticCatalog('knee pain');
+    expect(kneePainResults.some((r) => r.name.includes('Arthritis') || r.name.includes('Uric Acid') || r.name.includes('RA'))).toBe(true);
+
+    // 4. Smart tab detection
+    expect(detectBestCatalogTab('lft profile')).toBe('panels');
+    expect(detectBestCatalogTab('full body checkup')).toBe('panels');
+    expect(detectBestCatalogTab('pcod panel')).toBe('panels');
+    expect(detectBestCatalogTab('hemoglobin')).toBe('tests');
+    expect(detectBestCatalogTab('serum creatinine')).toBe('tests');
   });
 
   it('renders the approved individual-test catalog only', () => {
