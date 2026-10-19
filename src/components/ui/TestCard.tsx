@@ -84,7 +84,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
 
   const dept = getDepartmentInfo(test.category, test.name);
   const vac = getVacutainerDot(test.category, test.name);
-  const parentPanel = clinicalPanels.find((panel) => panel.constituentTestIds.includes(test.id));
+  const parentPanel = clinicalPanels.find((panel) => panel.constituentTestIds.some((id) => id.toLowerCase() === test.id.toLowerCase()));
 
   return (
     <>
@@ -130,10 +130,23 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
           </h3>
 
           {parentPanel && (
-            <div className="mb-2 inline-flex items-center gap-1 bg-cyan-50/80 border border-cyan-200/70 text-[10px] text-[#0A6C82] font-semibold px-2 py-0.5 rounded-[8px] w-fit max-w-full">
-              <Layers className="w-3 h-3 text-[#0A6C82] shrink-0" />
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.dispatchEvent(
+                  new CustomEvent('sawariya:search', {
+                    detail: { tab: 'panels', query: parentPanel.name.split('(')[0].trim() }
+                  })
+                );
+              }}
+              title={`View ${parentPanel.name} profile`}
+              className="mb-2 inline-flex items-center gap-1 bg-cyan-50/90 hover:bg-cyan-100/90 border border-cyan-200/80 text-[10.5px] text-[#0A6C82] hover:text-[#085363] font-semibold px-2 py-0.5 rounded-[8px] w-fit max-w-full transition-all cursor-pointer group/panel active:scale-[0.97]"
+            >
+              <Layers className="w-3 h-3 text-[#0A6C82] shrink-0 group-hover/panel:scale-110 transition-transform" />
               <span className="truncate">Also in {parentPanel.name.split('(')[0].trim()}</span>
-            </div>
+              <span className="text-[9px] text-[#0A6C82]/80 font-bold ml-0.5">➔</span>
+            </button>
           )}
 
           {/* Compact Parameters Preview / Verification note */}

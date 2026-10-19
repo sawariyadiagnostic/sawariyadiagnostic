@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Check, ChevronDown, ChevronUp, Clock, HelpCircle, Layers, Plus, Sparkles } from 'lucide-react';
 import { clinicalPanels, type ClinicalPanel } from '@/data/clinicalPanelManifest';
+import { medicalTests } from '@/data/publishedCatalog';
 import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { Button } from '../ui/button';
@@ -48,7 +49,8 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
         panel.hindiName.toLowerCase().includes(q) ||
         panel.parameters.some((p) => p.toLowerCase().includes(q)) ||
         panel.doctorQuestion.toLowerCase().includes(q) ||
-        panel.doctorAnswer.toLowerCase().includes(q);
+        panel.doctorAnswer.toLowerCase().includes(q) ||
+        (panel.keywords && panel.keywords.some((k) => k.toLowerCase().includes(q)));
       if (!match) return false;
     }
     if (selectedCategory === 'all') return true;
@@ -206,6 +208,38 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
                       <div className="p-2 rounded-[10px] bg-amber-50/90 border border-amber-200/80 text-[10px] text-amber-900 font-medium flex items-start gap-1.5">
                         <Sparkles className="w-3.5 h-3.5 text-amber-700 shrink-0 mt-0.5" />
                         <span>{panel.costToCompleteTip.message}</span>
+                      </div>
+                    )}
+
+                    {panel.constituentTestIds.length > 0 && (
+                      <div className="pt-2 border-t border-slate-200/70 space-y-1.5">
+                        <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider">
+                          Constituent Individual Tests:
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {panel.constituentTestIds.map((testId) => {
+                            const test = medicalTests.find((t) => t.id.toLowerCase() === testId.toLowerCase());
+                            const label = test ? test.name : testId.toUpperCase();
+                            return (
+                              <button
+                                key={testId}
+                                type="button"
+                                onClick={() => {
+                                  window.dispatchEvent(
+                                    new CustomEvent('sawariya:search', {
+                                      detail: { tab: 'tests', query: test ? test.name : testId }
+                                    })
+                                  );
+                                }}
+                                className="px-2 py-0.5 rounded-[6px] bg-white border border-slate-200 text-slate-700 hover:text-[#155E9A] hover:border-[#155E9A]/60 text-[10px] font-semibold transition-colors cursor-pointer active:scale-[0.96] text-left truncate max-w-full"
+                                title={`Search ${label} in individual tests`}
+                              >
+                                <span className="truncate">{label}</span>
+                                <span className="ml-1 text-[9px] text-[#155E9A]">➔</span>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
                   </div>

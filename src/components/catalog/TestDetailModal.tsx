@@ -6,8 +6,10 @@ import {
   Share2,
   ArrowLeft,
   ClipboardList,
+  Layers,
 } from 'lucide-react';
 import { type MedicalTest } from '@/data/publishedCatalog';
+import { getPanelsForTest } from '@/data/clinicalPanelManifest';
 import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { buildTestShareUrl } from '@/config/site';
@@ -38,6 +40,8 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   const { isSelected, toggleTest } = useRequisition();
 
   if (!item) return null;
+
+  const parentPanels = getPanelsForTest(item.id);
 
   const discountPercent = item.originalPrice > item.price
     ? Math.round((1 - item.price / item.originalPrice) * 100)
@@ -98,6 +102,48 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                 {item.description}
               </p>
             </div>
+
+            {/* Parent Clinical Profile Recommendations */}
+            {parentPanels.length > 0 && (
+              <div className="bg-gradient-to-r from-cyan-50/90 via-sky-50/80 to-blue-50/80 p-3.5 sm:p-4 rounded-[20px] border border-cyan-200/90 shadow-2xs space-y-2.5">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0A6C82]">
+                  <Layers className="w-4 h-4 text-[#0A6C82] shrink-0" />
+                  <span>Available in Complete Clinical Health Profile</span>
+                </div>
+                <div className="space-y-2">
+                  {parentPanels.map((panel) => (
+                    <div
+                      key={panel.id}
+                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 p-3 rounded-[14px] bg-white/95 border border-cyan-100 shadow-2xs"
+                    >
+                      <div className="min-w-0">
+                        <div className="text-xs sm:text-sm font-bold text-[#102A43] truncate">
+                          {panel.name}
+                        </div>
+                        <div className="text-[11px] text-slate-500 font-medium">
+                          {panel.parameters.length} Parameters • 1 Single Needle Prick • {panel.turnaroundEstimate}
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          onClose();
+                          window.dispatchEvent(
+                            new CustomEvent('sawariya:search', {
+                              detail: { tab: 'panels', query: panel.name.split('(')[0].trim() }
+                            })
+                          );
+                        }}
+                        className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-[10px] bg-[#155E9A] hover:bg-[#0F4775] text-white text-xs font-bold transition-all cursor-pointer active:scale-[0.96] shrink-0 self-start sm:self-auto shadow-2xs"
+                      >
+                        <span>View Profile</span>
+                        <span className="text-[10px]">➔</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Test Specific Details */}
             <div className="grid min-w-0 grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5 text-xs">

@@ -12,6 +12,7 @@ import { usePagination } from '@/lib/use-pagination';
 import { useRequisition } from './requisition/RequisitionContext';
 import { BatchPaginationBar } from './BatchPaginationBar';
 import { ClinicalPanelSection } from './catalog/ClinicalPanelSection';
+import { clinicalPanels } from '@/data/clinicalPanelManifest';
 
 const TESTS_PER_PAGE = 12;
 
@@ -64,6 +65,18 @@ export function TestCatalog() {
     () => searchEngine.search(searchQuery, selectedCategory).filter((item) => item.type === 'test'),
     [searchEngine, searchQuery, selectedCategory],
   );
+  const matchingPanelsCount = useMemo(() => {
+    if (!searchQuery.trim()) return clinicalPanels.length;
+    const q = searchQuery.toLowerCase().trim();
+    return clinicalPanels.filter((panel) =>
+      panel.name.toLowerCase().includes(q) ||
+      panel.hindiName.toLowerCase().includes(q) ||
+      panel.parameters.some((p) => p.toLowerCase().includes(q)) ||
+      panel.doctorQuestion.toLowerCase().includes(q) ||
+      panel.doctorAnswer.toLowerCase().includes(q) ||
+      (panel.keywords && panel.keywords.some((k) => k.toLowerCase().includes(q)))
+    ).length;
+  }, [searchQuery]);
   const { page: currentPage, setPage: setCurrentPage, resetPage, totalPages, start: pageStart, visibleItems: visibleTests } = usePagination(filteredTests, TESTS_PER_PAGE);
 
   const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
@@ -119,7 +132,7 @@ export function TestCatalog() {
           >
             <span>📦 Complete Health Panels</span>
             <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
-              8
+              {matchingPanelsCount}
             </span>
           </button>
           <button
@@ -133,7 +146,7 @@ export function TestCatalog() {
           >
             <span>🔬 Individual Tests</span>
             <span className="text-[10.5px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
-              74
+              {filteredTests.length}
             </span>
           </button>
         </div>
@@ -145,7 +158,7 @@ export function TestCatalog() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
               <Input
                 type="text"
-                placeholder={activeCatalogTab === 'panels' ? "Search health panels or organ checkups…" : "Ask about an individual test…"}
+                placeholder={activeCatalogTab === 'panels' ? "Search health profiles (e.g. CBC, LFT, KFT, PCOD, Sugar, गठिया, पीलिया)…" : "Search tests or symptoms (e.g. Hemoglobin, TSH, Creatinine, खून, कमजोरी)…"}
                 name="catalog-search"
                 autoComplete="off"
                 value={searchQuery}

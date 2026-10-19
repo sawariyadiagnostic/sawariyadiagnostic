@@ -52,6 +52,25 @@ describe('approved public catalog', () => {
     }
   });
 
+  it('maps bilingual vernacular queries, symptoms, and panel acronyms to constituent test IDs', () => {
+    const engine = createSearchEngine(buildSearchIndex(medicalTests));
+    for (const [query, expectedIds] of Object.entries({
+      khoon: ['web-001', 'web-002'],
+      piliya: ['web-012', 'web-015', 'web-016'],
+      gathiya: ['web-067', 'web-066'],
+      lft: ['web-012', 'web-015', 'web-016'],
+      kft: ['web-023', 'web-024', 'web-025'],
+      pcod: ['web-055', 'web-056', 'web-058', 'web-060'],
+      mahawari: ['web-055', 'web-056', 'web-057'],
+      bukhar: ['web-001', 'web-007', 'web-070', 'web-073'],
+    })) {
+      const resultIds = new Set(engine.search(query).map((test) => test.id));
+      for (const id of expectedIds) {
+        expect(resultIds, `${query} should include ${id}`).toContain(id);
+      }
+    }
+  });
+
   it('renders the approved individual-test catalog only', () => {
     expect(visitorSource).not.toContain('Health Packages');
     expect(visitorSource).toContain('Individual Tests. Transparent Pricing.');

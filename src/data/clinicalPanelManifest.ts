@@ -33,6 +33,7 @@ export interface ClinicalPanel {
   diabetesMedsHold: boolean;
   clinicalPearl: string;
   constituentTestIds: string[];
+  keywords: string[];
   transparentPrice: number;
   turnaroundEstimate: string;
   costToCompleteTip?: {
@@ -100,7 +101,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: false,
     clinicalPearl: "Evaluates oxygen delivery, active viral/bacterial infections, allergic eosinophilia, and platelet adequacy in one single blood draw.",
-    constituentTestIds: ["web-001", "web-004"],
+    constituentTestIds: ["web-001","web-002","web-003","web-004","web-005","web-006","web-007"],
+    keywords: ["cbc","esr","hemogram","blood","hemoglobin","tlc","dlc","platelet","wbc","rbc","anemia","fever","infection","khoon","khoon ki janch","khoon ki kami","lal koshika","shwet koshika","kamzori","thakan","weakness"],
     transparentPrice: 450,
     turnaroundEstimate: "TAT: 4 Hours",
     costToCompleteTip: {
@@ -160,7 +162,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Differentiates hepatocellular liver injury from biliary gallstone/cholestatic obstruction and chronic protein synthesis capacity.",
-    constituentTestIds: ["web-020"],
+    constituentTestIds: ["web-012","web-013","web-014","web-015","web-016","web-017","web-018","web-019","web-020","web-021","web-022"],
+    keywords: ["lft","liver","jaundice","piliya","peeliya","peela peshab","sgot","sgpt","alt","ast","bilirubin","alkaline phosphatase","alp","ggt","albumin","protein","digestive","bile","hepatitis","fatty liver","cirrhosis","liver ki janch"],
     transparentPrice: 600,
     turnaroundEstimate: "TAT: 6 Hours"
   },
@@ -210,7 +213,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Measures kidney filtration efficiency, nitrogenous waste excretion, and life-critical cardiac/nerve electrolyte balance.",
-    constituentTestIds: ["web-021", "web-028"],
+    constituentTestIds: ["web-023","web-024","web-025","web-026","web-027","web-028","web-029"],
+    keywords: ["kft","rft","kidney","renal","creatinine","urea","bun","uric acid","sodium","potassium","chloride","magnesium","electrolytes","gfr","swelling","edema","face swelling","foot swelling","gurde ki janch","peshab me jalan","dialysis","kidney ki janch"],
     transparentPrice: 1000,
     turnaroundEstimate: "TAT: 6 Hours"
   },
@@ -258,7 +262,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Unmasks circulating atherogenic particles, artery-clogging plaque risks, and familial hypertriglyceridemia.",
-    constituentTestIds: ["web-030"],
+    constituentTestIds: ["web-030","web-031","web-032","web-033","web-034","web-035","web-036"],
+    keywords: ["lipid","cholesterol","triglycerides","hdl","ldl","vldl","heart","cardiac","ascvd","blood pressure","hypertension","fat","artery blockage","dil ki bimari","chest pain","chole","lipid profile"],
     transparentPrice: 450,
     turnaroundEstimate: "TAT: 6 Hours"
   },
@@ -298,7 +303,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Pairs exact morning fasting blood glucose with the gold-standard 90-day biological red cell hemoglobin turnover window.",
-    constituentTestIds: ["web-037", "web-040", "web-066"],
+    constituentTestIds: ["web-037","web-038","web-039","web-040"],
+    keywords: ["diabetes","sugar","glucose","hba1c","fbs","ppbs","rbs","fasting blood sugar","post prandial","madhumeh","sugar ki bimari","teen mahine ki sugar","shakar","insulin","urine glucose","frequent urination","thirst","sweet urine"],
     transparentPrice: 510,
     turnaroundEstimate: "TAT: 6 Hours"
   },
@@ -339,7 +345,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Evaluates pituitary-thyroid feedback loop for unexplained weight fluctuation, persistent lethargy, cold sensitivity, and hair thinning.",
-    constituentTestIds: ["web-050", "web-053", "web-054"],
+    constituentTestIds: ["web-050","web-051","web-052","web-053","web-054"],
+    keywords: ["thyroid","tft","tsh","t3","t4","ft3","ft4","hypothyroid","hyperthyroid","goiter","gala","weight gain","weight loss","sluggish","chills","hairfall","gale me sujan","thyroid ki janch"],
     transparentPrice: 750,
     turnaroundEstimate: "TAT: 12 Hours"
   },
@@ -378,7 +385,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Identifies hidden drivers of bone weakness, chronic muscular fatigue, neuropathic tingling, and microcytic iron deficiency.",
-    constituentTestIds: ["web-064", "web-065", "web-041", "web-043"],
+    constituentTestIds: ["web-064","web-065","web-041","web-042","web-043","web-027"],
+    keywords: ["vitamins","vitamin d","d3","vitamin b12","b12","ferritin","iron","cyanocobalamin","calcium","bone","bone pain","haddi","haddiyo me dard","joint weakness","tingling","numbness","hair fall","fatigue","kamzori","sustee","exhaustion"],
     transparentPrice: 2400,
     turnaroundEstimate: "TAT: 16 Hours"
   },
@@ -416,7 +424,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: false,
     clinicalPearl: "Essential pre-operative screening and anticoagulant safety verification assessing extrinsic and intrinsic clotting cascades.",
-    constituentTestIds: ["web-015", "web-016"],
+    constituentTestIds: ["web-009","web-010","web-011"],
+    keywords: ["coagulation","clotting","pt","inr","aptt","prothrombin","bleeding","blood thinner","warfarin","heparin","ecospirin","surgery clearance","operation","bruising","khoon jamna","thakka"],
     transparentPrice: 600,
     turnaroundEstimate: "TAT: 4 Hours"
   },
@@ -464,7 +473,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Diagnostic gold standard for polycystic ovarian syndrome assessing hyperandrogenism, anovulatory LH/FSH inversion, and ovarian reserve.",
-    constituentTestIds: ["web-055", "web-056", "web-057", "web-058", "web-060", "web-061"],
+    constituentTestIds: ["web-055","web-056","web-057","web-058","web-060","web-061"],
+    keywords: ["pcod","pcos","polycystic","ovary","amh","lh","fsh","prolactin","testosterone","estradiol","e2","periods","irregular periods","mahawari","masik dharm","facial hair","acne","weight gain","infertility","nissantaan","pregnancy hormone","harmone"],
     transparentPrice: 3850,
     turnaroundEstimate: "TAT: 12 Hours"
   },
@@ -499,7 +509,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: false,
     clinicalPearl: "Differentiates autoimmune inflammatory arthritis from degenerative joint pain and quantifies acute systemic inflammatory load.",
-    constituentTestIds: ["web-066", "web-067"],
+    constituentTestIds: ["web-067","web-066","web-026","web-007"],
+    keywords: ["arthritis","gathiya","gathiya bay","rheumatoid","ra factor","crp","c-reactive protein","uric acid","esr","joint pain","jodo ka dard","ghutno ka dard","stiffness","morning stiffness","swelling","inflammation","sujan"],
     transparentPrice: 1100,
     turnaroundEstimate: "TAT: 6 Hours"
   },
@@ -536,7 +547,8 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Evaluates prostate glandular integrity alongside bioavailable testosterone to investigate urinary symptoms and male vitality.",
-    constituentTestIds: ["web-062", "web-058"],
+    constituentTestIds: ["web-062","web-058"],
+    keywords: ["prostate","psa","testosterone","male hormone","prostate specific antigen","bph","urine blockage","peshab me rukawat","frequent urination","male vitality","androgen","libido","purush hormone"],
     transparentPrice: 1450,
     turnaroundEstimate: "TAT: 12 Hours"
   },
@@ -573,8 +585,23 @@ export const clinicalPanels: ClinicalPanel[] = [
     bpMedsAllowed: true,
     diabetesMedsHold: true,
     clinicalPearl: "Assesses anterior pituitary reserve with standardized resting collection to prevent stress-induced growth hormone and prolactin artifacts.",
-    constituentTestIds: ["web-057", "web-050"],
+    constituentTestIds: ["web-057","web-050"],
+    keywords: ["growth hormone","gh","hgh","pituitary","prolactin","tsh","height","delayed growth","short stature","kad","lambai","endocrine","pituitary gland"],
     transparentPrice: 1350,
     turnaroundEstimate: "TAT: 12 Hours"
   }
 ];
+
+export function getPanelsForTest(testId: string): ClinicalPanel[] {
+  const normalized = testId.toLowerCase();
+  return clinicalPanels.filter((panel) =>
+    panel.constituentTestIds.some((id) => id.toLowerCase() === normalized)
+  );
+}
+
+export function getConstituentTestsForPanel(panelId: string, allTests: { id: string }[]): { id: string }[] {
+  const panel = clinicalPanels.find((p) => p.id === panelId);
+  if (!panel) return [];
+  const constituentSet = new Set(panel.constituentTestIds.map((id) => id.toLowerCase()));
+  return allTests.filter((test) => constituentSet.has(test.id.toLowerCase()));
+}
