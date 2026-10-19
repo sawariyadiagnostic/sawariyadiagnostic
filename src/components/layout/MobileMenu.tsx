@@ -55,10 +55,9 @@ export function MobileMenu({ isOpen, onClose, scrollToSection, onOpenReportModal
 
           {/* Action Stack - Aligned with Single Star Principle */}
           <div className="mt-5 space-y-2.5 pt-4 border-t border-slate-200/70">
-            {/* STAR CTA: Request Home Collection in Specular Ruby */}
             <Button
               type="button"
-              className="w-full btn-specular-ruby squircle-btn apple-pressable min-h-12 h-auto text-sm font-bold text-white shadow-md rounded-[16px] active:scale-[0.96] cursor-pointer"
+              className="w-full btn-primary squircle-btn apple-pressable min-h-12 h-auto text-sm font-bold shadow-md rounded-[16px] active:scale-[0.96] cursor-pointer"
               onClick={() => {
                 scrollToSection('home-collection');
               }}
@@ -95,26 +94,25 @@ export function MobileMenu({ isOpen, onClose, scrollToSection, onOpenReportModal
           </div>
         </div>
 
-        {/* Unified Bottom Lab Hub Card */}
-        <div className="p-4 m-3 bg-slate-50/90 rounded-[20px] border border-slate-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] space-y-2.5">
+        <div className="glass-card p-4 m-3 bg-white/60 rounded-[20px] border border-white/80 shadow-[0_4px_16px_rgba(0,0,0,0.04)] space-y-2.5">
           <div className="flex items-center justify-between text-xs text-[#155E9A] font-bold">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#155E9A] animate-pulse" />
-              Central Pathology Hub
+              <span className="w-2 h-2 rounded-full bg-[#C62828] animate-pulse" />
+              Diagnostic Laboratory
             </span>
-            <span className="text-[10.5px] text-slate-500 font-medium">Charkhi Dadri</span>
+            <span className="text-[10px] text-slate-400 font-medium">Charkhi Dadri</span>
           </div>
 
           <a
             href={telHref(siteConfig.contact.phone)}
-            className="flex items-center justify-center gap-2 bg-[#102A43] hover:bg-[#155E9A] text-white rounded-[14px] py-3 px-4 min-h-11 text-xs font-bold shadow-xs active:scale-[0.96] transition-colors"
+            className="flex items-center justify-center gap-2 btn-peacock squircle-btn apple-pressable text-white rounded-[14px] py-3 px-4 min-h-11 text-xs font-bold shadow-xs active:scale-[0.96] transition-surface"
           >
-            <Phone className="w-4 h-4 text-sky-300" />
-            <span>Call Lab Desk: {siteConfig.contact.phone}</span>
+            <Phone className="w-4 h-4 text-[#F1C27D]" />
+            <span>Contact lab: {siteConfig.contact.phone}</span>
           </a>
 
-          <div className="flex items-center justify-center gap-1.5 text-[10.5px] text-slate-500 font-medium text-center">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+          <div className="flex items-center justify-center gap-1.5 text-[10.5px] text-slate-500 font-medium">
+            <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
             <span>Home collection 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients and emergency from hospitals</span>
           </div>
         </div>
