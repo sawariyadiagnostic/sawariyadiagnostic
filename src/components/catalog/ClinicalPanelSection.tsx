@@ -33,11 +33,11 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
   };
 
   const categories = [
-    { id: 'all', label: 'All 8 Health Profiles' },
+    { id: 'all', label: `All ${clinicalPanels.length} Health Profiles` },
     { id: 'hematology', label: 'Blood & Clotting' },
-    { id: 'biochem', label: 'Liver, Kidney & Heart' },
+    { id: 'biochem', label: 'Liver, Kidney & Joints' },
     { id: 'metabolic', label: 'Diabetes & Metabolism' },
-    { id: 'endocrine', label: 'Thyroid & Vitamins' },
+    { id: 'endocrine', label: 'Thyroid, PCOD & Hormones' },
   ];
 
   const filteredPanels = clinicalPanels.filter((panel) => {
