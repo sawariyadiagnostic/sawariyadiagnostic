@@ -56,13 +56,13 @@ export function ClinicalPanelDetailModal({
             <div>
               <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200 mb-2">
                 <Layers className="w-3.5 h-3.5" />
-                <span>{panel.department.toUpperCase()} CLINICAL PROFILE</span>
+                <span>{panel.department.toUpperCase()} CLINICAL TEST PANEL</span>
               </div>
               <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
                 {panel.name}
               </DialogTitle>
               <DialogDescription className="text-xs text-blue-100 mt-1">
-                {panel.hindiName} • Consolidated Single Vacutainer Draw
+                Consolidated Single Vacutainer Draw • Standardized Central SOPs
               </DialogDescription>
             </div>
 
@@ -187,7 +187,7 @@ export function ClinicalPanelDetailModal({
           <MetricDisplay
             size="md"
             value={formatInr(panel.transparentPrice)}
-            label="Profile Rate"
+            label="Panel Rate"
             sublabel={`${panel.parameters.length} parameters included`}
           />
 
@@ -213,12 +213,12 @@ export function ClinicalPanelDetailModal({
               {allSelected ? (
                 <>
                   <Check className="h-4 w-4 mr-1.5 stroke-[2.5]" />
-                  <span>Profile Added</span>
+                  <span>Panel Added</span>
                 </>
               ) : (
                 <>
                   <Plus className="h-4 w-4 mr-1.5" />
-                  <span>Add Complete Profile</span>
+                  <span>Add Complete Panel</span>
                 </>
               )}
             </Button>

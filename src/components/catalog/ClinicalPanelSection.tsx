@@ -73,7 +73,7 @@ export function ClinicalPanelSection({
   };
 
   const categories = [
-    { id: 'all', label: `All ${clinicalPanels.length} Profiles` },
+    { id: 'all', label: `All ${clinicalPanels.length} Panels` },
     { id: 'hematology', label: 'Blood & Clotting' },
     { id: 'biochem', label: 'Liver, Kidney & Joints' },
     { id: 'metabolic', label: 'Diabetes & Metabolism' },
@@ -123,7 +123,7 @@ export function ClinicalPanelSection({
 
       {/* Mobile Sideways Swipe Indicator */}
       <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2 px-1 md:hidden">
-        <span>Showing {filteredPanels.length} complete profiles</span>
+        <span>Showing {filteredPanels.length} test panels</span>
         <span className="inline-flex items-center gap-1 text-[#155E9A] font-bold">
           <span>Swipe sideways</span>
           <span>➔</span>
@@ -133,7 +133,7 @@ export function ClinicalPanelSection({
       {/* Panels Track: Sideways on Mobile, Responsive Grid on Desktop */}
       {filteredPanels.length === 0 ? (
         <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
-          <h4 className="text-base font-bold text-[#102A43]">No clinical profiles match &quot;{searchQuery}&quot;</h4>
+          <h4 className="text-base font-bold text-[#102A43]">No test panels match &quot;{searchQuery}&quot;</h4>
           <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all individual lab tests.</p>
         </div>
       ) : (
@@ -164,14 +164,11 @@ export function ClinicalPanelSection({
                     </span>
                   </div>
 
-                  {/* Title and Hindi Name */}
+                  {/* Title */}
                   <div>
-                    <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] leading-snug line-clamp-1" title={panel.name}>
+                    <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] leading-snug line-clamp-2 min-h-[2.5rem] flex items-center" title={panel.name}>
                       {panel.name}
                     </h4>
-                    <p className="text-xs text-[#0A6C82] font-semibold mt-0.5 truncate" title={panel.hindiName}>
-                      {panel.hindiName}
-                    </p>
                   </div>
 
                   {/* Compact Parameters Scope */}
@@ -195,7 +192,7 @@ export function ClinicalPanelSection({
                 {/* Price, Single TAT Tag, and Action Button */}
                 <div className="pt-2.5 mt-3 border-t border-slate-100 flex flex-col gap-2">
                   <div className="flex items-center justify-between">
-                    <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Profile Test Rate" />
+                    <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Panel Test Rate" />
                     <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
                   </div>
 
@@ -210,12 +207,12 @@ export function ClinicalPanelSection({
                     {allSelected ? (
                       <>
                         <Check className="h-3.5 w-3.5 mr-1.5 shrink-0 stroke-[2.5]" />
-                        <span>All Profile Tests Added</span>
+                        <span>All Panel Tests Added</span>
                       </>
                     ) : (
                       <>
                         <Plus className="h-3.5 w-3.5 mr-1.5 shrink-0" />
-                        <span>Add Complete Profile</span>
+                        <span>Add Complete Panel</span>
                       </>
                     )}
                   </Button>

@@ -195,7 +195,7 @@ export function TestCatalog() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
               <Input
                 type="text"
-                placeholder={activeCatalogTab === 'panels' ? "Search health profiles (e.g. CBC, LFT, KFT, PCOD, Sugar, गठिया, पीलिया)…" : "Search tests or symptoms (e.g. Hemoglobin, TSH, Creatinine, खून, कमजोरी)…"}
+                placeholder={activeCatalogTab === 'panels' ? "Search test panels (e.g. CBC, LFT, KFT, PCOD, Sugar)…" : "Search tests or symptoms (e.g. Hemoglobin, TSH, Creatinine, Fever, Thyroid)…"}
                 name="catalog-search"
                 autoComplete="off"
                 value={searchQuery}
