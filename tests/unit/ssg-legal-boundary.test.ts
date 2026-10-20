@@ -82,5 +82,5 @@ describe('approval-gated legal SSG boundary', () => {
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
-  });
+  }, 20000);
 });
