@@ -142,11 +142,25 @@ export function ClinicalPanelSection({
                     </span>
                   </div>
 
-                  {/* Title */}
+                  {/* Title & ShortCode Pill */}
                   <div>
-                    <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] leading-snug line-clamp-2 min-h-[2.5rem] flex items-center" title={panel.name}>
-                      {panel.name}
-                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => setDetailPanel(panel)}
+                      className="text-left group/title w-full cursor-pointer focus:outline-none"
+                      aria-label={`View details for ${panel.name}`}
+                    >
+                      <div className="flex items-center gap-1.5 flex-wrap min-h-[2.5rem]">
+                        <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] group-hover/title:text-[#155E9A] leading-snug transition-colors line-clamp-2" title={panel.name}>
+                          {panel.name}
+                        </h4>
+                        {panel.shortCode && (
+                          <span className="inline-flex items-center px-1.5 py-0.5 rounded-[6px] bg-slate-100 text-slate-700 text-[10px] font-bold tracking-tight border border-slate-200/80">
+                            {panel.shortCode}
+                          </span>
+                        )}
+                      </div>
+                    </button>
                   </div>
 
                   {/* Compact Parameters Scope */}
@@ -172,7 +186,10 @@ export function ClinicalPanelSection({
                     <span className="font-heading text-xl sm:text-2xl font-black text-[#102A43] tracking-tight tabular-nums">
                       {formatInr(panel.transparentPrice)}
                     </span>
-                    <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
+                    <span className="badge-neutral-clinical inline-flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-slate-400 shrink-0" />
+                      <span>{panel.turnaroundEstimate}</span>
+                    </span>
                   </div>
 
                   <Button

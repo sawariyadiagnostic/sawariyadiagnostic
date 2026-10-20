@@ -50,27 +50,62 @@ export function ClinicalPanelDetailModal({
   return (
     <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
       <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel apple-squircle-modal rounded-[28px] flex flex-col">
-        {/* Header */}
+        {/* Header: Zero Collision, Full-Width Title, Metric First */}
         <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
-          <div className="flex items-start justify-between gap-4 relative z-10">
-            <div>
-              <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200 mb-2">
-                <Layers className="w-3.5 h-3.5" />
+          <div className="relative z-10 flex flex-col gap-3">
+            {/* 1. Kicker row with guaranteed close-button clearance (pr-12) */}
+            <div className="flex items-center justify-between pr-12">
+              <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200">
+                <Layers className="w-3.5 h-3.5 text-blue-300" />
                 <span>{panel.department.toUpperCase()} CLINICAL TEST PANEL</span>
               </div>
-              <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
-                {panel.name}
-              </DialogTitle>
-              <DialogDescription className="text-xs text-blue-100 mt-1">
-                Consolidated Single Vacutainer Draw • Standardized Central SOPs
+            </div>
+
+            {/* 2. Full-Width Title & Clinical Subtitle */}
+            <div className="pr-12 sm:pr-14">
+              <div className="flex items-center gap-2 flex-wrap">
+                <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
+                  {panel.name}
+                </DialogTitle>
+                {panel.shortCode && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-[6px] bg-white/15 text-blue-100 text-[11px] font-bold border border-white/20">
+                    {panel.shortCode}
+                  </span>
+                )}
+              </div>
+              <DialogDescription className="text-xs text-blue-100/90 mt-1">
+                {panel.subtitle || panel.clusterRef || 'Consolidated Single Vacutainer Draw • Standardized Central SOPs'}
               </DialogDescription>
             </div>
 
-            <div className="text-right flex-shrink-0 pt-10 sm:pt-0 sm:pr-12">
-              <div className="text-2xl sm:text-3xl font-black text-white">{formatInr(panel.transparentPrice)}</div>
-              <span className="text-[10px] font-bold bg-emerald-500/30 text-emerald-100 border border-emerald-400/40 px-2 py-0.5 rounded-full inline-block mt-1">
-                {panel.turnaroundEstimate}
-              </span>
+            {/* 3. Hero Metric Strip: Metric First! */}
+            <div className="pt-2 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
+              {/* Price Anchor */}
+              <div className="flex items-baseline gap-2">
+                <span className="font-heading text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">
+                  {formatInr(panel.transparentPrice)}
+                </span>
+                <span className="text-[11px] text-blue-200 font-semibold">
+                  Transparent In-House Fee
+                </span>
+              </div>
+
+              {/* Harmoniously Grouped Triage Badges */}
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/25 text-emerald-100 border border-emerald-400/40">
+                  <Clock className="w-3 h-3 text-emerald-300" />
+                  <span>{panel.turnaroundEstimate}</span>
+                </span>
+
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
+                  <span>{panel.fastingHours > 0 ? `${panel.fastingHours}h Fasting` : 'Non-Fasting'}</span>
+                </span>
+
+                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
+                  <span className={`w-1.5 h-1.5 rounded-full ${panel.tubeColorClass}`} />
+                  <span>1 Prick Draw</span>
+                </span>
+              </div>
             </div>
           </div>
         </div>

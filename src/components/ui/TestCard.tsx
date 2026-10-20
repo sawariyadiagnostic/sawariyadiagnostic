@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Check, ClipboardList, Home, Layers } from 'lucide-react';
+import { Check, ClipboardList, Home, Layers, Clock } from 'lucide-react';
 import { Button } from './button';
 import type { MedicalTest } from '@/data/publishedCatalog';
 import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 import { formatInr } from '@/lib/utils';
+import { getTestTurnaround, getTestParameterScope } from '@/utils/clinicalMetadata';
 
 interface TestCardProps {
   test: MedicalTest;
@@ -80,7 +81,8 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
     }
   };
 
-  const hasParameters = Boolean(test.parameters && test.parameters.length > 0);
+  const scope = getTestParameterScope(test);
+  const turnaround = getTestTurnaround(test);
 
   const dept = getDepartmentInfo(test.category, test.name);
   const vac = getVacutainerDot(test.category, test.name);
@@ -145,33 +147,49 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
               className="mb-2 inline-flex items-center gap-1 bg-cyan-50/90 hover:bg-cyan-100/90 border border-cyan-200/80 text-[10.5px] text-[#0A6C82] hover:text-[#085363] font-semibold px-2 py-0.5 rounded-[8px] w-fit max-w-full transition-all cursor-pointer group/panel active:scale-[0.97]"
             >
               <Layers className="w-3 h-3 text-[#0A6C82] shrink-0 group-hover/panel:scale-110 transition-transform" />
-              <span className="truncate">Also in {parentPanel.name.split('(')[0].trim()}</span>
+              <span className="truncate">Also in {parentPanel.name}</span>
               <span className="text-[9px] text-[#0A6C82]/80 font-bold ml-0.5">➔</span>
             </button>
           )}
 
-          {/* Compact Parameters Preview / Verification note */}
-          <div className="mb-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-600 gap-1.5 min-w-0">
-            {hasParameters ? (
-              <>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider shrink-0">
-                  {test.parameters.length} Params
-                </span>
-                <div className="flex items-center gap-1 overflow-hidden truncate">
-                  <span className="truncate text-slate-600 font-medium text-[10.5px]">
-                    {test.parameters.slice(0, 2).join(' • ')}
+          {/* Parameter Scope Display & Interactive Modal Trigger */}
+          <div className="mb-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] min-w-0">
+            {scope.isMultiParameter ? (
+              <button
+                type="button"
+                onClick={handleCardClick}
+                className="flex items-center justify-between w-full p-1.5 rounded-[10px] bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/60 text-[#155E9A] transition-colors cursor-pointer group/scope"
+                aria-label={`View all ${scope.count} parameters for ${test.name}`}
+              >
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-[#155E9A] text-white px-1.5 py-0.5 rounded-[6px] shrink-0">
+                    {scope.count} Params
                   </span>
-                  {test.parameters.length > 2 && (
-                    <span className="shrink-0 text-[9.5px] font-bold text-[#0A6C82] bg-teal-50 border border-teal-200/80 rounded px-1 py-0.2">
-                      +{test.parameters.length - 2}
-                    </span>
-                  )}
+                  <span className="text-[10.5px] font-medium text-slate-700 truncate max-w-[140px] sm:max-w-[180px]">
+                    {scope.preview}
+                  </span>
                 </div>
-              </>
+                <span className="text-[10px] font-bold text-[#155E9A] shrink-0 ml-1 group-hover/scope:translate-x-0.5 transition-transform">
+                  ➔
+                </span>
+              </button>
             ) : (
-              <span className="text-[10px] font-medium text-slate-400">
-                Central in-house analyzer • Verified in 12h
-              </span>
+              <button
+                type="button"
+                onClick={handleCardClick}
+                className="flex items-center justify-between w-full p-1.5 rounded-[10px] bg-slate-50 hover:bg-slate-100/80 border border-slate-100 text-slate-600 transition-colors cursor-pointer group/single"
+                aria-label={`View clinical details for ${test.name}`}
+              >
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <span className="text-[10.5px] font-bold text-slate-700">Single Analyte</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-[10px] text-slate-500 truncate">Central In-House SOP</span>
+                </div>
+                <span className="text-[10px] font-semibold text-slate-400 group-hover/single:text-slate-600 group-hover/single:translate-x-0.5 transition-all">
+                  Details ➔
+                </span>
+              </button>
             )}
           </div>
         </div>
@@ -189,8 +207,9 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
                 </span>
               )}
             </div>
-            <span className="badge-neutral-clinical">
-              Ready in 2–6 hrs
+            <span className="badge-neutral-clinical" title="Expected laboratory turnaround time">
+              <Clock className="w-3 h-3 text-slate-400 shrink-0" />
+              <span>{turnaround}</span>
             </span>
           </div>
 

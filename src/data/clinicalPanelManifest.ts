@@ -9,6 +9,8 @@
 export interface ClinicalPanel {
   id: string;
   name: string;
+  shortCode?: string;
+  subtitle?: string;
   hindiName: string;
   clusterRef: string;
   department: 'Hematology' | 'Biochemistry' | 'Endocrinology' | 'Microbiology';
@@ -46,7 +48,9 @@ export interface ClinicalPanel {
 export const clinicalPanels: ClinicalPanel[] = [
   {
     id: "panel-hemogram",
-    name: "Complete Hemogram (CBC + ESR)",
+    name: "Complete Hemogram",
+    shortCode: "CBC + ESR",
+    subtitle: "Includes CBC & Automated ESR (16 Analytes)",
     hindiName: "खून की सम्पूर्ण जांच (सीबीसी + ईएसआर)",
     clusterRef: "Cluster 1.1 — Master Hemogram",
     department: "Hematology",
@@ -113,7 +117,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-lft",
-    name: "Liver Function & Biliary Panel (LFT)",
+    name: "Liver Function Panel",
+    shortCode: "LFT (11 Analytes)",
+    subtitle: "Complete 11-Analyte Liver & Enzyme Screen",
     hindiName: "लिवर (जिगर) की सम्पूर्ण कार्यप्रणाली जांच",
     clusterRef: "Cluster 2.2 — Master LFT & R-Factor",
     department: "Biochemistry",
@@ -168,7 +174,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-kft",
-    name: "Renal Function & Complete Electrolytes (KFT + Na, K, Cl, Mg)",
+    name: "Kidney Function & Electrolytes",
+    shortCode: "KFT + 4 Electrolytes",
+    subtitle: "Includes BUN, Creatinine, Uric Acid & 4 Electrolytes",
     hindiName: "किडनी सम्पूर्ण जांच एवं 4 इलेक्ट्रोलाइट्स (सोडियम, पोटेशियम, क्लोराइड, मैग्नीशियम)",
     clusterRef: "Cluster 2.3 — Master KFT & Electrolytes",
     department: "Biochemistry",
@@ -219,7 +227,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-lipid",
-    name: "Lipid Profile & ASCVD Cardiovascular Risk",
+    name: "Lipid & Cholesterol Profile",
+    shortCode: "Lipid / ASCVD",
+    subtitle: "Direct HDL, LDL, Triglycerides & Cardiac Ratios",
     hindiName: "हार्ट व कोलेस्ट्रॉल लिपिड प्रोफाइल जांच",
     clusterRef: "Cluster 2.4 — Master ASCVD Lipid Risk",
     department: "Biochemistry",
@@ -268,7 +278,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-diabetes",
-    name: "Comprehensive Diabetic & Glycemic Panel",
+    name: "Diabetic Glycemic Panel",
+    shortCode: "HbA1c + Fasting",
+    subtitle: "Gold-Standard HPLC HbA1c, Fasting Glucose & Urine",
     hindiName: "मधुमेह एवं तीन महीने की शुगर (HbA1c) जांच",
     clusterRef: "Cluster 2.1 — Master Diabetic Glycemic Profile",
     department: "Biochemistry",
@@ -309,7 +321,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-thyroid",
-    name: "Thyroid Profile (Total & Free TFT)",
+    name: "Thyroid Profile",
+    shortCode: "Total & Free TFT",
+    subtitle: "Total T3, T4, Ultrasensitive TSH, FT3 & FT4",
     hindiName: "थायरॉइड सम्पूर्ण प्रोफाइल (T3, T4, TSH)",
     clusterRef: "Cluster 3.1 — Master Thyroid & Autoimmunity",
     department: "Endocrinology",
@@ -351,7 +365,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-vitamins-bone",
-    name: "Vital Vitamins & Deep Iron Panel (D3, B12, Ferritin, Iron)",
+    name: "Vitamins & Deep Iron Panel",
+    shortCode: "D3 + B12 + Iron",
+    subtitle: "Vitamin D3, B12, Serum Ferritin & Iron Profile",
     hindiName: "विटामिन डी3, बी12, फेरिटिन एवं आयरन जांच",
     clusterRef: "Cluster 3.2 — Master Micronutrient & Bone Health",
     department: "Endocrinology",
@@ -391,7 +407,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-coagulation",
-    name: "Coagulation & Clotting Screen (PT/INR + aPTT)",
+    name: "Coagulation Panel",
+    shortCode: "PT/INR + aPTT",
+    subtitle: "Prothrombin Time, INR & aPTT Screen",
     hindiName: "रक्त का थक्का जमने की जांच (पीटी/आईएनआर व एपीटीटी)",
     clusterRef: "Cluster 1.3 — Master Coagulation & Hemostasis",
     department: "Hematology",
@@ -430,7 +448,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-pcod",
-    name: "Comprehensive PCOD / PCOS & Female Hormone Panel",
+    name: "PCOD / PCOS Hormone Panel",
+    shortCode: "AMH + Hormones",
+    subtitle: "AMH, LH, FSH, Prolactin, Testosterone & E2",
     hindiName: "पीसीओडी व महिला हार्मोन सम्पूर्ण प्रोफाइल (PCOD/PCOS)",
     clusterRef: "Cluster 3.3 — Master Gynecological Endocrinology",
     department: "Endocrinology",
@@ -479,7 +499,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-arthritis",
-    name: "Arthritis & Autoimmune Inflammation Screen (RA + CRP)",
+    name: "Arthritis & Inflammation Panel",
+    shortCode: "RA + hs-CRP + Uric",
+    subtitle: "RA Factor, hs-CRP, Uric Acid & Calcium",
     hindiName: "गठिया एवं जोड़ों के दर्द की जांच (आरए फैक्टर व सीआरपी)",
     clusterRef: "Cluster 2.5 — Master Rheumatology & Serology",
     department: "Biochemistry",
@@ -515,7 +537,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-prostate-male",
-    name: "Prostate Health & Male Hormone Profile (PSA + Testosterone)",
+    name: "Male Vitality & Prostate Panel",
+    shortCode: "PSA + Testosterone",
+    subtitle: "Total PSA, Free/Total Testosterone & LH",
     hindiName: "प्रोस्टेट व पुरुष हार्मोन जांच (PSA व टेस्टोस्टेरोन)",
     clusterRef: "Cluster 3.4 — Master Urological Endocrinology",
     department: "Endocrinology",
@@ -553,7 +577,9 @@ export const clinicalPanels: ClinicalPanel[] = [
   },
   {
     id: "panel-growth-pituitary",
-    name: "Growth Hormone & Pituitary Profile (GH + Prolactin)",
+    name: "Growth & Pituitary Axis Panel",
+    shortCode: "hGH + Prolactin + TSH",
+    subtitle: "Human Growth Hormone, Prolactin & Ultrasensitive TSH",
     hindiName: "ग्रोथ हार्मोन व पिट्यूटरी प्रोफाइल (GH व प्रोलैक्टिन)",
     clusterRef: "Cluster 3.5 — Master Pituitary Axis",
     department: "Endocrinology",

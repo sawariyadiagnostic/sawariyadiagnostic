@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ClipboardList,
   Layers,
+  Clock,
 } from 'lucide-react';
 import { type MedicalTest } from '@/data/publishedCatalog';
 import { getPanelsForTest } from '@/data/clinicalPanelManifest';
@@ -15,6 +16,7 @@ import { formatInr } from '@/lib/utils';
 import { buildTestShareUrl } from '@/config/site';
 import { copyText } from '@/lib/clipboard';
 import { toast } from 'sonner';
+import { getTestTurnaround, getTestParameters, getTestParameterScope } from '@/utils/clinicalMetadata';
 
 interface TestDetailModalProps {
   item: MedicalTest | null;
@@ -42,6 +44,9 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
   if (!item) return null;
 
   const parentPanels = getPanelsForTest(item.id);
+  const turnaround = getTestTurnaround(item);
+  const parameters = getTestParameters(item);
+  const scope = getTestParameterScope(item);
 
   const discountPercent = item.originalPrice > item.price
     ? Math.round((1 - item.price / item.originalPrice) * 100)
@@ -61,32 +66,62 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     <>
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
         <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel apple-squircle-modal rounded-[28px] flex flex-col">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-6 text-white relative overflow-hidden flex-shrink-0">
-            <div className="flex items-start justify-between gap-4 relative z-10">
-              <div>
-                <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200 mb-2">
-                  <TestTube className="w-3.5 h-3.5" />
-                  <span>{item.category?.toUpperCase()} PATHOLOGY</span>
+          {/* Header: Zero Collision, Full-Width Title, Metric First */}
+          <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
+            <div className="relative z-10 flex flex-col gap-3">
+              {/* 1. Kicker row with guaranteed close-button clearance (pr-12) */}
+              <div className="flex items-center justify-between pr-12">
+                <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200">
+                  <TestTube className="w-3.5 h-3.5 text-blue-300" />
+                  <span>{item.category?.toUpperCase()} INVESTIGATION</span>
                 </div>
-                <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+              </div>
+
+              {/* 2. Full-Width Title */}
+              <div className="pr-12 sm:pr-14">
+                <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
                   {item.name}
                 </DialogTitle>
-                <DialogDescription className="text-xs text-[var(--text-on-dark)] mt-1">
+                <DialogDescription className="text-xs text-blue-100/90 mt-1">
                   Documented laboratory protocols • Reports verified within 12 hours
                 </DialogDescription>
               </div>
 
-              <div className="text-right flex-shrink-0 pt-11 sm:pt-0 sm:pr-14">
-                <div className="font-heading text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">{formatInr(item.price)}</div>
-                {item.originalPrice > item.price && (
-                  <div className="text-xs text-blue-200 line-through">{formatInr(item.originalPrice)}</div>
-                )}
-                {discountPercent && (
-                  <span className="text-[10px] font-bold bg-[#FDE047] text-[#102A43] px-2 py-0.5 rounded-full inline-block mt-1">
-                    Save {discountPercent}%
+              {/* 3. Hero Metric Strip: Metric First! */}
+              <div className="pt-2 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
+                {/* Price Anchor */}
+                <div className="flex items-baseline gap-2">
+                  <span className="font-heading text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">
+                    {formatInr(item.price)}
                   </span>
-                )}
+                  {item.originalPrice > item.price && (
+                    <span className="text-xs text-blue-200 line-through tabular-nums font-semibold">
+                      {formatInr(item.originalPrice)}
+                    </span>
+                  )}
+                  {discountPercent && (
+                    <span className="text-[10px] font-bold bg-[#FDE047] text-[#102A43] px-2 py-0.5 rounded-full inline-block">
+                      Save {discountPercent}%
+                    </span>
+                  )}
+                </div>
+
+                {/* Harmoniously Grouped Triage Badges */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/25 text-emerald-100 border border-emerald-400/40">
+                    <Clock className="w-3 h-3 text-emerald-300" />
+                    <span>{turnaround}</span>
+                  </span>
+
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
+                    <TestTube className="w-3 h-3 text-blue-300" />
+                    <span>{getBiologicalSpecimen(item).split('(')[0].trim()}</span>
+                  </span>
+
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
+                    <span>{scope.label}</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -173,10 +208,10 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
             {/* Parameters or Included Tests */}
             <div className="bg-white p-4 rounded-[20px] border border-slate-200 shadow-2xs space-y-2">
               <span className="text-[10.5px] font-bold text-slate-400 uppercase tracking-wider block">
-                {'Diagnostic Parameters Measured:'}
+                {scope.isMultiParameter ? `Diagnostic Parameters Measured (${parameters.length}):` : 'Diagnostic Parameter Measured:'}
               </span>
               <div className="grid sm:grid-cols-2 gap-2">
-                {(item.parameters || [item.name]).map((param, i) => (
+                {parameters.map((param, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-slate-700 bg-slate-50 p-2 rounded-[12px] border border-slate-100">
                     <Check className="w-3.5 h-3.5 text-green-700 flex-shrink-0" />
                     <span className="font-medium">{param}</span>

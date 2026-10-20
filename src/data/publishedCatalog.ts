@@ -39,11 +39,28 @@ export const medicalTests: MedicalTest[] = [
     price: 350,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["COMPLETE BLOOD COUNT (CBC)"],
+    parameters: [
+      "Hemoglobin (Hb)",
+      "Total Leukocyte Count (TLC / WBC)",
+      "Neutrophils (%)",
+      "Lymphocytes (%)",
+      "Eosinophils (%)",
+      "Monocytes (%)",
+      "Basophils (%)",
+      "Absolute Neutrophil Count (ANC)",
+      "Absolute Lymphocyte Count (ALC)",
+      "Absolute Eosinophil Count (AEC)",
+      "Red Blood Cell Count (RBC)",
+      "Packed Cell Volume (PCV / Hematocrit)",
+      "Mean Corpuscular Volume (MCV)",
+      "Mean Corpuscular Hemoglobin (MCH)",
+      "Mean Corpuscular Hemoglobin Concentration (MCHC)",
+      "Platelet Count"
+    ],
     specimen: "Whole Blood (Lavender-top K2/K3-EDTA)",
     method: "5-Part Automated Flow Cytometry & Impedance",
     preparation: "Fasting is not strictly mandatory for a CBC alone; however, if ordered alongside biochemistry panels, observe an 8-10 hour fast. Drink 1-2 glasses of plain water before coming to the lab.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 350,
   },
   {
@@ -57,7 +74,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (Lavender-top K2/K3-EDTA)",
     method: "Cyanide-Free SLS Photometry",
     preparation: "No fasting required. Maintain normal fluid intake.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 100,
   },
   {
@@ -71,7 +88,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (Lavender-top K2/K3-EDTA)",
     method: "Hydrodynamic Focusing Impedance & Optical Verification",
     preparation: "No fasting required. Drink plenty of water.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -85,7 +102,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (Lavender-top K2/K3-EDTA)",
     method: "Automated Flow Cytometry / Direct Microscopy Chamber",
     preparation: "Light breakfast or fasting. Avoid heavy high-carbohydrate meals right before the draw.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -99,7 +116,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (Lavender-top EDTA)",
     method: "Electrical Impedance with Hydrodynamic Focusing",
     preparation: "No fasting needed.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -113,7 +130,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (Lavender-top EDTA)",
     method: "Flow Cytometric Cell Counting / Impedance",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -127,7 +144,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Whole Blood (EDTA / Black-top Sodium Citrate 4:1)",
     method: "Automated / Modified Westergren Method",
     preparation: "No fasting required. Maintain regular hydration.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 100,
   },
   {
@@ -137,11 +154,14 @@ export const medicalTests: MedicalTest[] = [
     price: 120,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["BLOOD GROUP (ABO & Rh TYPING)"],
+    parameters: [
+      "ABO Blood Grouping (Forward & Reverse)",
+      "Rh (D) Factor Typing"
+    ],
     specimen: "Whole Blood (Lavender-top EDTA)",
     method: "Column Agglutination / Forward & Reverse Slide/Tube Method",
     preparation: "NO FASTING REQUIRED. Eating has absolutely zero impact on erythrocyte surface antigens.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 120,
   },
   {
@@ -151,11 +171,15 @@ export const medicalTests: MedicalTest[] = [
     price: 250,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["PROTHROMBIN TIME (PT/INR)"],
+    parameters: [
+      "Prothrombin Time (Patient Time in Seconds)",
+      "Control Time",
+      "International Normalized Ratio (INR)"
+    ],
     specimen: "Plasma (Light Blue-top 3.2% Sodium Citrate)",
     method: "Automated Optical / Mechanical Coagulometry",
     preparation: "No strict fasting, but avoid high-fat meals. Avoid sudden dramatic changes in intake of Vitamin K-rich green leafy vegetables (spinach, kale, broccoli).",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 250,
   },
   {
@@ -165,11 +189,15 @@ export const medicalTests: MedicalTest[] = [
     price: 500,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["ACTIVATED PARTIAL THROMBOPLASTIN TIME (APTT)"],
+    parameters: [
+      "Activated Partial Thromboplastin Time (Patient Time in Seconds)",
+      "Control Time",
+      "APTT Ratio"
+    ],
     specimen: "Plasma (Light Blue-top 3.2% Sodium Citrate)",
     method: "Automated Optical Coagulometry",
     preparation: "Avoid high-fat meals to prevent optical interference.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 500,
   },
   {
@@ -179,11 +207,14 @@ export const medicalTests: MedicalTest[] = [
     price: 150,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["BLEEDING TIME & CLOTTING TIME (BT & CT)"],
+    parameters: [
+      "Bleeding Time (Duke Method)",
+      "Clotting Time (Capillary Tube Method)"
+    ],
     specimen: "Patient (In-vivo capillary blood)",
     method: "Duke / Ivy Method & Wright's Capillary Tube Method",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 150,
   },
   {
@@ -197,7 +228,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Modified Jendrassik-Grof / Diazo Photometric",
     preparation: "Fasting for 8 to 10 hours is strongly recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -211,7 +242,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Diazo Photometric (Without Accelerator)",
     preparation: "8-10 hours fasting.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -225,7 +256,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "Mathematical Calculation (Total Bilirubin minus Direct Bilirubin)",
     preparation: "Overnight fast 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -239,7 +270,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "IFCC Kinetic UV Method (Without Pyridoxal Phosphate)",
     preparation: "Fasting 8-10 hours preferred. Water is allowed.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 100,
   },
   {
@@ -253,7 +284,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "IFCC Kinetic UV Method",
     preparation: "Overnight fasting 8-10 hours is recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 100,
   },
   {
@@ -267,7 +298,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "IFCC Kinetic Colorimetric (p-NPP Substrate)",
     preparation: "CRITICAL: Overnight fasting 8-10 hours is necessary.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -281,7 +312,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Szasz Kinetic Photometric (L-gamma-glutamyl-3-carboxy-4-nitroanilide)",
     preparation: "Fasting 8-10 hours is preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 250,
   },
   {
@@ -295,7 +326,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Biuret Colorimetric Reaction",
     preparation: "Overnight fasting 8-10 hours preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -309,7 +340,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Bromocresol Green (BCG) Dye-Binding",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -323,7 +354,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "Calculated (Total Protein minus Albumin)",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -337,7 +368,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "Calculated Ratio (Albumin / Globulin)",
     preparation: "Fasting.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -351,7 +382,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Enzymatic Urease - GLDH Kinetic UV",
     preparation: "Overnight fasting 8-10 hours is strongly recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -365,7 +396,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated / Direct Photometric)",
     method: "Calculated (BUN x 2.14) / Direct Enzymatic",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 120,
   },
   {
@@ -379,7 +410,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Enzymatic / Buffered Kinetic Jaffe Rate Blanked",
     preparation: "Overnight fasting 8-10 hours is recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -393,7 +424,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Enzymatic Uricase - PAP Colorimetric",
     preparation: "Fasting 8-10 hours. Strictly avoid purine-rich foods for 24 hours prior.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -407,7 +438,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Arsenazo III / O-Cresolphthalein Complexone (CPC)",
     preparation: "Overnight fasting 8-10 hours is preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -421,7 +452,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Phosphomolybdate UV Method",
     preparation: "CRITICAL: Overnight fasting 8-10 hours is mandatory.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -435,7 +466,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "MDRD (Modification of Diet in Renal Disease) Equation",
     preparation: "Same as Creatinine (8-10 hr fast).",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -449,7 +480,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "CHOD-PAP Enzymatic Photometric",
     preparation: "Fasting 10 to 12 hours is recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -463,7 +494,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Direct Homogeneous Enzymatic Surfactant Clearance",
     preparation: "Fasting 10 to 12 hours preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 200,
   },
   {
@@ -477,7 +508,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Direct Homogeneous / Friedewald Calculation",
     preparation: "STRICT 10-12 HOURS OVERNIGHT FASTING IS MANDATORY if calculated via Friedewald equation.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 200,
   },
   {
@@ -491,7 +522,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated / Direct)",
     method: "Calculated (Triglycerides / 5)",
     preparation: "Strict fasting 10-12 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -505,7 +536,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "GPO-PAP Enzymatic with Glycerol Blanking",
     preparation: "CRITICAL: STRICT 10 TO 12 HOURS OVERNIGHT FASTING IS MANDATORY.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 180,
   },
   {
@@ -519,7 +550,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "Calculated Ratio (Total Cholesterol / HDL)",
     preparation: "Fasting.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -533,7 +564,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Calculated)",
     method: "Calculated Ratio (LDL / HDL)",
     preparation: "Fasting.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 150,
   },
   {
@@ -547,7 +578,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Plasma (Grey-top Sodium Fluoride / Potassium Oxalate)",
     method: "Enzymatic GOD-POD / Hexokinase",
     preparation: "STRICT 8 TO 12 HOURS FASTING IS MANDATORY. No tea, coffee, milk, diet sodas, or chewing gum.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 80,
   },
   {
@@ -561,7 +592,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Plasma (Grey-top Sodium Fluoride)",
     method: "Enzymatic GOD-POD / Hexokinase",
     preparation: "Eat your customary, standard breakfast or lunch. Do not fast and do not overeat.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 80,
   },
   {
@@ -575,7 +606,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Plasma (Grey-top Sodium Fluoride)",
     method: "GOD-POD / Hexokinase",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 80,
   },
   {
@@ -585,11 +616,14 @@ export const medicalTests: MedicalTest[] = [
     price: 450,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["HbA1c (GLYCOSYLATED HEMOGLOBIN)"],
+    parameters: [
+      "HbA1c (Glycosylated Hemoglobin)",
+      "Estimated Average Glucose (eAG)"
+    ],
     specimen: "Whole Blood (Lavender-top EDTA)",
     method: "HPLC (High Performance Liquid Chromatography) / NGSP Certified",
     preparation: "NO FASTING REQUIRED. You can eat normally before this test.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 6 Hours",
     originalPrice: 450,
   },
   {
@@ -603,7 +637,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Ferrozine Photometric (Iron-free plasticware)",
     preparation: "Overnight fasting 8-10 hours is required. Avoid iron-rich red meats the night before.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 250,
   },
   {
@@ -613,11 +647,15 @@ export const medicalTests: MedicalTest[] = [
     price: 350,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["% TRANSFERRIN SATURATION"],
+    parameters: [
+      "Serum Iron",
+      "Total Iron Binding Capacity (TIBC)",
+      "% Transferrin Saturation"
+    ],
     specimen: "Serum (Calculated)",
     method: "Calculated: (Serum Iron / TIBC) * 100",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 6 Hours",
     originalPrice: 350,
   },
   {
@@ -631,7 +669,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting is preferred but not strictly mandatory for ferritin alone; if combined with iron, fast 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 600,
   },
   {
@@ -645,7 +683,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST) / Heparin Plasma",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "NO FASTING REQUIRED. NEVER delay blood collection for meals or fasting!",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 1150,
   },
   {
@@ -659,7 +697,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "ECLIA / High-Sensitivity CLIA",
     preparation: "No fasting.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 2250,
   },
   {
@@ -673,7 +711,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "IFCC Kinetic UV Method",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 350,
   },
   {
@@ -687,7 +725,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Immunoinhibition / CLIA",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 450,
   },
   {
@@ -701,7 +739,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Enzymatic Colorimetric (CNPG3 Substrate)",
     preparation: "Fasting 6 to 8 hours is preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 460,
   },
   {
@@ -715,7 +753,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Enzymatic Colorimetric (Methylresorufin Substrate)",
     preparation: "Fasting 6-8 hours preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 600,
   },
   {
@@ -729,7 +767,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Overnight fasting 8 to 10 hours is strongly recommended. Plain drinking water is permitted.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 180,
   },
   {
@@ -743,7 +781,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 180,
   },
   {
@@ -757,7 +795,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 180,
   },
   {
@@ -771,7 +809,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 250,
   },
   {
@@ -785,7 +823,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting 8-10 hours.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 250,
   },
   {
@@ -799,7 +837,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting not strictly required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 450,
   },
   {
@@ -813,7 +851,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting not mandatory.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 450,
   },
   {
@@ -827,7 +865,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting preferred. Avoid heavy protein breakfast.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 450,
   },
   {
@@ -841,7 +879,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting 8-10 hours is strongly recommended.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 550,
   },
   {
@@ -855,7 +893,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "NO FASTING REQUIRED.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 550,
   },
   {
@@ -869,7 +907,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting is not required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 1850,
   },
   {
@@ -883,7 +921,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Fasting not mandatory.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 650,
   },
   {
@@ -897,7 +935,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "No strict fasting required, though light fasting is standard.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 750,
   },
   {
@@ -911,7 +949,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Light fasting preferred.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 1250,
   },
   {
@@ -925,7 +963,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "Fasting 8-10 hours is preferred. Strictly avoid high-fat meals right before blood draw.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 1050,
   },
   {
@@ -939,7 +977,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Competitive CLIA (Maglumi X3)",
     preparation: "Overnight fasting 8-10 hours recommended. Avoid energy drinks containing high synthetic B-vitamins.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 750,
   },
   {
@@ -953,7 +991,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Automated High-Sensitivity Immunoturbidimetry",
     preparation: "No strict fasting required; light fasting standard.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 550,
   },
   {
@@ -967,7 +1005,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Quantitative Immunoturbidimetry",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4–6 Hours",
     originalPrice: 550,
   },
   {
@@ -981,7 +1019,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 650,
   },
   {
@@ -995,7 +1033,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3) / ELISA",
     preparation: "CRITICAL DIETARY RULE: DO NOT GO ON A GLUTEN-FREE DIET BEFORE TESTING! The patient MUST consume foods containing gluten (wheat, rotis, bread, pasta, barley) regularly for at least 6 to 8 WEEKS prior to the blood test. Eliminating gluten causes autoantibody titers to drop rapidly back to normal, producing FALSE-NEGATIVE results and missing the celiac diagnosis!",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 1100,
   },
   {
@@ -1009,7 +1047,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence Immunoassay (CLIA - Maglumi X3)",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 12 Hours",
     originalPrice: 650,
   },
   {
@@ -1023,7 +1061,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence / ELISA",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 650,
   },
   {
@@ -1037,7 +1075,7 @@ export const medicalTests: MedicalTest[] = [
     specimen: "Serum (Gold-top SST)",
     method: "Chemiluminescence / ELISA",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 650,
   },
   {
@@ -1047,11 +1085,16 @@ export const medicalTests: MedicalTest[] = [
     price: 150,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["WIDAL TEST"],
+    parameters: [
+      "Salmonella Typhi 'O' Antigen Titer",
+      "Salmonella Typhi 'H' Antigen Titer",
+      "Salmonella Paratyphi 'AH' Antigen Titer",
+      "Salmonella Paratyphi 'BH' Antigen Titer"
+    ],
     specimen: "Serum (Gold-top SST)",
     method: "Quantitative Tube / Slide Agglutination",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 6 Hours",
     originalPrice: 150,
   },
   {
@@ -1061,11 +1104,15 @@ export const medicalTests: MedicalTest[] = [
     price: 250,
     category: 'specialized',
     homeCollection: false,
-    parameters: ["MALARIA PARASITE ANTIGEN"],
+    parameters: [
+      "Plasmodium falciparum (Pf-HRP2) Antigen",
+      "Plasmodium vivax (Pan-pLDH) Antigen",
+      "Peripheral Blood Smear Parasite Examination"
+    ],
     specimen: "Whole Blood (Lavender-top EDTA)",
     method: "Immunochromatographic Rapid Antigen (Pf-HRP2 / Pan-pLDH) & Blood Smear Microscopy",
     preparation: "No fasting required.",
-    turnaround: "Confirm with the lab",
+    turnaround: "TAT: 4 Hours",
     originalPrice: 250,
   },
 ];
