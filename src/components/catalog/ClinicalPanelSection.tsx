@@ -1,13 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Check, ChevronDown, ChevronUp, Clock, HelpCircle, Layers, Plus, Sparkles } from 'lucide-react';
+import { Check, Clock, Plus } from 'lucide-react';
 import { clinicalPanels, type ClinicalPanel } from '@/data/clinicalPanelManifest';
-import { medicalTests } from '@/data/publishedCatalog';
 import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { MetricDisplay } from '../ui/MetricDisplay';
+import { ClinicalPanelDetailModal } from './ClinicalPanelDetailModal';
 
 export interface ClinicalPanelSectionProps {
   searchQuery?: string;
@@ -21,8 +21,8 @@ export function ClinicalPanelSection({
   onClearTargetPanel,
 }: ClinicalPanelSectionProps = {}) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [expandedPanelId, setExpandedPanelId] = useState<string | null>(null);
   const [highlightedPanelId, setHighlightedPanelId] = useState<string | null>(null);
+  const [detailPanel, setDetailPanel] = useState<ClinicalPanel | null>(null);
   const { isSelected, toggleTest } = useRequisition();
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export function ClinicalPanelSection({
     const targetId = targetPanel.id;
 
     setSelectedCategory('all');
-    setExpandedPanelId(targetId);
     setHighlightedPanelId(targetId);
 
     const timer = setTimeout(() => {
@@ -54,12 +53,11 @@ export function ClinicalPanelSection({
     };
   }, [targetPanel, onClearTargetPanel]);
 
-  const toggleExpand = (id: string) => {
-    setExpandedPanelId(expandedPanelId === id ? null : id);
-  };
-
   const areAllTestsSelected = (panel: ClinicalPanel) => {
-    return panel.constituentTestIds.every((testId) => isSelected(testId));
+    return (
+      panel.constituentTestIds.length > 0 &&
+      panel.constituentTestIds.every((testId) => isSelected(testId))
+    );
   };
 
   const handleTogglePanel = (panel: ClinicalPanel) => {
@@ -75,7 +73,7 @@ export function ClinicalPanelSection({
   };
 
   const categories = [
-    { id: 'all', label: `All ${clinicalPanels.length} Health Profiles` },
+    { id: 'all', label: `All ${clinicalPanels.length} Profiles` },
     { id: 'hematology', label: 'Blood & Clotting' },
     { id: 'biochem', label: 'Liver, Kidney & Joints' },
     { id: 'metabolic', label: 'Diabetes & Metabolism' },
@@ -103,222 +101,138 @@ export function ClinicalPanelSection({
   });
 
   return (
-    <div className="mb-10 sm:mb-14">
-      {/* Header section */}
-      <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8 space-y-2">
-        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-slate-200/90 px-3.5 py-1 rounded-full shadow-2xs">
-          <Layers className="w-4 h-4 text-[#155E9A]" />
-          <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">
-            Accredited Clinical Profiles (Multi-Analyte Panels)
-          </span>
-        </div>
-        <h3 className="text-xl sm:text-2xl font-black text-[#102A43] tracking-tight">
-          Accredited Clinical Health Profiles
-        </h3>
-        <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-          Standardized multi-test clinical profiles from central laboratory SOPs with clear turnaround times and transparent pricing.
-        </p>
-
-        {/* Category Pills */}
-        <div className="flex gap-1.5 overflow-x-auto pb-1 pt-2 scrollbar-none items-center justify-center flex-wrap">
-          {categories.map((cat) => {
-            const isActive = selectedCategory === cat.id;
-            return (
-              <button
-                type="button"
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`min-h-9 px-3.5 squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
-                  isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
-                }`}
-              >
-                {cat.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Grid of Clinical Profiles */}
-      {filteredPanels.length === 0 ? (
-        <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
-          <h4 className="text-base font-bold text-[#102A43]">No clinical profiles match &quot;{searchQuery}&quot;</h4>
-          <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all 74 individual lab tests.</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
-        {filteredPanels.map((panel) => {
-          const isExpanded = expandedPanelId === panel.id;
-          const allSelected = areAllTestsSelected(panel);
-
+    <div className="mb-8 sm:mb-12">
+      {/* Sleek Clinical Category Filter Bar (No duplicate titles or descriptions) */}
+      <div className="flex gap-1.5 overflow-x-auto pb-2.5 pt-0.5 scrollbar-none items-center justify-start sm:justify-center flex-nowrap sm:flex-wrap mb-3 sm:mb-5">
+        {categories.map((cat) => {
+          const isActive = selectedCategory === cat.id;
           return (
-            <div
-              key={panel.id}
-              id={`panel-${panel.id}`}
-              className={`peacock-test-card glass-card apple-squircle-card p-4 flex flex-col justify-between bg-white rounded-[22px] border scroll-mt-28 transition-all duration-300 ${
-                highlightedPanelId === panel.id
-                  ? 'ring-4 ring-[#0A6C82] shadow-[0_0_35px_rgba(10,108,130,0.35)] scale-[1.015] border-[#0A6C82]/60 bg-cyan-50/30'
-                  : 'border-slate-200/90 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)]'
-              } ${panel.spineClass}`}
+            <button
+              type="button"
+              key={cat.id}
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`min-h-9 px-3.5 shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
+                isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
+              }`}
             >
-              <div>
-                {/* Top Meta Bar: Fasting Status & Fixed TAT */}
-                <div className="flex items-center justify-between text-[10.5px] pb-2 mb-2.5 border-b border-slate-100">
-                  <span className="inline-flex items-center gap-1 text-slate-500 font-medium">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
-                    {panel.fastingHours > 0 ? `${panel.fastingHours}h Fasting` : 'Non-Fasting'}
-                  </span>
-                  <span className="inline-flex items-center font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/70 px-2 py-0.5 rounded-[6px] text-[10px] tracking-wide">
-                    {panel.turnaroundEstimate}
-                  </span>
-                </div>
-
-                {/* Department Pill */}
-                <div className="mb-2">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-[8px] border inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 border-slate-200/90">
-                    <span className={`w-1.5 h-1.5 rounded-full ${panel.tubeColorClass}`} />
-                    {panel.department}
-                  </span>
-                </div>
-
-                {/* Title and Vernacular Hindi */}
-                <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] leading-snug">
-                  {panel.name}
-                </h4>
-                <p className="text-[11px] text-[#0A6C82] font-semibold mt-0.5 mb-2">
-                  {panel.hindiName}
-                </p>
-
-                {/* Plain-Language Doctor Question Box */}
-                <div className="p-2.5 rounded-[12px] bg-slate-50 border border-slate-100 text-[11px] text-slate-700 space-y-1 mb-2.5">
-                  <div className="flex items-center gap-1.5 font-bold text-[#155E9A]">
-                    <HelpCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{panel.doctorQuestion}</span>
-                  </div>
-                  <p className="text-[10.5px] text-slate-600 leading-relaxed font-normal">
-                    {panel.doctorAnswer}
-                  </p>
-                </div>
-
-                {/* Parameters Scope */}
-                <div className="flex items-center justify-between p-2.5 rounded-[12px] bg-slate-50/70 border border-slate-100 mb-2.5 apple-squircle-inner">
-                  <MetricDisplay size="sm" value={panel.parameters.length} label="Parameters included" />
-                  <span className="badge-neutral-clinical">Consolidated Draw</span>
-                </div>
-
-                {/* Fasting & Preparation Guidance */}
-                <div className="flex items-center gap-1.5 mb-2.5 flex-wrap">
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
-                    {panel.fastingHours > 0 ? `⏱ Fasting: ${panel.fastingHours} Hrs` : '⏱ No Fasting Required'}
-                  </span>
-                  <span className="text-[10px] font-medium text-slate-500">
-                    • Consult your doctor regarding morning prescriptions
-                  </span>
-                </div>
-
-                {/* Expandable Parameter Ledger */}
-                <button
-                  type="button"
-                  onClick={() => toggleExpand(panel.id)}
-                  className="w-full text-left text-[11px] font-bold text-[#155E9A] hover:text-[#0A6C82] flex items-center justify-between py-1.5 px-2 rounded-[10px] bg-blue-50/60 border border-blue-100/70 mb-3 active:scale-[0.98] transition-transform cursor-pointer"
-                >
-                  <span>{isExpanded ? 'Hide Parameters' : `View All ${panel.parameters.length} Parameters`}</span>
-                  {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                </button>
-
-                {isExpanded && (
-                  <div className="mb-3 p-3 bg-slate-50 rounded-[14px] border border-slate-200/90 space-y-2 text-[10.5px]">
-                    <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider">
-                      Included Parameters ({panel.parameters.length}):
-                    </p>
-                    <ul className="space-y-0.5 text-slate-600 list-disc list-inside">
-                      {panel.parameters.map((param) => (
-                        <li key={param} className="truncate">{param}</li>
-                      ))}
-                    </ul>
-
-                    {panel.fastingNote && (
-                      <p className="pt-2 border-t border-slate-200/70 text-[9.5px] text-slate-500 leading-relaxed">
-                        <strong>Preparation:</strong> {panel.fastingNote}
-                      </p>
-                    )}
-
-                    {panel.costToCompleteTip && (
-                      <div className="p-2 rounded-[10px] bg-amber-50/90 border border-amber-200/80 text-[10px] text-amber-900 font-medium flex items-start gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-amber-700 shrink-0 mt-0.5" />
-                        <span>{panel.costToCompleteTip.message}</span>
-                      </div>
-                    )}
-
-                    {panel.constituentTestIds.length > 0 && (
-                      <div className="pt-2 border-t border-slate-200/70 space-y-1.5">
-                        <p className="font-bold text-slate-700 text-[10px] uppercase tracking-wider">
-                          Constituent Individual Tests:
-                        </p>
-                        <div className="flex flex-wrap gap-1">
-                          {panel.constituentTestIds.map((testId) => {
-                            const test = medicalTests.find((t) => t.id.toLowerCase() === testId.toLowerCase());
-                            const label = test ? test.name : testId.toUpperCase();
-                            return (
-                              <button
-                                key={testId}
-                                type="button"
-                                onClick={() => {
-                                  window.dispatchEvent(
-                                    new CustomEvent('sawariya:search', {
-                                      detail: { tab: 'tests', testId, query: '', openModal: true }
-                                    })
-                                  );
-                                }}
-                                className="px-2 py-0.5 rounded-[6px] bg-white border border-slate-200 text-slate-700 hover:text-[#155E9A] hover:border-[#155E9A]/60 text-[10px] font-semibold transition-colors cursor-pointer active:scale-[0.96] text-left truncate max-w-full"
-                                title={`View ${label} clinical details`}
-                              >
-                                <span className="truncate">{label}</span>
-                                <span className="ml-1 text-[9px] text-[#155E9A]">➔</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* Price & Action */}
-              <div className="pt-2.5 mt-auto border-t border-slate-100 flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Profile Test Rate" />
-                  <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
-                </div>
-
-                <Button
-                  type="button"
-                  size="sm"
-                  onClick={() => handleTogglePanel(panel)}
-                  className={`squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold active:scale-[0.96] cursor-pointer shadow-md ${
-                    allSelected
-                      ? 'btn-specular-emerald text-white'
-                      : 'action-isolated-primary'
-                  }`}
-                >
-                  {allSelected ? (
-                    <>
-                      <Check className="h-3.5 w-3.5 mr-1.5 shrink-0 stroke-[2.5]" />
-                      <span>All Profile Tests Added</span>
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="h-3.5 w-3.5 mr-1.5 shrink-0" />
-                      <span>Add Complete Profile to Request</span>
-                    </>
-                  )}
-                </Button>
-              </div>
-            </div>
+              {cat.label}
+            </button>
           );
         })}
       </div>
+
+      {/* Mobile Sideways Swipe Indicator */}
+      <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2 px-1 md:hidden">
+        <span>Showing {filteredPanels.length} complete profiles</span>
+        <span className="inline-flex items-center gap-1 text-[#155E9A] font-bold">
+          <span>Swipe sideways</span>
+          <span>➔</span>
+        </span>
+      </div>
+
+      {/* Panels Track: Sideways on Mobile, Responsive Grid on Desktop */}
+      {filteredPanels.length === 0 ? (
+        <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
+          <h4 className="text-base font-bold text-[#102A43]">No clinical profiles match &quot;{searchQuery}&quot;</h4>
+          <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all individual lab tests.</p>
+        </div>
+      ) : (
+        <div className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none gap-3.5 sm:gap-4 pb-4 pt-1 px-1 -mx-4 sm:-mx-6 md:mx-0 px-4 sm:px-6 md:px-0 scrollbar-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 scroll-smooth overscroll-x-contain">
+          {filteredPanels.map((panel) => {
+            const allSelected = areAllTestsSelected(panel);
+
+            return (
+              <div
+                key={panel.id}
+                id={`panel-${panel.id}`}
+                className={`w-[85vw] sm:w-[320px] md:w-auto shrink-0 snap-center md:shrink peacock-test-card glass-card apple-squircle-card p-4 flex flex-col justify-between bg-white rounded-[22px] border scroll-mt-28 transition-all duration-300 ${
+                  highlightedPanelId === panel.id
+                    ? 'ring-4 ring-[#0A6C82] shadow-[0_0_35px_rgba(10,108,130,0.35)] scale-[1.015] border-[#0A6C82]/60 bg-cyan-50/30'
+                    : 'border-slate-200/90 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)]'
+                } ${panel.spineClass}`}
+              >
+                <div className="space-y-2.5">
+                  {/* Top Meta Bar: 1x Fasting + Department Pill (Zero TAT redundancy here) */}
+                  <div className="flex items-center justify-between text-xs pb-2 border-b border-slate-100">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-[8px] border inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 border-slate-200/90">
+                      <span className={`w-1.5 h-1.5 rounded-full ${panel.tubeColorClass}`} />
+                      {panel.department}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-slate-500 font-semibold text-[11px]">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
+                      {panel.fastingHours > 0 ? `${panel.fastingHours}h Fasting` : 'Non-Fasting'}
+                    </span>
+                  </div>
+
+                  {/* Title and Hindi Name */}
+                  <div>
+                    <h4 className="text-sm sm:text-[15px] font-bold text-[#102A43] leading-snug line-clamp-1" title={panel.name}>
+                      {panel.name}
+                    </h4>
+                    <p className="text-xs text-[#0A6C82] font-semibold mt-0.5 truncate" title={panel.hindiName}>
+                      {panel.hindiName}
+                    </p>
+                  </div>
+
+                  {/* Compact Parameters Scope */}
+                  <div className="flex items-center justify-between p-2 rounded-[12px] bg-slate-50 border border-slate-100 apple-squircle-inner">
+                    <MetricDisplay size="sm" value={panel.parameters.length} label="Parameters included" />
+                    <span className="badge-neutral-clinical">Consolidated Draw</span>
+                  </div>
+
+                  {/* Clean Trigger Button to Full Clinical Detail Modal */}
+                  <button
+                    type="button"
+                    onClick={() => setDetailPanel(panel)}
+                    aria-label={`View clinical details for ${panel.name}`}
+                    className="w-full py-1.5 px-2.5 rounded-[10px] bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/60 text-xs font-bold text-[#155E9A] flex items-center justify-between transition-colors cursor-pointer active:scale-[0.98]"
+                  >
+                    <span>View {panel.parameters.length} Analytes &amp; Advice</span>
+                    <span>➔</span>
+                  </button>
+                </div>
+
+                {/* Price, Single TAT Tag, and Action Button */}
+                <div className="pt-2.5 mt-3 border-t border-slate-100 flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Profile Test Rate" />
+                    <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
+                  </div>
+
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => handleTogglePanel(panel)}
+                    className={`squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-xs font-bold active:scale-[0.96] cursor-pointer shadow-md ${
+                      allSelected ? 'btn-specular-emerald text-white' : 'action-isolated-primary'
+                    }`}
+                  >
+                    {allSelected ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 mr-1.5 shrink-0 stroke-[2.5]" />
+                        <span>All Profile Tests Added</span>
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="h-3.5 w-3.5 mr-1.5 shrink-0" />
+                        <span>Add Complete Profile</span>
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Rich Clinical Panel Detail Modal */}
+      {detailPanel && (
+        <ClinicalPanelDetailModal
+          panel={detailPanel}
+          isOpen={Boolean(detailPanel)}
+          onClose={() => setDetailPanel(null)}
+        />
       )}
     </div>
   );

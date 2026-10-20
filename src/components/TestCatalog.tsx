@@ -141,14 +141,18 @@ export function TestCatalog() {
       <div className="fluid-container relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 space-y-2.5">
           <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 px-4 py-1 rounded-full shadow-2xs h-[30.1px]">
-            <TestTube className="w-6 h-6 text-[#155E9A]" />
-            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">Diagnostic Test Catalog</span>
+            <TestTube className="w-4 h-4 text-[#155E9A]" />
+            <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">
+              {activeCatalogTab === 'panels' ? 'Accredited Health Profiles' : 'Diagnostic Test Catalog'}
+            </span>
           </div>
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#102A43] tracking-tight leading-tight">
-            Individual Tests. Transparent Pricing.
+            {activeCatalogTab === 'panels' ? 'Complete Health Panels. One-Draw Care.' : 'Individual Tests. Transparent Pricing.'}
           </h2>
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Browse individual tests and ask the lab about collection options.
+            {activeCatalogTab === 'panels'
+              ? 'Standardized multi-test clinical profiles from central laboratory SOPs with clear turnaround times and transparent pricing.'
+              : 'Browse individual tests and ask the lab about collection options.'}
           </p>
         </div>
 
