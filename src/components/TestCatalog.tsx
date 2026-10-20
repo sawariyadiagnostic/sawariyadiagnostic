@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { MessageSquare, Search, TestTube } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
@@ -57,6 +57,7 @@ export function TestCatalog() {
   };
 
   const [targetPanel, setTargetPanel] = useState<{ id: string; timestamp: number } | null>(null);
+  const testsTrackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const openHashTest = () => {
@@ -97,7 +98,7 @@ export function TestCatalog() {
           setTimeout(() => {
             const el = document.getElementById(`test-${detail.testId}`);
             if (el) {
-              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
             } else {
               const catalog = document.getElementById('tests');
               catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -182,6 +183,12 @@ export function TestCatalog() {
     setSearchQuery('');
     resetPage();
   };
+
+  useEffect(() => {
+    if (testsTrackRef.current) {
+      testsTrackRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+  }, [currentPage, activeCatalogTab, selectedPillId, searchQuery]);
 
   return (
     <section id="tests" className="relative fluid-section bg-[#F8FAFC] overflow-hidden">
@@ -323,11 +330,54 @@ export function TestCatalog() {
               </div>
             ) : (
               <>
-                <div className="fluid-grid-cards-sm">
+                {/* Mobile Sideways Swipe Indicator */}
+                <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2 px-1 md:hidden">
+                  <span>
+                    Showing {filteredTests.length > 0 ? pageStart + 1 : 0}–{Math.min(pageStart + visibleTests.length, filteredTests.length)} of {filteredTests.length} tests
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[#155E9A] font-bold">
+                    <span>Swipe sideways</span>
+                    <span>➔</span>
+                  </span>
+                </div>
+
+                <div
+                  ref={testsTrackRef}
+                  className="fluid-grid-cards-sm flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none gap-3.5 sm:gap-4 pb-4 pt-1 px-1 -mx-4 sm:-mx-6 md:mx-0 px-4 sm:px-6 md:px-0 scrollbar-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 scroll-smooth overscroll-x-contain"
+                >
                   {visibleTests.map((item) => {
                     const test = tests.find((candidate) => candidate.id === item.id);
-                    return test ? <TestCard key={test.id} test={test} isSelected={isSelected(test.id)} onToggleRequest={toggleTest} onViewDetails={openTest} /> : null;
+                    return test ? (
+                      <TestCard
+                        key={test.id}
+                        test={test}
+                        isSelected={isSelected(test.id)}
+                        onToggleRequest={toggleTest}
+                        onViewDetails={openTest}
+                      />
+                    ) : null;
                   })}
+                  {currentPage < totalPages && (
+                    <div className="w-[65vw] sm:w-[280px] md:hidden shrink-0 snap-center flex flex-col justify-center items-center text-center p-5 bg-gradient-to-b from-blue-50/70 to-indigo-50/50 rounded-[22px] border border-blue-200/80 space-y-3">
+                      <div className="w-10 h-10 rounded-full bg-[#155E9A]/10 text-[#155E9A] flex items-center justify-center font-black text-sm">
+                        {currentPage + 1}
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs font-bold text-slate-900">
+                          Next {Math.min(TESTS_PER_PAGE, filteredTests.length - currentPage * TESTS_PER_PAGE)} Tests
+                        </p>
+                        <p className="text-[11px] text-slate-500">Batch {currentPage + 1} of {totalPages}</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        className="py-2 px-3.5 rounded-[12px] bg-[#155E9A] text-white text-xs font-bold shadow-sm active:scale-[0.96] flex items-center gap-1.5 cursor-pointer hover:bg-[#104875] transition-colors"
+                      >
+                        <span>View Next Batch</span>
+                        <span>➔</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
                 <BatchPaginationBar
                   currentPage={currentPage}

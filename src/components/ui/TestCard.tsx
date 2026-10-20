@@ -12,6 +12,7 @@ interface TestCardProps {
   isSelected: boolean;
   onToggleRequest: (testId: string) => void;
   onViewDetails?: (test: MedicalTest) => void;
+  className?: string;
 }
 interface DepartmentInfo {
   name: string;
@@ -70,7 +71,7 @@ function getVacutainerDot(category = '', name = ''): { colorClass: string; label
   return { colorClass: 'vacutainer-dot-serum', label: 'Gold Serum' };
 }
 
-export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: TestCardProps) {
+export function TestCard({ test, isSelected, onToggleRequest, onViewDetails, className }: TestCardProps) {
   const [showDetail, setShowDetail] = useState(false);
 
   const handleCardClick = () => {
@@ -93,7 +94,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
       <div 
         id={`test-${test.id}`}
         data-selected={isSelected}
-        className={`peacock-test-card glass-card ui-card apple-squircle-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-[22px] border border-slate-200/80 scroll-mt-28 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] ${getDepartmentSpine(test.category, test.name)}`}
+        className={`w-[85vw] sm:w-[320px] md:w-auto shrink-0 snap-center md:shrink peacock-test-card glass-card ui-card apple-squircle-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-[22px] border border-slate-200/80 scroll-mt-28 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] ${getDepartmentSpine(test.category, test.name)} ${className ?? ''}`}
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A6C82]/0 to-[#0B6E66]/0 group-hover:from-[#0A6C82]/[0.03] group-hover:to-[#0B6E66]/[0.03] transition-colors duration-300 pointer-events-none" />

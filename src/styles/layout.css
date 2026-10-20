@@ -94,9 +94,19 @@
 
   /* Top-of-the-class Intrinsic Dynamic Auto-Fit Grid Engines */
   .fluid-grid-cards-sm {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
     gap: var(--fluid-gap-md);
+  }
+  @media (min-width: 768px) {
+    .fluid-grid-cards-sm {
+      display: grid;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: var(--fluid-gap-md);
+    }
   }
   .fluid-grid-cards-md {
     display: grid;
