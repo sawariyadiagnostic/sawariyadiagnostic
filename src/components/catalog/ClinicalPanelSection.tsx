@@ -85,10 +85,15 @@ export function ClinicalPanelSection({
       if (!match) return false;
     }
     if (selectedCategory === 'all') return true;
-    if (selectedCategory === 'hematology') return panel.department === 'Hematology';
+    if (selectedCategory === 'cbc-blood' || selectedCategory === 'hematology') return panel.department === 'Hematology';
+    if (selectedCategory === 'sugar-diabetes') return panel.id === 'panel-diabetes';
+    if (selectedCategory === 'thyroid-hormones' || selectedCategory === 'endocrine') return panel.department === 'Endocrinology';
+    if (selectedCategory === 'liver-lft') return panel.id === 'panel-lft';
+    if (selectedCategory === 'kidney-kft') return panel.id === 'panel-kft';
+    if (selectedCategory === 'cholesterol-heart') return panel.id === 'panel-lipid';
+    if (selectedCategory === 'vitamins-fatigue') return panel.id === 'panel-senior-vitality' || panel.id === 'panel-fever-infection';
     if (selectedCategory === 'biochem') return panel.department === 'Biochemistry' && panel.id !== 'panel-diabetes';
     if (selectedCategory === 'metabolic') return panel.id === 'panel-diabetes' || panel.id === 'panel-lipid';
-    if (selectedCategory === 'endocrine') return panel.department === 'Endocrinology';
     return true;
   });
 

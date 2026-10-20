@@ -17,11 +17,28 @@ import { whatsappHref } from '@/config/site';
 
 const TESTS_PER_PAGE = 12;
 
+interface MasterPill {
+  id: string;
+  label: string;
+  query: string;
+  panelCategory: string;
+}
+
+const MASTER_PILLS: MasterPill[] = [
+  { id: 'all', label: 'All', query: '', panelCategory: 'all' },
+  { id: 'cbc-blood', label: 'CBC & Blood', query: 'cbc', panelCategory: 'cbc-blood' },
+  { id: 'sugar-diabetes', label: 'Sugar & Diabetes', query: 'sugar', panelCategory: 'sugar-diabetes' },
+  { id: 'thyroid-hormones', label: 'Thyroid & Hormones', query: 'thyroid', panelCategory: 'thyroid-hormones' },
+  { id: 'liver-lft', label: 'Liver (LFT)', query: 'liver', panelCategory: 'liver-lft' },
+  { id: 'kidney-kft', label: 'Kidney (KFT)', query: 'kidney', panelCategory: 'kidney-kft' },
+  { id: 'cholesterol-heart', label: 'Heart & Cholesterol', query: 'lipid', panelCategory: 'cholesterol-heart' },
+  { id: 'vitamins-fatigue', label: 'Vitamins & Fatigue', query: 'vitamin', panelCategory: 'vitamins-fatigue' },
+];
+
 export function TestCatalog() {
   const [activeCatalogTab, setActiveCatalogTab] = useState<'panels' | 'tests'>('panels');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedPanelCategory, setSelectedPanelCategory] = useState('all');
+  const [selectedPillId, setSelectedPillId] = useState('all');
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
   const tests = publishedTests;
   const { isSelected, toggleTest } = useRequisition();
@@ -59,11 +76,14 @@ export function TestCatalog() {
         openModal?: boolean;
       }>).detail;
 
-      if (detail?.query !== undefined) setSearchQuery(detail.query);
+      if (detail?.query !== undefined) {
+        setSearchQuery(detail.query);
+        setSelectedPillId('all');
+      }
       if (detail?.tab) setActiveCatalogTab(detail.tab);
 
       if (detail?.panelId) {
-        setSelectedPanelCategory('all');
+        setSelectedPillId('all');
         setTargetPanel({ id: detail.panelId, timestamp: Date.now() });
         const catalog = document.getElementById('tests');
         catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -98,51 +118,70 @@ export function TestCatalog() {
     };
   }, [tests]);
 
+  const activePill = useMemo(
+    () => MASTER_PILLS.find((p) => p.id === selectedPillId) || MASTER_PILLS[0],
+    [selectedPillId]
+  );
+
+  const activeEffectiveTestQuery = useMemo(() => {
+    if (searchQuery.trim()) return searchQuery.trim();
+    if (selectedPillId !== 'all') {
+      return activePill.query;
+    }
+    return '';
+  }, [searchQuery, selectedPillId, activePill.query]);
+
   const searchEngine = useMemo(() => createSearchEngine(buildSearchIndex(tests)), [tests]);
   const filteredTests = useMemo(
-    () => searchEngine.search(searchQuery, selectedCategory).filter((item) => item.type === 'test'),
-    [searchEngine, searchQuery, selectedCategory],
+    () => searchEngine.search(activeEffectiveTestQuery).filter((item) => item.type === 'test'),
+    [searchEngine, activeEffectiveTestQuery],
   );
+
   const matchingPanelsCount = useMemo(() => {
-    if (!searchQuery.trim()) return clinicalPanels.length;
-    const q = searchQuery.toLowerCase().trim();
-    return clinicalPanels.filter((panel) =>
-      panel.name.toLowerCase().includes(q) ||
-      panel.hindiName.toLowerCase().includes(q) ||
-      panel.parameters.some((p) => p.toLowerCase().includes(q)) ||
-      panel.doctorQuestion.toLowerCase().includes(q) ||
-      panel.doctorAnswer.toLowerCase().includes(q) ||
-      (panel.keywords && panel.keywords.some((k) => k.toLowerCase().includes(q)))
-    ).length;
-  }, [searchQuery]);
+    let panels = clinicalPanels;
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim();
+      panels = panels.filter((panel) =>
+        panel.name.toLowerCase().includes(q) ||
+        panel.hindiName.toLowerCase().includes(q) ||
+        panel.parameters.some((p) => p.toLowerCase().includes(q)) ||
+        panel.doctorQuestion.toLowerCase().includes(q) ||
+        panel.doctorAnswer.toLowerCase().includes(q) ||
+        (panel.keywords && panel.keywords.some((k) => k.toLowerCase().includes(q)))
+      );
+    } else if (selectedPillId !== 'all') {
+      panels = panels.filter((panel) => {
+        if (activePill.panelCategory === 'cbc-blood') return panel.department === 'Hematology';
+        if (activePill.panelCategory === 'sugar-diabetes') return panel.id === 'panel-diabetes';
+        if (activePill.panelCategory === 'thyroid-hormones') return panel.department === 'Endocrinology';
+        if (activePill.panelCategory === 'liver-lft') return panel.id === 'panel-lft';
+        if (activePill.panelCategory === 'kidney-kft') return panel.id === 'panel-kft';
+        if (activePill.panelCategory === 'cholesterol-heart') return panel.id === 'panel-lipid';
+        if (activePill.panelCategory === 'vitamins-fatigue') return panel.id === 'panel-senior-vitality' || panel.id === 'panel-fever-infection';
+        return true;
+      });
+    }
+    return panels.length;
+  }, [searchQuery, selectedPillId, activePill.panelCategory]);
+
   const { page: currentPage, setPage: setCurrentPage, resetPage, totalPages, start: pageStart, visibleItems: visibleTests } = usePagination(filteredTests, TESTS_PER_PAGE);
 
-  const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all' || selectedPanelCategory !== 'all';
+  const hasFilter = searchQuery.trim().length > 0 || selectedPillId !== 'all';
   const clearFilters = () => {
     setSearchQuery('');
-    setSelectedCategory('all');
-    setSelectedPanelCategory('all');
+    setSelectedPillId('all');
     resetPage();
   };
-  const panelCategories = [
-    { id: 'all', label: `All ${clinicalPanels.length} Panels` },
-    { id: 'hematology', label: 'Blood & Clotting' },
-    { id: 'biochem', label: 'Liver, Kidney & Joints' },
-    { id: 'metabolic', label: 'Diabetes & Metabolism' },
-    { id: 'endocrine', label: 'Thyroid, PCOD & Hormones' },
-  ];
-  const quickSymptoms = [
-    { label: 'All Tests', query: '', cat: 'all' },
-    { label: 'CBC & Blood', query: 'cbc', cat: 'all' },
-    { label: 'Sugar & Diabetes', query: 'sugar', cat: 'all' },
-    { label: 'Thyroid', query: 'thyroid', cat: 'all' },
-    { label: 'Fatigue & Weakness', query: 'fatigue', cat: 'all' },
-    { label: 'Cholesterol & Heart', query: 'lipid', cat: 'all' },
-    { label: 'Vitamins D & B12', query: 'vitamin', cat: 'all' },
-    { label: 'Fever & Infection', query: 'fever', cat: 'all' },
-    { label: 'Kidney & Urine', query: 'kidney', cat: 'all' },
-    { label: 'Liver (LFT)', query: 'liver', cat: 'all' },
-  ];
+
+  const handlePillClick = (pill: MasterPill) => {
+    if (selectedPillId === pill.id) {
+      setSelectedPillId('all');
+    } else {
+      setSelectedPillId(pill.id);
+    }
+    setSearchQuery('');
+    resetPage();
+  };
 
   return (
     <section id="tests" className="relative fluid-section bg-[#F8FAFC] overflow-hidden">
@@ -156,16 +195,14 @@ export function TestCatalog() {
           <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 px-4 py-1 rounded-full shadow-2xs h-[30.1px]">
             <TestTube className="w-4 h-4 text-[#155E9A]" />
             <span className="text-[11px] font-bold text-slate-800 uppercase tracking-wider">
-              {activeCatalogTab === 'panels' ? 'Accredited Health Profiles' : 'Diagnostic Test Catalog'}
+              Diagnostic Test Catalog
             </span>
           </div>
           <h2 className="text-[clamp(1.75rem,1.2rem+2.5vw,2.75rem)] font-black text-[#102A43] tracking-tight leading-tight">
-            {activeCatalogTab === 'panels' ? 'Complete Health Panels. One-Draw Care.' : 'Individual Tests. Transparent Pricing.'}
+            Individual Tests. Transparent Pricing.
           </h2>
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            {activeCatalogTab === 'panels'
-              ? 'Standardized multi-test clinical profiles from central laboratory SOPs with clear turnaround times and transparent pricing.'
-              : 'Browse individual tests and ask the lab about collection options.'}
+            Standardized multi-test clinical panels and individual diagnostic tests with transparent pricing.
           </p>
         </div>
 
@@ -201,14 +238,14 @@ export function TestCatalog() {
           </button>
         </div>
 
-        {/* Unified Search Box & Quick Symptom Pills */}
+        {/* Unified Search Box & Shared Organ/System Pills */}
         <div className="max-w-4xl mx-auto mb-6 sm:mb-8 space-y-3">
           <div className="bg-white p-3.5 sm:p-4 rounded-[24px] border border-black/[0.06] shadow-[0_2px_16px_rgba(0,0,0,0.03)] space-y-3">
             <div className="relative">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#155E9A]" />
               <Input
                 type="text"
-                placeholder={activeCatalogTab === 'panels' ? "Search test panels (e.g. CBC, LFT, KFT, PCOD, Sugar)…" : "Search tests or symptoms (e.g. Hemoglobin, TSH, Creatinine, Fever, Thyroid)…"}
+                placeholder="Search tests, panels, or health conditions (e.g. CBC, Thyroid, Sugar, LFT)…"
                 name="catalog-search"
                 autoComplete="off"
                 value={searchQuery}
@@ -222,46 +259,21 @@ export function TestCatalog() {
               )}
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none items-center scroll-smooth overscroll-x-contain">
-              {activeCatalogTab === 'panels' ? (
-                panelCategories.map((cat) => {
-                  const isActive = selectedPanelCategory === cat.id && !searchQuery.trim();
-                  return (
-                    <button
-                      type="button"
-                      key={cat.id}
-                      onClick={() => {
-                        setSelectedPanelCategory(cat.id);
-                        setSearchQuery('');
-                      }}
-                      className={`min-h-9 px-3.5 shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
-                        isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
-                      }`}
-                    >
-                      <span>{cat.label}</span>
-                    </button>
-                  );
-                })
-              ) : (
-                quickSymptoms.map((symptom) => {
-                  const isActive = (symptom.query === '' && searchQuery === '') || (symptom.query !== '' && searchQuery.toLowerCase().includes(symptom.query.toLowerCase()));
-                  return (
-                    <button
-                      type="button"
-                      key={symptom.label}
-                      onClick={() => {
-                        setSearchQuery(symptom.query);
-                        setSelectedCategory(symptom.cat);
-                        resetPage();
-                      }}
-                      className={`min-h-9 px-3.5 shrink-0 flex-shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface active:scale-[0.96] cursor-pointer inline-flex items-center ${
-                        isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
-                      }`}
-                    >
-                      <span>{symptom.label}</span>
-                    </button>
-                  );
-                })
-              )}
+              {MASTER_PILLS.map((pill) => {
+                const isActive = selectedPillId === pill.id && !searchQuery.trim();
+                return (
+                  <button
+                    type="button"
+                    key={pill.id}
+                    onClick={() => handlePillClick(pill)}
+                    className={`min-h-9 px-3.5 shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
+                      isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
+                    }`}
+                  >
+                    <span>{pill.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -270,7 +282,7 @@ export function TestCatalog() {
         {activeCatalogTab === 'panels' && (
           <ClinicalPanelSection
             searchQuery={searchQuery}
-            selectedCategory={selectedPanelCategory}
+            selectedCategory={activePill.panelCategory}
             targetPanel={targetPanel}
             onClearTargetPanel={() => setTargetPanel(null)}
           />
