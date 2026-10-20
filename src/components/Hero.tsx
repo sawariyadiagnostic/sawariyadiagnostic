@@ -226,7 +226,7 @@ export function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#155E9A]"></span>
                 </span>
                 <span className="min-w-0 text-[10.5px] sm:text-[11.5px] md:text-xs font-bold tracking-tight text-slate-800 text-wrap">
-                  Home collection: 07:00 AM–07:00 PM <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Lab open 24*7 for walk-in patients &amp; hospital emergencies</span>
+                  Home collection: 07:00 AM–07:00 PM <span className="text-slate-400">•</span> <span className="text-[#7A4B2A]">Lab open 24*7</span>
                 </span>
               </div>
 

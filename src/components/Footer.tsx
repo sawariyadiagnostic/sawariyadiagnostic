@@ -186,7 +186,7 @@ export function Footer({
                   <div className="mt-1 text-[11px] font-semibold text-white">
                     Lab Reception Desk
                   </div>
-                  <div className="text-[10px] text-slate-400">Walk-In & Report Queries</div>
+                  <div className="text-[10px] text-slate-400">Lab & Report Queries</div>
                 </a>
               </div>
 
@@ -209,7 +209,7 @@ export function Footer({
                       Home collection: 07:00 AM–07:00 PM
                     </span>
                     <span className="block text-[11px] text-slate-300 mt-0.5">
-                      Lab open 24*7 for walk-in patients and emergency from hospitals • Reports verified within 12 hours (routine & hormone reports ready in 2–6 hours)
+                      Lab open 24*7 • Reports verified within 12 hours (routine & hormone reports ready in 2–6 hours)
                     </span>
                   </div>
                 </div>

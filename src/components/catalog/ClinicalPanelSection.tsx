@@ -150,9 +150,8 @@ export function ClinicalPanelSection({
                   </div>
 
                   {/* Compact Parameters Scope */}
-                  <div className="flex items-center justify-between p-2 rounded-[12px] bg-slate-50 border border-slate-100 apple-squircle-inner">
+                  <div className="p-2 rounded-[12px] bg-slate-50 border border-slate-100 apple-squircle-inner">
                     <MetricDisplay size="sm" value={panel.parameters.length} label="Parameters included" />
-                    <span className="badge-neutral-clinical">Consolidated Draw</span>
                   </div>
 
                   {/* Clean Trigger Button to Full Clinical Detail Modal */}
@@ -169,8 +168,10 @@ export function ClinicalPanelSection({
 
                 {/* Price, Single TAT Tag, and Action Button */}
                 <div className="pt-2.5 mt-3 border-t border-slate-100 flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Panel Test Rate" />
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-heading text-xl sm:text-2xl font-black text-[#102A43] tracking-tight tabular-nums">
+                      {formatInr(panel.transparentPrice)}
+                    </span>
                     <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
                   </div>
 

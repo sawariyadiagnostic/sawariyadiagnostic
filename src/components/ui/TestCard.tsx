@@ -5,7 +5,6 @@ import type { MedicalTest } from '@/data/publishedCatalog';
 import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 import { formatInr } from '@/lib/utils';
-import { MetricDisplay } from './MetricDisplay';
 
 interface TestCardProps {
   test: MedicalTest;
@@ -179,13 +178,17 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
         
         {/* Price & Action Section */}
         <div className="pt-2.5 mt-auto border-t border-slate-100/90 flex flex-col gap-2">
-          <div className="flex items-center justify-between">
-            <MetricDisplay
-              size="md"
-              value={formatInr(test.price)}
-              label="Standard Rate"
-              sublabel={test.originalPrice && test.originalPrice > test.price ? `Reg: ${formatInr(test.originalPrice)}` : undefined}
-            />
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-baseline gap-1.5 flex-wrap">
+              <span className="font-heading text-xl sm:text-2xl font-black text-[#102A43] tracking-tight tabular-nums">
+                {formatInr(test.price)}
+              </span>
+              {test.originalPrice && test.originalPrice > test.price && (
+                <span className="text-xs sm:text-[13px] text-slate-400 line-through font-semibold tabular-nums">
+                  {formatInr(test.originalPrice)}
+                </span>
+              )}
+            </div>
             <span className="badge-neutral-clinical">
               Ready in 2–6 hrs
             </span>

@@ -187,7 +187,6 @@ export function ClinicalPanelDetailModal({
           <MetricDisplay
             size="md"
             value={formatInr(panel.transparentPrice)}
-            label="Panel Rate"
             sublabel={`${panel.parameters.length} parameters included`}
           />
 

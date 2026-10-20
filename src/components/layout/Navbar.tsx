@@ -32,7 +32,7 @@ export function Navbar({
             </span>
             <span className="text-white/30 hidden md:inline">|</span>
             <span className="text-slate-300 font-medium hidden md:inline truncate">
-              Opp. R.S. Sangwan Hospital, Loharu Rd • Lab open 24*7 for walk-in patients and emergency from hospitals
+              Opp. R.S. Sangwan Hospital, Loharu Rd • Lab open 24*7
             </span>
           </div>
           <div className="flex items-center gap-3 shrink-0">

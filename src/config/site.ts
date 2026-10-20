@@ -26,7 +26,7 @@ export const siteConfig = {
   },
   claims: {
     accreditation: import.meta.env.VITE_ACCREDITATION_CLAIM || 'Accreditation details available on request',
-    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Home collection: 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients & hospital emergencies',
+    operatingHours: import.meta.env.VITE_OPERATING_HOURS || 'Home collection: 07:00 AM–07:00 PM • Lab open 24*7',
     reportTurnaround: import.meta.env.VITE_REPORT_TAT || 'Reports verified within 12 hours',
     serviceArea: import.meta.env.VITE_SERVICE_AREA || 'Charkhi Dadri and nearby areas',
   },

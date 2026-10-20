@@ -113,7 +113,7 @@ export function MobileMenu({ isOpen, onClose, scrollToSection, onOpenReportModal
 
           <div className="flex items-center justify-center gap-1.5 text-[10.5px] text-slate-500 font-medium">
             <ShieldCheck className="w-3.5 h-3.5 text-green-700" />
-            <span>Home collection 07:00 AM–07:00 PM • Lab open 24*7 for walk-in patients and emergency from hospitals</span>
+            <span>Home collection 07:00 AM–07:00 PM • Lab open 24*7</span>
           </div>
         </div>
       </DialogContent>

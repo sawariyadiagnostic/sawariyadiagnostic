@@ -6,7 +6,7 @@ export type MetricDisplayAlign = 'start' | 'center' | 'end';
 
 export interface MetricDisplayProps extends React.HTMLAttributes<HTMLDivElement> {
   value: React.ReactNode;
-  label: string;
+  label?: string;
   size?: MetricDisplaySize;
   sublabel?: string;
   unit?: string;
@@ -19,22 +19,22 @@ const sizeConfig: Record<
   { valueClass: string; labelClass: string; sublabelClass: string }
 > = {
   sm: {
-    valueClass: 'text-base sm:text-lg font-bold tracking-tight',
+    valueClass: 'font-heading text-base sm:text-lg font-black tracking-tight',
     labelClass: 'text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase',
     sublabelClass: 'text-[9.5px] text-slate-400',
   },
   md: {
-    valueClass: 'text-xl sm:text-2xl font-extrabold tracking-tight',
+    valueClass: 'font-heading text-xl sm:text-2xl font-black tracking-tight',
     labelClass: 'text-xs sm:text-[12.5px] font-semibold tracking-wider uppercase',
     sublabelClass: 'text-[10.5px] text-slate-400',
   },
   lg: {
-    valueClass: 'text-2xl sm:text-3xl font-black tracking-tight',
+    valueClass: 'font-heading text-2xl sm:text-3xl font-black tracking-tight',
     labelClass: 'text-xs sm:text-sm font-semibold tracking-wider uppercase',
     sublabelClass: 'text-xs text-slate-400',
   },
   xl: {
-    valueClass: 'text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight',
+    valueClass: 'font-heading text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight',
     labelClass: 'text-sm sm:text-base font-semibold tracking-wider uppercase',
     sublabelClass: 'text-xs sm:text-sm text-slate-400',
   },
@@ -69,7 +69,7 @@ export const MetricDisplay = React.forwardRef<HTMLDivElement, MetricDisplayProps
   ) => {
     const config = sizeConfig[size];
     const valueString = typeof value === 'string' || typeof value === 'number' ? String(value) : '';
-    const accessibleLabel = `${label}: ${valueString}${unit ? ` ${unit}` : ''}`;
+    const accessibleLabel = label ? `${label}: ${valueString}${unit ? ` ${unit}` : ''}` : `${valueString}${unit ? ` ${unit}` : ''}`;
 
     return (
       <div
@@ -108,16 +108,18 @@ export const MetricDisplay = React.forwardRef<HTMLDivElement, MetricDisplayProps
         </div>
 
         {/* LABEL SECOND (Qualitative Descriptors) */}
-        <div
-          data-slot="metric-label"
-          className={cn(
-            'mt-1 leading-snug truncate max-w-full',
-            config.labelClass,
-            invert ? 'text-[#FFD98A]' : 'text-[#455468]'
-          )}
-        >
-          {label}
-        </div>
+        {label ? (
+          <div
+            data-slot="metric-label"
+            className={cn(
+              'mt-1 leading-snug truncate max-w-full',
+              config.labelClass,
+              invert ? 'text-[#FFD98A]' : 'text-[#455468]'
+            )}
+          >
+            {label}
+          </div>
+        ) : null}
 
         {/* OPTIONAL CONTEXTUAL SUBLABEL */}
         {sublabel && (

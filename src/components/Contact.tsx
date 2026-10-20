@@ -27,7 +27,7 @@ export function Contact() {
           </h2>
           
           <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
-            Conveniently situated on Loharu Road for immediate walk-in sampling, clinical queries, and hospital emergencies.
+            Conveniently situated on Loharu Road for diagnostic sampling, clinical queries, and laboratory services.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export function Contact() {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
                     </span>
-                    <span>Walk-In &amp; Emergency Desk Open</span>
+                    <span>Lab Open 24*7</span>
                   </div>
 
                   <h3 className="text-xl sm:text-2xl font-black text-[#102A43] tracking-tight">

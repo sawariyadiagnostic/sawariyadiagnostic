@@ -78,7 +78,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
               </div>
 
               <div className="text-right flex-shrink-0 pt-11 sm:pt-0 sm:pr-14">
-                <div className="text-2xl sm:text-3xl font-black text-white">{formatInr(item.price)}</div>
+                <div className="font-heading text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">{formatInr(item.price)}</div>
                 {item.originalPrice > item.price && (
                   <div className="text-xs text-blue-200 line-through">{formatInr(item.originalPrice)}</div>
                 )}
