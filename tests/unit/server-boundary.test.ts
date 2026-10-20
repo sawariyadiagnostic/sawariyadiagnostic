@@ -16,6 +16,8 @@ describe('production server boundary', () => {
     expect(serverSource).toContain("res.setHeader('X-Content-Type-Options', 'nosniff')");
     expect(serverSource).toContain("res.setHeader('X-Frame-Options', 'DENY')");
     expect(serverSource).toContain("res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin')");
+    expect(serverSource).toContain("res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')");
+    expect(serverSource).toContain("res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')");
     expect(serverSource).not.toContain('X-XSS-Protection');
   });
 });

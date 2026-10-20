@@ -1,7 +1,7 @@
 // File: src/components/Footer.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import {
   PhoneCall,
   Mail,
@@ -11,8 +11,12 @@ import {
   ExternalLink,
   ShieldCheck,
 } from 'lucide-react';
-import { LegalModal, PolicyType } from './ui/LegalModal';
+import type { PolicyType } from './ui/LegalModal';
 import { ReportDownloadModal } from './ui/ReportDownloadModal';
+
+const LegalModal = lazy(() =>
+  import('./ui/LegalModal').then((module) => ({ default: module.LegalModal }))
+);
 
 export interface FooterProps {
   onOpenReportModal?: () => void;
@@ -257,10 +261,14 @@ export function Footer({
       </footer>
 
       {/* Interactive Modal */}
-      <LegalModal
-        type={internalLegalModal}
-        onClose={() => setInternalLegalModal(null)}
-      />
+      {internalLegalModal && (
+        <Suspense fallback={null}>
+          <LegalModal
+            type={internalLegalModal}
+            onClose={() => setInternalLegalModal(null)}
+          />
+        </Suspense>
+      )}
     </>
   );
 }

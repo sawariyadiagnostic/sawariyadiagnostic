@@ -433,7 +433,7 @@ export function searchSemanticCatalog(query: string, limit = 6): SemanticSearchR
         id: panel.id,
         name: panel.name,
         hindiName: panel.hindiName,
-        subtitle: `${panel.parameters.length} Parameters • 1 Single Needle Prick • ${panel.turnaroundEstimate}`,
+        subtitle: `${panel.parameters.length} Parameters • Consolidated Draw • ${panel.turnaroundEstimate}`,
         price: panel.transparentPrice,
         parameterCount: panel.parameters.length,
         matchReason: reason,

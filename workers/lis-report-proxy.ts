@@ -1,3 +1,13 @@
+/**
+ * Cloudflare Worker: LIS Report Proxy
+ *
+ * ARCHITECTURAL NOTICE:
+ * The in-memory rate limiter below is per-isolate (ephemeral). In Cloudflare Workers,
+ * global memory is not shared across geographic edge PoPs or worker recycles.
+ * For production multi-edge deployments with strict anti-enumeration guarantees,
+ * bind this worker to Cloudflare KV or a Durable Object / Cloudflare Rate Limiting API.
+ */
+
 export interface Env {
   LIS_UPSTREAM_URL: string;
   LIS_API_SECRET: string;

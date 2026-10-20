@@ -13,7 +13,7 @@ export interface PatientBookingDetails {
   address?: string;
 }
 
-// Deterministic 4-char checksum so reception immediately spots edited prices in WhatsApp
+// Deterministic 4-char reference tag to assist reception with order correlation; official tariffs are verified on the lab billing register.
 export function generateCartChecksum(items: CartItem[], total: number): string {
   const canonicalPayload = items
     .map((i) => `${i.code}:${i.price}`)
@@ -63,7 +63,7 @@ export function buildWhatsAppBookingUrl(
         ? '8-10 Hours Fasting Recommended (Water allowed)'
         : 'No Fasting Required'
     }`,
-    `*Security Hash:* [VERIFY: SDL-${checksum}]`,
+    `*Reception Reference:* [VERIFY: SDL-${checksum}] (Official tariffs confirmed on reception billing register)`,
     ``,
     `_Sent via Sawariya Lab Online Booking Desk_`
   ]

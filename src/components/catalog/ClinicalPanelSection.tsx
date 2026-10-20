@@ -207,19 +207,14 @@ export function ClinicalPanelSection({
                   </span>
                 </div>
 
-                {/* Fasting & Chai Status */}
+                {/* Fasting & Preparation Guidance */}
                 <div className="flex items-center gap-1.5 mb-2.5 flex-wrap">
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
-                    💧 Water: Allowed
+                    {panel.fastingHours > 0 ? `⏱ Fasting: ${panel.fastingHours} Hrs` : '⏱ No Fasting Required'}
                   </span>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${panel.chaiAllowed ? 'bg-emerald-50 text-emerald-800' : 'bg-rose-50 text-rose-800'}`}>
-                    ☕ Chai: {panel.chaiAllowed ? 'Yes' : 'Hold'}
+                  <span className="text-[10px] font-medium text-slate-500">
+                    • Consult your doctor regarding morning prescriptions
                   </span>
-                  {panel.bpMedsAllowed && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-800">
-                      💊 BP Meds: Take
-                    </span>
-                  )}
                 </div>
 
                 {/* Expandable Parameter Ledger */}

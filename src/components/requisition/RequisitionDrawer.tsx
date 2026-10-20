@@ -78,8 +78,8 @@ export function RequisitionDrawer() {
                     <Syringe className="w-3.5 h-3.5 text-amber-600" />
                     <span>Physical Vacutainer Tube Dock:</span>
                   </span>
-                  <span className="text-[10.5px] font-extrabold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    1 Single Needle Puncture
+                  <span className="text-[10.5px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded-full border border-slate-200">
+                    Consolidated Vacuum Draw
                   </span>
                 </div>
 
@@ -117,7 +117,7 @@ export function RequisitionDrawer() {
                 </div>
 
                 <p className="text-[10.5px] text-slate-500 leading-normal">
-                  All selected blood investigations are collected sequentially during <strong>one single vein entry</strong> using multi-sample vacuum adapter needles.
+                  Multi-sample vacuum adapter needles are used to minimize vein entries where clinically viable. Timed, serial (e.g. PPBS), or separate collections require independent draws.
                 </p>
               </div>
             )}

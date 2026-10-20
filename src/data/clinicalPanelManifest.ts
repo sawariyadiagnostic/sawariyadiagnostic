@@ -1,10 +1,9 @@
 /**
- * Accredited Clinical Diagnostic Health Profiles & Panels (Multi-Analyte Profiles)
- * Extracted directly from central laboratory Standard Operating Procedures:
- * C:\Users\Dell\Desktop\python\REFERENCES AND INTERPREATIONS
+ * Clinical Diagnostic Health Profiles & Panels (Multi-Analyte Profiles)
+ * Formatted from central laboratory Standard Operating Procedures.
  *
  * Each panel represents an unbundled, medically coherent profile of sister analytes
- * sharing the same physical vacutainer tube and requiring only ONE single needle prick.
+ * sharing the designated physical vacutainer tube.
  */
 
 export interface ClinicalPanel {
