@@ -186,6 +186,36 @@
   --safe-area-top: env(safe-area-inset-top, 0px);
   --safe-area-bottom: env(safe-area-inset-bottom, 0px);
   --mobile-dock-clearance: calc(var(--safe-area-bottom) + 76px);
+
+  /* =========================================================================
+     APPLE MOTION PHYSICS TOKENS (Empirical Harmonic Constants)
+     ========================================================================= */
+  --spring-apple-stiffness: 260;
+  --spring-apple-damping: 24;
+  --spring-apple-mass: 0.75;
+  --spring-gentle-stiffness: 180;
+  --spring-gentle-damping: 22;
+  --spring-snappy-stiffness: 420;
+  --spring-snappy-damping: 28;
+  --motion-duration-fluid: 0.28s;
+  --motion-duration-snappy: 0.18s;
+  --motion-ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* =========================================================================
+     CONCENTRIC GEOMETRY FORMULA TOKENS (R_inner = R_outer - Padding)
+     ========================================================================= */
+  --radius-concentric-outer: 1.5rem;    /* 24px */
+  --radius-concentric-padding: 0.625rem;/* 10px */
+  --radius-concentric-inner: calc(var(--radius-concentric-outer) - var(--radius-concentric-padding)); /* 14px */
+
+  /* =========================================================================
+     ISOLATED PRIMARY ACTION & CLINICAL NEUTRAL BADGE TOKENS
+     ========================================================================= */
+  --action-isolation-border: rgba(254, 215, 170, 0.55);
+  --action-isolation-glow: 0 4px 16px -2px rgba(198, 40, 40, 0.45);
+  --badge-neutral-bg: #F1F5F9;
+  --badge-neutral-border: #CBD5E1;
+  --badge-neutral-text: #2C465E;       /* 9.65:1 on White, >7:1 on #F1F5F9 (AAA) */
 }
 
 .dark {

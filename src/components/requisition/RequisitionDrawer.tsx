@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { ClipboardList, Trash2, Camera, Syringe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { MetricDisplay } from '@/components/ui/MetricDisplay';
 import { siteConfig, whatsappHref } from '@/config/site';
 import { formatInr } from '@/lib/utils';
 import { useRequisition } from './RequisitionContext';
@@ -51,10 +52,10 @@ export function RequisitionDrawer() {
 
   return <>
     {selectedTests.length > 0 && <div className="fixed right-3 bottom-[calc(env(safe-area-inset-bottom,0px)+5rem)] z-[105] sm:bottom-4">
-      <Button type="button" onClick={() => setOpen(true)} aria-label={`Review test request, ${selectedTests.length} selected`} className="btn-primary squircle-btn apple-pressable min-h-12 h-auto px-4 py-2.5 rounded-[18px] shadow-2xl active:scale-[0.96] flex items-center gap-2">
+      <Button type="button" onClick={() => setOpen(true)} aria-label={`Review test request, ${selectedTests.length} selected`} className="action-isolated-primary squircle-btn apple-pressable min-h-12 h-auto px-4 py-2.5 rounded-[18px] shadow-2xl active:scale-[0.96] flex items-center gap-2.5">
         <ClipboardList className="h-4 w-4" />
-        <span>Review request · {selectedTests.length}</span>
-        <span className="text-[10px] font-medium">{formatInr(subtotal)}</span>
+        <span className="font-bold">Review request ({selectedTests.length})</span>
+        <span className="text-xs font-black tabular-nums bg-black/25 px-2 py-0.5 rounded-full">{formatInr(subtotal)}</span>
       </Button>
     </div>}
 
@@ -131,7 +132,14 @@ export function RequisitionDrawer() {
                 <strong className="shrink-0 text-sm text-[#102A43]">{formatInr(test.price)}</strong>
               </li>)}
             </ul>
-            <p className="mt-5 rounded-[14px] border border-slate-200 bg-[#F8FAFC] p-3 text-sm font-semibold text-[#102A43] apple-squircle-inner">Published test-price subtotal: {formatInr(subtotal)}</p>
+            <div className="mt-5 rounded-[14px] border border-slate-200/90 bg-slate-50/90 p-3.5 flex items-center justify-between apple-squircle-inner">
+              <MetricDisplay
+                size="md"
+                value={formatInr(subtotal)}
+                label="Published test-price subtotal"
+                sublabel="Official tariffs confirmed on reception billing register"
+              />
+            </div>
             <div className="mt-3 rounded-[14px] border border-slate-200/80 bg-slate-50 p-3 flex items-center justify-between gap-3 text-xs apple-squircle-inner">
               <span className="text-slate-600 font-medium">Have a handwritten doctor's prescription slip?</span>
               <a href={prescriptionWhatsappUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-emerald-700 hover:underline shrink-0">

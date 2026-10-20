@@ -7,6 +7,7 @@ import { medicalTests } from '@/data/publishedCatalog';
 import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { Button } from '../ui/button';
+import { MetricDisplay } from '../ui/MetricDisplay';
 
 export interface ClinicalPanelSectionProps {
   searchQuery?: string;
@@ -200,11 +201,9 @@ export function ClinicalPanelSection({
                 </div>
 
                 {/* Parameters Scope */}
-                <div className="flex items-center justify-between p-2 rounded-[12px] bg-slate-50/70 border border-slate-100 text-[11px] mb-2.5">
-                  <span className="text-slate-500 font-medium">Total Parameters:</span>
-                  <span className="font-extrabold text-[#155E9A] bg-blue-50/80 px-2 py-0.5 rounded-[6px] border border-blue-100/80 text-[11px]">
-                    {panel.parameters.length} Parameters
-                  </span>
+                <div className="flex items-center justify-between p-2.5 rounded-[12px] bg-slate-50/70 border border-slate-100 mb-2.5 apple-squircle-inner">
+                  <MetricDisplay size="sm" value={panel.parameters.length} label="Parameters included" />
+                  <span className="badge-neutral-clinical">Consolidated Draw</span>
                 </div>
 
                 {/* Fasting & Preparation Guidance */}
@@ -288,23 +287,19 @@ export function ClinicalPanelSection({
 
               {/* Price & Action */}
               <div className="pt-2.5 mt-auto border-t border-slate-100 flex flex-col gap-2">
-                <div className="flex items-baseline justify-between">
-                  <div>
-                    <span className="text-[10px] text-slate-400 font-medium block">Profile Test Price</span>
-                    <span className="text-lg font-extrabold text-[#102A43] tracking-tight">
-                      {formatInr(panel.transparentPrice)}
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <MetricDisplay size="md" value={formatInr(panel.transparentPrice)} label="Profile Test Rate" />
+                  <span className="badge-neutral-clinical">{panel.turnaroundEstimate}</span>
                 </div>
 
                 <Button
                   type="button"
                   size="sm"
                   onClick={() => handleTogglePanel(panel)}
-                  className={`action-button squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold active:scale-[0.96] cursor-pointer shadow-md ${
+                  className={`squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold active:scale-[0.96] cursor-pointer shadow-md ${
                     allSelected
                       ? 'btn-specular-emerald text-white'
-                      : 'btn-primary'
+                      : 'action-isolated-primary'
                   }`}
                 >
                   {allSelected ? (

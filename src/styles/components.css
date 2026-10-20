@@ -1053,6 +1053,83 @@ button.ui-calendar-day { width: 2.25rem; height: 2.25rem; min-inline-size: 2.25r
   scrollbar-width: none;
 }
 
+/* =========================================================================
+   ACTION ISOLATION & CLINICAL NEUTRAL BADGE ARCHITECTURE
+   ========================================================================= */
+
+/* Primary Action Isolation: Creates independent stacking context, suppresses
+   secondary noise, and guarantees WCAG 2.5.5 minimum 44px hit bounds */
+.action-isolated-primary {
+  isolation: isolate;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--control-gap, 0.5rem);
+  min-block-size: var(--target-size-min, 44px);
+  min-inline-size: var(--target-size-min, 44px);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-control, 16px);
+  background: linear-gradient(135deg, #8F1D1D 0%, #C62828 48%, #D96B43 100%);
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: var(--font-action, 0.875rem);
+  letter-spacing: 0.015em;
+  border: 1px solid var(--action-isolation-border, rgba(254, 215, 170, 0.45));
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.45), var(--action-isolation-glow, 0 4px 16px -2px rgba(198, 40, 40, 0.42));
+  transition: transform 0.20s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.20s ease;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  overflow-wrap: anywhere;
+}
+
+.action-isolated-primary:hover {
+  background: linear-gradient(135deg, #741616 0%, #A61E1E 48%, #C62828 100%);
+  border-color: rgba(254, 240, 138, 0.65);
+  transform: translateY(-1.5px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.55), 0 8px 24px rgba(198, 40, 40, 0.50);
+}
+
+.action-isolated-primary:active {
+  transform: scale(0.96);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.35), 0 2px 8px rgba(198, 40, 40, 0.35);
+}
+
+/* Neutral Clinical Micro-Badge: Unbiased, non-alarming technical metadata */
+.badge-neutral-clinical {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-badge, 0.625rem);
+  background-color: var(--badge-neutral-bg, #F1F5F9);
+  border: 1px solid var(--badge-neutral-border, #CBD5E1);
+  color: var(--badge-neutral-text, #2C465E);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Pattern Interrupt Card Utility Base */
+.pattern-interrupt-card {
+  border-radius: var(--radius-card-outer, 1.5rem);
+  color: var(--text-on-action, #FFFFFF);
+}
+
+/* Concentric Progressive Enhancement */
+@supports (corner-shape: squircle) {
+  .action-isolated-primary,
+  .badge-neutral-clinical,
+  .pattern-interrupt-card,
+  [data-squircle-concentric="outer"],
+  [data-squircle-concentric="inner"] {
+    corner-shape: squircle;
+  }
+}
+
 
 
 

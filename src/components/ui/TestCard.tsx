@@ -5,6 +5,7 @@ import type { MedicalTest } from '@/data/publishedCatalog';
 import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { TestDetailModal } from '../catalog/TestDetailModal';
 import { formatInr } from '@/lib/utils';
+import { MetricDisplay } from './MetricDisplay';
 
 interface TestCardProps {
   test: MedicalTest;
@@ -178,20 +179,14 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
         
         {/* Price & Action Section */}
         <div className="pt-2.5 mt-auto border-t border-slate-100/90 flex flex-col gap-2">
-          <div className="flex items-baseline justify-between">
-            <div>
-              <div className="flex items-baseline gap-1.5">
-                <span className="text-xl sm:text-[22px] font-extrabold text-[#102A43] tracking-tight">
-                  {formatInr(test.price)}
-                </span>
-                {test.originalPrice && test.originalPrice > test.price && (
-                  <span className="text-xs text-slate-400 line-through font-normal">
-                    {formatInr(test.originalPrice)}
-                  </span>
-                )}
-              </div>
-            </div>
-            <span className="text-[10px] font-semibold text-[#0B6E66] bg-emerald-50/80 border border-emerald-200/60 rounded-md px-1.5 py-0.5">
+          <div className="flex items-center justify-between">
+            <MetricDisplay
+              size="md"
+              value={formatInr(test.price)}
+              label="Standard Rate"
+              sublabel={test.originalPrice && test.originalPrice > test.price ? `Reg: ${formatInr(test.originalPrice)}` : undefined}
+            />
+            <span className="badge-neutral-clinical">
               Ready in 2–6 hrs
             </span>
           </div>
@@ -209,7 +204,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
                 size="sm"
                 aria-pressed={false}
                 onClick={() => onToggleRequest(test.id)}
-                className="action-button squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs shadow-md active:scale-[0.96] cursor-pointer"
+                className="action-isolated-primary squircle-btn apple-pressable h-auto min-h-11 w-full min-w-0 rounded-[14px] px-2 text-[11px] font-bold sm:px-3 sm:text-xs active:scale-[0.96] cursor-pointer"
               >
                 <ClipboardList className="h-3.5 w-3.5 shrink-0" />
                 <span className="min-w-0">Add to Request</span>
