@@ -14,6 +14,8 @@ export interface ClinicalPanelSectionProps {
   selectedCategory?: string;
   targetPanel?: { id: string; timestamp: number } | null;
   onClearTargetPanel?: () => void;
+  matchingTestsCount?: number;
+  onSwitchToTests?: () => void;
 }
 
 export function ClinicalPanelSection({
@@ -21,6 +23,8 @@ export function ClinicalPanelSection({
   selectedCategory = 'all',
   targetPanel = null,
   onClearTargetPanel,
+  matchingTestsCount = 0,
+  onSwitchToTests,
 }: ClinicalPanelSectionProps = {}) {
   const [highlightedPanelId, setHighlightedPanelId] = useState<string | null>(null);
   const [detailPanel, setDetailPanel] = useState<ClinicalPanel | null>(null);
@@ -99,6 +103,30 @@ export function ClinicalPanelSection({
 
   return (
     <div className="mb-8 sm:mb-12">
+      {/* Cross-Section Companion Banner (Synchronized Live Search) */}
+      {filteredPanels.length > 0 && matchingTestsCount > 0 && (searchQuery.trim().length > 0 || selectedCategory !== 'all') && (
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 mb-3.5 rounded-[16px] bg-gradient-to-r from-blue-50/90 to-slate-50 border border-blue-200/70 text-xs shadow-2xs">
+          <div className="flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-blue-100 text-[#155E9A] flex items-center justify-center shrink-0 font-bold text-[11px]">
+              🔬
+            </span>
+            <span className="text-slate-700 font-medium">
+              Also found <strong className="text-[#102A43]">{matchingTestsCount}</strong> individual test{matchingTestsCount > 1 ? 's' : ''} matching this search
+            </span>
+          </div>
+          {onSwitchToTests && (
+            <button
+              type="button"
+              onClick={onSwitchToTests}
+              className="text-[#155E9A] hover:text-[#0f4470] font-bold inline-flex items-center gap-1 cursor-pointer whitespace-nowrap self-end sm:self-auto text-xs active:scale-[0.98] transition-transform"
+            >
+              <span>View Individual Tests ({matchingTestsCount})</span>
+              <span>➔</span>
+            </button>
+          )}
+        </div>
+      )}
+
       {/* Mobile Sideways Swipe Indicator */}
       <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2 px-1 md:hidden">
         <span>Showing {filteredPanels.length} test panels</span>
@@ -110,10 +138,32 @@ export function ClinicalPanelSection({
 
       {/* Panels Track: Sideways on Mobile, Responsive Grid on Desktop */}
       {filteredPanels.length === 0 ? (
-        <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
-          <h4 className="text-base font-bold text-[#102A43]">No test panels match &quot;{searchQuery}&quot;</h4>
-          <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all individual lab tests.</p>
-        </div>
+        matchingTestsCount > 0 ? (
+          <div role="status" className="rounded-[24px] border border-blue-200/80 bg-blue-50/40 p-6 sm:p-8 text-center shadow-sm max-w-xl mx-auto space-y-3">
+            <div className="w-10 h-10 rounded-full bg-blue-100 text-[#155E9A] mx-auto flex items-center justify-center font-bold text-base">
+              🔬
+            </div>
+            <h4 className="text-base font-bold text-[#102A43]">No test panels match &quot;{searchQuery}&quot;</h4>
+            <p className="text-xs sm:text-sm text-slate-600">
+              However, we found <strong>{matchingTestsCount}</strong> matching individual lab test{matchingTestsCount > 1 ? 's' : ''}!
+            </p>
+            {onSwitchToTests && (
+              <button
+                type="button"
+                onClick={onSwitchToTests}
+                className="action-button btn-primary squircle-btn apple-pressable min-h-11 px-5 rounded-[14px] font-bold text-xs inline-flex items-center gap-2 cursor-pointer shadow-md text-white"
+              >
+                <span>View {matchingTestsCount} Matching Individual Tests</span>
+                <span>➔</span>
+              </button>
+            )}
+          </div>
+        ) : (
+          <div role="status" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm max-w-xl mx-auto">
+            <h4 className="text-base font-bold text-[#102A43]">No test panels match &quot;{searchQuery}&quot;</h4>
+            <p className="mt-1 text-xs sm:text-sm text-slate-600">Try switching to Individual Tests tab to search across all individual lab tests.</p>
+          </div>
+        )
       ) : (
         <div className="flex md:grid overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none gap-3.5 sm:gap-4 pb-4 pt-1 px-1 -mx-4 sm:-mx-6 md:mx-0 px-4 sm:px-6 md:px-0 scrollbar-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 scroll-smooth overscroll-x-contain">
           {filteredPanels.map((panel) => {

@@ -14,6 +14,7 @@ import { BatchPaginationBar } from './BatchPaginationBar';
 import { ClinicalPanelSection } from './catalog/ClinicalPanelSection';
 import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { whatsappHref } from '@/config/site';
+import { formatInr } from '@/lib/utils';
 
 const TESTS_PER_PAGE = 12;
 
@@ -138,7 +139,7 @@ export function TestCatalog() {
     [searchEngine, activeEffectiveTestQuery],
   );
 
-  const matchingPanelsCount = useMemo(() => {
+  const matchingPanels = useMemo(() => {
     let panels = clinicalPanels;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
@@ -162,8 +163,10 @@ export function TestCatalog() {
         return true;
       });
     }
-    return panels.length;
+    return panels;
   }, [searchQuery, selectedPillId, activePill.panelCategory]);
+
+  const matchingPanelsCount = matchingPanels.length;
 
   const { page: currentPage, setPage: setCurrentPage, resetPage, totalPages, start: pageStart, visibleItems: visibleTests } = usePagination(filteredTests, TESTS_PER_PAGE);
 
@@ -225,7 +228,9 @@ export function TestCatalog() {
             }`}
           >
             <span>📦 Complete Health Panels</span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
+            <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-extrabold transition-colors ${
+              matchingPanelsCount > 0 ? 'bg-blue-100 text-[#155E9A]' : 'bg-slate-100 text-slate-400'
+            }`}>
               {matchingPanelsCount}
             </span>
           </button>
@@ -239,7 +244,9 @@ export function TestCatalog() {
             }`}
           >
             <span>🔬 Individual Tests</span>
-            <span className="text-[10.5px] px-1.5 py-0.5 rounded-full bg-slate-100 font-extrabold text-[#155E9A]">
+            <span className={`text-[10.5px] px-1.5 py-0.5 rounded-full font-extrabold transition-colors ${
+              filteredTests.length > 0 ? 'bg-blue-100 text-[#155E9A]' : 'bg-slate-100 text-slate-400'
+            }`}>
               {filteredTests.length}
             </span>
           </button>
@@ -282,6 +289,23 @@ export function TestCatalog() {
                 );
               })}
             </div>
+
+            {/* Rural Village Doorstep Phlebotomy Trust Banner */}
+            <div className="flex items-center justify-between gap-2 px-3 py-2 rounded-[14px] bg-teal-50/70 border border-teal-200/60 text-xs text-slate-700">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
+                <span className="font-medium text-[#102A43] truncate text-[11px] sm:text-xs">
+                  Doorstep blood collection active across <strong>40+ villages</strong> in Charkhi Dadri (Badhra, Jhojhu, Bond corridors)
+                </span>
+              </div>
+              <a
+                href="#home-collection"
+                className="font-bold text-[#155E9A] hover:underline whitespace-nowrap text-[11px] shrink-0 inline-flex items-center gap-1"
+              >
+                <span>Check Routes</span>
+                <span>➔</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -292,12 +316,36 @@ export function TestCatalog() {
             selectedCategory={activePill.panelCategory}
             targetPanel={targetPanel}
             onClearTargetPanel={() => setTargetPanel(null)}
+            matchingTestsCount={filteredTests.length}
+            onSwitchToTests={() => setActiveCatalogTab('tests')}
           />
         )}
 
         {/* Tab 2: Individual Tests */}
         {activeCatalogTab === 'tests' && (
           <>
+            {/* Cross-Section Companion Banner (Synchronized Live Search) */}
+            {filteredTests.length > 0 && matchingPanelsCount > 0 && (searchQuery.trim().length > 0 || selectedPillId !== 'all') && (
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 mb-3.5 rounded-[16px] bg-gradient-to-r from-blue-50/90 to-slate-50 border border-blue-200/70 text-xs shadow-2xs">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-blue-100 text-[#155E9A] flex items-center justify-center shrink-0 font-bold text-[11px]">
+                    📦
+                  </span>
+                  <span className="text-slate-700 font-medium">
+                    💡 Comprehensive panel available: <strong className="text-[#102A43]">{matchingPanels[0]?.name}</strong> ({matchingPanels[0]?.parameters.length} parameters at {formatInr(matchingPanels[0]?.transparentPrice)})
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveCatalogTab('panels')}
+                  className="text-[#155E9A] hover:text-[#0f4470] font-bold inline-flex items-center gap-1 cursor-pointer whitespace-nowrap self-end sm:self-auto text-xs active:scale-[0.98] transition-transform"
+                >
+                  <span>View Panels ({matchingPanelsCount})</span>
+                  <span>➔</span>
+                </button>
+              </div>
+            )}
+
             {searchQuery && (
               <div role="status" aria-live="polite" className="text-xs text-slate-600 mb-4 px-1 font-medium">
                 Found <strong>{filteredTests.length}</strong> tests matching &quot;{searchQuery}&quot;
@@ -305,29 +353,49 @@ export function TestCatalog() {
             )}
 
             {hasFilter && filteredTests.length === 0 ? (
-              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-sm max-w-xl mx-auto space-y-4">
-                <div className="w-12 h-12 rounded-full bg-blue-50 text-[#155E9A] mx-auto flex items-center justify-center border border-blue-200/80">
-                  <Search className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
-                  <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    Looking for a specific investigation not listed? Send your doctor&apos;s prescription slip on WhatsApp for direct price confirmation and doorstep pickup.
+              matchingPanelsCount > 0 ? (
+                <div role="status" className="rounded-[24px] border border-blue-200/80 bg-blue-50/40 p-6 sm:p-8 text-center shadow-sm max-w-xl mx-auto space-y-3">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 text-[#155E9A] mx-auto flex items-center justify-center font-bold text-base">
+                    📦
+                  </div>
+                  <h4 className="text-base font-bold text-[#102A43]">No individual tests match &quot;{searchQuery}&quot;</h4>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    However, we have <strong>{matchingPanelsCount}</strong> multi-test health panel{matchingPanelsCount > 1 ? 's' : ''} covering this condition!
                   </p>
-                </div>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
-                  <a
-                    href={whatsappHref(`Hello Sawariya Diagnostic, I searched for "${searchQuery}" and would like to confirm test availability and price.`)}
-                    className="action-button btn-whatsapp squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 text-white shadow-sm hover:shadow active:scale-[0.96]"
+                  <button
+                    type="button"
+                    onClick={() => setActiveCatalogTab('panels')}
+                    className="action-button btn-primary squircle-btn apple-pressable min-h-11 px-5 rounded-[14px] font-bold text-xs inline-flex items-center gap-2 cursor-pointer shadow-md text-white"
                   >
-                    <MessageSquare className="w-4 h-4" />
-                    <span>Ask Desk on WhatsApp</span>
-                  </a>
-                  <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm cursor-pointer">
-                    Clear filters
-                  </Button>
+                    <span>View {matchingPanelsCount} Matching Health Panels</span>
+                    <span>➔</span>
+                  </button>
                 </div>
-              </div>
+              ) : (
+                <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-sm max-w-xl mx-auto space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-50 text-[#155E9A] mx-auto flex items-center justify-center border border-blue-200/80">
+                    <Search className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
+                    <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                      Looking for a specific investigation not listed? Send your doctor&apos;s prescription slip on WhatsApp for direct price confirmation and doorstep pickup.
+                    </p>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+                    <a
+                      href={whatsappHref(`Hello Sawariya Diagnostic, I searched for "${searchQuery}" and would like to confirm test availability and price.`)}
+                      className="action-button btn-whatsapp squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 text-white shadow-sm hover:shadow active:scale-[0.96]"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Ask Desk on WhatsApp</span>
+                    </a>
+                    <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm cursor-pointer">
+                      Clear filters
+                    </Button>
+                  </div>
+                </div>
+              )
             ) : (
               <>
                 {/* Mobile Sideways Swipe Indicator */}

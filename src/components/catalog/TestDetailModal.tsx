@@ -66,32 +66,22 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
     <>
       <Dialog open={isOpen} onOpenChange={(val) => !val && onClose()}>
         <DialogContent className="w-[calc(100vw-1rem)] sm:w-[calc(100vw-2rem)] max-w-[min(760px,calc(100vw-2rem))] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] min-h-0 p-0 overflow-hidden bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_32px_80px_rgba(0,0,0,0.25)] ui-panel apple-squircle-modal rounded-[28px] flex flex-col">
-          {/* Header: Zero Collision, Full-Width Title, Metric First */}
-          <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] p-5 sm:p-6 text-white relative overflow-hidden flex-shrink-0">
-            <div className="relative z-10 flex flex-col gap-3">
-              {/* 1. Kicker row with guaranteed close-button clearance (pr-12) */}
-              <div className="flex items-center justify-between pr-12">
-                <div className="inline-flex items-center gap-1.5 bg-white/10 px-2.5 py-0.5 rounded-full text-[10.5px] font-bold text-blue-200">
-                  <TestTube className="w-3.5 h-3.5 text-blue-300" />
-                  <span>{item.category?.toUpperCase()} INVESTIGATION</span>
+          {/* Compact Header: High Density, Sleek & Fully Informative */}
+          <div className="bg-gradient-to-r from-[#102A43] via-[#155E9A] to-[#155E9A] px-4 py-3 sm:px-6 sm:py-3.5 text-white relative overflow-hidden flex-shrink-0">
+            <div className="relative z-10 space-y-1.5 pr-8 sm:pr-12">
+              {/* Top row: Name + Price */}
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <div className="min-w-0">
+                  <DialogTitle className="text-base sm:text-lg font-black text-white tracking-tight leading-snug">
+                    {item.name}
+                  </DialogTitle>
+                  <DialogDescription className="sr-only">
+                    {item.name} laboratory investigation parameters, turnaround time, and pre-test advice
+                  </DialogDescription>
                 </div>
-              </div>
 
-              {/* 2. Full-Width Title */}
-              <div className="pr-12 sm:pr-14">
-                <DialogTitle className="text-xl sm:text-2xl font-black text-white tracking-tight leading-snug">
-                  {item.name}
-                </DialogTitle>
-                <DialogDescription className="text-xs text-blue-100/90 mt-1">
-                  Documented laboratory protocols • Reports verified within 12 hours
-                </DialogDescription>
-              </div>
-
-              {/* 3. Hero Metric Strip: Metric First! */}
-              <div className="pt-2 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
-                {/* Price Anchor */}
-                <div className="flex items-baseline gap-2">
-                  <span className="font-heading text-2xl sm:text-3xl font-black text-white tracking-tight tabular-nums">
+                <div className="flex items-baseline gap-1.5 shrink-0">
+                  <span className="font-heading text-lg sm:text-2xl font-black text-white tracking-tight tabular-nums">
                     {formatInr(item.price)}
                   </span>
                   {item.originalPrice > item.price && (
@@ -100,28 +90,28 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                     </span>
                   )}
                   {discountPercent && (
-                    <span className="text-[10px] font-bold bg-[#FDE047] text-[#102A43] px-2 py-0.5 rounded-full inline-block">
+                    <span className="text-[10px] font-bold bg-[#FDE047] text-[#102A43] px-1.5 py-0.5 rounded-full inline-block">
                       Save {discountPercent}%
                     </span>
                   )}
                 </div>
+              </div>
 
-                {/* Harmoniously Grouped Triage Badges */}
-                <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/25 text-emerald-100 border border-emerald-400/40">
-                    <Clock className="w-3 h-3 text-emerald-300" />
-                    <span>{turnaround}</span>
-                  </span>
+              {/* Bottom row: Badges strip */}
+              <div className="flex items-center gap-1.5 flex-wrap text-[10px] sm:text-[11px]">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-bold bg-emerald-500/25 text-emerald-100 border border-emerald-400/40">
+                  <Clock className="w-3 h-3 text-emerald-300" />
+                  <span>{turnaround}</span>
+                </span>
 
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
-                    <TestTube className="w-3 h-3 text-blue-300" />
-                    <span>{getBiologicalSpecimen(item).split('(')[0].trim()}</span>
-                  </span>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold bg-white/10 text-blue-100 border border-white/20">
+                  <TestTube className="w-3 h-3 text-blue-300" />
+                  <span>{getBiologicalSpecimen(item).split('(')[0].trim()}</span>
+                </span>
 
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/10 text-blue-100 border border-white/20">
-                    <span>{scope.label}</span>
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold bg-white/10 text-blue-100 border border-white/20">
+                  <span>{scope.label}</span>
+                </span>
               </div>
             </div>
           </div>

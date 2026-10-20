@@ -86,6 +86,7 @@ export function HomeCollection() {
   const [selectedBlock, setSelectedBlock] = useState<string>('all');
   const [villageSearch, setVillageSearch] = useState<string>('');
   const [activeVillage, setActiveVillage] = useState<CatchmentVillage | null>(null);
+  const [isVillageListExpanded, setIsVillageListExpanded] = useState<boolean>(false);
 
   const blockCounts = useMemo(() => {
     const counts: Record<string, number> = { all: CATCHMENT_VILLAGES.length };
@@ -552,7 +553,6 @@ export function HomeCollection() {
                     aria-selected={isActive}
                     aria-controls="village-directory-grid"
                     id={`tab-${tab.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`}
-                    style={{ minInlineSize: 'max-content', flexShrink: 0 }}
                     onClick={(e) => {
                       setSelectedBlock(tab.id);
                       if (activeVillage && tab.id !== 'all' && activeVillage.block !== tab.id) {
@@ -585,12 +585,12 @@ export function HomeCollection() {
               })}
             </div>
 
-            {/* Village Pill Badges Grid */}
+            {/* Village Pill Badges Grid - Clean Flow with Zero Scroll Traps */}
             <div
               id="village-directory-grid"
               role="region"
               aria-label="Available village doorstep routes"
-              className="pt-1"
+              className="pt-1 space-y-3"
             >
               {filteredVillages.length === 0 ? (
                 <div className="w-full py-8 px-4 text-center space-y-3 rounded-[16px] bg-white/[0.03] border border-white/10">
@@ -626,28 +626,46 @@ export function HomeCollection() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-1">
-                  {filteredVillages.map((v) => {
-                    const isSelected = activeVillage?.name === v.name;
-                    return (
+                <>
+                  <div className="flex flex-wrap gap-2">
+                    {(villageSearch.trim() || isVillageListExpanded ? filteredVillages : filteredVillages.slice(0, 16)).map((v) => {
+                      const isSelected = activeVillage?.name === v.name;
+                      return (
+                        <button
+                          key={v.name}
+                          type="button"
+                          onClick={() => setActiveVillage(isSelected ? null : v)}
+                          className={`px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-[0.96] shrink-0 min-w-max whitespace-nowrap ${
+                            isSelected
+                              ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400 shadow-sm'
+                              : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20 hover:text-white'
+                          }`}
+                        >
+                          <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
+                          <span className="shrink-0 whitespace-nowrap">{v.name}</span>
+                          <span className="text-[10px] text-slate-400 font-normal shrink-0 whitespace-nowrap">({v.distance})</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {filteredVillages.length > 16 && !villageSearch.trim() && (
+                    <div className="pt-1">
                       <button
-                        key={v.name}
                         type="button"
-                        onClick={() => setActiveVillage(isSelected ? null : v)}
-                        style={{ minInlineSize: 'max-content', flexShrink: 0 }}
-                        className={`px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-[0.96] shrink-0 min-w-max whitespace-nowrap ${
-                          isSelected
-                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400 shadow-sm'
-                            : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20 hover:text-white'
-                        }`}
+                        onClick={() => setIsVillageListExpanded(!isVillageListExpanded)}
+                        className="px-3.5 py-1.5 rounded-[12px] bg-white/10 hover:bg-white/15 text-teal-300 text-xs font-bold border border-teal-500/30 transition-all cursor-pointer inline-flex items-center gap-1.5 active:scale-[0.96]"
                       >
-                        <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
-                        <span className="shrink-0 whitespace-nowrap">{v.name}</span>
-                        <span className="text-[10px] text-slate-400 font-normal shrink-0 whitespace-nowrap">({v.distance})</span>
+                        <span>
+                          {isVillageListExpanded
+                            ? 'Show fewer villages'
+                            : `Show all ${filteredVillages.length} villages in ${selectedBlock === 'all' ? 'corridors' : selectedBlock} (+${filteredVillages.length - 16} more)`}
+                        </span>
+                        <span>{isVillageListExpanded ? '▴' : '▾'}</span>
                       </button>
-                    );
-                  })}
-                </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
 
