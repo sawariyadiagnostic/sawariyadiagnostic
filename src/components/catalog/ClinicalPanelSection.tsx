@@ -35,7 +35,7 @@ export function ClinicalPanelSection({
     const timer = setTimeout(() => {
       const el = document.getElementById(`panel-${targetId}`);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       } else {
         const catalog = document.getElementById('tests');
         catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });

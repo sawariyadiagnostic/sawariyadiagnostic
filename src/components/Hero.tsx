@@ -82,17 +82,21 @@ export function Hero() {
     e.preventDefault();
     setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
-      const bestTab = detectBestCatalogTab(searchQuery);
+      const q = searchQuery.trim();
+      if (!q) return;
+
       const matchedPanel = clinicalPanels.find(
         (p) =>
-          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.hindiName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.keywords.some((k) => k.toLowerCase() === searchQuery.toLowerCase())
+          p.name.toLowerCase().includes(q.toLowerCase()) ||
+          p.hindiName.toLowerCase().includes(q.toLowerCase()) ||
+          p.keywords.some((k) => k.toLowerCase() === q.toLowerCase())
       );
+      const bestTab = matchedPanel ? 'panels' : detectBestCatalogTab(q);
+
       window.dispatchEvent(
         new CustomEvent('sawariya:search', {
           detail: {
-            query: matchedPanel ? '' : searchQuery,
+            query: q,
             tab: bestTab,
             panelId: matchedPanel?.id,
           },
@@ -164,7 +168,7 @@ export function Hero() {
   };
 
   const quickSearchTags: QuickSearchTag[] = [
-    { label: 'CBC Blood Count', query: 'cbc', tab: 'panels', panelId: 'panel-cbc-esr', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'CBC Blood Count', query: 'cbc', tab: 'panels', panelId: 'panel-hemogram', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
     { label: 'Thyroid (T3 T4 TSH)', query: 'thyroid', tab: 'panels', panelId: 'panel-thyroid', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
     { label: 'Vitamin D3 & B12', query: 'vitamin', tab: 'tests', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
     { label: 'Lipid (Cholesterol)', query: 'lipid', tab: 'panels', panelId: 'panel-lipid', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
