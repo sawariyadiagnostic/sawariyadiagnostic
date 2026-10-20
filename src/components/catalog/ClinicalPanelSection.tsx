@@ -175,7 +175,7 @@ export function ClinicalPanelSection({
                     aria-label={`View clinical details for ${panel.name}`}
                     className="w-full py-1.5 px-2.5 rounded-[10px] bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200/60 text-xs font-bold text-[#155E9A] flex items-center justify-between transition-colors cursor-pointer active:scale-[0.98]"
                   >
-                    <span>View {panel.parameters.length} Analytes &amp; Advice</span>
+                    <span>View Details &amp; Clinical Advice</span>
                     <span>➔</span>
                   </button>
                 </div>

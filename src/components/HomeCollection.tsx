@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { m } from 'framer-motion';
-import { ArrowRight, Calendar, CheckCircle2, ChevronDown, ChevronUp, Clock, Coffee, Droplets, ExternalLink, Home, MapPin, MessageCircle, Phone, Pill, Search, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, ChevronDown, ChevronUp, Clock, Coffee, Droplets, ExternalLink, Home, MapPin, MessageCircle, Phone, Pill, Search, ShieldCheck, Sparkles, Syringe, X } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
 import { Button } from './ui/button';
@@ -14,6 +14,7 @@ interface CatchmentVillage {
 }
 
 const CATCHMENT_VILLAGES: CatchmentVillage[] = [
+  // Badhra Tehsil
   { name: 'Badhra', block: 'Badhra Tehsil', distance: '22 km', routeTiming: '07:30 AM – 10:00 AM' },
   { name: 'Bhandwa', block: 'Badhra Tehsil', distance: '24 km', routeTiming: '07:30 AM – 10:00 AM' },
   { name: 'Berla', block: 'Badhra Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:00 AM' },
@@ -21,6 +22,13 @@ const CATCHMENT_VILLAGES: CatchmentVillage[] = [
   { name: 'Chandwas', block: 'Badhra Tehsil', distance: '25 km', routeTiming: '07:30 AM – 10:00 AM' },
   { name: 'Hansawas Kalan', block: 'Badhra Tehsil', distance: '23 km', routeTiming: '07:30 AM – 10:00 AM' },
   { name: 'Gopi', block: 'Badhra Tehsil', distance: '26 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Dalawas', block: 'Badhra Tehsil', distance: '24 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Jhinjhar', block: 'Badhra Tehsil', distance: '27 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Pichopa Kalan', block: 'Badhra Tehsil', distance: '28 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Kakroli Hukmi', block: 'Badhra Tehsil', distance: '21 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Kubja Nagar', block: 'Badhra Tehsil', distance: '25 km', routeTiming: '07:30 AM – 10:00 AM' },
+
+  // Jhojhu Kalan Sub-Tehsil
   { name: 'Jhojhu Kalan', block: 'Jhojhu Kalan Sub-Tehsil', distance: '16 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Jhojhu Khurd', block: 'Jhojhu Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Tiwala', block: 'Jhojhu Kalan Sub-Tehsil', distance: '14 km', routeTiming: '07:30 AM – 10:30 AM' },
@@ -28,20 +36,47 @@ const CATCHMENT_VILLAGES: CatchmentVillage[] = [
   { name: 'Atela Kalan', block: 'Jhojhu Kalan Sub-Tehsil', distance: '13 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Kadma', block: 'Jhojhu Kalan Sub-Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Chandeni', block: 'Jhojhu Kalan Sub-Tehsil', distance: '15 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Balrod', block: 'Jhojhu Kalan Sub-Tehsil', distance: '18 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Mehrana', block: 'Jhojhu Kalan Sub-Tehsil', distance: '19 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Gudana', block: 'Jhojhu Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Neemly', block: 'Jhojhu Kalan Sub-Tehsil', distance: '21 km', routeTiming: '07:30 AM – 10:30 AM' },
+
+  // Bond Kalan Sub-Tehsil
   { name: 'Bond Kalan', block: 'Bond Kalan Sub-Tehsil', distance: '18 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Ranila', block: 'Bond Kalan Sub-Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Sanjarwas', block: 'Bond Kalan Sub-Tehsil', distance: '16 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Missri', block: 'Bond Kalan Sub-Tehsil', distance: '14 km', routeTiming: '07:30 AM – 10:30 AM' },
   { name: 'Asawari', block: 'Bond Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Mankawas', block: 'Bond Kalan Sub-Tehsil', distance: '15 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Bigowa', block: 'Bond Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Fatehgarh', block: 'Bond Kalan Sub-Tehsil', distance: '19 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Rankoli', block: 'Bond Kalan Sub-Tehsil', distance: '21 km', routeTiming: '07:30 AM – 10:30 AM' },
+
+  // Bhiwani & Narnaul Corridors
   { name: 'Rawaldhi', block: 'Bhiwani & Narnaul Corridors', distance: '6 km', routeTiming: '07:00 AM – 11:00 AM' },
   { name: 'Imlota', block: 'Bhiwani & Narnaul Corridors', distance: '10 km', routeTiming: '07:00 AM – 11:00 AM' },
   { name: 'Morwala', block: 'Bhiwani & Narnaul Corridors', distance: '12 km', routeTiming: '07:00 AM – 11:00 AM' },
   { name: 'Mandola', block: 'Bhiwani & Narnaul Corridors', distance: '14 km', routeTiming: '07:00 AM – 11:00 AM' },
   { name: 'Balali', block: 'Bhiwani & Narnaul Corridors', distance: '15 km', routeTiming: '07:00 AM – 11:00 AM' },
   { name: 'Khatiwas', block: 'Bhiwani & Narnaul Corridors', distance: '8 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Phogat', block: 'Bhiwani & Narnaul Corridors', distance: '7 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Kheri Sanwal', block: 'Bhiwani & Narnaul Corridors', distance: '9 km', routeTiming: '07:00 AM – 11:00 AM' },
+
+  // Charkhi Dadri Central
   { name: 'Charkhi Village', block: 'Charkhi Dadri Central', distance: '4 km', routeTiming: '07:00 AM – 11:30 AM' },
   { name: 'Loharu Road & Civil Hospital Area', block: 'Charkhi Dadri Central', distance: '1 km', routeTiming: '07:00 AM – 12:00 PM' },
+  { name: 'Samaspur', block: 'Charkhi Dadri Central', distance: '3 km', routeTiming: '07:00 AM – 12:00 PM' },
+  { name: 'Ramnagar Catchment', block: 'Charkhi Dadri Central', distance: '2 km', routeTiming: '07:00 AM – 12:00 PM' },
 ];
+
+const BLOCK_TABS = [
+  { id: 'all', label: 'All 40+ Villages' },
+  { id: 'Badhra Tehsil', label: 'Badhra Tehsil' },
+  { id: 'Jhojhu Kalan Sub-Tehsil', label: 'Jhojhu Kalan Corridor' },
+  { id: 'Bond Kalan Sub-Tehsil', label: 'Bond Kalan & Ranila' },
+  { id: 'Bhiwani & Narnaul Corridors', label: 'Rawaldhi & Corridors' },
+  { id: 'Charkhi Dadri Central', label: 'Dadri Central' },
+] as const;
 
 export function HomeCollection() {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -51,6 +86,14 @@ export function HomeCollection() {
   const [selectedBlock, setSelectedBlock] = useState<string>('all');
   const [villageSearch, setVillageSearch] = useState<string>('');
   const [activeVillage, setActiveVillage] = useState<CatchmentVillage | null>(null);
+
+  const blockCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: CATCHMENT_VILLAGES.length };
+    for (const v of CATCHMENT_VILLAGES) {
+      counts[v.block] = (counts[v.block] || 0) + 1;
+    }
+    return counts;
+  }, []);
 
   const filteredVillages = useMemo(() => {
     return CATCHMENT_VILLAGES.filter((v) => {
@@ -477,58 +520,135 @@ export function HomeCollection() {
                   placeholder="Find your village…"
                   value={villageSearch}
                   onChange={(e) => setVillageSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 rounded-[14px] bg-white/10 border border-white/20 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 transition-colors"
+                  className="w-full pl-9 pr-8 py-2 rounded-[14px] bg-white/10 border border-white/20 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 transition-colors"
                 />
+                {villageSearch && (
+                  <button
+                    type="button"
+                    onClick={() => setVillageSearch('')}
+                    aria-label="Clear village search"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 text-slate-400 hover:text-white rounded-full transition-colors cursor-pointer"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
             </div>
 
             {/* Sub-District Block Filters */}
-            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none items-center flex-nowrap sm:flex-wrap">
-              {[
-                { id: 'all', label: 'All 40+ Villages' },
-                { id: 'Badhra Tehsil', label: 'Badhra Tehsil' },
-                { id: 'Jhojhu Kalan Sub-Tehsil', label: 'Jhojhu Kalan Corridor' },
-                { id: 'Bond Kalan Sub-Tehsil', label: 'Bond Kalan & Ranila' },
-                { id: 'Bhiwani & Narnaul Corridors', label: 'Rawaldhi & Corridors' },
-                { id: 'Charkhi Dadri Central', label: 'Dadri Central' },
-              ].map((tab) => {
+            <div
+              role="tablist"
+              aria-label="Filter catchment villages by sub-district or corridor"
+              className="flex gap-2 p-1.5 rounded-[18px] bg-white/[0.05] border border-white/10 items-center flex-wrap overflow-x-auto scroll-smooth overscroll-x-contain touch-pan-x scrollbar-none"
+            >
+              {BLOCK_TABS.map((tab) => {
                 const isActive = selectedBlock === tab.id;
+                const count = blockCounts[tab.id] || 0;
                 return (
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setSelectedBlock(tab.id)}
-                    className={`min-h-8 px-3 rounded-[12px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap active:scale-[0.96] ${
-                      isActive ? 'bg-teal-500 text-slate-950 shadow-sm' : 'bg-white/10 text-slate-300 hover:text-white hover:bg-white/15'
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls="village-directory-grid"
+                    id={`tab-${tab.id.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()}`}
+                    style={{ minInlineSize: 'max-content', flexShrink: 0 }}
+                    onClick={(e) => {
+                      setSelectedBlock(tab.id);
+                      if (activeVillage && tab.id !== 'all' && activeVillage.block !== tab.id) {
+                        setActiveVillage(null);
+                      }
+                      (e.currentTarget as HTMLElement).scrollIntoView({
+                        behavior: 'smooth',
+                        inline: 'nearest',
+                        block: 'nearest',
+                      });
+                    }}
+                    className={`min-h-[40px] px-3.5 py-2 rounded-[14px] text-xs transition-all cursor-pointer whitespace-nowrap shrink-0 min-w-max w-auto active:scale-[0.97] inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#102A43] ${
+                      isActive
+                        ? 'bg-teal-400 text-slate-950 font-extrabold shadow-[0_2px_12px_rgba(45,212,191,0.28)] border border-teal-300'
+                        : 'bg-white/5 text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/20 border border-white/10 font-semibold'
                     }`}
                   >
-                    {tab.label}
+                    <span className="shrink-0 whitespace-nowrap">{tab.label}</span>
+                    <span
+                      className={`text-[10.5px] px-2 py-0.5 rounded-full font-bold transition-colors shrink-0 whitespace-nowrap ${
+                        isActive
+                          ? 'bg-slate-950/20 text-slate-950'
+                          : 'bg-white/10 text-slate-300'
+                      }`}
+                    >
+                      {count}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
             {/* Village Pill Badges Grid */}
-            <div className="flex flex-wrap gap-2 pt-1 max-h-48 overflow-y-auto pr-1">
-              {filteredVillages.map((v) => {
-                const isSelected = activeVillage?.name === v.name;
-                return (
-                  <button
-                    key={v.name}
-                    type="button"
-                    onClick={() => setActiveVillage(isSelected ? null : v)}
-                    className={`px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-[0.96] ${
-                      isSelected
-                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400 shadow-sm'
-                        : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20 hover:text-white'
-                    }`}
-                  >
-                    <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
-                    <span>{v.name}</span>
-                    <span className="text-[10px] text-slate-400 font-normal">({v.distance})</span>
-                  </button>
-                );
-              })}
+            <div
+              id="village-directory-grid"
+              role="region"
+              aria-label="Available village doorstep routes"
+              className="pt-1"
+            >
+              {filteredVillages.length === 0 ? (
+                <div className="w-full py-8 px-4 text-center space-y-3 rounded-[16px] bg-white/[0.03] border border-white/10">
+                  <p className="text-xs sm:text-sm text-slate-300 font-medium">
+                    No villages found matching &quot;{villageSearch}&quot; in {selectedBlock === 'all' ? 'any corridor' : selectedBlock}.
+                  </p>
+                  <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+                    {selectedBlock !== 'all' && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedBlock('all')}
+                        className="px-3 py-1.5 rounded-[10px] bg-teal-500/20 text-teal-300 hover:bg-teal-500/30 text-xs font-semibold border border-teal-500/30 transition-colors cursor-pointer"
+                      >
+                        Check across All 40+ Villages
+                      </button>
+                    )}
+                    {villageSearch && (
+                      <button
+                        type="button"
+                        onClick={() => setVillageSearch('')}
+                        className="px-3 py-1.5 rounded-[10px] bg-white/10 text-slate-200 hover:bg-white/15 text-xs font-semibold border border-white/10 transition-colors cursor-pointer"
+                      >
+                        Clear search
+                      </button>
+                    )}
+                    <a
+                      href={whatsappHref(`Hello Sawariya Diagnostic, I would like to inquire if home collection is available in my village: ${villageSearch || 'in Charkhi Dadri district'}.`)}
+                      className="px-3 py-1.5 rounded-[10px] bg-[#128C7E]/30 text-emerald-300 hover:bg-[#128C7E]/40 text-xs font-semibold border border-emerald-500/30 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>Inquire for unlisted village on WhatsApp</span>
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-1">
+                  {filteredVillages.map((v) => {
+                    const isSelected = activeVillage?.name === v.name;
+                    return (
+                      <button
+                        key={v.name}
+                        type="button"
+                        onClick={() => setActiveVillage(isSelected ? null : v)}
+                        style={{ minInlineSize: 'max-content', flexShrink: 0 }}
+                        className={`px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-[0.96] shrink-0 min-w-max whitespace-nowrap ${
+                          isSelected
+                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400 shadow-sm'
+                            : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20 hover:text-white'
+                        }`}
+                      >
+                        <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
+                        <span className="shrink-0 whitespace-nowrap">{v.name}</span>
+                        <span className="text-[10px] text-slate-400 font-normal shrink-0 whitespace-nowrap">({v.distance})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Selected Village Route Details Banner */}
