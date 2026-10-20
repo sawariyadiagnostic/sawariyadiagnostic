@@ -9,6 +9,7 @@ import { MobileMenu } from './layout/MobileMenu';
 import { ReportDownloadModal } from './ui/ReportDownloadModal';
 import { Logo } from './ui/Logo';
 import { whatsappHref } from '@/config/site';
+import { clinicalPanels } from '@/data/clinicalPanelManifest';
 import { searchSemanticCatalog, detectBestCatalogTab, type SemanticSearchResult } from '@/lib/search-fuse';
 import { formatInr } from '@/lib/utils';
 
@@ -59,17 +60,21 @@ export function Hero() {
   }, []);
 
   const handleSelectResult = (result: SemanticSearchResult) => {
-    setSearchQuery(result.name);
+    setSearchQuery('');
     setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
       window.dispatchEvent(
         new CustomEvent('sawariya:search', {
-          detail: { query: result.name, tab: result.tab }
+          detail: {
+            query: result.type === 'panel' ? '' : result.name,
+            tab: result.tab,
+            panelId: result.type === 'panel' ? result.id : undefined,
+            testId: result.type === 'test' ? result.id : undefined,
+            openModal: result.type === 'test',
+          },
         })
       );
     }
-    const testsSection = document.getElementById('tests');
-    testsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -77,12 +82,22 @@ export function Hero() {
     setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
       const bestTab = detectBestCatalogTab(searchQuery);
+      const matchedPanel = clinicalPanels.find(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.hindiName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.keywords.some((k) => k.toLowerCase() === searchQuery.toLowerCase())
+      );
       window.dispatchEvent(
-        new CustomEvent('sawariya:search', { detail: { query: searchQuery, tab: bestTab } })
+        new CustomEvent('sawariya:search', {
+          detail: {
+            query: matchedPanel ? '' : searchQuery,
+            tab: bestTab,
+            panelId: matchedPanel?.id,
+          },
+        })
       );
     }
-    const testsSection = document.getElementById('tests');
-    testsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleQuickTagClick = (tag: string) => {
@@ -90,12 +105,22 @@ export function Hero() {
     setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
       const bestTab = detectBestCatalogTab(tag);
+      const matchedPanel = clinicalPanels.find(
+        (p) =>
+          p.name.toLowerCase().includes(tag.toLowerCase()) ||
+          p.hindiName.toLowerCase().includes(tag.toLowerCase()) ||
+          p.keywords.some((k) => k.toLowerCase() === tag.toLowerCase())
+      );
       window.dispatchEvent(
-        new CustomEvent('sawariya:search', { detail: { query: tag, tab: bestTab } })
+        new CustomEvent('sawariya:search', {
+          detail: {
+            query: matchedPanel ? '' : tag,
+            tab: bestTab,
+            panelId: matchedPanel?.id,
+          },
+        })
       );
     }
-    const testsSection = document.getElementById('tests');
-    testsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToSection = (sectionId: string) => {

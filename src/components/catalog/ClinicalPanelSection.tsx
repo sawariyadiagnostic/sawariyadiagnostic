@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Check, ChevronDown, ChevronUp, Clock, HelpCircle, Layers, Plus, Sparkles } from 'lucide-react';
 import { clinicalPanels, type ClinicalPanel } from '@/data/clinicalPanelManifest';
 import { medicalTests } from '@/data/publishedCatalog';
@@ -8,10 +8,50 @@ import { useRequisition } from '../requisition/RequisitionContext';
 import { formatInr } from '@/lib/utils';
 import { Button } from '../ui/button';
 
-export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: string } = {}) {
+export interface ClinicalPanelSectionProps {
+  searchQuery?: string;
+  targetPanel?: { id: string; timestamp: number } | null;
+  onClearTargetPanel?: () => void;
+}
+
+export function ClinicalPanelSection({
+  searchQuery = '',
+  targetPanel = null,
+  onClearTargetPanel,
+}: ClinicalPanelSectionProps = {}) {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [expandedPanelId, setExpandedPanelId] = useState<string | null>(null);
+  const [highlightedPanelId, setHighlightedPanelId] = useState<string | null>(null);
   const { isSelected, toggleTest } = useRequisition();
+
+  useEffect(() => {
+    if (!targetPanel?.id) return;
+    const targetId = targetPanel.id;
+
+    setSelectedCategory('all');
+    setExpandedPanelId(targetId);
+    setHighlightedPanelId(targetId);
+
+    const timer = setTimeout(() => {
+      const el = document.getElementById(`panel-${targetId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        const catalog = document.getElementById('tests');
+        catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 120);
+
+    const highlightTimer = setTimeout(() => {
+      setHighlightedPanelId(null);
+      onClearTargetPanel?.();
+    }, 3200);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(highlightTimer);
+    };
+  }, [targetPanel, onClearTargetPanel]);
 
   const toggleExpand = (id: string) => {
     setExpandedPanelId(expandedPanelId === id ? null : id);
@@ -113,7 +153,12 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
           return (
             <div
               key={panel.id}
-              className={`peacock-test-card glass-card apple-squircle-card p-4 flex flex-col justify-between bg-white rounded-[22px] border border-slate-200/90 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] transition-all ${panel.spineClass}`}
+              id={`panel-${panel.id}`}
+              className={`peacock-test-card glass-card apple-squircle-card p-4 flex flex-col justify-between bg-white rounded-[22px] border scroll-mt-28 transition-all duration-300 ${
+                highlightedPanelId === panel.id
+                  ? 'ring-4 ring-[#0A6C82] shadow-[0_0_35px_rgba(10,108,130,0.35)] scale-[1.015] border-[#0A6C82]/60 bg-cyan-50/30'
+                  : 'border-slate-200/90 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)]'
+              } ${panel.spineClass}`}
             >
               <div>
                 {/* Top Meta Bar: Fasting Status & Fixed TAT */}
@@ -227,12 +272,12 @@ export function ClinicalPanelSection({ searchQuery = '' }: { searchQuery?: strin
                                 onClick={() => {
                                   window.dispatchEvent(
                                     new CustomEvent('sawariya:search', {
-                                      detail: { tab: 'tests', query: test ? test.name : testId }
+                                      detail: { tab: 'tests', testId, query: '', openModal: true }
                                     })
                                   );
                                 }}
                                 className="px-2 py-0.5 rounded-[6px] bg-white border border-slate-200 text-slate-700 hover:text-[#155E9A] hover:border-[#155E9A]/60 text-[10px] font-semibold transition-colors cursor-pointer active:scale-[0.96] text-left truncate max-w-full"
-                                title={`Search ${label} in individual tests`}
+                                title={`View ${label} clinical details`}
                               >
                                 <span className="truncate">{label}</span>
                                 <span className="ml-1 text-[9px] text-[#155E9A]">➔</span>

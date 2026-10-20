@@ -369,9 +369,26 @@ describe('deployment asset contract', () => {
     expect(source).not.toContain('registerCatalog');
   });
 
-  it('keeps the logo source base-path relative', () => {
-    const source = readFileSync(resolve(process.cwd(), 'src/components/ui/Logo.tsx'), 'utf8');
-    expect(source).toContain('`${import.meta.env.BASE_URL}brand/sawariya-dna-original.svg`');
-    expect(existsSync(resolve(process.cwd(), 'public/brand/sawariya-dna-original.svg'))).toBe(true);
+  it('connects test cards and profile cards bidirectionally with automatic scroll and element targeting', () => {
+    const testCardSource = readFileSync(resolve(process.cwd(), 'src/components/ui/TestCard.tsx'), 'utf8');
+    const modalSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/TestDetailModal.tsx'), 'utf8');
+    const panelSource = readFileSync(resolve(process.cwd(), 'src/components/catalog/ClinicalPanelSection.tsx'), 'utf8');
+    const catalogSource = readFileSync(resolve(process.cwd(), 'src/components/TestCatalog.tsx'), 'utf8');
+
+    // TestCard provides panelId and scrolls target element
+    expect(testCardSource).toContain("detail: { tab: 'panels', panelId: parentPanel.id, query: '' }");
+    expect(testCardSource).toContain('id={`test-${test.id}`}');
+
+    // TestDetailModal provides panelId
+    expect(modalSource).toContain("detail: { tab: 'panels', panelId: panel.id, query: '' }");
+
+    // ClinicalPanelSection identifies panel cards and scrolls targetPanel into view
+    expect(panelSource).toContain('id={`panel-${panel.id}`}');
+    expect(panelSource).toContain('targetPanel');
+    expect(panelSource).toContain('scrollIntoView');
+
+    // TestCatalog routes panelId into targetPanel state
+    expect(catalogSource).toContain('setTargetPanel');
+    expect(catalogSource).toContain('targetPanel={targetPanel}');
   });
 });

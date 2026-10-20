@@ -89,8 +89,9 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
   return (
     <>
       <div 
+        id={`test-${test.id}`}
         data-selected={isSelected}
-        className={`peacock-test-card glass-card ui-card apple-squircle-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-[22px] border border-slate-200/80 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] ${getDepartmentSpine(test.category, test.name)}`}
+        className={`peacock-test-card glass-card ui-card apple-squircle-card p-3.5 sm:p-4 flex flex-col justify-between h-full group bg-white/95 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 relative overflow-hidden rounded-[22px] border border-slate-200/80 scroll-mt-28 shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_-2px_rgba(10,17,40,0.05)] hover:shadow-[inset_0_1px_0_0_#FFFFFF,0_8px_20px_-4px_rgba(10,108,130,0.14)] ${getDepartmentSpine(test.category, test.name)}`}
       >
         {/* Subtle hover gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A6C82]/0 to-[#0B6E66]/0 group-hover:from-[#0A6C82]/[0.03] group-hover:to-[#0B6E66]/[0.03] transition-colors duration-300 pointer-events-none" />
@@ -136,7 +137,7 @@ export function TestCard({ test, isSelected, onToggleRequest, onViewDetails }: T
                 e.stopPropagation();
                 window.dispatchEvent(
                   new CustomEvent('sawariya:search', {
-                    detail: { tab: 'panels', query: parentPanel.name.split('(')[0].trim() }
+                    detail: { tab: 'panels', panelId: parentPanel.id, query: '' }
                   })
                 );
               }}

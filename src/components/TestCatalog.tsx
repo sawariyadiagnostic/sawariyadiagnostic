@@ -37,6 +37,8 @@ export function TestCatalog() {
     else window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
   };
 
+  const [targetPanel, setTargetPanel] = useState<{ id: string; timestamp: number } | null>(null);
+
   useEffect(() => {
     const openHashTest = () => {
       const match = window.location.hash.match(/^#\/test\/([^/]+)$/);
@@ -47,9 +49,40 @@ export function TestCatalog() {
       }
     };
     const handleSearch = (event: Event) => {
-      const detail = (event as CustomEvent<{ query?: string; tab?: 'panels' | 'tests' }>).detail;
+      const detail = (event as CustomEvent<{
+        query?: string;
+        tab?: 'panels' | 'tests';
+        panelId?: string;
+        testId?: string;
+        openModal?: boolean;
+      }>).detail;
+
       if (detail?.query !== undefined) setSearchQuery(detail.query);
       if (detail?.tab) setActiveCatalogTab(detail.tab);
+
+      if (detail?.panelId) {
+        setTargetPanel({ id: detail.panelId, timestamp: Date.now() });
+      } else if (detail?.testId) {
+        if (detail.openModal) {
+          const targetTest = tests.find((item) => item.id.toLowerCase() === detail.testId?.toLowerCase());
+          if (targetTest) setSelectedTest(targetTest);
+          const catalog = document.getElementById('tests');
+          catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          setTimeout(() => {
+            const el = document.getElementById(`test-${detail.testId}`);
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+              const catalog = document.getElementById('tests');
+              catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 120);
+        }
+      } else {
+        const catalog = document.getElementById('tests');
+        catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     };
     openHashTest();
     window.addEventListener('hashchange', openHashTest);
@@ -197,7 +230,11 @@ export function TestCatalog() {
 
         {/* Tab 1: Complete Health Panels */}
         {activeCatalogTab === 'panels' && (
-          <ClinicalPanelSection searchQuery={searchQuery} />
+          <ClinicalPanelSection
+            searchQuery={searchQuery}
+            targetPanel={targetPanel}
+            onClearTargetPanel={() => setTargetPanel(null)}
+          />
         )}
 
         {/* Tab 2: Individual Tests */}

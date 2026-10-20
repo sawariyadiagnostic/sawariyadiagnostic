@@ -130,7 +130,7 @@ export function TestDetailModal({ item, isOpen, onClose }: TestDetailModalProps)
                           onClose();
                           window.dispatchEvent(
                             new CustomEvent('sawariya:search', {
-                              detail: { tab: 'panels', query: panel.name.split('(')[0].trim() }
+                              detail: { tab: 'panels', panelId: panel.id, query: '' }
                             })
                           );
                         }}
