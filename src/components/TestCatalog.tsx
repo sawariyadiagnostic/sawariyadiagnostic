@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Search, TestTube } from 'lucide-react';
+import { MessageSquare, Search, TestTube } from 'lucide-react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { TestCard } from './ui/TestCard';
@@ -13,6 +13,7 @@ import { useRequisition } from './requisition/RequisitionContext';
 import { BatchPaginationBar } from './BatchPaginationBar';
 import { ClinicalPanelSection } from './catalog/ClinicalPanelSection';
 import { clinicalPanels } from '@/data/clinicalPanelManifest';
+import { whatsappHref } from '@/config/site';
 
 const TESTS_PER_PAGE = 12;
 
@@ -20,6 +21,7 @@ export function TestCatalog() {
   const [activeCatalogTab, setActiveCatalogTab] = useState<'panels' | 'tests'>('panels');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedPanelCategory, setSelectedPanelCategory] = useState('all');
   const [selectedTest, setSelectedTest] = useState<MedicalTest | null>(null);
   const tests = publishedTests;
   const { isSelected, toggleTest } = useRequisition();
@@ -61,7 +63,10 @@ export function TestCatalog() {
       if (detail?.tab) setActiveCatalogTab(detail.tab);
 
       if (detail?.panelId) {
+        setSelectedPanelCategory('all');
         setTargetPanel({ id: detail.panelId, timestamp: Date.now() });
+        const catalog = document.getElementById('tests');
+        catalog?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else if (detail?.testId) {
         if (detail.openModal) {
           const targetTest = tests.find((item) => item.id.toLowerCase() === detail.testId?.toLowerCase());
@@ -112,12 +117,20 @@ export function TestCatalog() {
   }, [searchQuery]);
   const { page: currentPage, setPage: setCurrentPage, resetPage, totalPages, start: pageStart, visibleItems: visibleTests } = usePagination(filteredTests, TESTS_PER_PAGE);
 
-  const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all';
+  const hasFilter = searchQuery.trim().length > 0 || selectedCategory !== 'all' || selectedPanelCategory !== 'all';
   const clearFilters = () => {
     setSearchQuery('');
     setSelectedCategory('all');
+    setSelectedPanelCategory('all');
     resetPage();
   };
+  const panelCategories = [
+    { id: 'all', label: `All ${clinicalPanels.length} Panels` },
+    { id: 'hematology', label: 'Blood & Clotting' },
+    { id: 'biochem', label: 'Liver, Kidney & Joints' },
+    { id: 'metabolic', label: 'Diabetes & Metabolism' },
+    { id: 'endocrine', label: 'Thyroid, PCOD & Hormones' },
+  ];
   const quickSymptoms = [
     { label: 'All Tests', query: '', cat: 'all' },
     { label: 'CBC & Blood', query: 'cbc', cat: 'all' },
@@ -209,25 +222,46 @@ export function TestCatalog() {
               )}
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none items-center scroll-smooth overscroll-x-contain">
-              {quickSymptoms.map((symptom) => {
-                const isActive = (symptom.query === '' && searchQuery === '') || (symptom.query !== '' && searchQuery.toLowerCase().includes(symptom.query.toLowerCase()));
-                return (
-                  <button
-                    type="button"
-                    key={symptom.label}
-                    onClick={() => {
-                      setSearchQuery(symptom.query);
-                      setSelectedCategory(symptom.cat);
-                      resetPage();
-                    }}
-                    className={`min-h-9 px-3.5 shrink-0 flex-shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface active:scale-[0.96] cursor-pointer inline-flex items-center ${
-                      isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
-                    }`}
-                  >
-                    <span>{symptom.label}</span>
-                  </button>
-                );
-              })}
+              {activeCatalogTab === 'panels' ? (
+                panelCategories.map((cat) => {
+                  const isActive = selectedPanelCategory === cat.id && !searchQuery.trim();
+                  return (
+                    <button
+                      type="button"
+                      key={cat.id}
+                      onClick={() => {
+                        setSelectedPanelCategory(cat.id);
+                        setSearchQuery('');
+                      }}
+                      className={`min-h-9 px-3.5 shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
+                        isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
+                      }`}
+                    >
+                      <span>{cat.label}</span>
+                    </button>
+                  );
+                })
+              ) : (
+                quickSymptoms.map((symptom) => {
+                  const isActive = (symptom.query === '' && searchQuery === '') || (symptom.query !== '' && searchQuery.toLowerCase().includes(symptom.query.toLowerCase()));
+                  return (
+                    <button
+                      type="button"
+                      key={symptom.label}
+                      onClick={() => {
+                        setSearchQuery(symptom.query);
+                        setSelectedCategory(symptom.cat);
+                        resetPage();
+                      }}
+                      className={`min-h-9 px-3.5 shrink-0 flex-shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-surface active:scale-[0.96] cursor-pointer inline-flex items-center ${
+                        isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
+                      }`}
+                    >
+                      <span>{symptom.label}</span>
+                    </button>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
@@ -236,6 +270,7 @@ export function TestCatalog() {
         {activeCatalogTab === 'panels' && (
           <ClinicalPanelSection
             searchQuery={searchQuery}
+            selectedCategory={selectedPanelCategory}
             targetPanel={targetPanel}
             onClearTargetPanel={() => setTargetPanel(null)}
           />
@@ -251,10 +286,28 @@ export function TestCatalog() {
             )}
 
             {hasFilter && filteredTests.length === 0 ? (
-              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-8 text-center shadow-sm">
-                <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
-                <p className="mt-1 text-sm text-slate-600">Try another term or clear the filters to browse all tests.</p>
-                <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable mt-4 min-h-11 rounded-[16px] font-bold cursor-pointer">Clear filters</Button>
+              <div role="status" aria-live="polite" className="rounded-[24px] border border-slate-200 bg-white p-6 sm:p-8 text-center shadow-sm max-w-xl mx-auto space-y-4">
+                <div className="w-12 h-12 rounded-full bg-blue-50 text-[#155E9A] mx-auto flex items-center justify-center border border-blue-200/80">
+                  <Search className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-[#102A43]">No tests match this search</h3>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                    Looking for a specific investigation not listed? Send your doctor&apos;s prescription slip on WhatsApp for direct price confirmation and doorstep pickup.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+                  <a
+                    href={whatsappHref(`Hello Sawariya Diagnostic, I searched for "${searchQuery}" and would like to confirm test availability and price.`)}
+                    className="action-button btn-whatsapp squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 text-white shadow-sm hover:shadow active:scale-[0.96]"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Ask Desk on WhatsApp</span>
+                  </a>
+                  <Button type="button" variant="outline" onClick={clearFilters} className="action-button btn-outline squircle-btn apple-pressable min-h-11 px-5 rounded-[16px] font-bold text-xs sm:text-sm cursor-pointer">
+                    Clear filters
+                  </Button>
+                </div>
               </div>
             ) : (
               <>

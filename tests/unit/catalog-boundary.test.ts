@@ -88,6 +88,15 @@ describe('approved public catalog', () => {
     const jaundiceResults = searchSemanticCatalog('jaundice');
     expect(jaundiceResults.some((r) => r.name.includes('Liver') || r.name.includes('Bilirubin'))).toBe(true);
 
+    const devanagariKhoon = searchSemanticCatalog('खून');
+    expect(devanagariKhoon.some((r) => r.name.includes('Blood') || r.name.includes('CBC') || r.name.includes('Hemoglobin'))).toBe(true);
+
+    const devanagariPiliya = searchSemanticCatalog('पीलिया');
+    expect(devanagariPiliya.some((r) => r.name.includes('Liver') || r.name.includes('Bilirubin') || r.name.includes('LFT'))).toBe(true);
+
+    const hinglishBukhar = searchSemanticCatalog('bukhar');
+    expect(hinglishBukhar.some((r) => r.name.includes('Fever') || r.name.includes('Typhoid') || r.name.includes('CBC') || r.name.includes('Widal'))).toBe(true);
+
     const kneePainResults = searchSemanticCatalog('knee pain');
     expect(kneePainResults.some((r) => r.name.includes('Arthritis') || r.name.includes('Uric Acid') || r.name.includes('RA'))).toBe(true);
 

@@ -74,6 +74,7 @@ export function Hero() {
           },
         })
       );
+      scrollToSection('tests');
     }
   };
 
@@ -97,29 +98,32 @@ export function Hero() {
           },
         })
       );
+      scrollToSection('tests');
     }
   };
 
-  const handleQuickTagClick = (tag: string) => {
-    setSearchQuery(tag);
+  interface QuickSearchTag {
+    label: string;
+    query: string;
+    tab: 'panels' | 'tests';
+    panelId?: string;
+    color: string;
+  }
+
+  const handleQuickTagClick = (tag: QuickSearchTag) => {
+    setSearchQuery(tag.query);
     setIsSearchFocused(false);
     if (typeof window !== 'undefined') {
-      const bestTab = detectBestCatalogTab(tag);
-      const matchedPanel = clinicalPanels.find(
-        (p) =>
-          p.name.toLowerCase().includes(tag.toLowerCase()) ||
-          p.hindiName.toLowerCase().includes(tag.toLowerCase()) ||
-          p.keywords.some((k) => k.toLowerCase() === tag.toLowerCase())
-      );
       window.dispatchEvent(
         new CustomEvent('sawariya:search', {
           detail: {
-            query: matchedPanel ? '' : tag,
-            tab: bestTab,
-            panelId: matchedPanel?.id,
+            query: tag.panelId ? '' : tag.query,
+            tab: tag.tab,
+            panelId: tag.panelId,
           },
         })
       );
+      scrollToSection('tests');
     }
   };
 
@@ -159,14 +163,14 @@ export function Hero() {
     }
   };
 
-  const quickSearchTags = [
-    { label: 'CBC Blood Count', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'Thyroid (T3 T4 TSH)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'Vitamin D3 & B12', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'Lipid (Cholesterol)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'HbA1c Diabetes', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'Liver (LFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
-    { label: 'Kidney (KFT)', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+  const quickSearchTags: QuickSearchTag[] = [
+    { label: 'CBC Blood Count', query: 'cbc', tab: 'panels', panelId: 'panel-cbc-esr', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Thyroid (T3 T4 TSH)', query: 'thyroid', tab: 'panels', panelId: 'panel-thyroid', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Vitamin D3 & B12', query: 'vitamin', tab: 'tests', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Lipid (Cholesterol)', query: 'lipid', tab: 'panels', panelId: 'panel-lipid', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'HbA1c Diabetes', query: 'hba1c', tab: 'panels', panelId: 'panel-diabetes', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Liver (LFT)', query: 'lft', tab: 'panels', panelId: 'panel-lft', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
+    { label: 'Kidney (KFT)', query: 'kft', tab: 'panels', panelId: 'panel-kft', color: 'peacock-pill-inactive hover:border-[#0A6C82]' },
   ];
 
   const whatsappPrescriptionUrl = whatsappHref("Hello Sawariya Diagnostic, I would like to share a photo of my doctor's prescription slip to ask about test pricing and home collection.");
@@ -372,7 +376,7 @@ export function Hero() {
                     <button
                       key={tag.label}
                       type="button"
-                      onClick={() => handleQuickTagClick(tag.label)}
+                      onClick={() => handleQuickTagClick(tag)}
                       className={`ui-control-button squircle-btn apple-pressable h-auto min-h-11 px-3 rounded-[14px] ${tag.color} shadow-[inset_0_1px_0_0_#FFFFFF,0_2px_8px_rgba(0,0,0,0.04)] text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:text-[#0A6C82] transition-surface duration-200 active:scale-[0.96] cursor-pointer inline-flex items-center whitespace-nowrap flex-shrink-0`}
                     >
                       {tag.label}

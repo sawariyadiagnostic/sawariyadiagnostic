@@ -11,16 +11,17 @@ import { ClinicalPanelDetailModal } from './ClinicalPanelDetailModal';
 
 export interface ClinicalPanelSectionProps {
   searchQuery?: string;
+  selectedCategory?: string;
   targetPanel?: { id: string; timestamp: number } | null;
   onClearTargetPanel?: () => void;
 }
 
 export function ClinicalPanelSection({
   searchQuery = '',
+  selectedCategory = 'all',
   targetPanel = null,
   onClearTargetPanel,
 }: ClinicalPanelSectionProps = {}) {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [highlightedPanelId, setHighlightedPanelId] = useState<string | null>(null);
   const [detailPanel, setDetailPanel] = useState<ClinicalPanel | null>(null);
   const { isSelected, toggleTest } = useRequisition();
@@ -29,7 +30,6 @@ export function ClinicalPanelSection({
     if (!targetPanel?.id) return;
     const targetId = targetPanel.id;
 
-    setSelectedCategory('all');
     setHighlightedPanelId(targetId);
 
     const timer = setTimeout(() => {
@@ -72,14 +72,6 @@ export function ClinicalPanelSection({
     }
   };
 
-  const categories = [
-    { id: 'all', label: `All ${clinicalPanels.length} Panels` },
-    { id: 'hematology', label: 'Blood & Clotting' },
-    { id: 'biochem', label: 'Liver, Kidney & Joints' },
-    { id: 'metabolic', label: 'Diabetes & Metabolism' },
-    { id: 'endocrine', label: 'Thyroid, PCOD & Hormones' },
-  ];
-
   const filteredPanels = clinicalPanels.filter((panel) => {
     if (searchQuery.trim().length > 0) {
       const q = searchQuery.toLowerCase().trim();
@@ -102,25 +94,6 @@ export function ClinicalPanelSection({
 
   return (
     <div className="mb-8 sm:mb-12">
-      {/* Sleek Clinical Category Filter Bar (No duplicate titles or descriptions) */}
-      <div className="flex gap-1.5 overflow-x-auto pb-2.5 pt-0.5 scrollbar-none items-center justify-start sm:justify-center flex-nowrap sm:flex-wrap mb-3 sm:mb-5">
-        {categories.map((cat) => {
-          const isActive = selectedCategory === cat.id;
-          return (
-            <button
-              type="button"
-              key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`min-h-9 px-3.5 shrink-0 whitespace-nowrap squircle-btn apple-pressable rounded-[14px] text-xs font-bold transition-all cursor-pointer inline-flex items-center active:scale-[0.96] ${
-                isActive ? 'peacock-pill-active' : 'peacock-pill-inactive'
-              }`}
-            >
-              {cat.label}
-            </button>
-          );
-        })}
-      </div>
-
       {/* Mobile Sideways Swipe Indicator */}
       <div className="flex items-center justify-between text-xs text-slate-500 font-semibold mb-2 px-1 md:hidden">
         <span>Showing {filteredPanels.length} test panels</span>

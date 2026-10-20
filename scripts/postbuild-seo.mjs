@@ -37,6 +37,10 @@ const STATIC_SEO_HTML = `
         <li><strong>Antenatal Care (ANC) Pregnancy Profile</strong> — CBC, Blood Group, HIV, HBsAg, VDRL, TSH, Glucose</li>
       </ul>
     </section>
+    <section>
+      <h2>Home Sample Collection Villages &amp; Local Catchment Areas</h2>
+      <p>Daily scheduled morning home sample collection route across Charkhi Dadri district, Badhra Tehsil, Jhojhu Kalan, Bond Kalan, Ranila, Sanjarwas, Tiwala, Atela, Rawaldhi, Imlota, Mandola, Bhandwa, Berla, and surrounding rural communities with sealed cold-chain laboratory transport.</p>
+    </section>
   </main>
 </div>`;
 

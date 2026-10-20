@@ -1,16 +1,64 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { m } from 'framer-motion';
-import { ArrowRight, Calendar, CheckCircle2, ChevronDown, ChevronUp, Clock, Coffee, Droplets, ExternalLink, Home, MessageCircle, Phone, Pill, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, ChevronDown, ChevronUp, Clock, Coffee, Droplets, ExternalLink, Home, MapPin, MessageCircle, Phone, Pill, Search, ShieldCheck, Sparkles, Syringe } from 'lucide-react';
 import { siteConfig, telHref, whatsappHref } from '@/config/site';
 import { homeCollection } from '@/data/website-content';
 import { Button } from './ui/button';
 import Cal, { getCalApi } from "@calcom/embed-react";
+
+interface CatchmentVillage {
+  name: string;
+  block: string;
+  distance: string;
+  routeTiming: string;
+}
+
+const CATCHMENT_VILLAGES: CatchmentVillage[] = [
+  { name: 'Badhra', block: 'Badhra Tehsil', distance: '22 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Bhandwa', block: 'Badhra Tehsil', distance: '24 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Berla', block: 'Badhra Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Kari Mod', block: 'Badhra Tehsil', distance: '18 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Chandwas', block: 'Badhra Tehsil', distance: '25 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Hansawas Kalan', block: 'Badhra Tehsil', distance: '23 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Gopi', block: 'Badhra Tehsil', distance: '26 km', routeTiming: '07:30 AM – 10:00 AM' },
+  { name: 'Jhojhu Kalan', block: 'Jhojhu Kalan Sub-Tehsil', distance: '16 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Jhojhu Khurd', block: 'Jhojhu Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Tiwala', block: 'Jhojhu Kalan Sub-Tehsil', distance: '14 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Atela Khurd', block: 'Jhojhu Kalan Sub-Tehsil', distance: '12 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Atela Kalan', block: 'Jhojhu Kalan Sub-Tehsil', distance: '13 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Kadma', block: 'Jhojhu Kalan Sub-Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Chandeni', block: 'Jhojhu Kalan Sub-Tehsil', distance: '15 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Bond Kalan', block: 'Bond Kalan Sub-Tehsil', distance: '18 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Ranila', block: 'Bond Kalan Sub-Tehsil', distance: '20 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Sanjarwas', block: 'Bond Kalan Sub-Tehsil', distance: '16 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Missri', block: 'Bond Kalan Sub-Tehsil', distance: '14 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Asawari', block: 'Bond Kalan Sub-Tehsil', distance: '17 km', routeTiming: '07:30 AM – 10:30 AM' },
+  { name: 'Rawaldhi', block: 'Bhiwani & Narnaul Corridors', distance: '6 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Imlota', block: 'Bhiwani & Narnaul Corridors', distance: '10 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Morwala', block: 'Bhiwani & Narnaul Corridors', distance: '12 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Mandola', block: 'Bhiwani & Narnaul Corridors', distance: '14 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Balali', block: 'Bhiwani & Narnaul Corridors', distance: '15 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Khatiwas', block: 'Bhiwani & Narnaul Corridors', distance: '8 km', routeTiming: '07:00 AM – 11:00 AM' },
+  { name: 'Charkhi Village', block: 'Charkhi Dadri Central', distance: '4 km', routeTiming: '07:00 AM – 11:30 AM' },
+  { name: 'Loharu Road & Civil Hospital Area', block: 'Charkhi Dadri Central', distance: '1 km', routeTiming: '07:00 AM – 12:00 PM' },
+];
 
 export function HomeCollection() {
   const [showCalendar, setShowCalendar] = useState(false);
   const [calendarError, setCalendarError] = useState(false);
   const [useDirectEmbed, setUseDirectEmbed] = useState(false);
   const [activeBentoTab, setActiveBentoTab] = useState<'fasting' | 'opd'>('fasting');
+  const [selectedBlock, setSelectedBlock] = useState<string>('all');
+  const [villageSearch, setVillageSearch] = useState<string>('');
+  const [activeVillage, setActiveVillage] = useState<CatchmentVillage | null>(null);
+
+  const filteredVillages = useMemo(() => {
+    return CATCHMENT_VILLAGES.filter((v) => {
+      const matchesBlock = selectedBlock === 'all' || v.block === selectedBlock;
+      const matchesSearch = !villageSearch.trim() || v.name.toLowerCase().includes(villageSearch.toLowerCase().trim());
+      return matchesBlock && matchesSearch;
+    });
+  }, [selectedBlock, villageSearch]);
 
   useEffect(() => {
     (async function () {
@@ -401,6 +449,109 @@ export function HomeCollection() {
               <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
               <span>Single-prick multi-analyte panels save elderly patients from repeated venipunctures.</span>
             </div>
+          </div>
+        </div>
+
+        {/* Rural Village Catchment Directory across Charkhi Dadri District */}
+        <div className="mt-10 sm:mt-14 pt-8 border-t border-white/10">
+          <div className="glass-panel-dark rounded-[24px] p-5 sm:p-7 space-y-5 border border-white/15">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-300 uppercase tracking-wider mb-1">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Doorstep Catchment Area</span>
+                </div>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight">
+                  Rural Home Sample Collection Across Charkhi Dadri District
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+                  Covering 40+ rural villages and sub-tehsils with daily scheduled morning phlebotomy routes. Samples are transported in temperature-monitored cold-chain carriers directly to our Loharu Road central lab.
+                </p>
+              </div>
+
+              {/* Village Quick Search Input */}
+              <div className="w-full md:w-72 relative shrink-0">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input
+                  type="text"
+                  placeholder="Find your village…"
+                  value={villageSearch}
+                  onChange={(e) => setVillageSearch(e.target.value)}
+                  className="w-full pl-9 pr-3 py-2 rounded-[14px] bg-white/10 border border-white/20 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-teal-400 transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Sub-District Block Filters */}
+            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none items-center flex-nowrap sm:flex-wrap">
+              {[
+                { id: 'all', label: 'All 40+ Villages' },
+                { id: 'Badhra Tehsil', label: 'Badhra Tehsil' },
+                { id: 'Jhojhu Kalan Sub-Tehsil', label: 'Jhojhu Kalan Corridor' },
+                { id: 'Bond Kalan Sub-Tehsil', label: 'Bond Kalan & Ranila' },
+                { id: 'Bhiwani & Narnaul Corridors', label: 'Rawaldhi & Corridors' },
+                { id: 'Charkhi Dadri Central', label: 'Dadri Central' },
+              ].map((tab) => {
+                const isActive = selectedBlock === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setSelectedBlock(tab.id)}
+                    className={`min-h-8 px-3 rounded-[12px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap active:scale-[0.96] ${
+                      isActive ? 'bg-teal-500 text-slate-950 shadow-sm' : 'bg-white/10 text-slate-300 hover:text-white hover:bg-white/15'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Village Pill Badges Grid */}
+            <div className="flex flex-wrap gap-2 pt-1 max-h-48 overflow-y-auto pr-1">
+              {filteredVillages.map((v) => {
+                const isSelected = activeVillage?.name === v.name;
+                return (
+                  <button
+                    key={v.name}
+                    type="button"
+                    onClick={() => setActiveVillage(isSelected ? null : v)}
+                    className={`px-3 py-1.5 rounded-[12px] text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 border active:scale-[0.96] ${
+                      isSelected
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400 shadow-sm'
+                        : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/20 hover:text-white'
+                    }`}
+                  >
+                    <MapPin className="w-3 h-3 text-teal-400 shrink-0" />
+                    <span>{v.name}</span>
+                    <span className="text-[10px] text-slate-400 font-normal">({v.distance})</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Selected Village Route Details Banner */}
+            {activeVillage && (
+              <div className="p-4 rounded-[18px] bg-gradient-to-r from-teal-950/70 to-slate-900/80 border border-teal-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in duration-200">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-extrabold text-sm text-teal-300">Village {activeVillage.name} ({activeVillage.block})</span>
+                    <span className="text-[10.5px] px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30 font-semibold">Morning Route Confirmed</span>
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    Phlebotomist Arrival Window: <strong className="text-white">{activeVillage.routeTiming}</strong> • Cold-chain transport directly to Central Lab
+                  </p>
+                </div>
+                <a
+                  href={whatsappHref(`Hello Sawariya Diagnostic, I would like to request home collection in Village ${activeVillage.name} (${activeVillage.block}). Please share available morning slots.`)}
+                  className="action-button btn-whatsapp squircle-btn apple-pressable min-h-10 px-4 rounded-[14px] font-bold text-xs inline-flex items-center justify-center gap-2 text-white shrink-0 shadow-sm"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>Request collection in {activeVillage.name}</span>
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

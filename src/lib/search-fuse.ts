@@ -215,6 +215,45 @@ export interface SemanticSearchResult {
 }
 
 export const SEMANTIC_SYNONYM_REPLACEMENTS: Record<string, string[]> = {
+  // Devanagari Script Support (Hindi search without visible text clutter)
+  'खून': ['cbc', 'hemoglobin', 'blood count', 'anemia', 'khoon'],
+  'कमजोरी': ['fatigue', 'weakness', 'vitamin', 'cbc', 'kamzori'],
+  'पीलिया': ['jaundice', 'bilirubin', 'lft', 'liver', 'piliya'],
+  'गठिया': ['gathiya', 'arthritis', 'uric acid', 'ra factor'],
+  'गुर्दे': ['kidney', 'kft', 'creatinine', 'urea'],
+  'पेशाब': ['urine', 'kidney', 'kft', 'infection'],
+  'थकान': ['fatigue', 'weakness', 'thyroid', 'vitamin', 'thakan'],
+  'बुखार': ['fever', 'typhoid', 'widal', 'dengue', 'malaria', 'cbc', 'bukhar'],
+  'थायराइड': ['thyroid', 'tsh', 't3', 't4'],
+  'शुगर': ['sugar', 'diabetes', 'glucose', 'hba1c'],
+  'मधुमेह': ['diabetes', 'sugar', 'glucose', 'hba1c'],
+  'सूजन': ['swelling', 'edema', 'kidney', 'kft'],
+  'जोड़ों का दर्द': ['joint', 'arthritis', 'uric acid', 'gathiya'],
+  'कैल्शियम': ['calcium', 'vitamin', 'bone'],
+
+  // Colloquial Hinglish & Dialect Phonetics
+  khoon: ['cbc', 'hemoglobin', 'blood count', 'anemia'],
+  khun: ['cbc', 'hemoglobin', 'blood count'],
+  rakt: ['cbc', 'hemoglobin', 'blood'],
+  kamzori: ['fatigue', 'weakness', 'vitamin', 'cbc'],
+  thakan: ['fatigue', 'weakness', 'thyroid'],
+  piliya: ['jaundice', 'bilirubin', 'lft', 'liver'],
+  peeliya: ['jaundice', 'bilirubin', 'lft', 'liver'],
+  jigar: ['liver', 'lft'],
+  kamla: ['jaundice', 'bilirubin', 'lft'],
+  gurde: ['kidney', 'kft', 'creatinine'],
+  peshab: ['kidney', 'kft', 'urine'],
+  madhumeh: ['diabetes', 'sugar', 'glucose', 'hba1c'],
+  mitha: ['diabetes', 'sugar'],
+  gathiya: ['arthritis', 'uric acid', 'ra factor', 'joint'],
+  ghutno: ['arthritis', 'joint', 'uric acid'],
+  jodo: ['arthritis', 'joint', 'uric acid'],
+  yurik: ['uric acid', 'gout'],
+  bukhar: ['fever', 'typhoid', 'widal', 'dengue', 'malaria'],
+  thirode: ['thyroid', 'tsh'],
+  thiroyd: ['thyroid', 'tsh'],
+  sujan: ['swelling', 'edema', 'kidney', 'kft'],
+
   // Fatigue / Weakness / Energy
   tiredness: ['fatigue', 'weakness'],
   exhaustion: ['fatigue', 'weakness'],
